@@ -45,7 +45,7 @@ function applyHomeLanguage(l){
  const count=q('.count');count.childNodes[count.childNodes.length-1].textContent=' / 20 '+t.levels;
  if($('playLink')&&!$('playLink').textContent.includes('1–10'))$('playLink').innerHTML=t.play+' <span>▶</span>';
  const sh=qa('.shortcuts button b');if(sh[0])sh[0].textContent=t.daily;if(sh[1])sh[1].textContent=t.tasks;if(sh[2])sh[2].textContent=t.rating;
- const nav=qa('nav small');[t.home,t.chapters,t.rating,t.friends,t.shop].forEach((v,i)=>{if(nav[i])nav[i].textContent=v});
+ const nav=qa('nav small');[t.home,t.chapters,t.rating,t.friends,t.shop].forEach((v,i)=>{if(nav[i])nav[i].textContent=v});const offer=$('shopOffer');if(offer){const b=offer.querySelector('b'),s=offer.querySelector('small');if(l==='az'){b.textContent='Daha çox sikkə — daha çox imkan!';s.textContent='Hərfləri aç, ipuclarından istifadə et və səviyyələri keç';}else if(l==='en'){b.textContent='More coins — more possibilities!';s.textContent='Reveal letters, use hints and complete levels';}else{b.textContent='Больше монет — больше возможностей!';s.textContent='Открывай буквы, получай подсказки и проходи уровни';}}
  text('settingsTitle',t.settings);$('languageBtn').querySelector('b').textContent=t.language;
  const rows=qa('#settingsModal .settingrow b');if(rows[0])rows[0].textContent=t.sound;if(rows[1])rows[1].textContent=t.vibration;if(rows[2])rows[2].textContent=t.music;
  text('soundDesc',t.soundDesc);text('hapticDesc',t.hapticDesc);text('musicDesc',t.musicDesc);$('notificationsBtn').querySelector('b').textContent=t.notifications;text('supportDesc',t.supportDesc);text('supportTitle',t.support);text('supportText',t.supportText);text('dailyCopy',t.dailyCopy);
