@@ -50,3 +50,4 @@ html[data-theme="light"] .topbar,html[data-theme="light"] .shortcuts button,html
 html[data-theme="light"] .logo strong,html[data-theme="light"] .logoTag,html[data-theme="light"] .offer b,html[data-theme="light"] .offer small,html[data-theme="light"] .shortcuts b,html[data-theme="light"] .shortcuts small{color:#102938!important}
 html[data-theme="light"] .hero{box-shadow:inset 0 0 0 100vmax #ffffff35}
 html[data-theme="light"] .status{background:#f8fbfdee!important;color:#102938!important;border-color:#87a9b9!important}
+.languageGlobe{text-align:center;font-size:40px;margin:-4px 0 8px}#languageTitle{font-size:clamp(20px,5vw,28px);line-height:1.18}
