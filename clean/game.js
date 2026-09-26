@@ -51,11 +51,10 @@
   function showSuccess(rewarded){
     $('status').hidden=true;
     $('successPanel').hidden=false;
-    $('successTitle').textContent=levelId<3?'Уровень '+levelId+' пройден!':'Первые 3 уровня пройдены!';
+    $('successTitle').textContent='Уровень '+levelId+' пройден!';
     $('successReward').textContent=rewarded?'+20 монет · +100 XP':'Награда за этот уровень уже получена';
     const next=$('nextLevel');
-    if(levelId<3){next.href='./game.html?level='+(levelId+1);next.innerHTML='СЛЕДУЮЩИЙ УРОВЕНЬ <span>▶</span>';}
-    else{next.href='./index.html';next.innerHTML='НА ГЛАВНУЮ <span>✓</span>';}
+    next.href='./game.html?level='+(levelId+1);next.innerHTML='СЛЕДУЮЩИЙ УРОВЕНЬ <span>▶</span>';
   }
   async function check(){
     if(selected.some(id=>id===null))return;
