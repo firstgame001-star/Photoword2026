@@ -28,7 +28,7 @@ jobs:
             echo "HTTP 200: $file"
           done
           curl --fail --silent --show-error --location --max-time 30 "$base/" -o "$RUNNER_TEMP/entry.html"
-          grep -q '20260926-r8' "$RUNNER_TEMP/release.json"
+          grep -q '20260926-r9' "$RUNNER_TEMP/release.json"
           grep -q './home.js' "$RUNNER_TEMP/entry.html"
           grep -q './core.js' "$RUNNER_TEMP/game.html"
           grep -q 'https://telegram.org/js/telegram-web-app.js' "$RUNNER_TEMP/entry.html"
