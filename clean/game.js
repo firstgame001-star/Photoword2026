@@ -41,6 +41,19 @@
   };
   let gameLang='ru';try{gameLang=localStorage.getItem('pw.language')||'ru'}catch{}
   if(TRANSLATED[gameLang]) Object.keys(LEVELS).forEach(k=>Object.assign(LEVELS[k],TRANSLATED[gameLang][k]));
+  function validateLanguageLevels(){
+    const supported=['ru','en','az'];
+    for(const lang of supported){
+      for(let n=1;n<=10;n++){
+        const item=lang==='ru'?LEVELS[n]:TRANSLATED[lang][n];
+        if(!item||!item.answer||!item.pool||!item.hint)throw new Error('Incomplete language level '+lang+' '+n);
+        const need=[...item.answer].reduce((m,ch)=>(m[ch]=(m[ch]||0)+1,m),{});
+        const have=[...item.pool].reduce((m,ch)=>(m[ch]=(m[ch]||0)+1,m),{});
+        for(const ch in need)if((have[ch]||0)<need[ch])throw new Error('Missing answer letter '+lang+' '+n+' '+ch);
+      }
+    }
+  }
+  validateLanguageLevels();
   const requested = Number(new URLSearchParams(location.search).get('level') || 1);
   const levelId = LEVELS[requested] ? requested : 1, level = LEVELS[levelId], answer=[...level.answer];
   const tiles=[...level.pool].map((letter,id)=>({id,letter}));
