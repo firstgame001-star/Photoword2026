@@ -23,7 +23,7 @@ for path in ['clean/','clean/game.html','clean/core.js','clean/home.js','clean/g
 ANSWERS={
 'ru':['СОБАКА','КОШКА','МОРЕ','ДОЖДЬ','ВРЕМЯ','ТЕПЛО','ПАМЯТЬ','СВЕТ','ПУТЬ','ТАЙНА','ТЕНЬ','СЛЕД','ВОЛНА','КЛЮЧ','КОРЕНЬ','СЕТЬ','ТОК','КАДР','СВЯЗЬ','ИСТОЧНИК'],
 'en':['DOG','CAT','SEA','RAIN','TIME','WARMTH','MEMORY','LIGHT','PATH','SECRET','SHADOW','TRACE','WAVE','KEY','ROOT','NET','CURRENT','FRAME','LINK','SOURCE'],
-'az':['İT','PİŞİK','DƏNİZ','YAĞIŞ','ZAMAN','İSTİ','YADDAŞ','İŞIQ','YOL','SİRR','KÖLGƏ','İZ','DALĞA','AÇAR','KÖK','ŞƏBƏKƏ','CƏRƏYAN','KADR','ƏLAQƏ','MƏNBƏ']}
+'az':['İT','PİŞİK','DƏNİZ','YAĞIŞ','ZAMAN','İSTİ','YADDAŞ','İŞIQ','YOL','SİRR','KÖLGƏ','İZ','DALĞA','AÇAR','KÖK','ŞƏBƏKƏ','CƏRƏYAN','KADR','ƏLAQƏ','MƏNBƏ']
 }
 HINTS={'ru':['Домашнее животное','Она появляется рядом с предметом'],'en':['loyal domestic animal','object blocks light'],'az':['İnsanın ən yaxın dostu','İşığın qarşısı kəsiləndə']}
 reports=[]
