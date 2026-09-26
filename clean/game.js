@@ -1,1 +1,99 @@
-const tg=window.Telegram&&window.Telegram.WebApp?window.Telegram.WebApp:null;if(tg){tg.ready();tg.expand()}const ANSWER='СОБАКА';let picked=[],fixed=new Set(),locked=false;const slots=document.getElementById('slots'),letters=document.getElementById('letters'),toastEl=document.getElementById('toast');function toast(s){toastEl.textContent=s;toastEl.style.display='block';clearTimeout(window.tt);window.tt=setTimeout(()=>toastEl.style.display='none',1600)}function drawSlots(){slots.innerHTML='';for(let i=0;i<ANSWER.length;i++){const d=document.createElement('div');d.className='slot';d.textContent=fixed.has(i)?ANSWER[i]:(picked[i]?.letter||'');slots.appendChild(d)}}const pool=[...'СОБАКАНТЛДЕР'];function drawLetters(){letters.innerHTML='';pool.sort(()=>Math.random()-.5).forEach(letter=>{const b=document.createElement('button');b.className='letter';b.textContent=letter;b.onclick=()=>choose(b,letter);letters.appendChild(b)})}function word(){let s='';for(let i=0;i<ANSWER.length;i++)s+=fixed.has(i)?ANSWER[i]:(picked[i]?.letter||'');return s}function choose(el,letter){if(locked||el.classList.contains('used'))return;let pos=-1;for(let i=0;i<ANSWER.length;i++){if(!fixed.has(i)&&!picked[i]){pos=i;break}}if(pos<0)return;el.classList.add('used');picked[pos]={letter,el};drawSlots();if(word().length===ANSWER.length){locked=true;if(word()===ANSWER){toast('✅ Верно!');complete()}else{slots.classList.add('wrong');toast('❌ Неверное слово');setTimeout(()=>{slots.classList.remove('wrong');picked.forEach(x=>x?.el?.classList.remove('used'));picked=[];drawSlots();locked=false},700)}}}function initData(){if(tg?.initData)return tg.initData;try{return sessionStorage.getItem('tgInitData')||''}catch{return''}}async function api(action,extra){const data=initData();if(!data){toast('Нет данных Telegram');return null}try{const r=await fetch('https://bqoraxewpcnmidvjlpuy.supabase.co/functions/v1/telegram-login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({initData:data,action,...extra})});const d=await r.json();if(d.error==='insufficient_coins'){toast('Недостаточно монет');return null}if(!r.ok||!d.player){toast('Ошибка сервера');return null}document.getElementById('coins').textContent=d.player.coins;return d.player}catch(e){toast('Ошибка соединения');return null}}document.getElementById('shuffle').onclick=()=>{const a=[...letters.children];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}a.forEach(x=>letters.appendChild(x));toast('🔀 Буквы перемешаны')};document.getElementById('letterHint').onclick=async()=>{const available=[];for(let i=0;i<ANSWER.length;i++)if(!fixed.has(i))available.push(i);if(!available.length)return;const p=await api('use_hint',{hintType:'letter',levelId:1});if(!p)return;const pos=available[Math.floor(Math.random()*available.length)];fixed.add(pos);if(picked[pos]){picked[pos].el.classList.remove('used');picked[pos]=null}drawSlots();toast('💡 Буква открыта')};document.getElementById('removeHint').onclick=async()=>{const bad=[...letters.children].filter(x=>!x.classList.contains('used')&&!ANSWER.includes(x.textContent)&&!x.classList.contains('removed'));if(!bad.length)return;const p=await api('use_hint',{hintType:'remove',levelId:1});if(!p)return;bad.sort(()=>Math.random()-.5).slice(0,3).forEach(x=>x.classList.add('removed'));toast('🪄 Лишние буквы убраны')};document.getElementById('textHint').onclick=async()=>{const e=document.getElementById('hintValue');if(e.dataset.open)return;const p=await api('use_hint',{hintType:'text',levelId:1});if(!p)return;e.textContent='Домашнее животное, которое часто называют другом человека';e.dataset.open='1';toast('💬 Подсказка открыта')};async function complete(){const p=await api('complete_level',{levelId:1});locked=false;if(p){toast('✅ +20 монет · +100 XP');setTimeout(()=>location.href='index.html',1100)}}document.getElementById('back').onclick=()=>location.href='index.html';drawSlots();drawLetters();
+(() => {
+  'use strict';
+  const pw = window.PW, answer = [...'СОБАКА'];
+  const $ = id => document.getElementById(id);
+  const tiles = [...'СОБАКАНТЛДЕР'].map((letter,id) => ({id,letter}));
+  let order = tiles.map(t => t.id), selected = Array(6).fill(null), fixed = new Map(), removed = new Set();
+  let busy = false, solved = false, textOpen = false, sessionKey = null;
+  function shuffle() {
+    const previous = order.join(',');
+    for (let i=order.length-1;i>0;i--) { const j=Math.floor(Math.random()*(i+1)); [order[i],order[j]]=[order[j],order[i]]; }
+    if (order.join(',') === previous) order.push(order.shift());
+  }
+  function save() { if (sessionKey) pw.store.set(sessionKey,{fixed:[...fixed],removed:[...removed],textOpen}); }
+  function restore(p) {
+    sessionKey = 'pw.hints.' + p.photoword_id + '.1';
+    const saved = pw.store.get(sessionKey,{});
+    fixed = new Map((saved.fixed || []).filter(([pos,tile]) => Number.isInteger(pos) && pos>=0 && pos<6 && tiles[tile]?.letter===answer[pos]));
+    removed = new Set((saved.removed || []).filter(id => tiles[id] && !answer.includes(tiles[id].letter)));
+    textOpen = saved.textOpen === true;
+    for (const [pos,tile] of fixed) selected[pos]=tile;
+    paint();
+  }
+  function paint() {
+    const used = new Set(selected.filter(id => id !== null));
+    $('slots').replaceChildren(); $('letters').replaceChildren();
+    answer.forEach((_,pos) => {
+      const b = document.createElement('button'); b.type='button'; b.className='slot'+(fixed.has(pos)?' fixed':'');
+      b.textContent=tiles[selected[pos]]?.letter||''; b.disabled=busy||solved||fixed.has(pos);
+      b.setAttribute('aria-label','Буква '+(pos+1));
+      b.onclick=()=>{selected[pos]=null;paint();}; $('slots').append(b);
+    });
+    order.forEach(id=>{
+      const b=document.createElement('button'); b.type='button'; b.className='letter'+(used.has(id)?' used':'')+(removed.has(id)?' removed':'');
+      b.dataset.tile=id; b.textContent=tiles[id].letter; b.disabled=busy||solved||used.has(id)||removed.has(id);
+      b.onclick=()=>choose(id); $('letters').append(b);
+    });
+    ['letterHint','removeHint','textHint','shuffle'].forEach(id=>$(id).disabled=busy||solved);
+    if(textOpen) $('hintValue').textContent='Домашнее животное, которое часто называют другом человека.';
+  }
+  function clearInput() {
+    selected = Array(6).fill(null); for(const [pos,id] of fixed) selected[pos]=id;
+  }
+  async function check() {
+    if(selected.some(id=>id===null)) return;
+    busy=true; paint();
+    const word=selected.map(id=>tiles[id].letter).join('');
+    if(word!=='СОБАКА') {
+      pw.status('Неверное слово. Попробуй ещё раз.'); $('slots').classList.add('wrong');
+      // Schedule reset before optional Telegram haptics, which can throw on old clients.
+      setTimeout(()=>{clearInput();busy=false;$('slots').classList.remove('wrong');paint();},700);
+      pw.haptic('error'); return;
+    }
+    pw.status('Проверяю и сохраняю ответ…');
+    try {
+      await pw.login();
+      const previous = pw.player?.completed_levels ?? 0;
+      const p=await pw.api('complete_level',{levelId:1,answer:word});
+      solved=true; pw.haptic('success');
+      pw.status(p.completed_levels>previous?'Верно! +20 монет и +100 XP.':'Уровень уже пройден. Повторная награда не начисляется.');
+      $('finish').hidden=false;
+    } catch(e) {pw.status(e.message);clearInput();}
+    finally{busy=false;paint();}
+  }
+  function choose(id){if(busy||solved)return;const pos=selected.indexOf(null);if(pos<0)return;selected[pos]=id;paint();check();}
+  async function hint(type){
+    if(busy||solved)return;
+    if(type==='text'&&textOpen){pw.status('Подсказка уже открыта.');return;}
+    const available=answer.map((_,i)=>i).filter(i=>!fixed.has(i));
+    const bad=tiles.filter(t=>!answer.includes(t.letter)&&!removed.has(t.id));
+    if(type==='letter'&&!available.length){pw.status('Все буквы уже открыты.');return;}
+    if(type==='remove'&&!bad.length){pw.status('Лишних букв не осталось.');return;}
+    busy=true;paint();pw.status('Подсказка: ожидаю ответ сервера…');
+    try {
+      await pw.login();
+      const p=await pw.api('use_hint',{hintType:type,levelId:1});
+      if(!sessionKey) sessionKey='pw.hints.'+p.photoword_id+'.1';
+      if(type==='letter'){
+        const pos=available[Math.floor(Math.random()*available.length)];
+        // Reserve a distinct tile, including the two copies of А.
+        const reserved=new Set(fixed.values());
+        const tile=tiles.find(t=>t.letter===answer[pos]&&!reserved.has(t.id));
+        if(!tile)throw new Error('Не удалось разместить букву.');
+        selected=selected.map(id=>id===tile.id?null:id); selected[pos]=tile.id; fixed.set(pos,tile.id);
+        pw.status('Буква открыта. −50 монет.');
+      } else if(type==='remove'){
+        bad.slice(0,3).forEach(t=>{removed.add(t.id);selected=selected.map(id=>id===t.id?null:id);});
+        pw.status('Лишние буквы убраны. −100 монет.');
+      } else {textOpen=true;pw.status('Подсказка открыта. −150 монет.');}
+      save();pw.haptic();
+    }catch(e){pw.status(e.message);}
+    finally{busy=false;paint();}
+    if(selected.every(id=>id!==null))check();
+  }
+  $('shuffle').onclick=()=>{if(busy)return;shuffle();paint();pw.status('Буквы перемешаны. Бесплатно.');pw.haptic();};
+  $('letterHint').onclick=()=>hint('letter'); $('removeHint').onclick=()=>hint('remove'); $('textHint').onclick=()=>hint('text');
+  shuffle();paint();
+  // Local letter input and shuffle still work when authorization is unavailable.
+  pw.login().then(p=>{restore(p);pw.status('Профиль синхронизирован.');}).catch(e=>pw.status(e.message));
+})();
