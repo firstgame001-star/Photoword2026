@@ -19,9 +19,32 @@
     for (const id of ['avatar','profileAvatar']) text(id,name.charAt(0).toUpperCase());
     text('myRank','#' + p.rank); text('myXp',p.xp + ' XP');
   }
+  const UI={
+    ru:{player:'Игрок',login:'Вход в Telegram',chapter:'Глава 1',warm:'Разминка',desc:'Простые слова для хорошего старта',levels:'уровней',play:'ИГРАТЬ',daily:'Ежедневная награда',tasks:'Задания',rating:'Рейтинг',home:'Главная',chapters:'Главы',friends:'Друзья',shop:'Магазин',settings:'Настройки',language:'Язык',sound:'Звук',vibration:'Вибрация',music:'Музыка',rules:'Правила игры',support:'Поддержка',privacy:'Конфиденциальность',agreement:'Пользовательское соглашение',reset:'Сбросить прогресс',best:'ВЫГОДНО',coinshop:'Магазин монет',free:'Получить бесплатно',soon:'СКОРО',invite:'ПРИГЛАСИТЬ ДРУГА',invited:'Приглашено',received:'Получено',invitedList:'Приглашённые',dailyTitle:'Ежедневная награда',claim:'ПОЛУЧИТЬ',dayTasks:'Задания дня'},
+    en:{player:'Player',login:'Telegram login',chapter:'Chapter 1',warm:'Warm-up',desc:'Simple words for a good start',levels:'levels',play:'PLAY',daily:'Daily reward',tasks:'Tasks',rating:'Leaderboard',home:'Home',chapters:'Chapters',friends:'Friends',shop:'Shop',settings:'Settings',language:'Language',sound:'Sound',vibration:'Haptics',music:'Music',rules:'Game rules',support:'Support',privacy:'Privacy',agreement:'Terms of use',reset:'Reset progress',best:'BEST VALUE',coinshop:'Coin shop',free:'Get for free',soon:'SOON',invite:'INVITE A FRIEND',invited:'Invited',received:'Earned',invitedList:'Invited friends',dailyTitle:'Daily reward',claim:'CLAIM',dayTasks:'Daily tasks'},
+    az:{player:'Oyunçu',login:'Telegram girişi',chapter:'Fəsil 1',warm:'İsinmə',desc:'Yaxşı başlanğıc üçün sadə sözlər',levels:'səviyyə',play:'OYNA',daily:'Gündəlik mükafat',tasks:'Tapşırıqlar',rating:'Reytinq',home:'Ana səhifə',chapters:'Fəsillər',friends:'Dostlar',shop:'Mağaza',settings:'Ayarlar',language:'Dil',sound:'Səs',vibration:'Vibrasiya',music:'Musiqi',rules:'Oyun qaydaları',support:'Dəstək',privacy:'Məxfilik',agreement:'İstifadəçi razılaşması',reset:'Tərəqqini sıfırla',best:'SƏRFƏLİ',coinshop:'Sikkə mağazası',free:'Pulsuz əldə et',soon:'TEZLİKLƏ',invite:'DOSTU DƏVƏT ET',invited:'Dəvət edilib',received:'Qazanılıb',invitedList:'Dəvət olunanlar',dailyTitle:'Gündəlik mükafat',claim:'GÖTÜR',dayTasks:'Günün tapşırıqları'}
+  };
+  function applyHomeLanguage(lang){
+    const t=UI[lang]||UI.ru;document.documentElement.lang=lang;
+    const q=(s)=>document.querySelector(s), qa=(s)=>document.querySelectorAll(s);
+    if(q('.chapter-title small'))q('.chapter-title small').textContent=t.chapter;
+    if(q('.chapter-title h1'))q('.chapter-title h1').textContent=t.warm;
+    if(q('.chapter-title p'))q('.chapter-title p').textContent=t.desc;
+    const count=q('.count');if(count)count.childNodes[count.childNodes.length-1].textContent=' / 20 '+t.levels;
+    const play=$('playLink');if(play&&!play.textContent.includes('1–10'))play.innerHTML=t.play+' <span>▶</span>';
+    const shortcut=qa('.shortcuts button b');if(shortcut[0])shortcut[0].innerHTML=t.daily.replace(' ','<br>');if(shortcut[1])shortcut[1].textContent=t.tasks;if(shortcut[2])shortcut[2].textContent=t.rating;
+    const nav=qa('nav small');[t.home,t.chapters,t.rating,t.friends,t.shop].forEach((v,i)=>{if(nav[i])nav[i].textContent=v});
+    if($('settingsTitle'))$('settingsTitle').textContent=t.settings;
+    if($('languageBtn'))$('languageBtn').querySelector('b').textContent=t.language;
+    const rows=qa('#settingsModal .settingrow b');if(rows[0])rows[0].textContent=t.sound;if(rows[1])rows[1].textContent=t.vibration;if(rows[2])rows[2].textContent=t.music;
+    if($('friendsModal')){const x=$('friendsModal');x.querySelector('h2').textContent=t.friends;const st=x.querySelectorAll('.friendstats small');if(st[0])st[0].textContent=t.invited;if(st[1])st[1].textContent=t.received;if($('inviteFriend'))$('inviteFriend').textContent=t.invite;const h3=x.querySelector('h3');if(h3)h3.textContent=t.invitedList;}
+    if($('shopModal')){$('shopModal').querySelector('h2').textContent=t.coinshop;const best=$('shopModal').querySelector('.best i');if(best)best.textContent=t.best;const fr=$('shopModal').querySelector('.adreward b');if(fr)fr.textContent=t.free;if($('watchAd'))$('watchAd').textContent=t.soon;}
+    if($('dailyModal')){$('dailyModal').querySelector('h2').textContent=t.dailyTitle;if($('claimDaily'))$('claimDaily').textContent=t.claim;}
+    if($('tasksModal'))$('tasksModal').querySelector('h2').textContent='🎯 '+t.dayTasks;
+  }
   const LANGS={ru:'Русский',en:'English',az:'Azərbaycan dili'};
   function getLang(){try{return localStorage.getItem('pw.language')||''}catch{return''}}
-  function setLang(lang){try{localStorage.setItem('pw.language',lang)}catch{};document.documentElement.lang=lang;text('languageCurrent',LANGS[lang]);document.querySelectorAll('[data-language]').forEach(b=>b.classList.toggle('selected',b.dataset.language===lang));}
+  function setLang(lang){try{localStorage.setItem('pw.language',lang)}catch{};document.documentElement.lang=lang;text('languageCurrent',LANGS[lang]);document.querySelectorAll('[data-language]').forEach(b=>b.classList.toggle('selected',b.dataset.language===lang));applyHomeLanguage(lang);}
   const initialLang=getLang();
   if(initialLang)setLang(initialLang);
   else setTimeout(()=>open('languageModal'),250);
