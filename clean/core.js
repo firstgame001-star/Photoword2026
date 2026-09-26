@@ -45,11 +45,11 @@
       const response = await fetch(URL + path, {method:'POST', headers:{'Content-Type':'application/json', ...headers},
         body:JSON.stringify(body), signal:controller.signal, cache:'no-store'});
       const data = await response.json();
-      if (!response.ok || data?.error) throw new Error(errText(data?.error,response.status));
+      if (!response.ok || data?.error) {try{window.dispatchEvent(new CustomEvent('pw:error',{detail:{code:data?.error||'http_error',status:response.status}}))}catch{};throw new Error(errText(data?.error,response.status));}
       return data;
     } catch (error) {
-      if (error.name === 'AbortError') throw new Error(lang()==='en'?'Server did not respond. Check your connection.':lang()==='az'?'Server cavab vermədi. İnternet bağlantısını yoxlayın.':'Сервер не ответил. Проверь соединение.');
-      if (error instanceof TypeError) throw new Error(lang()==='en'?'Could not connect to the server.':lang()==='az'?'Serverlə əlaqə yaratmaq mümkün olmadı.':'Не удалось связаться с сервером.');
+      if (error.name === 'AbortError') {try{window.dispatchEvent(new CustomEvent('pw:error',{detail:{code:'timeout',status:0}}))}catch{};throw new Error(lang()==='en'?'Server did not respond. Check your connection.':lang()==='az'?'Server cavab vermədi. İnternet bağlantısını yoxlayın.':'Сервер не ответил. Проверь соединение.');}
+      if (error instanceof TypeError) {try{window.dispatchEvent(new CustomEvent('pw:error',{detail:{code:'network',status:0}}))}catch{};throw new Error(lang()==='en'?'Could not connect to the server.':lang()==='az'?'Serverlə əlaqə yaratmaq mümkün olmadı.':'Не удалось связаться с сервером.');}
       throw error;
     } finally { clearTimeout(timer); }
   }
