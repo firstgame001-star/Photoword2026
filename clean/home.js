@@ -19,8 +19,16 @@
     for (const id of ['avatar','profileAvatar']) text(id,name.charAt(0).toUpperCase());
     text('myRank','#' + p.rank); text('myXp',p.xp + ' XP');
   }
+  const LANGS={ru:'Русский',en:'English',az:'Azərbaycan dili'};
+  function getLang(){try{return localStorage.getItem('pw.language')||''}catch{return''}}
+  function setLang(lang){try{localStorage.setItem('pw.language',lang)}catch{};document.documentElement.lang=lang;text('languageCurrent',LANGS[lang]);document.querySelectorAll('[data-language]').forEach(b=>b.classList.toggle('selected',b.dataset.language===lang));}
+  const initialLang=getLang();
+  if(initialLang)setLang(initialLang);
+  else setTimeout(()=>open('languageModal'),250);
   // Bind navigation first. A failed login must not disable settings or the play link.
   $('settingsBtn').onclick = () => open('settingsModal');
+  $('languageBtn').onclick = () => open('languageModal');
+  document.querySelectorAll('[data-language]').forEach(b=>b.onclick=()=>{setLang(b.dataset.language);close('languageModal');pw.status(b.dataset.language==='ru'?'Язык игры: Русский':b.dataset.language==='en'?'Game language: English':'Oyun dili: Azərbaycan dili');});
   $('profileBtn').onclick = () => open('profileModal');
   $('dailyRewardBtn').onclick = () => open('dailyModal');
   $('tasksBtn').onclick = () => open('tasksModal');
