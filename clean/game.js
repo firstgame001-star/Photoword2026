@@ -131,7 +131,7 @@
     }catch(e){pw.status(e.message);clearInput();}
     finally{busy=false;paint();}
   }
-  function choose(id){if(busy||solved)return;const pos=selected.indexOf(null);if(pos<0)return;pw.sfx('tap');selected[pos]=id;paint();check();}
+  function choose(id){if(busy||solved)return;const pos=selected.indexOf(null);if(pos<0)return;pw.sfx('tap');pw.haptic();selected[pos]=id;paint();check();}
   async function hint(type){
     if(busy||solved)return;
     if(type==='text'&&textOpen){pw.status(ui.textOpened);return;}
