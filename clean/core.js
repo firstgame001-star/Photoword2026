@@ -22,17 +22,21 @@
   let prefs;
   try { prefs = JSON.parse(localStorage.getItem('photoword-prefs')) || {}; } catch { prefs = {}; }
   prefs = {sound: true, haptic: true, music: false, ...prefs};
-  const messages = {invalid_telegram_auth: 'Не удалось подтвердить вход. Закрой мини-приложение и открой его через бота.',
-    not_configured: 'Сервер входа ещё не настроен.', insufficient_coins: 'Недостаточно монет.',
-    complete_failed: 'Сервер не сохранил прохождение.', level_completed: 'Уровень уже пройден. Монеты не списаны.', wrong_answer: 'Неверное слово.',
-    hint_failed: 'Сервер не применил подсказку.', level_locked:'Сначала пройди предыдущий уровень.', invoice_failed:'Не удалось создать счёт Telegram Stars.', bad_pack:'Такого пакета монет нет.', daily_claimed:'Сегодня награда уже получена.', daily_failed:'Не удалось получить ежедневную награду.', task_claimed:'Эта награда сегодня уже получена.', task_not_ready:'Сначала выполни условие задания.', task_failed:'Не удалось получить награду за задание.', bad_task:'Такого задания нет.', level_locked: 'Сначала пройди предыдущий уровень.', bad_level: 'Такого уровня пока нет.', reset_failed:'Не удалось сбросить прогресс.'};
+  const ERR={
+    ru:{invalid_telegram_auth:'Не удалось подтвердить вход. Закрой мини-приложение и открой его через бота.',not_configured:'Сервер входа ещё не настроен.',insufficient_coins:'Недостаточно монет.',complete_failed:'Сервер не сохранил прохождение.',level_completed:'Уровень уже пройден.',wrong_answer:'Неверное слово.',hint_failed:'Сервер не применил подсказку.',level_locked:'Сначала пройди предыдущий уровень.',invoice_failed:'Не удалось создать счёт Telegram Stars.',bad_pack:'Такого пакета монет нет.',daily_claimed:'Сегодня награда уже получена.',daily_failed:'Не удалось получить ежедневную награду.',task_claimed:'Эта награда сегодня уже получена.',task_not_ready:'Сначала выполни условие задания.',task_failed:'Не удалось получить награду за задание.',bad_task:'Такого задания нет.',bad_level:'Такого уровня пока нет.',reset_failed:'Не удалось сбросить прогресс.',nickname_locked:'Игровой ник уже был установлен и больше не меняется.',nickname_taken:'Этот ник уже занят.',bad_nickname:'Ник: 3–16 символов, только английские буквы, цифры и _.',nickname_failed:'Не удалось сохранить ник.',referral_failed:'Не удалось зарегистрировать приглашение.',friends_failed:'Не удалось загрузить друзей.'},
+    en:{invalid_telegram_auth:'Could not verify Telegram login. Close the Mini App and open it again from the bot.',not_configured:'Login server is not configured.',insufficient_coins:'Not enough coins.',complete_failed:'The server did not save level completion.',level_completed:'This level is already completed.',wrong_answer:'Wrong word.',hint_failed:'The server did not apply the hint.',level_locked:'Complete the previous level first.',invoice_failed:'Could not create a Telegram Stars invoice.',bad_pack:'This coin pack does not exist.',daily_claimed:'Today’s daily reward has already been claimed.',daily_failed:'Could not claim the daily reward.',task_claimed:'This task reward has already been claimed today.',task_not_ready:'Complete the task first.',task_failed:'Could not claim the task reward.',bad_task:'This task does not exist.',bad_level:'This level is not available yet.',reset_failed:'Could not reset progress.',nickname_locked:'Your game nickname has already been set and cannot be changed again.',nickname_taken:'This nickname is already taken.',bad_nickname:'Nickname: 3–16 characters, English letters, numbers and _ only.',nickname_failed:'Could not save the nickname.',referral_failed:'Could not register the referral.',friends_failed:'Could not load friends.'},
+    az:{invalid_telegram_auth:'Telegram girişini təsdiqləmək mümkün olmadı. Mini tətbiqi bağlayıb botdan yenidən açın.',not_configured:'Giriş serveri sazlanmayıb.',insufficient_coins:'Kifayət qədər sikkə yoxdur.',complete_failed:'Server səviyyənin keçilməsini yadda saxlamadı.',level_completed:'Bu səviyyə artıq keçilib.',wrong_answer:'Söz yanlışdır.',hint_failed:'Server ipucunu tətbiq etmədi.',level_locked:'Əvvəlki səviyyəni keçin.',invoice_failed:'Telegram Stars hesabı yaratmaq mümkün olmadı.',bad_pack:'Belə sikkə paketi yoxdur.',daily_claimed:'Bugünkü gündəlik mükafat artıq alınıb.',daily_failed:'Gündəlik mükafatı almaq mümkün olmadı.',task_claimed:'Bu tapşırığın mükafatı bu gün artıq alınıb.',task_not_ready:'Əvvəlcə tapşırığı yerinə yetirin.',task_failed:'Tapşırıq mükafatını almaq mümkün olmadı.',bad_task:'Belə tapşırıq yoxdur.',bad_level:'Bu səviyyə hələ mövcud deyil.',reset_failed:'Tərəqqini sıfırlamaq mümkün olmadı.',nickname_locked:'Oyun nikiniz artıq seçilib və bir daha dəyişdirilə bilməz.',nickname_taken:'Bu nik artıq istifadə olunur.',bad_nickname:'Nik 3–16 simvol olmalıdır: yalnız ingilis hərfləri, rəqəmlər və _.',nickname_failed:'Niki saxlamaq mümkün olmadı.',referral_failed:'Dəvəti qeyd etmək mümkün olmadı.',friends_failed:'Dostları yükləmək mümkün olmadı.'}
+  };
+  function lang(){try{return localStorage.getItem('pw.language')||'ru'}catch{return'ru'}}
+  function errText(code,statusCode){const t=ERR[lang()]||ERR.ru;return t[code]||(lang()==='en'?'Server error ('+statusCode+').':lang()==='az'?'Server xətası ('+statusCode+').':'Ошибка сервера ('+statusCode+').')}
   function status(message) {
     const e = document.getElementById('status');
     if (e) { e.textContent = message; e.hidden = false; }
   }
   function name(p) {
-    const text = [p?.first_name, p?.last_name].filter(Boolean).join(' ').trim();
-    return /[\p{L}\p{N}]/u.test(text) ? text : 'Игрок' + (p?.photoword_id ? ' ' + p.photoword_id : '');
+    if(p?.game_nickname) return p.game_nickname;
+    const value=[p?.first_name,p?.last_name].filter(Boolean).join(' ').trim();
+    return /[\p{L}\p{N}]/u.test(value)?value:(p?.photoword_id||'Player');
   }
   async function request(path, body, headers = {}) {
     const controller = new AbortController();
@@ -41,20 +45,20 @@
       const response = await fetch(URL + path, {method:'POST', headers:{'Content-Type':'application/json', ...headers},
         body:JSON.stringify(body), signal:controller.signal, cache:'no-store'});
       const data = await response.json();
-      if (!response.ok || data?.error) throw new Error(messages[data?.error] || 'Ошибка сервера (' + response.status + ').');
+      if (!response.ok || data?.error) throw new Error(errText(data?.error,response.status));
       return data;
     } catch (error) {
-      if (error.name === 'AbortError') throw new Error('Сервер не ответил. Проверь соединение.');
-      if (error instanceof TypeError) throw new Error('Не удалось связаться с сервером.');
+      if (error.name === 'AbortError') throw new Error(lang()==='en'?'Server did not respond. Check your connection.':lang()==='az'?'Server cavab vermədi. İnternet bağlantısını yoxlayın.':'Сервер не ответил. Проверь соединение.');
+      if (error instanceof TypeError) throw new Error(lang()==='en'?'Could not connect to the server.':lang()==='az'?'Serverlə əlaqə yaratmaq mümkün olmadı.':'Не удалось связаться с сервером.');
       throw error;
     } finally { clearTimeout(timer); }
   }
   let current = null;
   let loginPending = null;
   async function api(action = 'login', extra = {}) {
-    if (!raw) throw new Error('Telegram не передал данные входа. Запусти игру кнопкой приложения у @PhotoWordBot.');
+    if (!raw) throw new Error(lang()==='en'?'Telegram did not provide login data. Open the game from the bot.':lang()==='az'?'Telegram giriş məlumatlarını ötürmədi. Oyunu botdan açın.':'Telegram не передал данные входа. Запусти игру через бота.');
     const result = await request('/functions/v1/telegram-login', {...extra, action, initData:raw});
-    if (!result?.player?.photoword_id) throw new Error('Сервер не вернул профиль.');
+    if (!result?.player?.photoword_id) throw new Error(lang()==='en'?'Server did not return a profile.':lang()==='az'?'Server profil qaytarmadı.':'Сервер не вернул профиль.');
     current = result.player;
     // Do not cache the complete response: it contains the private Telegram ID.
     document.querySelectorAll('[data-coins]').forEach(e => e.textContent = current.coins);
@@ -67,12 +71,12 @@
     return loginPending;
   }
   async function actionRequest(action,extra={}) {
-    if(!raw) throw new Error('Telegram не передал данные входа. Запусти игру через бота.');
+    if(!raw) throw new Error(lang()==='en'?'Telegram did not provide login data. Open the game from the bot.':lang()==='az'?'Telegram giriş məlumatlarını ötürmədi. Oyunu botdan açın.':'Telegram не передал данные входа. Запусти игру через бота.');
     return request('/functions/v1/telegram-login',{...extra,action,initData:raw});
   }
   async function leaderboard() {
     const rows = await request('/rest/v1/rpc/get_leaderboard', {p_limit:100}, {apikey:KEY});
-    if (!Array.isArray(rows)) throw new Error('Сервер вернул некорректный рейтинг.');
+    if (!Array.isArray(rows)) throw new Error(lang()==='en'?'Server returned an invalid leaderboard.':lang()==='az'?'Server səhv reytinq qaytardı.':'Сервер вернул некорректный рейтинг.');
     return rows;
   }
   let audioCtx=null,musicTimer=null,musicIndex=0;
