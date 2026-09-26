@@ -146,7 +146,7 @@ $('rulesBtn').onclick=()=>{close('settingsModal');applyLanguage(lang());setTimeo
 $('supportBtn').onclick=()=>{close('settingsModal');setTimeout(()=>open('supportModal'),0)};
 $('resetProgressBtn').onclick=()=>{close('settingsModal');resetArmed=false;text('confirmReset',t().resetButton);setTimeout(()=>open('resetModal'),0)};
 
-$('nicknameBtn').onclick=()=>{if(pw.player?.nickname_changed)return;text('nicknameInput','');$('nicknameInput').value='';open('nicknameModal')};
+$('nicknameBtn').onclick=()=>{if(pw.player?.nickname_changed)return;close('profileModal');$('nicknameInput').value='';open('nicknameModal')};
 $('saveNickname').onclick=async()=>{const b=$('saveNickname'),value=$('nicknameInput').value.trim();b.disabled=true;try{const p=await pw.api('set_nickname',{nickname:value});update(p);close('nicknameModal');pw.sfx('success')}catch(e){pw.status(e.message)}finally{b.disabled=false}};
 $('shareGameBtn').onclick=async()=>{const x=t(),link='https://t.me/PhotoWordBot?startapp=share',url='https://t.me/share/url?url='+encodeURIComponent(link)+'&text='+encodeURIComponent(x.shareText);if(window.Telegram?.WebApp?.openTelegramLink)Telegram.WebApp.openTelegramLink(url);else location.href=url};
 
