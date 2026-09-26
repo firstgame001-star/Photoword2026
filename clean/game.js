@@ -54,13 +54,22 @@
     }
   }
   validateLanguageLevels();
+  const GAME_UI={
+    ru:{chapter:'Глава 1',warm:'Разминка · Уровень ',textHint:'Текстовая подсказка',tap:'Нажми, чтобы открыть',wrong:'Неверное слово. Попробуй ещё раз.',checking:'Проверяю и сохраняю ответ…',passed:n=>'Уровень '+n+' пройден!',reward:'+20 монет · +15 XP',already:'Награда за этот уровень уже получена',next:'СЛЕДУЮЩИЙ УРОВЕНЬ',sync:'Профиль синхронизирован.',shuffle:'Буквы перемешаны. Бесплатно.',letter:'Буква открыта. −50 монет.',remove:'Лишние буквы убраны. −100 монет.',text:'Подсказка открыта. −150 монет.'},
+    en:{chapter:'Chapter 1',warm:'Warm-up · Level ',textHint:'Text hint',tap:'Tap to reveal',wrong:'Wrong word. Try again.',checking:'Checking and saving your answer…',passed:n=>'Level '+n+' completed!',reward:'+20 coins · +15 XP',already:'Reward for this level has already been claimed',next:'NEXT LEVEL',sync:'Profile synced.',shuffle:'Letters shuffled. Free.',letter:'Letter revealed. −50 coins.',remove:'Extra letters removed. −100 coins.',text:'Hint revealed. −150 coins.'},
+    az:{chapter:'Fəsil 1',warm:'İsinmə · Səviyyə ',textHint:'Mətn ipucu',tap:'Açmaq üçün toxun',wrong:'Söz yanlışdır. Yenidən cəhd et.',checking:'Cavab yoxlanılır və yadda saxlanılır…',passed:n=>n+'-ci səviyyə keçildi!',reward:'+20 sikkə · +15 XP',already:'Bu səviyyənin mükafatı artıq alınıb',next:'NÖVBƏTİ SƏVİYYƏ',sync:'Profil sinxronlaşdırıldı.',shuffle:'Hərflər qarışdırıldı. Pulsuz.',letter:'Hərf açıldı. −50 sikkə.',remove:'Artıq hərflər silindi. −100 sikkə.',text:'İpucu açıldı. −150 sikkə.'}
+  };
   const requested = Number(new URLSearchParams(location.search).get('level') || 1);
   const levelId = LEVELS[requested] ? requested : 1, level = LEVELS[levelId], answer=[...level.answer];
   const tiles=[...level.pool].map((letter,id)=>({id,letter}));
   let order=tiles.map(t=>t.id), selected=Array(answer.length).fill(null), fixed=new Map(), removed=new Set();
   let busy=false, solved=false, textOpen=false, sessionKey=null;
 
-  $('levelTitle').textContent=(gameLang==='en'?'Warm-up · Level ':gameLang==='az'?'İsinmə · Səviyyə ':'Разминка · Уровень ')+levelId;
+  const ui=GAME_UI[gameLang]||GAME_UI.ru;
+  document.documentElement.lang=gameLang;
+  document.querySelector('.game-head>div b').textContent=ui.chapter;
+  $('levelTitle').textContent=ui.warm+levelId;
+  $('textHint').querySelector('b').textContent=ui.textHint;$('hintValue').textContent=ui.tap;
   $('slots').style.gridTemplateColumns='repeat('+answer.length+',1fr)';
   level.photos.forEach(([emoji,label])=>{const d=document.createElement('div');d.className='photo';d.setAttribute('role','img');d.setAttribute('aria-label',label);d.textContent=emoji;$('photos').append(d);});
 
@@ -99,21 +108,21 @@
   function showSuccess(rewarded){
     $('status').hidden=true;
     $('successPanel').hidden=false;
-    $('successTitle').textContent='Уровень '+levelId+' пройден!';
-    $('successReward').textContent=rewarded?'+20 монет · +15 XP':'Награда за этот уровень уже получена';
+    $('successTitle').textContent=ui.passed(levelId);
+    $('successReward').textContent=rewarded?ui.reward:ui.already;
     const next=$('nextLevel');
-    next.href='./game.html?level='+(levelId+1);next.innerHTML='СЛЕДУЮЩИЙ УРОВЕНЬ <span>▶</span>';
+    next.href='./game.html?level='+(levelId+1);next.innerHTML=ui.next+' <span>▶</span>';
   }
   async function check(){
     if(selected.some(id=>id===null))return;
     busy=true;paint();
     const word=selected.map(id=>tiles[id].letter).join('');
     if(word!==level.answer){
-      pw.status('Неверное слово. Попробуй ещё раз.');$('slots').classList.add('wrong');
+      pw.status(ui.wrong);$('slots').classList.add('wrong');
       setTimeout(()=>{clearInput();busy=false;$('slots').classList.remove('wrong');paint();},700);
       pw.haptic('error');return;
     }
-    pw.status('Проверяю и сохраняю ответ…');
+    pw.status(ui.checking);
     try{
       await pw.login();
       const previous=pw.player?.completed_levels??0;
@@ -138,20 +147,20 @@
       if(type==='letter'){
         const pos=available[Math.floor(Math.random()*available.length)], reserved=new Set(fixed.values());
         const tile=tiles.find(t=>t.letter===answer[pos]&&!reserved.has(t.id));if(!tile)throw new Error('Не удалось разместить букву.');
-        selected=selected.map(id=>id===tile.id?null:id);selected[pos]=tile.id;fixed.set(pos,tile.id);pw.status('Буква открыта. −50 монет.');
+        selected=selected.map(id=>id===tile.id?null:id);selected[pos]=tile.id;fixed.set(pos,tile.id);pw.status(ui.letter);
       }else if(type==='remove'){
-        bad.slice(0,3).forEach(t=>{removed.add(t.id);selected=selected.map(id=>id===t.id?null:id);});pw.status('Лишние буквы убраны. −100 монет.');
-      }else{textOpen=true;pw.status('Подсказка открыта. −150 монет.');}
+        bad.slice(0,3).forEach(t=>{removed.add(t.id);selected=selected.map(id=>id===t.id?null:id);});pw.status(ui.remove);
+      }else{textOpen=true;pw.status(ui.text);}
       save();pw.haptic();
     }catch(e){pw.status(e.message);}
     finally{busy=false;paint();}
     if(selected.every(id=>id!==null))check();
   }
-  $('shuffle').onclick=()=>{if(busy)return;shuffle();paint();pw.status('Буквы перемешаны. Бесплатно.');pw.haptic();};
+  $('shuffle').onclick=()=>{if(busy)return;shuffle();paint();pw.status(ui.shuffle);pw.haptic();};
   $('letterHint').onclick=()=>hint('letter');$('removeHint').onclick=()=>hint('remove');$('textHint').onclick=()=>hint('text');
   shuffle();paint();
   pw.login().then(p=>{
     if(levelId>(p.current_level??1)){pw.status('Сначала пройди уровень '+(p.current_level??1)+'.');busy=true;paint();return;}
-    restore(p);pw.status('Профиль синхронизирован.');
+    restore(p);pw.status(ui.sync);
   }).catch(e=>pw.status(e.message));
 })();
