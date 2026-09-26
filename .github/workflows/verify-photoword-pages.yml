@@ -16,23 +16,32 @@ jobs:
   public-site-check:
     if: github.event_name == 'push' || github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 8
     steps:
-      - name: Check published pages and every required asset
+      - name: Wait for r10 and verify published files
         shell: bash
         run: |
           set -euo pipefail
           base='https://firstgame001-star.github.io/Photoword2026/clean'
-          for file in index.html game.html core.js home.js game.js ui.css release.json; do
-            curl --fail --silent --show-error --location --retry 4 --retry-all-errors --retry-delay 5 --max-time 30 "$base/$file" -o "$RUNNER_TEMP/$file"
+          ok=0
+          for i in $(seq 1 36); do
+            if curl --fail --silent --show-error --location --max-time 20 "$base/release.json?check=$i" -o "$RUNNER_TEMP/release.json" && grep -q '20260926-r10' "$RUNNER_TEMP/release.json"; then
+              ok=1
+              break
+            fi
+            sleep 5
+          done
+          test "$ok" = 1
+          for file in index.html game.html core.js home.js game.js ui.css privacy.html terms.html release.json; do
+            curl --fail --silent --show-error --location --retry 4 --retry-all-errors --retry-delay 3 --max-time 30 "$base/$file?r=20260926-r10" -o "$RUNNER_TEMP/$file"
             echo "HTTP 200: $file"
           done
-          curl --fail --silent --show-error --location --max-time 30 "$base/" -o "$RUNNER_TEMP/entry.html"
-          grep -q '20260926-r9' "$RUNNER_TEMP/release.json"
-          grep -q './home.js' "$RUNNER_TEMP/entry.html"
+          grep -q './home.js' "$RUNNER_TEMP/index.html"
           grep -q './core.js' "$RUNNER_TEMP/game.html"
-          grep -q 'https://telegram.org/js/telegram-web-app.js' "$RUNNER_TEMP/entry.html"
+          grep -q 'privacy.html' "$RUNNER_TEMP/index.html"
+          grep -q 'terms.html' "$RUNNER_TEMP/index.html"
+          grep -q 'https://telegram.org/js/telegram-web-app.js' "$RUNNER_TEMP/index.html"
           node --check "$RUNNER_TEMP/core.js"
           node --check "$RUNNER_TEMP/home.js"
           node --check "$RUNNER_TEMP/game.js"
-          printf '### PhotoWord publication check\n\n/clean/, both pages and all required assets returned HTTP 200.\n' >> "$GITHUB_STEP_SUMMARY"
+          printf '### PhotoWord r10 publication check\n\nPublic pages and required assets returned HTTP 200 and JavaScript parsed successfully.\n' >> "$GITHUB_STEP_SUMMARY"
