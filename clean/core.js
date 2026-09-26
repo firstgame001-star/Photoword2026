@@ -18,6 +18,7 @@
   for (const [method, value] of [['ready'], ['expand'], ['setHeaderColor', '#061d2c'], ['setBackgroundColor', '#061d2c']]) {
     try { tg?.[method]?.(value); } catch { /* Native bridge is optional, UI is not. */ }
   }
+  try{const theme=localStorage.getItem('pw.theme')||'game';document.documentElement.dataset.theme=['game','night','light','neon','gold'].includes(theme)?theme:'game';}catch{document.documentElement.dataset.theme='game';}
   let prefs;
   try { prefs = JSON.parse(localStorage.getItem('photoword-prefs')) || {}; } catch { prefs = {}; }
   prefs = {sound: true, haptic: true, music: false, ...prefs};
