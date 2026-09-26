@@ -126,7 +126,7 @@ with sync_playwright() as pw:
       if language=='en': expect(page.locator('#supportTitle')).to_have_text('Support')
       expect(page.locator('#openSupportChat')).to_be_visible();page.locator('[data-close="supportModal"]').tap()
       # Account deletion flow is present and requires explicit confirmation.
-      page.locator('#settingsBtn').tap();page.locator('#eraseAccountBtn').tap();expect(page.locator('#eraseAccountModal')).to_be_visible();expect(page.locator('#confirmEraseAccount')).to_be_visible();page.locator('[data-close="eraseAccountModal"]').tap()
+      page.locator('#settingsBtn').tap();page.locator('#eraseAccountBtn').tap();expect(page.locator('#eraseAccountModal')).to_be_visible();expect(page.locator('#confirmEraseAccount')).to_be_visible();page.locator('#cancelEraseAccount').tap()
       # Privacy and terms follow the selected language.
       legal=ctx.new_page();legal.goto(BASE+'clean/privacy.html?r='+RELEASE,wait_until='domcontentloaded');expected_priv={'ru':'Политика конфиденциальности','en':'Privacy Policy','az':'Məxfilik siyasəti'}[language];expect(legal.locator('#pt')).to_have_text(expected_priv);legal.goto(BASE+'clean/terms.html?r='+RELEASE,wait_until='domcontentloaded');expected_terms={'ru':'Пользовательское соглашение','en':'Terms of Use','az':'İstifadəçi razılaşması'}[language];expect(legal.locator('#tt')).to_have_text(expected_terms);body_legal=legal.locator('body').inner_text();assert 'will be added before public launch' not in body_legal;assert 'будет добавлен до публичного запуска' not in body_legal;legal.close()
       # Nickname is one-time UI and becomes the displayed name.
