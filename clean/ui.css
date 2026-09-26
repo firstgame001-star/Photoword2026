@@ -58,3 +58,8 @@ html[data-theme="light"] .chapter-title{color:#fff;text-shadow:0 2px 5px #000}
 html[data-theme="light"] .chapter-foot{color:#102938}
 html[data-theme="light"] .chapter .count{color:#102938}
 html[data-theme="light"] #activeChapterCard .chapter-foot,html[data-theme="light"] .chapter-select .chapter-foot{background:#f8fbfd}
+
+.success-copy #successChapter{display:block;margin-top:8px;color:#72ddff;font-weight:800}
+.slots.long-answer{max-width:430px;gap:3px}
+.slots.long-answer .slot{font-size:clamp(14px,4vw,19px);border-radius:7px}
+html[data-theme="light"] .success-copy #successChapter{color:#087ca7}
