@@ -63,3 +63,35 @@ html[data-theme="light"] #activeChapterCard .chapter-foot,html[data-theme="light
 .slots.long-answer{max-width:430px;gap:3px}
 .slots.long-answer .slot{font-size:clamp(14px,4vw,19px);border-radius:7px}
 html[data-theme="light"] .success-copy #successChapter{color:#087ca7}
+
+/* Chapter 2 visual identity */
+.assoc-hero{overflow:hidden;isolation:isolate;background:
+ radial-gradient(circle at 20% 18%,#8b5cf655 0 7%,transparent 8%),
+ radial-gradient(circle at 78% 24%,#22d3ee44 0 6%,transparent 7%),
+ radial-gradient(circle at 62% 72%,#f59e0b33 0 5%,transparent 6%),
+ linear-gradient(135deg,#160f38 0%,#13284d 48%,#0b4c56 100%)!important}
+.assoc-hero:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#07162a12 0%,#071b31c7 88%);z-index:-1}
+.chapter-cover-mark{position:absolute;right:18px;top:14px;font-size:68px;font-weight:1000;line-height:1;color:#ffffff16;letter-spacing:-7px}
+.chapter-orbits{position:absolute;inset:0;pointer-events:none}
+.chapter-orbits i{position:absolute;border:1px solid #8be9ff2b;border-radius:50%;transform:rotate(-16deg)}
+.chapter-orbits i:nth-child(1){width:190px;height:78px;left:-30px;top:56px}
+.chapter-orbits i:nth-child(2){width:245px;height:100px;right:-58px;top:104px;border-color:#b69cff2e}
+.chapter-orbits i:nth-child(3){width:135px;height:52px;left:35%;bottom:38px;border-color:#ffd36b2b}
+.chapter.assoc{border-color:#7667ff;box-shadow:0 12px 32px #08061d88,0 0 0 1px #725cff22}
+.chapter.assoc .bar i{background:linear-gradient(90deg,#7458ff,#26d7d0)}
+.chapter.assoc .play{background:linear-gradient(#7258f5,#4a36c8);border-color:#aa9cff;box-shadow:0 4px #30238f}
+.chapter-lock-note{margin:7px 0 10px;text-align:center;font-size:11px;color:#aabac9}
+#activeChapterCard.assoc .hero{background:
+ radial-gradient(circle at 22% 22%,#8b5cf650 0 8%,transparent 9%),
+ radial-gradient(circle at 75% 30%,#22d3ee3b 0 7%,transparent 8%),
+ linear-gradient(135deg,#160f38,#13284d 48%,#0b4c56)!important}
+#activeChapterCard.assoc{border-color:#7667ff}
+#activeChapterCard.assoc .bar i{background:linear-gradient(90deg,#7458ff,#26d7d0)}
+#activeChapterCard.assoc .play{background:linear-gradient(#7258f5,#4a36c8);border-color:#aa9cff;box-shadow:0 4px #30238f}
+
+/* Launch controls */
+#watchAd:not(:disabled){background:#159d3a;color:#fff}
+#eraseAccountBtn small{color:#d8a8b0}
+#eraseAccountModal .resetbody{color:#efc9cf}
+html[data-theme="light"] .chapter-lock-note{color:#59707c}
+html[data-theme="light"] .chapter.assoc .chapter-foot{background:#f8fbfd}
