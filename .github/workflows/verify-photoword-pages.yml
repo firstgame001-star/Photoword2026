@@ -1,14 +1,20 @@
 name: Verify PhotoWord Pages
 on:
+  push:
+    branches: [main]
+    paths: ['clean/**', '.github/workflows/verify-photoword-pages.yml']
   workflow_run:
     workflows: ["pages build and deployment"]
     types: [completed]
     branches: [main]
   workflow_dispatch:
 permissions: {}
+concurrency:
+  group: photoword-public-check
+  cancel-in-progress: true
 jobs:
   public-site-check:
-    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
