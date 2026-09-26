@@ -9,7 +9,7 @@
   function update(p) {
     const name = pw.name(p);
     text('name',name); text('profileName',name);
-    const league=p.xp>=1500?'Легенда':p.xp>=750?'Мастер':p.xp>=400?'Эксперт':p.xp>=150?'Знаток':'Новичок';
+    const league=p.xp>=4000?'Легенда':p.xp>=2500?'Мастер':p.xp>=1500?'Эксперт':p.xp>=400?'Знаток':'Новичок';
     text('rankLabel',league+' · место #'+p.rank); text('profileRank','#' + p.rank);
     text('photoWordId',p.photoword_id); text('profileXp',p.xp); text('profileDone',p.completed_levels);
     text('profileUsername',p.username ? '@' + p.username : 'Username не указан');
