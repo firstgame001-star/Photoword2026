@@ -66,11 +66,11 @@ function persistPrefs(){try{localStorage.setItem('photoword-prefs',JSON.stringif
 
 const initial=getLang();applyTheme(getTheme());if(initial)setLang(initial);else{setTimeout(()=>open('languageModal'),250);applyHomeLanguage('ru')}
 
-$('settingsBtn').onclick=()=>open('settingsModal');$('languageBtn').onclick=()=>open('languageModal');$('themeBtn').onclick=()=>open('themeModal');
+$('settingsBtn').onclick=()=>open('settingsModal');$('languageBtn').onclick=()=>{close('settingsModal');open('languageModal')};$('themeBtn').onclick=()=>{close('settingsModal');open('themeModal')};
 document.querySelectorAll('[data-theme]').forEach(b=>b.onclick=()=>{applyTheme(b.dataset.theme);close('themeModal')});
 document.querySelectorAll('[data-language]').forEach(b=>b.onclick=()=>{setLang(b.dataset.language);close('languageModal');pw.status(b.dataset.language==='ru'?'Язык игры: Русский':b.dataset.language==='en'?'Game language: English':'Oyun dili: Azərbaycan dili')});
 $('profileBtn').onclick=()=>open('profileModal');$('dailyRewardBtn').onclick=()=>open('dailyModal');$('tasksBtn').onclick=()=>open('tasksModal');$('shopOffer').onclick=()=>open('shopModal');$('shopNav').onclick=()=>open('shopModal');
-$('rulesBtn').onclick=()=>{applyHomeLanguage(lang());open('rulesModal')};$('resetProgressBtn').onclick=()=>{resetArmed=false;applyHomeLanguage(lang());$('confirmReset').textContent=lang()==='en'?'RESET PROGRESS':lang()==='az'?'TƏRƏQQİNİ SIFIRLA':'СБРОСИТЬ ПРОГРЕСС';open('resetModal')};
+$('rulesBtn').onclick=()=>{close('settingsModal');applyHomeLanguage(lang());open('rulesModal')};$('resetProgressBtn').onclick=()=>{close('settingsModal');resetArmed=false;applyHomeLanguage(lang());$('confirmReset').textContent=lang()==='en'?'RESET PROGRESS':lang()==='az'?'TƏRƏQQİNİ SIFIRLA':'СБРОСИТЬ ПРОГРЕСС';open('resetModal')};
 
 $('notificationsBtn').onclick=()=>{
  const tg=window.Telegram?.WebApp;
