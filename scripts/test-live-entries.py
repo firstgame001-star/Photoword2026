@@ -4,7 +4,7 @@ from pathlib import Path
 from playwright.sync_api import sync_playwright, expect
 
 BASE='https://firstgame001-star.github.io/Photoword2026/'
-RELEASE='20260926-r10'
+RELEASE='20260926-r11'
 OUT=Path('test-results'); OUT.mkdir(exist_ok=True)
 
 # Wait for the exact public release, not merely for GitHub source commits.
