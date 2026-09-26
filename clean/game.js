@@ -55,9 +55,9 @@
   }
   validateLanguageLevels();
   const GAME_UI={
-    ru:{chapter:'Глава 1',warm:'Разминка · Уровень ',textHint:'Текстовая подсказка',tap:'Нажми, чтобы открыть',wrong:'Неверное слово. Попробуй ещё раз.',checking:'Проверяю и сохраняю ответ…',passed:n=>'Уровень '+n+' пройден!',reward:'+20 монет · +15 XP',already:'Награда за этот уровень уже получена',next:'СЛЕДУЮЩИЙ УРОВЕНЬ',sync:'Профиль синхронизирован.',shuffle:'Буквы перемешаны. Бесплатно.',letter:'Буква открыта. −50 монет.',remove:'Лишние буквы убраны. −100 монет.',text:'Подсказка открыта. −150 монет.'},
-    en:{chapter:'Chapter 1',warm:'Warm-up · Level ',textHint:'Text hint',tap:'Tap to reveal',wrong:'Wrong word. Try again.',checking:'Checking and saving your answer…',passed:n=>'Level '+n+' completed!',reward:'+20 coins · +15 XP',already:'Reward for this level has already been claimed',next:'NEXT LEVEL',sync:'Profile synced.',shuffle:'Letters shuffled. Free.',letter:'Letter revealed. −50 coins.',remove:'Extra letters removed. −100 coins.',text:'Hint revealed. −150 coins.'},
-    az:{chapter:'Fəsil 1',warm:'İsinmə · Səviyyə ',textHint:'Mətn ipucu',tap:'Açmaq üçün toxun',wrong:'Söz yanlışdır. Yenidən cəhd et.',checking:'Cavab yoxlanılır və yadda saxlanılır…',passed:n=>n+'-ci səviyyə keçildi!',reward:'+20 sikkə · +15 XP',already:'Bu səviyyənin mükafatı artıq alınıb',next:'NÖVBƏTİ SƏVİYYƏ',sync:'Profil sinxronlaşdırıldı.',shuffle:'Hərflər qarışdırıldı. Pulsuz.',letter:'Hərf açıldı. −50 sikkə.',remove:'Artıq hərflər silindi. −100 sikkə.',text:'İpucu açıldı. −150 sikkə.'}
+    ru:{chapter:'Глава 1',warm:'Разминка · Уровень ',textHint:'Текстовая подсказка',tap:'Нажми, чтобы открыть',wrong:'Неверное слово. Попробуй ещё раз.',checking:'Проверяю и сохраняю ответ…',passed:n=>'Уровень '+n+' пройден!',reward:'+20 монет · +15 XP',already:'Награда за этот уровень уже получена',next:'СЛЕДУЮЩИЙ УРОВЕНЬ',sync:'Профиль синхронизирован.',shuffle:'Буквы перемешаны. Бесплатно.',letter:'Буква открыта. −50 монет.',remove:'Лишние буквы убраны. −100 монет.',text:'Подсказка открыта. −150 монет.',textOpened:'Подсказка уже открыта.',allLetters:'Все буквы уже открыты.',noExtra:'Лишних букв не осталось.',hintWait:'Подсказка: ожидаю ответ сервера…',locked:n=>'Сначала пройди уровень '+n+'.'},
+    en:{chapter:'Chapter 1',warm:'Warm-up · Level ',textHint:'Text hint',tap:'Tap to reveal',wrong:'Wrong word. Try again.',checking:'Checking and saving your answer…',passed:n=>'Level '+n+' completed!',reward:'+20 coins · +15 XP',already:'Reward for this level has already been claimed',next:'NEXT LEVEL',sync:'Profile synced.',shuffle:'Letters shuffled. Free.',letter:'Letter revealed. −50 coins.',remove:'Extra letters removed. −100 coins.',text:'Hint revealed. −150 coins.',textOpened:'Hint already revealed.',allLetters:'All letters are already revealed.',noExtra:'No extra letters remain.',hintWait:'Getting hint from the server…',locked:n=>'Complete level '+n+' first.'},
+    az:{chapter:'Fəsil 1',warm:'İsinmə · Səviyyə ',textHint:'Mətn ipucu',tap:'Açmaq üçün toxun',wrong:'Söz yanlışdır. Yenidən cəhd et.',checking:'Cavab yoxlanılır və yadda saxlanılır…',passed:n=>n+'-ci səviyyə keçildi!',reward:'+20 sikkə · +15 XP',already:'Bu səviyyənin mükafatı artıq alınıb',next:'NÖVBƏTİ SƏVİYYƏ',sync:'Profil sinxronlaşdırıldı.',shuffle:'Hərflər qarışdırıldı. Pulsuz.',letter:'Hərf açıldı. −50 sikkə.',remove:'Artıq hərflər silindi. −100 sikkə.',text:'İpucu açıldı. −150 sikkə.',textOpened:'İpucu artıq açılıb.',allLetters:'Bütün hərflər artıq açılıb.',noExtra:'Artıq hərf qalmayıb.',hintWait:'İpucu serverdən alınır…',locked:n=>'Əvvəlcə '+n+'-ci səviyyəni keç.'}
   };
   const requested = Number(new URLSearchParams(location.search).get('level') || 1);
   const levelId = LEVELS[requested] ? requested : 1, level = LEVELS[levelId], answer=[...level.answer];
@@ -120,26 +120,26 @@
     if(word!==level.answer){
       pw.status(ui.wrong);$('slots').classList.add('wrong');
       setTimeout(()=>{clearInput();busy=false;$('slots').classList.remove('wrong');paint();},700);
-      pw.haptic('error');return;
+      pw.sfx('error');pw.haptic('error');return;
     }
     pw.status(ui.checking);
     try{
       await pw.login();
       const previous=pw.player?.completed_levels??0;
       const p=await pw.api('complete_level',{levelId,answer:word});
-      solved=true;pw.haptic('success');showSuccess(p.completed_levels>previous);
+      solved=true;pw.sfx('success');pw.haptic('success');showSuccess(p.completed_levels>previous);
     }catch(e){pw.status(e.message);clearInput();}
     finally{busy=false;paint();}
   }
-  function choose(id){if(busy||solved)return;const pos=selected.indexOf(null);if(pos<0)return;selected[pos]=id;paint();check();}
+  function choose(id){if(busy||solved)return;const pos=selected.indexOf(null);if(pos<0)return;pw.sfx('tap');selected[pos]=id;paint();check();}
   async function hint(type){
     if(busy||solved)return;
-    if(type==='text'&&textOpen){pw.status('Подсказка уже открыта.');return;}
+    if(type==='text'&&textOpen){pw.status(ui.textOpened);return;}
     const available=answer.map((_,i)=>i).filter(i=>!fixed.has(i));
     const bad=tiles.filter(t=>!answer.includes(t.letter)&&!removed.has(t.id));
-    if(type==='letter'&&!available.length){pw.status('Все буквы уже открыты.');return;}
-    if(type==='remove'&&!bad.length){pw.status('Лишних букв не осталось.');return;}
-    busy=true;paint();pw.status('Подсказка: ожидаю ответ сервера…');
+    if(type==='letter'&&!available.length){pw.status(ui.allLetters);return;}
+    if(type==='remove'&&!bad.length){pw.status(ui.noExtra);return;}
+    busy=true;paint();pw.status(ui.hintWait);
     try{
       await pw.login();
       const p=await pw.api('use_hint',{hintType:type,levelId});
@@ -151,16 +151,16 @@
       }else if(type==='remove'){
         bad.slice(0,3).forEach(t=>{removed.add(t.id);selected=selected.map(id=>id===t.id?null:id);});pw.status(ui.remove);
       }else{textOpen=true;pw.status(ui.text);}
-      save();pw.haptic();
+      save();pw.sfx('hint');pw.haptic();
     }catch(e){pw.status(e.message);}
     finally{busy=false;paint();}
     if(selected.every(id=>id!==null))check();
   }
-  $('shuffle').onclick=()=>{if(busy)return;shuffle();paint();pw.status(ui.shuffle);pw.haptic();};
+  $('shuffle').onclick=()=>{if(busy)return;shuffle();paint();pw.status(ui.shuffle);pw.sfx('tap');pw.haptic();};
   $('letterHint').onclick=()=>hint('letter');$('removeHint').onclick=()=>hint('remove');$('textHint').onclick=()=>hint('text');
   shuffle();paint();
   pw.login().then(p=>{
-    if(levelId>(p.current_level??1)){pw.status('Сначала пройди уровень '+(p.current_level??1)+'.');busy=true;paint();return;}
+    if(levelId>(p.current_level??1)){pw.status(ui.locked(p.current_level??1));busy=true;paint();return;}
     restore(p);pw.status(ui.sync);
   }).catch(e=>pw.status(e.message));
 })();
