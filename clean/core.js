@@ -25,7 +25,7 @@
   const messages = {invalid_telegram_auth: 'Не удалось подтвердить вход. Закрой мини-приложение и открой его через бота.',
     not_configured: 'Сервер входа ещё не настроен.', insufficient_coins: 'Недостаточно монет.',
     complete_failed: 'Сервер не сохранил прохождение.', level_completed: 'Уровень уже пройден. Монеты не списаны.', wrong_answer: 'Неверное слово.',
-    hint_failed: 'Сервер не применил подсказку.', invoice_failed:'Не удалось создать счёт Telegram Stars.', bad_pack:'Такого пакета монет нет.', daily_claimed:'Сегодня награда уже получена.', daily_failed:'Не удалось получить ежедневную награду.', task_claimed:'Эта награда сегодня уже получена.', task_not_ready:'Сначала выполни условие задания.', task_failed:'Не удалось получить награду за задание.', bad_task:'Такого задания нет.', level_locked: 'Сначала пройди предыдущий уровень.', bad_level: 'Такого уровня пока нет.'};
+    hint_failed: 'Сервер не применил подсказку.', invoice_failed:'Не удалось создать счёт Telegram Stars.', bad_pack:'Такого пакета монет нет.', daily_claimed:'Сегодня награда уже получена.', daily_failed:'Не удалось получить ежедневную награду.', task_claimed:'Эта награда сегодня уже получена.', task_not_ready:'Сначала выполни условие задания.', task_failed:'Не удалось получить награду за задание.', bad_task:'Такого задания нет.', level_locked: 'Сначала пройди предыдущий уровень.', bad_level: 'Такого уровня пока нет.', reset_failed:'Не удалось сбросить прогресс.'};
   function status(message) {
     const e = document.getElementById('status');
     if (e) { e.textContent = message; e.hidden = false; }
@@ -75,6 +75,39 @@
     if (!Array.isArray(rows)) throw new Error('Сервер вернул некорректный рейтинг.');
     return rows;
   }
+  let audioCtx=null,musicTimer=null,musicIndex=0;
+  function ensureAudio(){
+    if(!audioCtx){const C=window.AudioContext||window.webkitAudioContext;if(C)audioCtx=new C();}
+    if(audioCtx?.state==='suspended')audioCtx.resume().catch(()=>{});
+    return audioCtx;
+  }
+  function tone(freq,duration=.08,volume=.04,type='sine',delay=0){
+    const ctx=ensureAudio();if(!ctx)return;
+    const o=ctx.createOscillator(),g=ctx.createGain(),t=ctx.currentTime+delay;
+    o.type=type;o.frequency.setValueAtTime(freq,t);g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(Math.max(.0002,volume),t+.01);g.gain.exponentialRampToValueAtTime(.0001,t+duration);
+    o.connect(g);g.connect(ctx.destination);o.start(t);o.stop(t+duration+.03);
+  }
+  function sfx(kind='tap'){
+    if(!prefs.sound)return;
+    if(kind==='success'){tone(523,.16,.045,'sine');tone(659,.18,.04,'sine',.08);tone(784,.22,.035,'sine',.16);}
+    else if(kind==='error'){tone(180,.14,.045,'square');tone(140,.16,.035,'square',.08);}
+    else if(kind==='coin'){tone(880,.08,.04,'triangle');tone(1175,.12,.035,'triangle',.06);}
+    else if(kind==='hint'){tone(660,.1,.035,'sine');tone(880,.12,.03,'sine',.07);}
+    else tone(440,.045,.025,'sine');
+  }
+  function stopMusic(){if(musicTimer){clearTimeout(musicTimer);musicTimer=null;}}
+  function musicStep(){
+    if(!prefs.music){stopMusic();return;}
+    const seq=[261.63,329.63,392,493.88,392,329.63,293.66,349.23];
+    tone(seq[musicIndex++%seq.length],1.45,.012,'sine');
+    musicTimer=setTimeout(musicStep,900);
+  }
+  function setMusic(enabled){
+    prefs.music=Boolean(enabled);
+    try{localStorage.setItem('photoword-prefs',JSON.stringify(prefs));}catch{}
+    if(prefs.music){ensureAudio();if(!musicTimer)musicStep();}else stopMusic();
+  }
+  document.addEventListener('pointerdown',()=>{if(prefs.music&&!musicTimer)setMusic(true);},{once:false,passive:true});
   function haptic(kind = 'light') {
     if (!prefs.haptic) return;
     try {
@@ -82,6 +115,6 @@
       else tg?.HapticFeedback?.impactOccurred(kind);
     } catch { /* Haptics must never interrupt answer reset or hint application. */ }
   }
-  window.PW = {store, prefs, status, name, api, login, actionRequest, leaderboard, haptic,
+  window.PW = {store, prefs, status, name, api, login, actionRequest, leaderboard, haptic, sfx, setMusic,
     get player() { return current; }, get hasAuth() { return Boolean(raw); }};
 })();
