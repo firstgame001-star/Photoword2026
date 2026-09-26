@@ -24,7 +24,7 @@
   const messages = {invalid_telegram_auth: 'Не удалось подтвердить вход. Закрой мини-приложение и открой его через бота.',
     not_configured: 'Сервер входа ещё не настроен.', insufficient_coins: 'Недостаточно монет.',
     complete_failed: 'Сервер не сохранил прохождение.', level_completed: 'Уровень уже пройден. Монеты не списаны.', wrong_answer: 'Неверное слово.',
-    hint_failed: 'Сервер не применил подсказку.', level_locked: 'Сначала пройди предыдущий уровень.', bad_level: 'Такого уровня пока нет.'};
+    hint_failed: 'Сервер не применил подсказку.', daily_claimed:'Сегодня награда уже получена.', daily_failed:'Не удалось получить ежедневную награду.', task_claimed:'Эта награда сегодня уже получена.', task_not_ready:'Сначала выполни условие задания.', task_failed:'Не удалось получить награду за задание.', bad_task:'Такого задания нет.', level_locked: 'Сначала пройди предыдущий уровень.', bad_level: 'Такого уровня пока нет.'};
   function status(message) {
     const e = document.getElementById('status');
     if (e) { e.textContent = message; e.hidden = false; }
