@@ -24,6 +24,22 @@
   $('profileBtn').onclick = () => open('profileModal');
   $('dailyRewardBtn').onclick = () => open('dailyModal');
   $('tasksBtn').onclick = () => open('tasksModal');
+  $('shopOffer').onclick = () => open('shopModal');
+  $('shopNav').onclick = () => open('shopModal');
+  document.querySelectorAll('[data-pack]').forEach(b=>b.onclick=async()=>{
+    if(b.disabled)return;b.disabled=true;pw.status('Создаю счёт Telegram Stars…');
+    try{
+      const result=await pw.raw('create_invoice',{pack:b.dataset.pack});
+      const tg=window.Telegram?.WebApp;
+      if(!tg?.openInvoice)throw new Error('Оплата доступна только внутри Telegram.');
+      tg.openInvoice(result.invoice_url,status=>{
+        b.disabled=false;
+        if(status==='paid'){pw.status('Платёж подтверждён Telegram. Начисляю монеты…');setTimeout(()=>pw.login(true).catch(()=>{}),1200);}
+        else if(status==='cancelled')pw.status('Покупка отменена.');
+        else if(status==='failed')pw.status('Платёж не прошёл.');
+      });
+    }catch(e){pw.status(e.message);b.disabled=false;}
+  });
   $('claimDaily').onclick = async () => {
     $('claimDaily').disabled=true; pw.status('Получаю ежедневную награду…');
     try { const p=await pw.api('claim_daily'); update(p); text('dailyStreak','Серия: '+(p.daily_streak||1)+' дн.'); pw.status('+5 монет! Ежедневная награда получена.'); $('claimDaily').textContent='ПОЛУЧЕНО'; }
