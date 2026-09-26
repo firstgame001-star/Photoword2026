@@ -157,6 +157,7 @@
     }
   };
   let gameLang='ru';try{gameLang=localStorage.getItem('pw.language')||'ru'}catch{}
+  const track=(event,data={})=>pw.actionRequest('track_event',{event,language:gameLang,...data}).catch(()=>{});
   if(TRANSLATED[gameLang]) Object.keys(LEVELS).forEach(k=>Object.assign(LEVELS[k],TRANSLATED[gameLang][k]));
   function validateLanguageLevels(){
     const supported=['ru','en','az'];
@@ -239,7 +240,7 @@
     busy=true;paint();
     const word=selected.map(id=>tiles[id].letter).join('');
     if(word!==level.answer){
-      pw.status(ui.wrong);$('slots').classList.add('wrong');
+      track('wrong_answer',{levelId,chapterId:levelId<=20?1:2});pw.status(ui.wrong);$('slots').classList.add('wrong');
       setTimeout(()=>{clearInput();busy=false;$('slots').classList.remove('wrong');paint();},700);
       pw.sfx('error');pw.haptic('error');return;
     }
@@ -248,7 +249,7 @@
       await pw.login();
       const previous=pw.player?.completed_levels??0;
       const p=await pw.api('complete_level',{levelId,answer:word});
-      solved=true;pw.sfx('success');pw.haptic('success');showSuccess(p.completed_levels>previous);
+      solved=true;track('level_complete',{levelId,chapterId:levelId<=20?1:2});pw.sfx('success');pw.haptic('success');showSuccess(p.completed_levels>previous);
     }catch(e){pw.status(e.message);clearInput();}
     finally{busy=false;paint();}
   }
@@ -272,7 +273,7 @@
       }else if(type==='remove'){
         bad.slice(0,3).forEach(t=>{removed.add(t.id);selected=selected.map(id=>id===t.id?null:id);});pw.status(ui.remove);
       }else{textOpen=true;pw.status(ui.text);}
-      save();pw.sfx('hint');pw.haptic();
+      save();track('hint_use',{levelId,chapterId:levelId<=20?1:2,metadata:{type}});pw.sfx('hint');pw.haptic();
     }catch(e){pw.status(e.message);}
     finally{busy=false;paint();}
     if(selected.every(id=>id!==null))check();
@@ -282,6 +283,6 @@
   shuffle();paint();
   pw.login().then(p=>{
     if(levelId>(p.current_level??1)){pw.status(ui.locked(p.current_level??1));busy=true;paint();return;}
-    restore(p);pw.status(ui.sync);
+    restore(p);track('level_open',{levelId,chapterId:levelId<=20?1:2});pw.status(ui.sync);
   }).catch(e=>pw.status(e.message));
 })();
