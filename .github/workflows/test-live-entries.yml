@@ -1,0 +1,32 @@
+name: Test live PhotoWord entries
+on:
+  push:
+    branches: [main]
+    paths: ['index.html', 'app/index.html', 'game.html', 'app/game.html', '404.html', 'clean/**', 'scripts/test-live-entries.py', '.github/workflows/test-live-entries.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: photoword-live-entry-tests
+  cancel-in-progress: true
+jobs:
+  mobile-browser-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - name: Install browser tests
+        run: |
+          python -m pip install playwright==1.63.0
+          python -m playwright install --with-deps chromium webkit
+      - name: Open actual public Pages URLs and tap controls
+        run: python scripts/test-live-entries.py
+      - name: Save browser test evidence
+        if: always()
+        uses: actions/upload-artifact@v5
+        with:
+          name: photoword-mobile-browser-check
+          path: test-results/
+          retention-days: 7
