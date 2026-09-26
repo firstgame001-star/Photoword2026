@@ -42,15 +42,31 @@
     if($('dailyModal')){$('dailyModal').querySelector('h2').textContent=t.dailyTitle;if($('claimDaily'))$('claimDaily').textContent=t.claim;}
     if($('tasksModal'))$('tasksModal').querySelector('h2').textContent='🎯 '+t.dayTasks;
   }
+  const THEMES={
+    ru:{game:'Игровая',night:'Ночная',light:'Светлая',neon:'Неон',gold:'Золотая'},
+    en:{game:'Game',night:'Night',light:'Light',neon:'Neon',gold:'Gold'},
+    az:{game:'Oyun',night:'Gecə',light:'İşıqlı',neon:'Neon',gold:'Qızılı'}
+  };
+  function getTheme(){try{return localStorage.getItem('pw.theme')||'game'}catch{return'game'}}
+  function applyTheme(theme){
+    if(!['game','night','light','neon','gold'].includes(theme))theme='game';
+    document.documentElement.dataset.theme=theme;
+    try{localStorage.setItem('pw.theme',theme)}catch{}
+    const lang=getLang()||'ru';text('themeCurrent',(THEMES[lang]||THEMES.ru)[theme]);
+    document.querySelectorAll('[data-theme]').forEach(b=>b.classList.toggle('selected',b.dataset.theme===theme));
+  }
   const LANGS={ru:'Русский',en:'English',az:'Azərbaycan dili'};
   function getLang(){try{return localStorage.getItem('pw.language')||''}catch{return''}}
-  function setLang(lang){try{localStorage.setItem('pw.language',lang)}catch{};document.documentElement.lang=lang;text('languageCurrent',LANGS[lang]);document.querySelectorAll('[data-language]').forEach(b=>b.classList.toggle('selected',b.dataset.language===lang));applyHomeLanguage(lang);}
+  function setLang(lang){try{localStorage.setItem('pw.language',lang)}catch{};document.documentElement.lang=lang;text('languageCurrent',LANGS[lang]);document.querySelectorAll('[data-language]').forEach(b=>b.classList.toggle('selected',b.dataset.language===lang));applyHomeLanguage(lang);text('themeCurrent',(THEMES[lang]||THEMES.ru)[getTheme()]);}
   const initialLang=getLang();
+  applyTheme(getTheme());
   if(initialLang)setLang(initialLang);
   else setTimeout(()=>open('languageModal'),250);
   // Bind navigation first. A failed login must not disable settings or the play link.
   $('settingsBtn').onclick = () => open('settingsModal');
   $('languageBtn').onclick = () => open('languageModal');
+  $('themeBtn').onclick = () => open('themeModal');
+  document.querySelectorAll('[data-theme]').forEach(b=>b.onclick=()=>{applyTheme(b.dataset.theme);close('themeModal');});
   document.querySelectorAll('[data-language]').forEach(b=>b.onclick=()=>{setLang(b.dataset.language);close('languageModal');pw.status(b.dataset.language==='ru'?'Язык игры: Русский':b.dataset.language==='en'?'Game language: English':'Oyun dili: Azərbaycan dili');});
   $('profileBtn').onclick = () => open('profileModal');
   $('dailyRewardBtn').onclick = () => open('dailyModal');
