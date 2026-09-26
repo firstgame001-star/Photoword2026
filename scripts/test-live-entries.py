@@ -4,7 +4,7 @@ from pathlib import Path
 from playwright.sync_api import sync_playwright, expect
 
 BASE='https://firstgame001-star.github.io/Photoword2026/'
-RELEASE='20260927-r20'
+RELEASE='20260927-r21'
 OUT=Path('test-results'); OUT.mkdir(exist_ok=True)
 
 for attempt in range(48):
@@ -65,8 +65,14 @@ def install_mock(ctx,account,completed,lang):
             nick=body.get('nickname','');assert re.fullmatch(r'[A-Za-z0-9_]{3,16}',nick);account['game_nickname']=nick;account['nickname_changed']=True
         elif action=='friends':
             route.fulfill(status=200,content_type='application/json',body=json.dumps({'friends':[{'photoword_id':'PW-FRIEND','first_name':'Friend','last_name':'','username':'friend','game_nickname':'FriendOne','completed_levels':7,'rewarded':False}],'invited':1,'rewarded':0,'total_reward':0}),headers={'Access-Control-Allow-Origin':'*'});return
+        elif action=='public_config':
+            route.fulfill(status=200,content_type='application/json',body=json.dumps({'config':{'ads_provider':'adsgram','adsgram_reward_block_id':None,'support_contact':'@PhotoWordBot'}}),headers={'Access-Control-Allow-Origin':'*'});return
+        elif action=='track_event':
+            route.fulfill(status=200,content_type='application/json',body=json.dumps({'ok':True}),headers={'Access-Control-Allow-Origin':'*'});return
+        elif action=='erase_account':
+            route.fulfill(status=200,content_type='application/json',body=json.dumps({'erased':True}),headers={'Access-Control-Allow-Origin':'*'});return
         elif action=='create_invoice':
-            route.fulfill(status=200,content_type='application/json',body=json.dumps({'invoice_url':'https://t.me/$test'}),headers={'Access-Control-Allow-Origin':'*'});return
+            route.fulfill(status=200,content_type='application/json',body=json.dumps({'invoice_url':'https://t.me/$test','coins':10,'stars':15}),headers={'Access-Control-Allow-Origin':'*'});return
         if data is None:data={'player':account.copy()}
         route.fulfill(status=status,content_type='application/json',body=json.dumps(data),headers={'Access-Control-Allow-Origin':'*'})
     ctx.route('https://bqoraxewpcnmidvjlpuy.supabase.co/**',mock)
@@ -89,7 +95,7 @@ with sync_playwright() as pw:
     page.goto(BASE+'clean/#'+fragment,wait_until='domcontentloaded',timeout=45000)
     expect(page.locator('#languageModal')).to_be_visible();expect(page.locator('#languageTitle')).to_contain_text('Choose language');expect(page.locator('#languageTitle')).to_contain_text('Dil seçin');expect(page.locator('#languageClose')).to_be_hidden()
     page.locator('[data-language="az"]').tap();expect(page.locator('#languageModal')).to_be_hidden()
-    expect(page.locator('#activeChapterTitle')).to_have_text('İsinmə');expect(page.locator('#shopOffer')).to_contain_text('Daha çox sikkə');expect(page.locator('#logoWord')).to_have_text('1 SÖZ');page.locator('#chaptersNav').tap();expect(page.locator('#chapter1Label')).to_contain_text('1–20');expect(page.locator('#chapter2Label')).to_contain_text('21–49');expect(page.locator('#chapter2Play')).to_have_class(re.compile('locked'));page.locator('#chaptersBack').tap()
+    expect(page.locator('#activeChapterTitle')).to_have_text('İsinmə');expect(page.locator('#shopOffer')).to_contain_text('Daha çox sikkə');expect(page.locator('#logoWord')).to_have_text('1 SÖZ');page.locator('#chaptersNav').tap();expect(page.locator('#chapter1Label')).to_contain_text('1–20');expect(page.locator('#chapter2Label')).to_contain_text('21–49');expect(page.locator('#chapter2Select .chapter-cover-mark')).to_have_text('II');expect(page.locator('#chapter2Play')).to_have_class(re.compile('locked'));page.locator('#chaptersBack').tap()
     body=page.locator('body').inner_text()
     for leak in ['Больше монет','Главная','Задания','Рейтинг','Сегодня награда']: assert leak not in body,('AZ leak',leak)
     assert not errors,errors;ctx.close()
@@ -118,9 +124,11 @@ with sync_playwright() as pw:
       page.locator('#settingsBtn').tap();page.locator('#supportBtn').tap();expect(page.locator('#supportModal')).to_be_visible()
       if language=='az': expect(page.locator('#supportTitle')).to_have_text('Dəstək')
       if language=='en': expect(page.locator('#supportTitle')).to_have_text('Support')
-      page.locator('[data-close="supportModal"]').tap()
+      expect(page.locator('#openSupportChat')).to_be_visible();page.locator('[data-close="supportModal"]').tap()
+      # Account deletion flow is present and requires explicit confirmation.
+      page.locator('#settingsBtn').tap();page.locator('#eraseAccountBtn').tap();expect(page.locator('#eraseAccountModal')).to_be_visible();expect(page.locator('#confirmEraseAccount')).to_be_visible();page.locator('[data-close="eraseAccountModal"]').tap()
       # Privacy and terms follow the selected language.
-      legal=ctx.new_page();legal.goto(BASE+'clean/privacy.html?r='+RELEASE,wait_until='domcontentloaded');expected_priv={'ru':'Политика конфиденциальности','en':'Privacy Policy','az':'Məxfilik siyasəti'}[language];expect(legal.locator('#pt')).to_have_text(expected_priv);legal.goto(BASE+'clean/terms.html?r='+RELEASE,wait_until='domcontentloaded');expected_terms={'ru':'Пользовательское соглашение','en':'Terms of Use','az':'İstifadəçi razılaşması'}[language];expect(legal.locator('#tt')).to_have_text(expected_terms);legal.close()
+      legal=ctx.new_page();legal.goto(BASE+'clean/privacy.html?r='+RELEASE,wait_until='domcontentloaded');expected_priv={'ru':'Политика конфиденциальности','en':'Privacy Policy','az':'Məxfilik siyasəti'}[language];expect(legal.locator('#pt')).to_have_text(expected_priv);legal.goto(BASE+'clean/terms.html?r='+RELEASE,wait_until='domcontentloaded');expected_terms={'ru':'Пользовательское соглашение','en':'Terms of Use','az':'İstifadəçi razılaşması'}[language];expect(legal.locator('#tt')).to_have_text(expected_terms);body_legal=legal.locator('body').inner_text();assert 'will be added before public launch' not in body_legal;assert 'будет добавлен до публичного запуска' not in body_legal;legal.close()
       # Nickname is one-time UI and becomes the displayed name.
       page.locator('#profileBtn').tap();page.locator('#nicknameBtn').tap();page.locator('#nicknameInput').fill('Player_77');page.locator('#saveNickname').tap();expect(page.locator('#name')).to_have_text('Player_77');page.locator('#profileBtn').tap();expect(page.locator('#nicknameBtn')).to_be_disabled()
       # Share-game control is available from the profile.
