@@ -24,7 +24,7 @@
   const messages = {invalid_telegram_auth: 'Не удалось подтвердить вход. Закрой мини-приложение и открой его через бота.',
     not_configured: 'Сервер входа ещё не настроен.', insufficient_coins: 'Недостаточно монет.',
     complete_failed: 'Сервер не сохранил прохождение.', level_completed: 'Уровень уже пройден. Монеты не списаны.', wrong_answer: 'Неверное слово.',
-    hint_failed: 'Сервер не применил подсказку.', daily_claimed:'Сегодня награда уже получена.', daily_failed:'Не удалось получить ежедневную награду.', task_claimed:'Эта награда сегодня уже получена.', task_not_ready:'Сначала выполни условие задания.', task_failed:'Не удалось получить награду за задание.', bad_task:'Такого задания нет.', level_locked: 'Сначала пройди предыдущий уровень.', bad_level: 'Такого уровня пока нет.'};
+    hint_failed: 'Сервер не применил подсказку.', invoice_failed:'Не удалось создать счёт Telegram Stars.', bad_pack:'Такого пакета монет нет.', daily_claimed:'Сегодня награда уже получена.', daily_failed:'Не удалось получить ежедневную награду.', task_claimed:'Эта награда сегодня уже получена.', task_not_ready:'Сначала выполни условие задания.', task_failed:'Не удалось получить награду за задание.', bad_task:'Такого задания нет.', level_locked: 'Сначала пройди предыдущий уровень.', bad_level: 'Такого уровня пока нет.'};
   function status(message) {
     const e = document.getElementById('status');
     if (e) { e.textContent = message; e.hidden = false; }
@@ -60,9 +60,14 @@
     window.dispatchEvent(new CustomEvent('pw:player', {detail:current}));
     return current;
   }
-  function login() {
+  function login(force=false) {
+    if(force) loginPending=null;
     if (!loginPending) loginPending = api().catch(e => { loginPending = null; throw e; });
     return loginPending;
+  }
+  async function raw(action,extra={}) {
+    if(!raw) throw new Error('Telegram не передал данные входа. Запусти игру через бота.');
+    return request('/functions/v1/telegram-login',{...extra,action,initData:raw});
   }
   async function leaderboard() {
     const rows = await request('/rest/v1/rpc/get_leaderboard', {p_limit:100}, {apikey:KEY});
@@ -76,6 +81,6 @@
       else tg?.HapticFeedback?.impactOccurred(kind);
     } catch { /* Haptics must never interrupt answer reset or hint application. */ }
   }
-  window.PW = {store, prefs, status, name, api, login, leaderboard, haptic,
+  window.PW = {store, prefs, status, name, api, login, raw, leaderboard, haptic,
     get player() { return current; }, get hasAuth() { return Boolean(raw); }};
 })();
