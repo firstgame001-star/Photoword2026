@@ -106,7 +106,7 @@ with sync_playwright() as pw:
       page.locator('#chaptersNav').tap();expect(page.locator('#chaptersScreen')).to_be_visible();expect(page.locator('#chapter1Label')).to_contain_text('1–20');expect(page.locator('#chapter2Label')).to_contain_text('21–49');expect(page.locator('#chapter2Count')).to_contain_text('29');expect(page.locator('#chapter2Play')).not_to_have_class(re.compile('locked'));expect(page.locator('#chapter2Play')).to_have_attribute('href','./game.html?level=21');page.locator('#chaptersBack').tap()
       # Every visual theme must apply and persist.
       for theme in ['game','night','light','neon','gold']:
-        page.locator('#settingsBtn').tap();page.locator('#themeBtn').tap();expect(page.locator('#themeModal')).to_be_visible();page.locator(f'[data-theme="{theme}"]').tap();assert page.evaluate("document.documentElement.dataset.theme")==theme;assert page.evaluate("localStorage.getItem('pw.theme')")==theme
+        page.locator('#settingsBtn').tap();page.locator('#themeBtn').tap();expect(page.locator('#themeModal')).to_be_visible();page.locator(f'button[data-theme="{theme}"]').tap();assert page.evaluate("document.documentElement.dataset.theme")==theme;assert page.evaluate("localStorage.getItem('pw.theme')")==theme
       # Sound, haptics and music preferences persist.
       page.locator('#settingsBtn').tap();page.locator('#soundToggle').uncheck();page.locator('#hapticToggle').uncheck();page.locator('#musicToggle').check();prefs=page.evaluate("JSON.parse(localStorage.getItem('photoword-prefs'))");assert prefs['sound'] is False and prefs['haptic'] is False and prefs['music'] is True;page.locator('#musicToggle').uncheck();page.locator('[data-close="settingsModal"]').tap()
       # Rules and support are localized.
