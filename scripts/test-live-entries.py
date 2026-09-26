@@ -151,7 +151,7 @@ with sync_playwright() as pw:
           page.locator('#removeHint').tap();expect(page.locator('#letters .removed')).to_have_count(3)
         tap_word(page,answer);expect(page.locator('#successPanel')).to_be_visible(timeout=5000);expect(page.locator('#successTitle')).to_contain_text(str(level));expect(page.locator('#successReward')).to_contain_text('15 XP')
         if level==20:
-          expect(page.locator('#successChapter')).to_be_visible();expect(page.locator('#successChapter')).to_contain_text('2' if language=='az' else ('Chapter 2' if language=='en' else 'Глава 2'));expect(page.locator('#nextLevel')).to_have_attribute('href','./game.html?level=21');page.locator('#nextLevel').tap();expect(page.locator('.game-head>div b')).to_contain_text('2');expect(page.locator('#shuffle')).to_be_visible()
+          expect(page.locator('#successChapter')).to_be_visible();expect(page.locator('#successChapter')).to_contain_text('2' if language=='az' else ('Chapter 2' if language=='en' else 'Глава 2'));expect(page.locator('#nextLevel')).to_have_attribute('href','./game.html?level=21');page.locator('#nextLevel').tap();expect(page.locator('.game-head>div:nth-child(2)>b')).to_contain_text('2');expect(page.locator('#shuffle')).to_be_visible()
         elif level<49:
           page.locator('#nextLevel').tap();expect(page.locator('#shuffle')).to_be_visible()
         else:
