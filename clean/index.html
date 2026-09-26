@@ -3,15 +3,15 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#061d2c"><meta name="referrer" content="no-referrer">
 <title>PhotoWord</title>
-<link rel="stylesheet" href="./ui.css?v=20260926-r2">
+<link rel="stylesheet" href="./ui.css?v=20260926-r5">
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
-<script defer src="./core.js?v=20260926-r2"></script><script defer src="./home.js?v=20260926-r2"></script>
+<script defer src="./core.js?v=20260926-r5"></script><script defer src="./home.js?v=20260926-r5"></script>
 </head><body>
 <div id="home" class="screen active">
 <header class="top"><button type="button" class="profile" id="profileBtn"><span class="avatar" id="avatar">P</span><span><b id="name">Игрок</b><small id="rankLabel">Вход в Telegram</small></span></button><span class="wallet">🪙 <b data-coins>—</b></span><button class="settings" id="settingsBtn" aria-label="Настройки">⚙</button></header>
 <div class="logo"><div><i>4</i><i>Ф</i><i>О</i><i>Т</i><i>О</i></div><strong>1 СЛОВО</strong><small>Больше, чем просто слова</small></div>
 <main><section class="chapter"><div class="hero"><div class="chapter-title"><small>Глава 1</small><h1>Разминка</h1><p>Простые слова для хорошего старта</p></div></div><div class="chapter-foot"><div class="bar"><i id="progress"></i></div><p class="count"><b id="done">0</b> / 20 уровней</p><a id="playLink" class="play" href="./game.html">ИГРАТЬ <span>▶</span></a></div></section>
-<section class="shortcuts"><button data-info="Награда">🎁<b>Ежедневная<br>награда</b></button><button data-info="Задания">🎯<b>Задания</b></button><button id="ratingShortcut">🏆<b>Рейтинг</b></button></section>
+<section class="shortcuts"><button id="dailyRewardBtn">🎁<b>Ежедневная<br>награда</b></button><button id="tasksBtn">🎯<b>Задания</b></button><button id="ratingShortcut">🏆<b>Рейтинг</b></button></section>
 <button class="offer" data-info="Магазин"><span>🪙</span><span><b>Больше монет — больше возможностей!</b><small>Открывай буквы, получай подсказки и проходи уровни</small></span><span>›</span></button></main>
 <nav><button id="homeNav" class="on">⌂<small>Главная</small></button><button data-info="Главы">◈<small>Главы</small></button><button id="ratingNav">🏆<small>Рейтинг</small></button><button data-info="Друзья">♟<small>Друзья</small></button><button data-info="Магазин">▰<small>Магазин</small></button></nav>
 </div>
@@ -23,6 +23,8 @@
 <div class="settingrow"><span><b>Музыка</b><small>Аудиодорожка ещё не подключена</small></span><input type="checkbox" disabled aria-label="Музыка пока недоступна"></div>
 <button class="settingrow" data-info="Язык">Язык <small>Русский ›</small></button><button class="settingrow" data-info="Уведомления">Уведомления <span>›</span></button><button class="settingrow" data-info="Тема">Тема <small>Игровая ›</small></button>
 <button class="settingrow" data-info="Правила">Правила игры <span>›</span></button><button class="settingrow" data-info="Поддержка">Поддержка <span>›</span></button><button class="settingrow" data-info="Конфиденциальность">Конфиденциальность <span>›</span></button><button class="settingrow" data-info="Соглашение">Пользовательское соглашение <span>›</span></button><button class="settingrow" data-info="Сброс">Сбросить прогресс <span>›</span></button><p class="version">PhotoWord · 2026.09.26-r2</p></div></div>
+<div id="dailyModal" class="modal" hidden role="dialog" aria-modal="true"><div class="modalcard"><button class="close" data-close="dailyModal">×</button><div class="rewardIcon">🎁</div><h2>Ежедневная награда</h2><p>Заходи каждый день и забирай монеты.</p><p class="rewardBig">+50 🪙</p><p id="dailyStreak" class="muted">Серия: —</p><button id="claimDaily" class="claimbtn">ПОЛУЧИТЬ</button></div></div>
+<div id="tasksModal" class="modal" hidden role="dialog" aria-modal="true"><div class="modalcard"><button class="close" data-close="tasksModal">×</button><h2>🎯 Задания дня</h2><div class="taskcard"><span><b>Пройди 1 уровень</b><small>Награда: 40 🪙</small></span><button data-task="level_1">ЗАБРАТЬ</button></div><div class="taskcard"><span><b>Пройди 2 уровня</b><small>Награда: 80 🪙</small></span><button data-task="level_2">ЗАБРАТЬ</button></div><p class="muted">Задания обновляются каждый день.</p></div></div>
 <div id="infoModal" class="modal" hidden role="dialog" aria-modal="true" aria-labelledby="infoTitle"><div class="modalcard"><button class="close" data-close="infoModal" aria-label="Закрыть">×</button><h2 id="infoTitle"></h2><p id="infoText"></p></div></div>
 <p id="status" class="status" role="status" aria-live="polite">Загрузка профиля…</p>
 <noscript><p class="status">Для игры необходимо включить JavaScript.</p></noscript>
