@@ -93,7 +93,9 @@ $('confirmReset').onclick=async()=>{
  try{
    const p=await pw.api('reset_progress');
    try{for(let i=sessionStorage.length-1;i>=0;i--){const k=sessionStorage.key(i);if(k&&k.startsWith('pw.hints.'))sessionStorage.removeItem(k)}}catch{}
-   update(p);close('resetModal');pw.sfx('success');pw.status(lang()==='en'?'Progress reset. Game starts from level 1.':lang()==='az'?'Tərəqqi sıfırlandı. Oyun 1-ci səviyyədən başlayır.':'Прогресс сброшен. Игра начинается с уровня 1.');
+   try{localStorage.removeItem('pw.language')}catch{}
+   update(p);close('resetModal');pw.sfx('success');pw.status(lang()==='en'?'Progress reset. Choose your language.':lang()==='az'?'Tərəqqi sıfırlandı. Oyun dilini seçin.':'Прогресс сброшен. Выберите язык игры.');
+   setTimeout(()=>open('languageModal'),350);
  }catch(e){pw.status(e.message)}
  finally{$('confirmReset').disabled=false;resetArmed=false}
 };
