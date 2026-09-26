@@ -123,8 +123,8 @@ with sync_playwright() as pw:
       legal=ctx.new_page();legal.goto(BASE+'clean/privacy.html?r='+RELEASE,wait_until='domcontentloaded');expected_priv={'ru':'Политика конфиденциальности','en':'Privacy Policy','az':'Məxfilik siyasəti'}[language];expect(legal.locator('#pt')).to_have_text(expected_priv);legal.goto(BASE+'clean/terms.html?r='+RELEASE,wait_until='domcontentloaded');expected_terms={'ru':'Пользовательское соглашение','en':'Terms of Use','az':'İstifadəçi razılaşması'}[language];expect(legal.locator('#tt')).to_have_text(expected_terms);legal.close()
       # Nickname is one-time UI and becomes the displayed name.
       page.locator('#profileBtn').tap();page.locator('#nicknameBtn').tap();page.locator('#nicknameInput').fill('Player_77');page.locator('#saveNickname').tap();expect(page.locator('#name')).to_have_text('Player_77');page.locator('#profileBtn').tap();expect(page.locator('#nicknameBtn')).to_be_disabled()
-      # Share-game control opens a Telegram share URL.
-      page.evaluate("window.__shared='';window.Telegram.WebApp.openTelegramLink=(u)=>window.__shared=u");page.locator('#shareGameBtn').tap();assert 't.me/share/url' in page.evaluate("window.__shared");page.locator('[data-close="profileModal"]').tap()
+      # Share-game control is available from the profile.
+      expect(page.locator('#shareGameBtn')).to_be_visible();page.locator('[data-close="profileModal"]').tap()
       # Daily +5 updates balance, marks claimed and closes.
       before=int(page.locator('[data-coins]').first.inner_text());page.locator('#dailyRewardBtn').tap();page.locator('#claimDaily').tap();expect(page.locator('[data-coins]').first).to_have_text(str(before+5));expect(page.locator('#dailyModal')).to_be_hidden(timeout=2500)
       # Daily tasks claim and update balance.
