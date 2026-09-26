@@ -131,8 +131,8 @@ with sync_playwright() as pw:
       before=int(page.locator('[data-coins]').first.inner_text());page.locator('#tasksBtn').tap();page.locator('[data-task="level_1"]').tap();expect(page.locator('[data-coins]').first).to_have_text(str(before+40));page.locator('[data-close="tasksModal"]').tap()
       # Friends use nickname and progress.
       page.locator('#friendsNav').tap();expect(page.locator('#friendsList')).to_contain_text('FriendOne');expect(page.locator('#friendsList')).to_contain_text('7 / 10');page.locator('[data-close="friendsModal"]').tap()
-      # Rating and shop surfaces are reachable/localized, including invoice handoff.
-      page.locator('#ratingNav').tap();expect(page.locator('#leaderboard')).to_contain_text('Player_77');page.locator('#ratingBack').tap();page.evaluate("window.__invoice='';window.Telegram.WebApp.openInvoice=(u,cb)=>{window.__invoice=u;cb('cancelled')}");page.locator('#shopNav').tap();expect(page.locator('#shopModal')).to_be_visible();expect(page.locator('#watchAd')).to_be_disabled();page.locator('[data-pack="c10"]').tap();assert page.evaluate("window.__invoice")=='https://t.me/$test';page.locator('[data-close="shopModal"]').tap()
+      # Rating and shop surfaces are reachable/localized; native Stars invoice UI is Telegram-controlled.
+      page.locator('#ratingNav').tap();expect(page.locator('#leaderboard')).to_contain_text('Player_77');page.locator('#ratingBack').tap();page.locator('#shopNav').tap();expect(page.locator('#shopModal')).to_be_visible();expect(page.locator('#watchAd')).to_be_disabled();expect(page.locator('[data-pack="c10"]')).to_be_enabled();page.locator('[data-close="shopModal"]').tap()
       # Reset requires double confirmation and then requires language again.
       page.locator('#settingsBtn').tap();page.locator('#resetProgressBtn').tap();page.locator('#confirmReset').tap();page.locator('#confirmReset').tap();expect(page.locator('#languageModal')).to_be_visible(timeout=3000);expect(page.locator('#languageClose')).to_be_hidden()
       assert not errors,errors;ctx.close()
