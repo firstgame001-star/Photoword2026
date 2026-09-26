@@ -59,7 +59,7 @@
     $('status').hidden=true;
     $('successPanel').hidden=false;
     $('successTitle').textContent='Уровень '+levelId+' пройден!';
-    $('successReward').textContent=rewarded?'+20 монет · +25 XP':'Награда за этот уровень уже получена';
+    $('successReward').textContent=rewarded?'+20 монет · +15 XP':'Награда за этот уровень уже получена';
     const next=$('nextLevel');
     next.href='./game.html?level='+(levelId+1);next.innerHTML='СЛЕДУЮЩИЙ УРОВЕНЬ <span>▶</span>';
   }
