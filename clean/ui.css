@@ -5,3 +5,8 @@
 .success-copy b{display:block;font-size:20px}.success-copy small{display:block;margin-top:4px;color:#b8e9c9}
 .next-level{display:block;margin-top:14px;padding:14px 12px;border-radius:13px;background:linear-gradient(#40df38,#10a936);box-shadow:0 4px #08782b;color:#fff;text-decoration:none;font-size:18px;font-weight:900}
 .next-level span{margin-left:12px}
+
+/* Center the post-level action beneath the completion message. */
+.success-panel{display:flex;flex-direction:column;align-items:center}
+.success-copy{text-align:center;width:100%}
+.next-level{width:min(330px,100%);margin:14px auto 0;text-align:center}
