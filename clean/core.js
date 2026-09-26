@@ -65,7 +65,7 @@
     if (!loginPending) loginPending = api().catch(e => { loginPending = null; throw e; });
     return loginPending;
   }
-  async function raw(action,extra={}) {
+  async function actionRequest(action,extra={}) {
     if(!raw) throw new Error('Telegram не передал данные входа. Запусти игру через бота.');
     return request('/functions/v1/telegram-login',{...extra,action,initData:raw});
   }
@@ -81,6 +81,6 @@
       else tg?.HapticFeedback?.impactOccurred(kind);
     } catch { /* Haptics must never interrupt answer reset or hint application. */ }
   }
-  window.PW = {store, prefs, status, name, api, login, raw, leaderboard, haptic,
+  window.PW = {store, prefs, status, name, api, login, actionRequest, leaderboard, haptic,
     get player() { return current; }, get hasAuth() { return Boolean(raw); }};
 })();
