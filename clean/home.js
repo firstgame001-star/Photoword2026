@@ -26,7 +26,25 @@
   $('tasksBtn').onclick = () => open('tasksModal');
   $('shopOffer').onclick = () => open('shopModal');
   $('shopNav').onclick = () => open('shopModal');
-  $('friendsNav').onclick = () => open('friendsModal');
+  async function loadFriends(){
+    open('friendsModal');
+    const list=$('friendsList'); list.textContent='Загрузка…';
+    try{
+      const data=await pw.actionRequest('friends');
+      text('friendsInvited',data.invited||0); text('friendsReward',(data.total_reward||0)+' монет'); list.replaceChildren();
+      if(!data.friends||!data.friends.length){list.textContent='Пока никого нет.';return;}
+      data.friends.forEach(f=>{
+        const row=document.createElement('div');row.className='friendrow'+(f.rewarded?' rewarded':'');
+        const who=document.createElement('div'), n=document.createElement('b'), sub=document.createElement('small');
+        n.textContent=[f.first_name,f.last_name].filter(Boolean).join(' ')||'Игрок';
+        sub.textContent=f.username?'@'+f.username:f.photoword_id; who.append(n,sub);
+        const prog=document.createElement('div'), label=document.createElement('span'), track=document.createElement('em'), bar=document.createElement('i');
+        prog.className='friendprogress'; label.textContent=f.rewarded?'Награда получена':f.completed_levels+' / 10 уровней'; bar.style.width=Math.min(100,(f.completed_levels||0)*10)+'%';
+        track.append(bar);prog.append(label,track);row.append(who,prog);list.append(row);
+      });
+    }catch(e){list.textContent=e.message;}
+  }
+  $('friendsNav').onclick = loadFriends;
   $('inviteFriend').onclick = async () => {
     try {
       const p=await pw.login();
