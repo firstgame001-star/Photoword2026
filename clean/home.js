@@ -126,8 +126,8 @@ async function rating(){
  try{if(pw.hasAuth)await pw.login().catch(e=>pw.status(e.message));const rows=await pw.leaderboard();if(id!==requestId)return;board.replaceChildren();if(!rows.length)board.textContent='—';rows.forEach(p=>{const row=document.createElement('div');row.className='rankrow'+(p.photoword_id===pw.player?.photoword_id?' me':'');const rank=document.createElement('b');rank.textContent='#'+p.rank;const person=document.createElement('div'),title=document.createElement('strong'),sub=document.createElement('small');title.textContent=pw.name(p);sub.textContent=p.photoword_id;person.append(title,sub);const xp=document.createElement('b');xp.textContent=p.xp+' XP';row.append(rank,person,xp);board.append(row)})}catch(e){board.textContent=e.message}
 }
 ['ratingNav','ratingShortcut','refreshRating'].forEach(id=>$(id).onclick=rating);
-const info={'Главы':'1–10','Поддержка':'Контакт поддержки добавим перед публичным запуском.'};
-document.querySelectorAll('[data-info]').forEach(b=>b.onclick=()=>{text('infoTitle',b.dataset.info);text('infoText',info[b.dataset.info]||b.dataset.info);open('infoModal')});
+const info={ru:{'Главы':'Уровни 1–10'},en:{'Главы':'Levels 1–10'},az:{'Главы':'1–10 səviyyələr'}};
+document.querySelectorAll('[data-info]').forEach(b=>b.onclick=()=>{text('infoTitle',b.dataset.info);text('infoText',(info[lang()]||info.ru)[b.dataset.info]||b.dataset.info);open('infoModal')});
 
 window.addEventListener('pw:player',e=>update(e.detail));
 pw.login().then(async()=>{pw.status(lang()==='en'?'Profile synced':lang()==='az'?'Profil sinxronlaşdırıldı':'Профиль синхронизирован');try{const start=window.Telegram?.WebApp?.initDataUnsafe?.start_param||'';if(start.indexOf('ref_PW-')===0)await pw.api('register_referral',{referrer:start.slice(4)})}catch{}}).catch(e=>pw.status(e.message));
