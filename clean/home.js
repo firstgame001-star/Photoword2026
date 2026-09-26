@@ -29,7 +29,7 @@
   document.querySelectorAll('[data-pack]').forEach(b=>b.onclick=async()=>{
     if(b.disabled)return;b.disabled=true;pw.status('Создаю счёт Telegram Stars…');
     try{
-      const result=await pw.raw('create_invoice',{pack:b.dataset.pack});
+      const result=await pw.actionRequest('create_invoice',{pack:b.dataset.pack});
       const tg=window.Telegram?.WebApp;
       if(!tg?.openInvoice)throw new Error('Оплата доступна только внутри Telegram.');
       tg.openInvoice(result.invoice_url,status=>{
