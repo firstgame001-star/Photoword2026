@@ -9,7 +9,8 @@
   function update(p) {
     const name = pw.name(p);
     text('name',name); text('profileName',name);
-    text('rankLabel','Место #' + p.rank); text('profileRank','#' + p.rank);
+    const league=p.xp>=2000?'Легенда':p.xp>=1200?'Мастер':p.xp>=700?'Эксперт':p.xp>=300?'Знаток':'Новичок';
+    text('rankLabel',league+' · место #'+p.rank); text('profileRank','#' + p.rank);
     text('photoWordId',p.photoword_id); text('profileXp',p.xp); text('profileDone',p.completed_levels);
     text('profileUsername',p.username ? '@' + p.username : 'Username не указан');
     text('done',Math.min(20,p.completed_levels)); $('progress').style.width = Math.min(100,p.completed_levels*5) + '%';
@@ -21,6 +22,18 @@
   // Bind navigation first. A failed login must not disable settings or the play link.
   $('settingsBtn').onclick = () => open('settingsModal');
   $('profileBtn').onclick = () => open('profileModal');
+  $('dailyRewardBtn').onclick = () => open('dailyModal');
+  $('tasksBtn').onclick = () => open('tasksModal');
+  $('claimDaily').onclick = async () => {
+    $('claimDaily').disabled=true; pw.status('Получаю ежедневную награду…');
+    try { const p=await pw.api('claim_daily'); update(p); text('dailyStreak','Серия: '+(p.daily_streak||1)+' дн.'); pw.status('+50 монет! Ежедневная награда получена.'); $('claimDaily').textContent='ПОЛУЧЕНО'; }
+    catch(e){ pw.status(e.message); $('claimDaily').disabled=false; }
+  };
+  document.querySelectorAll('[data-task]').forEach(b=>b.onclick=async()=>{
+    b.disabled=true; pw.status('Проверяю задание…');
+    try{const p=await pw.api('claim_task',{taskKey:b.dataset.task});update(p);b.textContent='ПОЛУЧЕНО';pw.status('Награда за задание начислена!');}
+    catch(e){pw.status(e.message);b.disabled=false;}
+  });
   document.querySelectorAll('[data-close]').forEach(b => b.onclick = () => close(b.dataset.close));
   document.querySelectorAll('.modal').forEach(m => m.onclick = e => { if (e.target === m) close(m.id); });
   document.addEventListener('keydown',e => { if (e.key === 'Escape') document.querySelectorAll('.modal').forEach(m => m.hidden = true); });
@@ -53,7 +66,7 @@
     'Правила':'Четыре подсказки связаны одним словом. Нажимай буквы, чтобы заполнить ответ. Нажатие на клетку возвращает букву. Неверный ответ очищается. Перемешивание бесплатно; остальные подсказки стоят 50, 100 и 150 монет.',
     'Магазин':'Покупки ещё не подключены. Нажатие здесь не списывает деньги.',
     'Главы':'Сейчас доступны первые 10 уровней главы «Разминка».',
-    'Награда':'Ежедневная награда пока не подключена.', 'Задания':'Задания пока не подключены.', 'Друзья':'Приглашения друзей пока не подключены.',
+    'Друзья':'Приглашения друзей пока не подключены.',
     'Язык':'Сейчас доступен русский язык.', 'Тема':'Сейчас доступна игровая тёмная тема.',
     'Уведомления':'Напоминания от бота пока не подключены.', 'Поддержка':'Контакт поддержки ещё не указан.',
     'Конфиденциальность':'Политика ещё не опубликована. Для входа сервер проверяет данные Telegram. Telegram ID не отображается в рейтинге.',
