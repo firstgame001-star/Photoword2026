@@ -51,3 +51,10 @@ html[data-theme="light"] .logo strong,html[data-theme="light"] .logoTag,html[dat
 html[data-theme="light"] .hero{box-shadow:inset 0 0 0 100vmax #ffffff35}
 html[data-theme="light"] .status{background:#f8fbfdee!important;color:#102938!important;border-color:#87a9b9!important}
 .languageGlobe{text-align:center;font-size:40px;margin:-4px 0 8px}#languageTitle{font-size:clamp(20px,5vw,28px);line-height:1.18}
+.chapter-list{display:grid;gap:16px;margin-top:14px}.chapter-select .hero{height:220px}.chapter-select .chapter-foot{margin-top:-22px}.chapter-title h2{margin:2px 0;font-size:27px}.assoc-hero{background:linear-gradient(#14103a70,transparent 35%,#071d35e8),radial-gradient(circle at 30% 20%,#7347b4 0 8%,transparent 9%),radial-gradient(circle at 72% 30%,#25a7b8 0 7%,transparent 8%),linear-gradient(135deg,#102340,#1d315d 45%,#123f49)!important}.chapter.assoc{border-color:#8b79ff}.smallplay{font-size:17px;padding:11px}.play.locked{background:#38505d;border-color:#526a75;box-shadow:0 4px #263b45;color:#a9bac2;pointer-events:none}.nickname-input{width:100%;padding:13px 14px;margin:10px 0 14px;border:1px solid #42758c;border-radius:12px;background:#051f31;color:#fff;text-align:center;font-size:18px;letter-spacing:.5px}.nickname-input::placeholder{color:#7193a3}
+#profileModal .secondary{margin-top:8px}.chapter-list .count{margin-bottom:9px}
+html[data-theme="light"] .nickname-input{background:#fff;color:#102938;border-color:#aac0cb}
+html[data-theme="light"] .chapter-title{color:#fff;text-shadow:0 2px 5px #000}
+html[data-theme="light"] .chapter-foot{color:#102938}
+html[data-theme="light"] .chapter .count{color:#102938}
+html[data-theme="light"] #activeChapterCard .chapter-foot,html[data-theme="light"] .chapter-select .chapter-foot{background:#f8fbfd}
