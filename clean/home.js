@@ -106,5 +106,11 @@
     };
   }
   window.addEventListener('pw:player',e => update(e.detail));
-  pw.login().then(() => pw.status('Профиль синхронизирован')).catch(e => pw.status(e.message));
+  pw.login().then(async () => {
+    pw.status('Профиль синхронизирован');
+    try {
+      const start=window.Telegram?.WebApp?.initDataUnsafe?.start_param||'';
+      if(start.indexOf('ref_PW-')===0) await pw.api('register_referral',{referrer:start.slice(4)});
+    } catch(e) {}
+  }).catch(e => pw.status(e.message));
 })();
