@@ -11,7 +11,17 @@
     7:{answer:'ПАМЯТЬ',pool:'ПАМЯТЬКРСОНД',hint:'Она хранит то, что уже произошло.',photos:[['🧠','Мозг'],['📸','Фотография'],['💾','Накопитель'],['🕰️','Старые часы']]},
     8:{answer:'СВЕТ',pool:'СВЕТЛАМОРКНД',hint:'Без него трудно увидеть окружающий мир.',photos:[['💡','Лампочка'],['🔦','Фонарик'],['🌅','Рассвет'],['🕯️','Свеча']]},
     9:{answer:'ПУТЬ',pool:'ПУТЬДОРГАКСМ',hint:'Он может быть дорогой, маршрутом или направлением к цели.',photos:[['🛣️','Дорога'],['🧭','Компас'],['🥾','Ботинок путешественника'],['📍','Точка назначения']]},
-    10:{answer:'ТАЙНА',pool:'ТАЙНАСЕКРМОЛ',hint:'То, что скрывают и пытаются разгадать.',photos:[['🔐','Замок'],['🤫','Тишина'],['🕵️','Детектив'],['❓','Вопрос']]}
+    10:{answer:'ТАЙНА',pool:'ТАЙНАСЕКРМОЛ',hint:'То, что скрывают и пытаются разгадать.',photos:[['🔐','Замок'],['🤫','Тишина'],['🕵️','Детектив'],['❓','Вопрос']]},
+    11:{answer:'ТЕНЬ',pool:'ТЕНЬСВЛКРАМД',hint:'Она появляется рядом с предметом, когда свет не может пройти сквозь него.',photos:[['👤','Силуэт'],['☀️','Солнце'],['🌳','Дерево'],['💡','Лампа']]},
+    12:{answer:'СЛЕД',pool:'СЛЕДНОГАТКРМ',hint:'Он остаётся после того, кто или что здесь прошло.',photos:[['👣','Следы ног'],['🐾','Следы лап'],['🚗','След шины'],['🕵️','Улика']]},
+    13:{answer:'ВОЛНА',pool:'ВОЛНАРДИОКС',hint:'Она бывает на воде, в звуке и в радиосигнале.',photos:[['🌊','Морская волна'],['📻','Радио'],['🔊','Звук'],['〰️','Волнистая линия']]},
+    14:{answer:'КЛЮЧ',pool:'КЛЮЧЗАМНОТАР',hint:'Им открывают замок, но этим словом называют и способ решения.',photos:[['🔑','Ключ'],['🔒','Замок'],['🎼','Музыкальный ключ'],['⌨️','Клавиша']]},
+    15:{answer:'КОРЕНЬ',pool:'КОРЕНЬЗУБМАТ',hint:'Он есть у дерева и зуба, а ещё встречается в математике.',photos:[['🌳','Корни дерева'],['🦷','Зуб'],['√','Корень числа'],['🥕','Корнеплод']]},
+    16:{answer:'СЕТЬ',pool:'СЕТЬИНТРЫБАК',hint:'Она может ловить рыбу, соединять компьютеры или напоминать паутину.',photos:[['🕸️','Паутина'],['🎣','Рыболовная сеть'],['🌐','Интернет'],['📡','Связь']]},
+    17:{answer:'ТОК',pool:'ТОКРЕКАЛМНИЯ',hint:'Он бывает электрическим, а ещё так называют движение воды.',photos:[['⚡','Электричество'],['🔌','Розетка'],['🏞️','Течение реки'],['💡','Лампочка']]},
+    18:{answer:'КАДР',pool:'КАДРФОТОЛМЕН',hint:'Один момент изображения в фотографии или кино.',photos:[['🎞️','Киноплёнка'],['📸','Фотография'],['🖼️','Рамка'],['🎬','Кино']]},
+    19:{answer:'СВЯЗЬ',pool:'СВЯЗЬТЕЛФОНК',hint:'Она объединяет людей, устройства и отдельные части.',photos:[['📱','Телефон'],['🔗','Цепь'],['📶','Сигнал'],['🤝','Люди']]},
+    20:{answer:'ИСТОЧНИК',pool:'ИСТОЧНИКВОДАС',hint:'Место или объект, откуда что-либо берёт начало.',photos:[['⛲','Родник'],['💡','Источник света'],['📚','Источник информации'],['🔋','Источник энергии']]}
   };
   const TRANSLATED={
     en:{
@@ -24,7 +34,17 @@
       7:{answer:'MEMORY',pool:'MEMORYPASTDK',hint:'It keeps what has already happened.'},
       8:{answer:'LIGHT',pool:'LIGHTSUNROPE',hint:'Without it, seeing the world becomes difficult.'},
       9:{answer:'PATH',pool:'PATHROADMNES',hint:'A road, route, or direction toward a destination.'},
-      10:{answer:'SECRET',pool:'SECRETLOCKQAZ',hint:'Something hidden that others may try to discover.'}
+      10:{answer:'SECRET',pool:'SECRETLOCKQAZ',hint:'Something hidden that others may try to discover.'},
+      11:{answer:'SHADOW',pool:'SHADOWLIGHTER',hint:'It appears when an object blocks light.'},
+      12:{answer:'TRACE',pool:'TRACEFOOTMNDS',hint:'A mark or sign left behind by someone or something.'},
+      13:{answer:'WAVE',pool:'WAVERDIOSNMT',hint:'It can travel through water, sound, or radio.'},
+      14:{answer:'KEY',pool:'KEYLOCKMUSICR',hint:'It opens a lock, but can also mean the solution to something.'},
+      15:{answer:'ROOT',pool:'ROOTTOOTHMATH',hint:'A tree has one, a tooth has one, and mathematics uses the same word.'},
+      16:{answer:'NET',pool:'NETWEBFISHRKA',hint:'It can catch fish or connect computers.'},
+      17:{answer:'CURRENT',pool:'CURRENTPOWERA',hint:'It can mean flowing electricity or flowing water.'},
+      18:{answer:'FRAME',pool:'FRAMEFILMPHOT',hint:'A single image in film, or a border around a picture.'},
+      19:{answer:'LINK',pool:'LINKPHONEWEBAR',hint:'It connects people, devices, or pieces of information.'},
+      20:{answer:'SOURCE',pool:'SOURCEWATEREN',hint:'The place or thing from which something begins or comes.'}
     },
     az:{
       1:{answer:'İT',pool:'İTPİŞKALMONR',hint:'İnsanın ən yaxın dostu adlandırılan ev heyvanı.'},
@@ -36,7 +56,17 @@
       7:{answer:'YADDAŞ',pool:'YADDAŞBEYİNR',hint:'Baş verənləri yadda saxlayır.'},
       8:{answer:'İŞIQ',pool:'İŞIQLAMPAGÜN',hint:'Onsuz ətrafı görmək çətindir.'},
       9:{answer:'YOL',pool:'YOLXƏRİTƏKMN',hint:'Məqsədə aparan istiqamət və ya marşrut.'},
-      10:{answer:'SİRR',pool:'SİRRKİLİDAQZ',hint:'Gizli saxlanılan və açılmağa çalışılan şey.'}
+      10:{answer:'SİRR',pool:'SİRRKİLİDAQZ',hint:'Gizli saxlanılan və açılmağa çalışılan şey.'},
+      11:{answer:'KÖLGƏ',pool:'KÖLGƏGÜNƏŞAR',hint:'İşığın qarşısı kəsiləndə yaranır.'},
+      12:{answer:'İZ',pool:'İZAYAQTƏKƏRLM',hint:'Kimsə və ya nəsə keçdikdən sonra qalan nişan.'},
+      13:{answer:'DALĞA',pool:'DALĞASURADİOK',hint:'Dənizdə, səsdə və radio siqnalında ola bilər.'},
+      14:{answer:'AÇAR',pool:'AÇARKİLİDMUS',hint:'Qapını açır, həm də problemin həlli mənasında işlənə bilər.'},
+      15:{answer:'KÖK',pool:'KÖKAĞACDİŞMAT',hint:'Ağacda və dişdə olur, riyaziyyatda da bu söz işlənir.'},
+      16:{answer:'ŞƏBƏKƏ',pool:'ŞƏBƏKƏTORNETA',hint:'İnsanları və cihazları birləşdirə bilər, tor formasında da olur.'},
+      17:{answer:'CƏRƏYAN',pool:'CƏRƏYANELEKSU',hint:'Elektrikdə və suyun hərəkətində işlənən anlayışdır.'},
+      18:{answer:'KADR',pool:'KADRFİLMŞƏKİL',hint:'Foto və ya filmdə bir görüntü anıdır.'},
+      19:{answer:'ƏLAQƏ',pool:'ƏLAQƏTELFONR',hint:'İnsanları, cihazları və məlumatları bir-birinə bağlayır.'},
+      20:{answer:'MƏNBƏ',pool:'MƏNBƏSUGÜCİNF',hint:'Bir şeyin başladığı və ya əldə edildiyi yer.'}
     }
   };
   let gameLang='ru';try{gameLang=localStorage.getItem('pw.language')||'ru'}catch{}
@@ -44,7 +74,7 @@
   function validateLanguageLevels(){
     const supported=['ru','en','az'];
     for(const lang of supported){
-      for(let n=1;n<=10;n++){
+      for(let n=1;n<=20;n++){
         const item=lang==='ru'?LEVELS[n]:TRANSLATED[lang][n];
         if(!item||!item.answer||!item.pool||!item.hint)throw new Error('Incomplete language level '+lang+' '+n);
         const need=[...item.answer].reduce((m,ch)=>(m[ch]=(m[ch]||0)+1,m),{});
@@ -111,7 +141,7 @@
     $('successTitle').textContent=ui.passed(levelId);
     $('successReward').textContent=rewarded?ui.reward:ui.already;
     const next=$('nextLevel');
-    if(levelId<10){next.href='./game.html?level='+(levelId+1);next.innerHTML=ui.next+' <span>▶</span>';}
+    if(levelId<20){next.href='./game.html?level='+(levelId+1);next.innerHTML=ui.next+' <span>▶</span>';}
     else{next.href='./index.html';next.innerHTML=ui.home+' <span>✓</span>';}
   }
   async function check(){
