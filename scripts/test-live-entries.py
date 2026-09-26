@@ -97,8 +97,8 @@ with sync_playwright() as pw:
       account={'photoword_id':'PW-TESTONLY','first_name':'Test','last_name':'','username':None,'game_nickname':None,'nickname_changed':False,'coins':5000,'xp':90,'completed_levels':6,'current_level':7,'rank':1,'daily_streak':0,'last_daily_reward':None}
       completed=set(range(1,7));install_mock(ctx,account,completed,language);page=ctx.new_page();errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
       page.goto(BASE+'clean/#'+fragment,wait_until='domcontentloaded',timeout=45000)
-      # Chapter 2 exists and is locked until chapter 1 completion.
-      page.locator('#chaptersNav').tap();expect(page.locator('#chaptersScreen')).to_be_visible();expect(page.locator('#chapter2Play')).to_have_class(re.compile('locked'));page.locator('#chaptersBack').tap()
+      # Chapter 1 contains all 20 levels.
+      page.locator('#chaptersNav').tap();expect(page.locator('#chaptersScreen')).to_be_visible();expect(page.locator('#chapter1Label')).to_contain_text('1–20');expect(page.locator('#chapter2Select')).to_have_count(0);page.locator('#chaptersBack').tap()
       # Theme selection and light-theme contrast surface.
       page.locator('#settingsBtn').tap();page.locator('#themeBtn').tap();expect(page.locator('#themeModal')).to_be_visible();page.locator('[data-theme="light"]').tap();assert page.evaluate("document.documentElement.dataset.theme")=='light'
       # Rules and support are localized.
@@ -117,7 +117,7 @@ with sync_playwright() as pw:
       page.locator('#settingsBtn').tap();page.locator('#resetProgressBtn').tap();page.locator('#confirmReset').tap();page.locator('#confirmReset').tap();expect(page.locator('#languageModal')).to_be_visible(timeout=3000);expect(page.locator('#languageClose')).to_be_hidden()
       assert not errors,errors;ctx.close()
 
-    # Complete all 20 levels in all 3 languages and exercise hints in both chapters.
+    # Complete all 20 levels in all 3 languages and exercise hints across chapter 1.
     for language in ['ru','en','az']:
       ctx=browser.new_context(viewport={'width':390,'height':800},has_touch=True,is_mobile=True)
       ctx.add_init_script(f"localStorage.setItem('pw.language','{language}'); localStorage.setItem('pw.theme','game');")
@@ -141,7 +141,7 @@ with sync_playwright() as pw:
       assert account['completed_levels']==20 and account['xp']==300 and account['current_level']==21
       page.screenshot(path=str(OUT/f'{engine}-{language}-level20.png'),full_page=True)
       assert not errors,errors
-      report={'engine':engine,'language':language,'levels':'1-20','checks':['chapter 1','chapter 2','all answer letter pools','localized text hints in both chapters','letter hint','remove hint','20 server answers mocked','15 XP each','20 coins each','final return home'],'result':'PASS'}
+      report={'engine':engine,'language':language,'levels':'1-20','checks':['chapter 1 levels 1-20','all answer letter pools','localized text hints across the chapter','letter hint','remove hint','20 server answers mocked','15 XP each','20 coins each','final return home'],'result':'PASS'}
       reports.append(report);print(json.dumps(report,ensure_ascii=False),flush=True);ctx.close()
     browser.close()
 
