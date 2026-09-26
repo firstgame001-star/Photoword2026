@@ -62,7 +62,13 @@ with sync_playwright() as pw:
             page.locator('#shuffle').tap()
             after=page.locator('#letters .letter').evaluate_all('(xs)=>xs.map(x=>x.dataset.tile).join(",")')
             assert before!=after,'Shuffle did not change tile order'
-            page.evaluate('if(window.Telegram?.WebApp?.HapticFeedback) Telegram.WebApp.HapticFeedback.notificationOccurred=()=>{throw new Error("mock native bridge error")};')
+            page.screenshot(path=str(OUT/f'{engine}-{path.strip("/") or "root"}-shuffle.png'),full_page=True)
+            # An outer function returns undefined; Playwright must not invoke the assigned stub itself.
+            page.evaluate('''() => {
+                if (window.Telegram?.WebApp?.HapticFeedback) {
+                    Telegram.WebApp.HapticFeedback.notificationOccurred = () => { throw new Error("mock native bridge error"); };
+                }
+            }''')
             for letter in 'НТЛДЕР':
                 page.get_by_role('button',name=letter,exact=True).tap()
             expect(page.locator('#status')).to_contain_text('Неверное слово')
@@ -85,6 +91,6 @@ with sync_playwright() as pw:
             assert not errors,errors
             reports.append({'engine':engine,'entry':path or '/','checks':['entry redirects','settings open/close','play navigation','Telegram data retained','shuffle','wrong answer reset despite native bridge error','letter hint','remove hint','insufficient balance','answer saved'],'server':'MOCKED; no real balance changes','result':'PASS'})
             print(json.dumps(reports[-1]),flush=True)
+            (OUT/'results.json').write_text(json.dumps(reports,ensure_ascii=False,indent=2))
             ctx.close()
         browser.close()
-(OUT/'results.json').write_text(json.dumps(reports,ensure_ascii=False,indent=2))
