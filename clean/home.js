@@ -13,8 +13,8 @@ const today=()=>new Date().toISOString().slice(0,10);
 const T={
 ru:{
 logo:['4','Ф','О','Т','О'],one:'1 СЛОВО',tagline:'Больше, чем просто слова',
-chapter:n=>'Глава '+n,chapter1:'Разминка',chapter1Desc:'От простых слов к более сложным ассоциациям',levels:'уровней',
-play:'ИГРАТЬ',replay:'ПЕРЕИГРАТЬ',locked:'ЗАКРЫТО',allDone:'УРОВНИ 1–20 ПРОЙДЕНЫ',
+chapter:n=>'Глава '+n,chapter1:'Разминка',chapter1Desc:'От простых слов к более сложным ассоциациям',chapter2:'Ассоциации',chapter2Desc:'Более сложные слова и связи между образами',levels:'уровней',
+play:'ИГРАТЬ',replay:'ПЕРЕИГРАТЬ',locked:'ЗАКРЫТО',allDone:'ГЛАВЫ 1–2 ПРОЙДЕНЫ',
 home:'Главная',chapters:'Главы',chaptersSubtitle:'Выбирай главу и продолжай игру',rating:'Рейтинг',ratingSubtitle:'Лучшие игроки PhotoWord',overallRating:'🏆 Общий рейтинг',myPosition:'Твоя позиция',refresh:'Обновить рейтинг',
 friends:'Друзья',shop:'Магазин',daily:'Ежедневная награда',tasks:'Задания',
 settings:'Настройки',sound:'Звук',soundDesc:'Буквы, победа, ошибка и награды',vibration:'Вибрация',hapticDesc:'Нажатия, верный и неверный ответ',music:'Музыка',musicDesc:'Спокойная фоновая музыка',language:'Язык',notifications:'Уведомления',notifyAllow:'Награды и новые уровни · Разрешить',notifyAllowed:'Разрешены',theme:'Тема',rules:'Правила игры',rulesDesc:'Как играть, монеты, XP и подсказки',support:'Поддержка',supportDesc:'Связаться с поддержкой',supportText:'Контакты поддержки будут добавлены перед запуском.',privacy:'Конфиденциальность',privacyDesc:'Какие данные используются и зачем',terms:'Пользовательское соглашение',reset:'Сбросить прогресс',resetDesc:'Уровни, XP и место в рейтинге',
@@ -30,8 +30,8 @@ profileSynced:'Профиль синхронизирован',loading:'Загр�
 },
 en:{
 logo:['4','P','I','C','S'],one:'1 WORD',tagline:'More than just words',
-chapter:n=>'Chapter '+n,chapter1:'Warm-up',chapter1Desc:'From simple words to more challenging associations',levels:'levels',
-play:'PLAY',replay:'REPLAY',locked:'LOCKED',allDone:'LEVELS 1–20 COMPLETED',
+chapter:n=>'Chapter '+n,chapter1:'Warm-up',chapter1Desc:'From simple words to more challenging associations',chapter2:'Associations',chapter2Desc:'More challenging words and deeper image connections',levels:'levels',
+play:'PLAY',replay:'REPLAY',locked:'LOCKED',allDone:'CHAPTERS 1–2 COMPLETED',
 home:'Home',chapters:'Chapters',chaptersSubtitle:'Choose a chapter and continue',rating:'Leaderboard',ratingSubtitle:'Top PhotoWord players',overallRating:'🏆 Overall leaderboard',myPosition:'Your position',refresh:'Refresh leaderboard',
 friends:'Friends',shop:'Shop',daily:'Daily reward',tasks:'Tasks',
 settings:'Settings',sound:'Sound',soundDesc:'Letters, wins, mistakes and rewards',vibration:'Haptics',hapticDesc:'Taps, correct and wrong answers',music:'Music',musicDesc:'Calm background music',language:'Language',notifications:'Notifications',notifyAllow:'Rewards and new levels · Allow',notifyAllowed:'Allowed',theme:'Theme',rules:'Game rules',rulesDesc:'How to play, coins, XP and hints',support:'Support',supportDesc:'Contact support',supportText:'Support contacts will be added before launch.',privacy:'Privacy',privacyDesc:'What data is used and why',terms:'Terms of use',reset:'Reset progress',resetDesc:'Levels, XP and leaderboard position',
@@ -47,8 +47,8 @@ profileSynced:'Profile synced',loading:'Loading…',noPlayers:'No players yet',n
 },
 az:{
 logo:['4','F','O','T','O'],one:'1 SÖZ',tagline:'Sadəcə sözlərdən daha çox',
-chapter:n=>'Fəsil '+n,chapter1:'İsinmə',chapter1Desc:'Sadə sözlərdən daha çətin assosiasiyalara',levels:'səviyyə',
-play:'OYNA',replay:'YENİDƏN OYNA',locked:'BAĞLIDIR',allDone:'1–20 SƏVİYYƏ KEÇİLİB',
+chapter:n=>'Fəsil '+n,chapter1:'İsinmə',chapter1Desc:'Sadə sözlərdən daha çətin assosiasiyalara',chapter2:'Assosiasiyalar',chapter2Desc:'Daha çətin sözlər və şəkillər arasında daha dərin əlaqələr',levels:'səviyyə',
+play:'OYNA',replay:'YENİDƏN OYNA',locked:'BAĞLIDIR',allDone:'1–2-Cİ FƏSİLLƏR TAMAMLANDI',
 home:'Ana səhifə',chapters:'Fəsillər',chaptersSubtitle:'Fəsli seç və oyuna davam et',rating:'Reytinq',ratingSubtitle:'PhotoWord-un ən yaxşı oyunçuları',overallRating:'🏆 Ümumi reytinq',myPosition:'Sənin yerin',refresh:'Reytinqi yenilə',
 friends:'Dostlar',shop:'Mağaza',daily:'Gündəlik mükafat',tasks:'Tapşırıqlar',
 settings:'Ayarlar',sound:'Səs',soundDesc:'Hərflər, qələbə, səhv və mükafat səsləri',vibration:'Vibrasiya',hapticDesc:'Toxunuş, düzgün və səhv cavab',music:'Musiqi',musicDesc:'Sakit fon musiqisi',language:'Dil',notifications:'Bildirişlər',notifyAllow:'Mükafatlar və yeni səviyyələr · İcazə ver',notifyAllowed:'İcazə verilib',theme:'Tema',rules:'Oyun qaydaları',rulesDesc:'Oyun, sikkələr, XP və ipucları',support:'Dəstək',supportDesc:'Dəstəklə əlaqə',supportText:'Dəstək əlaqələri istifadəyə verilməzdən əvvəl əlavə olunacaq.',privacy:'Məxfilik',privacyDesc:'Hansı məlumatların niyə istifadə edilməsi',terms:'İstifadəçi razılaşması',reset:'Tərəqqini sıfırla',resetDesc:'Səviyyələr, XP və reytinq mövqeyi',
@@ -68,7 +68,7 @@ function t(){return T[lang()]||T.ru}
 function leagueName(p){const x=t();return p.xp>=4000?x.legend:p.xp>=2500?x.master:p.xp>=1500?x.expert:p.xp>=400?x.skilled:x.novice}
 function persistPrefs(){try{localStorage.setItem('photoword-prefs',JSON.stringify(pw.prefs))}catch{}}
 function setLogo(x){const e=$('logoLetters');if(e)e.innerHTML=x.logo.map(v=>'<i>'+v+'</i>').join('');text('logoWord',x.one);text('logoTagline',x.tagline)}
-function chapterData(x){return {title:x.chapter1,desc:x.chapter1Desc,start:1,end:20}}
+function chapterData(p,x){return (p.current_level||1)<=20?{num:1,title:x.chapter1,desc:x.chapter1Desc,start:1,end:20,total:20}:{num:2,title:x.chapter2,desc:x.chapter2Desc,start:21,end:49,total:29}}
 
 function applyTheme(theme){
  if(!THEMES.includes(theme))theme='game';
@@ -80,9 +80,16 @@ function setThemeLabels(x){
  for(const key of THEMES){const cap=key[0].toUpperCase()+key.slice(1);text('theme'+cap+'Name',x.themeNames[key]);text('theme'+cap+'Desc',x.themeDesc[key]);}
 }
 function updateChapterCards(p){
- const x=t(),done=Math.min(20,p.completed_levels||0);
- text('chapter1Label',x.chapter(1)+' · 1–20');text('chapter1Title',x.chapter1);text('chapter1Desc',x.chapter1Desc);text('chapter1Done',done);text('chapter1Count','/ 20 '+x.levels);$('chapter1Progress').style.width=done*5+'%';
- const next=Math.max(1,Math.min(20,p.current_level||1));$('chapter1Play').href='./game.html?level='+next;$('chapter1Play').innerHTML=(done>=20?x.replay:x.play)+' <span>▶</span>';
+ const x=t(),done=Math.min(49,p.completed_levels||0),d1=Math.min(20,done),d2=Math.max(0,Math.min(29,done-20));
+ text('chapter1Label',x.chapter(1)+' · 1–20');text('chapter1Title',x.chapter1);text('chapter1Desc',x.chapter1Desc);text('chapter1Done',d1);text('chapter1Count','/ 20 '+x.levels);$('chapter1Progress').style.width=d1*5+'%';
+ const next1=d1>=20?1:Math.max(1,Math.min(20,p.current_level||1));$('chapter1Play').href='./game.html?level='+next1;$('chapter1Play').innerHTML=(d1>=20?x.replay:x.play)+' <span>▶</span>';
+ text('chapter2Label',x.chapter(2)+' · 21–49');text('chapter2Title',x.chapter2);text('chapter2Desc',x.chapter2Desc);text('chapter2Done',d2);text('chapter2Count','/ 29 '+x.levels);$('chapter2Progress').style.width=(d2/29*100)+'%';
+ const unlocked=(p.current_level||1)>=21||d1>=20;
+ if(unlocked){
+   const next2=d2>=29?21:Math.max(21,Math.min(49,p.current_level||21));$('chapter2Play').classList.remove('locked');$('chapter2Play').removeAttribute('aria-disabled');$('chapter2Play').href='./game.html?level='+next2;$('chapter2Play').innerHTML=(d2>=29?x.replay:x.play)+' <span>▶</span>';
+ }else{
+   $('chapter2Play').classList.add('locked');$('chapter2Play').setAttribute('aria-disabled','true');$('chapter2Play').removeAttribute('href');$('chapter2Play').textContent=x.locked;
+ }
 }
 function update(p){
  const x=t(),name=pw.name(p),rank=p.rank>0?'#'+p.rank:'—';
@@ -90,12 +97,12 @@ function update(p){
  text('photoWordId',p.photoword_id);text('profileXp',p.xp);text('profileDone',p.completed_levels);text('profileUsername',p.username?'@'+p.username:x.noUsername);
  for(const id of ['avatar','profileAvatar'])text(id,(name||'P').charAt(0).toUpperCase());text('myRank',rank);text('myXp',p.xp+' XP');
  text('nicknameBtn',p.nickname_changed?x.nicknameDone:x.nicknameSet);$('nicknameBtn').disabled=Boolean(p.nickname_changed);
- const done=Math.min(20,p.completed_levels||0),cd=chapterData(x);
- text('done',done);text('chapterCountSuffix','/ 20 '+x.levels);$('progress').style.width=done*5+'%';
- text('activeChapterLabel',x.chapter(1));text('activeChapterTitle',cd.title);text('activeChapterDesc',cd.desc);
- $('activeChapterCard').classList.remove('assoc');$('activeChapterHero').classList.remove('assoc-hero');
- const next=Math.max(1,Math.min(20,p.current_level||1));$('playLink').href='./game.html?level='+next;
- if((p.current_level||1)>20)$('playLink').innerHTML=x.allDone+' <span>✓</span>'; else $('playLink').innerHTML=x.play+' <span>▶</span>';
+ const done=Math.min(49,p.completed_levels||0),cd=chapterData(p,x),chapterDone=cd.num===1?Math.min(20,done):Math.max(0,Math.min(29,done-20));
+ text('done',chapterDone);text('chapterCountSuffix','/ '+cd.total+' '+x.levels);$('progress').style.width=(chapterDone/cd.total*100)+'%';
+ text('activeChapterLabel',x.chapter(cd.num));text('activeChapterTitle',cd.title);text('activeChapterDesc',cd.desc);
+ $('activeChapterCard').classList.toggle('assoc',cd.num===2);$('activeChapterHero').classList.toggle('assoc-hero',cd.num===2);
+ const next=(p.current_level||1)>49?21:Math.max(cd.start,Math.min(cd.end,p.current_level||cd.start));$('playLink').href='./game.html?level='+next;
+ if((p.current_level||1)>49)$('playLink').innerHTML=x.allDone+' <span>✓</span>'; else $('playLink').innerHTML=x.play+' <span>▶</span>';
  updateChapterCards(p);
  const claimed=String(p.last_daily_reward||'')===today();$('claimDaily').disabled=claimed;text('claimDaily',claimed?x.claimed:x.claim);text('dailyStreak',x.streak+': '+(p.daily_streak||0));
 }
@@ -118,9 +125,9 @@ function applyLanguage(l){
 function showRequiredLanguagePicker(){const c=$('languageClose');if(c)c.hidden=true;open('languageModal')}
 
 const RULES={
-ru:`<h3>Цель игры</h3><p>Четыре изображения связаны одним словом. Собери его из предложенных букв.</p><h3>Глава 1</h3><p>Первая глава состоит из 20 уровней: начало проще, а к уровням 11–20 ассоциации становятся заметно сложнее.</p><h3>Подсказки</h3><p>💡 правильная буква — 50 🪙.<br>🪄 убрать до трёх лишних — 100 🪙.<br>Текстовая подсказка — 150 🪙.<br>🔀 перемешивание — бесплатно.</p><h3>Награды</h3><p>Первое прохождение уровня: +20 🪙 и +15 XP. Ежедневная награда: +5 🪙. Повторное прохождение уровня награду не даёт.</p><h3>XP и ранги</h3><p>0–399 Новичок · 400–1499 Знаток · 1500–2499 Эксперт · 2500–3999 Мастер · 4000+ Легенда.</p><h3>Друзья</h3><p>Если приглашённый игрок пройдёт 10 уровней, вы оба получите +20 🪙.</p>`,
-en:`<h3>Goal</h3><p>Four images are connected by one word. Build it from the available letters.</p><h3>Chapter 1</h3><p>The first chapter contains 20 levels: it starts easier, while levels 11–20 use more challenging associations.</p><h3>Hints</h3><p>💡 correct letter — 50 🪙.<br>🪄 remove up to three extra letters — 100 🪙.<br>Text hint — 150 🪙.<br>🔀 shuffle — free.</p><h3>Rewards</h3><p>First completion: +20 🪙 and +15 XP. Daily reward: +5 🪙. Replaying a level gives no extra reward.</p><h3>XP and ranks</h3><p>0–399 Novice · 400–1499 Skilled · 1500–2499 Expert · 2500–3999 Master · 4000+ Legend.</p><h3>Friends</h3><p>If your invited friend completes 10 levels, both of you receive +20 🪙.</p>`,
-az:`<h3>Məqsəd</h3><p>Dörd şəkli bir söz birləşdirir. Həmin sözü verilən hərflərdən düzəlt.</p><h3>1-ci fəsil</h3><p>Birinci fəsil 20 səviyyədən ibarətdir: əvvəl daha sadədir, 11–20-ci səviyyələrdə assosiasiyalar daha çətin olur.</p><h3>İpucları</h3><p>💡 düzgün hərf — 50 🪙.<br>🪄 üçədək artıq hərfi silmək — 100 🪙.<br>Mətn ipucu — 150 🪙.<br>🔀 qarışdırmaq — pulsuz.</p><h3>Mükafatlar</h3><p>Səviyyəni ilk dəfə keçdikdə +20 🪙 və +15 XP. Gündəlik mükafat +5 🪙. Təkrar keçid əlavə mükafat vermir.</p><h3>XP və rütbələr</h3><p>0–399 Yeni başlayan · 400–1499 Bilici · 1500–2499 Ekspert · 2500–3999 Usta · 4000+ Əfsanə.</p><h3>Dostlar</h3><p>Dəvət etdiyin oyunçu 10 səviyyə keçdikdə hər ikiniz +20 🪙 alırsınız.</p>`
+ru:`<h3>Цель игры</h3><p>Четыре изображения связаны одним словом. Собери его из предложенных букв.</p><h3>Главы</h3><p>Глава 1 «Разминка» — уровни 1–20. Глава 2 «Ассоциации» — уровни 21–49 и открывается после прохождения 20-го уровня.</p><h3>Подсказки</h3><p>💡 правильная буква — 50 🪙.<br>🪄 убрать до трёх лишних — 100 🪙.<br>Текстовая подсказка — 150 🪙.<br>🔀 перемешивание — бесплатно.</p><h3>Награды</h3><p>Первое прохождение уровня: +20 🪙 и +15 XP. Ежедневная награда: +5 🪙. Повторное прохождение уровня награду не даёт.</p><h3>XP и ранги</h3><p>0–399 Новичок · 400–1499 Знаток · 1500–2499 Эксперт · 2500–3999 Мастер · 4000+ Легенда.</p><h3>Друзья</h3><p>Если приглашённый игрок пройдёт 10 уровней, вы оба получите +20 🪙.</p>`,
+en:`<h3>Goal</h3><p>Four images are connected by one word. Build it from the available letters.</p><h3>Chapters</h3><p>Chapter 1 “Warm-up” contains levels 1–20. Chapter 2 “Associations” contains levels 21–49 and unlocks after level 20.</p><h3>Hints</h3><p>💡 correct letter — 50 🪙.<br>🪄 remove up to three extra letters — 100 🪙.<br>Text hint — 150 🪙.<br>🔀 shuffle — free.</p><h3>Rewards</h3><p>First completion: +20 🪙 and +15 XP. Daily reward: +5 🪙. Replaying a level gives no extra reward.</p><h3>XP and ranks</h3><p>0–399 Novice · 400–1499 Skilled · 1500–2499 Expert · 2500–3999 Master · 4000+ Legend.</p><h3>Friends</h3><p>If your invited friend completes 10 levels, both of you receive +20 🪙.</p>`,
+az:`<h3>Məqsəd</h3><p>Dörd şəkli bir söz birləşdirir. Həmin sözü verilən hərflərdən düzəlt.</p><h3>Fəsillər</h3><p>1-ci fəsil “İsinmə” — 1–20-ci səviyyələr. 2-ci fəsil “Assosiasiyalar” — 21–49-cu səviyyələr və 20-ci səviyyədən sonra açılır.</p><h3>İpucları</h3><p>💡 düzgün hərf — 50 🪙.<br>🪄 üçədək artıq hərfi silmək — 100 🪙.<br>Mətn ipucu — 150 🪙.<br>🔀 qarışdırmaq — pulsuz.</p><h3>Mükafatlar</h3><p>Səviyyəni ilk dəfə keçdikdə +20 🪙 və +15 XP. Gündəlik mükafat +5 🪙. Təkrar keçid əlavə mükafat vermir.</p><h3>XP və rütbələr</h3><p>0–399 Yeni başlayan · 400–1499 Bilici · 1500–2499 Ekspert · 2500–3999 Usta · 4000+ Əfsanə.</p><h3>Dostlar</h3><p>Dəvət etdiyin oyunçu 10 səviyyə keçdikdə hər ikiniz +20 🪙 alırsınız.</p>`
 };
 const RESET={
 ru:'Будут удалены прохождение всех уровней, XP и позиция в рейтинге. Игра начнётся с уровня 1, язык нужно будет выбрать снова. Монеты, покупки Telegram Stars и история уже полученных наград сохраняются.',
