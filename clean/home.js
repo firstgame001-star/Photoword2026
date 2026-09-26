@@ -26,6 +26,16 @@
   $('tasksBtn').onclick = () => open('tasksModal');
   $('shopOffer').onclick = () => open('shopModal');
   $('shopNav').onclick = () => open('shopModal');
+  $('friendsNav').onclick = () => open('friendsModal');
+  $('inviteFriend').onclick = async () => {
+    try {
+      const p=await pw.login();
+      const start='ref_'+p.photoword_id;
+      const link='https://t.me/PhotoWordBot?startapp='+encodeURIComponent(start);
+      const share='https://t.me/share/url?url='+encodeURIComponent(link);
+      if(window.Telegram?.WebApp?.openTelegramLink) Telegram.WebApp.openTelegramLink(share);
+    } catch(e) { pw.status(e.message); }
+  };
   document.querySelectorAll('[data-pack]').forEach(b=>b.onclick=async()=>{
     if(b.disabled)return;b.disabled=true;pw.status('Создаю счёт Telegram Stars…');
     try{
