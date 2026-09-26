@@ -26,7 +26,7 @@
   $('tasksBtn').onclick = () => open('tasksModal');
   $('claimDaily').onclick = async () => {
     $('claimDaily').disabled=true; pw.status('Получаю ежедневную награду…');
-    try { const p=await pw.api('claim_daily'); update(p); text('dailyStreak','Серия: '+(p.daily_streak||1)+' дн.'); pw.status('+50 монет! Ежедневная награда получена.'); $('claimDaily').textContent='ПОЛУЧЕНО'; }
+    try { const p=await pw.api('claim_daily'); update(p); text('dailyStreak','Серия: '+(p.daily_streak||1)+' дн.'); pw.status('+5 монет! Ежедневная награда получена.'); $('claimDaily').textContent='ПОЛУЧЕНО'; }
     catch(e){ pw.status(e.message); $('claimDaily').disabled=false; }
   };
   document.querySelectorAll('[data-task]').forEach(b=>b.onclick=async()=>{
