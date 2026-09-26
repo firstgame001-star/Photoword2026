@@ -109,6 +109,11 @@ with sync_playwright() as pw:
         page.locator('#settingsBtn').tap();page.locator('#themeBtn').tap();expect(page.locator('#themeModal')).to_be_visible();page.locator(f'button[data-theme="{theme}"]').tap();assert page.evaluate("document.documentElement.dataset.theme")==theme;assert page.evaluate("localStorage.getItem('pw.theme')")==theme
       # Sound, haptics and music preferences persist.
       page.locator('#settingsBtn').tap();page.locator('#soundToggle').uncheck();page.locator('#hapticToggle').uncheck();page.locator('#musicToggle').check();prefs=page.evaluate("JSON.parse(localStorage.getItem('photoword-prefs'))");assert prefs['sound'] is False and prefs['haptic'] is False and prefs['music'] is True;page.locator('#musicToggle').uncheck();page.locator('[data-close="settingsModal"]').tap()
+      # Language can be changed from Settings and changed back without losing the game.
+      other={'ru':'en','en':'az','az':'ru'}[language];page.locator('#settingsBtn').tap();page.locator('#languageBtn').tap();page.locator(f'[data-language="{other}"]').tap();assert page.evaluate("localStorage.getItem('pw.language')")==other;page.locator('#settingsBtn').tap();page.locator('#languageBtn').tap();page.locator(f'[data-language="{language}"]').tap();assert page.evaluate("localStorage.getItem('pw.language')")==language
+      # Telegram notification permission UI updates when Telegram grants access.
+      page.evaluate("window.Telegram=window.Telegram||{};window.Telegram.WebApp=window.Telegram.WebApp||{};window.Telegram.WebApp.requestWriteAccess=(cb)=>cb(true)")
+      page.locator('#settingsBtn').tap();page.locator('#notificationsBtn').tap();assert page.evaluate("localStorage.getItem('pw.writeAccess')")=='1';page.locator('[data-close="settingsModal"]').tap()
       # Rules and support are localized.
       page.locator('#settingsBtn').tap();page.locator('#rulesBtn').tap();expect(page.locator('#rulesModal')).to_be_visible();assert len(page.locator('#rulesBody').inner_text())>100;page.locator('[data-close="rulesModal"]').tap()
       page.locator('#settingsBtn').tap();page.locator('#supportBtn').tap();expect(page.locator('#supportModal')).to_be_visible()
@@ -118,15 +123,17 @@ with sync_playwright() as pw:
       # Privacy and terms follow the selected language.
       legal=ctx.new_page();legal.goto(BASE+'clean/privacy.html?r='+RELEASE,wait_until='domcontentloaded');expected_priv={'ru':'Политика конфиденциальности','en':'Privacy Policy','az':'Məxfilik siyasəti'}[language];expect(legal.locator('#pt')).to_have_text(expected_priv);legal.goto(BASE+'clean/terms.html?r='+RELEASE,wait_until='domcontentloaded');expected_terms={'ru':'Пользовательское соглашение','en':'Terms of Use','az':'İstifadəçi razılaşması'}[language];expect(legal.locator('#tt')).to_have_text(expected_terms);legal.close()
       # Nickname is one-time UI and becomes the displayed name.
-      page.locator('#profileBtn').tap();page.locator('#nicknameBtn').tap();page.locator('#nicknameInput').fill('Player_77');page.locator('#saveNickname').tap();expect(page.locator('#name')).to_have_text('Player_77')
+      page.locator('#profileBtn').tap();page.locator('#nicknameBtn').tap();page.locator('#nicknameInput').fill('Player_77');page.locator('#saveNickname').tap();expect(page.locator('#name')).to_have_text('Player_77');page.locator('#profileBtn').tap();expect(page.locator('#nicknameBtn')).to_be_disabled()
+      # Share-game control opens a Telegram share URL.
+      page.evaluate("window.__shared='';window.Telegram.WebApp.openTelegramLink=(u)=>window.__shared=u");page.locator('#shareGameBtn').tap();assert 't.me/share/url' in page.evaluate("window.__shared");page.locator('[data-close="profileModal"]').tap()
       # Daily +5 updates balance, marks claimed and closes.
       before=int(page.locator('[data-coins]').first.inner_text());page.locator('#dailyRewardBtn').tap();page.locator('#claimDaily').tap();expect(page.locator('[data-coins]').first).to_have_text(str(before+5));expect(page.locator('#dailyModal')).to_be_hidden(timeout=2500)
       # Daily tasks claim and update balance.
       before=int(page.locator('[data-coins]').first.inner_text());page.locator('#tasksBtn').tap();page.locator('[data-task="level_1"]').tap();expect(page.locator('[data-coins]').first).to_have_text(str(before+40));page.locator('[data-close="tasksModal"]').tap()
       # Friends use nickname and progress.
       page.locator('#friendsNav').tap();expect(page.locator('#friendsList')).to_contain_text('FriendOne');expect(page.locator('#friendsList')).to_contain_text('7 / 10');page.locator('[data-close="friendsModal"]').tap()
-      # Rating and shop surfaces are reachable/localized.
-      page.locator('#ratingNav').tap();expect(page.locator('#leaderboard')).to_contain_text('Player_77');page.locator('#ratingBack').tap();page.locator('#shopNav').tap();expect(page.locator('#shopModal')).to_be_visible();expect(page.locator('#watchAd')).to_be_disabled();page.locator('[data-close="shopModal"]').tap()
+      # Rating and shop surfaces are reachable/localized, including invoice handoff.
+      page.locator('#ratingNav').tap();expect(page.locator('#leaderboard')).to_contain_text('Player_77');page.locator('#ratingBack').tap();page.evaluate("window.__invoice='';window.Telegram.WebApp.openInvoice=(u,cb)=>{window.__invoice=u;cb('cancelled')}");page.locator('#shopNav').tap();expect(page.locator('#shopModal')).to_be_visible();expect(page.locator('#watchAd')).to_be_disabled();page.locator('[data-pack="c10"]').tap();assert page.evaluate("window.__invoice")=='https://t.me/$test';page.locator('[data-close="shopModal"]').tap()
       # Reset requires double confirmation and then requires language again.
       page.locator('#settingsBtn').tap();page.locator('#resetProgressBtn').tap();page.locator('#confirmReset').tap();page.locator('#confirmReset').tap();expect(page.locator('#languageModal')).to_be_visible(timeout=3000);expect(page.locator('#languageClose')).to_be_hidden()
       assert not errors,errors;ctx.close()
