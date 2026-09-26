@@ -2,137 +2,178 @@
 'use strict';
 const $=id=>document.getElementById(id),pw=window.PW;
 const text=(id,v)=>{const e=$(id);if(e)e.textContent=v};
-const open=id=>{const e=$(id);if(!e)return;e.hidden=false;e.querySelector('button')?.focus()};
+const open=id=>{const e=$(id);if(!e)return;e.hidden=false;e.querySelector('button,input')?.focus()};
 const close=id=>{const e=$(id);if(e)e.hidden=true};
 const screen=id=>{document.querySelectorAll('.screen').forEach(e=>e.classList.toggle('active',e.id===id));window.scrollTo(0,0)};
-
-const UI={
-ru:{chapter:'Глава 1',warm:'Разминка',desc:'Простые слова для хорошего старта',levels:'уровней',play:'ИГРАТЬ',daily:'Ежедневная награда',tasks:'Задания',rating:'Рейтинг',home:'Главная',chapters:'Главы',friends:'Друзья',shop:'Магазин',settings:'Настройки',language:'Язык',sound:'Звук',vibration:'Вибрация',music:'Музыка',notifications:'Уведомления',rules:'Правила игры',support:'Поддержка',privacy:'Конфиденциальность',agreement:'Пользовательское соглашение',reset:'Сбросить прогресс',best:'ВЫГОДНО',coinshop:'Магазин монет',free:'Получить бесплатно',soon:'СКОРО',invite:'ПРИГЛАСИТЬ ДРУГА',invited:'Приглашено',received:'Получено',invitedList:'Приглашённые',dailyTitle:'Ежедневная награда',claim:'ПОЛУЧИТЬ',dayTasks:'Задания дня',soundDesc:'Буквы, победа, ошибка и награды',hapticDesc:'Нажатия, верный и неверный ответ',musicDesc:'Спокойная фоновая музыка',notifyState:'Награды и новые уровни · Разрешить',rulesDesc:'Как играть, монеты, XP и подсказки',privacyDesc:'Какие данные используются и зачем',resetDesc:'Уровни, XP и место в рейтинге',novice:'Новичок',knower:'Знаток',expert:'Эксперт',master:'Мастер',legend:'Легенда',place:'место',rulesTitle:'Правила игры',resetTitle:'Сбросить прогресс?',cancel:'Отмена',unranked:'вне рейтинга',supportDesc:'Связаться с поддержкой',supportText:'Контакты поддержки будут добавлены перед запуском.',dailyCopy:'Заходи каждый день и забирай награду.',claimed:'Награда получена ✓',alreadyDaily:'Сегодня награда уже получена.'},
-en:{chapter:'Chapter 1',warm:'Warm-up',desc:'Simple words for a good start',levels:'levels',play:'PLAY',daily:'Daily reward',tasks:'Tasks',rating:'Leaderboard',home:'Home',chapters:'Chapters',friends:'Friends',shop:'Shop',settings:'Settings',language:'Language',sound:'Sound',vibration:'Haptics',music:'Music',notifications:'Notifications',rules:'Game rules',support:'Support',privacy:'Privacy',agreement:'Terms of use',reset:'Reset progress',best:'BEST VALUE',coinshop:'Coin shop',free:'Get for free',soon:'SOON',invite:'INVITE A FRIEND',invited:'Invited',received:'Earned',invitedList:'Invited friends',dailyTitle:'Daily reward',claim:'CLAIM',dayTasks:'Daily tasks',soundDesc:'Letters, wins, mistakes and rewards',hapticDesc:'Taps, correct and wrong answers',musicDesc:'Calm background music',notifyState:'Rewards and new levels · Allow',rulesDesc:'How to play, coins, XP and hints',privacyDesc:'What data is used and why',resetDesc:'Levels, XP and leaderboard position',novice:'Novice',knower:'Skilled',expert:'Expert',master:'Master',legend:'Legend',place:'place',rulesTitle:'Game rules',resetTitle:'Reset progress?',cancel:'Cancel',unranked:'unranked',supportDesc:'Contact support',supportText:'Support contacts will be added before launch.',dailyCopy:'Come back every day and claim your reward.',claimed:'Reward claimed ✓',alreadyDaily:'Today’s reward has already been claimed.'},
-az:{chapter:'Fəsil 1',warm:'İsinmə',desc:'Yaxşı başlanğıc üçün sadə sözlər',levels:'səviyyə',play:'OYNA',daily:'Gündəlik mükafat',tasks:'Tapşırıqlar',rating:'Reytinq',home:'Ana səhifə',chapters:'Fəsillər',friends:'Dostlar',shop:'Mağaza',settings:'Ayarlar',language:'Dil',sound:'Səs',vibration:'Vibrasiya',music:'Musiqi',notifications:'Bildirişlər',rules:'Oyun qaydaları',support:'Dəstək',privacy:'Məxfilik',agreement:'İstifadəçi razılaşması',reset:'Tərəqqini sıfırla',best:'SƏRFƏLİ',coinshop:'Sikkə mağazası',free:'Pulsuz əldə et',soon:'TEZLİKLƏ',invite:'DOSTU DƏVƏT ET',invited:'Dəvət edilib',received:'Qazanılıb',invitedList:'Dəvət olunanlar',dailyTitle:'Gündəlik mükafat',claim:'GÖTÜR',dayTasks:'Günün tapşırıqları',soundDesc:'Hərflər, qələbə, səhv və mükafat səsləri',hapticDesc:'Toxunuş, düzgün və səhv cavab',musicDesc:'Sakit fon musiqisi',notifyState:'Mükafatlar və yeni səviyyələr · İcazə ver',rulesDesc:'Oyun, sikkələr, XP və ipucları',privacyDesc:'Hansı məlumatların niyə istifadə edilməsi',resetDesc:'Səviyyələr, XP və reytinq mövqeyi',novice:'Yeni başlayan',knower:'Bilici',expert:'Ekspert',master:'Usta',legend:'Əfsanə',place:'yer',rulesTitle:'Oyun qaydaları',resetTitle:'Tərəqqi sıfırlansın?',cancel:'Ləğv et',unranked:'reytinqdən kənar',supportDesc:'Dəstəklə əlaqə',supportText:'Dəstək əlaqələri istifadəyə verilməzdən əvvəl əlavə olunacaq.',dailyCopy:'Hər gün daxil ol və mükafatını götür.',claimed:'Mükafat alındı ✓',alreadyDaily:'Bugünkü mükafat artıq alınıb.'}
-};
-const THEMES={ru:{game:'Игровая',night:'Ночная',light:'Светлая',neon:'Неон',gold:'Золотая'},en:{game:'Game',night:'Night',light:'Light',neon:'Neon',gold:'Gold'},az:{game:'Oyun',night:'Gecə',light:'İşıqlı',neon:'Neon',gold:'Qızılı'}};
-const LANGS={ru:'Русский',en:'English',az:'Azərbaycan dili'};
 const getLang=()=>{try{return localStorage.getItem('pw.language')||''}catch{return''}};
 const getTheme=()=>{try{return localStorage.getItem('pw.theme')||'game'}catch{return'game'}};
 const lang=()=>getLang()||'ru';
+const today=()=>new Date().toISOString().slice(0,10);
 
-const RULES={
-ru:`<h3>Цель игры</h3><p>На экране четыре изображения. У них есть одно общее слово. Собери это слово из предложенных букв.</p><h3>Как отвечать</h3><p>Нажимай буквы по порядку. Нажатие на заполненную клетку возвращает букву обратно. Неверное слово автоматически очищается.</p><h3>Подсказки</h3><p>💡 открыть правильную букву — 50 🪙.<br>🪄 убрать до трёх лишних букв — 100 🪙.<br>Текстовая подсказка — 150 🪙.<br>🔀 перемешивание букв — бесплатно.</p><h3>Награды</h3><p>За первое прохождение уровня: +20 🪙 и +15 XP. Повторное прохождение награду не даёт. Ежедневная награда — +5 🪙. Дополнительные монеты можно получать за задания и приглашения друзей.</p><h3>XP и ранги</h3><p>0–399 — Новичок · 400–1499 — Знаток · 1500–2499 — Эксперт · 2500–3999 — Мастер · 4000+ — Легенда. XP не тратится и влияет на рейтинг.</p><h3>Друзья</h3><p>Если приглашённый по твоей ссылке игрок пройдёт 10 уровней, вы оба получите по 20 🪙.</p><h3>Язык</h3><p>Слова, буквы и текстовые подсказки соответствуют выбранному языку: Русский, English или Azərbaycan dili.</p>`,
-en:`<h3>Goal</h3><p>Four images have one word in common. Build that word from the available letters.</p><h3>Answering</h3><p>Tap letters in order. Tap a filled slot to return a letter. A wrong word is cleared automatically.</p><h3>Hints</h3><p>💡 reveal a correct letter — 50 🪙.<br>🪄 remove up to three extra letters — 100 🪙.<br>Text hint — 150 🪙.<br>🔀 shuffle — free.</p><h3>Rewards</h3><p>First completion: +20 🪙 and +15 XP. Replays do not grant another reward. Daily reward: +5 🪙. Tasks and referrals can grant more coins.</p><h3>XP and ranks</h3><p>0–399 Novice · 400–1499 Skilled · 1500–2499 Expert · 2500–3999 Master · 4000+ Legend. XP is not spent and affects the leaderboard.</p><h3>Friends</h3><p>If a player joins through your referral and completes 10 levels, both of you receive 20 🪙.</p><h3>Language</h3><p>Words, letters and text hints follow the selected language: Русский, English or Azərbaycan dili.</p>`,
-az:`<h3>Oyunun məqsədi</h3><p>Dörd şəkli birləşdirən bir söz var. Həmin sözü verilən hərflərdən düzəlt.</p><h3>Cavab vermək</h3><p>Hərflərə ardıcıllıqla toxun. Doldurulmuş xanaya toxunmaq hərfi geri qaytarır. Səhv söz avtomatik silinir.</p><h3>İpucları</h3><p>💡 düzgün hərfi açmaq — 50 🪙.<br>🪄 üçədək artıq hərfi silmək — 100 🪙.<br>Mətn ipucu — 150 🪙.<br>🔀 hərfləri qarışdırmaq — pulsuz.</p><h3>Mükafatlar</h3><p>Səviyyəni ilk dəfə keçdikdə +20 🪙 və +15 XP verilir. Təkrar keçid əlavə mükafat vermir. Gündəlik mükafat +5 🪙-dir.</p><h3>XP və rütbələr</h3><p>0–399 Yeni başlayan · 400–1499 Bilici · 1500–2499 Ekspert · 2500–3999 Usta · 4000+ Əfsanə. XP xərclənmir və reytinqə təsir edir.</p><h3>Dostlar</h3><p>Sənin dəvət linkinlə gələn oyunçu 10 səviyyə keçdikdə hər ikiniz 20 🪙 alırsınız.</p><h3>Dil</h3><p>Sözlər, hərflər və mətn ipucları seçilmiş dilə uyğun olur.</p>`
-};
-const RESET={
-ru:'Будут удалены: прохождение всех уровней, XP и текущая позиция в рейтинге. Игра снова начнётся с уровня 1. Сохранённые подсказки уровней будут очищены. Монеты, покупки Telegram Stars, уже полученные ежедневные/реферальные награды и история платежей сохраняются, чтобы не потерять оплаченные покупки и не допустить повторного получения наград.',
-en:'This removes all completed levels, XP and your current leaderboard position. The game starts again from level 1 and saved level hints are cleared. Coins, Telegram Stars purchases, already claimed daily/referral rewards and payment history are kept so paid purchases are not lost and rewards cannot be claimed twice.',
-az:'Bütün keçilmiş səviyyələr, XP və cari reytinq mövqeyi silinəcək. Oyun yenidən 1-ci səviyyədən başlayacaq və saxlanmış ipucları təmizlənəcək. Ödənilmiş alışların itməməsi və mükafatların təkrar alınmaması üçün sikkələr, Telegram Stars alışları, artıq alınmış gündəlik/referral mükafatları və ödəniş tarixçəsi saxlanılır.'
-};
+const T={
+ru:{
+logo:['4','Ф','О','Т','О'],one:'1 СЛОВО',tagline:'Больше, чем просто слова',
+chapter:n=>'Глава '+n,chapter1:'Разминка',chapter1Desc:'Простые слова для хорошего старта',chapter2:'Ассоциации',chapter2Desc:'Ищи связь между разными значениями',levels:'уровней',
+play:'ИГРАТЬ',replay:'ПЕРЕИГРАТЬ',locked:'ЗАКРЫТО',allDone:'УРОВНИ 1–20 ПРОЙДЕНЫ',
+home:'Главная',chapters:'Главы',chaptersSubtitle:'Выбирай раздел и продолжай игру',rating:'Рейтинг',ratingSubtitle:'Лучшие игроки PhotoWord',overallRating:'🏆 Общий рейтинг',myPosition:'Твоя позиция',refresh:'Обновить рейтинг',
+friends:'Друзья',shop:'Магазин',daily:'Ежедневная награда',tasks:'Задания',
+settings:'Настройки',sound:'Звук',soundDesc:'Буквы, победа, ошибка и награды',vibration:'Вибрация',hapticDesc:'Нажатия, верный и неверный ответ',music:'Музыка',musicDesc:'Спокойная фоновая музыка',language:'Язык',notifications:'Уведомления',notifyAllow:'Награды и новые уровни · Разрешить',notifyAllowed:'Разрешены',theme:'Тема',rules:'Правила игры',rulesDesc:'Как играть, монеты, XP и подсказки',support:'Поддержка',supportDesc:'Связаться с поддержкой',supportText:'Контакты поддержки будут добавлены перед запуском.',privacy:'Конфиденциальность',privacyDesc:'Какие данные используются и зачем',terms:'Пользовательское соглашение',reset:'Сбросить прогресс',resetDesc:'Уровни, XP и место в рейтинге',
+novice:'Новичок',skilled:'Знаток',expert:'Эксперт',master:'Мастер',legend:'Легенда',place:'место',unranked:'вне рейтинга',profileRank:'Место',profileLevels:'Уровней',profilePrivacy:'Telegram ID не показывается в рейтинге.',noUsername:'Telegram username не указан',
+nicknameSet:'Установить игровой ник',nicknameDone:'Игровой ник установлен',nicknameTitle:'Игровой ник',nicknameText:'Можно установить только один раз. 3–16 символов: английские буквы, цифры и _.',save:'СОХРАНИТЬ',share:'Поделиться игрой',shareText:'Попробуй PhotoWord — 4 картинки, 1 слово!',
+dailyCopy:'Заходи каждый день и забирай награду.',streak:'Серия',claim:'ПОЛУЧИТЬ',claimed:'Награда получена ✓',alreadyDaily:'Сегодня награда уже получена.',
+taskTitle:'🎯 Задания дня',task1:'Пройди 1 уровень',task2:'Пройди 2 уровня',reward:'Награда',take:'ЗАБРАТЬ',tasksFoot:'Задания обновляются каждый день.',taskClaimed:'ПОЛУЧЕНО',
+invite:'ПРИГЛАСИТЬ ДРУГА',invited:'Приглашено',earned:'Получено',inviteCondition:'Друг проходит 10 уровней — вы оба получаете +20 🪙.',invitedList:'Приглашённые',none:'Пока никого нет.',rewardReceived:'Награда получена',
+coinShop:'Магазин монет',payStars:'Оплата через Telegram Stars ⭐',best:'ВЫГОДНО',adTitle:'Получить бесплатно',adText:'Посмотри рекламу и получи +5 🪙',soon:'СКОРО',shopFoot:'Монеты начисляются после подтверждения платежа Telegram.',offerTitle:'Больше монет — больше возможностей!',offerText:'Открывай буквы, получай подсказки и проходи уровни',
+themeTitle:'Тема',themeSubtitle:'Выберите оформление игры',themeNames:{game:'🎮 Игровая',night:'🌙 Ночная',light:'☀️ Светлая',neon:'⚡ Неон',gold:'👑 Золотая'},themeDesc:{game:'Текущая классическая тема',night:'Графит и приглушённые цвета',light:'Светлый фон и тёмный текст',neon:'Яркое свечение и контраст',gold:'Тёмный фон и золотые акценты'},
+rulesTitle:'Правила игры',resetTitle:'Сбросить прогресс?',cancel:'Отмена',resetButton:'СБРОСИТЬ ПРОГРЕСС',confirmReset:'НАЖМИ ЕЩЁ РАЗ ДЛЯ ПОДТВЕРЖДЕНИЯ',
+profileSynced:'Профиль синхронизирован',loading:'Загрузка…',noPlayers:'Пока нет игроков',notifyNeedTelegram:'Открой игру внутри Telegram, чтобы разрешить уведомления.',notifyGranted:'Уведомления разрешены.',notifyDenied:'Разрешение не предоставлено.',resetDone:'Прогресс сброшен. Выберите язык игры.'
+},
+en:{
+logo:['4','P','I','C','S'],one:'1 WORD',tagline:'More than just words',
+chapter:n=>'Chapter '+n,chapter1:'Warm-up',chapter1Desc:'Simple words for a good start',chapter2:'Associations',chapter2Desc:'Find the connection between different meanings',levels:'levels',
+play:'PLAY',replay:'REPLAY',locked:'LOCKED',allDone:'LEVELS 1–20 COMPLETED',
+home:'Home',chapters:'Chapters',chaptersSubtitle:'Choose a chapter and continue',rating:'Leaderboard',ratingSubtitle:'Top PhotoWord players',overallRating:'🏆 Overall leaderboard',myPosition:'Your position',refresh:'Refresh leaderboard',
+friends:'Friends',shop:'Shop',daily:'Daily reward',tasks:'Tasks',
+settings:'Settings',sound:'Sound',soundDesc:'Letters, wins, mistakes and rewards',vibration:'Haptics',hapticDesc:'Taps, correct and wrong answers',music:'Music',musicDesc:'Calm background music',language:'Language',notifications:'Notifications',notifyAllow:'Rewards and new levels · Allow',notifyAllowed:'Allowed',theme:'Theme',rules:'Game rules',rulesDesc:'How to play, coins, XP and hints',support:'Support',supportDesc:'Contact support',supportText:'Support contacts will be added before launch.',privacy:'Privacy',privacyDesc:'What data is used and why',terms:'Terms of use',reset:'Reset progress',resetDesc:'Levels, XP and leaderboard position',
+novice:'Novice',skilled:'Skilled',expert:'Expert',master:'Master',legend:'Legend',place:'place',unranked:'unranked',profileRank:'Place',profileLevels:'Levels',profilePrivacy:'Telegram ID is not shown on the leaderboard.',noUsername:'Telegram username not set',
+nicknameSet:'Set game nickname',nicknameDone:'Game nickname set',nicknameTitle:'Game nickname',nicknameText:'You can set it only once. 3–16 characters: English letters, numbers and _.',save:'SAVE',share:'Share game',shareText:'Try PhotoWord — 4 pictures, 1 word!',
+dailyCopy:'Come back every day and claim your reward.',streak:'Streak',claim:'CLAIM',claimed:'Reward claimed ✓',alreadyDaily:'Today’s reward has already been claimed.',
+taskTitle:'🎯 Daily tasks',task1:'Complete 1 level',task2:'Complete 2 levels',reward:'Reward',take:'CLAIM',tasksFoot:'Tasks refresh every day.',taskClaimed:'CLAIMED',
+invite:'INVITE A FRIEND',invited:'Invited',earned:'Earned',inviteCondition:'Your friend completes 10 levels — both of you get +20 🪙.',invitedList:'Invited friends',none:'No invited friends yet.',rewardReceived:'Reward received',
+coinShop:'Coin shop',payStars:'Payment via Telegram Stars ⭐',best:'BEST VALUE',adTitle:'Get for free',adText:'Watch an ad and get +5 🪙',soon:'SOON',shopFoot:'Coins are credited after Telegram confirms the payment.',offerTitle:'More coins — more possibilities!',offerText:'Reveal letters, use hints and complete levels',
+themeTitle:'Theme',themeSubtitle:'Choose the game appearance',themeNames:{game:'🎮 Game',night:'🌙 Night',light:'☀️ Light',neon:'⚡ Neon',gold:'👑 Gold'},themeDesc:{game:'Current classic theme',night:'Graphite and muted colors',light:'Light background and dark text',neon:'Bright glow and contrast',gold:'Dark background with gold accents'},
+rulesTitle:'Game rules',resetTitle:'Reset progress?',cancel:'Cancel',resetButton:'RESET PROGRESS',confirmReset:'TAP AGAIN TO CONFIRM',
+profileSynced:'Profile synced',loading:'Loading…',noPlayers:'No players yet',notifyNeedTelegram:'Open the game inside Telegram to enable notifications.',notifyGranted:'Notifications allowed.',notifyDenied:'Permission was not granted.',resetDone:'Progress reset. Choose your game language.'
+},
+az:{
+logo:['4','F','O','T','O'],one:'1 SÖZ',tagline:'Sadəcə sözlərdən daha çox',
+chapter:n=>'Fəsil '+n,chapter1:'İsinmə',chapter1Desc:'Yaxşı başlanğıc üçün sadə sözlər',chapter2:'Assosiasiyalar',chapter2Desc:'Fərqli mənalar arasında əlaqəni tap',levels:'səviyyə',
+play:'OYNA',replay:'YENİDƏN OYNA',locked:'BAĞLIDIR',allDone:'1–20 SƏVİYYƏ KEÇİLİB',
+home:'Ana səhifə',chapters:'Fəsillər',chaptersSubtitle:'Bölməni seç və oyuna davam et',rating:'Reytinq',ratingSubtitle:'PhotoWord-un ən yaxşı oyunçuları',overallRating:'🏆 Ümumi reytinq',myPosition:'Sənin yerin',refresh:'Reytinqi yenilə',
+friends:'Dostlar',shop:'Mağaza',daily:'Gündəlik mükafat',tasks:'Tapşırıqlar',
+settings:'Ayarlar',sound:'Səs',soundDesc:'Hərflər, qələbə, səhv və mükafat səsləri',vibration:'Vibrasiya',hapticDesc:'Toxunuş, düzgün və səhv cavab',music:'Musiqi',musicDesc:'Sakit fon musiqisi',language:'Dil',notifications:'Bildirişlər',notifyAllow:'Mükafatlar və yeni səviyyələr · İcazə ver',notifyAllowed:'İcazə verilib',theme:'Tema',rules:'Oyun qaydaları',rulesDesc:'Oyun, sikkələr, XP və ipucları',support:'Dəstək',supportDesc:'Dəstəklə əlaqə',supportText:'Dəstək əlaqələri istifadəyə verilməzdən əvvəl əlavə olunacaq.',privacy:'Məxfilik',privacyDesc:'Hansı məlumatların niyə istifadə edilməsi',terms:'İstifadəçi razılaşması',reset:'Tərəqqini sıfırla',resetDesc:'Səviyyələr, XP və reytinq mövqeyi',
+novice:'Yeni başlayan',skilled:'Bilici',expert:'Ekspert',master:'Usta',legend:'Əfsanə',place:'yer',unranked:'reytinqdən kənar',profileRank:'Yer',profileLevels:'Səviyyələr',profilePrivacy:'Telegram ID reytinqdə göstərilmir.',noUsername:'Telegram username göstərilməyib',
+nicknameSet:'Oyun niki təyin et',nicknameDone:'Oyun niki təyin edilib',nicknameTitle:'Oyun niki',nicknameText:'Yalnız bir dəfə təyin etmək olar. 3–16 simvol: ingilis hərfləri, rəqəmlər və _.',save:'YADDA SAXLA',share:'Oyunu paylaş',shareText:'PhotoWord-u sına — 4 şəkil, 1 söz!',
+dailyCopy:'Hər gün daxil ol və mükafatını götür.',streak:'Seriya',claim:'GÖTÜR',claimed:'Mükafat alındı ✓',alreadyDaily:'Bugünkü mükafat artıq alınıb.',
+taskTitle:'🎯 Günün tapşırıqları',task1:'1 səviyyə keç',task2:'2 səviyyə keç',reward:'Mükafat',take:'GÖTÜR',tasksFoot:'Tapşırıqlar hər gün yenilənir.',taskClaimed:'ALINDI',
+invite:'DOSTU DƏVƏT ET',invited:'Dəvət edilib',earned:'Qazanılıb',inviteCondition:'Dostun 10 səviyyə keçir — hər ikiniz +20 🪙 alırsınız.',invitedList:'Dəvət olunanlar',none:'Hələ dəvət olunan yoxdur.',rewardReceived:'Mükafat alındı',
+coinShop:'Sikkə mağazası',payStars:'Ödəniş Telegram Stars ilə ⭐',best:'SƏRFƏLİ',adTitle:'Pulsuz əldə et',adText:'Reklama bax və +5 🪙 qazan',soon:'TEZLİKLƏ',shopFoot:'Sikkələr Telegram ödənişi təsdiqlədikdən sonra əlavə olunur.',offerTitle:'Daha çox sikkə — daha çox imkan!',offerText:'Hərfləri aç, ipuclarından istifadə et və səviyyələri keç',
+themeTitle:'Tema',themeSubtitle:'Oyunun görünüşünü seç',themeNames:{game:'🎮 Oyun',night:'🌙 Gecə',light:'☀️ İşıqlı',neon:'⚡ Neon',gold:'👑 Qızılı'},themeDesc:{game:'Klassik oyun mövzusu',night:'Qrafit və sakit rənglər',light:'Açıq fon və tünd mətn',neon:'Parlaq işıq və kontrast',gold:'Tünd fon və qızılı vurğular'},
+rulesTitle:'Oyun qaydaları',resetTitle:'Tərəqqi sıfırlansın?',cancel:'Ləğv et',resetButton:'TƏRƏQQİNİ SIFIRLA',confirmReset:'TƏSDİQ ÜÇÜN YENƏ TOXUN',
+profileSynced:'Profil sinxronlaşdırıldı',loading:'Yüklənir…',noPlayers:'Hələ oyunçu yoxdur',notifyNeedTelegram:'Bildirişləri aktivləşdirmək üçün oyunu Telegram daxilində açın.',notifyGranted:'Bildirişlərə icazə verildi.',notifyDenied:'İcazə verilmədi.',resetDone:'Tərəqqi sıfırlandı. Oyun dilini seçin.'
+}};
 
-function leagueName(p,l=lang()){const t=UI[l]||UI.ru;return p.xp>=4000?t.legend:p.xp>=2500?t.master:p.xp>=1500?t.expert:p.xp>=400?t.knower:t.novice}
-function update(p){
- const l=lang(),t=UI[l]||UI.ru,name=pw.name(p);
- const rankText=p.rank>0?'#'+p.rank:'—';text('name',name);text('profileName',name);text('rankLabel',leagueName(p,l)+' · '+(p.rank>0?t.place+' #'+p.rank:t.unranked));text('profileRank',rankText);
- text('photoWordId',p.photoword_id);text('profileXp',p.xp);text('profileDone',p.completed_levels);text('profileUsername',p.username?'@'+p.username:'Username не указан');
- text('done',Math.min(20,p.completed_levels));$('progress').style.width=Math.min(100,p.completed_levels*5)+'%';
- const play=$('playLink'),next=Math.max(1,Math.min(10,p.current_level||1));play.href='./game.html?level='+next;
- if((p.current_level||1)>10)play.innerHTML=(l==='ru'?'УРОВНИ 1–10 ПРОЙДЕНЫ':l==='en'?'LEVELS 1–10 COMPLETED':'1–10 SƏVİYYƏ KEÇİLİB')+' <span>✓</span>';
- for(const id of ['avatar','profileAvatar'])text(id,name.charAt(0).toUpperCase());text('myRank','#'+p.rank);text('myXp',p.xp+' XP');
+const THEMES=['game','night','light','neon','gold'];
+function t(){return T[lang()]||T.ru}
+function leagueName(p){const x=t();return p.xp>=4000?x.legend:p.xp>=2500?x.master:p.xp>=1500?x.expert:p.xp>=400?x.skilled:x.novice}
+function persistPrefs(){try{localStorage.setItem('photoword-prefs',JSON.stringify(pw.prefs))}catch{}}
+function setLogo(x){const e=$('logoLetters');if(e)e.innerHTML=x.logo.map(v=>'<i>'+v+'</i>').join('');text('logoWord',x.one);text('logoTagline',x.tagline)}
+function chapterData(num,x){return num===1?{title:x.chapter1,desc:x.chapter1Desc,start:1,end:10}:{title:x.chapter2,desc:x.chapter2Desc,start:11,end:20}}
+function currentChapter(p){return (p.current_level||1)<=10?1:2}
+
+function applyTheme(theme){
+ if(!THEMES.includes(theme))theme='game';
+ document.documentElement.dataset.theme=theme;try{localStorage.setItem('pw.theme',theme)}catch{}
+ const x=t();text('themeCurrent',x.themeNames[theme]);document.querySelectorAll('[data-theme]').forEach(b=>b.classList.toggle('selected',b.dataset.theme===theme));
 }
-function applyTheme(theme){if(!['game','night','light','neon','gold'].includes(theme))theme='game';document.documentElement.dataset.theme=theme;try{localStorage.setItem('pw.theme',theme)}catch{};text('themeCurrent',(THEMES[lang()]||THEMES.ru)[theme]);document.querySelectorAll('[data-theme]').forEach(b=>b.classList.toggle('selected',b.dataset.theme===theme))}
-function applyHomeLanguage(l){
- const t=UI[l]||UI.ru;document.documentElement.lang=l;const q=s=>document.querySelector(s),qa=s=>document.querySelectorAll(s);
- q('.chapter-title small').textContent=t.chapter;q('.chapter-title h1').textContent=t.warm;q('.chapter-title p').textContent=t.desc;
- const count=q('.count');count.childNodes[count.childNodes.length-1].textContent=' / 20 '+t.levels;
- if($('playLink')&&!$('playLink').textContent.includes('1–10'))$('playLink').innerHTML=t.play+' <span>▶</span>';
- const sh=qa('.shortcuts button b');if(sh[0])sh[0].textContent=t.daily;if(sh[1])sh[1].textContent=t.tasks;if(sh[2])sh[2].textContent=t.rating;
- const nav=qa('nav small');[t.home,t.chapters,t.rating,t.friends,t.shop].forEach((v,i)=>{if(nav[i])nav[i].textContent=v});const offer=$('shopOffer');if(offer){const b=offer.querySelector('b'),s=offer.querySelector('small');if(l==='az'){b.textContent='Daha çox sikkə — daha çox imkan!';s.textContent='Hərfləri aç, ipuclarından istifadə et və səviyyələri keç';}else if(l==='en'){b.textContent='More coins — more possibilities!';s.textContent='Reveal letters, use hints and complete levels';}else{b.textContent='Больше монет — больше возможностей!';s.textContent='Открывай буквы, получай подсказки и проходи уровни';}}
- text('settingsTitle',t.settings);$('languageBtn').querySelector('b').textContent=t.language;
- const rows=qa('#settingsModal .settingrow b');if(rows[0])rows[0].textContent=t.sound;if(rows[1])rows[1].textContent=t.vibration;if(rows[2])rows[2].textContent=t.music;
- text('soundDesc',t.soundDesc);text('hapticDesc',t.hapticDesc);text('musicDesc',t.musicDesc);$('notificationsBtn').querySelector('b').textContent=t.notifications;text('supportDesc',t.supportDesc);text('supportTitle',t.support);text('supportText',t.supportText);text('dailyCopy',t.dailyCopy);
- if(!localStorage.getItem('pw.writeAccess'))text('notificationsState',t.notifyState);
- $('rulesBtn').querySelector('b').textContent=t.rules;$('rulesBtn').querySelector('small').textContent=t.rulesDesc;
- $('privacyLink').querySelector('b').textContent=t.privacy;$('privacyLink').querySelector('small').textContent=t.privacyDesc;
- $('termsLink').querySelector('b').textContent=t.agreement;$('resetProgressBtn').querySelector('b').textContent=t.reset;$('resetProgressBtn').querySelector('small').textContent=t.resetDesc;
- text('rulesTitle',t.rulesTitle);$('rulesBody').innerHTML=RULES[l]||RULES.ru;text('resetTitle',t.resetTitle);text('resetBody',RESET[l]||RESET.ru);text('cancelReset',t.cancel);
- if($('friendsModal')){const x=$('friendsModal');x.querySelector('h2').textContent=t.friends;const st=x.querySelectorAll('.friendstats small');if(st[0])st[0].textContent=t.invited;if(st[1])st[1].textContent=t.received;text('inviteFriend',t.invite);x.querySelector('h3').textContent=t.invitedList}
- if($('shopModal')){$('shopModal').querySelector('h2').textContent=t.coinshop;const best=$('shopModal').querySelector('.best i');if(best)best.textContent=t.best;$('shopModal').querySelector('.adreward b').textContent=t.free;text('watchAd',t.soon)}
- if($('dailyModal')){$('dailyModal').querySelector('h2').textContent=t.dailyTitle;text('claimDaily',t.claim)}
- if($('tasksModal'))$('tasksModal').querySelector('h2').textContent='🎯 '+t.dayTasks;
- text('themeCurrent',(THEMES[l]||THEMES.ru)[getTheme()]);text('languageCurrent',LANGS[l]);
+function setThemeLabels(x){
+ text('themeTitle',x.themeTitle);text('themeSubtitle',x.themeSubtitle);
+ for(const key of THEMES){const cap=key[0].toUpperCase()+key.slice(1);text('theme'+cap+'Name',x.themeNames[key]);text('theme'+cap+'Desc',x.themeDesc[key]);}
+}
+function updateChapterCards(p){
+ const x=t(),done=Math.min(20,p.completed_levels||0),d1=Math.min(10,done),d2=Math.max(0,Math.min(10,done-10));
+ text('chapter1Label',x.chapter(1)+' · 1–10');text('chapter1Title',x.chapter1);text('chapter1Desc',x.chapter1Desc);text('chapter1Done',d1);text('chapter1Count','/ 10 '+x.levels);$('chapter1Progress').style.width=d1*10+'%';
+ text('chapter2Label',x.chapter(2)+' · 11–20');text('chapter2Title',x.chapter2);text('chapter2Desc',x.chapter2Desc);text('chapter2Done',d2);text('chapter2Count','/ 10 '+x.levels);$('chapter2Progress').style.width=d2*10+'%';
+ const next1=Math.max(1,Math.min(10,p.current_level||1));$('chapter1Play').href='./game.html?level='+next1;$('chapter1Play').innerHTML=(d1>=10?x.replay:x.play)+' <span>▶</span>';
+ const unlocked=(p.current_level||1)>=11||d1>=10,next2=Math.max(11,Math.min(20,p.current_level||11));
+ if(unlocked){$('chapter2Play').classList.remove('locked');$('chapter2Play').removeAttribute('aria-disabled');$('chapter2Play').href='./game.html?level='+next2;$('chapter2Play').innerHTML=(d2>=10?x.replay:x.play)+' <span>▶</span>';}
+ else{$('chapter2Play').classList.add('locked');$('chapter2Play').setAttribute('aria-disabled','true');$('chapter2Play').removeAttribute('href');$('chapter2Play').textContent=x.locked;}
+}
+function update(p){
+ const x=t(),name=pw.name(p),rank=p.rank>0?'#'+p.rank:'—';
+ text('name',name);text('profileName',name);text('rankLabel',leagueName(p)+' · '+(p.rank>0?x.place+' #'+p.rank:x.unranked));text('profileRank',rank);
+ text('photoWordId',p.photoword_id);text('profileXp',p.xp);text('profileDone',p.completed_levels);text('profileUsername',p.username?'@'+p.username:x.noUsername);
+ for(const id of ['avatar','profileAvatar'])text(id,(name||'P').charAt(0).toUpperCase());text('myRank',rank);text('myXp',p.xp+' XP');
+ text('nicknameBtn',p.nickname_changed?x.nicknameDone:x.nicknameSet);$('nicknameBtn').disabled=Boolean(p.nickname_changed);
+ const done=Math.min(20,p.completed_levels||0),ch=currentChapter(p),cd=chapterData(ch,x),inChapter=ch===1?Math.min(10,done):Math.max(0,Math.min(10,done-10));
+ text('done',inChapter);text('chapterCountSuffix','/ 10 '+x.levels);$('progress').style.width=inChapter*10+'%';
+ text('activeChapterLabel',x.chapter(ch));text('activeChapterTitle',cd.title);text('activeChapterDesc',cd.desc);
+ $('activeChapterCard').classList.toggle('assoc',ch===2);$('activeChapterHero').classList.toggle('assoc-hero',ch===2);
+ const next=Math.max(cd.start,Math.min(cd.end,p.current_level||cd.start));$('playLink').href='./game.html?level='+next;
+ if((p.current_level||1)>20)$('playLink').innerHTML=x.allDone+' <span>✓</span>'; else $('playLink').innerHTML=x.play+' <span>▶</span>';
+ updateChapterCards(p);
+ const claimed=String(p.last_daily_reward||'')===today();$('claimDaily').disabled=claimed;text('claimDaily',claimed?x.claimed:x.claim);text('dailyStreak',x.streak+': '+(p.daily_streak||0));
+}
+function applyLanguage(l){
+ if(!T[l])l='ru';try{localStorage.setItem('pw.language',l)}catch{};document.documentElement.lang=l;const x=T[l];setLogo(x);
+ const nav=document.querySelectorAll('nav small');[x.home,x.chapters,x.rating,x.friends,x.shop].forEach((v,i)=>{if(nav[i])nav[i].textContent=v});
+ text('chaptersTitle',x.chapters);text('chaptersSubtitle',x.chaptersSubtitle);text('ratingTitle',x.rating);text('ratingSubtitle',x.ratingSubtitle);text('ratingLeague',x.overallRating);text('myPositionLabel',x.myPosition);text('refreshRating',x.refresh);
+ text('settingsTitle',x.settings);const rows=document.querySelectorAll('#settingsModal .settingrow b');if(rows[0])rows[0].textContent=x.sound;if(rows[1])rows[1].textContent=x.vibration;if(rows[2])rows[2].textContent=x.music;
+ text('soundDesc',x.soundDesc);text('hapticDesc',x.hapticDesc);text('musicDesc',x.musicDesc);$('languageBtn').querySelector('b').textContent=x.language;$('notificationsBtn').querySelector('b').textContent=x.notifications;text('notificationsState',localStorage.getItem('pw.writeAccess')?x.notifyAllowed:x.notifyAllow);$('themeBtn').querySelector('b').textContent=x.theme;
+ $('rulesBtn').querySelector('b').textContent=x.rules;$('rulesBtn').querySelector('small').textContent=x.rulesDesc;text('supportTitle',x.support);text('supportDesc',x.supportDesc);text('supportText',x.supportText);$('privacyLink').querySelector('b').textContent=x.privacy;$('privacyLink').querySelector('small').textContent=x.privacyDesc;$('termsLink').querySelector('b').textContent=x.terms;$('resetProgressBtn').querySelector('b').textContent=x.reset;$('resetProgressBtn').querySelector('small').textContent=x.resetDesc;
+ text('profileRankLabel',x.profileRank);text('profileDoneLabel',x.profileLevels);text('profilePrivacyNote',x.profilePrivacy);text('nicknameTitle',x.nicknameTitle);text('nicknameText',x.nicknameText);text('saveNickname',x.save);text('shareGameBtn',x.share);
+ text('friendsInvited',document.getElementById('friendsInvited')?.textContent||'0');const fs=document.querySelectorAll('.friendstats small');if(fs[0])fs[0].textContent=x.invited;if(fs[1])fs[1].textContent=x.earned;text('friendsCondition',x.inviteCondition);text('inviteFriend',x.invite);$('friendsModal').querySelector('h2').textContent=x.friends;$('friendsModal').querySelector('h3').textContent=x.invitedList;if($('friendsEmpty'))text('friendsEmpty',x.none);
+ text('shopTitle',x.coinShop);text('shopPayNote',x.payStars);const best=$('shopModal').querySelector('.best i');if(best)best.textContent=x.best;text('adTitle',x.adTitle);text('adText',x.adText);text('watchAd',x.soon);text('shopFootnote',x.shopFoot);const offer=$('shopOffer');if(offer){offer.querySelector('b').textContent=x.offerTitle;offer.querySelector('small').textContent=x.offerText;}
+ $('dailyModal').querySelector('h2').textContent=x.daily;text('dailyCopy',x.dailyCopy);text('tasksTitle',x.taskTitle);text('task1Title',x.task1);text('task1Reward',x.reward+': 40 🪙');text('task2Title',x.task2);text('task2Reward',x.reward+': 80 🪙');document.querySelectorAll('[data-task]').forEach(b=>{if(!b.disabled)b.textContent=x.take});text('tasksFootnote',x.tasksFoot);
+ const shortcuts=document.querySelectorAll('.shortcuts button b');if(shortcuts[0])shortcuts[0].textContent=x.daily;if(shortcuts[1])shortcuts[1].textContent=x.tasks;if(shortcuts[2])shortcuts[2].textContent=x.rating);
+ text('rulesTitle',x.rulesTitle);$('rulesBody').innerHTML=RULES[l]||RULES.ru;text('resetTitle',x.resetTitle);text('resetBody',RESET[l]||RESET.ru);text('cancelReset',x.cancel);text('confirmReset',x.resetButton);
+ setThemeLabels(x);text('themeCurrent',x.themeNames[getTheme()]);text('languageCurrent',l==='ru'?'Русский':l==='en'?'English':'Azərbaycan dili');document.querySelectorAll('[data-language]').forEach(b=>b.classList.toggle('selected',b.dataset.language===l));
  if(pw.player)update(pw.player);
 }
-function setLang(l){if(!LANGS[l])l='ru';try{localStorage.setItem('pw.language',l)}catch{};document.querySelectorAll('[data-language]').forEach(b=>b.classList.toggle('selected',b.dataset.language===l));applyHomeLanguage(l)}
-function persistPrefs(){try{localStorage.setItem('photoword-prefs',JSON.stringify(pw.prefs))}catch{}}
-
-const initial=getLang();applyTheme(getTheme());
 function showRequiredLanguagePicker(){const c=$('languageClose');if(c)c.hidden=true;open('languageModal')}
-if(initial)setLang(initial);else{setTimeout(showRequiredLanguagePicker,250);applyHomeLanguage('ru')}
 
-$('settingsBtn').onclick=()=>open('settingsModal');$('languageBtn').onclick=()=>{close('settingsModal');const c=$('languageClose');if(c)c.hidden=false;setTimeout(()=>open('languageModal'),0)};$('themeBtn').onclick=()=>{close('settingsModal');setTimeout(()=>open('themeModal'),0)};
-document.querySelectorAll('[data-theme]').forEach(b=>b.onclick=()=>{applyTheme(b.dataset.theme);close('themeModal')});
-document.querySelectorAll('[data-language]').forEach(b=>b.onclick=()=>{setLang(b.dataset.language);close('languageModal');pw.status(b.dataset.language==='ru'?'Язык игры: Русский':b.dataset.language==='en'?'Game language: English':'Oyun dili: Azərbaycan dili')});
-$('profileBtn').onclick=()=>open('profileModal');$('supportBtn').onclick=()=>{close('settingsModal');setTimeout(()=>open('supportModal'),0)};$('dailyRewardBtn').onclick=()=>open('dailyModal');$('tasksBtn').onclick=()=>open('tasksModal');$('shopOffer').onclick=()=>open('shopModal');$('shopNav').onclick=()=>open('shopModal');
-$('rulesBtn').onclick=()=>{close('settingsModal');applyHomeLanguage(lang());setTimeout(()=>open('rulesModal'),0)};$('resetProgressBtn').onclick=()=>{close('settingsModal');resetArmed=false;applyHomeLanguage(lang());$('confirmReset').textContent=lang()==='en'?'RESET PROGRESS':lang()==='az'?'TƏRƏQQİNİ SIFIRLA':'СБРОСИТЬ ПРОГРЕСС';setTimeout(()=>open('resetModal'),0)};
-
-$('notificationsBtn').onclick=()=>{
- const tg=window.Telegram?.WebApp;
- if(!tg?.requestWriteAccess){pw.status(lang()==='en'?'Open the game inside Telegram to enable notifications.':lang()==='az'?'Bildirişləri aktivləşdirmək üçün oyunu Telegram daxilində açın.':'Открой игру внутри Telegram, чтобы разрешить уведомления.');return}
- tg.requestWriteAccess(allowed=>{
-   if(allowed){try{localStorage.setItem('pw.writeAccess','1')}catch{};text('notificationsState',lang()==='en'?'Allowed':lang()==='az'?'İcazə verilib':'Разрешены');pw.status(lang()==='en'?'Notifications allowed.':lang()==='az'?'Bildirişlərə icazə verildi.':'Уведомления разрешены.')}
-   else pw.status(lang()==='en'?'Permission was not granted.':lang()==='az'?'İcazə verilmədi.':'Разрешение не предоставлено.');
- });
+const RULES={
+ru:`<h3>Цель игры</h3><p>Четыре изображения связаны одним словом. Собери его из предложенных букв.</p><h3>Главы</h3><p>Глава 1 «Разминка» — уровни 1–10. Глава 2 «Ассоциации» — уровни 11–20 и более смысловые связи.</p><h3>Подсказки</h3><p>💡 правильная буква — 50 🪙.<br>🪄 убрать до трёх лишних — 100 🪙.<br>Текстовая подсказка — 150 🪙.<br>🔀 перемешивание — бесплатно.</p><h3>Награды</h3><p>Первое прохождение уровня: +20 🪙 и +15 XP. Ежедневная награда: +5 🪙. Повторное прохождение уровня награду не даёт.</p><h3>XP и ранги</h3><p>0–399 Новичок · 400–1499 Знаток · 1500–2499 Эксперт · 2500–3999 Мастер · 4000+ Легенда.</p><h3>Друзья</h3><p>Если приглашённый игрок пройдёт 10 уровней, вы оба получите +20 🪙.</p>`,
+en:`<h3>Goal</h3><p>Four images are connected by one word. Build it from the available letters.</p><h3>Chapters</h3><p>Chapter 1 “Warm-up” is levels 1–10. Chapter 2 “Associations” is levels 11–20 with more conceptual connections.</p><h3>Hints</h3><p>💡 correct letter — 50 🪙.<br>🪄 remove up to three extra letters — 100 🪙.<br>Text hint — 150 🪙.<br>🔀 shuffle — free.</p><h3>Rewards</h3><p>First completion: +20 🪙 and +15 XP. Daily reward: +5 🪙. Replaying a level gives no extra reward.</p><h3>XP and ranks</h3><p>0–399 Novice · 400–1499 Skilled · 1500–2499 Expert · 2500–3999 Master · 4000+ Legend.</p><h3>Friends</h3><p>If your invited friend completes 10 levels, both of you receive +20 🪙.</p>`,
+az:`<h3>Məqsəd</h3><p>Dörd şəkli bir söz birləşdirir. Həmin sözü verilən hərflərdən düzəlt.</p><h3>Fəsillər</h3><p>1-ci fəsil “İsinmə” — 1–10 səviyyələr. 2-ci fəsil “Assosiasiyalar” — 11–20 səviyyələr və daha mənalı əlaqələr.</p><h3>İpucları</h3><p>💡 düzgün hərf — 50 🪙.<br>🪄 üçədək artıq hərfi silmək — 100 🪙.<br>Mətn ipucu — 150 🪙.<br>🔀 qarışdırmaq — pulsuz.</p><h3>Mükafatlar</h3><p>Səviyyəni ilk dəfə keçdikdə +20 🪙 və +15 XP. Gündəlik mükafat +5 🪙. Təkrar keçid əlavə mükafat vermir.</p><h3>XP və rütbələr</h3><p>0–399 Yeni başlayan · 400–1499 Bilici · 1500–2499 Ekspert · 2500–3999 Usta · 4000+ Əfsanə.</p><h3>Dostlar</h3><p>Dəvət etdiyin oyunçu 10 səviyyə keçdikdə hər ikiniz +20 🪙 alırsınız.</p>`
+};
+const RESET={
+ru:'Будут удалены прохождение всех уровней, XP и позиция в рейтинге. Игра начнётся с уровня 1, язык нужно будет выбрать снова. Монеты, покупки Telegram Stars и история уже полученных наград сохраняются.',
+en:'All completed levels, XP and leaderboard position will be removed. The game restarts from level 1 and you will choose the language again. Coins, Telegram Stars purchases and previously claimed reward history are kept.',
+az:'Bütün keçilmiş səviyyələr, XP və reytinq mövqeyi silinəcək. Oyun 1-ci səviyyədən başlayacaq və dil yenidən seçiləcək. Sikkələr, Telegram Stars alışları və artıq alınmış mükafatların tarixçəsi saxlanılır.'
 };
 
-for(const [id,key] of [['soundToggle','sound'],['hapticToggle','haptic']]){
- $(id).checked=Boolean(pw.prefs[key]);$(id).onchange=()=>{pw.prefs[key]=$(id).checked;persistPrefs();if(key==='sound')pw.sfx('tap')};
-}
+const initial=getLang();applyTheme(getTheme());if(initial)applyLanguage(initial);else{applyLanguage('ru');setTimeout(showRequiredLanguagePicker,250)}
+
+$('settingsBtn').onclick=()=>open('settingsModal');
+$('languageBtn').onclick=()=>{close('settingsModal');const c=$('languageClose');if(c)c.hidden=false;setTimeout(()=>open('languageModal'),0)};
+$('themeBtn').onclick=()=>{close('settingsModal');setTimeout(()=>open('themeModal'),0)};
+document.querySelectorAll('[data-theme]').forEach(b=>b.onclick=()=>{applyTheme(b.dataset.theme);close('themeModal')});
+document.querySelectorAll('[data-language]').forEach(b=>b.onclick=()=>{applyLanguage(b.dataset.language);close('languageModal');pw.status(b.dataset.language==='ru'?'Язык игры: Русский':b.dataset.language==='en'?'Game language: English':'Oyun dili: Azərbaycan dili')});
+$('profileBtn').onclick=()=>open('profileModal');$('dailyRewardBtn').onclick=()=>open('dailyModal');$('tasksBtn').onclick=()=>open('tasksModal');$('shopOffer').onclick=()=>open('shopModal');$('shopNav').onclick=()=>open('shopModal');
+$('chaptersNav').onclick=()=>screen('chaptersScreen');$('chaptersBack').onclick=()=>screen('home');$('homeNav').onclick=()=>screen('home');
+$('rulesBtn').onclick=()=>{close('settingsModal');applyLanguage(lang());setTimeout(()=>open('rulesModal'),0)};
+$('supportBtn').onclick=()=>{close('settingsModal');setTimeout(()=>open('supportModal'),0)};
+$('resetProgressBtn').onclick=()=>{close('settingsModal');resetArmed=false;text('confirmReset',t().resetButton);setTimeout(()=>open('resetModal'),0)};
+
+$('nicknameBtn').onclick=()=>{if(pw.player?.nickname_changed)return;text('nicknameInput','');$('nicknameInput').value='';open('nicknameModal')};
+$('saveNickname').onclick=async()=>{const b=$('saveNickname'),value=$('nicknameInput').value.trim();b.disabled=true;try{const p=await pw.api('set_nickname',{nickname:value});update(p);close('nicknameModal');pw.sfx('success')}catch(e){pw.status(e.message)}finally{b.disabled=false}};
+$('shareGameBtn').onclick=async()=>{const x=t(),link='https://t.me/PhotoWordBot?startapp=share',url='https://t.me/share/url?url='+encodeURIComponent(link)+'&text='+encodeURIComponent(x.shareText);if(window.Telegram?.WebApp?.openTelegramLink)Telegram.WebApp.openTelegramLink(url);else location.href=url};
+
+$('notificationsBtn').onclick=()=>{const tg=window.Telegram?.WebApp,x=t();if(!tg?.requestWriteAccess){pw.status(x.notifyNeedTelegram);return}tg.requestWriteAccess(ok=>{if(ok){try{localStorage.setItem('pw.writeAccess','1')}catch{};text('notificationsState',x.notifyAllowed);pw.status(x.notifyGranted)}else pw.status(x.notifyDenied)})};
+for(const [id,key] of [['soundToggle','sound'],['hapticToggle','haptic']]){$(id).checked=Boolean(pw.prefs[key]);$(id).onchange=()=>{pw.prefs[key]=$(id).checked;persistPrefs();if(key==='sound')pw.sfx('tap')}};
 $('musicToggle').checked=Boolean(pw.prefs.music);$('musicToggle').onchange=()=>pw.setMusic($('musicToggle').checked);
 
 let resetArmed=false,resetTimer=null;
-$('confirmReset').onclick=async()=>{
- if(!resetArmed){resetArmed=true;clearTimeout(resetTimer);$('confirmReset').textContent=lang()==='en'?'TAP AGAIN TO CONFIRM':lang()==='az'?'TƏSDİQ ÜÇÜN YENƏ TOXUN':'НАЖМИ ЕЩЁ РАЗ ДЛЯ ПОДТВЕРЖДЕНИЯ';resetTimer=setTimeout(()=>{resetArmed=false},5000);return}
- $('confirmReset').disabled=true;
- try{
-   const p=await pw.api('reset_progress');
-   try{for(let i=sessionStorage.length-1;i>=0;i--){const k=sessionStorage.key(i);if(k&&k.startsWith('pw.hints.'))sessionStorage.removeItem(k)}}catch{}
-   try{localStorage.removeItem('pw.language')}catch{}
-   update(p);close('resetModal');pw.sfx('success');pw.status(lang()==='en'?'Progress reset. Choose your language.':lang()==='az'?'Tərəqqi sıfırlandı. Oyun dilini seçin.':'Прогресс сброшен. Выберите язык игры.');
-   setTimeout(showRequiredLanguagePicker,350);
- }catch(e){pw.status(e.message)}
- finally{$('confirmReset').disabled=false;resetArmed=false}
-};
+$('confirmReset').onclick=async()=>{const b=$('confirmReset'),x=t();if(!resetArmed){resetArmed=true;b.textContent=x.confirmReset;clearTimeout(resetTimer);resetTimer=setTimeout(()=>{resetArmed=false;b.textContent=x.resetButton},5000);return}b.disabled=true;try{const p=await pw.api('reset_progress');try{for(let i=sessionStorage.length-1;i>=0;i--){const k=sessionStorage.key(i);if(k?.startsWith('pw.hints.'))sessionStorage.removeItem(k)}localStorage.removeItem('pw.language')}catch{};update(p);close('resetModal');pw.sfx('success');pw.status(x.resetDone);setTimeout(showRequiredLanguagePicker,350)}catch(e){pw.status(e.message)}finally{b.disabled=false;resetArmed=false}};
 
-async function loadFriends(){
- open('friendsModal');const list=$('friendsList');list.textContent=lang()==='en'?'Loading…':lang()==='az'?'Yüklənir…':'Загрузка…';
- try{
-   const data=await pw.actionRequest('friends');text('friendsInvited',data.invited||0);text('friendsReward',(data.total_reward||0)+' 🪙');list.replaceChildren();
-   if(!data.friends?.length){list.textContent=lang()==='en'?'No invited friends yet.':lang()==='az'?'Hələ dəvət olunan yoxdur.':'Пока никого нет.';return}
-   data.friends.forEach(f=>{const row=document.createElement('div');row.className='friendrow'+(f.rewarded?' rewarded':'');const who=document.createElement('div'),n=document.createElement('b'),sub=document.createElement('small');n.textContent=[f.first_name,f.last_name].filter(Boolean).join(' ')||'Player';sub.textContent=f.username?'@'+f.username:f.photoword_id;who.append(n,sub);const prog=document.createElement('div'),label=document.createElement('span'),track=document.createElement('em'),bar=document.createElement('i');prog.className='friendprogress';label.textContent=f.rewarded?(lang()==='en'?'Reward received':lang()==='az'?'Mükafat alınıb':'Награда получена'):f.completed_levels+' / 10';bar.style.width=Math.min(100,(f.completed_levels||0)*10)+'%';track.append(bar);prog.append(label,track);row.append(who,prog);list.append(row)});
- }catch(e){list.textContent=e.message}
-}
+async function loadFriends(){const x=t();open('friendsModal');const list=$('friendsList');list.textContent=x.loading;try{const data=await pw.actionRequest('friends');text('friendsInvited',data.invited||0);text('friendsReward',(data.total_reward||0)+' 🪙');list.replaceChildren();if(!data.friends?.length){const p=document.createElement('p');p.className='muted';p.textContent=x.none;list.append(p);return}data.friends.forEach(f=>{const row=document.createElement('div');row.className='friendrow'+(f.rewarded?' rewarded':'');const who=document.createElement('div'),n=document.createElement('b'),sub=document.createElement('small');n.textContent=f.game_nickname||[f.first_name,f.last_name].filter(Boolean).join(' ')||f.photoword_id;sub.textContent=f.username?'@'+f.username:f.photoword_id;who.append(n,sub);const prog=document.createElement('div'),label=document.createElement('span'),track=document.createElement('em'),bar=document.createElement('i');prog.className='friendprogress';label.textContent=f.rewarded?x.rewardReceived:f.completed_levels+' / 10';bar.style.width=Math.min(100,(f.completed_levels||0)*10)+'%';track.append(bar);prog.append(label,track);row.append(who,prog);list.append(row)})}catch(e){list.textContent=e.message}}
 $('friendsNav').onclick=loadFriends;
-$('inviteFriend').onclick=async()=>{try{const p=await pw.login(),start='ref_'+p.photoword_id,link='https://t.me/PhotoWordBot?startapp='+encodeURIComponent(start),share='https://t.me/share/url?url='+encodeURIComponent(link);window.Telegram?.WebApp?.openTelegramLink?.(share)}catch(e){pw.status(e.message)}};
+$('inviteFriend').onclick=async()=>{try{const p=await pw.login(),link='https://t.me/PhotoWordBot?startapp='+encodeURIComponent('ref_'+p.photoword_id),share='https://t.me/share/url?url='+encodeURIComponent(link)+'&text='+encodeURIComponent(t().shareText);window.Telegram?.WebApp?.openTelegramLink?.(share)}catch(e){pw.status(e.message)}};
 
-function tForDaily(){return UI[lang()]||UI.ru}
+document.querySelectorAll('[data-pack]').forEach(b=>b.onclick=async()=>{if(b.disabled)return;b.disabled=true;try{const result=await pw.actionRequest('create_invoice',{pack:b.dataset.pack}),tg=window.Telegram?.WebApp;if(!tg?.openInvoice)throw new Error(t().notifyNeedTelegram);tg.openInvoice(result.invoice_url,status=>{b.disabled=false;if(status==='paid'){pw.status(t().profileSynced);setTimeout(()=>pw.login(true).catch(()=>{}),1200)}})}catch(e){pw.status(e.message);b.disabled=false}});
 
-document.querySelectorAll('[data-pack]').forEach(b=>b.onclick=async()=>{if(b.disabled)return;b.disabled=true;try{const result=await pw.actionRequest('create_invoice',{pack:b.dataset.pack}),tg=window.Telegram?.WebApp;if(!tg?.openInvoice)throw new Error('Telegram required');tg.openInvoice(result.invoice_url,status=>{b.disabled=false;if(status==='paid'){pw.status('Payment confirmed');setTimeout(()=>pw.login(true).catch(()=>{}),1200)}})}catch(e){pw.status(e.message);b.disabled=false}});
-$('claimDaily').onclick=async()=>{try{const p=await pw.api('claim_daily');update(p);text('dailyStreak',(lang()==='en'?'Streak: ':lang()==='az'?'Seriya: ':'Серия: ')+(p.daily_streak||1));pw.sfx('coin');pw.status('+5 🪙');text('claimDaily',tForDaily().claimed);$('claimDaily').disabled=true;setTimeout(()=>close('dailyModal'),900)}catch(e){if(String(e.message).includes('уже')||String(e.message).includes('already')){text('claimDaily',tForDaily().claimed);$('claimDaily').disabled=true;pw.status(tForDaily().alreadyDaily)}else pw.status(e.message)}};
-document.querySelectorAll('[data-task]').forEach(b=>b.onclick=async()=>{b.disabled=true;try{const p=await pw.api('claim_task',{taskKey:b.dataset.task});update(p);b.textContent='✓';pw.sfx('coin')}catch(e){pw.status(e.message);b.disabled=false}});
+$('claimDaily').onclick=async()=>{const x=t();try{const p=await pw.api('claim_daily');update(p);pw.sfx('coin');text('claimDaily',x.claimed);$('claimDaily').disabled=true;pw.status('+5 🪙');setTimeout(()=>close('dailyModal'),900)}catch(e){if(String(e.message)===x.alreadyDaily||String(e.message).toLowerCase().includes('already')||String(e.message).includes('уже')||String(e.message).includes('artıq')){text('claimDaily',x.claimed);$('claimDaily').disabled=true;pw.status(x.alreadyDaily)}else pw.status(e.message)}};
+document.querySelectorAll('[data-task]').forEach(b=>b.onclick=async()=>{b.disabled=true;try{const p=await pw.api('claim_task',{taskKey:b.dataset.task});update(p);b.textContent=t().taskClaimed;pw.sfx('coin')}catch(e){pw.status(e.message);b.disabled=false}});
 
 document.querySelectorAll('[data-close]').forEach(b=>b.onclick=()=>close(b.dataset.close));
 document.querySelectorAll('.modal').forEach(m=>m.onclick=e=>{if(e.target===m)close(m.id)});
 document.addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelectorAll('.modal').forEach(m=>m.hidden=true)});
-$('homeNav').onclick=()=>screen('home');$('ratingBack').onclick=()=>screen('home');
 
-let requestId=0;
-async function rating(){
- screen('ratingScreen');const id=++requestId,board=$('leaderboard');board.textContent='…';
- try{if(pw.hasAuth)await pw.login().catch(e=>pw.status(e.message));const rows=await pw.leaderboard();if(id!==requestId)return;board.replaceChildren();if(!rows.length)board.textContent='—';rows.forEach(p=>{const row=document.createElement('div');row.className='rankrow'+(p.photoword_id===pw.player?.photoword_id?' me':'');const rank=document.createElement('b');rank.textContent='#'+p.rank;const person=document.createElement('div'),title=document.createElement('strong'),sub=document.createElement('small');title.textContent=pw.name(p);sub.textContent=p.photoword_id;person.append(title,sub);const xp=document.createElement('b');xp.textContent=p.xp+' XP';row.append(rank,person,xp);board.append(row)})}catch(e){board.textContent=e.message}
-}
+$('ratingBack').onclick=()=>screen('home');let ratingReq=0;
+async function rating(){const x=t();screen('ratingScreen');const id=++ratingReq,board=$('leaderboard');board.textContent=x.loading;try{if(pw.hasAuth)await pw.login().catch(e=>pw.status(e.message));const rows=await pw.leaderboard();if(id!==ratingReq)return;board.replaceChildren();if(!rows.length){board.textContent=x.noPlayers;return}rows.forEach(p=>{const row=document.createElement('div');row.className='rankrow'+(p.photoword_id===pw.player?.photoword_id?' me':'');const rank=document.createElement('b');rank.textContent='#'+p.rank;const person=document.createElement('div'),title=document.createElement('strong'),sub=document.createElement('small');title.textContent=pw.name(p);sub.textContent=p.photoword_id;person.append(title,sub);const xp=document.createElement('b');xp.textContent=p.xp+' XP';row.append(rank,person,xp);board.append(row)})}catch(e){board.textContent=e.message}}
 ['ratingNav','ratingShortcut','refreshRating'].forEach(id=>$(id).onclick=rating);
-const info={ru:{'Главы':'Уровни 1–10'},en:{'Главы':'Levels 1–10'},az:{'Главы':'1–10 səviyyələr'}};
-document.querySelectorAll('[data-info]').forEach(b=>b.onclick=()=>{text('infoTitle',b.dataset.info);text('infoText',(info[lang()]||info.ru)[b.dataset.info]||b.dataset.info);open('infoModal')});
 
 window.addEventListener('pw:player',e=>update(e.detail));
-pw.login().then(async()=>{pw.status(lang()==='en'?'Profile synced':lang()==='az'?'Profil sinxronlaşdırıldı':'Профиль синхронизирован');try{const start=window.Telegram?.WebApp?.initDataUnsafe?.start_param||'';if(start.indexOf('ref_PW-')===0)await pw.api('register_referral',{referrer:start.slice(4)})}catch{}}).catch(e=>pw.status(e.message));
+pw.login().then(async()=>{pw.status(t().profileSynced);try{const start=window.Telegram?.WebApp?.initDataUnsafe?.start_param||'';if(start.startsWith('ref_PW-'))await pw.api('register_referral',{referrer:start.slice(4)})}catch{}}).catch(e=>pw.status(e.message));
 })();
