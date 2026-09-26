@@ -40,7 +40,7 @@ def install_mock(ctx,account,completed,lang):
     def mock(route):
         req=route.request
         if req.method=='OPTIONS':
-            route.fulfill(status=204,headers={'Access-Control-Allow-Origin':'*','Access-Control-Allow-Headers':'*'});return
+            route.fulfill(status=204,headers={'Access-Control-Allow-Origin':'*','Access-Control-Allow-Headers':'content-type,apikey','Access-Control-Allow-Methods':'POST,OPTIONS'});return
         body=json.loads(req.post_data or '{}')
         if '/rest/v1/rpc/get_leaderboard' in req.url:
             row=account.copy()
