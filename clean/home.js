@@ -64,9 +64,11 @@ function applyHomeLanguage(l){
 function setLang(l){if(!LANGS[l])l='ru';try{localStorage.setItem('pw.language',l)}catch{};document.querySelectorAll('[data-language]').forEach(b=>b.classList.toggle('selected',b.dataset.language===l));applyHomeLanguage(l)}
 function persistPrefs(){try{localStorage.setItem('photoword-prefs',JSON.stringify(pw.prefs))}catch{}}
 
-const initial=getLang();applyTheme(getTheme());if(initial)setLang(initial);else{setTimeout(()=>open('languageModal'),250);applyHomeLanguage('ru')}
+const initial=getLang();applyTheme(getTheme());
+function showRequiredLanguagePicker(){const c=$('languageClose');if(c)c.hidden=true;open('languageModal')}
+if(initial)setLang(initial);else{setTimeout(showRequiredLanguagePicker,250);applyHomeLanguage('ru')}
 
-$('settingsBtn').onclick=()=>open('settingsModal');$('languageBtn').onclick=()=>{close('settingsModal');setTimeout(()=>open('languageModal'),0)};$('themeBtn').onclick=()=>{close('settingsModal');setTimeout(()=>open('themeModal'),0)};
+$('settingsBtn').onclick=()=>open('settingsModal');$('languageBtn').onclick=()=>{close('settingsModal');const c=$('languageClose');if(c)c.hidden=false;setTimeout(()=>open('languageModal'),0)};$('themeBtn').onclick=()=>{close('settingsModal');setTimeout(()=>open('themeModal'),0)};
 document.querySelectorAll('[data-theme]').forEach(b=>b.onclick=()=>{applyTheme(b.dataset.theme);close('themeModal')});
 document.querySelectorAll('[data-language]').forEach(b=>b.onclick=()=>{setLang(b.dataset.language);close('languageModal');pw.status(b.dataset.language==='ru'?'Язык игры: Русский':b.dataset.language==='en'?'Game language: English':'Oyun dili: Azərbaycan dili')});
 $('profileBtn').onclick=()=>open('profileModal');$('supportBtn').onclick=()=>{close('settingsModal');setTimeout(()=>open('supportModal'),0)};$('dailyRewardBtn').onclick=()=>open('dailyModal');$('tasksBtn').onclick=()=>open('tasksModal');$('shopOffer').onclick=()=>open('shopModal');$('shopNav').onclick=()=>open('shopModal');
@@ -95,7 +97,7 @@ $('confirmReset').onclick=async()=>{
    try{for(let i=sessionStorage.length-1;i>=0;i--){const k=sessionStorage.key(i);if(k&&k.startsWith('pw.hints.'))sessionStorage.removeItem(k)}}catch{}
    try{localStorage.removeItem('pw.language')}catch{}
    update(p);close('resetModal');pw.sfx('success');pw.status(lang()==='en'?'Progress reset. Choose your language.':lang()==='az'?'Tərəqqi sıfırlandı. Oyun dilini seçin.':'Прогресс сброшен. Выберите язык игры.');
-   setTimeout(()=>open('languageModal'),350);
+   setTimeout(showRequiredLanguagePicker,350);
  }catch(e){pw.status(e.message)}
  finally{$('confirmReset').disabled=false;resetArmed=false}
 };
