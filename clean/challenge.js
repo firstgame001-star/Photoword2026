@@ -27,7 +27,9 @@ const I={
 const tr=()=>I[lang()]||I.ru;
 const alphabet=()=>lang()==='az'?'ABCÇDEƏFGĞHXIİJKLMNOÖPQRSŞTUÜVYZ':lang()==='en'?'ABCDEFGHJKLMNPQRSTUVWXYZ':'АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЫЭЮЯ';
 const rawInit=()=>window.Telegram?.WebApp?.initData||'';
-let mode='blitz',state=null,running=false,question=null,answer='',tiles=[],selected=[],used=new Set(),hearts=3,correct=0,streak=0,bestRunStreak=0,score=0,deadline=0,timer=null,order=[],pos=0,energyTimer=null,serverMode=true;
+let mode='blitz',state=null,running=false,question=null,answer='',tiles=[],selected=[],used=new Set(),hearts=3,correct=0,streak=0,bestRunStreak=0,score=0,deadline=0,timer=null,order=[],pos=0,energyTimer=null,serverMode=true,serverNowMs=0,serverPerfMs=0;
+function syncTrustedClock(s){const n=Date.parse(s?.server_now||'');if(Number.isFinite(n)){serverNowMs=n;serverPerfMs=performance.now()}}
+function trustedNow(){return serverNowMs?serverNowMs+(performance.now()-serverPerfMs):Date.now()}
 const localKey='pw.challenge.local.v1';
 function localRead(){
  let d={energy:5,ref:Date.now(),limited_best_score:0,nohint_best_streak:0,blitz_best_score:0,blitz_best_streak:0};try{d={...d,...JSON.parse(localStorage.getItem(localKey)||'{}')}}catch{}
@@ -42,7 +44,7 @@ async function api(action,extra={}){
   const j=await r.json();
   if(!r.ok)throw Object.assign(new Error(j.error||'challenge_error'),{data:j});
   if(!j.challenge)throw new Error('challenge_state_missing');
-  serverMode=true;return j.challenge;
+  syncTrustedClock(j.challenge);serverMode=true;return j.challenge;
  }
  serverMode=false;let d=localRead();
  if(action==='start'&&extra.mode==='limited'){if(d.energy<=0)throw Object.assign(new Error('challenge_no_energy'),{data:{challenge:d}});if(d.energy===5)d.ref=Date.now();d.energy--;localWrite(d);}
@@ -76,7 +78,7 @@ function updateHud(){
  const x=tr();
  if(mode==='limited')setHud([x.words,x.errors,x.energy,x.record],[correct+'/10',heartsText(),(state?.energy??0)+'/5',(state?.limited_best_score||0)+'/10']);
  else if(mode==='nohint')setHud([x.series,x.errors,x.record,x.passed],[streak,heartsText(),Math.max(state?.nohint_best_streak||0,bestRunStreak),correct]);
- else setHud([x.time,x.points,x.series,x.record],[Math.max(0,Math.ceil((deadline-Date.now())/1000)),score,streak,Math.max(state?.blitz_best_score||0,score)]);
+ else setHud([x.time,x.points,x.series,x.record],[Math.max(0,Math.ceil((deadline-performance.now())/1000)),score,streak,Math.max(state?.blitz_best_score||0,score)]);
 }
 function flash(msg,good=false){const e=$('challengeStatus');e.textContent=msg;e.classList.toggle('challenge-good',good)}
 function checkWord(){
@@ -89,7 +91,7 @@ function checkWord(){
  }else{
   pw?.sfx?.('error');pw?.haptic?.('error');streak=0;flash(tr().wrong,false);
   $('challengeSlots').classList.add('wrong');
-  if(mode==='blitz'){deadline-=3000;updateHud();setTimeout(()=>{if(running){$('challengeSlots').classList.remove('wrong');clearWord()}},330);if(deadline<=Date.now())setTimeout(()=>finish('time'),340);return}
+  if(mode==='blitz'){deadline-=3000;updateHud();setTimeout(()=>{if(running){$('challengeSlots').classList.remove('wrong');clearWord()}},330);if(deadline<=performance.now())setTimeout(()=>finish('time'),340);return}
   hearts--;updateHud();setTimeout(()=>{$('challengeSlots').classList.remove('wrong');if(hearts<=0)finish('lives');else clearWord()},380);
  }
 }
@@ -98,7 +100,7 @@ function renderIntro(){
  clearInterval(energyTimer);document.querySelectorAll('.challenge-energy-countdown').forEach(e=>e.remove());const x=tr(),d=x[mode];$('challengeGameTitle').textContent=d[1];$('challengeGameSubtitle').textContent=mode==='limited'?x.energy:mode==='nohint'?x.series:x.time;$('challengeIntroIcon').textContent=d[0];$('challengeIntroTitle').textContent=d[1];$('challengeIntroText').textContent=d[2];$('challengeStart').textContent=x.start+' ▶';
  const stats=$('challengeIntroStats');stats.replaceChildren();
  const add=(label,value)=>{const e=document.createElement('div');e.innerHTML='<small></small><b></b>';e.querySelector('small').textContent=label;e.querySelector('b').textContent=value;stats.append(e)};
- if(mode==='limited'){add(x.energy,(state?.energy??0)+'/5');add(x.record,(state?.limited_best_score||0)+'/10');const b=$('challengeStart');b.disabled=(state?.energy??0)<=0;$('energyRefill').hidden=(state?.energy??0)>0;$('energyRefill').textContent=x.refill;$('energyRefillNote').hidden=true;const countdown=document.createElement('p');countdown.className='challenge-energy-countdown';stats.after(countdown);const tick=()=>{const e=state?.energy??0;if(e>=5){countdown.textContent=x.full;return}const left=Date.parse(state?.next_energy_at||'')-Date.now(),fullLeft=Math.max(0,left)+Math.max(0,ENERGY_MAX-e-1)*ENERGY_MS;countdown.textContent=(left>0?x.wait+': '+formatLeft(left):x.wait+': 0:00')+' · '+x.fullIn+': '+formatLeft(fullLeft);if(left<=0)loadState()};tick();energyTimer=setInterval(tick,1000)}
+ if(mode==='limited'){add(x.energy,(state?.energy??0)+'/5');add(x.record,(state?.limited_best_score||0)+'/10');const b=$('challengeStart');b.disabled=(state?.energy??0)<=0;$('energyRefill').hidden=(state?.energy??0)>0;$('energyRefill').textContent=x.refill;$('energyRefillNote').hidden=true;const countdown=document.createElement('p');countdown.className='challenge-energy-countdown';stats.after(countdown);const tick=()=>{const e=state?.energy??0;if(e>=5){countdown.textContent=x.full;return}const left=Date.parse(state?.next_energy_at||'')-trustedNow(),fullLeft=Math.max(0,left)+Math.max(0,ENERGY_MAX-e-1)*ENERGY_MS;countdown.textContent=(left>0?x.wait+': '+formatLeft(left):x.wait+': 0:00')+' · '+x.fullIn+': '+formatLeft(fullLeft);if(left<=0)loadState()};tick();energyTimer=setInterval(tick,1000)}
  else{$('challengeStart').disabled=false;$('energyRefill').hidden=true;$('energyRefillNote').hidden=true;if(mode==='nohint'){add(x.record,state?.nohint_best_streak||0);add(x.errors,'❤️❤️❤️')}else{add(x.record,state?.blitz_best_score||0);add(x.series,state?.blitz_best_streak||0)}}
  if(!serverMode){const note=document.createElement('small');note.className='challenge-local-note';note.textContent=x.serverFallback;stats.append(note)}
 }
@@ -107,7 +109,7 @@ async function startRun(){
  try{state=await api('start',{mode,language:lang()})}catch(e){if(e?.data?.challenge)state=e.data.challenge;if(String(e?.message)==='challenge_no_energy'){renderIntro();pw?.status?.(tr().energyEmpty);return}if(rawInit()){pw?.status?.(lang()==='en'?'Could not start the mode. Try again.':lang()==='az'?'Rejimi başlatmaq olmadı. Yenidən cəhd et.':'Не удалось запустить режим. Попробуй ещё раз.');return}state=localRead()}
  running=true;hearts=3;correct=0;streak=0;bestRunStreak=0;score=0;resetOrder();clearInterval(timer);clearInterval(energyTimer);
  $('challengeIntro').hidden=true;$('challengeResult').hidden=true;$('challengeHud').hidden=false;$('challengePuzzle').hidden=false;
- if(mode==='blitz'){deadline=Date.now()+60000;timer=setInterval(()=>{updateHud();if(running&&Date.now()>=deadline)finish('time')},150)}
+ if(mode==='blitz'){deadline=performance.now()+60000;timer=setInterval(()=>{updateHud();if(running&&performance.now()>=deadline)finish('time')},150)}
  updateHud();nextQ();
 }
 async function finish(reason){
