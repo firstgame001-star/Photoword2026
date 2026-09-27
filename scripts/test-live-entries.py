@@ -967,6 +967,23 @@ def tap_challenge_word(page,word):
         assert clicked,(word,pos,ch)
 
 
+def parse_json_array_after(text,token):
+    start=text.index('[',text.index(token))
+    return json.JSONDecoder().raw_decode(text[start:])[0]
+
+challenge_source=Path('clean/challenge.js').read_text(encoding='utf-8')
+challenge_extra_source=Path('clean/challenge-bank-extra.js').read_text(encoding='utf-8')
+CHALLENGE_BANK=parse_json_array_after(challenge_source,'const Q=')+parse_json_array_after(challenge_extra_source,'window.PW_CHALLENGE_EXTRA=')
+assert len(CHALLENGE_BANK)==400
+CHALLENGE_BY_PHOTOS={tuple(item['p']):item for item in CHALLENGE_BANK}
+assert len(CHALLENGE_BY_PHOTOS)==400
+
+def current_challenge_answer(page,language):
+    clues=tuple(page.locator('#challengePhotos .photo').all_inner_texts())
+    assert clues in CHALLENGE_BY_PHOTOS,clues
+    return CHALLENGE_BY_PHOTOS[clues][language]
+
+
 fragment=auth_fragment()
 with sync_playwright() as pw:
   for engine in ['chromium','webkit']:
@@ -1038,13 +1055,9 @@ with sync_playwright() as pw:
       expect(page.locator('#tasksBtn')).to_have_count(0);expect(page.locator('#tasksModal')).to_have_count(0)
       # Thematic mode is a prominent separate surface and unlocks after 10 main levels.
       expect(page.locator('#challengeModes')).to_be_visible();expect(page.locator('[data-challenge]')).to_have_count(3)
-      challenge_first={'ru':'СОБАКА','en':'DOG','az':'İT'}[language]
-      page.evaluate("localStorage.setItem('pw.challenge.deck.r54-400.blitz','[0,1,2,3]')")
-      page.locator('[data-challenge="blitz"]').tap();expect(page.locator('#challengeScreen')).to_be_visible();expect(page.locator('#challengeIntroTitle')).to_have_text({'ru':'Блиц','en':'Blitz','az':'Blits'}[language]);page.locator('#challengeStart').tap();expect(page.locator('#challengeHud')).to_be_visible();expect(page.locator('#challengePhotos .photo')).to_have_count(4);expect(page.locator('#blitzHints')).to_be_visible();expect(page.locator('#challengeCorrectPanel')).to_be_hidden();assert page.evaluate("window.PW_CHALLENGE_EXTRA.length")==200;coins_before=int(page.locator('[data-coins]').first.inner_text());page.locator('#blitzLetterHint').tap();expect(page.locator('#challengeSlots .slot.fixed')).to_have_count(1);expect(page.locator('[data-coins]').first).to_have_text(str(coins_before-75));tap_challenge_word(page,challenge_first);expect(page.locator('#hudValue2')).to_have_text('1',timeout=3000);page.locator('#challengeBack').tap();expect(page.locator('#home')).to_be_visible()
-      page.evaluate("localStorage.setItem('pw.challenge.deck.r54-400.nohint','[0,1,2,3]')")
-      page.locator('[data-challenge="nohint"]').tap();expect(page.locator('#challengeScreen')).to_be_visible();page.locator('#challengeStart').tap();expect(page.locator('#challengeHud')).to_be_visible();expect(page.locator('#hudValue2')).to_contain_text('🛡');tap_challenge_word(page,challenge_first);expect(page.locator('#challengeCorrectPanel')).to_be_visible(timeout=3000);expect(page.locator('#challengeCorrectWord')).to_have_text(challenge_first);page.locator('#challengeCorrectNext').tap();expect(page.locator('#challengeCorrectPanel')).to_be_hidden();page.locator('#challengeBack').tap()
-      page.evaluate("localStorage.setItem('pw.challenge.deck.r54-400.limited','[0,1,2,3]')")
-      page.locator('[data-challenge="limited"]').tap();expect(page.locator('#challengeScreen')).to_be_visible();expect(page.locator('#challengeIntroStats')).to_contain_text('5');expect(page.locator('#energyRefill')).to_be_visible();expect(page.locator('[data-energy-pack]')).to_have_count(2);page.locator('#challengeStart').tap();expect(page.locator('#challengeHud')).to_be_visible();expect(page.locator('#hudValue3')).to_have_text('4/5');tap_challenge_word(page,challenge_first);expect(page.locator('#challengeCorrectPanel')).to_be_visible(timeout=3000);expect(page.locator('#challengeCorrectWord')).to_have_text(challenge_first);page.locator('#challengeCorrectNext').tap();expect(page.locator('#challengeCorrectPanel')).to_be_hidden();page.locator('#challengeBack').tap()
+      page.locator('[data-challenge="blitz"]').tap();expect(page.locator('#challengeScreen')).to_be_visible();expect(page.locator('#challengeIntroTitle')).to_have_text({'ru':'Блиц','en':'Blitz','az':'Blits'}[language]);page.locator('#challengeStart').tap();expect(page.locator('#challengeHud')).to_be_visible();expect(page.locator('#challengePhotos .photo')).to_have_count(4);expect(page.locator('#blitzHints')).to_be_visible();expect(page.locator('#challengeCorrectPanel')).to_be_hidden();assert page.evaluate("window.PW_CHALLENGE_EXTRA.length")==200;coins_before=int(page.locator('[data-coins]').first.inner_text());page.locator('#blitzLetterHint').tap();expect(page.locator('#challengeSlots .slot.fixed')).to_have_count(1);expect(page.locator('[data-coins]').first).to_have_text(str(coins_before-75));challenge_answer=current_challenge_answer(page,language);tap_challenge_word(page,challenge_answer);expect(page.locator('#hudValue2')).to_have_text('1',timeout=3000);page.locator('#challengeBack').tap();expect(page.locator('#home')).to_be_visible()
+      page.locator('[data-challenge="nohint"]').tap();expect(page.locator('#challengeScreen')).to_be_visible();page.locator('#challengeStart').tap();expect(page.locator('#challengeHud')).to_be_visible();expect(page.locator('#hudValue2')).to_contain_text('🛡');challenge_answer=current_challenge_answer(page,language);tap_challenge_word(page,challenge_answer);expect(page.locator('#challengeCorrectPanel')).to_be_visible(timeout=3000);expect(page.locator('#challengeCorrectWord')).to_have_text(challenge_answer);page.locator('#challengeCorrectNext').tap();expect(page.locator('#challengeCorrectPanel')).to_be_hidden();page.locator('#challengeBack').tap()
+      page.locator('[data-challenge="limited"]').tap();expect(page.locator('#challengeScreen')).to_be_visible();expect(page.locator('#challengeIntroStats')).to_contain_text('5');expect(page.locator('#energyRefill')).to_be_visible();expect(page.locator('[data-energy-pack]')).to_have_count(2);page.locator('#challengeStart').tap();expect(page.locator('#challengeHud')).to_be_visible();expect(page.locator('#hudValue3')).to_have_text('4/5');challenge_answer=current_challenge_answer(page,language);tap_challenge_word(page,challenge_answer);expect(page.locator('#challengeCorrectPanel')).to_be_visible(timeout=3000);expect(page.locator('#challengeCorrectWord')).to_have_text(challenge_answer);page.locator('#challengeCorrectNext').tap();expect(page.locator('#challengeCorrectPanel')).to_be_hidden();page.locator('#challengeBack').tap()
       expect(page.locator('#themesEntry')).to_be_visible();expect(page.locator('#themesEntryBadge')).to_be_visible();page.locator('#themesEntry').tap();expect(page.locator('#themesScreen')).to_be_visible();expect(page.locator('#themeCards .theme-card')).to_have_count(12);expect(page.locator('#themeCards .theme-card').first).to_be_enabled();expect(page.locator('#themeCards .theme-card').nth(2)).to_be_enabled();expect(page.locator('#themeCards .theme-card').nth(3)).to_be_enabled();expect(page.locator('#themeCards .theme-card').nth(4)).to_be_enabled();expect(page.locator('#themeCards .theme-card').nth(5)).to_be_enabled();page.locator('#themeCards .theme-card').first.tap();expect(page.locator('#themeDetailScreen')).to_be_visible();expect(page.locator('#themeLevelGrid button')).to_have_count(100);expect(page.locator('#themeLevelGrid button').nth(0)).to_be_enabled();expect(page.locator('#themeLevelGrid button').nth(20)).to_be_disabled();page.locator('#themeDetailBack').tap();page.locator('#themesBack').tap()
       # Friends use nickname and progress.
       page.locator('#friendsNav').tap();expect(page.locator('#friendsList')).to_contain_text('FriendOne');expect(page.locator('#friendsList')).to_contain_text('7 / 10');page.locator('[data-close="friendsModal"]').tap()
