@@ -27,14 +27,14 @@ for(const file of ['core.js','home.js','game.js','theme-game.js']){
 }
 
 const release=JSON.parse(readFileSync(resolve(base,'release.json'),'utf8'));
-if(release.release!=='20260927-r42')throw Error('Unexpected release: '+release.release);
+if(release.release!=='20260927-r43')throw Error('Unexpected release: '+release.release);
 if(!Array.isArray(release.levels)||!release.levels.includes(100))throw Error('Main levels are not published through 100');
 if(release.chapters?.length!==10)throw Error('Main chapter navigation must contain 10 chapters');
 if(release.chapters.find(x=>x.id===3)?.status!=='live')throw Error('Chapter 3 must be complete');
 if(release.chapters.find(x=>x.id===4)?.available_through!==100)throw Error('Chapter 4 preview must be available through 100');
 if(release.thematic_mode?.categories?.length!==12)throw Error('Thematic catalog must contain 12 categories');
 const sport=release.thematic_mode.categories.find(x=>x.id==='sport');
-if(!sport||sport.available_through!==50)throw Error('Sport theme must be playable through level 50');
+if(!sport||sport.available_through!==100)throw Error('Sport theme must be playable through level 100');
 
 const index=readFileSync(resolve(base,'index.html'),'utf8');
 const themeGame=readFileSync(resolve(base,'theme-game.html'),'utf8');
@@ -55,4 +55,4 @@ for(let n=1;n<=10;n++){
 }
 if(release.ui?.chapter_progress_mode!=='absolute_level')throw Error('Release must declare absolute chapter progress');
 if(release.ui?.chapter_titles!==true)throw Error('Release must declare chapter title system');
-console.log('PASS: r42 entrypoints, Chapters 1-10, backgrounds, absolute progress, chapter titles and JavaScript syntax.');
+console.log('PASS: r43 entrypoints, Chapters 1-10, backgrounds, absolute progress, chapter titles and JavaScript syntax.');
