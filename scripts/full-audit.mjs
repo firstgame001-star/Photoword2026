@@ -6,6 +6,9 @@ const read=name=>readFileSync(resolve(base,name),'utf8');
 const index=read('index.html'),gameHtml=read('game.html'),themeHtml=read('theme-game.html');
 const home=read('home.js'),game=read('game.js'),theme=read('theme-game.js'),challenge=read('challenge.js'),challengeExtra=read('challenge-bank-extra.js'),core=read('core.js');
 const release=JSON.parse(read('release.json'));
+if(release.thematic_mode?.economy?.first_completion?.coins!==15||release.thematic_mode?.economy?.first_completion?.xp!==10)throw Error('Thematic completion reward must be 15 coins and 10 XP');
+if(release.thematic_mode?.economy?.hints?.letter!==50||release.thematic_mode?.economy?.hints?.remove!==100||release.thematic_mode?.economy?.hints?.text!==150)throw Error('Thematic hint costs changed unexpectedly');
+if(!theme.includes('THEME_REWARD_COINS=15,THEME_REWARD_XP=10'))throw Error('Thematic client reward constants are incorrect');
 
 function ids(html){return [...html.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1])}
 function duplicates(list){const seen=new Set(),dup=[];for(const x of list){if(seen.has(x)&&!dup.includes(x))dup.push(x);seen.add(x)}return dup}
