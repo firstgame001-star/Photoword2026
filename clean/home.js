@@ -298,7 +298,11 @@ $('themeBtn').onclick=()=>{close('settingsModal');setTimeout(()=>open('themeModa
 document.querySelectorAll('[data-theme]').forEach(b=>b.onclick=()=>{applyTheme(b.dataset.theme);track('theme_change',{metadata:{theme:b.dataset.theme}});close('themeModal')});
 document.querySelectorAll('[data-language]').forEach(b=>b.onclick=()=>{applyLanguage(b.dataset.language);track('language_change',{metadata:{language:b.dataset.language}});close('languageModal');pw.status(b.dataset.language==='ru'?'Язык игры: Русский':b.dataset.language==='en'?'Game language: English':'Oyun dili: Azərbaycan dili')});
 $('profileBtn').onclick=()=>open('profileModal');$('dailyRewardBtn').onclick=()=>open('dailyModal');$('shopOffer').onclick=()=>{track('shop_open');open('shopModal')};$('shopNav').onclick=()=>{track('shop_open');open('shopModal')};$('themesEntry').onclick=()=>{renderThemeHub(pw.player);screen('themesScreen');track('themes_open')};$('themesBack').onclick=()=>screen('home');$('themeDetailBack').onclick=()=>screen('themesScreen');document.querySelectorAll('[data-challenge]').forEach(b=>b.onclick=()=>openChallengeMode(b.dataset.challenge));
-$('chaptersNav').onclick=()=>{track('chapter_open',{chapterId:(pw.player?.current_level||1)<=20?1:2});screen('chaptersScreen')};$('chaptersBack').onclick=()=>screen('home');$('homeNav').onclick=()=>screen('home');
+function chapterIdForLevel(level){
+ const n=Number(level||1);
+ return n<=20?1:n<=50?2:n<=90?3:n<=131?4:n<=180?5:n<=230?6:n<=280?7:8;
+}
+$('chaptersNav').onclick=()=>{track('chapter_open',{chapterId:chapterIdForLevel(pw.player?.current_level)});screen('chaptersScreen')};$('chaptersBack').onclick=()=>screen('home');$('homeNav').onclick=()=>screen('home');
 $('rulesBtn').onclick=()=>{close('settingsModal');applyLanguage(lang());setTimeout(()=>open('rulesModal'),0)};
 $('supportBtn').onclick=()=>{track('support_open');close('settingsModal');setTimeout(()=>open('supportModal'),0)};
 $('openSupportChat').onclick=()=>{const url='https://t.me/PhotoWordBot?start=support';if(window.Telegram?.WebApp?.openTelegramLink)Telegram.WebApp.openTelegramLink(url);else location.href=url};
@@ -364,5 +368,5 @@ function showProfileSyncedOnce(){
  const msg=t().profileSynced;pw.status(msg);
  setTimeout(()=>{const e=$('status');if(e&&!e.hidden&&e.textContent===msg){e.hidden=true;e.textContent=''}},1800);
 }
-pw.login().then(async()=>{showProfileSyncedOnce();track('app_open',{metadata:{version:'r56'}});configureAds();try{const start=window.Telegram?.WebApp?.initDataUnsafe?.start_param||'';if(start.startsWith('ref_PW-'))await pw.api('register_referral',{referrer:start.slice(4)})}catch{}}).catch(e=>pw.status(e.message));
+pw.login().then(async()=>{showProfileSyncedOnce();track('app_open',{metadata:{version:'r71'}});configureAds();try{const start=window.Telegram?.WebApp?.initDataUnsafe?.start_param||'';if(start.startsWith('ref_PW-'))await pw.api('register_referral',{referrer:start.slice(4)})}catch{}}).catch(e=>pw.status(e.message));
 })();
