@@ -4,11 +4,11 @@ const $=id=>document.getElementById(id),pw=window.PW;
 const getLang=()=>{try{return localStorage.getItem('pw.language')||'ru'}catch{return'ru'}};
 const lang=getLang();
 const themeParam=new URLSearchParams(location.search).get('theme');
-const themeId=['sport','art','professions','travel','science'].includes(themeParam)?themeParam:'sport';
+const themeId=['sport','art','professions','travel','science','technology'].includes(themeParam)?themeParam:'sport';
 const UI={
- ru:{sport:'⚽ Спорт',art:'🎨 Искусство',professions:'🧑‍💼 Профессии',travel:'🌍 Путешествия',science:'🔬 Наука',level:n=>'Тематический уровень '+n,textHint:'Текстовая подсказка',tap:'Нажми, чтобы открыть',wrong:'Неверное слово. Попробуй ещё раз.',passed:n=>'Уровень '+n+' пройден!',saved:'Прогресс сохранён отдельно от основной игры.',next:'СЛЕДУЮЩИЙ УРОВЕНЬ',back:'К ТЕМАМ',locked:n=>'Сначала пройди уровень '+n+'.',letter:'Буква открыта.',remove:'Лишние буквы убраны.',shuffle:'Буквы перемешаны.',text:'Подсказка открыта.',allLetters:'Все буквы уже открыты.',noExtra:'Лишних букв не осталось.',placeFail:'Не удалось разместить букву.',image:n=>'Изображение '+n},
- en:{sport:'⚽ Sport',art:'🎨 Art',professions:'🧑‍💼 Professions',travel:'🌍 Travel',science:'🔬 Science',level:n=>'Themed level '+n,textHint:'Text hint',tap:'Tap to reveal',wrong:'Wrong word. Try again.',passed:n=>'Level '+n+' completed!',saved:'Progress saved separately from the main game.',next:'NEXT LEVEL',back:'BACK TO THEMES',locked:n=>'Complete level '+n+' first.',letter:'Letter revealed.',remove:'Extra letters removed.',shuffle:'Letters shuffled.',text:'Hint revealed.',allLetters:'All letters are already revealed.',noExtra:'No extra letters remain.',placeFail:'Could not place the letter.',image:n=>'Image '+n},
- az:{sport:'⚽ İdman',art:'🎨 İncəsənət',professions:'🧑‍💼 Peşələr',travel:'🌍 Səyahət',science:'🔬 Elm',level:n=>n+'-ci mövzu səviyyəsi',textHint:'Mətn ipucu',tap:'Açmaq üçün toxun',wrong:'Söz yanlışdır. Yenidən cəhd et.',passed:n=>n+'-ci səviyyə keçildi!',saved:'Tərəqqi əsas oyundan ayrıca saxlanıldı.',next:'NÖVBƏTİ SƏVİYYƏ',back:'MÖVZULARA QAYIT',locked:n=>'Əvvəlcə '+n+'-ci səviyyəni keç.',letter:'Hərf açıldı.',remove:'Artıq hərflər silindi.',shuffle:'Hərflər qarışdırıldı.',text:'İpucu açıldı.',allLetters:'Bütün hərflər artıq açılıb.',noExtra:'Artıq hərf qalmayıb.',placeFail:'Hərfi yerləşdirmək mümkün olmadı.',image:n=>n+'-ci şəkil'}
+ ru:{sport:'⚽ Спорт',art:'🎨 Искусство',professions:'🧑‍💼 Профессии',travel:'🌍 Путешествия',science:'🔬 Наука',technology:'💻 Технологии',level:n=>'Тематический уровень '+n,textHint:'Текстовая подсказка',tap:'Нажми, чтобы открыть',wrong:'Неверное слово. Попробуй ещё раз.',passed:n=>'Уровень '+n+' пройден!',saved:'Прогресс сохранён отдельно от основной игры.',next:'СЛЕДУЮЩИЙ УРОВЕНЬ',back:'К ТЕМАМ',locked:n=>'Сначала пройди уровень '+n+'.',letter:'Буква открыта.',remove:'Лишние буквы убраны.',shuffle:'Буквы перемешаны.',text:'Подсказка открыта.',allLetters:'Все буквы уже открыты.',noExtra:'Лишних букв не осталось.',placeFail:'Не удалось разместить букву.',image:n=>'Изображение '+n},
+ en:{sport:'⚽ Sport',art:'🎨 Art',professions:'🧑‍💼 Professions',travel:'🌍 Travel',science:'🔬 Science',technology:'💻 Technology',level:n=>'Themed level '+n,textHint:'Text hint',tap:'Tap to reveal',wrong:'Wrong word. Try again.',passed:n=>'Level '+n+' completed!',saved:'Progress saved separately from the main game.',next:'NEXT LEVEL',back:'BACK TO THEMES',locked:n=>'Complete level '+n+' first.',letter:'Letter revealed.',remove:'Extra letters removed.',shuffle:'Letters shuffled.',text:'Hint revealed.',allLetters:'All letters are already revealed.',noExtra:'No extra letters remain.',placeFail:'Could not place the letter.',image:n=>'Image '+n},
+ az:{sport:'⚽ İdman',art:'🎨 İncəsənət',professions:'🧑‍💼 Peşələr',travel:'🌍 Səyahət',science:'🔬 Elm',technology:'💻 Texnologiya',level:n=>n+'-ci mövzu səviyyəsi',textHint:'Mətn ipucu',tap:'Açmaq üçün toxun',wrong:'Söz yanlışdır. Yenidən cəhd et.',passed:n=>n+'-ci səviyyə keçildi!',saved:'Tərəqqi əsas oyundan ayrıca saxlanıldı.',next:'NÖVBƏTİ SƏVİYYƏ',back:'MÖVZULARA QAYIT',locked:n=>'Əvvəlcə '+n+'-ci səviyyəni keç.',letter:'Hərf açıldı.',remove:'Artıq hərflər silindi.',shuffle:'Hərflər qarışdırıldı.',text:'İpucu açıldı.',allLetters:'Bütün hərflər artıq açılıb.',noExtra:'Artıq hərf qalmayıb.',placeFail:'Hərfi yerləşdirmək mümkün olmadı.',image:n=>n+'-ci şəkil'}
 };
 const ui=UI[lang]||UI.ru;
 const SETTINGS_UI={
@@ -9601,7 +9601,3015 @@ const SCIENCE_TRANSLATED={
   }
  }
 };
-const THEME_BANKS={sport:[LEVELS,TRANSLATED],art:[ART_LEVELS,ART_TRANSLATED],professions:[PROF_LEVELS,PROF_TRANSLATED],travel:[TRAVEL_LEVELS,TRAVEL_TRANSLATED],science:[SCIENCE_LEVELS,SCIENCE_TRANSLATED]};
+const TECHNOLOGY_LEVELS={
+ "1": {
+  "answer": "ТЕХНОЛОГИЯ",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "💻",
+    "💻"
+   ],
+   [
+    "⚙️",
+    "⚙️"
+   ],
+   [
+    "📱",
+    "📱"
+   ],
+   [
+    "🤖",
+    "🤖"
+   ]
+  ]
+ },
+ "2": {
+  "answer": "КОМПЬЮТЕР",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "💻",
+    "💻"
+   ],
+   [
+    "⌨️",
+    "⌨️"
+   ],
+   [
+    "🖱️",
+    "🖱️"
+   ],
+   [
+    "🖥️",
+    "🖥️"
+   ]
+  ]
+ },
+ "3": {
+  "answer": "НОУТБУК",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "💻",
+    "💻"
+   ],
+   [
+    "🔋",
+    "🔋"
+   ],
+   [
+    "⌨️",
+    "⌨️"
+   ],
+   [
+    "🎒",
+    "🎒"
+   ]
+  ]
+ },
+ "4": {
+  "answer": "ПЛАНШЕТ",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "📱",
+    "📱"
+   ],
+   [
+    "✍️",
+    "✍️"
+   ],
+   [
+    "🖥️",
+    "🖥️"
+   ],
+   [
+    "🔋",
+    "🔋"
+   ]
+  ]
+ },
+ "5": {
+  "answer": "СМАРТФОН",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "📱",
+    "📱"
+   ],
+   [
+    "📲",
+    "📲"
+   ],
+   [
+    "🔋",
+    "🔋"
+   ],
+   [
+    "🌐",
+    "🌐"
+   ]
+  ]
+ },
+ "6": {
+  "answer": "МОНИТОР",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "🖥️",
+    "🖥️"
+   ],
+   [
+    "👀",
+    "👀"
+   ],
+   [
+    "💻",
+    "💻"
+   ],
+   [
+    "📺",
+    "📺"
+   ]
+  ]
+ },
+ "7": {
+  "answer": "КЛАВИАТУРА",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "⌨️",
+    "⌨️"
+   ],
+   [
+    "💻",
+    "💻"
+   ],
+   [
+    "🔤",
+    "🔤"
+   ],
+   [
+    "🖥️",
+    "🖥️"
+   ]
+  ]
+ },
+ "8": {
+  "answer": "МЫШЬ",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "🖱️",
+    "🖱️"
+   ],
+   [
+    "💻",
+    "💻"
+   ],
+   [
+    "👆",
+    "👆"
+   ],
+   [
+    "🖥️",
+    "🖥️"
+   ]
+  ]
+ },
+ "9": {
+  "answer": "ПРИНТЕР",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "🖨️",
+    "🖨️"
+   ],
+   [
+    "📄",
+    "📄"
+   ],
+   [
+    "💻",
+    "💻"
+   ],
+   [
+    "🖋️",
+    "🖋️"
+   ]
+  ]
+ },
+ "10": {
+  "answer": "СКАНЕР",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "📄",
+    "📄"
+   ],
+   [
+    "🔍",
+    "🔍"
+   ],
+   [
+    "💻",
+    "💻"
+   ],
+   [
+    "🖨️",
+    "🖨️"
+   ]
+  ]
+ },
+ "11": {
+  "answer": "КАМЕРА",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "📷",
+    "📷"
+   ],
+   [
+    "🎥",
+    "🎥"
+   ],
+   [
+    "📸",
+    "📸"
+   ],
+   [
+    "💾",
+    "💾"
+   ]
+  ]
+ },
+ "12": {
+  "answer": "МИКРОФОН",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "🎤",
+    "🎤"
+   ],
+   [
+    "🎙️",
+    "🎙️"
+   ],
+   [
+    "🔊",
+    "🔊"
+   ],
+   [
+    "💻",
+    "💻"
+   ]
+  ]
+ },
+ "13": {
+  "answer": "НАУШНИКИ",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "🎧",
+    "🎧"
+   ],
+   [
+    "🎵",
+    "🎵"
+   ],
+   [
+    "📱",
+    "📱"
+   ],
+   [
+    "🔊",
+    "🔊"
+   ]
+  ]
+ },
+ "14": {
+  "answer": "КОЛОНКА",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "🔊",
+    "🔊"
+   ],
+   [
+    "🎵",
+    "🎵"
+   ],
+   [
+    "📱",
+    "📱"
+   ],
+   [
+    "📶",
+    "📶"
+   ]
+  ]
+ },
+ "15": {
+  "answer": "РОУТЕР",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "📶",
+    "📶"
+   ],
+   [
+    "🌐",
+    "🌐"
+   ],
+   [
+    "💻",
+    "💻"
+   ],
+   [
+    "📱",
+    "📱"
+   ]
+  ]
+ },
+ "16": {
+  "answer": "МОДЕМ",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "📡",
+    "📡"
+   ],
+   [
+    "🌐",
+    "🌐"
+   ],
+   [
+    "💻",
+    "💻"
+   ],
+   [
+    "🔌",
+    "🔌"
+   ]
+  ]
+ },
+ "17": {
+  "answer": "СЕРВЕР",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "🖥️",
+    "🖥️"
+   ],
+   [
+    "🌐",
+    "🌐"
+   ],
+   [
+    "🗄️",
+    "🗄️"
+   ],
+   [
+    "⚙️",
+    "⚙️"
+   ]
+  ]
+ },
+ "18": {
+  "answer": "ДИСК",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "💽",
+    "💽"
+   ],
+   [
+    "💾",
+    "💾"
+   ],
+   [
+    "🖥️",
+    "🖥️"
+   ],
+   [
+    "📁",
+    "📁"
+   ]
+  ]
+ },
+ "19": {
+  "answer": "ФЛЕШКА",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "💾",
+    "💾"
+   ],
+   [
+    "🔌",
+    "🔌"
+   ],
+   [
+    "📁",
+    "📁"
+   ],
+   [
+    "💻",
+    "💻"
+   ]
+  ]
+ },
+ "20": {
+  "answer": "ЧИП",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "🔬",
+    "🔬"
+   ],
+   [
+    "⚙️",
+    "⚙️"
+   ],
+   [
+    "📱",
+    "📱"
+   ],
+   [
+    "💻",
+    "💻"
+   ]
+  ]
+ },
+ "21": {
+  "answer": "ПРОЦЕССОР",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "⚙️",
+    "⚙️"
+   ],
+   [
+    "💻",
+    "💻"
+   ],
+   [
+    "🔥",
+    "🔥"
+   ],
+   [
+    "🔬",
+    "🔬"
+   ]
+  ]
+ },
+ "22": {
+  "answer": "ВИДЕОКАРТА",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "🎮",
+    "🎮"
+   ],
+   [
+    "🖥️",
+    "🖥️"
+   ],
+   [
+    "⚙️",
+    "⚙️"
+   ],
+   [
+    "🧊",
+    "🧊"
+   ]
+  ]
+ },
+ "23": {
+  "answer": "ПАМЯТЬ",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "💾",
+    "💾"
+   ],
+   [
+    "🧠",
+    "🧠"
+   ],
+   [
+    "💻",
+    "💻"
+   ],
+   [
+    "📦",
+    "📦"
+   ]
+  ]
+ },
+ "24": {
+  "answer": "БАТАРЕЯ",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "🔋",
+    "🔋"
+   ],
+   [
+    "⚡",
+    "⚡"
+   ],
+   [
+    "📱",
+    "📱"
+   ],
+   [
+    "💻",
+    "💻"
+   ]
+  ]
+ },
+ "25": {
+  "answer": "ЗАРЯДКА",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "🔌",
+    "🔌"
+   ],
+   [
+    "⚡",
+    "⚡"
+   ],
+   [
+    "🔋",
+    "🔋"
+   ],
+   [
+    "📱",
+    "📱"
+   ]
+  ]
+ },
+ "26": {
+  "answer": "КАБЕЛЬ",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "🔌",
+    "🔌"
+   ],
+   [
+    "➿",
+    "➿"
+   ],
+   [
+    "💻",
+    "💻"
+   ],
+   [
+    "⚡",
+    "⚡"
+   ]
+  ]
+ },
+ "27": {
+  "answer": "РАЗЪЕМ",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "🔌",
+    "🔌"
+   ],
+   [
+    "🧩",
+    "🧩"
+   ],
+   [
+    "💻",
+    "💻"
+   ],
+   [
+    "📱",
+    "📱"
+   ]
+  ]
+ },
+ "28": {
+  "answer": "ЭКРАН",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "🖥️",
+    "🖥️"
+   ],
+   [
+    "📱",
+    "📱"
+   ],
+   [
+    "👀",
+    "👀"
+   ],
+   [
+    "✨",
+    "✨"
+   ]
+  ]
+ },
+ "29": {
+  "answer": "СЕНСОР",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "👆",
+    "👆"
+   ],
+   [
+    "📱",
+    "📱"
+   ],
+   [
+    "📡",
+    "📡"
+   ],
+   [
+    "⚙️",
+    "⚙️"
+   ]
+  ]
+ },
+ "30": {
+  "answer": "ПИКСЕЛЬ",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "🔲",
+    "🔲"
+   ],
+   [
+    "🖥️",
+    "🖥️"
+   ],
+   [
+    "🎨",
+    "🎨"
+   ],
+   [
+    "📷",
+    "📷"
+   ]
+  ]
+ },
+ "31": {
+  "answer": "ИНТЕРНЕТ",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "🌐",
+    "🌐"
+   ],
+   [
+    "📶",
+    "📶"
+   ],
+   [
+    "💻",
+    "💻"
+   ],
+   [
+    "📱",
+    "📱"
+   ]
+  ]
+ },
+ "32": {
+  "answer": "САЙТ",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "🌐",
+    "🌐"
+   ],
+   [
+    "🖥️",
+    "🖥️"
+   ],
+   [
+    "🔗",
+    "🔗"
+   ],
+   [
+    "📄",
+    "📄"
+   ]
+  ]
+ },
+ "33": {
+  "answer": "БРАУЗЕР",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "🌐",
+    "🌐"
+   ],
+   [
+    "🔎",
+    "🔎"
+   ],
+   [
+    "🖥️",
+    "🖥️"
+   ],
+   [
+    "📑",
+    "📑"
+   ]
+  ]
+ },
+ "34": {
+  "answer": "ПОИСК",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "🔎",
+    "🔎"
+   ],
+   [
+    "🌐",
+    "🌐"
+   ],
+   [
+    "⌨️",
+    "⌨️"
+   ],
+   [
+    "📱",
+    "📱"
+   ]
+  ]
+ },
+ "35": {
+  "answer": "ССЫЛКА",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "🔗",
+    "🔗"
+   ],
+   [
+    "🌐",
+    "🌐"
+   ],
+   [
+    "📄",
+    "📄"
+   ],
+   [
+    "👆",
+    "👆"
+   ]
+  ]
+ },
+ "36": {
+  "answer": "СЕТЬ",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "🌐",
+    "🌐"
+   ],
+   [
+    "🔗",
+    "🔗"
+   ],
+   [
+    "📡",
+    "📡"
+   ],
+   [
+    "💻",
+    "💻"
+   ]
+  ]
+ },
+ "37": {
+  "answer": "ВАЙФАЙ",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "📶",
+    "📶"
+   ],
+   [
+    "📱",
+    "📱"
+   ],
+   [
+    "💻",
+    "💻"
+   ],
+   [
+    "🌐",
+    "🌐"
+   ]
+  ]
+ },
+ "38": {
+  "answer": "БЛЮТУЗ",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "🟦",
+    "🟦"
+   ],
+   [
+    "📱",
+    "📱"
+   ],
+   [
+    "🎧",
+    "🎧"
+   ],
+   [
+    "📶",
+    "📶"
+   ]
+  ]
+ },
+ "39": {
+  "answer": "ОБЛАКО",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "☁️",
+    "☁️"
+   ],
+   [
+    "💾",
+    "💾"
+   ],
+   [
+    "🌐",
+    "🌐"
+   ],
+   [
+    "📁",
+    "📁"
+   ]
+  ]
+ },
+ "40": {
+  "answer": "ДОМЕН",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "🌐",
+    "🌐"
+   ],
+   [
+    "🔤",
+    "🔤"
+   ],
+   [
+    "🖥️",
+    "🖥️"
+   ],
+   [
+    "🔗",
+    "🔗"
+   ]
+  ]
+ },
+ "41": {
+  "answer": "ХОСТИНГ",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "🖥️",
+    "🖥️"
+   ],
+   [
+    "🌐",
+    "🌐"
+   ],
+   [
+    "📦",
+    "📦"
+   ],
+   [
+    "⚙️",
+    "⚙️"
+   ]
+  ]
+ },
+ "42": {
+  "answer": "ПАРОЛЬ",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "🔐",
+    "🔐"
+   ],
+   [
+    "⌨️",
+    "⌨️"
+   ],
+   [
+    "👤",
+    "👤"
+   ],
+   [
+    "🛡️",
+    "🛡️"
+   ]
+  ]
+ },
+ "43": {
+  "answer": "ЛОГИН",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "👤",
+    "👤"
+   ],
+   [
+    "⌨️",
+    "⌨️"
+   ],
+   [
+    "🔐",
+    "🔐"
+   ],
+   [
+    "🌐",
+    "🌐"
+   ]
+  ]
+ },
+ "44": {
+  "answer": "ПРОФИЛЬ",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "👤",
+    "👤"
+   ],
+   [
+    "📱",
+    "📱"
+   ],
+   [
+    "⚙️",
+    "⚙️"
+   ],
+   [
+    "🌐",
+    "🌐"
+   ]
+  ]
+ },
+ "45": {
+  "answer": "АККАУНТ",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "👤",
+    "👤"
+   ],
+   [
+    "🔐",
+    "🔐"
+   ],
+   [
+    "📱",
+    "📱"
+   ],
+   [
+    "🌐",
+    "🌐"
+   ]
+  ]
+ },
+ "46": {
+  "answer": "ФАЙЛ",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "📄",
+    "📄"
+   ],
+   [
+    "💾",
+    "💾"
+   ],
+   [
+    "📁",
+    "📁"
+   ],
+   [
+    "💻",
+    "💻"
+   ]
+  ]
+ },
+ "47": {
+  "answer": "ПАПКА",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "📁",
+    "📁"
+   ],
+   [
+    "📄",
+    "📄"
+   ],
+   [
+    "💾",
+    "💾"
+   ],
+   [
+    "🗂️",
+    "🗂️"
+   ]
+  ]
+ },
+ "48": {
+  "answer": "АРХИВ",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "🗜️",
+    "🗜️"
+   ],
+   [
+    "📦",
+    "📦"
+   ],
+   [
+    "📁",
+    "📁"
+   ],
+   [
+    "💾",
+    "💾"
+   ]
+  ]
+ },
+ "49": {
+  "answer": "БАЗАДАННЫХ",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "🗄️",
+    "🗄️"
+   ],
+   [
+    "📊",
+    "📊"
+   ],
+   [
+    "💾",
+    "💾"
+   ],
+   [
+    "🖥️",
+    "🖥️"
+   ]
+  ]
+ },
+ "50": {
+  "answer": "БЭКАП",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "💾",
+    "💾"
+   ],
+   [
+    "☁️",
+    "☁️"
+   ],
+   [
+    "🔄",
+    "🔄"
+   ],
+   [
+    "🛡️",
+    "🛡️"
+   ]
+  ]
+ },
+ "51": {
+  "answer": "КОД",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "💻",
+    "💻"
+   ],
+   [
+    "⌨️",
+    "⌨️"
+   ],
+   [
+    "🔣",
+    "🔣"
+   ],
+   [
+    "🧑‍💻",
+    "🧑‍💻"
+   ]
+  ]
+ },
+ "52": {
+  "answer": "ПРОГРАММА",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "💻",
+    "💻"
+   ],
+   [
+    "⚙️",
+    "⚙️"
+   ],
+   [
+    "📄",
+    "📄"
+   ],
+   [
+    "▶️",
+    "▶️"
+   ]
+  ]
+ },
+ "53": {
+  "answer": "ПРИЛОЖЕНИЕ",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "📱",
+    "📱"
+   ],
+   [
+    "🧩",
+    "🧩"
+   ],
+   [
+    "👆",
+    "👆"
+   ],
+   [
+    "⚙️",
+    "⚙️"
+   ]
+  ]
+ },
+ "54": {
+  "answer": "СИСТЕМА",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "⚙️",
+    "⚙️"
+   ],
+   [
+    "🖥️",
+    "🖥️"
+   ],
+   [
+    "🔗",
+    "🔗"
+   ],
+   [
+    "📊",
+    "📊"
+   ]
+  ]
+ },
+ "55": {
+  "answer": "АЛГОРИТМ",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "🧠",
+    "🧠"
+   ],
+   [
+    "🔢",
+    "🔢"
+   ],
+   [
+    "➡️",
+    "➡️"
+   ],
+   [
+    "💻",
+    "💻"
+   ]
+  ]
+ },
+ "56": {
+  "answer": "ФУНКЦИЯ",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "🔣",
+    "🔣"
+   ],
+   [
+    "💻",
+    "💻"
+   ],
+   [
+    "➡️",
+    "➡️"
+   ],
+   [
+    "⚙️",
+    "⚙️"
+   ]
+  ]
+ },
+ "57": {
+  "answer": "ПЕРЕМЕННАЯ",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "🔤",
+    "🔤"
+   ],
+   [
+    "📦",
+    "📦"
+   ],
+   [
+    "💻",
+    "💻"
+   ],
+   [
+    "🔄",
+    "🔄"
+   ]
+  ]
+ },
+ "58": {
+  "answer": "МАССИВ",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "📚",
+    "📚"
+   ],
+   [
+    "🔢",
+    "🔢"
+   ],
+   [
+    "🧩",
+    "🧩"
+   ],
+   [
+    "💻",
+    "💻"
+   ]
+  ]
+ },
+ "59": {
+  "answer": "ЦИКЛ",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "🔄",
+    "🔄"
+   ],
+   [
+    "💻",
+    "💻"
+   ],
+   [
+    "➡️",
+    "➡️"
+   ],
+   [
+    "🔁",
+    "🔁"
+   ]
+  ]
+ },
+ "60": {
+  "answer": "ОШИБКА",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "🐞",
+    "🐞"
+   ],
+   [
+    "💻",
+    "💻"
+   ],
+   [
+    "⚠️",
+    "⚠️"
+   ],
+   [
+    "🔧",
+    "🔧"
+   ]
+  ]
+ },
+ "61": {
+  "answer": "ОТЛАДКА",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "🐞",
+    "🐞"
+   ],
+   [
+    "🔍",
+    "🔍"
+   ],
+   [
+    "💻",
+    "💻"
+   ],
+   [
+    "🛠️",
+    "🛠️"
+   ]
+  ]
+ },
+ "62": {
+  "answer": "ВЕРСИЯ",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "🔢",
+    "🔢"
+   ],
+   [
+    "📦",
+    "📦"
+   ],
+   [
+    "💻",
+    "💻"
+   ],
+   [
+    "🔄",
+    "🔄"
+   ]
+  ]
+ },
+ "63": {
+  "answer": "ОБНОВЛЕНИЕ",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "🔄",
+    "🔄"
+   ],
+   [
+    "⬆️",
+    "⬆️"
+   ],
+   [
+    "📱",
+    "📱"
+   ],
+   [
+    "💻",
+    "💻"
+   ]
+  ]
+ },
+ "64": {
+  "answer": "УСТАНОВКА",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "⬇️",
+    "⬇️"
+   ],
+   [
+    "📦",
+    "📦"
+   ],
+   [
+    "💻",
+    "💻"
+   ],
+   [
+    "✅",
+    "✅"
+   ]
+  ]
+ },
+ "65": {
+  "answer": "ИНТЕРФЕЙС",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "🖥️",
+    "🖥️"
+   ],
+   [
+    "🔘",
+    "🔘"
+   ],
+   [
+    "📱",
+    "📱"
+   ],
+   [
+    "👆",
+    "👆"
+   ]
+  ]
+ },
+ "66": {
+  "answer": "КНОПКА",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "🔘",
+    "🔘"
+   ],
+   [
+    "👆",
+    "👆"
+   ],
+   [
+    "📱",
+    "📱"
+   ],
+   [
+    "🖥️",
+    "🖥️"
+   ]
+  ]
+ },
+ "67": {
+  "answer": "МЕНЮ",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "☰",
+    "☰"
+   ],
+   [
+    "📱",
+    "📱"
+   ],
+   [
+    "🖥️",
+    "🖥️"
+   ],
+   [
+    "👆",
+    "👆"
+   ]
+  ]
+ },
+ "68": {
+  "answer": "УВЕДОМЛЕНИЕ",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "🔔",
+    "🔔"
+   ],
+   [
+    "📱",
+    "📱"
+   ],
+   [
+    "💬",
+    "💬"
+   ],
+   [
+    "⚠️",
+    "⚠️"
+   ]
+  ]
+ },
+ "69": {
+  "answer": "ЧАТ",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "💬",
+    "💬"
+   ],
+   [
+    "📱",
+    "📱"
+   ],
+   [
+    "👥",
+    "👥"
+   ],
+   [
+    "⌨️",
+    "⌨️"
+   ]
+  ]
+ },
+ "70": {
+  "answer": "СООБЩЕНИЕ",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "💬",
+    "💬"
+   ],
+   [
+    "✉️",
+    "✉️"
+   ],
+   [
+    "📱",
+    "📱"
+   ],
+   [
+    "🔔",
+    "🔔"
+   ]
+  ]
+ },
+ "71": {
+  "answer": "ВИДЕО",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "🎥",
+    "🎥"
+   ],
+   [
+    "▶️",
+    "▶️"
+   ],
+   [
+    "📱",
+    "📱"
+   ],
+   [
+    "🖥️",
+    "🖥️"
+   ]
+  ]
+ },
+ "72": {
+  "answer": "СТРИМ",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "🔴",
+    "🔴"
+   ],
+   [
+    "🎥",
+    "🎥"
+   ],
+   [
+    "📡",
+    "📡"
+   ],
+   [
+    "👥",
+    "👥"
+   ]
+  ]
+ },
+ "73": {
+  "answer": "ПОДКАСТ",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "🎙️",
+    "🎙️"
+   ],
+   [
+    "🎧",
+    "🎧"
+   ],
+   [
+    "📱",
+    "📱"
+   ],
+   [
+    "🔊",
+    "🔊"
+   ]
+  ]
+ },
+ "74": {
+  "answer": "СОЦСЕТЬ",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "👥",
+    "👥"
+   ],
+   [
+    "📱",
+    "📱"
+   ],
+   [
+    "❤️",
+    "❤️"
+   ],
+   [
+    "🌐",
+    "🌐"
+   ]
+  ]
+ },
+ "75": {
+  "answer": "МЕССЕНДЖЕР",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "💬",
+    "💬"
+   ],
+   [
+    "📱",
+    "📱"
+   ],
+   [
+    "🔔",
+    "🔔"
+   ],
+   [
+    "👥",
+    "👥"
+   ]
+  ]
+ },
+ "76": {
+  "answer": "QRКОД",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "🔳",
+    "🔳"
+   ],
+   [
+    "📱",
+    "📱"
+   ],
+   [
+    "📷",
+    "📷"
+   ],
+   [
+    "🔗",
+    "🔗"
+   ]
+  ]
+ },
+ "77": {
+  "answer": "ГЕОЛОКАЦИЯ",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "📍",
+    "📍"
+   ],
+   [
+    "🗺️",
+    "🗺️"
+   ],
+   [
+    "📱",
+    "📱"
+   ],
+   [
+    "🛰️",
+    "🛰️"
+   ]
+  ]
+ },
+ "78": {
+  "answer": "GPS",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "🛰️",
+    "🛰️"
+   ],
+   [
+    "📍",
+    "📍"
+   ],
+   [
+    "🗺️",
+    "🗺️"
+   ],
+   [
+    "📱",
+    "📱"
+   ]
+  ]
+ },
+ "79": {
+  "answer": "СПУТНИК",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "🛰️",
+    "🛰️"
+   ],
+   [
+    "🌍",
+    "🌍"
+   ],
+   [
+    "📡",
+    "📡"
+   ],
+   [
+    "🌌",
+    "🌌"
+   ]
+  ]
+ },
+ "80": {
+  "answer": "ДРОН",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "🚁",
+    "🚁"
+   ],
+   [
+    "📷",
+    "📷"
+   ],
+   [
+    "📡",
+    "📡"
+   ],
+   [
+    "🔋",
+    "🔋"
+   ]
+  ]
+ },
+ "81": {
+  "answer": "РОБОТ",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "🤖",
+    "🤖"
+   ],
+   [
+    "⚙️",
+    "⚙️"
+   ],
+   [
+    "🦾",
+    "🦾"
+   ],
+   [
+    "🔋",
+    "🔋"
+   ]
+  ]
+ },
+ "82": {
+  "answer": "АНДРОИД",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "🤖",
+    "🤖"
+   ],
+   [
+    "📱",
+    "📱"
+   ],
+   [
+    "💚",
+    "💚"
+   ],
+   [
+    "⚙️",
+    "⚙️"
+   ]
+  ]
+ },
+ "83": {
+  "answer": "АВТОМАТИКА",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "⚙️",
+    "⚙️"
+   ],
+   [
+    "🤖",
+    "🤖"
+   ],
+   [
+    "🔄",
+    "🔄"
+   ],
+   [
+    "🏭",
+    "🏭"
+   ]
+  ]
+ },
+ "84": {
+  "answer": "НЕЙРОСЕТЬ",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "🧠",
+    "🧠"
+   ],
+   [
+    "🔗",
+    "🔗"
+   ],
+   [
+    "💻",
+    "💻"
+   ],
+   [
+    "✨",
+    "✨"
+   ]
+  ]
+ },
+ "85": {
+  "answer": "МОДЕЛЬ",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "🧠",
+    "🧠"
+   ],
+   [
+    "📊",
+    "📊"
+   ],
+   [
+    "💻",
+    "💻"
+   ],
+   [
+    "⚙️",
+    "⚙️"
+   ]
+  ]
+ },
+ "86": {
+  "answer": "ДАННЫЕ",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "💾",
+    "💾"
+   ],
+   [
+    "📊",
+    "📊"
+   ],
+   [
+    "🔢",
+    "🔢"
+   ],
+   [
+    "💻",
+    "💻"
+   ]
+  ]
+ },
+ "87": {
+  "answer": "АНАЛИТИКА",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "📊",
+    "📊"
+   ],
+   [
+    "📈",
+    "📈"
+   ],
+   [
+    "🔍",
+    "🔍"
+   ],
+   [
+    "💻",
+    "💻"
+   ]
+  ]
+ },
+ "88": {
+  "answer": "КИБЕРБЕЗОПАСНОСТЬ",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "🛡️",
+    "🛡️"
+   ],
+   [
+    "💻",
+    "💻"
+   ],
+   [
+    "🔐",
+    "🔐"
+   ],
+   [
+    "🌐",
+    "🌐"
+   ]
+  ]
+ },
+ "89": {
+  "answer": "ШИФРОВАНИЕ",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "🔐",
+    "🔐"
+   ],
+   [
+    "🔣",
+    "🔣"
+   ],
+   [
+    "💻",
+    "💻"
+   ],
+   [
+    "🛡️",
+    "🛡️"
+   ]
+  ]
+ },
+ "90": {
+  "answer": "ФАЕРВОЛ",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "🧱",
+    "🧱"
+   ],
+   [
+    "🔥",
+    "🔥"
+   ],
+   [
+    "🛡️",
+    "🛡️"
+   ],
+   [
+    "🌐",
+    "🌐"
+   ]
+  ]
+ },
+ "91": {
+  "answer": "ВИРУС",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "🦠",
+    "🦠"
+   ],
+   [
+    "💻",
+    "💻"
+   ],
+   [
+    "⚠️",
+    "⚠️"
+   ],
+   [
+    "🔐",
+    "🔐"
+   ]
+  ]
+ },
+ "92": {
+  "answer": "АНТИВИРУС",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "🛡️",
+    "🛡️"
+   ],
+   [
+    "🦠",
+    "🦠"
+   ],
+   [
+    "💻",
+    "💻"
+   ],
+   [
+    "✅",
+    "✅"
+   ]
+  ]
+ },
+ "93": {
+  "answer": "БЛОКЧЕЙН",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "⛓️",
+    "⛓️"
+   ],
+   [
+    "🔗",
+    "🔗"
+   ],
+   [
+    "💻",
+    "💻"
+   ],
+   [
+    "🔐",
+    "🔐"
+   ]
+  ]
+ },
+ "94": {
+  "answer": "КРИПТОГРАФИЯ",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "🔐",
+    "🔐"
+   ],
+   [
+    "🔣",
+    "🔣"
+   ],
+   [
+    "📜",
+    "📜"
+   ],
+   [
+    "💻",
+    "💻"
+   ]
+  ]
+ },
+ "95": {
+  "answer": "ВИРТУАЛЬНОСТЬ",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "🥽",
+    "🥽"
+   ],
+   [
+    "🌐",
+    "🌐"
+   ],
+   [
+    "🎮",
+    "🎮"
+   ],
+   [
+    "✨",
+    "✨"
+   ]
+  ]
+ },
+ "96": {
+  "answer": "VR",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "🥽",
+    "🥽"
+   ],
+   [
+    "🎮",
+    "🎮"
+   ],
+   [
+    "🌐",
+    "🌐"
+   ],
+   [
+    "🕹️",
+    "🕹️"
+   ]
+  ]
+ },
+ "97": {
+  "answer": "3DПЕЧАТЬ",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "🖨️",
+    "🖨️"
+   ],
+   [
+    "🧱",
+    "🧱"
+   ],
+   [
+    "🧩",
+    "🧩"
+   ],
+   [
+    "📐",
+    "📐"
+   ]
+  ]
+ },
+ "98": {
+  "answer": "УМНЫЙДОМ",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "🏠",
+    "🏠"
+   ],
+   [
+    "📱",
+    "📱"
+   ],
+   [
+    "💡",
+    "💡"
+   ],
+   [
+    "🌐",
+    "🌐"
+   ]
+  ]
+ },
+ "99": {
+  "answer": "БИОМЕТРИЯ",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "👆",
+    "👆"
+   ],
+   [
+    "👁️",
+    "👁️"
+   ],
+   [
+    "🔐",
+    "🔐"
+   ],
+   [
+    "📱",
+    "📱"
+   ]
+  ]
+ },
+ "100": {
+  "answer": "ИННОВАЦИЯ",
+  "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+  "photos": [
+   [
+    "💡",
+    "💡"
+   ],
+   [
+    "🚀",
+    "🚀"
+   ],
+   [
+    "⚙️",
+    "⚙️"
+   ],
+   [
+    "✨",
+    "✨"
+   ]
+  ]
+ }
+};
+const TECHNOLOGY_TRANSLATED={
+ "en": {
+  "1": {
+   "answer": "TECHNOLOGY",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "2": {
+   "answer": "COMPUTER",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "3": {
+   "answer": "LAPTOP",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "4": {
+   "answer": "TABLET",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "5": {
+   "answer": "SMARTPHONE",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "6": {
+   "answer": "MONITOR",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "7": {
+   "answer": "KEYBOARD",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "8": {
+   "answer": "MOUSE",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "9": {
+   "answer": "PRINTER",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "10": {
+   "answer": "SCANNER",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "11": {
+   "answer": "CAMERA",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "12": {
+   "answer": "MICROPHONE",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "13": {
+   "answer": "HEADPHONES",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "14": {
+   "answer": "SPEAKER",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "15": {
+   "answer": "ROUTER",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "16": {
+   "answer": "MODEM",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "17": {
+   "answer": "SERVER",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "18": {
+   "answer": "DRIVE",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "19": {
+   "answer": "FLASHDRIVE",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "20": {
+   "answer": "CHIP",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "21": {
+   "answer": "PROCESSOR",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "22": {
+   "answer": "GRAPHICSCARD",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "23": {
+   "answer": "MEMORY",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "24": {
+   "answer": "BATTERY",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "25": {
+   "answer": "CHARGER",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "26": {
+   "answer": "CABLE",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "27": {
+   "answer": "CONNECTOR",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "28": {
+   "answer": "SCREEN",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "29": {
+   "answer": "SENSOR",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "30": {
+   "answer": "PIXEL",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "31": {
+   "answer": "INTERNET",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "32": {
+   "answer": "WEBSITE",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "33": {
+   "answer": "BROWSER",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "34": {
+   "answer": "SEARCH",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "35": {
+   "answer": "LINK",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "36": {
+   "answer": "NETWORK",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "37": {
+   "answer": "WIFI",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "38": {
+   "answer": "BLUETOOTH",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "39": {
+   "answer": "CLOUD",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "40": {
+   "answer": "DOMAIN",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "41": {
+   "answer": "HOSTING",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "42": {
+   "answer": "PASSWORD",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "43": {
+   "answer": "LOGIN",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "44": {
+   "answer": "PROFILE",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "45": {
+   "answer": "ACCOUNT",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "46": {
+   "answer": "FILE",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "47": {
+   "answer": "FOLDER",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "48": {
+   "answer": "ARCHIVE",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "49": {
+   "answer": "DATABASE",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "50": {
+   "answer": "BACKUP",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "51": {
+   "answer": "CODE",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "52": {
+   "answer": "PROGRAM",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "53": {
+   "answer": "APP",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "54": {
+   "answer": "SYSTEM",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "55": {
+   "answer": "ALGORITHM",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "56": {
+   "answer": "FUNCTION",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "57": {
+   "answer": "VARIABLE",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "58": {
+   "answer": "ARRAY",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "59": {
+   "answer": "LOOP",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "60": {
+   "answer": "BUG",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "61": {
+   "answer": "DEBUG",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "62": {
+   "answer": "VERSION",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "63": {
+   "answer": "UPDATE",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "64": {
+   "answer": "INSTALL",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "65": {
+   "answer": "INTERFACE",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "66": {
+   "answer": "BUTTON",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "67": {
+   "answer": "MENU",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "68": {
+   "answer": "NOTIFICATION",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "69": {
+   "answer": "CHAT",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "70": {
+   "answer": "MESSAGE",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "71": {
+   "answer": "VIDEO",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "72": {
+   "answer": "STREAM",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "73": {
+   "answer": "PODCAST",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "74": {
+   "answer": "SOCIALNETWORK",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "75": {
+   "answer": "MESSENGER",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "76": {
+   "answer": "QRCODE",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "77": {
+   "answer": "GEOLOCATION",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "78": {
+   "answer": "GPS",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "79": {
+   "answer": "SATELLITE",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "80": {
+   "answer": "DRONE",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "81": {
+   "answer": "ROBOT",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "82": {
+   "answer": "ANDROID",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "83": {
+   "answer": "AUTOMATION",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "84": {
+   "answer": "NEURALNET",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "85": {
+   "answer": "MODEL",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "86": {
+   "answer": "DATA",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "87": {
+   "answer": "ANALYTICS",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "88": {
+   "answer": "CYBERSECURITY",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "89": {
+   "answer": "ENCRYPTION",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "90": {
+   "answer": "FIREWALL",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "91": {
+   "answer": "VIRUS",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "92": {
+   "answer": "ANTIVIRUS",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "93": {
+   "answer": "BLOCKCHAIN",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "94": {
+   "answer": "CRYPTOGRAPHY",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "95": {
+   "answer": "VIRTUALITY",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "96": {
+   "answer": "VR",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "97": {
+   "answer": "3DPRINTING",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "98": {
+   "answer": "SMARTHOME",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "99": {
+   "answer": "BIOMETRICS",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  },
+  "100": {
+   "answer": "INNOVATION",
+   "hint": "A concept, device, or technology from the digital and technical world."
+  }
+ },
+ "az": {
+  "1": {
+   "answer": "TEXNOLOGİYA",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "2": {
+   "answer": "KOMPÜTER",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "3": {
+   "answer": "NOUTBUK",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "4": {
+   "answer": "PLANŞET",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "5": {
+   "answer": "SMARTFON",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "6": {
+   "answer": "MONİTOR",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "7": {
+   "answer": "KLAVİATURA",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "8": {
+   "answer": "SİÇAN",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "9": {
+   "answer": "PRİNTER",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "10": {
+   "answer": "SKANER",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "11": {
+   "answer": "KAMERA",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "12": {
+   "answer": "MİKROFON",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "13": {
+   "answer": "QULAQLIQ",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "14": {
+   "answer": "DİNAMİK",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "15": {
+   "answer": "ROUTER",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "16": {
+   "answer": "MODEM",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "17": {
+   "answer": "SERVER",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "18": {
+   "answer": "DİSK",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "19": {
+   "answer": "FLAŞKART",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "20": {
+   "answer": "ÇİP",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "21": {
+   "answer": "PROSESSOR",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "22": {
+   "answer": "VİDEOKART",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "23": {
+   "answer": "YADDAŞ",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "24": {
+   "answer": "BATAREYA",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "25": {
+   "answer": "ŞARJ",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "26": {
+   "answer": "KABEL",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "27": {
+   "answer": "KONNEKTOR",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "28": {
+   "answer": "EKRAN",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "29": {
+   "answer": "SENSOR",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "30": {
+   "answer": "PİKSEL",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "31": {
+   "answer": "İNTERNET",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "32": {
+   "answer": "SAYT",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "33": {
+   "answer": "BRAUZER",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "34": {
+   "answer": "AXTARIŞ",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "35": {
+   "answer": "LİNK",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "36": {
+   "answer": "ŞƏBƏKƏ",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "37": {
+   "answer": "VAYFAY",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "38": {
+   "answer": "BLUTUZ",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "39": {
+   "answer": "BULUD",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "40": {
+   "answer": "DOMEN",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "41": {
+   "answer": "HOSTİNQ",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "42": {
+   "answer": "PAROL",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "43": {
+   "answer": "LOQİN",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "44": {
+   "answer": "PROFİL",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "45": {
+   "answer": "HESAB",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "46": {
+   "answer": "FAYL",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "47": {
+   "answer": "QOVLUQ",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "48": {
+   "answer": "ARXİV",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "49": {
+   "answer": "VERİLƏNLƏRBAZASI",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "50": {
+   "answer": "EHTİYATNÜSXƏ",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "51": {
+   "answer": "KOD",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "52": {
+   "answer": "PROQRAM",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "53": {
+   "answer": "TƏTBİQ",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "54": {
+   "answer": "SİSTEM",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "55": {
+   "answer": "ALQORİTM",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "56": {
+   "answer": "FUNKSİYA",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "57": {
+   "answer": "DƏYİŞƏN",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "58": {
+   "answer": "MASSİV",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "59": {
+   "answer": "DÖVR",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "60": {
+   "answer": "SƏHV",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "61": {
+   "answer": "DEBAQ",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "62": {
+   "answer": "VERSİYA",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "63": {
+   "answer": "YENİLƏMƏ",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "64": {
+   "answer": "QURAŞDIRMA",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "65": {
+   "answer": "İNTERFEYS",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "66": {
+   "answer": "DÜYMƏ",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "67": {
+   "answer": "MENYU",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "68": {
+   "answer": "BİLDİRİŞ",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "69": {
+   "answer": "ÇAT",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "70": {
+   "answer": "MESAJ",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "71": {
+   "answer": "VİDEO",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "72": {
+   "answer": "YAYIM",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "73": {
+   "answer": "PODKAST",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "74": {
+   "answer": "SOSİALŞƏBƏKƏ",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "75": {
+   "answer": "MESENCER",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "76": {
+   "answer": "QRKOD",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "77": {
+   "answer": "GEOLOKASİYA",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "78": {
+   "answer": "GPS",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "79": {
+   "answer": "PEYK",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "80": {
+   "answer": "DRON",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "81": {
+   "answer": "ROBOT",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "82": {
+   "answer": "ANDROİD",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "83": {
+   "answer": "AVTOMATLAŞMA",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "84": {
+   "answer": "NEYRONŞƏBƏKƏ",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "85": {
+   "answer": "MODEL",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "86": {
+   "answer": "MƏLUMAT",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "87": {
+   "answer": "ANALİTİKA",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "88": {
+   "answer": "KİBERTƏHLÜKƏSİZLİK",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "89": {
+   "answer": "ŞİFRLƏMƏ",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "90": {
+   "answer": "FAYRVOL",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "91": {
+   "answer": "VİRUS",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "92": {
+   "answer": "ANTİVİRUS",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "93": {
+   "answer": "BLOKÇEYN",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "94": {
+   "answer": "KRİPTOQRAFİYA",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "95": {
+   "answer": "VİRTUALLIQ",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "96": {
+   "answer": "VR",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "97": {
+   "answer": "3DÇAP",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "98": {
+   "answer": "AĞILLIEV",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "99": {
+   "answer": "BİOMETRİYA",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  },
+  "100": {
+   "answer": "İNNOVASİYA",
+   "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+  }
+ }
+};
+const THEME_BANKS={sport:[LEVELS,TRANSLATED],art:[ART_LEVELS,ART_TRANSLATED],professions:[PROF_LEVELS,PROF_TRANSLATED],travel:[TRAVEL_LEVELS,TRAVEL_TRANSLATED],science:[SCIENCE_LEVELS,SCIENCE_TRANSLATED],technology:[TECHNOLOGY_LEVELS,TECHNOLOGY_TRANSLATED]};
 const [ACTIVE_LEVELS,ACTIVE_TRANSLATED]=THEME_BANKS[themeId]||THEME_BANKS.sport;
 if(ACTIVE_TRANSLATED[lang])Object.keys(ACTIVE_LEVELS).forEach(k=>Object.assign(ACTIVE_LEVELS[k],ACTIVE_TRANSLATED[lang][k]));
 
