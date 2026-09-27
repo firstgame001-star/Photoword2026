@@ -27,7 +27,7 @@ for(const file of ['core.js','home.js','game.js','theme-game.js','challenge.js']
 }
 
 const release=JSON.parse(readFileSync(resolve(base,'release.json'),'utf8'));
-if(release.release!=='20260927-r45')throw Error('Unexpected release: '+release.release);
+if(release.release!=='20260927-r46')throw Error('Unexpected release: '+release.release);
 if(!Array.isArray(release.levels)||!release.levels.includes(100))throw Error('Main levels are not published through 100');
 if(release.chapters?.length!==10)throw Error('Main chapter navigation must contain 10 chapters');
 if(release.chapters.find(x=>x.id===3)?.status!=='live')throw Error('Chapter 3 must be complete');
@@ -65,4 +65,7 @@ if(!challengeJs.includes("correct_seconds_bonus")&&!challengeJs.includes("deadli
 if(!challengeJs.includes("deadline-=3000"))throw Error('Blitz wrong-word penalty is missing');
 if(!challengeJs.includes("hearts=3"))throw Error('Challenge mistake limit is missing');
 if(!challengeJs.includes("ENERGY_MAX=5")||!challengeJs.includes("ENERGY_MS=30*60*1000"))throw Error('Limited-attempt energy model is missing');
-console.log('PASS: r45 entrypoints, Chapters 1-10, backgrounds, absolute progress, chapter titles and JavaScript syntax.');
+if(!challengeJs.includes('syncTrustedClock')||!challengeJs.includes('trustedNow'))throw Error('Trusted server clock sync is missing');
+if(!challengeJs.includes('performance.now()+60000')||!challengeJs.includes('deadline-performance.now()'))throw Error('Blitz must use a monotonic clock');
+if(release.challenge_modes?.anti_clock_cheat?.enabled!==true)throw Error('Anti clock-cheat manifest flag is missing');
+console.log('PASS: r46 entrypoints, Chapters 1-10, backgrounds, absolute progress, chapter titles and JavaScript syntax.');
