@@ -98,6 +98,9 @@ if(!ruleBlock.includes('Глава 7 «Цивилизация» — уровни
 if(!ruleBlock.includes('Chapter 7 “Civilization” contains levels 231–280'))throw Error('EN Chapter 7 rules are stale');
 if(!ruleBlock.includes('7-ci fəsil “Sivilizasiya” — 231–280-ci səviyyələr'))throw Error('AZ Chapter 7 rules are stale');
 if(ruleBlock.includes('5–12-ci fəsillər artıq naviqasiyaya əlavə edilib'))throw Error('Stale Azerbaijani chapter rules remain');
+if(!home.includes("track('app_open',{metadata:{version:'r72'}})"))throw Error('App-open analytics version is stale');
+if(!home.includes('function chapterIdForLevel(level)'))throw Error('Chapter analytics helper is missing');
+if(!home.includes("n<=280?7:8"))throw Error('Chapter analytics mapping is incomplete');
 
 const themeBanks=[
  ['sport','LEVELS','TRANSLATED'],['art','ART_LEVELS','ART_TRANSLATED'],['professions','PROF_LEVELS','PROF_TRANSLATED'],
