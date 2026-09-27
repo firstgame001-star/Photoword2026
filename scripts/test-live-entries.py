@@ -148,6 +148,17 @@ with sync_playwright() as pw:
       page.locator('#settingsBtn').tap();page.locator('#resetProgressBtn').tap();page.locator('#confirmReset').tap();page.locator('#confirmReset').tap();expect(page.locator('#languageModal')).to_be_visible(timeout=3000);expect(page.locator('#languageClose')).to_be_hidden()
       assert not relevant_errors(errors),errors;ctx.close()
 
+    # Thematic Sport game keeps separate progress, shows real coins, and has no settings/progress widgets in the top-right header.
+    for language in ['ru','en','az']:
+      ctx=browser.new_context(viewport={'width':390,'height':800},has_touch=True,is_mobile=True)
+      ctx.add_init_script(f"localStorage.setItem('pw.language','{language}'); localStorage.setItem('pw.theme','game'); localStorage.removeItem('pw.themeProgress.sport');")
+      account={'photoword_id':'PW-TESTONLY','first_name':'Test','last_name':'','username':None,'game_nickname':None,'nickname_changed':False,'coins':4321,'xp':300,'completed_levels':20,'current_level':21,'rank':1,'daily_streak':0,'last_daily_reward':None}
+      completed=set(range(1,21));install_mock(ctx,account,completed,language);page=ctx.new_page();errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
+      page.goto(BASE+'clean/theme-game.html?theme=sport&level=1#'+fragment,wait_until='domcontentloaded',timeout=45000)
+      expect(page.locator('[data-coins]')).to_have_text('4321');expect(page.locator('#themeSettingsBtn')).to_have_count(0);expect(page.locator('#themeProgress')).to_have_count(0)
+      sport_answer={'ru':'ГОЛ','en':'GOAL','az':'QOL'}[language];tap_word(page,sport_answer);expect(page.locator('#successPanel')).to_be_visible();assert page.evaluate("JSON.parse(localStorage.getItem('pw.themeProgress.sport')).includes(1)")
+      assert not relevant_errors(errors),errors;ctx.close()
+
     # Complete all 60 published main levels in all 3 languages and exercise hints across all live chapters.
     for language in ['ru','en','az']:
       ctx=browser.new_context(viewport={'width':390,'height':800},has_touch=True,is_mobile=True)
