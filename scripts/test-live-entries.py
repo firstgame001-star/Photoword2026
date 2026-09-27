@@ -4,7 +4,7 @@ from pathlib import Path
 from playwright.sync_api import sync_playwright, expect
 
 BASE='https://firstgame001-star.github.io/Photoword2026/'
-RELEASE='20260927-r45'
+RELEASE='20260927-r46'
 OUT=Path('test-results'); OUT.mkdir(exist_ok=True)
 
 for attempt in range(48):
@@ -46,7 +46,7 @@ def install_mock(ctx,account,completed,lang):
             action=body.get('action','state');mode=body.get('mode');energy=account.setdefault('_challenge_energy',5)
             if action=='start' and mode=='limited' and energy>0:
                 account['_challenge_energy']=energy-1
-            ch={'energy':account['_challenge_energy'],'energy_max':5,'next_energy_at':None,'limited_best_score':0,'nohint_best_streak':0,'blitz_best_score':0,'blitz_best_streak':0}
+            ch={'energy':account['_challenge_energy'],'energy_max':5,'next_energy_at':None,'limited_best_score':0,'nohint_best_streak':0,'blitz_best_score':0,'blitz_best_streak':0,'server_now':time.strftime('%Y-%m-%dT%H:%M:%SZ',time.gmtime())}
             route.fulfill(status=200,content_type='application/json',body=json.dumps({'challenge':ch}),headers={'Access-Control-Allow-Origin':'*'});return
         if '/rest/v1/rpc/get_leaderboard' in req.url:
             row=account.copy()
