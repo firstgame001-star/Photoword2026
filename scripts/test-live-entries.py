@@ -957,8 +957,14 @@ def tap_word(page,word):
 def tap_challenge_word(page,word):
     for pos,ch in enumerate(word):
         if page.locator('#challengeSlots .slot').nth(pos).inner_text(): continue
-        loc=page.locator('#challengeLetters .letter:not([disabled])').filter(has_text=re.compile('^'+re.escape(ch)+'$')).first
-        expect(loc).to_be_visible();loc.tap()
+        clicked=page.evaluate("""ch => {
+          const buttons=[...document.querySelectorAll('#challengeLetters .letter:not([disabled])')];
+          const button=buttons.find(b => (b.textContent||'').trim()===ch);
+          if(!button)return false;
+          button.click();
+          return true;
+        }""",ch)
+        assert clicked,(word,pos,ch)
 
 
 fragment=auth_fragment()
