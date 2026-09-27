@@ -27,7 +27,7 @@ for(const file of ['core.js','home.js','game.js','theme-game.js','challenge.js',
 }
 
 const release=JSON.parse(readFileSync(resolve(base,'release.json'),'utf8'));
-if(release.release!=='20260927-r59')throw Error('Unexpected release: '+release.release);
+if(release.release!=='20260927-r60')throw Error('Unexpected release: '+release.release);
 if(!Array.isArray(release.levels)||!release.levels.includes(180))throw Error('Main levels are not published through 180');
 if(release.chapters?.length!==12)throw Error('Main chapter navigation must contain 12 chapters');
 if(release.chapters.find(x=>x.id===3)?.status!=='live')throw Error('Chapter 3 must be complete');
@@ -35,15 +35,22 @@ if(release.chapters.find(x=>x.id===4)?.available_through!==131||release.chapters
 if(release.chapters.find(x=>x.id===5)?.available_through!==180||release.chapters.find(x=>x.id===5)?.status!=='live')throw Error('Chapter 5 must be complete through 180');
 if(release.thematic_mode?.categories?.length!==12)throw Error('Thematic catalog must contain 12 categories');
 const sport=release.thematic_mode.categories.find(x=>x.id==='sport');
-if(!sport||sport.available_through!==100)throw Error('Sport theme must be playable through level 100');
+if(!sport||sport.available_through!==100||sport.status!=='complete')throw Error('Sport theme must be playable through level 100');
+const art=release.thematic_mode.categories.find(x=>x.id==='art');
+if(!art||art.available_through!==100||art.status!=='complete')throw Error('Art theme must be playable through level 100');
 
 const index=readFileSync(resolve(base,'index.html'),'utf8');
 const themeGame=readFileSync(resolve(base,'theme-game.html'),'utf8');
+const themeGameJs=readFileSync(resolve(base,'theme-game.js'),'utf8');
 if(index.includes('id="tasksBtn"')||index.includes('id="tasksModal"'))throw Error('Daily tasks must stay removed');
 if(!index.includes('themes-entry-featured'))throw Error('Featured thematic mode card is missing');
 if(!index.includes('12 тем · 1200 уровней'))throw Error('Thematic mode headline is missing');
 if(!themeGame.includes('data-coins'))throw Error('Thematic game coin balance is missing');
 if(themeGame.includes('id="themeSettingsBtn"')||themeGame.includes('id="themeProgress"'))throw Error('Thematic header must contain coins only');
+if(!themeGameJs.includes('const ART_LEVELS={')||!themeGameJs.includes('const ART_TRANSLATED={'))throw Error('Art theme bank is missing');
+if(!themeGameJs.includes("themeId=themeParam==='art'?'art':'sport'")||!themeGameJs.includes("return 'pw.themeProgress.'+themeId")||!themeGameJs.includes("theme='+themeId+'&level="))throw Error('Thematic routing/progress is not category-specific');
+const artBank=themeGameJs.match(/const ART_LEVELS=\{\n([\s\S]*?)\n\};\nconst ART_TRANSLATED=/);
+if(!artBank||(artBank[1].match(/^\s*\d+:\{/gm)||[]).length!==100)throw Error('Art theme must contain 100 levels');
 const homeJs=readFileSync(resolve(base,'home.js'),'utf8');
 const uiCss=readFileSync(resolve(base,'ui.css'),'utf8');
 if(!index.includes('id="profileTitle"'))throw Error('Chapter-earned profile title surface is missing');
