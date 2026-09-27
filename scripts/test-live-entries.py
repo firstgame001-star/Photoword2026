@@ -920,16 +920,27 @@ def install_mock(ctx,account,completed,lang):
             account['coins']+=5;account['daily_streak']=max(1,account.get('daily_streak',0)+1);account['last_daily_reward']=time.strftime('%Y-%m-%d')
         elif action=='set_nickname':
             nick=body.get('nickname','');assert re.fullmatch(r'[A-Za-z0-9_]{3,16}',nick);account['game_nickname']=nick;account['nickname_changed']=True
+        elif action=='enable_notifications':
+            account['notifications_enabled']=True;account['notification_language']=body.get('language',lang)
         elif action=='friends':
             route.fulfill(status=200,content_type='application/json',body=json.dumps({'friends':[{'photoword_id':'PW-FRIEND','first_name':'Friend','last_name':'','username':'friend','game_nickname':'FriendOne','completed_levels':7,'rewarded':False}],'invited':1,'rewarded':0,'total_reward':0}),headers={'Access-Control-Allow-Origin':'*'});return
         elif action=='public_config':
             route.fulfill(status=200,content_type='application/json',body=json.dumps({'config':{'ads_provider':'adsgram','adsgram_reward_block_id':None,'support_contact':'@PhotoWordBot'}}),headers={'Access-Control-Allow-Origin':'*'});return
         elif action=='track_event':
             route.fulfill(status=200,content_type='application/json',body=json.dumps({'ok':True}),headers={'Access-Control-Allow-Origin':'*'});return
+        elif action=='ad_prepare':
+            route.fulfill(status=200,content_type='application/json',body=json.dumps({'nonce':'00000000-0000-0000-0000-000000000070','block_id':'audit-block','reward':5}),headers={'Access-Control-Allow-Origin':'*'});return
+        elif action=='ad_claim':
+            account['coins']+=5
         elif action=='erase_account':
-            route.fulfill(status=200,content_type='application/json',body=json.dumps({'erased':True}),headers={'Access-Control-Allow-Origin':'*'});return
+            account['_erased']=True;route.fulfill(status=200,content_type='application/json',body=json.dumps({'erased':True}),headers={'Access-Control-Allow-Origin':'*'});return
         elif action=='create_invoice':
             route.fulfill(status=200,content_type='application/json',body=json.dumps({'invoice_url':'https://t.me/$test','coins':10,'stars':15}),headers={'Access-Control-Allow-Origin':'*'});return
+        elif action=='create_energy_invoice':
+            pack=body.get('pack');assert pack in ('e1','e5')
+            if account.get('_challenge_energy',5)>=5:
+                route.fulfill(status=409,content_type='application/json',body=json.dumps({'error':'energy_full'}),headers={'Access-Control-Allow-Origin':'*'});return
+            route.fulfill(status=200,content_type='application/json',body=json.dumps({'invoice_url':'https://t.me/$energy','pack':pack,'energy':1 if pack=='e1' else 5,'stars':15 if pack=='e1' else 50}),headers={'Access-Control-Allow-Origin':'*'});return
         if data is None:data={'player':account.copy()}
         route.fulfill(status=status,content_type='application/json',body=json.dumps(data),headers={'Access-Control-Allow-Origin':'*'})
     ctx.route('https://bqoraxewpcnmidvjlpuy.supabase.co/**',mock)
@@ -967,6 +978,15 @@ with sync_playwright() as pw:
       account={'photoword_id':'PW-TESTONLY','first_name':'Test','last_name':'','username':None,'game_nickname':None,'nickname_changed':False,'coins':5000,'xp':300,'completed_levels':20,'current_level':21,'rank':1,'daily_streak':0,'last_daily_reward':None}
       completed=set(range(1,21));install_mock(ctx,account,completed,language);page=ctx.new_page();errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
       page.goto(BASE+'clean/#'+fragment,wait_until='domcontentloaded',timeout=45000)
+      page.evaluate("""() => {
+        window.__pwNative={links:[],invoices:[],closed:false};
+        window.Telegram=window.Telegram||{};window.Telegram.WebApp=window.Telegram.WebApp||{};
+        const set=(k,v)=>{try{Object.defineProperty(window.Telegram.WebApp,k,{configurable:true,writable:true,value:v})}catch{window.Telegram.WebApp[k]=v}};
+        set('openTelegramLink',url=>window.__pwNative.links.push(url));
+        set('openInvoice',(url,cb)=>{window.__pwNative.invoices.push(url);cb('cancelled')});
+        set('requestWriteAccess',cb=>cb(true));
+        set('close',()=>{window.__pwNative.closed=true});
+      }""")
       # Chapters: chapter 2 is unlocked after level 20 and uses a 30-level counter; chapter 3 is present.
       expect(page.locator('#homeChapter1')).to_be_visible();expect(page.locator('#homeChapter2')).to_be_visible();page.locator('#homeChapter1').scroll_into_view_if_needed();expect(page.locator('#homeChapter1Title')).to_be_visible();page.locator('#homeChapter2').scroll_into_view_if_needed();expect(page.locator('#homeChapter2Title')).to_be_visible();page.locator('#homeChapter1').scroll_into_view_if_needed();expect(page.locator('#homeChapter1Title')).to_be_visible()
       page.locator('#chaptersNav').tap();expect(page.locator('#chaptersScreen')).to_be_visible();expect(page.locator('#chapter1Label')).to_contain_text('1–20');expect(page.locator('#chapter2Label')).to_contain_text('21–50');expect(page.locator('#chapter2Done')).to_have_text('21');expect(page.locator('#chapter2Count')).to_contain_text('50');expect(page.locator('#chapter2Play')).not_to_have_class(re.compile('locked'));expect(page.locator('#chapter2Play')).to_have_attribute('href','./game.html?level=21');page.locator('#chaptersBack').tap()
@@ -977,8 +997,8 @@ with sync_playwright() as pw:
       page.locator('#settingsBtn').tap();page.locator('#soundToggle').uncheck();page.locator('#hapticToggle').uncheck();page.locator('#musicToggle').check();prefs=page.evaluate("JSON.parse(localStorage.getItem('photoword-prefs'))");assert prefs['sound'] is False and prefs['haptic'] is False and prefs['music'] is True;page.locator('#musicToggle').uncheck();page.locator('[data-close="settingsModal"]').tap()
       # Language can be changed from Settings and changed back without losing the game.
       other={'ru':'en','en':'az','az':'ru'}[language];page.locator('#settingsBtn').tap();page.locator('#languageBtn').tap();page.locator(f'[data-language="{other}"]').tap();assert page.evaluate("localStorage.getItem('pw.language')")==other;page.locator('#settingsBtn').tap();page.locator('#languageBtn').tap();page.locator(f'[data-language="{language}"]').tap();assert page.evaluate("localStorage.getItem('pw.language')")==language
-      # Notification setting is present and localized; native permission is controlled by Telegram.
-      page.locator('#settingsBtn').tap();expect(page.locator('#notificationsBtn')).to_be_visible();expect(page.locator('#notificationsState')).not_to_be_empty();page.locator('[data-close="settingsModal"]').tap()
+      # Notification permission flow calls Telegram and persists server/local state.
+      page.locator('#settingsBtn').tap();expect(page.locator('#notificationsBtn')).to_be_visible();page.locator('#notificationsBtn').tap();expect(page.locator('#notificationsState')).to_have_text({'ru':'Разрешены','en':'Allowed','az':'İcazə verilib'}[language]);assert page.evaluate("localStorage.getItem('pw.writeAccess')")=='1';page.locator('[data-close="settingsModal"]').tap()
       # Rules and support are localized.
       page.locator('#settingsBtn').tap();page.locator('#rulesBtn').tap();expect(page.locator('#rulesModal')).to_be_visible();assert len(page.locator('#rulesBody').inner_text())>100;rules_text=page.locator('#rulesBody').inner_text();
       if language=='az': assert '7-ci fəsil “Sivilizasiya”' in rules_text and '5–12-ci fəsillər artıq' not in rules_text
@@ -986,7 +1006,7 @@ with sync_playwright() as pw:
       page.locator('#settingsBtn').tap();page.locator('#supportBtn').tap();expect(page.locator('#supportModal')).to_be_visible()
       if language=='az': expect(page.locator('#supportTitle')).to_have_text('Dəstək')
       if language=='en': expect(page.locator('#supportTitle')).to_have_text('Support')
-      expect(page.locator('#openSupportChat')).to_be_visible();page.locator('[data-close="supportModal"]').tap()
+      expect(page.locator('#openSupportChat')).to_be_visible();page.locator('#openSupportChat').tap();assert 'start=support' in page.evaluate("window.__pwNative.links.at(-1)");page.locator('[data-close="supportModal"]').tap()
       # Account deletion flow is present and requires explicit confirmation.
       page.locator('#settingsBtn').tap();page.locator('#eraseAccountBtn').tap();expect(page.locator('#eraseAccountModal')).to_be_visible();expect(page.locator('#confirmEraseAccount')).to_be_visible();page.locator('#cancelEraseAccount').tap()
       # Privacy and terms follow the selected language.
@@ -997,8 +1017,8 @@ with sync_playwright() as pw:
       page.locator('#profileBtn').tap();expect(page.locator('#profileTitle')).to_have_text(expected_title);page.locator('[data-close="profileModal"]').tap()
       # Nickname is one-time UI and becomes the displayed name.
       page.locator('#profileBtn').tap();page.locator('#nicknameBtn').tap();page.locator('#nicknameInput').fill('Player_77');page.locator('#saveNickname').tap();expect(page.locator('#name')).to_have_text('Player_77');page.locator('#profileBtn').tap();expect(page.locator('#nicknameBtn')).to_be_disabled()
-      # Share-game control is available from the profile.
-      expect(page.locator('#shareGameBtn')).to_be_visible();page.locator('[data-close="profileModal"]').tap()
+      # Share-game control opens Telegram share URL.
+      expect(page.locator('#shareGameBtn')).to_be_visible();page.locator('#shareGameBtn').tap();assert 't.me/share/url' in page.evaluate("window.__pwNative.links.at(-1)");page.locator('[data-close="profileModal"]').tap()
       # Daily +5 updates balance, marks claimed and closes.
       before=int(page.locator('[data-coins]').first.inner_text());page.locator('#dailyRewardBtn').tap();page.locator('#claimDaily').tap();expect(page.locator('[data-coins]').first).to_have_text(str(before+5));expect(page.locator('#dailyModal')).to_be_hidden(timeout=2500)
       # High-reward daily tasks were removed from the product surface.
@@ -1011,11 +1031,26 @@ with sync_playwright() as pw:
       expect(page.locator('#themesEntry')).to_be_visible();expect(page.locator('#themesEntryBadge')).to_be_visible();page.locator('#themesEntry').tap();expect(page.locator('#themesScreen')).to_be_visible();expect(page.locator('#themeCards .theme-card')).to_have_count(12);expect(page.locator('#themeCards .theme-card').first).to_be_enabled();expect(page.locator('#themeCards .theme-card').nth(2)).to_be_enabled();expect(page.locator('#themeCards .theme-card').nth(3)).to_be_enabled();expect(page.locator('#themeCards .theme-card').nth(4)).to_be_enabled();expect(page.locator('#themeCards .theme-card').nth(5)).to_be_enabled();page.locator('#themeCards .theme-card').first.tap();expect(page.locator('#themeDetailScreen')).to_be_visible();expect(page.locator('#themeLevelGrid button')).to_have_count(100);expect(page.locator('#themeLevelGrid button').nth(0)).to_be_enabled();expect(page.locator('#themeLevelGrid button').nth(20)).to_be_disabled();page.locator('#themeDetailBack').tap();page.locator('#themesBack').tap()
       # Friends use nickname and progress.
       page.locator('#friendsNav').tap();expect(page.locator('#friendsList')).to_contain_text('FriendOne');expect(page.locator('#friendsList')).to_contain_text('7 / 10');page.locator('[data-close="friendsModal"]').tap()
-      # Rating and shop surfaces are reachable/localized; native Stars invoice UI is Telegram-controlled.
-      page.locator('#ratingNav').tap();expect(page.locator('#leaderboard')).to_contain_text('Player_77');page.locator('#ratingBack').tap();page.locator('#shopNav').tap();expect(page.locator('#shopModal')).to_be_visible();expect(page.locator('#watchAd')).to_be_disabled();expect(page.locator('[data-pack="c10"]')).to_be_enabled();expect(page.locator('[data-energy-store-pack]')).to_have_count(2);expect(page.locator('[data-energy-store-pack="e1"]')).to_be_enabled();expect(page.locator('[data-energy-store-pack="e5"]')).to_be_enabled();page.locator('[data-close="shopModal"]').tap()
+      # Rating, Stars invoices, energy purchase route and rewarded-ad claim are reachable.
+      page.locator('#ratingNav').tap();expect(page.locator('#leaderboard')).to_contain_text('Player_77');page.locator('#ratingBack').tap();page.locator('#shopNav').tap();expect(page.locator('#shopModal')).to_be_visible();expect(page.locator('[data-pack="c10"]')).to_be_enabled();expect(page.locator('[data-energy-store-pack]')).to_have_count(2)
+      page.locator('[data-pack="c10"]').tap();expect(page.locator('[data-pack="c10"]')).to_be_enabled();assert '$test' in page.evaluate("window.__pwNative.invoices.at(-1)")
+      page.locator('[data-energy-store-pack="e1"]').tap();expect(page.locator('[data-energy-store-pack="e1"]')).to_be_enabled();assert '$energy' in page.evaluate("window.__pwNative.invoices.at(-1)")
+      page.evaluate("""() => { window.Adsgram={init:()=>({show:async()=>({done:true})})}; document.getElementById('watchAd').disabled=false }""")
+      ad_before=int(page.locator('[data-coins]').first.inner_text());page.locator('#watchAd').tap();expect(page.locator('[data-coins]').first).to_have_text(str(ad_before+5))
+      page.locator('[data-close="shopModal"]').tap()
       # Reset requires double confirmation and then requires language again.
       page.locator('#settingsBtn').tap();page.locator('#resetProgressBtn').tap();page.locator('#confirmReset').tap();page.locator('#confirmReset').tap();expect(page.locator('#languageModal')).to_be_visible(timeout=3000);expect(page.locator('#languageClose')).to_be_hidden()
       assert not relevant_errors(errors),errors;ctx.close()
+
+    # Confirm destructive account deletion end-to-end in the mocked backend.
+    ctx=browser.new_context(viewport={'width':390,'height':800},has_touch=True,is_mobile=True)
+    ctx.add_init_script("localStorage.setItem('pw.language','ru'); localStorage.setItem('pw.theme','game');")
+    erase_account={'photoword_id':'PW-ERASE-TEST','first_name':'Erase','last_name':'','username':None,'game_nickname':None,'nickname_changed':False,'coins':250,'xp':0,'completed_levels':0,'current_level':1,'rank':0,'daily_streak':0,'last_daily_reward':None}
+    install_mock(ctx,erase_account,set(),'ru');page=ctx.new_page();errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
+    page.goto(BASE+'clean/#'+fragment,wait_until='domcontentloaded',timeout=45000)
+    page.evaluate("""() => { window.Telegram=window.Telegram||{};window.Telegram.WebApp=window.Telegram.WebApp||{};try{Object.defineProperty(window.Telegram.WebApp,'close',{configurable:true,value:()=>{window.__pwClosed=true}})}catch{} }""")
+    page.locator('#settingsBtn').tap();page.locator('#eraseAccountBtn').tap();expect(page.locator('#eraseAccountModal')).to_be_visible();page.locator('#confirmEraseAccount').tap();page.locator('#confirmEraseAccount').tap();expect(page.locator('#eraseAccountModal')).to_be_hidden();assert erase_account.get('_erased') is True;assert page.evaluate("localStorage.getItem('pw.language')") is None
+    assert not relevant_errors(errors),errors;ctx.close()
 
     # Thematic Sport game keeps separate progress, shows real coins, and has no settings/progress widgets in the top-right header.
     for language in ['ru','en','az']:
