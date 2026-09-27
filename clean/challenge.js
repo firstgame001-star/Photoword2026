@@ -2830,8 +2830,8 @@ function trustedNow(){return serverNowMs?serverNowMs+(performance.now()-serverPe
 const localKey='pw.challenge.local.v1';
 function localRead(){
  let d={energy:5,ref:Date.now(),limited_best_score:0,nohint_best_streak:0,blitz_best_score:0,blitz_best_streak:0};try{d={...d,...JSON.parse(localStorage.getItem(localKey)||'{}')}}catch{}
- const now=Date.now();if(d.energy<5){const gain=Math.floor(Math.max(0,now-d.ref)/ENERGY_MS);if(gain>0){d.energy=Math.min(5,d.energy+gain);d.ref=d.energy===5?now:d.ref+gain*ENERGY_MS;localStorage.setItem(localKey,JSON.stringify(d));}}
- return {...d,energy_max:5,next_energy_at:d.energy<5?new Date(d.ref+ENERGY_MS).toISOString():null};
+ const now=Date.now();if(d.energy<ENERGY_MAX){const gain=Math.floor(Math.max(0,now-d.ref)/ENERGY_MS);if(gain>0){d.energy=Math.min(ENERGY_MAX,d.energy+gain);d.ref=d.energy===ENERGY_MAX?now:d.ref+gain*ENERGY_MS;localStorage.setItem(localKey,JSON.stringify(d));}}
+ return {...d,energy_max:ENERGY_MAX,next_energy_at:d.energy<ENERGY_MAX?new Date(d.ref+ENERGY_MS).toISOString():null};
 }
 function localWrite(d){try{localStorage.setItem(localKey,JSON.stringify(d))}catch{}}
 async function api(action,extra={}){
@@ -2846,7 +2846,7 @@ async function api(action,extra={}){
   return j.challenge;
  }
  serverMode=false;let d=localRead();
- if(action==='start'&&extra.mode==='limited'){if(d.energy<=0)throw Object.assign(new Error('challenge_no_energy'),{data:{challenge:d}});if(d.energy===5)d.ref=Date.now();d.energy--;localWrite(d);}
+ if(action==='start'&&extra.mode==='limited'){if(d.energy<=0)throw Object.assign(new Error('challenge_no_energy'),{data:{challenge:d}});if(d.energy===ENERGY_MAX)d.ref=Date.now();d.energy--;localWrite(d);}
  if(action==='finish'){
   if(extra.mode==='limited')d.limited_best_score=Math.max(d.limited_best_score,extra.score||0);
   if(extra.mode==='nohint')d.nohint_best_streak=Math.max(d.nohint_best_streak,extra.streak||0);
@@ -2894,7 +2894,7 @@ function heartsText(){return '🛡️'.repeat(Math.max(0,hearts))+'💥'.repeat(
 function setHud(labels,values){for(let i=0;i<4;i++){const n=i+1;$('hudLabel'+n).textContent=labels[i]||'';$('hudValue'+n).textContent=values[i]??''}}
 function updateHud(){
  const x=tr();
- if(mode==='limited')setHud([x.words,x.errors,x.energy,x.record],[correct+'/10',heartsText(),(state?.energy??0)+'/5',(state?.limited_best_score||0)+'/10']);
+ if(mode==='limited')setHud([x.words,x.errors,x.energy,x.record],[correct+'/10',heartsText(),(state?.energy??0)+'/'+ENERGY_MAX,(state?.limited_best_score||0)+'/10']);
  else if(mode==='nohint')setHud([x.series,x.errors,x.record,x.passed],[streak,heartsText(),Math.max(state?.nohint_best_streak||0,bestRunStreak),correct]);
  else setHud([x.time,x.points,x.series,x.record],[Math.max(0,Math.ceil((deadline-performance.now())/1000)),score,streak,Math.max(state?.blitz_best_score||0,score)]);
 }
@@ -2948,11 +2948,11 @@ function renderIntro(){
  clearInterval(energyTimer);document.querySelectorAll('.challenge-energy-countdown').forEach(e=>e.remove());const x=tr(),d=x[mode];$('challengeGameTitle').textContent=d[1];$('challengeGameSubtitle').textContent=mode==='limited'?x.energy:mode==='nohint'?x.series:x.time;$('challengeIntroIcon').textContent=d[0];$('challengeIntroTitle').textContent=d[1];$('challengeIntroText').textContent=d[2];$('challengeStart').textContent=x.start+' ▶';
  const stats=$('challengeIntroStats');stats.replaceChildren();
  const add=(label,value)=>{const e=document.createElement('div');e.innerHTML='<small></small><b></b>';e.querySelector('small').textContent=label;e.querySelector('b').textContent=value;stats.append(e)};
- if(mode==='limited'){add(x.energy,(state?.energy??0)+'/5');add(x.record,(state?.limited_best_score||0)+'/10');const b=$('challengeStart');b.disabled=(state?.energy??0)<=0;$('energyRefill').hidden=(state?.energy??0)>0;$('energyRefill').textContent=x.refill;$('energyShop').hidden=true;$('energyRefillNote').hidden=true;const countdown=document.createElement('p');countdown.className='challenge-energy-countdown';stats.after(countdown);const tick=()=>{const e=state?.energy??0;if(e>=5){countdown.textContent=x.full;return}const left=Date.parse(state?.next_energy_at||'')-trustedNow(),fullLeft=Math.max(0,left)+Math.max(0,ENERGY_MAX-e-1)*ENERGY_MS;countdown.textContent=(left>0?x.wait+': '+formatLeft(left):x.wait+': 0:00')+' · '+x.fullIn+': '+formatLeft(fullLeft);if(left<=0)loadState()};tick();energyTimer=setInterval(tick,1000)}
+ if(mode==='limited'){add(x.energy,(state?.energy??0)+'/'+ENERGY_MAX);add(x.record,(state?.limited_best_score||0)+'/10');const b=$('challengeStart');b.disabled=(state?.energy??0)<=0;$('energyRefill').hidden=(state?.energy??0)>0;$('energyRefill').textContent=x.refill;$('energyShop').hidden=true;$('energyRefillNote').hidden=true;const countdown=document.createElement('p');countdown.className='challenge-energy-countdown';stats.after(countdown);const tick=()=>{const e=state?.energy??0;if(e>=ENERGY_MAX){countdown.textContent=x.full;return}const left=Date.parse(state?.next_energy_at||'')-trustedNow(),fullLeft=Math.max(0,left)+Math.max(0,ENERGY_MAX-e-1)*ENERGY_MS;countdown.textContent=(left>0?x.wait+': '+formatLeft(left):x.wait+': 0:00')+' · '+x.fullIn+': '+formatLeft(fullLeft);if(left<=0)loadState()};tick();energyTimer=setInterval(tick,1000)}
  else{$('challengeStart').disabled=false;$('energyRefill').hidden=true;$('energyRefillNote').hidden=true;if(mode==='nohint'){add(x.record,state?.nohint_best_streak||0);add(x.errors,'🛡️🛡️🛡️')}else{add(x.record,state?.blitz_best_score||0);add(x.series,state?.blitz_best_streak||0)}}
  if(!serverMode){const note=document.createElement('small');note.className='challenge-local-note';note.textContent=x.serverFallback;stats.append(note)}
 }
-async function loadState(){try{state=await api('state');renderIntro()}catch{if(rawInit()){state={energy:5,energy_max:5,next_energy_at:null,limited_best_score:0,nohint_best_streak:0,blitz_best_score:0,blitz_best_streak:0};serverMode=true;renderIntro();$('challengeStart').disabled=true;pw?.status?.(lang()==='en'?'Could not load the mode. Try again.':lang()==='az'?'Rejimi yükləmək olmadı. Yenidən cəhd et.':'Не удалось загрузить режим. Попробуй ещё раз.')}else{state=localRead();serverMode=false;renderIntro()}}}
+async function loadState(){try{state=await api('state');renderIntro()}catch{if(rawInit()){state={energy:5,energy_max:ENERGY_MAX,next_energy_at:null,limited_best_score:0,nohint_best_streak:0,blitz_best_score:0,blitz_best_streak:0};serverMode=true;renderIntro();$('challengeStart').disabled=true;pw?.status?.(lang()==='en'?'Could not load the mode. Try again.':lang()==='az'?'Rejimi yükləmək olmadı. Yenidən cəhd et.':'Не удалось загрузить режим. Попробуй ещё раз.')}else{state=localRead();serverMode=false;renderIntro()}}}
 async function startRun(){
  try{state=await api('start',{mode,language:lang()})}catch(e){if(e?.data?.challenge)state=e.data.challenge;if(String(e?.message)==='challenge_no_energy'){renderIntro();pw?.status?.(tr().energyEmpty);return}if(rawInit()){pw?.status?.(lang()==='en'?'Could not start the mode. Try again.':lang()==='az'?'Rejimi başlatmaq olmadı. Yenidən cəhd et.':'Не удалось запустить режим. Попробуй ещё раз.');return}state=localRead()}
  running=true;hearts=3;correct=0;streak=0;bestRunStreak=0;score=0;resetOrder();clearInterval(timer);clearInterval(energyTimer);
