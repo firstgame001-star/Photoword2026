@@ -27,7 +27,7 @@ for(const file of ['core.js','home.js','game.js','theme-game.js','challenge.js',
 }
 
 const release=JSON.parse(readFileSync(resolve(base,'release.json'),'utf8'));
-if(release.release!=='20260927-r60')throw Error('Unexpected release: '+release.release);
+if(release.release!=='20260927-r61')throw Error('Unexpected release: '+release.release);
 if(!Array.isArray(release.levels)||!release.levels.includes(180))throw Error('Main levels are not published through 180');
 if(release.chapters?.length!==12)throw Error('Main chapter navigation must contain 12 chapters');
 if(release.chapters.find(x=>x.id===3)?.status!=='live')throw Error('Chapter 3 must be complete');
@@ -76,7 +76,8 @@ const challengeJs=readFileSync(resolve(base,'challenge.js'),'utf8');
 if(!challengeJs.includes("correct_seconds_bonus")&&!challengeJs.includes("deadline+=3000"))throw Error('Blitz +3 second bonus is missing');
 if(!challengeJs.includes("deadline-=3000"))throw Error('Blitz wrong-word penalty is missing');
 if(!challengeJs.includes("hearts=3"))throw Error('Challenge mistake limit is missing');
-if(!challengeJs.includes("ENERGY_MAX=25")||!challengeJs.includes("ENERGY_MS=30*60*1000"))throw Error('Limited-attempt energy model is missing');
+if(!challengeJs.includes("ENERGY_MAX=5")||!challengeJs.includes("ENERGY_MS=30*60*1000"))throw Error('Limited-attempt energy model is missing');
+if(!challengeJs.includes("reserve_energy")||release.challenge_modes?.energy_stars?.purchased_storage!=='separate_reserve')throw Error('Purchased attempt reserve model is missing');
 if(!challengeJs.includes('syncTrustedClock')||!challengeJs.includes('trustedNow'))throw Error('Trusted server clock sync is missing');
 if(!challengeJs.includes('performance.now()+60000')||!challengeJs.includes('deadline-performance.now()'))throw Error('Blitz must use a monotonic clock');
 if(release.challenge_modes?.anti_clock_cheat?.enabled!==true)throw Error('Anti clock-cheat manifest flag is missing');
@@ -110,4 +111,4 @@ if(release.ui?.language_gate_fix!=='first_launch_unset_then_persist_choice')thro
 if(!homeJs.includes("sessionStorage.getItem('pw.profileSyncedShown')")||!homeJs.includes("setTimeout(()=>{const e=$('status')"))throw Error('One-time profile sync notice is missing');
 if(release.ui?.profile_synced_notice?.show!=='once_per_session'||release.ui?.profile_synced_notice?.auto_hide_ms!==1800)throw Error('Profile sync notice manifest is incorrect');
 if(!homeJs.includes("applyLanguage('ru',false)")||!homeJs.includes("function applyLanguage(l,persist=true)"))throw Error('First-launch language selection flow is incorrect');
-console.log('PASS: r58 entrypoints, Chapters 1-12, backgrounds, absolute progress, chapter titles and JavaScript syntax.');
+console.log('PASS: r61 entrypoints, Chapters 1-12, backgrounds, absolute progress, chapter titles and JavaScript syntax.');
