@@ -43,7 +43,11 @@ def install_mock(ctx,account,completed,lang):
             route.fulfill(status=204,headers={'Access-Control-Allow-Origin':'*','Access-Control-Allow-Headers':'content-type,apikey','Access-Control-Allow-Methods':'POST,OPTIONS'});return
         body=json.loads(req.post_data or '{}')
         if '/functions/v1/challenge-game' in req.url:
-            route.abort();return
+            action=body.get('action','state');mode=body.get('mode');energy=account.setdefault('_challenge_energy',5)
+            if action=='start' and mode=='limited' and energy>0:
+                account['_challenge_energy']=energy-1
+            ch={'energy':account['_challenge_energy'],'energy_max':5,'next_energy_at':None,'limited_best_score':0,'nohint_best_streak':0,'blitz_best_score':0,'blitz_best_streak':0}
+            route.fulfill(status=200,content_type='application/json',body=json.dumps({'challenge':ch}),headers={'Access-Control-Allow-Origin':'*'});return
         if '/rest/v1/rpc/get_leaderboard' in req.url:
             row=account.copy()
             route.fulfill(status=200,content_type='application/json',body=json.dumps([row] if row['xp']>0 else []),headers={'Access-Control-Allow-Origin':'*'});return
