@@ -1231,6 +1231,20 @@ with sync_playwright() as pw:
       assert not relevant_errors(errors),errors
       report={'engine':engine,'language':language,'levels':'1-280 validated / boundary samples played','checks':['runtime validation of all 280 answer pools','chapter 1 sample','chapter 2 boundaries 21 and 50','completed chapter 3 through 90','chapter 4 complete 91-131','chapter 5 complete 132-180','chapter 6 complete 181-230','chapter 7 complete 231-280','transitions at 20, 50, 90, 131, 180, 230 and completion at 280','localized text hint','letter hint','remove hint','level 100 continues to 101, level 131 opens 132, level 180 opens 181, level 230 opens 231, and level 280 returns home'],'result':'PASS'}
       reports.append(report);print(json.dumps(report,ensure_ascii=False),flush=True);ctx.close()
+    # Narrow-screen long-answer smoke: no horizontal overflow at 320px.
+    ctx=browser.new_context(viewport={'width':320,'height':720},has_touch=True,is_mobile=True)
+    ctx.add_init_script("localStorage.setItem('pw.language','en'); localStorage.setItem('pw.theme','game');")
+    narrow_account={'photoword_id':'PW-NARROW','first_name':'Narrow','last_name':'','username':None,'game_nickname':None,'nickname_changed':False,'coins':5000,'xp':0,'completed_levels':280,'current_level':281,'rank':1,'daily_streak':0,'last_daily_reward':None}
+    install_mock(ctx,narrow_account,set(),'en');page=ctx.new_page();errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
+    page.goto(BASE+'clean/game.html?level=103#'+fragment,wait_until='domcontentloaded',timeout=45000)
+    assert page.evaluate("document.documentElement.scrollWidth<=window.innerWidth+1"),page.evaluate("({w:innerWidth,sw:document.documentElement.scrollWidth})")
+    slots_box=page.locator('#slots').bounding_box();assert slots_box and slots_box['x']>=0 and slots_box['x']+slots_box['width']<=321,slots_box
+    page.evaluate("localStorage.setItem('pw.language','az')")
+    page.goto(BASE+'clean/theme-game.html?theme=technology&level=88#'+fragment,wait_until='domcontentloaded',timeout=45000)
+    assert page.evaluate("document.documentElement.scrollWidth<=window.innerWidth+1"),page.evaluate("({w:innerWidth,sw:document.documentElement.scrollWidth})")
+    slots_box=page.locator('#slots').bounding_box();assert slots_box and slots_box['x']>=0 and slots_box['x']+slots_box['width']<=321,slots_box
+    assert not relevant_errors(errors),errors;ctx.close()
+
     browser.close()
 
 (OUT/'results.json').write_text(json.dumps(reports,ensure_ascii=False,indent=2))
