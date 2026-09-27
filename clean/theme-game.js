@@ -4,11 +4,11 @@ const $=id=>document.getElementById(id),pw=window.PW;
 const getLang=()=>{try{return localStorage.getItem('pw.language')||'ru'}catch{return'ru'}};
 const lang=getLang();
 const themeParam=new URLSearchParams(location.search).get('theme');
-const themeId=['sport','art','professions'].includes(themeParam)?themeParam:'sport';
+const themeId=['sport','art','professions','travel'].includes(themeParam)?themeParam:'sport';
 const UI={
- ru:{sport:'⚽ Спорт',art:'🎨 Искусство',professions:'🧑‍💼 Профессии',level:n=>'Тематический уровень '+n,textHint:'Текстовая подсказка',tap:'Нажми, чтобы открыть',wrong:'Неверное слово. Попробуй ещё раз.',passed:n=>'Уровень '+n+' пройден!',saved:'Прогресс сохранён отдельно от основной игры.',next:'СЛЕДУЮЩИЙ УРОВЕНЬ',back:'К ТЕМАМ',locked:n=>'Сначала пройди уровень '+n+'.',letter:'Буква открыта.',remove:'Лишние буквы убраны.',shuffle:'Буквы перемешаны.',text:'Подсказка открыта.',allLetters:'Все буквы уже открыты.',noExtra:'Лишних букв не осталось.',placeFail:'Не удалось разместить букву.',image:n=>'Изображение '+n},
- en:{sport:'⚽ Sport',art:'🎨 Art',professions:'🧑‍💼 Professions',level:n=>'Themed level '+n,textHint:'Text hint',tap:'Tap to reveal',wrong:'Wrong word. Try again.',passed:n=>'Level '+n+' completed!',saved:'Progress saved separately from the main game.',next:'NEXT LEVEL',back:'BACK TO THEMES',locked:n=>'Complete level '+n+' first.',letter:'Letter revealed.',remove:'Extra letters removed.',shuffle:'Letters shuffled.',text:'Hint revealed.',allLetters:'All letters are already revealed.',noExtra:'No extra letters remain.',placeFail:'Could not place the letter.',image:n=>'Image '+n},
- az:{sport:'⚽ İdman',art:'🎨 İncəsənət',professions:'🧑‍💼 Peşələr',level:n=>n+'-ci mövzu səviyyəsi',textHint:'Mətn ipucu',tap:'Açmaq üçün toxun',wrong:'Söz yanlışdır. Yenidən cəhd et.',passed:n=>n+'-ci səviyyə keçildi!',saved:'Tərəqqi əsas oyundan ayrıca saxlanıldı.',next:'NÖVBƏTİ SƏVİYYƏ',back:'MÖVZULARA QAYIT',locked:n=>'Əvvəlcə '+n+'-ci səviyyəni keç.',letter:'Hərf açıldı.',remove:'Artıq hərflər silindi.',shuffle:'Hərflər qarışdırıldı.',text:'İpucu açıldı.',allLetters:'Bütün hərflər artıq açılıb.',noExtra:'Artıq hərf qalmayıb.',placeFail:'Hərfi yerləşdirmək mümkün olmadı.',image:n=>n+'-ci şəkil'}
+ ru:{sport:'⚽ Спорт',art:'🎨 Искусство',professions:'🧑‍💼 Профессии',travel:'🌍 Путешествия',level:n=>'Тематический уровень '+n,textHint:'Текстовая подсказка',tap:'Нажми, чтобы открыть',wrong:'Неверное слово. Попробуй ещё раз.',passed:n=>'Уровень '+n+' пройден!',saved:'Прогресс сохранён отдельно от основной игры.',next:'СЛЕДУЮЩИЙ УРОВЕНЬ',back:'К ТЕМАМ',locked:n=>'Сначала пройди уровень '+n+'.',letter:'Буква открыта.',remove:'Лишние буквы убраны.',shuffle:'Буквы перемешаны.',text:'Подсказка открыта.',allLetters:'Все буквы уже открыты.',noExtra:'Лишних букв не осталось.',placeFail:'Не удалось разместить букву.',image:n=>'Изображение '+n},
+ en:{sport:'⚽ Sport',art:'🎨 Art',professions:'🧑‍💼 Professions',travel:'🌍 Travel',level:n=>'Themed level '+n,textHint:'Text hint',tap:'Tap to reveal',wrong:'Wrong word. Try again.',passed:n=>'Level '+n+' completed!',saved:'Progress saved separately from the main game.',next:'NEXT LEVEL',back:'BACK TO THEMES',locked:n=>'Complete level '+n+' first.',letter:'Letter revealed.',remove:'Extra letters removed.',shuffle:'Letters shuffled.',text:'Hint revealed.',allLetters:'All letters are already revealed.',noExtra:'No extra letters remain.',placeFail:'Could not place the letter.',image:n=>'Image '+n},
+ az:{sport:'⚽ İdman',art:'🎨 İncəsənət',professions:'🧑‍💼 Peşələr',travel:'🌍 Səyahət',level:n=>n+'-ci mövzu səviyyəsi',textHint:'Mətn ipucu',tap:'Açmaq üçün toxun',wrong:'Söz yanlışdır. Yenidən cəhd et.',passed:n=>n+'-ci səviyyə keçildi!',saved:'Tərəqqi əsas oyundan ayrıca saxlanıldı.',next:'NÖVBƏTİ SƏVİYYƏ',back:'MÖVZULARA QAYIT',locked:n=>'Əvvəlcə '+n+'-ci səviyyəni keç.',letter:'Hərf açıldı.',remove:'Artıq hərflər silindi.',shuffle:'Hərflər qarışdırıldı.',text:'İpucu açıldı.',allLetters:'Bütün hərflər artıq açılıb.',noExtra:'Artıq hərf qalmayıb.',placeFail:'Hərfi yerləşdirmək mümkün olmadı.',image:n=>n+'-ci şəkil'}
 };
 const ui=UI[lang]||UI.ru;
 const SETTINGS_UI={
@@ -3585,7 +3585,3015 @@ const PROF_TRANSLATED={
   }
  }
 };
-const THEME_BANKS={sport:[LEVELS,TRANSLATED],art:[ART_LEVELS,ART_TRANSLATED],professions:[PROF_LEVELS,PROF_TRANSLATED]};
+const TRAVEL_LEVELS={
+ "1": {
+  "answer": "ПАСПОРТ",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "🛂",
+    "🛂"
+   ],
+   [
+    "📕",
+    "📕"
+   ],
+   [
+    "✈️",
+    "✈️"
+   ],
+   [
+    "🌍",
+    "🌍"
+   ]
+  ]
+ },
+ "2": {
+  "answer": "БИЛЕТ",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "🎫",
+    "🎫"
+   ],
+   [
+    "✈️",
+    "✈️"
+   ],
+   [
+    "🚆",
+    "🚆"
+   ],
+   [
+    "📱",
+    "📱"
+   ]
+  ]
+ },
+ "3": {
+  "answer": "ЧЕМОДАН",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "🧳",
+    "🧳"
+   ],
+   [
+    "✈️",
+    "✈️"
+   ],
+   [
+    "🏨",
+    "🏨"
+   ],
+   [
+    "🧥",
+    "🧥"
+   ]
+  ]
+ },
+ "4": {
+  "answer": "РЮКЗАК",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "🎒",
+    "🎒"
+   ],
+   [
+    "🥾",
+    "🥾"
+   ],
+   [
+    "🏕️",
+    "🏕️"
+   ],
+   [
+    "🗺️",
+    "🗺️"
+   ]
+  ]
+ },
+ "5": {
+  "answer": "КАРТА",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "🗺️",
+    "🗺️"
+   ],
+   [
+    "📍",
+    "📍"
+   ],
+   [
+    "🧭",
+    "🧭"
+   ],
+   [
+    "🌍",
+    "🌍"
+   ]
+  ]
+ },
+ "6": {
+  "answer": "ГОСТИНИЦА",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "🏨",
+    "🏨"
+   ],
+   [
+    "🛏️",
+    "🛏️"
+   ],
+   [
+    "🛎️",
+    "🛎️"
+   ],
+   [
+    "🧳",
+    "🧳"
+   ]
+  ]
+ },
+ "7": {
+  "answer": "АЭРОПОРТ",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "✈️",
+    "✈️"
+   ],
+   [
+    "🛄",
+    "🛄"
+   ],
+   [
+    "🛫",
+    "🛫"
+   ],
+   [
+    "🛬",
+    "🛬"
+   ]
+  ]
+ },
+ "8": {
+  "answer": "ВОКЗАЛ",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "🚉",
+    "🚉"
+   ],
+   [
+    "🚆",
+    "🚆"
+   ],
+   [
+    "🕒",
+    "🕒"
+   ],
+   [
+    "🎫",
+    "🎫"
+   ]
+  ]
+ },
+ "9": {
+  "answer": "ПОЕЗД",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "🚆",
+    "🚆"
+   ],
+   [
+    "🛤️",
+    "🛤️"
+   ],
+   [
+    "🚉",
+    "🚉"
+   ],
+   [
+    "🎫",
+    "🎫"
+   ]
+  ]
+ },
+ "10": {
+  "answer": "САМОЛЕТ",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "✈️",
+    "✈️"
+   ],
+   [
+    "☁️",
+    "☁️"
+   ],
+   [
+    "🛫",
+    "🛫"
+   ],
+   [
+    "🌍",
+    "🌍"
+   ]
+  ]
+ },
+ "11": {
+  "answer": "КОРАБЛЬ",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "🚢",
+    "🚢"
+   ],
+   [
+    "⚓",
+    "⚓"
+   ],
+   [
+    "🌊",
+    "🌊"
+   ],
+   [
+    "🧭",
+    "🧭"
+   ]
+  ]
+ },
+ "12": {
+  "answer": "АВТОБУС",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "🚌",
+    "🚌"
+   ],
+   [
+    "🛣️",
+    "🛣️"
+   ],
+   [
+    "🚏",
+    "🚏"
+   ],
+   [
+    "🎫",
+    "🎫"
+   ]
+  ]
+ },
+ "13": {
+  "answer": "ТАКСИ",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "🚕",
+    "🚕"
+   ],
+   [
+    "📍",
+    "📍"
+   ],
+   [
+    "📱",
+    "📱"
+   ],
+   [
+    "🛣️",
+    "🛣️"
+   ]
+  ]
+ },
+ "14": {
+  "answer": "МЕТРО",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "🚇",
+    "🚇"
+   ],
+   [
+    "🚉",
+    "🚉"
+   ],
+   [
+    "🗺️",
+    "🗺️"
+   ],
+   [
+    "🎫",
+    "🎫"
+   ]
+  ]
+ },
+ "15": {
+  "answer": "ДОРОГА",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "🛣️",
+    "🛣️"
+   ],
+   [
+    "🚗",
+    "🚗"
+   ],
+   [
+    "🗺️",
+    "🗺️"
+   ],
+   [
+    "➡️",
+    "➡️"
+   ]
+  ]
+ },
+ "16": {
+  "answer": "ТРАССА",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "🛣️",
+    "🛣️"
+   ],
+   [
+    "🚙",
+    "🚙"
+   ],
+   [
+    "🧭",
+    "🧭"
+   ],
+   [
+    "📍",
+    "📍"
+   ]
+  ]
+ },
+ "17": {
+  "answer": "МОСТ",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "🌉",
+    "🌉"
+   ],
+   [
+    "🚗",
+    "🚗"
+   ],
+   [
+    "🌊",
+    "🌊"
+   ],
+   [
+    "🏙️",
+    "🏙️"
+   ]
+  ]
+ },
+ "18": {
+  "answer": "ТОННЕЛЬ",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "🚇",
+    "🚇"
+   ],
+   [
+    "🕳️",
+    "🕳️"
+   ],
+   [
+    "🚗",
+    "🚗"
+   ],
+   [
+    "💡",
+    "💡"
+   ]
+  ]
+ },
+ "19": {
+  "answer": "ГРАНИЦА",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "🛂",
+    "🛂"
+   ],
+   [
+    "🚧",
+    "🚧"
+   ],
+   [
+    "🗺️",
+    "🗺️"
+   ],
+   [
+    "🏳️",
+    "🏳️"
+   ]
+  ]
+ },
+ "20": {
+  "answer": "ВИЗА",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "🛂",
+    "🛂"
+   ],
+   [
+    "📄",
+    "📄"
+   ],
+   [
+    "✈️",
+    "✈️"
+   ],
+   [
+    "✅",
+    "✅"
+   ]
+  ]
+ },
+ "21": {
+  "answer": "ТУРИСТ",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "📷",
+    "📷"
+   ],
+   [
+    "🗺️",
+    "🗺️"
+   ],
+   [
+    "🧳",
+    "🧳"
+   ],
+   [
+    "😎",
+    "😎"
+   ]
+  ]
+ },
+ "22": {
+  "answer": "ГИД",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "🗣️",
+    "🗣️"
+   ],
+   [
+    "🗺️",
+    "🗺️"
+   ],
+   [
+    "👥",
+    "👥"
+   ],
+   [
+    "📍",
+    "📍"
+   ]
+  ]
+ },
+ "23": {
+  "answer": "ЭКСКУРСИЯ",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "🚌",
+    "🚌"
+   ],
+   [
+    "🏛️",
+    "🏛️"
+   ],
+   [
+    "👥",
+    "👥"
+   ],
+   [
+    "🎧",
+    "🎧"
+   ]
+  ]
+ },
+ "24": {
+  "answer": "МАРШРУТ",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "🗺️",
+    "🗺️"
+   ],
+   [
+    "📍",
+    "📍"
+   ],
+   [
+    "➡️",
+    "➡️"
+   ],
+   [
+    "🧭",
+    "🧭"
+   ]
+  ]
+ },
+ "25": {
+  "answer": "НАВИГАТОР",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "📱",
+    "📱"
+   ],
+   [
+    "🗺️",
+    "🗺️"
+   ],
+   [
+    "📍",
+    "📍"
+   ],
+   [
+    "🧭",
+    "🧭"
+   ]
+  ]
+ },
+ "26": {
+  "answer": "КОМПАС",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "🧭",
+    "🧭"
+   ],
+   [
+    "🗺️",
+    "🗺️"
+   ],
+   [
+    "🥾",
+    "🥾"
+   ],
+   [
+    "🌍",
+    "🌍"
+   ]
+  ]
+ },
+ "27": {
+  "answer": "КЕМПИНГ",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "🏕️",
+    "🏕️"
+   ],
+   [
+    "⛺",
+    "⛺"
+   ],
+   [
+    "🔥",
+    "🔥"
+   ],
+   [
+    "🌲",
+    "🌲"
+   ]
+  ]
+ },
+ "28": {
+  "answer": "ПАЛАТКА",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "⛺",
+    "⛺"
+   ],
+   [
+    "🏕️",
+    "🏕️"
+   ],
+   [
+    "🌲",
+    "🌲"
+   ],
+   [
+    "🌙",
+    "🌙"
+   ]
+  ]
+ },
+ "29": {
+  "answer": "КОСТЕР",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "🔥",
+    "🔥"
+   ],
+   [
+    "🏕️",
+    "🏕️"
+   ],
+   [
+    "🌙",
+    "🌙"
+   ],
+   [
+    "🪵",
+    "🪵"
+   ]
+  ]
+ },
+ "30": {
+  "answer": "ПОХОД",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "🥾",
+    "🥾"
+   ],
+   [
+    "🎒",
+    "🎒"
+   ],
+   [
+    "⛰️",
+    "⛰️"
+   ],
+   [
+    "🗺️",
+    "🗺️"
+   ]
+  ]
+ },
+ "31": {
+  "answer": "ПИКНИК",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "🧺",
+    "🧺"
+   ],
+   [
+    "🥪",
+    "🥪"
+   ],
+   [
+    "🌳",
+    "🌳"
+   ],
+   [
+    "☀️",
+    "☀️"
+   ]
+  ]
+ },
+ "32": {
+  "answer": "ПЛЯЖ",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "🏖️",
+    "🏖️"
+   ],
+   [
+    "🌊",
+    "🌊"
+   ],
+   [
+    "☀️",
+    "☀️"
+   ],
+   [
+    "⛱️",
+    "⛱️"
+   ]
+  ]
+ },
+ "33": {
+  "answer": "КУРОРТ",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "🏨",
+    "🏨"
+   ],
+   [
+    "🏖️",
+    "🏖️"
+   ],
+   [
+    "🌴",
+    "🌴"
+   ],
+   [
+    "😎",
+    "😎"
+   ]
+  ]
+ },
+ "34": {
+  "answer": "ОСТРОВ",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "🏝️",
+    "🏝️"
+   ],
+   [
+    "🌊",
+    "🌊"
+   ],
+   [
+    "🌴",
+    "🌴"
+   ],
+   [
+    "🚤",
+    "🚤"
+   ]
+  ]
+ },
+ "35": {
+  "answer": "МАТЕРИК",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "🌍",
+    "🌍"
+   ],
+   [
+    "🗺️",
+    "🗺️"
+   ],
+   [
+    "🏔️",
+    "🏔️"
+   ],
+   [
+    "🌊",
+    "🌊"
+   ]
+  ]
+ },
+ "36": {
+  "answer": "ГОРА",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "⛰️",
+    "⛰️"
+   ],
+   [
+    "🥾",
+    "🥾"
+   ],
+   [
+    "❄️",
+    "❄️"
+   ],
+   [
+    "🧗",
+    "🧗"
+   ]
+  ]
+ },
+ "37": {
+  "answer": "ВЕРШИНА",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "🏔️",
+    "🏔️"
+   ],
+   [
+    "🚩",
+    "🚩"
+   ],
+   [
+    "🥾",
+    "🥾"
+   ],
+   [
+    "☁️",
+    "☁️"
+   ]
+  ]
+ },
+ "38": {
+  "answer": "ДОЛИНА",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "🏞️",
+    "🏞️"
+   ],
+   [
+    "⛰️",
+    "⛰️"
+   ],
+   [
+    "🌿",
+    "🌿"
+   ],
+   [
+    "🌊",
+    "🌊"
+   ]
+  ]
+ },
+ "39": {
+  "answer": "ЛЕС",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "🌲",
+    "🌲"
+   ],
+   [
+    "🌳",
+    "🌳"
+   ],
+   [
+    "🥾",
+    "🥾"
+   ],
+   [
+    "🦌",
+    "🦌"
+   ]
+  ]
+ },
+ "40": {
+  "answer": "ПУСТЫНЯ",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "🏜️",
+    "🏜️"
+   ],
+   [
+    "🐪",
+    "🐪"
+   ],
+   [
+    "☀️",
+    "☀️"
+   ],
+   [
+    "🌵",
+    "🌵"
+   ]
+  ]
+ },
+ "41": {
+  "answer": "ВОДОПАД",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "💦",
+    "💦"
+   ],
+   [
+    "🏞️",
+    "🏞️"
+   ],
+   [
+    "🌊",
+    "🌊"
+   ],
+   [
+    "⬇️",
+    "⬇️"
+   ]
+  ]
+ },
+ "42": {
+  "answer": "ОЗЕРО",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "🏞️",
+    "🏞️"
+   ],
+   [
+    "💧",
+    "💧"
+   ],
+   [
+    "🚣",
+    "🚣"
+   ],
+   [
+    "🌲",
+    "🌲"
+   ]
+  ]
+ },
+ "43": {
+  "answer": "РЕКА",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "🏞️",
+    "🏞️"
+   ],
+   [
+    "🌊",
+    "🌊"
+   ],
+   [
+    "🚣",
+    "🚣"
+   ],
+   [
+    "🌉",
+    "🌉"
+   ]
+  ]
+ },
+ "44": {
+  "answer": "ОКЕАН",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "🌊",
+    "🌊"
+   ],
+   [
+    "🐋",
+    "🐋"
+   ],
+   [
+    "🚢",
+    "🚢"
+   ],
+   [
+    "🌍",
+    "🌍"
+   ]
+  ]
+ },
+ "45": {
+  "answer": "БУХТА",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "🌊",
+    "🌊"
+   ],
+   [
+    "⛵",
+    "⛵"
+   ],
+   [
+    "🏝️",
+    "🏝️"
+   ],
+   [
+    "⚓",
+    "⚓"
+   ]
+  ]
+ },
+ "46": {
+  "answer": "ПОРТ",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "⚓",
+    "⚓"
+   ],
+   [
+    "🚢",
+    "🚢"
+   ],
+   [
+    "📦",
+    "📦"
+   ],
+   [
+    "🌊",
+    "🌊"
+   ]
+  ]
+ },
+ "47": {
+  "answer": "МАЯК",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "🗼",
+    "🗼"
+   ],
+   [
+    "💡",
+    "💡"
+   ],
+   [
+    "🌊",
+    "🌊"
+   ],
+   [
+    "🚢",
+    "🚢"
+   ]
+  ]
+ },
+ "48": {
+  "answer": "ЗАКАТ",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "🌅",
+    "🌅"
+   ],
+   [
+    "🌊",
+    "🌊"
+   ],
+   [
+    "📷",
+    "📷"
+   ],
+   [
+    "🧡",
+    "🧡"
+   ]
+  ]
+ },
+ "49": {
+  "answer": "РАССВЕТ",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "🌄",
+    "🌄"
+   ],
+   [
+    "☀️",
+    "☀️"
+   ],
+   [
+    "📷",
+    "📷"
+   ],
+   [
+    "🌅",
+    "🌅"
+   ]
+  ]
+ },
+ "50": {
+  "answer": "ПАНОРАМА",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "🏞️",
+    "🏞️"
+   ],
+   [
+    "📷",
+    "📷"
+   ],
+   [
+    "👀",
+    "👀"
+   ],
+   [
+    "🌄",
+    "🌄"
+   ]
+  ]
+ },
+ "51": {
+  "answer": "ФОТО",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "📷",
+    "📷"
+   ],
+   [
+    "📸",
+    "📸"
+   ],
+   [
+    "🖼️",
+    "🖼️"
+   ],
+   [
+    "🌍",
+    "🌍"
+   ]
+  ]
+ },
+ "52": {
+  "answer": "СУВЕНИР",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "🎁",
+    "🎁"
+   ],
+   [
+    "🧲",
+    "🧲"
+   ],
+   [
+    "🗺️",
+    "🗺️"
+   ],
+   [
+    "🛍️",
+    "🛍️"
+   ]
+  ]
+ },
+ "53": {
+  "answer": "ОТКРЫТКА",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "💌",
+    "💌"
+   ],
+   [
+    "📮",
+    "📮"
+   ],
+   [
+    "🏞️",
+    "🏞️"
+   ],
+   [
+    "✍️",
+    "✍️"
+   ]
+  ]
+ },
+ "54": {
+  "answer": "МУЗЕЙ",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "🏛️",
+    "🏛️"
+   ],
+   [
+    "🖼️",
+    "🖼️"
+   ],
+   [
+    "🏺",
+    "🏺"
+   ],
+   [
+    "🎟️",
+    "🎟️"
+   ]
+  ]
+ },
+ "55": {
+  "answer": "ЗАМОК",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "🏰",
+    "🏰"
+   ],
+   [
+    "👑",
+    "👑"
+   ],
+   [
+    "🗿",
+    "🗿"
+   ],
+   [
+    "📷",
+    "📷"
+   ]
+  ]
+ },
+ "56": {
+  "answer": "ДВОРЕЦ",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "🏛️",
+    "🏛️"
+   ],
+   [
+    "👑",
+    "👑"
+   ],
+   [
+    "✨",
+    "✨"
+   ],
+   [
+    "📷",
+    "📷"
+   ]
+  ]
+ },
+ "57": {
+  "answer": "ХРАМ",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "🛕",
+    "🛕"
+   ],
+   [
+    "🙏",
+    "🙏"
+   ],
+   [
+    "🏛️",
+    "🏛️"
+   ],
+   [
+    "🕯️",
+    "🕯️"
+   ]
+  ]
+ },
+ "58": {
+  "answer": "МЕЧЕТЬ",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "🕌",
+    "🕌"
+   ],
+   [
+    "🌙",
+    "🌙"
+   ],
+   [
+    "🙏",
+    "🙏"
+   ],
+   [
+    "🏛️",
+    "🏛️"
+   ]
+  ]
+ },
+ "59": {
+  "answer": "СОБОР",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "⛪",
+    "⛪"
+   ],
+   [
+    "🔔",
+    "🔔"
+   ],
+   [
+    "🏛️",
+    "🏛️"
+   ],
+   [
+    "✨",
+    "✨"
+   ]
+  ]
+ },
+ "60": {
+  "answer": "ПЛОЩАДЬ",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "🏙️",
+    "🏙️"
+   ],
+   [
+    "⛲",
+    "⛲"
+   ],
+   [
+    "👥",
+    "👥"
+   ],
+   [
+    "📷",
+    "📷"
+   ]
+  ]
+ },
+ "61": {
+  "answer": "УЛИЦА",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "🏙️",
+    "🏙️"
+   ],
+   [
+    "🚶",
+    "🚶"
+   ],
+   [
+    "🚦",
+    "🚦"
+   ],
+   [
+    "🏘️",
+    "🏘️"
+   ]
+  ]
+ },
+ "62": {
+  "answer": "РЫНОК",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "🛍️",
+    "🛍️"
+   ],
+   [
+    "🥭",
+    "🥭"
+   ],
+   [
+    "👥",
+    "👥"
+   ],
+   [
+    "💰",
+    "💰"
+   ]
+  ]
+ },
+ "63": {
+  "answer": "КАФЕ",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "☕",
+    "☕"
+   ],
+   [
+    "🥐",
+    "🥐"
+   ],
+   [
+    "🪑",
+    "🪑"
+   ],
+   [
+    "🍰",
+    "🍰"
+   ]
+  ]
+ },
+ "64": {
+  "answer": "РЕСТОРАН",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "🍽️",
+    "🍽️"
+   ],
+   [
+    "🍷",
+    "🍷"
+   ],
+   [
+    "👨‍🍳",
+    "👨‍🍳"
+   ],
+   [
+    "🧾",
+    "🧾"
+   ]
+  ]
+ },
+ "65": {
+  "answer": "МЕНЮ",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "📖",
+    "📖"
+   ],
+   [
+    "🍽️",
+    "🍽️"
+   ],
+   [
+    "🍲",
+    "🍲"
+   ],
+   [
+    "💳",
+    "💳"
+   ]
+  ]
+ },
+ "66": {
+  "answer": "ЗАВТРАК",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "☕",
+    "☕"
+   ],
+   [
+    "🥐",
+    "🥐"
+   ],
+   [
+    "🍳",
+    "🍳"
+   ],
+   [
+    "🌅",
+    "🌅"
+   ]
+  ]
+ },
+ "67": {
+  "answer": "ПРОГУЛКА",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "🚶",
+    "🚶"
+   ],
+   [
+    "🌳",
+    "🌳"
+   ],
+   [
+    "📷",
+    "📷"
+   ],
+   [
+    "☀️",
+    "☀️"
+   ]
+  ]
+ },
+ "68": {
+  "answer": "ВЕЛОСИПЕД",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "🚲",
+    "🚲"
+   ],
+   [
+    "🛣️",
+    "🛣️"
+   ],
+   [
+    "🪖",
+    "🪖"
+   ],
+   [
+    "🌳",
+    "🌳"
+   ]
+  ]
+ },
+ "69": {
+  "answer": "ЛОДКА",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "🚤",
+    "🚤"
+   ],
+   [
+    "🌊",
+    "🌊"
+   ],
+   [
+    "⚓",
+    "⚓"
+   ],
+   [
+    "🛟",
+    "🛟"
+   ]
+  ]
+ },
+ "70": {
+  "answer": "ПАРОМ",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "⛴️",
+    "⛴️"
+   ],
+   [
+    "🚗",
+    "🚗"
+   ],
+   [
+    "🌊",
+    "🌊"
+   ],
+   [
+    "⚓",
+    "⚓"
+   ]
+  ]
+ },
+ "71": {
+  "answer": "КРУИЗ",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "🛳️",
+    "🛳️"
+   ],
+   [
+    "🌊",
+    "🌊"
+   ],
+   [
+    "🏝️",
+    "🏝️"
+   ],
+   [
+    "🍹",
+    "🍹"
+   ]
+  ]
+ },
+ "72": {
+  "answer": "РЕЙС",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "✈️",
+    "✈️"
+   ],
+   [
+    "🕒",
+    "🕒"
+   ],
+   [
+    "🎫",
+    "🎫"
+   ],
+   [
+    "🛫",
+    "🛫"
+   ]
+  ]
+ },
+ "73": {
+  "answer": "ВЗЛЕТ",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "🛫",
+    "🛫"
+   ],
+   [
+    "✈️",
+    "✈️"
+   ],
+   [
+    "☁️",
+    "☁️"
+   ],
+   [
+    "⬆️",
+    "⬆️"
+   ]
+  ]
+ },
+ "74": {
+  "answer": "ПРИЛЕТ",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "🛬",
+    "🛬"
+   ],
+   [
+    "✈️",
+    "✈️"
+   ],
+   [
+    "🛄",
+    "🛄"
+   ],
+   [
+    "👋",
+    "👋"
+   ]
+  ]
+ },
+ "75": {
+  "answer": "БАГАЖ",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "🧳",
+    "🧳"
+   ],
+   [
+    "🛄",
+    "🛄"
+   ],
+   [
+    "✈️",
+    "✈️"
+   ],
+   [
+    "🏷️",
+    "🏷️"
+   ]
+  ]
+ },
+ "76": {
+  "answer": "РЕГИСТРАЦИЯ",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "🎫",
+    "🎫"
+   ],
+   [
+    "🛂",
+    "🛂"
+   ],
+   [
+    "🛄",
+    "🛄"
+   ],
+   [
+    "✅",
+    "✅"
+   ]
+  ]
+ },
+ "77": {
+  "answer": "БРОНЬ",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "📱",
+    "📱"
+   ],
+   [
+    "🏨",
+    "🏨"
+   ],
+   [
+    "✅",
+    "✅"
+   ],
+   [
+    "📅",
+    "📅"
+   ]
+  ]
+ },
+ "78": {
+  "answer": "НОМЕР",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "🛏️",
+    "🛏️"
+   ],
+   [
+    "🏨",
+    "🏨"
+   ],
+   [
+    "🔑",
+    "🔑"
+   ],
+   [
+    "🚪",
+    "🚪"
+   ]
+  ]
+ },
+ "79": {
+  "answer": "КЛЮЧ",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "🔑",
+    "🔑"
+   ],
+   [
+    "🏨",
+    "🏨"
+   ],
+   [
+    "🚪",
+    "🚪"
+   ],
+   [
+    "🧳",
+    "🧳"
+   ]
+  ]
+ },
+ "80": {
+  "answer": "ХОСТЕЛ",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "🛏️",
+    "🛏️"
+   ],
+   [
+    "🎒",
+    "🎒"
+   ],
+   [
+    "👥",
+    "👥"
+   ],
+   [
+    "🏠",
+    "🏠"
+   ]
+  ]
+ },
+ "81": {
+  "answer": "ТРАНСФЕР",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "🚐",
+    "🚐"
+   ],
+   [
+    "✈️",
+    "✈️"
+   ],
+   [
+    "🏨",
+    "🏨"
+   ],
+   [
+    "📍",
+    "📍"
+   ]
+  ]
+ },
+ "82": {
+  "answer": "СТРАХОВКА",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "🛡️",
+    "🛡️"
+   ],
+   [
+    "📄",
+    "📄"
+   ],
+   [
+    "✈️",
+    "✈️"
+   ],
+   [
+    "✅",
+    "✅"
+   ]
+  ]
+ },
+ "83": {
+  "answer": "ВАЛЮТА",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "💵",
+    "💵"
+   ],
+   [
+    "💶",
+    "💶"
+   ],
+   [
+    "💱",
+    "💱"
+   ],
+   [
+    "🏦",
+    "🏦"
+   ]
+  ]
+ },
+ "84": {
+  "answer": "ОБМЕН",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "💱",
+    "💱"
+   ],
+   [
+    "💵",
+    "💵"
+   ],
+   [
+    "💶",
+    "💶"
+   ],
+   [
+    "🏦",
+    "🏦"
+   ]
+  ]
+ },
+ "85": {
+  "answer": "ЧАСОВОЙПОЯС",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "🕒",
+    "🕒"
+   ],
+   [
+    "🌍",
+    "🌍"
+   ],
+   [
+    "✈️",
+    "✈️"
+   ],
+   [
+    "🌐",
+    "🌐"
+   ]
+  ]
+ },
+ "86": {
+  "answer": "ПРИКЛЮЧЕНИЕ",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "🧭",
+    "🧭"
+   ],
+   [
+    "🎒",
+    "🎒"
+   ],
+   [
+    "⛰️",
+    "⛰️"
+   ],
+   [
+    "✨",
+    "✨"
+   ]
+  ]
+ },
+ "87": {
+  "answer": "ЭКСПЕДИЦИЯ",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "🧭",
+    "🧭"
+   ],
+   [
+    "🏕️",
+    "🏕️"
+   ],
+   [
+    "🗺️",
+    "🗺️"
+   ],
+   [
+    "🔭",
+    "🔭"
+   ]
+  ]
+ },
+ "88": {
+  "answer": "САФАРИ",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "🦁",
+    "🦁"
+   ],
+   [
+    "🚙",
+    "🚙"
+   ],
+   [
+    "🌍",
+    "🌍"
+   ],
+   [
+    "📷",
+    "📷"
+   ]
+  ]
+ },
+ "89": {
+  "answer": "ДАЙВИНГ",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "🤿",
+    "🤿"
+   ],
+   [
+    "🐠",
+    "🐠"
+   ],
+   [
+    "🌊",
+    "🌊"
+   ],
+   [
+    "🪸",
+    "🪸"
+   ]
+  ]
+ },
+ "90": {
+  "answer": "СЕРФИНГ",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "🏄",
+    "🏄"
+   ],
+   [
+    "🌊",
+    "🌊"
+   ],
+   [
+    "☀️",
+    "☀️"
+   ],
+   [
+    "🏖️",
+    "🏖️"
+   ]
+  ]
+ },
+ "91": {
+  "answer": "ЛЫЖИ",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "🎿",
+    "🎿"
+   ],
+   [
+    "❄️",
+    "❄️"
+   ],
+   [
+    "🏔️",
+    "🏔️"
+   ],
+   [
+    "🚠",
+    "🚠"
+   ]
+  ]
+ },
+ "92": {
+  "answer": "СНОУБОРД",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "🏂",
+    "🏂"
+   ],
+   [
+    "❄️",
+    "❄️"
+   ],
+   [
+    "🏔️",
+    "🏔️"
+   ],
+   [
+    "🚠",
+    "🚠"
+   ]
+  ]
+ },
+ "93": {
+  "answer": "ФУНИКУЛЕР",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "🚞",
+    "🚞"
+   ],
+   [
+    "⛰️",
+    "⛰️"
+   ],
+   [
+    "⬆️",
+    "⬆️"
+   ],
+   [
+    "🏙️",
+    "🏙️"
+   ]
+  ]
+ },
+ "94": {
+  "answer": "ТРОПА",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "🥾",
+    "🥾"
+   ],
+   [
+    "🌲",
+    "🌲"
+   ],
+   [
+    "🗺️",
+    "🗺️"
+   ],
+   [
+    "⛰️",
+    "⛰️"
+   ]
+  ]
+ },
+ "95": {
+  "answer": "ПЕРЕВАЛ",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "🏔️",
+    "🏔️"
+   ],
+   [
+    "🛣️",
+    "🛣️"
+   ],
+   [
+    "🥾",
+    "🥾"
+   ],
+   [
+    "🧭",
+    "🧭"
+   ]
+  ]
+ },
+ "96": {
+  "answer": "ЛАГУНА",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "🏝️",
+    "🏝️"
+   ],
+   [
+    "🌊",
+    "🌊"
+   ],
+   [
+    "🐠",
+    "🐠"
+   ],
+   [
+    "☀️",
+    "☀️"
+   ]
+  ]
+ },
+ "97": {
+  "answer": "РИФ",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "🪸",
+    "🪸"
+   ],
+   [
+    "🐠",
+    "🐠"
+   ],
+   [
+    "🌊",
+    "🌊"
+   ],
+   [
+    "🤿",
+    "🤿"
+   ]
+  ]
+ },
+ "98": {
+  "answer": "ВУЛКАН",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "🌋",
+    "🌋"
+   ],
+   [
+    "🔥",
+    "🔥"
+   ],
+   [
+    "🏝️",
+    "🏝️"
+   ],
+   [
+    "📷",
+    "📷"
+   ]
+  ]
+ },
+ "99": {
+  "answer": "ЛЕДНИК",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "🧊",
+    "🧊"
+   ],
+   [
+    "🏔️",
+    "🏔️"
+   ],
+   [
+    "❄️",
+    "❄️"
+   ],
+   [
+    "💧",
+    "💧"
+   ]
+  ]
+ },
+ "100": {
+  "answer": "ПУТЕШЕСТВИЕ",
+  "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+  "photos": [
+   [
+    "🌍",
+    "🌍"
+   ],
+   [
+    "✈️",
+    "✈️"
+   ],
+   [
+    "🧳",
+    "🧳"
+   ],
+   [
+    "🗺️",
+    "🗺️"
+   ]
+  ]
+ }
+};
+const TRAVEL_TRANSLATED={
+ "en": {
+  "1": {
+   "answer": "PASSPORT",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "2": {
+   "answer": "TICKET",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "3": {
+   "answer": "SUITCASE",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "4": {
+   "answer": "BACKPACK",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "5": {
+   "answer": "MAP",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "6": {
+   "answer": "HOTEL",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "7": {
+   "answer": "AIRPORT",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "8": {
+   "answer": "STATION",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "9": {
+   "answer": "TRAIN",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "10": {
+   "answer": "AIRPLANE",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "11": {
+   "answer": "SHIP",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "12": {
+   "answer": "BUS",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "13": {
+   "answer": "TAXI",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "14": {
+   "answer": "METRO",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "15": {
+   "answer": "ROAD",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "16": {
+   "answer": "HIGHWAY",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "17": {
+   "answer": "BRIDGE",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "18": {
+   "answer": "TUNNEL",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "19": {
+   "answer": "BORDER",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "20": {
+   "answer": "VISA",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "21": {
+   "answer": "TOURIST",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "22": {
+   "answer": "GUIDE",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "23": {
+   "answer": "EXCURSION",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "24": {
+   "answer": "ROUTE",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "25": {
+   "answer": "NAVIGATOR",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "26": {
+   "answer": "COMPASS",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "27": {
+   "answer": "CAMPING",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "28": {
+   "answer": "TENT",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "29": {
+   "answer": "CAMPFIRE",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "30": {
+   "answer": "HIKE",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "31": {
+   "answer": "PICNIC",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "32": {
+   "answer": "BEACH",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "33": {
+   "answer": "RESORT",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "34": {
+   "answer": "ISLAND",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "35": {
+   "answer": "CONTINENT",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "36": {
+   "answer": "MOUNTAIN",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "37": {
+   "answer": "SUMMIT",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "38": {
+   "answer": "VALLEY",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "39": {
+   "answer": "FOREST",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "40": {
+   "answer": "DESERT",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "41": {
+   "answer": "WATERFALL",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "42": {
+   "answer": "LAKE",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "43": {
+   "answer": "RIVER",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "44": {
+   "answer": "OCEAN",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "45": {
+   "answer": "BAY",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "46": {
+   "answer": "PORT",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "47": {
+   "answer": "LIGHTHOUSE",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "48": {
+   "answer": "SUNSET",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "49": {
+   "answer": "SUNRISE",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "50": {
+   "answer": "PANORAMA",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "51": {
+   "answer": "PHOTO",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "52": {
+   "answer": "SOUVENIR",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "53": {
+   "answer": "POSTCARD",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "54": {
+   "answer": "MUSEUM",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "55": {
+   "answer": "CASTLE",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "56": {
+   "answer": "PALACE",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "57": {
+   "answer": "TEMPLE",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "58": {
+   "answer": "MOSQUE",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "59": {
+   "answer": "CATHEDRAL",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "60": {
+   "answer": "SQUARE",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "61": {
+   "answer": "STREET",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "62": {
+   "answer": "MARKET",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "63": {
+   "answer": "CAFE",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "64": {
+   "answer": "RESTAURANT",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "65": {
+   "answer": "MENU",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "66": {
+   "answer": "BREAKFAST",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "67": {
+   "answer": "WALK",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "68": {
+   "answer": "BICYCLE",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "69": {
+   "answer": "BOAT",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "70": {
+   "answer": "FERRY",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "71": {
+   "answer": "CRUISE",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "72": {
+   "answer": "FLIGHT",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "73": {
+   "answer": "TAKEOFF",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "74": {
+   "answer": "ARRIVAL",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "75": {
+   "answer": "BAGGAGE",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "76": {
+   "answer": "CHECKIN",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "77": {
+   "answer": "BOOKING",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "78": {
+   "answer": "ROOM",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "79": {
+   "answer": "KEY",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "80": {
+   "answer": "HOSTEL",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "81": {
+   "answer": "TRANSFER",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "82": {
+   "answer": "INSURANCE",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "83": {
+   "answer": "CURRENCY",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "84": {
+   "answer": "EXCHANGE",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "85": {
+   "answer": "TIMEZONE",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "86": {
+   "answer": "ADVENTURE",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "87": {
+   "answer": "EXPEDITION",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "88": {
+   "answer": "SAFARI",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "89": {
+   "answer": "DIVING",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "90": {
+   "answer": "SURFING",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "91": {
+   "answer": "SKIING",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "92": {
+   "answer": "SNOWBOARD",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "93": {
+   "answer": "FUNICULAR",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "94": {
+   "answer": "TRAIL",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "95": {
+   "answer": "PASS",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "96": {
+   "answer": "LAGOON",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "97": {
+   "answer": "REEF",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "98": {
+   "answer": "VOLCANO",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "99": {
+   "answer": "GLACIER",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  },
+  "100": {
+   "answer": "TRAVEL",
+   "hint": "A word connected with travel, routes, holidays, or exploring new places."
+  }
+ },
+ "az": {
+  "1": {
+   "answer": "PASPORT",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "2": {
+   "answer": "BİLET",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "3": {
+   "answer": "ÇAMADAN",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "4": {
+   "answer": "BELÇANTASI",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "5": {
+   "answer": "XƏRİTƏ",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "6": {
+   "answer": "OTEL",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "7": {
+   "answer": "AEROPORT",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "8": {
+   "answer": "VAĞZAL",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "9": {
+   "answer": "QATAR",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "10": {
+   "answer": "TƏYYARƏ",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "11": {
+   "answer": "GƏMİ",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "12": {
+   "answer": "AVTOBUS",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "13": {
+   "answer": "TAKSİ",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "14": {
+   "answer": "METRO",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "15": {
+   "answer": "YOL",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "16": {
+   "answer": "MAGİSTRAL",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "17": {
+   "answer": "KÖRPÜ",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "18": {
+   "answer": "TUNEL",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "19": {
+   "answer": "SƏRHƏD",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "20": {
+   "answer": "VİZA",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "21": {
+   "answer": "TURİST",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "22": {
+   "answer": "BƏLƏDÇİ",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "23": {
+   "answer": "EKSKURSİYA",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "24": {
+   "answer": "MARŞRUT",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "25": {
+   "answer": "NAVİQATOR",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "26": {
+   "answer": "KOMPAS",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "27": {
+   "answer": "KEMPİNQ",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "28": {
+   "answer": "ÇADIR",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "29": {
+   "answer": "TONQAL",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "30": {
+   "answer": "YÜRÜŞ",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "31": {
+   "answer": "PİKNİK",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "32": {
+   "answer": "ÇİMƏRLİK",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "33": {
+   "answer": "KURORT",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "34": {
+   "answer": "ADA",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "35": {
+   "answer": "QİTƏ",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "36": {
+   "answer": "DAĞ",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "37": {
+   "answer": "ZİRVƏ",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "38": {
+   "answer": "VADİ",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "39": {
+   "answer": "MEŞƏ",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "40": {
+   "answer": "SƏHRA",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "41": {
+   "answer": "ŞƏLALƏ",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "42": {
+   "answer": "GÖL",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "43": {
+   "answer": "ÇAY",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "44": {
+   "answer": "OKEAN",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "45": {
+   "answer": "KÖRFƏZ",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "46": {
+   "answer": "LİMAN",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "47": {
+   "answer": "MAYAK",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "48": {
+   "answer": "GÜNBATIMI",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "49": {
+   "answer": "GÜNÇIXIMI",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "50": {
+   "answer": "PANORAMA",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "51": {
+   "answer": "FOTO",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "52": {
+   "answer": "SUVENİR",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "53": {
+   "answer": "AÇIQCA",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "54": {
+   "answer": "MUZEY",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "55": {
+   "answer": "QALA",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "56": {
+   "answer": "SARAY",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "57": {
+   "answer": "MƏBƏD",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "58": {
+   "answer": "MƏSCİD",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "59": {
+   "answer": "KAFEDRAL",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "60": {
+   "answer": "MEYDAN",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "61": {
+   "answer": "KÜÇƏ",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "62": {
+   "answer": "BAZAR",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "63": {
+   "answer": "KAFE",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "64": {
+   "answer": "RESTORAN",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "65": {
+   "answer": "MENYU",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "66": {
+   "answer": "SƏHƏRYEMƏYİ",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "67": {
+   "answer": "GƏZİNTİ",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "68": {
+   "answer": "VELOSİPED",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "69": {
+   "answer": "QAYIQ",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "70": {
+   "answer": "BƏRƏ",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "71": {
+   "answer": "KRUIZ",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "72": {
+   "answer": "REYS",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "73": {
+   "answer": "UÇUŞ",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "74": {
+   "answer": "GƏLİŞ",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "75": {
+   "answer": "BAQAJ",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "76": {
+   "answer": "QEYDİYYAT",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "77": {
+   "answer": "REZERV",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "78": {
+   "answer": "OTAQ",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "79": {
+   "answer": "AÇAR",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "80": {
+   "answer": "HOSTEL",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "81": {
+   "answer": "TRANSFER",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "82": {
+   "answer": "SIĞORTA",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "83": {
+   "answer": "VALYUTA",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "84": {
+   "answer": "MÜBADİLƏ",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "85": {
+   "answer": "SAATZOLAĞI",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "86": {
+   "answer": "MACƏRA",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "87": {
+   "answer": "EKSPEDİSİYA",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "88": {
+   "answer": "SAFARİ",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "89": {
+   "answer": "DAYVİNQ",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "90": {
+   "answer": "SÖRFİNQ",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "91": {
+   "answer": "XİZƏK",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "92": {
+   "answer": "SNOUBORD",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "93": {
+   "answer": "FUNİKULYOR",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "94": {
+   "answer": "CIĞIR",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "95": {
+   "answer": "AŞIRIM",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "96": {
+   "answer": "LAQUN",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "97": {
+   "answer": "RİF",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "98": {
+   "answer": "VULKAN",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "99": {
+   "answer": "BUZLAQ",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  },
+  "100": {
+   "answer": "SƏYAHƏT",
+   "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+  }
+ }
+};
+const THEME_BANKS={sport:[LEVELS,TRANSLATED],art:[ART_LEVELS,ART_TRANSLATED],professions:[PROF_LEVELS,PROF_TRANSLATED],travel:[TRAVEL_LEVELS,TRAVEL_TRANSLATED]};
 const [ACTIVE_LEVELS,ACTIVE_TRANSLATED]=THEME_BANKS[themeId]||THEME_BANKS.sport;
 if(ACTIVE_TRANSLATED[lang])Object.keys(ACTIVE_LEVELS).forEach(k=>Object.assign(ACTIVE_LEVELS[k],ACTIVE_TRANSLATED[lang][k]));
 
