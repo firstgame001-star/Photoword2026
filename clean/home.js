@@ -18,7 +18,7 @@ window.addEventListener('unhandledrejection',e=>track('client_error',{metadata:{
 const T={
 ru:{
 logo:['4','Ф','О','Т','О'],one:'1 СЛОВО',tagline:'Больше, чем просто слова',
-chapter:n=>'Глава '+n,chapter1:'Разминка',chapter1Desc:'От простых слов к более сложным ассоциациям',chapter2:'Ассоциации',chapter2Desc:'Более сложные слова и связи между образами',chapter3:'Связи',chapter3Desc:'Новые сочетания и более тонкие ассоциации',chapter3Lock:'🔒 Пройди 50-й уровень',future:'Скоро',futureDesc:'Новая глава готовится',futureState:'Закрыто',levels:'уровней',
+chapter:n=>'Глава '+n,chapter1:'Разминка',chapter1Desc:'От простых слов к более сложным ассоциациям',chapter2:'Ассоциации',chapter2Desc:'Более сложные слова и связи между образами',chapter3:'Связи',chapter3Desc:'Новые сочетания и более тонкие ассоциации',chapter3Lock:'🔒 Пройди 50-й уровень',chapter4:'Глубина',chapter4Desc:'Больше уровней, систем и сложных связей',chapter4Lock:'🔒 Пройди 90-й уровень',future:'Скоро',futureDesc:'Новая глава готовится',futureState:'Закрыто',levels:'уровней',
 play:'ИГРАТЬ',replay:'ПЕРЕИГРАТЬ',locked:'ЗАКРЫТО',allDone:'ГЛАВЫ 1–2 ПРОЙДЕНЫ',
 home:'Главная',chapters:'Главы',chaptersSubtitle:'Выбирай главу и продолжай игру',rating:'Рейтинг',ratingSubtitle:'Лучшие игроки PhotoWord',overallRating:'🏆 Общий рейтинг',myPosition:'Твоя позиция',refresh:'Обновить рейтинг',
 friends:'Друзья',shop:'Магазин',daily:'Ежедневная награда',tasks:'Задания',
@@ -35,7 +35,7 @@ profileSynced:'Профиль синхронизирован',loading:'Загр�
 },
 en:{
 logo:['4','P','I','C','S'],one:'1 WORD',tagline:'More than just words',
-chapter:n=>'Chapter '+n,chapter1:'Warm-up',chapter1Desc:'From simple words to more challenging associations',chapter2:'Associations',chapter2Desc:'More challenging words and deeper image connections',chapter3:'Connections',chapter3Desc:'New combinations and subtler associations',chapter3Lock:'🔒 Complete level 50',future:'Coming soon',futureDesc:'A new chapter is being prepared',futureState:'Locked',levels:'levels',
+chapter:n=>'Chapter '+n,chapter1:'Warm-up',chapter1Desc:'From simple words to more challenging associations',chapter2:'Associations',chapter2Desc:'More challenging words and deeper image connections',chapter3:'Connections',chapter3Desc:'New combinations and subtler associations',chapter3Lock:'🔒 Complete level 50',chapter4:'Depth',chapter4Desc:'More levels, systems, and deeper connections',chapter4Lock:'🔒 Complete level 90',future:'Coming soon',futureDesc:'A new chapter is being prepared',futureState:'Locked',levels:'levels',
 play:'PLAY',replay:'REPLAY',locked:'LOCKED',allDone:'CHAPTERS 1–2 COMPLETED',
 home:'Home',chapters:'Chapters',chaptersSubtitle:'Choose a chapter and continue',rating:'Leaderboard',ratingSubtitle:'Top PhotoWord players',overallRating:'🏆 Overall leaderboard',myPosition:'Your position',refresh:'Refresh leaderboard',
 friends:'Friends',shop:'Shop',daily:'Daily reward',tasks:'Tasks',
@@ -52,7 +52,7 @@ profileSynced:'Profile synced',loading:'Loading…',noPlayers:'No players yet',n
 },
 az:{
 logo:['4','F','O','T','O'],one:'1 SÖZ',tagline:'Sadəcə sözlərdən daha çox',
-chapter:n=>'Fəsil '+n,chapter1:'İsinmə',chapter1Desc:'Sadə sözlərdən daha çətin assosiasiyalara',chapter2:'Assosiasiyalar',chapter2Desc:'Daha çətin sözlər və şəkillər arasında daha dərin əlaqələr',chapter3:'Əlaqələr',chapter3Desc:'Yeni birləşmələr və daha incə assosiasiyalar',chapter3Lock:'🔒 50-ci səviyyəni keç',future:'Tezliklə',futureDesc:'Yeni fəsil hazırlanır',futureState:'Bağlıdır',levels:'səviyyə',
+chapter:n=>'Fəsil '+n,chapter1:'İsinmə',chapter1Desc:'Sadə sözlərdən daha çətin assosiasiyalara',chapter2:'Assosiasiyalar',chapter2Desc:'Daha çətin sözlər və şəkillər arasında daha dərin əlaqələr',chapter3:'Əlaqələr',chapter3Desc:'Yeni birləşmələr və daha incə assosiasiyalar',chapter3Lock:'🔒 50-ci səviyyəni keç',chapter4:'Dərinlik',chapter4Desc:'Daha çox səviyyə, sistem və daha dərin əlaqələr',chapter4Lock:'🔒 90-cı səviyyəni keç',future:'Tezliklə',futureDesc:'Yeni fəsil hazırlanır',futureState:'Bağlıdır',levels:'səviyyə',
 play:'OYNA',replay:'YENİDƏN OYNA',locked:'BAĞLIDIR',allDone:'1–2-Cİ FƏSİLLƏR TAMAMLANDI',
 home:'Ana səhifə',chapters:'Fəsillər',chaptersSubtitle:'Fəsli seç və oyuna davam et',rating:'Reytinq',ratingSubtitle:'PhotoWord-un ən yaxşı oyunçuları',overallRating:'🏆 Ümumi reytinq',myPosition:'Sənin yerin',refresh:'Reytinqi yenilə',
 friends:'Dostlar',shop:'Mağaza',daily:'Gündəlik mükafat',tasks:'Tapşırıqlar',
@@ -134,7 +134,7 @@ function t(){return T[lang()]||T.ru}
 function leagueName(p){const x=t();return p.xp>=4000?x.legend:p.xp>=2500?x.master:p.xp>=1500?x.expert:p.xp>=400?x.skilled:x.novice}
 function persistPrefs(){try{localStorage.setItem('photoword-prefs',JSON.stringify(pw.prefs))}catch{}}
 function setLogo(x){const e=$('logoLetters');if(e)e.innerHTML=x.logo.map(v=>'<i>'+v+'</i>').join('');text('logoWord',x.one);text('logoTagline',x.tagline)}
-function chapterData(p,x){const l=p.current_level||1;return l<=20?{num:1,title:x.chapter1,desc:x.chapter1Desc,start:1,end:20,total:20}:l<=50?{num:2,title:x.chapter2,desc:x.chapter2Desc,start:21,end:50,total:30}:{num:3,title:x.chapter3,desc:x.chapter3Desc,start:51,end:90,total:40}}
+function chapterData(p,x){const l=p.current_level||1;return l<=20?{num:1,title:x.chapter1,desc:x.chapter1Desc,start:1,end:20,total:20}:l<=50?{num:2,title:x.chapter2,desc:x.chapter2Desc,start:21,end:50,total:30}:l<=90?{num:3,title:x.chapter3,desc:x.chapter3Desc,start:51,end:90,total:40}:{num:4,title:x.chapter4,desc:x.chapter4Desc,start:91,end:131,total:41}}
 
 function applyTheme(theme){
  if(!THEMES.includes(theme))theme='game';
@@ -146,43 +146,39 @@ function setThemeLabels(x){
  for(const key of THEMES){const cap=key[0].toUpperCase()+key.slice(1);text('theme'+cap+'Name',x.themeNames[key]);text('theme'+cap+'Desc',x.themeDesc[key]);}
 }
 function updateChapterCards(p){
- const x=t(),done=Math.min(60,p.completed_levels||0),d1=Math.min(20,done),d2=Math.max(0,Math.min(30,done-20)),d3=Math.max(0,Math.min(10,done-50));
+ const x=t(),done=Math.min(100,p.completed_levels||0),d1=Math.min(20,done),d2=Math.max(0,Math.min(30,done-20)),d3=Math.max(0,Math.min(40,done-50)),d4=Math.max(0,Math.min(10,done-90));
  text('chapter1Label',x.chapter(1)+' · 1–20');text('chapter1Title',x.chapter1);text('chapter1Desc',x.chapter1Desc);text('chapter1Done',d1);text('chapter1Count','/ 20 '+x.levels);$('chapter1Progress').style.width=d1*5+'%';
  const next1=d1>=20?1:Math.max(1,Math.min(20,p.current_level||1));$('chapter1Play').href='./game.html?level='+next1;$('chapter1Play').innerHTML=(d1>=20?x.replay:x.play)+' <span>▶</span>';
  text('chapter2Label',x.chapter(2)+' · 21–50');text('chapter2Title',x.chapter2);text('chapter2Desc',x.chapter2Desc);text('chapter2Done',d2);text('chapter2Count','/ 30 '+x.levels);$('chapter2Progress').style.width=(d2/30*100)+'%';
- const unlocked=(p.current_level||1)>=21||d1>=20;
- if(unlocked){
-   if($('chapter2LockNote'))$('chapter2LockNote').hidden=true;
-   const next2=d2>=30?21:Math.max(21,Math.min(50,p.current_level||21));$('chapter2Play').classList.remove('locked');$('chapter2Play').removeAttribute('aria-disabled');$('chapter2Play').href='./game.html?level='+next2;$('chapter2Play').innerHTML=(d2>=30?x.replay:x.play)+' <span>▶</span>';
- }else{
-   if($('chapter2LockNote')){$('chapter2LockNote').hidden=false;text('chapter2LockNote',x.chapter2Lock);}
-   $('chapter2Play').classList.add('locked');$('chapter2Play').setAttribute('aria-disabled','true');$('chapter2Play').removeAttribute('href');$('chapter2Play').textContent=x.locked;
- }
+ const unlocked2=(p.current_level||1)>=21||d1>=20;
+ if(unlocked2){$('chapter2LockNote').hidden=true;const next2=d2>=30?21:Math.max(21,Math.min(50,p.current_level||21));$('chapter2Play').classList.remove('locked');$('chapter2Play').removeAttribute('aria-disabled');$('chapter2Play').href='./game.html?level='+next2;$('chapter2Play').innerHTML=(d2>=30?x.replay:x.play)+' <span>▶</span>';}
+ else{$('chapter2LockNote').hidden=false;text('chapter2LockNote',x.chapter2Lock);$('chapter2Play').classList.add('locked');$('chapter2Play').setAttribute('aria-disabled','true');$('chapter2Play').removeAttribute('href');$('chapter2Play').textContent=x.locked;}
  text('chapter3Label',x.chapter(3)+' · 51–90');text('chapter3Title',x.chapter3);text('chapter3Desc',x.chapter3Desc);text('chapter3Done',d3);text('chapter3Count','/ 40 '+x.levels);$('chapter3Progress').style.width=(d3/40*100)+'%';
  const unlocked3=(p.current_level||1)>=51||d2>=30;
- if(unlocked3&&d3<10){
-   if($('chapter3LockNote'))$('chapter3LockNote').hidden=true;
-   const next3=Math.max(51,Math.min(60,p.current_level||51));$('chapter3Play').classList.remove('locked');$('chapter3Play').removeAttribute('aria-disabled');$('chapter3Play').href='./game.html?level='+next3;$('chapter3Play').innerHTML=x.play+' <span>▶</span>';
- }else if(unlocked3&&d3>=10){
-   if($('chapter3LockNote'))$('chapter3LockNote').hidden=true;
-   $('chapter3Play').classList.add('locked');$('chapter3Play').setAttribute('aria-disabled','true');$('chapter3Play').removeAttribute('href');$('chapter3Play').textContent=x.future;
- }else{
-   if($('chapter3LockNote')){$('chapter3LockNote').hidden=false;text('chapter3LockNote',x.chapter3Lock);}
-   $('chapter3Play').classList.add('locked');$('chapter3Play').setAttribute('aria-disabled','true');$('chapter3Play').removeAttribute('href');$('chapter3Play').textContent=x.locked;
- }
+ if(unlocked3){$('chapter3LockNote').hidden=true;const next3=d3>=40?51:Math.max(51,Math.min(90,p.current_level||51));$('chapter3Play').classList.remove('locked');$('chapter3Play').removeAttribute('aria-disabled');$('chapter3Play').href='./game.html?level='+next3;$('chapter3Play').innerHTML=(d3>=40?x.replay:x.play)+' <span>▶</span>';}
+ else{$('chapter3LockNote').hidden=false;text('chapter3LockNote',x.chapter3Lock);$('chapter3Play').classList.add('locked');$('chapter3Play').setAttribute('aria-disabled','true');$('chapter3Play').removeAttribute('href');$('chapter3Play').textContent=x.locked;}
+ text('chapter4Label',x.chapter(4)+' · 91–131');text('chapter4Title',x.chapter4);text('chapter4Desc',x.chapter4Desc);text('chapter4Done',d4);text('chapter4Count','/ 41 '+x.levels);$('chapter4Progress').style.width=(d4/41*100)+'%';
+ const unlocked4=(p.current_level||1)>=91||d3>=40;
+ if(unlocked4&&d4<10){$('chapter4LockNote').hidden=true;const next4=Math.max(91,Math.min(100,p.current_level||91));$('chapter4Play').classList.remove('locked');$('chapter4Play').removeAttribute('aria-disabled');$('chapter4Play').href='./game.html?level='+next4;$('chapter4Play').innerHTML=x.play+' <span>▶</span>';}
+ else if(unlocked4&&d4>=10){$('chapter4LockNote').hidden=true;$('chapter4Play').classList.add('locked');$('chapter4Play').setAttribute('aria-disabled','true');$('chapter4Play').removeAttribute('href');$('chapter4Play').textContent=x.future;}
+ else{$('chapter4LockNote').hidden=false;text('chapter4LockNote',x.chapter4Lock);$('chapter4Play').classList.add('locked');$('chapter4Play').setAttribute('aria-disabled','true');$('chapter4Play').removeAttribute('href');$('chapter4Play').textContent=x.locked;}
+ for(let n=5;n<=10;n++){text('chapter'+n+'Label',x.chapter(n));text('chapter'+n+'Title',x.future);text('chapter'+n+'Desc',x.futureDesc);text('chapter'+n+'Count',x.futureState);text('chapter'+n+'Play',x.future);}
 }
 function updateHomeCarousel(p){
- const x=t(),done=Math.min(60,p.completed_levels||0),d1=Math.min(20,done),d2=Math.max(0,Math.min(30,done-20)),d3=Math.max(0,Math.min(10,done-50)),unlocked2=(p.current_level||1)>=21||d1>=20,unlocked3=(p.current_level||1)>=51||d2>=30;
+ const x=t(),done=Math.min(100,p.completed_levels||0),d1=Math.min(20,done),d2=Math.max(0,Math.min(30,done-20)),d3=Math.max(0,Math.min(40,done-50)),d4=Math.max(0,Math.min(10,done-90)),unlocked2=(p.current_level||1)>=21||d1>=20,unlocked3=(p.current_level||1)>=51||d2>=30,unlocked4=(p.current_level||1)>=91||d3>=40;
  text('homeChapter1Label',x.chapter(1)+' · 1–20');text('homeChapter1Title',x.chapter1);text('homeChapter1Desc',x.chapter1Desc);text('homeChapter1Done',d1);text('homeChapter1Count','/ 20 '+x.levels);$('homeChapter1Progress').style.width=d1*5+'%';
  const n1=d1>=20?1:Math.max(1,Math.min(20,p.current_level||1));$('homeChapter1Play').href='./game.html?level='+n1;$('homeChapter1Play').innerHTML=(d1>=20?x.replay:x.play)+' <span>▶</span>';
  text('homeChapter2Label',x.chapter(2)+' · 21–50');text('homeChapter2Title',x.chapter2);text('homeChapter2Desc',x.chapter2Desc);text('homeChapter2Done',d2);text('homeChapter2Count','/ 30 '+x.levels);$('homeChapter2Progress').style.width=(d2/30*100)+'%';
  if(unlocked2){$('homeChapter2LockNote').hidden=true;$('homeChapter2Play').classList.remove('locked');$('homeChapter2Play').removeAttribute('aria-disabled');const n2=d2>=30?21:Math.max(21,Math.min(50,p.current_level||21));$('homeChapter2Play').href='./game.html?level='+n2;$('homeChapter2Play').innerHTML=(d2>=30?x.replay:x.play)+' <span>▶</span>';}
  else{$('homeChapter2LockNote').hidden=false;text('homeChapter2LockNote',x.chapter2Lock);$('homeChapter2Play').classList.add('locked');$('homeChapter2Play').setAttribute('aria-disabled','true');$('homeChapter2Play').removeAttribute('href');$('homeChapter2Play').textContent=x.locked;}
  text('homeChapter3Label',x.chapter(3)+' · 51–90');text('homeChapter3Title',x.chapter3);text('homeChapter3Desc',x.chapter3Desc);text('homeChapter3Done',d3);text('homeChapter3Count','/ 40 '+x.levels);$('homeChapter3Progress').style.width=(d3/40*100)+'%';
- if(unlocked3&&d3<10){$('homeChapter3LockNote').hidden=true;$('homeChapter3Play').classList.remove('locked');$('homeChapter3Play').removeAttribute('aria-disabled');const n3=Math.max(51,Math.min(60,p.current_level||51));$('homeChapter3Play').href='./game.html?level='+n3;$('homeChapter3Play').innerHTML=x.play+' <span>▶</span>';}
- else if(unlocked3&&d3>=10){$('homeChapter3LockNote').hidden=true;$('homeChapter3Play').classList.add('locked');$('homeChapter3Play').setAttribute('aria-disabled','true');$('homeChapter3Play').removeAttribute('href');$('homeChapter3Play').textContent=x.future;}
+ if(unlocked3){$('homeChapter3LockNote').hidden=true;$('homeChapter3Play').classList.remove('locked');$('homeChapter3Play').removeAttribute('aria-disabled');const n3=d3>=40?51:Math.max(51,Math.min(90,p.current_level||51));$('homeChapter3Play').href='./game.html?level='+n3;$('homeChapter3Play').innerHTML=(d3>=40?x.replay:x.play)+' <span>▶</span>';}
  else{$('homeChapter3LockNote').hidden=false;text('homeChapter3LockNote',x.chapter3Lock);$('homeChapter3Play').classList.add('locked');$('homeChapter3Play').setAttribute('aria-disabled','true');$('homeChapter3Play').removeAttribute('href');$('homeChapter3Play').textContent=x.locked;}
- text('homeChapter4Label',x.chapter(4)+' · 91–131');text('homeChapter4Title',x.future);text('homeChapter4Desc',x.futureDesc);text('homeChapter4State',x.futureState);text('homeChapter4Play',x.future);text('chapter4Label',x.chapter(4)+' · 91–131');text('chapter4Title',x.future);text('chapter4Desc',x.futureDesc);text('chapter4Count','0 / 41 '+x.levels);text('chapter4Play',x.future);
+ text('homeChapter4Label',x.chapter(4)+' · 91–131');text('homeChapter4Title',x.chapter4);text('homeChapter4Desc',x.chapter4Desc);text('homeChapter4Done',d4);text('homeChapter4Count','/ 41 '+x.levels);$('homeChapter4Progress').style.width=(d4/41*100)+'%';
+ if(unlocked4&&d4<10){$('homeChapter4LockNote').hidden=true;$('homeChapter4Play').classList.remove('locked');$('homeChapter4Play').removeAttribute('aria-disabled');const n4=Math.max(91,Math.min(100,p.current_level||91));$('homeChapter4Play').href='./game.html?level='+n4;$('homeChapter4Play').innerHTML=x.play+' <span>▶</span>';}
+ else if(unlocked4&&d4>=10){$('homeChapter4LockNote').hidden=true;$('homeChapter4Play').classList.add('locked');$('homeChapter4Play').setAttribute('aria-disabled','true');$('homeChapter4Play').removeAttribute('href');$('homeChapter4Play').textContent=x.future;}
+ else{$('homeChapter4LockNote').hidden=false;text('homeChapter4LockNote',x.chapter4Lock);$('homeChapter4Play').classList.add('locked');$('homeChapter4Play').setAttribute('aria-disabled','true');$('homeChapter4Play').removeAttribute('href');$('homeChapter4Play').textContent=x.locked;}
+ for(let n=5;n<=10;n++){text('homeChapter'+n+'Label',x.chapter(n));text('homeChapter'+n+'Title',x.future);text('homeChapter'+n+'Desc',x.futureDesc);text('homeChapter'+n+'State',x.futureState);text('homeChapter'+n+'Play',x.future);}
 }
 function update(p){
  const x=t(),name=pw.name(p),rank=p.rank>0?'#'+p.rank:'—';
@@ -192,7 +188,7 @@ function update(p){
  text('nicknameBtn',p.nickname_changed?x.nicknameDone:x.nicknameSet);$('nicknameBtn').disabled=Boolean(p.nickname_changed);
  updateHomeCarousel(p);updateChapterCards(p);renderThemeHub(p);
  const claimed=String(p.last_daily_reward||'')===today();$('claimDaily').disabled=claimed;text('claimDaily',claimed?x.claimed:x.claim);text('dailyStreak',x.streak+': '+(p.daily_streak||0));text('notificationsState',p.notifications_enabled?x.notifyAllowed:x.notifyAllow);
- let target=1;if(homeCarouselPositioned){try{const saved=Number(sessionStorage.getItem('pw.homeChapter'));if(saved>=1&&saved<=4)target=saved}catch{}}else{homeCarouselPositioned=true;try{sessionStorage.removeItem('pw.homeChapter')}catch{}}requestAnimationFrame(()=>showHomeChapter(target,false));
+ let target=1;if(homeCarouselPositioned){try{const saved=Number(sessionStorage.getItem('pw.homeChapter'));if(saved>=1&&saved<=10)target=saved}catch{}}else{homeCarouselPositioned=true;try{sessionStorage.removeItem('pw.homeChapter')}catch{}}requestAnimationFrame(()=>showHomeChapter(target,false));
 }
 function applyLanguage(l){
  if(!T[l])l='ru';try{localStorage.setItem('pw.language',l)}catch{};document.documentElement.lang=l;const x=T[l];setLogo(x);setThemeHubLabels();
@@ -207,11 +203,11 @@ function applyLanguage(l){
  $('dailyModal').querySelector('h2').textContent=x.daily;text('dailyCopy',x.dailyCopy);
  const shortcuts=document.querySelectorAll('.shortcuts button b');if(shortcuts[0])shortcuts[0].textContent=x.daily;if(shortcuts[1])shortcuts[1].textContent=x.rating;
  text('rulesTitle',x.rulesTitle);$('rulesBody').innerHTML=RULES[l]||RULES.ru;text('resetTitle',x.resetTitle);text('resetBody',RESET[l]||RESET.ru);text('cancelReset',x.cancel);text('confirmReset',x.resetButton);text('eraseAccountTitle',x.eraseTitle);text('eraseAccountText',x.eraseText);text('confirmEraseAccount',x.eraseButton);text('cancelEraseAccount',x.cancel);
- text('homeChapter3Label',x.chapter(3)+' · 51–90');text('homeChapter3Title',x.chapter3);text('homeChapter3Desc',x.chapter3Desc);text('chapter3Label',x.chapter(3)+' · 51–90');text('chapter3Title',x.chapter3);text('chapter3Desc',x.chapter3Desc);text('chapter3Count','/ 40 '+x.levels);text('homeChapter4Label',x.chapter(4)+' · 91–131');text('homeChapter4Title',x.future);text('homeChapter4Desc',x.futureDesc);text('homeChapter4State',x.futureState);text('homeChapter4Play',x.future);text('chapter4Label',x.chapter(4)+' · 91–131');text('chapter4Title',x.future);text('chapter4Desc',x.futureDesc);text('chapter4Count','0 / 41 '+x.levels);text('chapter4Play',x.future);setThemeLabels(x);text('themeCurrent',x.themeNames[getTheme()]);text('languageCurrent',l==='ru'?'Русский':l==='en'?'English':'Azərbaycan dili');document.querySelectorAll('[data-language]').forEach(b=>b.classList.toggle('selected',b.dataset.language===l));
+ text('homeChapter3Label',x.chapter(3)+' · 51–90');text('homeChapter3Title',x.chapter3);text('homeChapter3Desc',x.chapter3Desc);text('chapter3Label',x.chapter(3)+' · 51–90');text('chapter3Title',x.chapter3);text('chapter3Desc',x.chapter3Desc);text('chapter3Count','/ 40 '+x.levels);text('homeChapter4Label',x.chapter(4)+' · 91–131');text('homeChapter4Title',x.chapter4);text('homeChapter4Desc',x.chapter4Desc);text('chapter4Label',x.chapter(4)+' · 91–131');text('chapter4Title',x.chapter4);text('chapter4Desc',x.chapter4Desc);text('chapter4Count','/ 41 '+x.levels);for(let n=5;n<=10;n++){text('homeChapter'+n+'Label',x.chapter(n));text('homeChapter'+n+'Title',x.future);text('homeChapter'+n+'Desc',x.futureDesc);text('homeChapter'+n+'State',x.futureState);text('homeChapter'+n+'Play',x.future);text('chapter'+n+'Label',x.chapter(n));text('chapter'+n+'Title',x.future);text('chapter'+n+'Desc',x.futureDesc);text('chapter'+n+'Count',x.futureState);text('chapter'+n+'Play',x.future);}setThemeLabels(x);text('themeCurrent',x.themeNames[getTheme()]);text('languageCurrent',l==='ru'?'Русский':l==='en'?'English':'Azərbaycan dili');document.querySelectorAll('[data-language]').forEach(b=>b.classList.toggle('selected',b.dataset.language===l));
  if(pw.player)update(pw.player);
 }
 function markHomeChapter(n){document.querySelectorAll('#homeChapterDots button').forEach(b=>{const on=Number(b.dataset.dot)===n;b.classList.toggle('on',on);if(on)b.setAttribute('aria-current','true');else b.removeAttribute('aria-current')});try{sessionStorage.setItem('pw.homeChapter',String(n))}catch{}}
-function showHomeChapter(n,smooth=true){n=Math.max(1,Math.min(4,Number(n)||1));const car=$('homeChapterCarousel'),slide=car?.querySelector('[data-home-chapter="'+n+'"]');if(!car||!slide)return;const left=Math.max(0,slide.offsetLeft-(car.clientWidth-slide.clientWidth)/2);car.scrollTo({left,behavior:smooth?'smooth':'auto'});markHomeChapter(n)}
+function showHomeChapter(n,smooth=true){n=Math.max(1,Math.min(10,Number(n)||1));const car=$('homeChapterCarousel'),slide=car?.querySelector('[data-home-chapter="'+n+'"]');if(!car||!slide)return;const left=Math.max(0,slide.offsetLeft-(car.clientWidth-slide.clientWidth)/2);car.scrollTo({left,behavior:smooth?'smooth':'auto'});markHomeChapter(n)}
 function initHomeCarousel(){const car=$('homeChapterCarousel');if(!car)return;let timer;const sync=()=>{const center=car.scrollLeft+car.clientWidth/2;let best=1,dist=Infinity;car.querySelectorAll('[data-home-chapter]').forEach(s=>{const d=Math.abs(s.offsetLeft+s.clientWidth/2-center);if(d<dist){dist=d;best=Number(s.dataset.homeChapter)}});markHomeChapter(best)};car.addEventListener('scroll',()=>{clearTimeout(timer);timer=setTimeout(sync,80)},{passive:true});document.querySelectorAll('#homeChapterDots button').forEach(b=>b.onclick=()=>showHomeChapter(Number(b.dataset.dot)));car.querySelectorAll('[data-home-chapter]').forEach(s=>s.addEventListener('click',e=>{if(e.target.closest('a,button,input,label'))return;const n=Number(s.dataset.homeChapter);if(n)showHomeChapter(n)}));}
 function showRequiredLanguagePicker(){const c=$('languageClose');if(c)c.hidden=true;open('languageModal')}
 
@@ -274,5 +270,5 @@ async function rating(){const x=t();screen('ratingScreen');const id=++ratingReq,
 ['ratingNav','ratingShortcut','refreshRating'].forEach(id=>$(id).onclick=rating);
 
 window.addEventListener('pw:player',e=>update(e.detail));
-pw.login().then(async()=>{pw.status(t().profileSynced);track('app_open',{metadata:{version:'r40'}});configureAds();try{const start=window.Telegram?.WebApp?.initDataUnsafe?.start_param||'';if(start.startsWith('ref_PW-'))await pw.api('register_referral',{referrer:start.slice(4)})}catch{}}).catch(e=>pw.status(e.message));
+pw.login().then(async()=>{pw.status(t().profileSynced);track('app_open',{metadata:{version:'r41'}});configureAds();try{const start=window.Telegram?.WebApp?.initDataUnsafe?.start_param||'';if(start.startsWith('ref_PW-'))await pw.api('register_referral',{referrer:start.slice(4)})}catch{}}).catch(e=>pw.status(e.message));
 })();
