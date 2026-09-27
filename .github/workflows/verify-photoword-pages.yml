@@ -18,14 +18,14 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 8
     steps:
-      - name: Wait for r23 and verify published files
+      - name: Wait for r24 and verify published files
         shell: bash
         run: |
           set -euo pipefail
           base='https://firstgame001-star.github.io/Photoword2026/clean'
           ok=0
           for i in $(seq 1 48); do
-            if curl --fail --silent --show-error --location --max-time 20 "$base/release.json?check=$i" -o "$RUNNER_TEMP/release.json" && grep -q '20260927-r23' "$RUNNER_TEMP/release.json"; then
+            if curl --fail --silent --show-error --location --max-time 20 "$base/release.json?check=$i" -o "$RUNNER_TEMP/release.json" && grep -q '20260927-r24' "$RUNNER_TEMP/release.json"; then
               ok=1
               break
             fi
@@ -33,7 +33,7 @@ jobs:
           done
           test "$ok" = 1
           for file in index.html game.html core.js home.js game.js ui.css privacy.html terms.html release.json; do
-            curl --fail --silent --show-error --location --retry 4 --retry-all-errors --retry-delay 3 --max-time 30 "$base/$file?r=20260927-r23" -o "$RUNNER_TEMP/$file"
+            curl --fail --silent --show-error --location --retry 4 --retry-all-errors --retry-delay 3 --max-time 30 "$base/$file?r=20260927-r24" -o "$RUNNER_TEMP/$file"
             echo "HTTP 200: $file"
           done
           grep -q 'chapter1Select' "$RUNNER_TEMP/index.html"
@@ -42,8 +42,8 @@ jobs:
           grep -q '21–49' "$RUNNER_TEMP/index.html"
           grep -q 'privacy.html' "$RUNNER_TEMP/index.html"
           grep -q 'terms.html' "$RUNNER_TEMP/index.html"
-          grep -q '20260927-r23' "$RUNNER_TEMP/release.json"
+          grep -q '20260927-r24' "$RUNNER_TEMP/release.json"
           node --check "$RUNNER_TEMP/core.js"
           node --check "$RUNNER_TEMP/home.js"
           node --check "$RUNNER_TEMP/game.js"
-          printf '### PhotoWord r23 publication check\n\n49 levels, launch support, analytics, account deletion and chapter 2 assets are live and parse successfully.\n' >> "$GITHUB_STEP_SUMMARY"
+          printf '### PhotoWord r24 publication check\n\n49 levels, launch support, analytics, account deletion and chapter 2 assets are live and parse successfully.\n' >> "$GITHUB_STEP_SUMMARY"
