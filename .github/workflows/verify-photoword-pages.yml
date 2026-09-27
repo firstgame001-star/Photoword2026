@@ -23,12 +23,12 @@ jobs:
           persist-credentials: false
       - name: Verify repository clean build
         run: node scripts/check-clean.mjs
-      - name: Wait for r38 and verify published files
+      - name: Wait for r39 and verify published files
         shell: bash
         run: |
           set -euo pipefail
           base='https://firstgame001-star.github.io/Photoword2026/clean'
-          release='20260927-r38'
+          release='20260927-r39'
           ok=0
           for i in $(seq 1 48); do
             if curl --fail --silent --show-error --location --max-time 20 "$base/release.json?check=$i" -o "$RUNNER_TEMP/release.json" && grep -q "$release" "$RUNNER_TEMP/release.json"; then
@@ -60,4 +60,4 @@ jobs:
           node --check "$RUNNER_TEMP/home.js"
           node --check "$RUNNER_TEMP/game.js"
           node --check "$RUNNER_TEMP/theme-game.js"
-          printf '### PhotoWord r38 publication check\n\nMain levels 1–60, Chapters 1–4 structure, featured thematic mode, Sport 1–20, legal/settings surfaces and JavaScript all verified.\n' >> "$GITHUB_STEP_SUMMARY"
+          printf '### PhotoWord r39 publication check\n\nMain levels 1–60, Chapters 1–4 structure, featured thematic mode, Sport 1–20, legal/settings surfaces and JavaScript all verified.\n' >> "$GITHUB_STEP_SUMMARY"
