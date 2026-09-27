@@ -267,3 +267,13 @@ html[data-theme="light"] .challenge-copy em{background:#e6eef2;color:#395563}
 html[data-theme="light"] .challenge-run-panel,html[data-theme="light"] .challenge-hud>div,html[data-theme="light"] .challenge-intro-stats>div{background:#f8fbfd;color:#17303c;border-color:#b9ccd5}
 html[data-theme="light"] .challenge-run-panel>p,html[data-theme="light"] .challenge-hud small,html[data-theme="light"] .challenge-intro-stats small{color:#617985}
 @media(max-width:380px){.challenge-hud{gap:5px}.challenge-hud>div{padding:7px 2px}.challenge-hud b{font-size:13px}.challenge-hud small{font-size:7px}}
+
+
+/* Blitz paid hints */
+.challenge-blitz-hints{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:12px}
+.challenge-blitz-hints .tool{min-height:42px;padding:8px 4px;font-size:14px}
+.challenge-blitz-hints .tool:nth-child(1){background:#17a93d}
+.challenge-blitz-hints .tool:nth-child(2){background:#c18b18}
+.challenge-blitz-hints .tool:nth-child(3){background:#176f9a}
+.challenge-text-hint{margin-top:10px;padding:11px 12px;border:1px solid #4a7489;border-radius:12px;background:#082b3d;color:#cce0e9;font-size:11px;line-height:1.45;text-align:left}
+html[data-theme="light"] .challenge-text-hint{background:#f8fbfd;color:#17303c;border-color:#b6cad4}
