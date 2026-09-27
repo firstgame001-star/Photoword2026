@@ -1,6 +1,6 @@
 <!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#061d2c"><meta name="referrer" content="no-referrer"><title>PhotoWord — Тематический уровень</title>
-<link rel="stylesheet" href="./ui.css?v=20260927-r33"><script src="https://telegram.org/js/telegram-web-app.js"></script><script defer src="./core.js?v=20260927-r33"></script><script defer src="./theme-game.js?v=20260927-r33"></script></head><body><main class="game-wrap">
-<header class="game-head"><a href="./index.html" class="back" aria-label="На главную">‹</a><div><b id="themeGameTitle">⚽ Спорт</b><small id="levelTitle">Тематический уровень 1</small></div><div class="theme-mini-progress" id="themeProgress">0 / 100</div></header>
+<link rel="stylesheet" href="./ui.css?v=20260927-r34"><script src="https://telegram.org/js/telegram-web-app.js"></script><script defer src="./core.js?v=20260927-r34"></script><script defer src="./theme-game.js?v=20260927-r34"></script></head><body><main class="game-wrap">
+<header class="game-head"><a href="./index.html" class="back" aria-label="На главную">‹</a><div><b id="themeGameTitle">⚽ Спорт</b><small id="levelTitle">Тематический уровень 1</small></div><div class="theme-game-actions"><div class="theme-mini-progress" id="themeProgress">0 / 100</div><button class="settings theme-settings" id="themeSettingsBtn" aria-label="Настройки">⚙</button></div></header>
 <div id="photos" class="photos" aria-label="Четыре подсказки"></div>
 <div id="slots" class="slots" aria-label="Ответ"></div><div id="letters" class="letters" aria-label="Буквы"></div>
 <div class="tools"><button class="tool" id="letterHint" aria-label="Открыть букву">💡</button><button class="tool" id="removeHint" aria-label="Убрать лишние буквы">🪄</button><button class="tool" id="shuffle" aria-label="Перемешать">🔀</button></div>
@@ -11,5 +11,27 @@
   <div class="success-copy"><b id="successTitle">Уровень пройден!</b><small id="successReward">Прогресс сохранён</small></div>
   <a id="nextLevel" class="next-level" href="./index.html">СЛЕДУЮЩИЙ УРОВЕНЬ <span>▶</span></a>
 </section>
-<p class="version">PhotoWord · Themes · 2026.09.27-r33</p>
+<p class="version">PhotoWord · Themes · 2026.09.27-r34</p>
+
+<div id="tgSettingsModal" class="modal" hidden role="dialog" aria-modal="true"><div class="modalcard settingscard"><button class="close" data-tg-close="tgSettingsModal">×</button><h2 id="tgSettingsTitle">Настройки</h2>
+<label class="settingrow"><span><b id="tgSoundLabel">Звук</b><small id="tgSoundDesc">Буквы, победа, ошибка и подсказки</small></span><input type="checkbox" id="tgSoundToggle"></label>
+<label class="settingrow"><span><b id="tgHapticLabel">Вибрация</b><small id="tgHapticDesc">Нажатия, верный и неверный ответ</small></span><input type="checkbox" id="tgHapticToggle"></label>
+<label class="settingrow"><span><b id="tgMusicLabel">Музыка</b><small id="tgMusicDesc">Спокойная фоновая музыка</small></span><input type="checkbox" id="tgMusicToggle"></label>
+<button class="settingrow" id="tgLanguageBtn"><span><b id="tgLanguageLabel">Язык</b><small id="tgLanguageCurrent">Русский</small></span><span>›</span></button>
+<button class="settingrow" id="tgNotificationsBtn"><span><b id="tgNotificationsLabel">Уведомления</b><small id="tgNotificationsState">Разрешить сообщения от бота</small></span><span>›</span></button>
+<button class="settingrow" id="tgThemeBtn"><span><b id="tgThemeLabel">Тема</b><small id="tgThemeCurrent">Игровая</small></span><span>›</span></button>
+<button class="settingrow" id="tgRulesBtn"><span><b id="tgRulesLabel">Правила игры</b><small id="tgRulesDesc">Как играть в тематическом режиме</small></span><span>›</span></button>
+<button class="settingrow" id="tgSupportBtn"><span><b id="tgSupportLabel">Поддержка</b><small id="tgSupportDesc">Связаться с поддержкой</small></span><span>›</span></button>
+<a class="settingrow" id="tgPrivacyLink" href="./privacy.html"><span><b id="tgPrivacyLabel">Конфиденциальность</b></span><span>›</span></a>
+<a class="settingrow" id="tgTermsLink" href="./terms.html"><span><b id="tgTermsLabel">Пользовательское соглашение</b></span><span>›</span></a>
+</div></div>
+
+<div id="tgLanguageModal" class="modal" hidden role="dialog" aria-modal="true"><div class="modalcard"><button class="close" data-tg-close="tgLanguageModal">×</button><div class="languageGlobe">🌐</div><h2 id="tgLanguageTitle">Выберите язык</h2><div class="languagechoices"><button data-tg-language="ru">🇷🇺 <b>Русский</b></button><button data-tg-language="en">🇬🇧 <b>English</b></button><button data-tg-language="az">🇦🇿 <b>Azərbaycan dili</b></button></div></div></div>
+
+<div id="tgThemeModal" class="modal" hidden role="dialog" aria-modal="true"><div class="modalcard"><button class="close" data-tg-close="tgThemeModal">×</button><h2 id="tgThemeTitle">Тема</h2><div class="themechoices"><button data-tg-theme="game"><i class="themepreview game"></i><span><b>🎮 Игровая</b></span></button><button data-tg-theme="night"><i class="themepreview night"></i><span><b>🌙 Ночная</b></span></button><button data-tg-theme="light"><i class="themepreview light"></i><span><b>☀️ Светлая</b></span></button><button data-tg-theme="neon"><i class="themepreview neon"></i><span><b>⚡ Неон</b></span></button><button data-tg-theme="gold"><i class="themepreview gold"></i><span><b>👑 Золотая</b></span></button></div></div></div>
+
+<div id="tgRulesModal" class="modal" hidden role="dialog" aria-modal="true"><div class="modalcard rulescard"><button class="close" data-tg-close="tgRulesModal">×</button><h2 id="tgRulesTitle">Правила игры</h2><div id="tgRulesBody" class="rulesbody"></div></div></div>
+
+<div id="tgSupportModal" class="modal" hidden role="dialog" aria-modal="true"><div class="modalcard"><button class="close" data-tg-close="tgSupportModal">×</button><h2 id="tgSupportTitle">Поддержка</h2><p id="tgSupportText">Напиши в поддержку через Telegram-бота.</p><button id="tgOpenSupport" class="claimbtn">НАПИСАТЬ В ПОДДЕРЖКУ</button><p class="muted">@PhotoWordBot</p></div></div>
+
 <noscript>Для игры необходимо включить JavaScript.</noscript></main></body></html>
