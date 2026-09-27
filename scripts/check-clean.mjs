@@ -27,7 +27,7 @@ for(const file of ['core.js','home.js','game.js','theme-game.js']){
 }
 
 const release=JSON.parse(readFileSync(resolve(base,'release.json'),'utf8'));
-if(release.release!=='20260927-r41')throw Error('Unexpected release: '+release.release);
+if(release.release!=='20260927-r42')throw Error('Unexpected release: '+release.release);
 if(!Array.isArray(release.levels)||!release.levels.includes(100))throw Error('Main levels are not published through 100');
 if(release.chapters?.length!==10)throw Error('Main chapter navigation must contain 10 chapters');
 if(release.chapters.find(x=>x.id===3)?.status!=='live')throw Error('Chapter 3 must be complete');
@@ -43,4 +43,16 @@ if(!index.includes('themes-entry-featured'))throw Error('Featured thematic mode 
 if(!index.includes('12 тем · 1200 уровней'))throw Error('Thematic mode headline is missing');
 if(!themeGame.includes('data-coins'))throw Error('Thematic game coin balance is missing');
 if(themeGame.includes('id="themeSettingsBtn"')||themeGame.includes('id="themeProgress"'))throw Error('Thematic header must contain coins only');
-console.log('PASS: clean entrypoints, r41 manifest, Chapters 1-10, main levels through 100, thematic mode and JavaScript syntax.');
+const homeJs=readFileSync(resolve(base,'home.js'),'utf8');
+const uiCss=readFileSync(resolve(base,'ui.css'),'utf8');
+if(!index.includes('id="profileTitle"'))throw Error('Chapter-earned profile title surface is missing');
+if(!homeJs.includes("chapter_progress_mode") && !homeJs.includes('shownChapterLevel'))throw Error('Absolute chapter progress helper is missing');
+if(homeJs.includes('requestAnimationFrame(()=>showHomeChapter'))throw Error('Initial carousel must not auto-scroll after profile sync');
+for(let n=1;n<=10;n++){
+ const homeNeed=n===1?'#homeChapter1':('[data-home-chapter="'+n+'"]');
+ const listNeed='#chapter'+n+'Select';
+ if(!uiCss.includes(homeNeed)||!uiCss.includes(listNeed))throw Error('Missing chapter background '+n);
+}
+if(release.ui?.chapter_progress_mode!=='absolute_level')throw Error('Release must declare absolute chapter progress');
+if(release.ui?.chapter_titles!==true)throw Error('Release must declare chapter title system');
+console.log('PASS: r42 entrypoints, Chapters 1-10, backgrounds, absolute progress, chapter titles and JavaScript syntax.');
