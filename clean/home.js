@@ -10,7 +10,7 @@ const getTheme=()=>{try{return localStorage.getItem('pw.theme')||'game'}catch{re
 const lang=()=>getLang()||'ru';
 const today=()=>new Date().toISOString().slice(0,10);
 const track=(event,data={})=>pw.actionRequest('track_event',{event,language:lang(),...data}).catch(()=>{});
-let publicConfig={},adController=null;
+let publicConfig={},adController=null,homeCarouselPositioned=false;
 window.addEventListener('pw:error',e=>track('server_error',{metadata:{code:String(e.detail?.code||'error'),status:Number(e.detail?.status||0)}}));
 window.addEventListener('error',e=>track('client_error',{metadata:{message:String(e.message||'error').slice(0,120)}}));
 window.addEventListener('unhandledrejection',e=>track('client_error',{metadata:{message:String(e.reason?.message||e.reason||'rejection').slice(0,120)}}));
@@ -88,7 +88,7 @@ function updateChapterCards(p){
  const x=t(),done=Math.min(49,p.completed_levels||0),d1=Math.min(20,done),d2=Math.max(0,Math.min(29,done-20));
  text('chapter1Label',x.chapter(1)+' · 1–20');text('chapter1Title',x.chapter1);text('chapter1Desc',x.chapter1Desc);text('chapter1Done',d1);text('chapter1Count','/ 20 '+x.levels);$('chapter1Progress').style.width=d1*5+'%';
  const next1=d1>=20?1:Math.max(1,Math.min(20,p.current_level||1));$('chapter1Play').href='./game.html?level='+next1;$('chapter1Play').innerHTML=(d1>=20?x.replay:x.play)+' <span>▶</span>';
- text('chapter2Label',x.chapter(2)+' · 21–49');text('chapter2Title',x.chapter2);text('chapter2Desc',x.chapter2Desc);text('chapter2Done',d2);text('chapter2Count','/ 29 '+x.levels);$('chapter2Progress').style.width=(d2/29*100)+'%';
+ text('chapter2Label',x.chapter(2)+' · 21–50');text('chapter2Title',x.chapter2);text('chapter2Desc',x.chapter2Desc);text('chapter2Done',d2);text('chapter2Count','/ 29 '+x.levels);$('chapter2Progress').style.width=(d2/29*100)+'%';
  const unlocked=(p.current_level||1)>=21||d1>=20;
  if(unlocked){
    if($('chapter2LockNote'))$('chapter2LockNote').hidden=true;
@@ -100,12 +100,12 @@ function updateChapterCards(p){
 }
 function updateHomeCarousel(p){
  const x=t(),done=Math.min(49,p.completed_levels||0),d1=Math.min(20,done),d2=Math.max(0,Math.min(29,done-20)),unlocked2=(p.current_level||1)>=21||d1>=20;
- text('homeChapter1Label',x.chapter(1));text('homeChapter1Title',x.chapter1);text('homeChapter1Desc',x.chapter1Desc);text('homeChapter1Done',d1);text('homeChapter1Count','/ 20 '+x.levels);$('homeChapter1Progress').style.width=d1*5+'%';
+ text('homeChapter1Label',x.chapter(1)+' · 1–20');text('homeChapter1Title',x.chapter1);text('homeChapter1Desc',x.chapter1Desc);text('homeChapter1Done',d1);text('homeChapter1Count','/ 20 '+x.levels);$('homeChapter1Progress').style.width=d1*5+'%';
  const n1=d1>=20?1:Math.max(1,Math.min(20,p.current_level||1));$('homeChapter1Play').href='./game.html?level='+n1;$('homeChapter1Play').innerHTML=(d1>=20?x.replay:x.play)+' <span>▶</span>';
- text('homeChapter2Label',x.chapter(2));text('homeChapter2Title',x.chapter2);text('homeChapter2Desc',x.chapter2Desc);text('homeChapter2Done',d2);text('homeChapter2Count','/ 29 '+x.levels);$('homeChapter2Progress').style.width=(d2/29*100)+'%';
+ text('homeChapter2Label',x.chapter(2)+' · 21–50');text('homeChapter2Title',x.chapter2);text('homeChapter2Desc',x.chapter2Desc);text('homeChapter2Done',d2);text('homeChapter2Count','/ 29 '+x.levels);$('homeChapter2Progress').style.width=(d2/29*100)+'%';
  if(unlocked2){$('homeChapter2LockNote').hidden=true;$('homeChapter2Play').classList.remove('locked');$('homeChapter2Play').removeAttribute('aria-disabled');const n2=d2>=29?21:Math.max(21,Math.min(49,p.current_level||21));$('homeChapter2Play').href='./game.html?level='+n2;$('homeChapter2Play').innerHTML=(d2>=29?x.replay:x.play)+' <span>▶</span>';}
  else{$('homeChapter2LockNote').hidden=false;text('homeChapter2LockNote',x.chapter2Lock);$('homeChapter2Play').classList.add('locked');$('homeChapter2Play').setAttribute('aria-disabled','true');$('homeChapter2Play').removeAttribute('href');$('homeChapter2Play').textContent=x.locked;}
- for(const n of [3,4]){text('homeChapter'+n+'Label',x.chapter(n));text('homeChapter'+n+'Title',x.future);text('homeChapter'+n+'Desc',x.futureDesc);text('homeChapter'+n+'State',x.futureState);text('homeChapter'+n+'Play',x.future);}
+ for(const n of [3,4]){const range=n===3?'51–90':'91–131';text('homeChapter'+n+'Label',x.chapter(n)+' · '+range);text('homeChapter'+n+'Title',x.future);text('homeChapter'+n+'Desc',x.futureDesc);text('homeChapter'+n+'State',x.futureState);text('homeChapter'+n+'Play',x.future);}
 }
 function update(p){
  const x=t(),name=pw.name(p),rank=p.rank>0?'#'+p.rank:'—';
@@ -115,7 +115,7 @@ function update(p){
  text('nicknameBtn',p.nickname_changed?x.nicknameDone:x.nicknameSet);$('nicknameBtn').disabled=Boolean(p.nickname_changed);
  updateHomeCarousel(p);updateChapterCards(p);
  const claimed=String(p.last_daily_reward||'')===today();$('claimDaily').disabled=claimed;text('claimDaily',claimed?x.claimed:x.claim);text('dailyStreak',x.streak+': '+(p.daily_streak||0));text('notificationsState',p.notifications_enabled?x.notifyAllowed:x.notifyAllow);
- let target=(p.current_level||1)>49?2:((p.current_level||1)>=21?2:1);try{const saved=Number(sessionStorage.getItem('pw.homeChapter'));if(saved>=1&&saved<=4)target=saved}catch{}requestAnimationFrame(()=>showHomeChapter(target,false));
+ let target=1;if(homeCarouselPositioned){try{const saved=Number(sessionStorage.getItem('pw.homeChapter'));if(saved>=1&&saved<=4)target=saved}catch{}}else{homeCarouselPositioned=true;try{sessionStorage.removeItem('pw.homeChapter')}catch{}}requestAnimationFrame(()=>showHomeChapter(target,false));
 }
 function applyLanguage(l){
  if(!T[l])l='ru';try{localStorage.setItem('pw.language',l)}catch{};document.documentElement.lang=l;const x=T[l];setLogo(x);
@@ -130,7 +130,7 @@ function applyLanguage(l){
  $('dailyModal').querySelector('h2').textContent=x.daily;text('dailyCopy',x.dailyCopy);text('tasksTitle',x.taskTitle);text('task1Title',x.task1);text('task1Reward',x.reward+': 40 🪙');text('task2Title',x.task2);text('task2Reward',x.reward+': 80 🪙');document.querySelectorAll('[data-task]').forEach(b=>{if(!b.disabled)b.textContent=x.take});text('tasksFootnote',x.tasksFoot);
  const shortcuts=document.querySelectorAll('.shortcuts button b');if(shortcuts[0])shortcuts[0].textContent=x.daily;if(shortcuts[1])shortcuts[1].textContent=x.tasks;if(shortcuts[2])shortcuts[2].textContent=x.rating;
  text('rulesTitle',x.rulesTitle);$('rulesBody').innerHTML=RULES[l]||RULES.ru;text('resetTitle',x.resetTitle);text('resetBody',RESET[l]||RESET.ru);text('cancelReset',x.cancel);text('confirmReset',x.resetButton);text('eraseAccountTitle',x.eraseTitle);text('eraseAccountText',x.eraseText);text('confirmEraseAccount',x.eraseButton);text('cancelEraseAccount',x.cancel);
- for(const n of [3,4]){text('homeChapter'+n+'Label',x.chapter(n));text('homeChapter'+n+'Title',x.future);text('homeChapter'+n+'Desc',x.futureDesc);text('homeChapter'+n+'State',x.futureState);text('homeChapter'+n+'Play',x.future);}setThemeLabels(x);text('themeCurrent',x.themeNames[getTheme()]);text('languageCurrent',l==='ru'?'Русский':l==='en'?'English':'Azərbaycan dili');document.querySelectorAll('[data-language]').forEach(b=>b.classList.toggle('selected',b.dataset.language===l));
+ for(const n of [3,4]){const range=n===3?'51–90':'91–131';text('homeChapter'+n+'Label',x.chapter(n)+' · '+range);text('homeChapter'+n+'Title',x.future);text('homeChapter'+n+'Desc',x.futureDesc);text('homeChapter'+n+'State',x.futureState);text('homeChapter'+n+'Play',x.future);}setThemeLabels(x);text('themeCurrent',x.themeNames[getTheme()]);text('languageCurrent',l==='ru'?'Русский':l==='en'?'English':'Azərbaycan dili');document.querySelectorAll('[data-language]').forEach(b=>b.classList.toggle('selected',b.dataset.language===l));
  if(pw.player)update(pw.player);
 }
 function markHomeChapter(n){document.querySelectorAll('#homeChapterDots button').forEach(b=>{const on=Number(b.dataset.dot)===n;b.classList.toggle('on',on);if(on)b.setAttribute('aria-current','true');else b.removeAttribute('aria-current')});try{sessionStorage.setItem('pw.homeChapter',String(n))}catch{}}
