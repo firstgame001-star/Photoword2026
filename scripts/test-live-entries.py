@@ -738,6 +738,21 @@ with sync_playwright() as pw:
       answer100={'ru':'ОЛИМПИАДА','en':'OLYMPICS','az':'OLİMPİADA'}[language];tap_word(page,answer100);expect(page.locator('#successPanel')).to_be_visible();expect(page.locator('#nextLevel')).to_have_attribute('href','./index.html')
       assert not relevant_errors(errors),errors;ctx.close()
 
+
+    # Thematic Art has its own 100-level bank and separate progress from Sport.
+    for language in ['ru','en','az']:
+      ctx=browser.new_context(viewport={'width':390,'height':800},has_touch=True,is_mobile=True)
+      ctx.add_init_script(f"localStorage.setItem('pw.language','{language}'); localStorage.setItem('pw.theme','game');")
+      account={'photoword_id':'PW-TESTONLY','first_name':'Test','last_name':'','username':None,'game_nickname':None,'nickname_changed':False,'coins':4321,'xp':300,'completed_levels':20,'current_level':21,'rank':1,'daily_streak':0,'last_daily_reward':None}
+      completed=set(range(1,21));install_mock(ctx,account,completed,language);page=ctx.new_page();errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
+      page.goto(BASE+'clean/theme-game.html?theme=art&level=1#'+fragment,wait_until='domcontentloaded',timeout=45000)
+      expect(page.locator('#themeGameTitle')).to_contain_text({'ru':'Искусство','en':'Art','az':'İncəsənət'}[language])
+      art_answer={'ru':'КИСТЬ','en':'BRUSH','az':'FIRÇA'}[language];tap_word(page,art_answer);expect(page.locator('#successPanel')).to_be_visible();assert page.evaluate("JSON.parse(localStorage.getItem('pw.themeProgress.art')).includes(1)");assert page.evaluate("localStorage.getItem('pw.themeProgress.sport')") is None
+      page.evaluate("localStorage.setItem('pw.themeProgress.art',JSON.stringify(Array.from({length:99},(_,i)=>i+1)))")
+      page.goto(BASE+'clean/theme-game.html?theme=art&level=100#'+fragment,wait_until='domcontentloaded',timeout=45000)
+      art100={'ru':'ТВОРЧЕСТВО','en':'CREATIVITY','az':'YARADICILIQ'}[language];tap_word(page,art100);expect(page.locator('#successPanel')).to_be_visible();expect(page.locator('#nextLevel')).to_have_attribute('href','./index.html')
+      assert not relevant_errors(errors),errors;ctx.close()
+
     # Representative main-game browser checks. Loading game.js also validates every published answer/pool in RU/EN/AZ.
     sample_levels=[1,20,21,50,51,60,61,90,91,100,101,131,132,150,180]
     for language in ['ru','en','az']:
