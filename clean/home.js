@@ -117,12 +117,12 @@ function renderThemeHub(p){
 function openThemeCategory(id){
  const cat=themeCategory(id);if(!cat)return;
  const m=themeMode(),copy=m.cats[id]||[id,''],progress=getThemeProgress(id),done=progress.size,isSport=id==='sport';
- text('themeDetailTitle',cat.icon+' '+copy[0]);text('themeDetailSubtitle',done+' / 100 · '+m.detail);text('themeDetailInfo',isSport?(lang()==='ru'?'Готовы первые 20 уровней. Остальные добавим следующим блоком.':lang()==='en'?'The first 20 levels are ready. More will be added in the next block.':'İlk 20 səviyyə hazırdır. Qalanları növbəti blokda əlavə ediləcək.'):m.preparing);
+ text('themeDetailTitle',cat.icon+' '+copy[0]);text('themeDetailSubtitle',done+' / 100 · '+m.detail);text('themeDetailInfo',isSport?(lang()==='ru'?'Готовы первые 50 уровней. Остальные добавим следующим блоком.':lang()==='en'?'The first 50 levels are ready. More will be added in the next block.':'İlk 50 səviyyə hazırdır. Qalanları növbəti blokda əlavə ediləcək.'):m.preparing);
  const grid=$('themeLevelGrid');grid.replaceChildren();
- const next=Math.min(20,done+1);
+ const next=Math.min(50,done+1);
  for(let n=1;n<=100;n++){
    const b=document.createElement('button');b.type='button';b.textContent=n;b.setAttribute('aria-label',copy[0]+' '+n);
-   const completed=progress.has(n),available=isSport&&n<=20&&(completed||n<=next);
+   const completed=progress.has(n),available=isSport&&n<=50&&(completed||n<=next);
    b.disabled=!available;b.classList.toggle('done',completed);b.classList.toggle('next',available&&!completed);
    if(available)b.onclick=()=>{location.href='./theme-game.html?theme='+encodeURIComponent(id)+'&level='+n};
    grid.append(b);
@@ -274,5 +274,5 @@ async function rating(){const x=t();screen('ratingScreen');const id=++ratingReq,
 ['ratingNav','ratingShortcut','refreshRating'].forEach(id=>$(id).onclick=rating);
 
 window.addEventListener('pw:player',e=>update(e.detail));
-pw.login().then(async()=>{pw.status(t().profileSynced);track('app_open',{metadata:{version:'r39'}});configureAds();try{const start=window.Telegram?.WebApp?.initDataUnsafe?.start_param||'';if(start.startsWith('ref_PW-'))await pw.api('register_referral',{referrer:start.slice(4)})}catch{}}).catch(e=>pw.status(e.message));
+pw.login().then(async()=>{pw.status(t().profileSynced);track('app_open',{metadata:{version:'r40'}});configureAds();try{const start=window.Telegram?.WebApp?.initDataUnsafe?.start_param||'';if(start.startsWith('ref_PW-'))await pw.api('register_referral',{referrer:start.slice(4)})}catch{}}).catch(e=>pw.status(e.message));
 })();
