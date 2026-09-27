@@ -16,7 +16,7 @@ for attempt in range(48):
     time.sleep(5)
 else: raise AssertionError('Public Pages never reached '+RELEASE)
 
-for path in ['clean/','clean/game.html','clean/theme-game.html','clean/core.js','clean/home.js','clean/game.js','clean/theme-game.js','clean/ui.css','clean/privacy.html','clean/terms.html']:
+for path in ['clean/','clean/game.html','clean/theme-game.html','clean/core.js','clean/home.js','clean/game.js','clean/theme-game.js','clean/challenge.js','clean/ui.css','clean/privacy.html','clean/terms.html']:
     with urllib.request.urlopen(BASE+path+'?r='+RELEASE,timeout=20) as r: assert r.status==200,path
     print('LIVE HTTP 200:',path,flush=True)
 
@@ -42,6 +42,8 @@ def install_mock(ctx,account,completed,lang):
         if req.method=='OPTIONS':
             route.fulfill(status=204,headers={'Access-Control-Allow-Origin':'*','Access-Control-Allow-Headers':'content-type,apikey','Access-Control-Allow-Methods':'POST,OPTIONS'});return
         body=json.loads(req.post_data or '{}')
+        if '/functions/v1/challenge-game' in req.url:
+            route.abort();return
         if '/rest/v1/rpc/get_leaderboard' in req.url:
             row=account.copy()
             route.fulfill(status=200,content_type='application/json',body=json.dumps([row] if row['xp']>0 else []),headers={'Access-Control-Allow-Origin':'*'});return
