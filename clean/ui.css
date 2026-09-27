@@ -134,3 +134,7 @@ html[data-theme="light"] .theme-card small,html[data-theme="light"] .themes-entr
 .theme-level-grid button.done{background:#0c6848;border-color:#63dfa2;color:#fff}
 .theme-level-grid button.next{background:#0f5f80;border-color:#57d8ff;color:#fff;box-shadow:0 0 0 2px #57d8ff22}
 .theme-mini-progress{padding:8px 10px;border:1px solid #37657b;border-radius:11px;background:#072739e8;font-size:11px;font-weight:800;white-space:nowrap}
+
+.theme-game-actions{display:flex;align-items:center;gap:7px;justify-content:flex-end}
+.theme-settings{width:38px;height:38px;font-size:22px}
+@media(max-width:380px){.theme-mini-progress{padding:7px 8px;font-size:10px}.theme-settings{width:36px;height:36px}}
