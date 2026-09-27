@@ -4,7 +4,7 @@ from pathlib import Path
 from playwright.sync_api import sync_playwright, expect
 
 BASE='https://firstgame001-star.github.io/Photoword2026/'
-RELEASE='20260927-r40'
+RELEASE='20260927-r41'
 OUT=Path('test-results'); OUT.mkdir(exist_ok=True)
 
 for attempt in range(48):
@@ -21,9 +21,9 @@ for path in ['clean/','clean/game.html','clean/theme-game.html','clean/core.js',
     print('LIVE HTTP 200:',path,flush=True)
 
 ANSWERS={
-'ru':["СОБАКА","КОШКА","МОРЕ","ДОЖДЬ","ВРЕМЯ","ТЕПЛО","ПАМЯТЬ","СВЕТ","ПУТЬ","ТАЙНА","ТЕНЬ","СЛЕД","ВОЛНА","КЛЮЧ","КОРЕНЬ","СЕТЬ","ТОК","КАДР","СВЯЗЬ","ИСТОЧНИК","МОСТ","МАСКА","ИСКРА","ЗЕРКАЛО","ПУСТЫНЯ","ШИФР","ПЛАМЯ","КОМЕТА","ЛАБИРИНТ","СИГНАЛ","ПЕЧАТЬ","УЗЕЛ","СПУТНИК","ОБЛАКО","ГРАНЬ","КОНТУР","ОСКОЛОК","ИМПУЛЬС","АРХИВ","ГОРИЗОНТ","ВЕКТОР","СПЕКТР","ОРБИТА","РЕЗОНАНС","ПАРАДОКС","МАТРИЦА","ТРАЕКТОРИЯ","КОДЕКС","КОМПАС","БАЛАНС","РИТМ","ФОКУС","ЭХО","ПУЛЬС","ТОН","ПОРТАЛ","КАНАЛ","ФИЛЬТР","СЦЕНА","СИМВОЛ"],
-'en':["DOG","CAT","SEA","RAIN","TIME","WARMTH","MEMORY","LIGHT","PATH","SECRET","SHADOW","TRACE","WAVE","KEY","ROOT","NET","CURRENT","FRAME","LINK","SOURCE","BRIDGE","MASK","SPARK","MIRROR","DESERT","CODE","FLAME","COMET","MAZE","SIGNAL","STAMP","KNOT","SATELLITE","CLOUD","EDGE","OUTLINE","SHARD","IMPULSE","ARCHIVE","HORIZON","VECTOR","SPECTRUM","ORBIT","RESONANCE","PARADOX","MATRIX","TRAJECTORY","CODEX","COMPASS","BALANCE","RHYTHM","FOCUS","ECHO","PULSE","TONE","PORTAL","CHANNEL","FILTER","STAGE","SYMBOL"],
-'az':["İT","PİŞİK","DƏNİZ","YAĞIŞ","ZAMAN","İSTİ","YADDAŞ","İŞIQ","YOL","SİRR","KÖLGƏ","İZ","DALĞA","AÇAR","KÖK","ŞƏBƏKƏ","CƏRƏYAN","KADR","ƏLAQƏ","MƏNBƏ","KÖRPÜ","MASKA","QILCIM","GÜZGÜ","SƏHRA","ŞİFRƏ","ALOV","KOMETA","LABİRİNT","SİQNAL","MÖHÜR","DÜYÜN","PEYK","BULUD","KƏNAR","KONTUR","QIRINTI","İMPULS","ARXİV","ÜFÜQ","VEKTOR","SPEKTR","ORBİT","REZONANS","PARADOKS","MATRİSA","TRAEKTORİYA","KODEKS","KOMPAS","TARAZLIQ","RİTM","FOKUS","SƏDA","NƏBZ","TON","PORTAL","KANAL","FİLTR","SƏHNƏ","SİMVOL"]
+'ru':["СОБАКА","КОШКА","МОРЕ","ДОЖДЬ","ВРЕМЯ","ТЕПЛО","ПАМЯТЬ","СВЕТ","ПУТЬ","ТАЙНА","ТЕНЬ","СЛЕД","ВОЛНА","КЛЮЧ","КОРЕНЬ","СЕТЬ","ТОК","КАДР","СВЯЗЬ","ИСТОЧНИК","МОСТ","МАСКА","ИСКРА","ЗЕРКАЛО","ПУСТЫНЯ","ШИФР","ПЛАМЯ","КОМЕТА","ЛАБИРИНТ","СИГНАЛ","ПЕЧАТЬ","УЗЕЛ","СПУТНИК","ОБЛАКО","ГРАНЬ","КОНТУР","ОСКОЛОК","ИМПУЛЬС","АРХИВ","ГОРИЗОНТ","ВЕКТОР","СПЕКТР","ОРБИТА","РЕЗОНАНС","ПАРАДОКС","МАТРИЦА","ТРАЕКТОРИЯ","КОДЕКС","КОМПАС","БАЛАНС","РИТМ","ФОКУС","ЭХО","ПУЛЬС","ТОН","ПОРТАЛ","КАНАЛ","ФИЛЬТР","СЦЕНА","СИМВОЛ","ПОТОК","ПРЕДЕЛ","МОМЕНТ","ОБРАЗ","ЭНЕРГИЯ","ЧАСТОТА","СИСТЕМА","МОДЕЛЬ","КОНТАКТ","РЕСУРС","МАСШТАБ","ТОЧКА","ЛИНИЯ","ФОРМУЛА","СТРУКТУРА","ПРОЦЕСС","ШАБЛОН","СХЕМА","КОНТЕКСТ","ФАКТОР","ДИАЛОГ","ГРАНИЦА","ЦИКЛ","ЯДРО","МОДУЛЬ","ПАРАМЕТР","АЛГОРИТМ","СЦЕНАРИЙ","СМЫСЛ","СВЯЗКА","МЕХАНИЗМ","КООРДИНАТА","ПЕРСПЕКТИВА","ИНТЕРВАЛ","ПРОПОРЦИЯ","ИЕРАРХИЯ","КОНФИГУРАЦИЯ","ТРАНСФОРМАЦИЯ","ИНТЕГРАЦИЯ","АБСТРАКЦИЯ"],
+'en':["DOG","CAT","SEA","RAIN","TIME","WARMTH","MEMORY","LIGHT","PATH","SECRET","SHADOW","TRACE","WAVE","KEY","ROOT","NET","CURRENT","FRAME","LINK","SOURCE","BRIDGE","MASK","SPARK","MIRROR","DESERT","CODE","FLAME","COMET","MAZE","SIGNAL","STAMP","KNOT","SATELLITE","CLOUD","EDGE","OUTLINE","SHARD","IMPULSE","ARCHIVE","HORIZON","VECTOR","SPECTRUM","ORBIT","RESONANCE","PARADOX","MATRIX","TRAJECTORY","CODEX","COMPASS","BALANCE","RHYTHM","FOCUS","ECHO","PULSE","TONE","PORTAL","CHANNEL","FILTER","STAGE","SYMBOL","FLOW","LIMIT","MOMENT","IMAGE","ENERGY","FREQUENCY","SYSTEM","MODEL","CONTACT","RESOURCE","SCALE","POINT","LINE","FORMULA","STRUCTURE","PROCESS","PATTERN","SCHEME","CONTEXT","FACTOR","DIALOGUE","BOUNDARY","CYCLE","CORE","MODULE","PARAMETER","ALGORITHM","SCENARIO","MEANING","LINKAGE","MECHANISM","COORDINATE","PERSPECTIVE","INTERVAL","PROPORTION","HIERARCHY","CONFIGURATION","TRANSFORMATION","INTEGRATION","ABSTRACTION"],
+'az':["İT","PİŞİK","DƏNİZ","YAĞIŞ","ZAMAN","İSTİ","YADDAŞ","İŞIQ","YOL","SİRR","KÖLGƏ","İZ","DALĞA","AÇAR","KÖK","ŞƏBƏKƏ","CƏRƏYAN","KADR","ƏLAQƏ","MƏNBƏ","KÖRPÜ","MASKA","QILCIM","GÜZGÜ","SƏHRA","ŞİFRƏ","ALOV","KOMETA","LABİRİNT","SİQNAL","MÖHÜR","DÜYÜN","PEYK","BULUD","KƏNAR","KONTUR","QIRINTI","İMPULS","ARXİV","ÜFÜQ","VEKTOR","SPEKTR","ORBİT","REZONANS","PARADOKS","MATRİSA","TRAEKTORİYA","KODEKS","KOMPAS","TARAZLIQ","RİTM","FOKUS","SƏDA","NƏBZ","TON","PORTAL","KANAL","FİLTR","SƏHNƏ","SİMVOL","AXIN","HƏDD","AN","TƏSVİR","ENERJİ","TEZLİK","SİSTEM","MODEL","TƏMAS","RESURS","MİQYAS","NÖQTƏ","XƏTT","FORMUL","STRUKTUR","PROSES","NÜMUNƏ","SXEM","KONTEKST","AMİL","DİALOQ","SƏRHƏD","DÖVR","NÜVƏ","MODUL","PARAMETR","ALQORİTM","SSENARİ","MƏNA","BAĞLANTI","MEXANİZM","KOORDİNAT","PERSPEKTİV","İNTERVAL","NİSBƏT","İYERARXİYA","KONFİQURASİYA","TRANSFORMASİYA","İNTEQRASİYA","ABSTRAKSİYA"]
 }
 HINTS={
 'ru':{1:'Домашнее животное',11:'Она появляется рядом',21:'Соединяет два берега',31:'Её ставят на документ',41:'Направленная величина',51:'Повторяющийся рисунок'},
@@ -96,7 +96,7 @@ with sync_playwright() as pw:
     page.goto(BASE+'clean/#'+fragment,wait_until='domcontentloaded',timeout=45000)
     expect(page.locator('#languageModal')).to_be_visible();expect(page.locator('#languageTitle')).to_contain_text('Choose language');expect(page.locator('#languageTitle')).to_contain_text('Dil seçin');expect(page.locator('#languageClose')).to_be_hidden()
     page.locator('[data-language="az"]').tap();expect(page.locator('#languageModal')).to_be_hidden()
-    expect(page.locator('#homeChapter1Title')).to_have_text('İsinmə');expect(page.locator('#homeChapter2Title')).to_have_text('Assosiasiyalar');expect(page.locator('[data-home-chapter="3"]')).to_be_visible();expect(page.locator('[data-home-chapter="4"]')).to_be_visible();expect(page.locator('#shopOffer')).to_contain_text('Daha çox sikkə');expect(page.locator('#logoWord')).to_have_text('1 SÖZ');page.locator('#chaptersNav').tap();expect(page.locator('#chapter1Label')).to_contain_text('1–20');expect(page.locator('#chapter2Label')).to_contain_text('21–50');expect(page.locator('#chapter2Select .chapter-cover-mark')).to_have_text('II');expect(page.locator('#chapter2Play')).to_have_class(re.compile('locked'));page.locator('#chaptersBack').tap()
+    expect(page.locator('#homeChapter1Title')).to_have_text('İsinmə');expect(page.locator('#homeChapter2Title')).to_have_text('Assosiasiyalar');expect(page.locator('[data-home-chapter="3"]')).to_be_visible();expect(page.locator('[data-home-chapter="4"]')).to_be_visible();expect(page.locator('[data-home-chapter="10"]')).to_be_attached();expect(page.locator('#homeChapterDots button')).to_have_count(10);expect(page.locator('#shopOffer')).to_contain_text('Daha çox sikkə');expect(page.locator('#logoWord')).to_have_text('1 SÖZ');page.locator('#chaptersNav').tap();expect(page.locator('#chapter1Label')).to_contain_text('1–20');expect(page.locator('#chapter2Label')).to_contain_text('21–50');expect(page.locator('#chapter2Select .chapter-cover-mark')).to_have_text('II');expect(page.locator('#chapter2Play')).to_have_class(re.compile('locked'));expect(page.locator('#chapter10Select')).to_be_attached();page.locator('#chaptersBack').tap()
     body=page.locator('body').inner_text()
     for leak in ['Больше монет','Главная','Задания','Рейтинг','Сегодня награда']: assert leak not in body,('AZ leak',leak)
     assert not relevant_errors(errors),errors;ctx.close()
@@ -166,11 +166,11 @@ with sync_playwright() as pw:
       assert not relevant_errors(errors),errors;ctx.close()
 
     # Representative main-game browser checks. Loading game.js also validates every published answer/pool in RU/EN/AZ.
-    sample_levels=[1,20,21,50,51,60]
+    sample_levels=[1,20,21,50,51,60,61,90,91,100]
     for language in ['ru','en','az']:
       ctx=browser.new_context(viewport={'width':390,'height':800},has_touch=True,is_mobile=True)
       ctx.add_init_script(f"localStorage.setItem('pw.language','{language}'); localStorage.setItem('pw.theme','game');")
-      account={'photoword_id':'PW-TESTONLY','first_name':'Test','last_name':'','username':None,'game_nickname':None,'nickname_changed':False,'coins':10000,'xp':0,'completed_levels':0,'current_level':61,'rank':1,'daily_streak':0,'last_daily_reward':None}
+      account={'photoword_id':'PW-TESTONLY','first_name':'Test','last_name':'','username':None,'game_nickname':None,'nickname_changed':False,'coins':10000,'xp':0,'completed_levels':0,'current_level':101,'rank':1,'daily_streak':0,'last_daily_reward':None}
       completed=set();install_mock(ctx,account,completed,language);page=ctx.new_page();errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
       for level in sample_levels:
         page.goto(BASE+f'clean/game.html?level={level}#'+fragment,wait_until='domcontentloaded',timeout=45000)
@@ -189,12 +189,14 @@ with sync_playwright() as pw:
           expect(page.locator('#successChapter')).to_be_visible();expect(page.locator('#nextLevel')).to_have_attribute('href','./game.html?level=21')
         elif level==50:
           expect(page.locator('#successChapter')).to_be_visible();expect(page.locator('#nextLevel')).to_have_attribute('href','./game.html?level=51')
-        elif level==60:
+        elif level==90:
+          expect(page.locator('#successChapter')).to_be_visible();expect(page.locator('#nextLevel')).to_have_attribute('href','./game.html?level=91')
+        elif level==100:
           expect(page.locator('#nextLevel')).to_have_attribute('href','./index.html')
       assert account['completed_levels']==len(sample_levels) and account['xp']==15*len(sample_levels)
-      page.screenshot(path=str(OUT/f'{engine}-{language}-level60.png'),full_page=True)
+      page.screenshot(path=str(OUT/f'{engine}-{language}-level100.png'),full_page=True)
       assert not relevant_errors(errors),errors
-      report={'engine':engine,'language':language,'levels':'1-60 validated / boundary samples played','checks':['runtime validation of all 60 answer pools','chapter 1 sample','chapter 2 boundaries 21 and 50','chapter 3 preview boundaries 51 and 60','transitions at 20 and 50','localized text hint','letter hint','remove hint','final published level 60 returns home'],'result':'PASS'}
+      report={'engine':engine,'language':language,'levels':'1-100 validated / boundary samples played','checks':['runtime validation of all 100 answer pools','chapter 1 sample','chapter 2 boundaries 21 and 50','completed chapter 3 through 90','chapter 4 preview 91-100','transitions at 20, 50 and 90','localized text hint','letter hint','remove hint','current preview endpoint 100 returns home'],'result':'PASS'}
       reports.append(report);print(json.dumps(report,ensure_ascii=False),flush=True);ctx.close()
     browser.close()
 
