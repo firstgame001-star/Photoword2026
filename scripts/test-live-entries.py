@@ -152,7 +152,56 @@ ANSWERS={
   "ТЕОРИЯ",
   "МАССА",
   "ФОРМА",
-  "ГЛУБИНА"
+  "ГЛУБИНА",
+  "ШТОРМ",
+  "КРИСТАЛЛ",
+  "МАГНИТ",
+  "ВУЛКАН",
+  "МАЯК",
+  "КАНЬОН",
+  "ТУМАН",
+  "КАПЛЯ",
+  "СПИРАЛЬ",
+  "МОЛНИЯ",
+  "КУПОЛ",
+  "МАРШРУТ",
+  "ПИКСЕЛЬ",
+  "МОЗАИКА",
+  "КОЛЬЦО",
+  "МАЯТНИК",
+  "ЛИНЗА",
+  "ВИХРЬ",
+  "РЕЛЬЕФ",
+  "КАПСУЛА",
+  "СФЕРА",
+  "ПРИЗМА",
+  "АТЛАС",
+  "КОНТРАСТ",
+  "ФРАГМЕНТ",
+  "ПАНОРАМА",
+  "ОПТИКА",
+  "ИНДЕКС",
+  "ДИАПАЗОН",
+  "ТЕНДЕНЦИЯ",
+  "ФАЗА",
+  "РЕАКЦИЯ",
+  "ИНТЕРФЕЙС",
+  "КАТАЛОГ",
+  "ПРОТОКОЛ",
+  "СЕНСОР",
+  "ИНДИКАТОР",
+  "КЛАСТЕР",
+  "РАКУРС",
+  "ТЕКСТУРА",
+  "СИЛУЭТ",
+  "ГРАДИЕНТ",
+  "МАРКЕР",
+  "СЕКТОР",
+  "КОЛЕБАНИЕ",
+  "АМПЛИТУДА",
+  "РАДИУС",
+  "ДИАГРАММА",
+  "ОРИЕНТИР"
  ],
  'en': [
   "DOG",
@@ -285,7 +334,56 @@ ANSWERS={
   "THEORY",
   "MASS",
   "FORM",
-  "DEPTH"
+  "DEPTH",
+  "STORM",
+  "CRYSTAL",
+  "MAGNET",
+  "VOLCANO",
+  "LIGHTHOUSE",
+  "CANYON",
+  "FOG",
+  "DROP",
+  "SPIRAL",
+  "LIGHTNING",
+  "DOME",
+  "ROUTE",
+  "PIXEL",
+  "MOSAIC",
+  "RING",
+  "PENDULUM",
+  "LENS",
+  "VORTEX",
+  "RELIEF",
+  "CAPSULE",
+  "SPHERE",
+  "PRISM",
+  "ATLAS",
+  "CONTRAST",
+  "FRAGMENT",
+  "PANORAMA",
+  "OPTICS",
+  "INDEX",
+  "RANGE",
+  "TREND",
+  "PHASE",
+  "REACTION",
+  "INTERFACE",
+  "CATALOG",
+  "PROTOCOL",
+  "SENSOR",
+  "INDICATOR",
+  "CLUSTER",
+  "ANGLE",
+  "TEXTURE",
+  "SILHOUETTE",
+  "GRADIENT",
+  "MARKER",
+  "SECTOR",
+  "OSCILLATION",
+  "AMPLITUDE",
+  "RADIUS",
+  "DIAGRAM",
+  "LANDMARK"
  ],
  'az': [
   "İT",
@@ -418,7 +516,56 @@ ANSWERS={
   "NƏZƏRİYYƏ",
   "KÜTLƏ",
   "FORMA",
-  "DƏRİNLİK"
+  "DƏRİNLİK",
+  "FIRTINA",
+  "KRİSTAL",
+  "MAQNİT",
+  "VULKAN",
+  "MAYAK",
+  "KANYON",
+  "DUMAN",
+  "DAMCI",
+  "SPİRAL",
+  "ŞİMŞƏK",
+  "GÜNBƏZ",
+  "MARŞRUT",
+  "PİKSEL",
+  "MOZAİKA",
+  "HALQA",
+  "KƏFKİR",
+  "LİNZA",
+  "BURULĞAN",
+  "RELYEF",
+  "KAPSUL",
+  "KÜRƏ",
+  "PRİZMA",
+  "ATLAS",
+  "KONTRAST",
+  "FRAQMENT",
+  "PANORAMA",
+  "OPTİKA",
+  "İNDEKS",
+  "DİAPAZON",
+  "TENDENSİYA",
+  "FAZA",
+  "REAKSİYA",
+  "İNTERFEYS",
+  "KATALOQ",
+  "PROTOKOL",
+  "SENSOR",
+  "İNDİKATOR",
+  "KLASTER",
+  "RAKURS",
+  "TEKSTURA",
+  "SİLUET",
+  "QRADİYENT",
+  "MARKER",
+  "SEKTOR",
+  "TİTRƏMƏ",
+  "AMPLİTUDA",
+  "RADİUS",
+  "DİAQRAM",
+  "ORİYENTİR"
  ]
 }
 
@@ -592,11 +739,11 @@ with sync_playwright() as pw:
       assert not relevant_errors(errors),errors;ctx.close()
 
     # Representative main-game browser checks. Loading game.js also validates every published answer/pool in RU/EN/AZ.
-    sample_levels=[1,20,21,50,51,60,61,90,91,100,101,131]
+    sample_levels=[1,20,21,50,51,60,61,90,91,100,101,131,132,150,180]
     for language in ['ru','en','az']:
       ctx=browser.new_context(viewport={'width':390,'height':800},has_touch=True,is_mobile=True)
       ctx.add_init_script(f"localStorage.setItem('pw.language','{language}'); localStorage.setItem('pw.theme','game');")
-      account={'photoword_id':'PW-TESTONLY','first_name':'Test','last_name':'','username':None,'game_nickname':None,'nickname_changed':False,'coins':10000,'xp':0,'completed_levels':0,'current_level':132,'rank':1,'daily_streak':0,'last_daily_reward':None}
+      account={'photoword_id':'PW-TESTONLY','first_name':'Test','last_name':'','username':None,'game_nickname':None,'nickname_changed':False,'coins':10000,'xp':0,'completed_levels':0,'current_level':181,'rank':1,'daily_streak':0,'last_daily_reward':None}
       completed=set();install_mock(ctx,account,completed,language);page=ctx.new_page();errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
       for level in sample_levels:
         page.goto(BASE+f'clean/game.html?level={level}#'+fragment,wait_until='domcontentloaded',timeout=45000)
@@ -620,11 +767,13 @@ with sync_playwright() as pw:
         elif level==100:
           expect(page.locator('#nextLevel')).to_have_attribute('href','./game.html?level=101')
         elif level==131:
-          expect(page.locator('#successChapter')).to_be_visible();expect(page.locator('#successChapter')).to_contain_text({'ru':'Опытный','en':'Experienced','az':'Təcrübəli'}[language]);expect(page.locator('#nextLevel')).to_have_attribute('href','./index.html')
+          expect(page.locator('#successChapter')).to_be_visible();expect(page.locator('#successChapter')).to_contain_text({'ru':'Опытный','en':'Experienced','az':'Təcrübəli'}[language]);expect(page.locator('#nextLevel')).to_have_attribute('href','./game.html?level=132')
+        elif level==180:
+          expect(page.locator('#successChapter')).to_be_visible();expect(page.locator('#successChapter')).to_contain_text({'ru':'Эксперт','en':'Expert','az':'Ekspert'}[language]);expect(page.locator('#nextLevel')).to_have_attribute('href','./index.html')
       assert account['completed_levels']==len(sample_levels) and account['xp']==15*len(sample_levels)
-      page.screenshot(path=str(OUT/f'{engine}-{language}-level131.png'),full_page=True)
+      page.screenshot(path=str(OUT/f'{engine}-{language}-level180.png'),full_page=True)
       assert not relevant_errors(errors),errors
-      report={'engine':engine,'language':language,'levels':'1-131 validated / boundary samples played','checks':['runtime validation of all 131 answer pools','chapter 1 sample','chapter 2 boundaries 21 and 50','completed chapter 3 through 90','chapter 4 complete 91-131','transitions at 20, 50, 90 and completion at 131','localized text hint','letter hint','remove hint','level 100 continues to 101 and level 131 returns home'],'result':'PASS'}
+      report={'engine':engine,'language':language,'levels':'1-180 validated / boundary samples played','checks':['runtime validation of all 180 answer pools','chapter 1 sample','chapter 2 boundaries 21 and 50','completed chapter 3 through 90','chapter 4 complete 91-131','chapter 5 complete 132-180','transitions at 20, 50, 90, 131 and completion at 180','localized text hint','letter hint','remove hint','level 100 continues to 101, level 131 opens 132, and level 180 returns home'],'result':'PASS'}
       reports.append(report);print(json.dumps(report,ensure_ascii=False),flush=True);ctx.close()
     browser.close()
 
