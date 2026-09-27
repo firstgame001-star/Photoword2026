@@ -130,3 +130,7 @@ html[data-theme="light"] .chapter.assoc .chapter-foot{background:#f8fbfd}
 html[data-theme="light"] .themes-entry,html[data-theme="light"] .themes-unlock-note,html[data-theme="light"] .theme-detail-info,html[data-theme="light"] .theme-card{background:#f8fbfd;color:#17303c}
 html[data-theme="light"] .theme-card small,html[data-theme="light"] .themes-entry small{color:#59717d}
 @media(max-width:380px){.theme-grid{grid-template-columns:1fr}.theme-card{min-height:110px}.theme-level-grid{grid-template-columns:repeat(5,1fr);gap:6px}}
+
+.theme-level-grid button.done{background:#0c6848;border-color:#63dfa2;color:#fff}
+.theme-level-grid button.next{background:#0f5f80;border-color:#57d8ff;color:#fff;box-shadow:0 0 0 2px #57d8ff22}
+.theme-mini-progress{padding:8px 10px;border:1px solid #37657b;border-radius:11px;background:#072739e8;font-size:11px;font-weight:800;white-space:nowrap}
