@@ -234,8 +234,8 @@ function update(p){
  updateHomeCarousel(p);updateChapterCards(p);renderThemeHub(p);
  const claimed=String(p.last_daily_reward||'')===today();$('claimDaily').disabled=claimed;text('claimDaily',claimed?x.claimed:x.claim);text('dailyStreak',x.streak+': '+(p.daily_streak||0));text('notificationsState',p.notifications_enabled?x.notifyAllowed:x.notifyAllow);
 }
-function applyLanguage(l){
- if(!T[l])l='ru';try{localStorage.setItem('pw.language',l)}catch{};document.documentElement.lang=l;const x=T[l];setLogo(x);setThemeHubLabels();setChallengeLabels();
+function applyLanguage(l,persist=true){
+ if(!T[l])l='ru';if(persist){try{localStorage.setItem('pw.language',l)}catch{}}document.documentElement.lang=l;const x=T[l];setLogo(x);setThemeHubLabels();setChallengeLabels();
  const nav=document.querySelectorAll('nav small');[x.home,x.chapters,x.rating,x.friends,x.shop].forEach((v,i)=>{if(nav[i])nav[i].textContent=v});
  text('chaptersTitle',x.chapters);text('chaptersSubtitle',x.chaptersSubtitle);text('ratingTitle',x.rating);text('ratingSubtitle',x.ratingSubtitle);text('ratingLeague',x.overallRating);text('myPositionLabel',x.myPosition);text('refreshRating',x.refresh);
  text('settingsTitle',x.settings);const rows=document.querySelectorAll('#settingsModal .settingrow b');if(rows[0])rows[0].textContent=x.sound;if(rows[1])rows[1].textContent=x.vibration;if(rows[2])rows[2].textContent=x.music;
@@ -266,7 +266,7 @@ en:'All completed levels, XP and leaderboard position will be removed. The game 
 az:'Bütün keçilmiş səviyyələr, XP və reytinq mövqeyi silinəcək. Oyun 1-ci səviyyədən başlayacaq və dil yenidən seçiləcək. Sikkələr, Telegram Stars alışları və artıq alınmış mükafatların tarixçəsi saxlanılır.'
 };
 
-const initial=getLang();applyTheme(getTheme());initHomeCarousel();if(initial)applyLanguage(initial);else{applyLanguage('ru');setTimeout(showRequiredLanguagePicker,250)}
+const initial=getLang();applyTheme(getTheme());initHomeCarousel();if(initial)applyLanguage(initial);else{applyLanguage('ru',false);setTimeout(showRequiredLanguagePicker,250)}
 
 $('settingsBtn').onclick=()=>open('settingsModal');
 $('languageBtn').onclick=()=>{close('settingsModal');const c=$('languageClose');if(c)c.hidden=false;setTimeout(()=>open('languageModal'),0)};
