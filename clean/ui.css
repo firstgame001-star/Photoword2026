@@ -143,3 +143,88 @@ html[data-theme="light"] .theme-card small,html[data-theme="light"] .themes-entr
 .theme-game-actions{display:flex;align-items:center;gap:7px;justify-content:flex-end}
 .theme-settings{width:38px;height:38px;font-size:22px}
 @media(max-width:380px){.theme-mini-progress{padding:7px 8px;font-size:10px}.theme-settings{width:36px;height:36px}}
+
+
+/* Stable home layout + chapter-earned title */
+body{overflow-x:hidden}
+.profile-title{display:inline-block;margin:2px auto 10px;padding:5px 10px;border:1px solid #d5ad46;border-radius:999px;background:#2c2515aa;color:#ffd866;font-size:12px;font-weight:900;letter-spacing:.2px}
+.home-chapter-carousel{scroll-behavior:auto}
+.home-chapter-carousel.is-user-scrolling{scroll-behavior:smooth}
+
+/* Distinct visual identity for every chapter */
+#homeChapter1 .hero,#chapter1Select .hero{
+ background:
+ linear-gradient(180deg,#06243a25 0%,#06243a38 42%,#06243adb 100%),
+ url('https://images.unsplash.com/photo-1765832656676-96294a88d919?auto=format&fit=crop&w=1200&q=88') center/cover!important
+}
+#homeChapter2 .hero,#chapter2Select .hero{
+ background:
+ radial-gradient(circle at 25% 22%,#9c67ff88 0 7%,transparent 8%),
+ radial-gradient(circle at 75% 28%,#37d6ea66 0 6%,transparent 7%),
+ radial-gradient(circle at 62% 70%,#ffb84b44 0 5%,transparent 6%),
+ linear-gradient(145deg,#171240,#182b5f 52%,#0d4650)!important
+}
+[data-home-chapter="3"] .hero,#chapter3Select .hero{
+ background:
+ radial-gradient(circle at 18% 23%,#59d8ffcc 0 4px,transparent 5px),
+ radial-gradient(circle at 72% 18%,#6c8dffcc 0 5px,transparent 6px),
+ radial-gradient(circle at 36% 67%,#45f0c6bb 0 4px,transparent 5px),
+ radial-gradient(circle at 82% 72%,#63c8ffbb 0 5px,transparent 6px),
+ repeating-linear-gradient(28deg,#75dfff16 0 1px,transparent 1px 44px),
+ repeating-linear-gradient(152deg,#8f7bff12 0 1px,transparent 1px 52px),
+ linear-gradient(145deg,#08283b,#0b3850 48%,#18284b)!important
+}
+[data-home-chapter="4"] .hero,#chapter4Select .hero{
+ background:
+ radial-gradient(circle at 50% 42%,#5d6cff42 0 11%,transparent 12%),
+ radial-gradient(circle at 50% 42%,transparent 0 24%,#66d7ff24 25% 26%,transparent 27%),
+ radial-gradient(circle at 50% 42%,transparent 0 37%,#a660ff1d 38% 39%,transparent 40%),
+ linear-gradient(160deg,#071726,#101d39 46%,#2a1d3f)!important
+}
+[data-home-chapter="5"] .hero,#chapter5Select .hero{
+ background:
+ radial-gradient(circle at 15% 18%,#ffffffd9 0 1px,transparent 2px),
+ radial-gradient(circle at 72% 26%,#9fc7ffcc 0 1px,transparent 2px),
+ radial-gradient(circle at 40% 64%,#ffffffcc 0 1px,transparent 2px),
+ radial-gradient(circle at 82% 78%,#c6a7ffcc 0 1px,transparent 2px),
+ radial-gradient(circle at 62% 44%,#6448ff44 0 12%,transparent 30%),
+ linear-gradient(155deg,#050c1f,#111941 52%,#251845)!important
+}
+[data-home-chapter="6"] .hero,#chapter6Select .hero{
+ background:
+ repeating-linear-gradient(0deg,#2ce9ff13 0 1px,transparent 1px 28px),
+ repeating-linear-gradient(90deg,#2ce9ff13 0 1px,transparent 1px 28px),
+ radial-gradient(circle at 72% 34%,#00e5ff3c 0 10%,transparent 25%),
+ linear-gradient(145deg,#061c2d,#082d3f 55%,#0b1f34)!important
+}
+[data-home-chapter="7"] .hero,#chapter7Select .hero{
+ background:
+ conic-gradient(from 32deg at 28% 34%,#7b61ff28,transparent 15% 35%,#39d4ff22 48%,transparent 62%),
+ repeating-linear-gradient(45deg,#9a8cff12 0 2px,transparent 2px 38px),
+ linear-gradient(150deg,#141a32,#242247 48%,#152f46)!important
+}
+[data-home-chapter="8"] .hero,#chapter8Select .hero{
+ background:
+ linear-gradient(120deg,transparent 0 22%,#23dcff2e 23% 25%,transparent 26% 44%,#8d5dff32 45% 48%,transparent 49% 66%,#ffd45b20 67% 69%,transparent 70%),
+ radial-gradient(circle at 66% 35%,#40e8ff3c 0 8%,transparent 22%),
+ linear-gradient(150deg,#071b2a,#102f43 50%,#281d43)!important
+}
+[data-home-chapter="9"] .hero,#chapter9Select .hero{
+ background:
+ repeating-linear-gradient(90deg,#ffffff0b 0 18px,#ffffff00 18px 42px),
+ repeating-linear-gradient(0deg,#5edfff12 0 1px,transparent 1px 34px),
+ linear-gradient(145deg,#101b28,#1c2d3c 50%,#263245)!important
+}
+[data-home-chapter="10"] .hero,#chapter10Select .hero{
+ background:
+ radial-gradient(circle at 50% 30%,#ffd76844 0 10%,transparent 30%),
+ radial-gradient(circle at 50% 58%,#ffbc3b1d 0 18%,transparent 45%),
+ linear-gradient(155deg,#0c0d12,#17140e 52%,#2b2210)!important
+}
+[data-home-chapter="5"] .chapter-cover-mark,#chapter5Select .chapter-cover-mark,
+[data-home-chapter="6"] .chapter-cover-mark,#chapter6Select .chapter-cover-mark,
+[data-home-chapter="7"] .chapter-cover-mark,#chapter7Select .chapter-cover-mark,
+[data-home-chapter="8"] .chapter-cover-mark,#chapter8Select .chapter-cover-mark,
+[data-home-chapter="9"] .chapter-cover-mark,#chapter9Select .chapter-cover-mark,
+[data-home-chapter="10"] .chapter-cover-mark,#chapter10Select .chapter-cover-mark{opacity:.72}
+.future-chapter{opacity:.96}
