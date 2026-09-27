@@ -27,7 +27,7 @@ for(const file of ['core.js','home.js','game.js','theme-game.js','challenge.js',
 }
 
 const release=JSON.parse(readFileSync(resolve(base,'release.json'),'utf8'));
-if(release.release!=='20260927-r53')throw Error('Unexpected release: '+release.release);
+if(release.release!=='20260927-r54')throw Error('Unexpected release: '+release.release);
 if(!Array.isArray(release.levels)||!release.levels.includes(131))throw Error('Main levels are not published through 131');
 if(release.chapters?.length!==12)throw Error('Main chapter navigation must contain 12 chapters');
 if(release.chapters.find(x=>x.id===3)?.status!=='live')throw Error('Chapter 3 must be complete');
@@ -90,10 +90,13 @@ const extraBank=JSON.parse(eMatch[1]);
 const fullBank=[...qBank,...extraBank];
 if(fullBank.length!==400)throw Error('Challenge question bank must contain 400 words');
 if(fullBank.some(x=>!x.ru||!x.en||!x.az||!Array.isArray(x.p)||x.p.length!==4))throw Error('Challenge question bank contains incomplete entries');
-if(new Set(fullBank.map(x=>x.ru)).size!==400)throw Error('Challenge question bank contains duplicate answers');
+if(new Set(fullBank.map(x=>x.ru)).size!==400)throw Error('Challenge question bank contains duplicate RU answers');
+if(new Set(fullBank.map(x=>x.en)).size!==400)throw Error('Challenge question bank contains duplicate EN answers');
+if(new Set(fullBank.map(x=>x.az)).size!==400)throw Error('Challenge question bank contains duplicate AZ answers');
 if(release.challenge_modes?.question_bank?.total!==400||release.challenge_modes?.question_bank?.no_repeat_until_exhausted!==true)throw Error('Challenge question-bank manifest is incorrect');
-if(!challengeJs.includes("BANK_VERSION='r52-400'")||!challengeJs.includes('pw.challenge.deck.')||!challengeJs.includes('pw.challenge.last.'))throw Error('Non-repeating challenge deck is missing');
+if(release.challenge_modes?.question_bank?.unique_in_each_language!==true)throw Error('Challenge bank uniqueness manifest is missing');
+if(!challengeJs.includes("BANK_VERSION='r54-400'")||!challengeJs.includes('pw.challenge.deck.')||!challengeJs.includes('pw.challenge.last.'))throw Error('Non-repeating challenge deck is missing');
 if(!homeJs.includes('function showRequiredLanguagePicker(){if(getLang())return;'))throw Error('Language picker re-open guard is missing');
 if(release.ui?.language_gate_fix!=='first_launch_unset_then_persist_choice')throw Error('Language gate fix manifest is missing');
 if(!homeJs.includes("applyLanguage('ru',false)")||!homeJs.includes("function applyLanguage(l,persist=true)"))throw Error('First-launch language selection flow is incorrect');
-console.log('PASS: r53 entrypoints, Chapters 1-12, backgrounds, absolute progress, chapter titles and JavaScript syntax.');
+console.log('PASS: r54 entrypoints, Chapters 1-12, backgrounds, absolute progress, chapter titles and JavaScript syntax.');
