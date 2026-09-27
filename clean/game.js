@@ -133,7 +133,56 @@
     128:{"answer":"ТЕОРИЯ","pool":"ТЕОРИЯБВГДЖЗ","hint":"Система идей, объясняющая явления и связи между ними.","photos":[["📚","Знания"],["🧠","Идеи"],["🔬","Объяснение"],["🔗","Связи"]]},
     129:{"answer":"МАССА","pool":"МАССАБВГДЖЗ","hint":"Физическая величина, показывающая количество вещества и инерционность тела.","photos":[["⚖️","Весы"],["🏋️","Тяжесть"],["🧱","Тело"],["🔢","Величина"]]},
     130:{"answer":"ФОРМА","pool":"ФОРМАБВГДЖЗ","hint":"Внешний вид, очертание или способ организации чего-либо.","photos":[["🔺","Очертание"],["⬛","Фигура"],["🧩","Структура"],["🎨","Вид"]]},
-    131:{"answer":"ГЛУБИНА","pool":"ГЛУБИНАБВГДЖЗ","hint":"Расстояние от поверхности внутрь; также степень сложности и проникновения в смысл.","photos":[["🌊","Вода"],["⬇️","Внутрь"],["🕳️","Расстояние"],["🧠","Смысл"]]}
+    131:{"answer":"ГЛУБИНА","pool":"ГЛУБИНАБВГДЖЗ","hint":"Расстояние от поверхности внутрь; также степень сложности и проникновения в смысл.","photos":[["🌊","Вода"],["⬇️","Внутрь"],["🕳️","Расстояние"],["🧠","Смысл"]]},
+    132:{"answer":"ШТОРМ","pool":"ШТОРМАБВГДЕЖ","hint":"Сильная буря с ветром и непогодой.","photos":[["🌩️","🌩️"],["🌊","🌊"],["💨","💨"],["⛵","⛵"]]},
+    133:{"answer":"КРИСТАЛЛ","pool":"КРИСТАЛЛБВГДЕ","hint":"Твёрдое тело с упорядоченной структурой и гранями.","photos":[["💎","💎"],["🔮","🔮"],["✨","✨"],["🧊","🧊"]]},
+    134:{"answer":"МАГНИТ","pool":"МАГНИТБВДЕЖЗ","hint":"Он притягивает некоторые металлы и создаёт магнитное поле.","photos":[["🧲","🧲"],["📎","📎"],["🧭","🧭"],["⚙️","⚙️"]]},
+    135:{"answer":"ВУЛКАН","pool":"ВУЛКАНБГДЕЖЗ","hint":"Гора, из которой могут извергаться лава, пепел и газы.","photos":[["🌋","🌋"],["🔥","🔥"],["🌫️","🌫️"],["🪨","🪨"]]},
+    136:{"answer":"МАЯК","pool":"МАЯКБВГДЕЖЗИ","hint":"Световой ориентир для судов у берега.","photos":[["💡","💡"],["🌊","🌊"],["🚢","🚢"],["🌙","🌙"]]},
+    137:{"answer":"КАНЬОН","pool":"КАНЬОНБВГДЕЖ","hint":"Глубокая долина с крутыми склонами.","photos":[["🏜️","🏜️"],["🪨","🪨"],["🏞️","🏞️"],["🥾","🥾"]]},
+    138:{"answer":"ТУМАН","pool":"ТУМАНБВГДЕЖЗ","hint":"Мелкие капли в воздухе, из-за которых плохо видно.","photos":[["🌫️","🌫️"],["🚗","🚗"],["👀","👀"],["💧","💧"]]},
+    139:{"answer":"КАПЛЯ","pool":"КАПЛЯБВГДЕЖЗ","hint":"Маленькая порция жидкости округлой формы.","photos":[["💧","💧"],["🌧️","🌧️"],["🚰","🚰"],["🍃","🍃"]]},
+    140:{"answer":"СПИРАЛЬ","pool":"СПИРАЛЬБВГДЕ","hint":"Линия, которая закручивается вокруг центра.","photos":[["🌀","🌀"],["🐚","🐚"],["🧬","🧬"],["🌪️","🌪️"]]},
+    141:{"answer":"МОЛНИЯ","pool":"МОЛНИЯАБВГДЕ","hint":"Яркий электрический разряд во время грозы.","photos":[["⚡","⚡"],["🌩️","🌩️"],["☁️","☁️"],["🔥","🔥"]]},
+    142:{"answer":"КУПОЛ","pool":"КУПОЛАБВГДЕЖ","hint":"Округлая верхняя часть здания или конструкции.","photos":[["🕌","🕌"],["🏛️","🏛️"],["🌐","🌐"],["⛪","⛪"]]},
+    143:{"answer":"МАРШРУТ","pool":"МАРШРУТБВГДЕ","hint":"Заранее выбранный путь от начала до цели.","photos":[["🗺️","🗺️"],["📍","📍"],["🧭","🧭"],["🚗","🚗"]]},
+    144:{"answer":"ПИКСЕЛЬ","pool":"ПИКСЕЛЬАБВГД","hint":"Минимальный элемент цифрового изображения.","photos":[["🖥️","🖥️"],["🔲","🔲"],["🎨","🎨"],["📷","📷"]]},
+    145:{"answer":"МОЗАИКА","pool":"МОЗАИКАБВГДЕ","hint":"Изображение, собранное из множества маленьких частей.","photos":[["🧩","🧩"],["🎨","🎨"],["🔷","🔷"],["🏛️","🏛️"]]},
+    146:{"answer":"КОЛЬЦО","pool":"КОЛЬЦОАБВГДЕ","hint":"Замкнутая круглая форма или украшение.","photos":[["💍","💍"],["⭕","⭕"],["🪐","🪐"],["🔗","🔗"]]},
+    147:{"answer":"МАЯТНИК","pool":"МАЯТНИКБВГДЕ","hint":"Тело, которое регулярно качается из стороны в сторону.","photos":[["🕰️","🕰️"],["↔️","↔️"],["⏱️","⏱️"],["⚙️","⚙️"]]},
+    148:{"answer":"ЛИНЗА","pool":"ЛИНЗАБВГДЕЖЙ","hint":"Прозрачный элемент, который преломляет и фокусирует свет.","photos":[["🔍","🔍"],["👓","👓"],["📷","📷"],["🔭","🔭"]]},
+    149:{"answer":"ВИХРЬ","pool":"ВИХРЬАБГДЕЖЗ","hint":"Быстрое вращательное движение воздуха или воды.","photos":[["🌪️","🌪️"],["🌀","🌀"],["🌊","🌊"],["🕳️","🕳️"]]},
+    150:{"answer":"РЕЛЬЕФ","pool":"РЕЛЬЕФАБВГДЖ","hint":"Неровности и формы поверхности местности.","photos":[["🗺️","🗺️"],["⛰️","⛰️"],["🪨","🪨"],["📐","📐"]]},
+    151:{"answer":"КАПСУЛА","pool":"КАПСУЛАБВГДЕ","hint":"Небольшая герметичная оболочка или контейнер.","photos":[["💊","💊"],["🚀","🚀"],["🧪","🧪"],["📦","📦"]]},
+    152:{"answer":"СФЕРА","pool":"СФЕРАБВГДЖЗИ","hint":"Объёмная геометрическая форма, похожая на шар.","photos":[["⚽","⚽"],["🌍","🌍"],["🔵","🔵"],["🪐","🪐"]]},
+    153:{"answer":"ПРИЗМА","pool":"ПРИЗМАБВГДЕЖ","hint":"Она может разложить белый свет на цвета.","photos":[["🔺","🔺"],["🌈","🌈"],["💡","💡"],["🔬","🔬"]]},
+    154:{"answer":"АТЛАС","pool":"АТЛАСБВГДЕЖЗ","hint":"Собрание карт в книге или цифровом виде.","photos":[["🗺️","🗺️"],["🌍","🌍"],["📖","📖"],["🧭","🧭"]]},
+    155:{"answer":"КОНТРАСТ","pool":"КОНТРАСТБВГДЕ","hint":"Заметное различие между противоположными элементами.","photos":[["⚫","⚫"],["⚪","⚪"],["🌗","🌗"],["🎨","🎨"]]},
+    156:{"answer":"ФРАГМЕНТ","pool":"ФРАГМЕНТБВДЖЗ","hint":"Отдельная часть чего-то более крупного.","photos":[["🧩","🧩"],["💔","💔"],["🧱","🧱"],["📄","📄"]]},
+    157:{"answer":"ПАНОРАМА","pool":"ПАНОРАМАБВГДЕ","hint":"Широкий обзор большого пространства.","photos":[["🏞️","🏞️"],["📷","📷"],["👀","👀"],["🌅","🌅"]]},
+    158:{"answer":"ОПТИКА","pool":"ОПТИКАБВГДЕЖ","hint":"Область, связанная со светом, линзами и изображением.","photos":[["👓","👓"],["🔭","🔭"],["🔬","🔬"],["💡","💡"]]},
+    159:{"answer":"ИНДЕКС","pool":"ИНДЕКСАБВГЖЗ","hint":"Указатель, номер или показатель для поиска и сравнения.","photos":[["🔢","🔢"],["📚","📚"],["🔎","🔎"],["🗂️","🗂️"]]},
+    160:{"answer":"ДИАПАЗОН","pool":"ДИАПАЗОНБВГЕЖ","hint":"Промежуток между минимальным и максимальным значением.","photos":[["🎚️","🎚️"],["📏","📏"],["📡","📡"],["🌈","🌈"]]},
+    161:{"answer":"ТЕНДЕНЦИЯ","pool":"ТЕНДЕНЦИЯАБВГЖ","hint":"Устойчивое направление изменения или развития.","photos":[["📈","📈"],["📊","📊"],["➡️","➡️"],["🔥","🔥"]]},
+    162:{"answer":"ФАЗА","pool":"ФАЗАБВГДЕЖИЙ","hint":"Отдельный этап процесса или состояния.","photos":[["🌒","🌒"],["🔄","🔄"],["🧪","🧪"],["⏱️","⏱️"]]},
+    163:{"answer":"РЕАКЦИЯ","pool":"РЕАКЦИЯБВГДЖ","hint":"Ответ на воздействие или превращение веществ.","photos":[["🧪","🧪"],["⚗️","⚗️"],["💥","💥"],["😮","😮"]]},
+    164:{"answer":"ИНТЕРФЕЙС","pool":"ИНТЕРФЕЙСАБВГД","hint":"Среда, через которую человек взаимодействует с системой.","photos":[["🖥️","🖥️"],["🖱️","🖱️"],["📱","📱"],["🔘","🔘"]]},
+    165:{"answer":"КАТАЛОГ","pool":"КАТАЛОГБВДЕЖ","hint":"Упорядоченный список объектов, товаров или материалов.","photos":[["📚","📚"],["🗂️","🗂️"],["🏷️","🏷️"],["🛒","🛒"]]},
+    166:{"answer":"ПРОТОКОЛ","pool":"ПРОТОКОЛАБВГД","hint":"Набор правил, определяющих порядок взаимодействия.","photos":[["📜","📜"],["🤝","🤝"],["🌐","🌐"],["✅","✅"]]},
+    167:{"answer":"СЕНСОР","pool":"СЕНСОРАБВГДЖ","hint":"Устройство, которое обнаруживает и измеряет изменения.","photos":[["📡","📡"],["🌡️","🌡️"],["📱","📱"],["👆","👆"]]},
+    168:{"answer":"ИНДИКАТОР","pool":"ИНДИКАТОРБВГЕЖ","hint":"Элемент, который показывает состояние или значение.","photos":[["📊","📊"],["🚦","🚦"],["🔋","🔋"],["📍","📍"]]},
+    169:{"answer":"КЛАСТЕР","pool":"КЛАСТЕРБВГДЖ","hint":"Группа близких или связанных элементов.","photos":[["🍇","🍇"],["🖥️","🖥️"],["⭐","⭐"],["🔗","🔗"]]},
+    170:{"answer":"РАКУРС","pool":"РАКУРСБВГДЕЖ","hint":"Точка и направление, с которых рассматривают объект.","photos":[["📷","📷"],["👁️","👁️"],["↗️","↗️"],["🎬","🎬"]]},
+    171:{"answer":"ТЕКСТУРА","pool":"ТЕКСТУРАБВГДЖ","hint":"Характер поверхности: гладкий, шероховатый, мягкий и другой.","photos":[["🪵","🪵"],["🧱","🧱"],["🧶","🧶"],["🖐️","🖐️"]]},
+    172:{"answer":"СИЛУЭТ","pool":"СИЛУЭТАБВГДЕ","hint":"Тёмное или контурное изображение формы объекта.","photos":[["👤","👤"],["🌅","🌅"],["🕴️","🕴️"],["✂️","✂️"]]},
+    173:{"answer":"ГРАДИЕНТ","pool":"ГРАДИЕНТБВЖЗЙ","hint":"Плавный переход от одного значения или цвета к другому.","photos":[["🌈","🌈"],["🎨","🎨"],["⬛","⬛"],["⬜","⬜"]]},
+    174:{"answer":"МАРКЕР","pool":"МАРКЕРБВГДЖЗ","hint":"Знак или инструмент, которым что-то отмечают.","photos":[["🖊️","🖊️"],["📍","📍"],["🗺️","🗺️"],["✅","✅"]]},
+    175:{"answer":"СЕКТОР","pool":"СЕКТОРАБВГДЖ","hint":"Отдельная часть круга, пространства или области деятельности.","photos":[["🥧","🥧"],["🧭","🧭"],["🏢","🏢"],["📊","📊"]]},
+    176:{"answer":"КОЛЕБАНИЕ","pool":"КОЛЕБАНИЕВГДЖЗ","hint":"Повторяющееся движение или изменение около среднего положения.","photos":[["〰️","〰️"],["🎵","🎵"],["⚡","⚡"],["🕰️","🕰️"]]},
+    177:{"answer":"АМПЛИТУДА","pool":"АМПЛИТУДАБВГЕЖ","hint":"Наибольшее отклонение колебания от среднего положения.","photos":[["📈","📈"],["〰️","〰️"],["🔊","🔊"],["📡","📡"]]},
+    178:{"answer":"РАДИУС","pool":"РАДИУСБВГЕЖЗ","hint":"Расстояние от центра круга или сферы до границы.","photos":[["⭕","⭕"],["📐","📐"],["📏","📏"],["🎯","🎯"]]},
+    179:{"answer":"ДИАГРАММА","pool":"ДИАГРАММАБВЕЖЗ","hint":"Наглядное графическое представление данных или связей.","photos":[["📊","📊"],["📈","📈"],["🧩","🧩"],["📝","📝"]]},
+    180:{"answer":"ОРИЕНТИР","pool":"ОРИЕНТИРАБВГД","hint":"Заметный объект или признак, помогающий выбрать направление.","photos":[["🧭","🧭"],["🚩","🚩"],["👀","👀"],["🏔️","🏔️"]]}
   };
   const TRANSLATED={
     en:{
@@ -268,7 +317,56 @@
       128:{"answer":"THEORY","pool":"THEORYBDFGJK","hint":"A system of ideas that explains phenomena and their relationships."},
       129:{"answer":"MASS","pool":"MASSBDFGJK","hint":"A physical quantity related to the amount of matter and inertia of a body."},
       130:{"answer":"FORM","pool":"FORMBDFGJK","hint":"The shape, appearance, or organization of something."},
-      131:{"answer":"DEPTH","pool":"DEPTHBDFGJK","hint":"Distance inward from a surface; also the degree of complexity or insight."}
+      131:{"answer":"DEPTH","pool":"DEPTHBDFGJK","hint":"Distance inward from a surface; also the degree of complexity or insight."},
+      132:{"answer":"STORM","pool":"STORMABCDEFG","hint":"A powerful storm with strong wind and rough weather."},
+      133:{"answer":"CRYSTAL","pool":"CRYSTALBDEFG","hint":"A solid with an ordered structure and clear facets."},
+      134:{"answer":"MAGNET","pool":"MAGNETBCDFHJ","hint":"It attracts some metals and creates a magnetic field."},
+      135:{"answer":"VOLCANO","pool":"VOLCANOBDEFG","hint":"A mountain that can erupt lava, ash, and gases."},
+      136:{"answer":"LIGHTHOUSE","pool":"LIGHTHOUSEABCDF","hint":"A coastal light that guides ships."},
+      137:{"answer":"CANYON","pool":"CANYONBDEFGH","hint":"A deep valley with steep sides."},
+      138:{"answer":"FOG","pool":"FOGABCDEHJKL","hint":"Tiny droplets in the air that reduce visibility."},
+      139:{"answer":"DROP","pool":"DROPABCEFGHJ","hint":"A small rounded amount of liquid."},
+      140:{"answer":"SPIRAL","pool":"SPIRALBCDEFG","hint":"A line that winds around a center."},
+      141:{"answer":"LIGHTNING","pool":"LIGHTNINGABCDE","hint":"A bright electrical discharge during a storm."},
+      142:{"answer":"DOME","pool":"DOMEABCFGHJK","hint":"A rounded roof or upper part of a structure."},
+      143:{"answer":"ROUTE","pool":"ROUTEABCDFGH","hint":"A planned path from a start to a destination."},
+      144:{"answer":"PIXEL","pool":"PIXELABCDFGH","hint":"The smallest element of a digital image."},
+      145:{"answer":"MOSAIC","pool":"MOSAICBDEFGH","hint":"An image made from many small pieces."},
+      146:{"answer":"RING","pool":"RINGABCDEFHJ","hint":"A closed circular shape or a piece of jewelry."},
+      147:{"answer":"PENDULUM","pool":"PENDULUMABCFG","hint":"An object that swings regularly from side to side."},
+      148:{"answer":"LENS","pool":"LENSABCDFGHJ","hint":"A transparent element that bends and focuses light."},
+      149:{"answer":"VORTEX","pool":"VORTEXABCDFG","hint":"A fast rotating motion of air or water."},
+      150:{"answer":"RELIEF","pool":"RELIEFABCDGH","hint":"The shapes and elevations of a surface."},
+      151:{"answer":"CAPSULE","pool":"CAPSULEBDFGH","hint":"A small sealed shell or container."},
+      152:{"answer":"SPHERE","pool":"SPHEREABCDFG","hint":"A three-dimensional round geometric shape."},
+      153:{"answer":"PRISM","pool":"PRISMABCDEFG","hint":"It can split white light into colors."},
+      154:{"answer":"ATLAS","pool":"ATLASBCDEFGH","hint":"A collection of maps in a book or digital form."},
+      155:{"answer":"CONTRAST","pool":"CONTRASTBDEFG","hint":"A clear difference between opposing elements."},
+      156:{"answer":"FRAGMENT","pool":"FRAGMENTBCDHJ","hint":"A separate piece of something larger."},
+      157:{"answer":"PANORAMA","pool":"PANORAMABCDEF","hint":"A wide view of a large area."},
+      158:{"answer":"OPTICS","pool":"OPTICSABDEFG","hint":"The field dealing with light, lenses, and images."},
+      159:{"answer":"INDEX","pool":"INDEXABCFGHJ","hint":"A reference, number, or measure used for lookup and comparison."},
+      160:{"answer":"RANGE","pool":"RANGEBCDFHJK","hint":"The span between a minimum and maximum value."},
+      161:{"answer":"TREND","pool":"TRENDABCFGHJ","hint":"A sustained direction of change or development."},
+      162:{"answer":"PHASE","pool":"PHASEBCDFGJK","hint":"A distinct stage of a process or state."},
+      163:{"answer":"REACTION","pool":"REACTIONBDFGH","hint":"A response to an influence or a chemical change."},
+      164:{"answer":"INTERFACE","pool":"INTERFACEBDGHJ","hint":"The layer through which a person interacts with a system."},
+      165:{"answer":"CATALOG","pool":"CATALOGBDEFH","hint":"An organized list of items, products, or materials."},
+      166:{"answer":"PROTOCOL","pool":"PROTOCOLABDEF","hint":"A set of rules that defines how interaction works."},
+      167:{"answer":"SENSOR","pool":"SENSORABCDFG","hint":"A device that detects and measures changes."},
+      168:{"answer":"INDICATOR","pool":"INDICATORBEFGH","hint":"An element that shows a state or value."},
+      169:{"answer":"CLUSTER","pool":"CLUSTERABDFG","hint":"A group of nearby or connected elements."},
+      170:{"answer":"ANGLE","pool":"ANGLEBCDFHJK","hint":"The viewpoint or direction from which something is seen."},
+      171:{"answer":"TEXTURE","pool":"TEXTUREABCDF","hint":"The surface quality of something, such as smooth or rough."},
+      172:{"answer":"SILHOUETTE","pool":"SILHOUETTEABCDF","hint":"A dark or outlined representation of an object's shape."},
+      173:{"answer":"GRADIENT","pool":"GRADIENTBCFHJ","hint":"A gradual transition from one value or color to another."},
+      174:{"answer":"MARKER","pool":"MARKERBCDFGH","hint":"A sign or tool used to mark something."},
+      175:{"answer":"SECTOR","pool":"SECTORABDFGH","hint":"A distinct part of a circle, space, or field of activity."},
+      176:{"answer":"OSCILLATION","pool":"OSCILLATIONBDEFG","hint":"A repeating movement or change around an average position."},
+      177:{"answer":"AMPLITUDE","pool":"AMPLITUDEBCFGH","hint":"The maximum displacement of an oscillation from its middle position."},
+      178:{"answer":"RADIUS","pool":"RADIUSBCEFGH","hint":"The distance from the center of a circle or sphere to its edge."},
+      179:{"answer":"DIAGRAM","pool":"DIAGRAMBCEFH","hint":"A visual graphic representation of data or relationships."},
+      180:{"answer":"LANDMARK","pool":"LANDMARKBCEFG","hint":"A noticeable feature that helps with orientation or direction."}
     },
     az:{
       1:{answer:'İT',pool:'İTPİŞKALMONR',hint:'İnsanın ən yaxın dostu adlandırılan ev heyvanı.'},
@@ -402,7 +500,56 @@
       128:{"answer":"NƏZƏRİYYƏ","pool":"NƏZƏRİYYƏBCÇDƏF","hint":"Hadisələri və onların əlaqələrini izah edən ideyalar sistemi."},
       129:{"answer":"KÜTLƏ","pool":"KÜTLƏBCÇDƏF","hint":"Cismin maddə miqdarı və ətaləti ilə bağlı fiziki kəmiyyət."},
       130:{"answer":"FORMA","pool":"FORMABCÇDƏF","hint":"Bir şeyin xarici görünüşü, konturu və ya təşkil olunma üsulu."},
-      131:{"answer":"DƏRİNLİK","pool":"DƏRİNLİKBCÇDƏF","hint":"Səthdən içəri məsafə, həm də məna və mürəkkəblik dərəcəsi."}
+      131:{"answer":"DƏRİNLİK","pool":"DƏRİNLİKBCÇDƏF","hint":"Səthdən içəri məsafə, həm də məna və mürəkkəblik dərəcəsi."},
+      132:{"answer":"FIRTINA","pool":"FIRTINABCÇDE","hint":"Güclü külək və sərt hava ilə müşayiət olunan fırtına."},
+      133:{"answer":"KRİSTAL","pool":"KRİSTALBCÇDE","hint":"Nizamlı quruluşa və aydın səthlərə malik bərk cisim."},
+      134:{"answer":"MAQNİT","pool":"MAQNİTBCÇDEƏ","hint":"Bəzi metalları cəzb edir və maqnit sahəsi yaradır."},
+      135:{"answer":"VULKAN","pool":"VULKANBCÇDEƏ","hint":"Lava, kül və qaz püskürə bilən dağ."},
+      136:{"answer":"MAYAK","pool":"MAYAKBCÇDEƏF","hint":"Sahildə gəmilərə yol göstərən işıqlı istiqamət nişanı."},
+      137:{"answer":"KANYON","pool":"KANYONBCÇDEƏ","hint":"Sıldırım yamacları olan dərin vadi."},
+      138:{"answer":"DUMAN","pool":"DUMANBCÇEƏFG","hint":"Görünüşü azaldan havadakı xırda su damcıları."},
+      139:{"answer":"DAMCI","pool":"DAMCIBÇEƏFGĞ","hint":"Mayenin kiçik, adətən dairəvi hissəsi."},
+      140:{"answer":"SPİRAL","pool":"SPİRALBCÇDEƏ","hint":"Mərkəz ətrafında dolanan xətt."},
+      141:{"answer":"ŞİMŞƏK","pool":"ŞİMŞƏKABCÇDE","hint":"Göy gurultusu zamanı yaranan parlaq elektrik boşalması."},
+      142:{"answer":"GÜNBƏZ","pool":"GÜNBƏZACÇDEF","hint":"Binanın və ya qurğunun dairəvi üst hissəsi."},
+      143:{"answer":"MARŞRUT","pool":"MARŞRUTBCÇDE","hint":"Başlanğıcdan məqsədə qədər seçilmiş yol."},
+      144:{"answer":"PİKSEL","pool":"PİKSELABCÇDƏ","hint":"Rəqəmsal təsvirin ən kiçik elementi."},
+      145:{"answer":"MOZAİKA","pool":"MOZAİKABCÇDE","hint":"Çoxlu kiçik hissələrdən yığılmış təsvir."},
+      146:{"answer":"HALQA","pool":"HALQABCÇDEƏF","hint":"Qapalı dairəvi forma və ya bəzək əşyası."},
+      147:{"answer":"KƏFKİR","pool":"KƏFKİRABCÇDE","hint":"Müntəzəm olaraq bir tərəfdən o biri tərəfə yellənən cisim."},
+      148:{"answer":"LİNZA","pool":"LİNZABCÇDEƏF","hint":"İşığı sındıran və fokuslayan şəffaf element."},
+      149:{"answer":"BURULĞAN","pool":"BURULĞANCÇDEƏ","hint":"Havanın və ya suyun sürətli fırlanma hərəkəti."},
+      150:{"answer":"RELYEF","pool":"RELYEFABCÇDƏ","hint":"Səthin yüksəklik və çökəklik formaları."},
+      151:{"answer":"KAPSUL","pool":"KAPSULBCÇDEƏ","hint":"Kiçik qapalı örtük və ya konteyner."},
+      152:{"answer":"KÜRƏ","pool":"KÜRƏABCÇDEFG","hint":"Topa bənzəyən həcmli həndəsi forma."},
+      153:{"answer":"PRİZMA","pool":"PRİZMABCÇDEƏ","hint":"Ağ işığı rənglərə ayıra bilən optik cisim."},
+      154:{"answer":"ATLAS","pool":"ATLASBCÇDEƏF","hint":"Kitabda və ya rəqəmsal formada xəritələr toplusu."},
+      155:{"answer":"KONTRAST","pool":"KONTRASTBCÇDE","hint":"Bir-birinə əks elementlər arasındakı aydın fərq."},
+      156:{"answer":"FRAQMENT","pool":"FRAQMENTBCÇDƏ","hint":"Daha böyük bir bütövün ayrıca hissəsi."},
+      157:{"answer":"PANORAMA","pool":"PANORAMABCÇDE","hint":"Böyük ərazinin geniş görünüşü."},
+      158:{"answer":"OPTİKA","pool":"OPTİKABCÇDEƏ","hint":"İşıq, linzalar və təsvirlərlə bağlı sahə."},
+      159:{"answer":"İNDEKS","pool":"İNDEKSABCÇƏF","hint":"Axtarış və müqayisə üçün göstərici, nömrə və ya siyahı."},
+      160:{"answer":"DİAPAZON","pool":"DİAPAZONBCÇEƏ","hint":"Minimum və maksimum qiymət arasındakı interval."},
+      161:{"answer":"TENDENSİYA","pool":"TENDENSİYABCÇƏF","hint":"Dəyişiklik və ya inkişafın davamlı istiqaməti."},
+      162:{"answer":"FAZA","pool":"FAZABCÇDEƏGĞ","hint":"Prosesin və ya vəziyyətin ayrıca mərhələsi."},
+      163:{"answer":"REAKSİYA","pool":"REAKSİYABCÇDƏ","hint":"Təsirə cavab və ya maddələrin kimyəvi dəyişməsi."},
+      164:{"answer":"İNTERFEYS","pool":"İNTERFEYSABCÇD","hint":"İnsanın sistemlə qarşılıqlı əlaqə qurduğu mühit."},
+      165:{"answer":"KATALOQ","pool":"KATALOQBCÇDE","hint":"Obyektlərin, məhsulların və ya materialların nizamlı siyahısı."},
+      166:{"answer":"PROTOKOL","pool":"PROTOKOLABCÇD","hint":"Qarşılıqlı əlaqə qaydasını müəyyən edən qaydalar toplusu."},
+      167:{"answer":"SENSOR","pool":"SENSORABCÇDƏ","hint":"Dəyişiklikləri aşkar edən və ölçən cihaz."},
+      168:{"answer":"İNDİKATOR","pool":"İNDİKATORBCÇEƏ","hint":"Vəziyyəti və ya qiyməti göstərən element."},
+      169:{"answer":"KLASTER","pool":"KLASTERBCÇDƏ","hint":"Bir-birinə yaxın və ya bağlı elementlər qrupu."},
+      170:{"answer":"RAKURS","pool":"RAKURSBCÇDEƏ","hint":"Obyektə baxılan mövqe və istiqamət."},
+      171:{"answer":"TEKSTURA","pool":"TEKSTURABCÇDƏ","hint":"Səthin hamar, kobud, yumşaq və s. xüsusiyyəti."},
+      172:{"answer":"SİLUET","pool":"SİLUETABCÇDƏ","hint":"Obyekt formasının tünd və ya kontur təsviri."},
+      173:{"answer":"QRADİYENT","pool":"QRADİYENTBCÇƏF","hint":"Bir rəngdən və ya qiymətdən digərinə tədrici keçid."},
+      174:{"answer":"MARKER","pool":"MARKERBCÇDƏF","hint":"Nəyisə işarələmək üçün istifadə olunan nişan və ya alət."},
+      175:{"answer":"SEKTOR","pool":"SEKTORABCÇDƏ","hint":"Dairənin, məkanın və ya fəaliyyət sahəsinin ayrıca hissəsi."},
+      176:{"answer":"TİTRƏMƏ","pool":"TİTRƏMƏABCÇD","hint":"Orta vəziyyət ətrafında təkrarlanan hərəkət və ya dəyişmə."},
+      177:{"answer":"AMPLİTUDA","pool":"AMPLİTUDABCÇEƏ","hint":"Titrəmənin orta vəziyyətdən ən böyük yayınması."},
+      178:{"answer":"RADİUS","pool":"RADİUSBCÇEƏF","hint":"Dairə və ya kürənin mərkəzindən sərhədinə qədər məsafə."},
+      179:{"answer":"DİAQRAM","pool":"DİAQRAMBCÇEƏ","hint":"Məlumatların və ya əlaqələrin qrafik təsviri."},
+      180:{"answer":"ORİYENTİR","pool":"ORİYENTİRABCÇD","hint":"İstiqaməti müəyyən etməyə kömək edən nəzərəçarpan obyekt və ya əlamət."}
     }
   };
   let gameLang='ru';try{gameLang=localStorage.getItem('pw.language')||'ru'}catch{}
@@ -414,7 +561,7 @@
   function validateLanguageLevels(){
     const supported=['ru','en','az'];
     for(const lang of supported){
-      for(let n=1;n<=131;n++){
+      for(let n=1;n<=180;n++){
         const item=lang==='ru'?LEVELS[n]:TRANSLATED[lang][n];
         if(!item||!item.answer||!item.pool||!item.hint)throw new Error('Incomplete language level '+lang+' '+n);
         const need=[...item.answer].reduce((m,ch)=>(m[ch]=(m[ch]||0)+1,m),{});
@@ -425,9 +572,9 @@
   }
   validateLanguageLevels();
   const GAME_UI={
-    ru:{chapter:n=>'Глава '+n,warm:'Разминка',assoc:'Ассоциации',chapter3:'Связи',chapter4:'Глубина',level:n=>'Уровень '+n,textHint:'Текстовая подсказка',tap:'Нажми, чтобы открыть',wrong:'Неверное слово. Попробуй ещё раз.',checking:'Проверяю и сохраняю ответ…',passed:n=>'Уровень '+n+' пройден!',reward:'+20 монет · +15 XP',already:'Награда за этот уровень уже получена',next:'СЛЕДУЮЩИЙ УРОВЕНЬ',sync:'Профиль синхронизирован.',shuffle:'Буквы перемешаны. Бесплатно.',letter:'Буква открыта. −50 монет.',remove:'Лишние буквы убраны. −100 монет.',text:'Подсказка открыта. −150 монет.',textOpened:'Подсказка уже открыта.',allLetters:'Все буквы уже открыты.',noExtra:'Лишних букв не осталось.',hintWait:'Подсказка: ожидаю ответ сервера…',locked:n=>'Сначала пройди уровень '+n+'.',home:'НА ГЛАВНУЮ',nextChapter:'СЛЕДУЮЩАЯ ГЛАВА',chapterPassed:n=>'Глава '+n+' пройдена!',chapterUnlocked:n=>'Глава '+n+' открыта',newTitle:title=>'Новый титул: '+title,slot:n=>'Буква '+n,image:n=>'Изображение '+n,placeFail:'Не удалось разместить букву.'},
-    en:{chapter:n=>'Chapter '+n,warm:'Warm-up',assoc:'Associations',chapter3:'Connections',chapter4:'Depth',level:n=>'Level '+n,textHint:'Text hint',tap:'Tap to reveal',wrong:'Wrong word. Try again.',checking:'Checking and saving your answer…',passed:n=>'Level '+n+' completed!',reward:'+20 coins · +15 XP',already:'Reward for this level has already been claimed',next:'NEXT LEVEL',sync:'Profile synced.',shuffle:'Letters shuffled. Free.',letter:'Letter revealed. −50 coins.',remove:'Extra letters removed. −100 coins.',text:'Hint revealed. −150 coins.',textOpened:'Hint already revealed.',allLetters:'All letters are already revealed.',noExtra:'No extra letters remain.',hintWait:'Getting hint from the server…',locked:n=>'Complete level '+n+' first.',home:'HOME',nextChapter:'NEXT CHAPTER',chapterPassed:n=>'Chapter '+n+' completed!',chapterUnlocked:n=>'Chapter '+n+' unlocked',newTitle:title=>'New title: '+title,slot:n=>'Letter '+n,image:n=>'Image '+n,placeFail:'Could not place the letter.'},
-    az:{chapter:n=>'Fəsil '+n,warm:'İsinmə',assoc:'Assosiasiyalar',chapter3:'Əlaqələr',chapter4:'Dərinlik',level:n=>n+'-ci səviyyə',textHint:'Mətn ipucu',tap:'Açmaq üçün toxun',wrong:'Söz yanlışdır. Yenidən cəhd et.',checking:'Cavab yoxlanılır və yadda saxlanılır…',passed:n=>n+'-ci səviyyə keçildi!',reward:'+20 sikkə · +15 XP',already:'Bu səviyyənin mükafatı artıq alınıb',next:'NÖVBƏTİ SƏVİYYƏ',sync:'Profil sinxronlaşdırıldı.',shuffle:'Hərflər qarışdırıldı. Pulsuz.',letter:'Hərf açıldı. −50 sikkə.',remove:'Artıq hərflər silindi. −100 sikkə.',text:'İpucu açıldı. −150 sikkə.',textOpened:'İpucu artıq açılıb.',allLetters:'Bütün hərflər artıq açılıb.',noExtra:'Artıq hərf qalmayıb.',hintWait:'İpucu serverdən alınır…',locked:n=>'Əvvəlcə '+n+'-ci səviyyəni keç.',home:'ANA SƏHİFƏ',nextChapter:'NÖVBƏTİ FƏSİL',chapterPassed:n=>n+'-ci fəsil tamamlandı!',chapterUnlocked:n=>n+'-ci fəsil açıldı',newTitle:title=>'Yeni titul: '+title,slot:n=>n+'-ci hərf',image:n=>n+'-ci şəkil',placeFail:'Hərfi yerləşdirmək mümkün olmadı.'}
+    ru:{chapter:n=>'Глава '+n,warm:'Разминка',assoc:'Ассоциации',chapter3:'Связи',chapter4:'Глубина',chapter5:'Мастерство',level:n=>'Уровень '+n,textHint:'Текстовая подсказка',tap:'Нажми, чтобы открыть',wrong:'Неверное слово. Попробуй ещё раз.',checking:'Проверяю и сохраняю ответ…',passed:n=>'Уровень '+n+' пройден!',reward:'+20 монет · +15 XP',already:'Награда за этот уровень уже получена',next:'СЛЕДУЮЩИЙ УРОВЕНЬ',sync:'Профиль синхронизирован.',shuffle:'Буквы перемешаны. Бесплатно.',letter:'Буква открыта. −50 монет.',remove:'Лишние буквы убраны. −100 монет.',text:'Подсказка открыта. −150 монет.',textOpened:'Подсказка уже открыта.',allLetters:'Все буквы уже открыты.',noExtra:'Лишних букв не осталось.',hintWait:'Подсказка: ожидаю ответ сервера…',locked:n=>'Сначала пройди уровень '+n+'.',home:'НА ГЛАВНУЮ',nextChapter:'СЛЕДУЮЩАЯ ГЛАВА',chapterPassed:n=>'Глава '+n+' пройдена!',chapterUnlocked:n=>'Глава '+n+' открыта',newTitle:title=>'Новый титул: '+title,slot:n=>'Буква '+n,image:n=>'Изображение '+n,placeFail:'Не удалось разместить букву.'},
+    en:{chapter:n=>'Chapter '+n,warm:'Warm-up',assoc:'Associations',chapter3:'Connections',chapter4:'Depth',chapter5:'Mastery',level:n=>'Level '+n,textHint:'Text hint',tap:'Tap to reveal',wrong:'Wrong word. Try again.',checking:'Checking and saving your answer…',passed:n=>'Level '+n+' completed!',reward:'+20 coins · +15 XP',already:'Reward for this level has already been claimed',next:'NEXT LEVEL',sync:'Profile synced.',shuffle:'Letters shuffled. Free.',letter:'Letter revealed. −50 coins.',remove:'Extra letters removed. −100 coins.',text:'Hint revealed. −150 coins.',textOpened:'Hint already revealed.',allLetters:'All letters are already revealed.',noExtra:'No extra letters remain.',hintWait:'Getting hint from the server…',locked:n=>'Complete level '+n+' first.',home:'HOME',nextChapter:'NEXT CHAPTER',chapterPassed:n=>'Chapter '+n+' completed!',chapterUnlocked:n=>'Chapter '+n+' unlocked',newTitle:title=>'New title: '+title,slot:n=>'Letter '+n,image:n=>'Image '+n,placeFail:'Could not place the letter.'},
+    az:{chapter:n=>'Fəsil '+n,warm:'İsinmə',assoc:'Assosiasiyalar',chapter3:'Əlaqələr',chapter4:'Dərinlik',chapter5:'Ustalıq',level:n=>n+'-ci səviyyə',textHint:'Mətn ipucu',tap:'Açmaq üçün toxun',wrong:'Söz yanlışdır. Yenidən cəhd et.',checking:'Cavab yoxlanılır və yadda saxlanılır…',passed:n=>n+'-ci səviyyə keçildi!',reward:'+20 sikkə · +15 XP',already:'Bu səviyyənin mükafatı artıq alınıb',next:'NÖVBƏTİ SƏVİYYƏ',sync:'Profil sinxronlaşdırıldı.',shuffle:'Hərflər qarışdırıldı. Pulsuz.',letter:'Hərf açıldı. −50 sikkə.',remove:'Artıq hərflər silindi. −100 sikkə.',text:'İpucu açıldı. −150 sikkə.',textOpened:'İpucu artıq açılıb.',allLetters:'Bütün hərflər artıq açılıb.',noExtra:'Artıq hərf qalmayıb.',hintWait:'İpucu serverdən alınır…',locked:n=>'Əvvəlcə '+n+'-ci səviyyəni keç.',home:'ANA SƏHİFƏ',nextChapter:'NÖVBƏTİ FƏSİL',chapterPassed:n=>n+'-ci fəsil tamamlandı!',chapterUnlocked:n=>n+'-ci fəsil açıldı',newTitle:title=>'Yeni titul: '+title,slot:n=>n+'-ci hərf',image:n=>n+'-ci şəkil',placeFail:'Hərfi yerləşdirmək mümkün olmadı.'}
   };
   const CHAPTER_TITLES={
     ru:{1:'Новичок',2:'Любитель',3:'Знаток',4:'Опытный',5:'Эксперт',6:'Профессионал',7:'Мастер',8:'Виртуоз',9:'Легенда',10:'Мастер слов'},
@@ -443,9 +590,9 @@
 
   const ui=GAME_UI[gameLang]||GAME_UI.ru;
   document.documentElement.lang=gameLang;
-  const chapterNum=levelId<=20?1:levelId<=50?2:levelId<=90?3:4;
+  const chapterNum=levelId<=20?1:levelId<=50?2:levelId<=90?3:levelId<=131?4:5;
   document.querySelector('.game-head>div b').textContent=ui.chapter(chapterNum);
-  $('levelTitle').textContent=(chapterNum===1?ui.warm:chapterNum===2?ui.assoc:chapterNum===3?ui.chapter3:ui.chapter4)+' · '+ui.level(levelId);
+  $('levelTitle').textContent=(chapterNum===1?ui.warm:chapterNum===2?ui.assoc:chapterNum===3?ui.chapter3:chapterNum===4?ui.chapter4:ui.chapter5)+' · '+ui.level(levelId);
   $('textHint').querySelector('b').textContent=ui.textHint;$('hintValue').textContent=ui.tap;
   $('slots').style.gridTemplateColumns='repeat('+answer.length+',1fr)';$('slots').classList.toggle('long-answer',answer.length>=9);
   level.photos.forEach(([emoji],index)=>{const d=document.createElement('div');d.className='photo';d.setAttribute('role','img');d.setAttribute('aria-label',ui.image(index+1));d.textContent=emoji;$('photos').append(d);});
@@ -492,8 +639,8 @@
     if(levelId===20){if(chapterNote){chapterNote.hidden=false;chapterNote.textContent=ui.chapterPassed(1)+' '+ui.newTitle(chapterEarnedTitle(1))+'. '+ui.chapterUnlocked(2)+'.';}next.href='./game.html?level=21';next.innerHTML=ui.nextChapter+' <span>▶</span>';}
     else if(levelId===50){if(chapterNote){chapterNote.hidden=false;chapterNote.textContent=ui.chapterPassed(2)+' '+ui.newTitle(chapterEarnedTitle(2))+'. '+ui.chapterUnlocked(3)+'.';}next.href='./game.html?level=51';next.innerHTML=ui.nextChapter+' <span>▶</span>';}
     else if(levelId===90){if(chapterNote){chapterNote.hidden=false;chapterNote.textContent=ui.chapterPassed(3)+' '+ui.newTitle(chapterEarnedTitle(3))+'. '+ui.chapterUnlocked(4)+'.';}next.href='./game.html?level=91';next.innerHTML=ui.nextChapter+' <span>▶</span>';}
-    else if(levelId===131){if(chapterNote){chapterNote.hidden=false;chapterNote.textContent=ui.chapterPassed(4)+' '+ui.newTitle(chapterEarnedTitle(4))+'.';}next.href='./index.html';next.innerHTML=ui.home+' <span>✓</span>';}
-    else if(levelId<131){next.href='./game.html?level='+(levelId+1);next.innerHTML=ui.next+' <span>▶</span>';}
+    else if(levelId===131){if(chapterNote){chapterNote.hidden=false;chapterNote.textContent=ui.chapterPassed(4)+' '+ui.newTitle(chapterEarnedTitle(4))+'. '+ui.chapterUnlocked(5)+'.';}next.href='./game.html?level=132';next.innerHTML=ui.nextChapter+' <span>▶</span>';}\n    else if(levelId===180){if(chapterNote){chapterNote.hidden=false;chapterNote.textContent=ui.chapterPassed(5)+' '+ui.newTitle(chapterEarnedTitle(5))+'.';}next.href='./index.html';next.innerHTML=ui.home+' <span>✓</span>';}
+    else if(levelId<180){next.href='./game.html?level='+(levelId+1);next.innerHTML=ui.next+' <span>▶</span>';}
     else{next.href='./index.html';next.innerHTML=ui.home+' <span>✓</span>';}
   }
   async function check(){
