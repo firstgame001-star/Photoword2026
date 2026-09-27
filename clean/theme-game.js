@@ -13233,7 +13233,7 @@ let order=tiles.map(t=>t.id),selected=Array(answer.length).fill(null),fixed=new 
 
 document.documentElement.lang=lang;
 $('themeGameTitle').textContent=ui[themeId]||ui.sport;$('levelTitle').textContent=ui.level(levelId);$('letterHint').textContent='💡 '+HINT_COSTS.letter;$('removeHint').textContent='🪄 '+HINT_COSTS.remove;$('textHintLabel').textContent=ui.textHint+' · '+HINT_COSTS.text+' 🪙';$('hintValue').textContent=ui.tap;
-$('slots').style.gridTemplateColumns='repeat('+answer.length+',1fr)';$('slots').classList.toggle('long-answer',answer.length>=9);
+$('slots').style.gridTemplateColumns='repeat('+answer.length+',1fr)';$('slots').classList.toggle('long-answer',answer.length>=9);$('letters').classList.toggle('dense',tiles.length>=19);
 level.photos.forEach(([emoji],index)=>{const d=document.createElement('div');d.className='photo';d.setAttribute('role','img');d.setAttribute('aria-label',ui.image(index+1));d.textContent=emoji;$('photos').append(d)});
 
 function shuffle(){
