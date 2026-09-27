@@ -980,7 +980,9 @@ with sync_playwright() as pw:
       # Notification setting is present and localized; native permission is controlled by Telegram.
       page.locator('#settingsBtn').tap();expect(page.locator('#notificationsBtn')).to_be_visible();expect(page.locator('#notificationsState')).not_to_be_empty();page.locator('[data-close="settingsModal"]').tap()
       # Rules and support are localized.
-      page.locator('#settingsBtn').tap();page.locator('#rulesBtn').tap();expect(page.locator('#rulesModal')).to_be_visible();assert len(page.locator('#rulesBody').inner_text())>100;rules_text=page.locator('#rulesBody').inner_text();\n      if language=='az': assert '7-ci fəsil “Sivilizasiya”' in rules_text and '5–12-ci fəsillər artıq' not in rules_text\n      page.locator('[data-close="rulesModal"]').tap()
+      page.locator('#settingsBtn').tap();page.locator('#rulesBtn').tap();expect(page.locator('#rulesModal')).to_be_visible();assert len(page.locator('#rulesBody').inner_text())>100;rules_text=page.locator('#rulesBody').inner_text();
+      if language=='az': assert '7-ci fəsil “Sivilizasiya”' in rules_text and '5–12-ci fəsillər artıq' not in rules_text
+      page.locator('[data-close="rulesModal"]').tap()
       page.locator('#settingsBtn').tap();page.locator('#supportBtn').tap();expect(page.locator('#supportModal')).to_be_visible()
       if language=='az': expect(page.locator('#supportTitle')).to_have_text('Dəstək')
       if language=='en': expect(page.locator('#supportTitle')).to_have_text('Support')
