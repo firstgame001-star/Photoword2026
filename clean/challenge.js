@@ -2856,7 +2856,7 @@ async function api(action,extra={}){
  return localRead();
 }
 function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
-const BANK_VERSION='r52-400';
+const BANK_VERSION='r54-400';
 function deckKey(){return 'pw.challenge.deck.'+BANK_VERSION+'.'+mode}
 function lastKey(){return 'pw.challenge.last.'+BANK_VERSION+'.'+mode}
 function loadDeck(){
