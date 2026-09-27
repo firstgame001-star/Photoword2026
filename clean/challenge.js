@@ -32,7 +32,7 @@ const I={
 const tr=()=>I[lang()]||I.ru;
 const alphabet=()=>lang()==='az'?'ABCÇDEƏFGĞHXIİJKLMNOÖPQRSŞTUÜVYZ':lang()==='en'?'ABCDEFGHJKLMNPQRSTUVWXYZ':'АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЫЭЮЯ';
 const rawInit=()=>window.Telegram?.WebApp?.initData||'';
-let mode='blitz',state=null,running=false,question=null,answer='',tiles=[],selected=[],used=new Set(),fixed=new Map(),removed=new Set(),textHintOpen=false,hintBusy=false,hearts=3,correct=0,streak=0,bestRunStreak=0,score=0,deadline=0,timer=null,order=[],pos=0,energyTimer=null,serverMode=true,serverNowMs=0,serverPerfMs=0;
+let mode='blitz',state=null,running=false,question=null,answer='',tiles=[],selected=[],used=new Set(),fixed=new Map(),removed=new Set(),letterOrder=[],textHintOpen=false,hintBusy=false,hearts=3,correct=0,streak=0,bestRunStreak=0,score=0,deadline=0,timer=null,order=[],pos=0,energyTimer=null,serverMode=true,serverNowMs=0,serverPerfMs=0;
 function syncTrustedClock(s){const n=Date.parse(s?.server_now||'');if(Number.isFinite(n)){serverNowMs=n;serverPerfMs=performance.now()}}
 function trustedNow(){return serverNowMs?serverNowMs+(performance.now()-serverPerfMs):Date.now()}
 const localKey='pw.challenge.local.v1';
@@ -68,7 +68,7 @@ function resetOrder(){order=shuffle(Q.map((_,i)=>i));pos=0}
 function nextQ(){if(pos>=order.length)resetOrder();question=Q[order[pos++]];answer=question[lang()]||question.ru;buildPuzzle()}
 function pool(word){const a=[...word],want=Math.max(12,a.length+5),chars=[...alphabet()].filter(ch=>!a.includes(ch));shuffle(chars);return shuffle([...a,...chars.slice(0,Math.max(0,want-a.length))])}
 function buildPuzzle(){
- selected=Array([...answer].length).fill(null);used.clear();fixed.clear();removed.clear();textHintOpen=false;hintBusy=false;tiles=pool(answer);
+ selected=Array([...answer].length).fill(null);used.clear();fixed.clear();removed.clear();textHintOpen=false;hintBusy=false;tiles=pool(answer);letterOrder=tiles.map((_,i)=>i);
  const photos=$('challengePhotos');photos.replaceChildren();question.p.forEach((e,i)=>{const d=document.createElement('div');d.className='photo';d.textContent=e;d.setAttribute('aria-label','Image '+(i+1));photos.append(d)});
  $('blitzHints').hidden=mode!=='blitz';$('blitzTextHintBox').hidden=true;$('blitzTextHintBox').textContent='';
  renderInput();$('challengeStatus').textContent='';
@@ -76,7 +76,7 @@ function buildPuzzle(){
 function renderInput(){
  const slots=$('challengeSlots'),letters=$('challengeLetters');slots.replaceChildren();letters.replaceChildren();
  selected.forEach((idx,i)=>{const b=document.createElement('button');b.className='slot'+(fixed.has(i)?' fixed':'');b.textContent=idx===null?'':tiles[idx];b.disabled=fixed.has(i)||hintBusy||!running;b.onclick=()=>{if(!running||idx===null||fixed.has(i))return;used.delete(idx);selected[i]=null;renderInput()};slots.append(b)});
- tiles.forEach((ch,i)=>{const b=document.createElement('button');b.className='letter'+(used.has(i)?' used':'')+(removed.has(i)?' removed':'');b.textContent=ch;b.disabled=used.has(i)||removed.has(i)||!running||hintBusy;b.onclick=()=>choose(i);letters.append(b)});
+ letterOrder.forEach(i=>{const ch=tiles[i],b=document.createElement('button');b.className='letter'+(used.has(i)?' used':'')+(removed.has(i)?' removed':'');b.textContent=ch;b.disabled=used.has(i)||removed.has(i)||!running||hintBusy;b.onclick=()=>choose(i);letters.append(b)});
  ['blitzLetterHint','blitzRemoveHint','blitzTextHint','challengeShuffle'].forEach(id=>{const e=$(id);if(e)e.disabled=!running||hintBusy});
 }
 function choose(i){if(!running||hintBusy||used.has(i)||removed.has(i))return;const s=selected.indexOf(null);if(s<0)return;selected[s]=i;used.add(i);renderInput();if(!selected.includes(null))setTimeout(checkWord,70)}
@@ -164,7 +164,7 @@ function openMode(m){
  $('challengeHome').textContent=tr().home;$('challengeIntro').hidden=false;$('challengeHud').hidden=true;$('challengePuzzle').hidden=true;$('challengeResult').hidden=true;loadState();
 }
 function closeMode(){running=false;clearInterval(timer);clearInterval(energyTimer);document.querySelectorAll('.screen').forEach(e=>e.classList.toggle('active',e.id==='home'));window.scrollTo(0,0)}
-$('challengeStart')?.addEventListener('click',startRun);$('challengeAgain')?.addEventListener('click',startRun);$('challengeShuffle')?.addEventListener('click',()=>{if(!running||hintBusy)return;const old=[...tiles];tiles=shuffle([...tiles]);selected=Array([...answer].length).fill(null);used.clear();fixed.clear();removed.clear();textHintOpen=false;$('blitzTextHintBox').hidden=true;renderInput()});$('blitzLetterHint')?.addEventListener('click',()=>blitzHint('letter'));$('blitzRemoveHint')?.addEventListener('click',()=>blitzHint('remove'));$('blitzTextHint')?.addEventListener('click',()=>blitzHint('text'));$('challengeBack')?.addEventListener('click',closeMode);$('challengeHome')?.addEventListener('click',closeMode);
+$('challengeStart')?.addEventListener('click',startRun);$('challengeAgain')?.addEventListener('click',startRun);$('challengeShuffle')?.addEventListener('click',()=>{if(!running||hintBusy)return;letterOrder=shuffle([...letterOrder]);renderInput();pw?.sfx?.('tap');pw?.haptic?.()});$('blitzLetterHint')?.addEventListener('click',()=>blitzHint('letter'));$('blitzRemoveHint')?.addEventListener('click',()=>blitzHint('remove'));$('blitzTextHint')?.addEventListener('click',()=>blitzHint('text'));$('challengeBack')?.addEventListener('click',closeMode);$('challengeHome')?.addEventListener('click',closeMode);
 $('energyRefill')?.addEventListener('click',()=>{$('energyRefillNote').hidden=false;$('energyRefillNote').textContent=tr().refillNote});
 window.PWChallenge={open:openMode,close:closeMode};
 if(modeParam&&I.ru[modeParam])setTimeout(()=>openMode(modeParam),0);
