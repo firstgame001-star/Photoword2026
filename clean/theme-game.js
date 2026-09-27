@@ -154,4 +154,5 @@ textSettingLabels();
 
 shuffle();paint();
 if(levelId>unlock&&!progress.has(levelId)){busy=true;paint();pw?.status?.(ui.locked(unlock))}else{pw?.status?.(ui.level(levelId))}
+if(pw.hasAuth)pw.login().catch(e=>pw.status(e.message));
 })();
