@@ -51,7 +51,17 @@
     47:{answer:"ТРАЕКТОРИЯ",pool:"ТРАЕКТОРИЯБВГДЖЗ",hint:"Линия движения тела или объекта.",photos:[["🏀","Полёт мяча"],["🏹","Полёт стрелы"],["🚀","Движение"],["📈","Линия движения"]]},
     48:{answer:"КОДЕКС",pool:"КОДЕКСАБВГЖЗ",hint:"Свод правил или законов.",photos:[["⚖️","Право"],["📜","Правила"],["🏛️","Законы"],["📚","Свод текстов"]]},
     49:{answer:"КОМПАС",pool:"КОМПАСБВГДЕЖ",hint:"Прибор, который помогает определить направление.",photos:[["🗺️","Маршрут"],["🥾","Поход"],["🧲","Магнит"],["🧭","Направление"]]},
-    50:{answer:"БАЛАНС",pool:"БАЛАНСТРЕКО",hint:"Равновесие между разными сторонами, силами или решениями.",photos:[["🧘","Равновесие"],["⚖️","Две стороны"],["🤸","Удержание положения"],["📊","Соотношение"]]}
+    50:{answer:"БАЛАНС",pool:"БАЛАНСТРЕКО",hint:"Равновесие между разными сторонами, силами или решениями.",photos:[["🧘","Равновесие"],["⚖️","Две стороны"],["🤸","Удержание положения"],["📊","Соотношение"]]},
+    51:{answer:"РИТМ",pool:"РИТМЛАСОКН",hint:"Повторяющийся рисунок звуков, движений или ударов.",photos:[["🎧","Музыка"],["🫀","Сердцебиение"],["🥁","Удары"],["⏱️","Темп"]]},
+    52:{answer:"ФОКУС",pool:"ФОКУСДРАЛМН",hint:"Точка внимания или чёткости, на которой всё сосредоточено.",photos:[["📷","Камера"],["👀","Внимание"],["🎯","Цель"],["🔍","Чёткость"]]},
+    53:{answer:"ЭХО",pool:"ЭХОТАРМСЛК",hint:"Звук, который возвращается после отражения.",photos:[["🏔️","Горы"],["🗣️","Голос"],["🔊","Звук"],["↩️","Возврат"]]},
+    54:{answer:"ПУЛЬС",pool:"ПУЛЬСАКРМЕН",hint:"Ритмичные толчки, по которым можно судить о работе сердца.",photos:[["🏃","Нагрузка"],["🫀","Сердце"],["⌚","Измерение"],["📈","Ритм"]]},
+    55:{answer:"ТОН",pool:"ТОНАЛМЕРСК",hint:"Он бывает у голоса, музыки и даже цвета.",photos:[["🎤","Голос"],["🎼","Музыка"],["🎨","Цвет"],["🔊","Звучание"]]},
+    56:{answer:"ПОРТАЛ",pool:"ПОРТАЛМЕКСИН",hint:"Проход или вход, ведущий в другое пространство или раздел.",photos:[["🚪","Вход"],["🌌","Другой мир"],["🎮","Игра"],["🌀","Переход"]]},
+    57:{answer:"КАНАЛ",pool:"КАНАЛТРЕСОМ",hint:"По нему может идти вода, сигнал, информация или транспорт.",photos:[["📺","Передача"],["🌊","Вода"],["📡","Сигнал"],["🚢","Судоходство"]]},
+    58:{answer:"ФИЛЬТР",pool:"ФИЛЬТРСАКОН",hint:"Он пропускает нужное и задерживает лишнее.",photos:[["☕","Кофе"],["📷","Изображение"],["😷","Защита"],["💧","Очистка"]]},
+    59:{answer:"СЦЕНА",pool:"СЦЕНАРТИМОК",hint:"Место, где происходит выступление, действие или важный эпизод.",photos:[["🎤","Выступление"],["💡","Свет"],["👥","Зрители"],["🎭","Театр"]]},
+    60:{answer:"СИМВОЛ",pool:"СИМВОЛТАРЕКН",hint:"Знак или образ, который представляет идею, значение или объект.",photos:[["❤️","Значение"],["🚦","Знак"],["🏳️","Обозначение"],["🔣","Знаки"]]}
   };
   const TRANSLATED={
     en:{
@@ -104,7 +114,17 @@
       47:{answer:"TRAJECTORY",pool:"TRAJECTORYBDFGHI",hint:"The path of movement of an object or body."},
       48:{answer:"CODEX",pool:"CODEXABFGHI",hint:"A set of rules or laws."},
       49:{answer:"COMPASS",pool:"COMPASSBDEFGH",hint:"A tool used to determine direction."},
-      50:{answer:"BALANCE",pool:"BALANCETRMSO",hint:"A state where different sides, forces, or choices are in equilibrium."}
+      50:{answer:"BALANCE",pool:"BALANCETRMSO",hint:"A state where different sides, forces, or choices are in equilibrium."},
+      51:{answer:"RHYTHM",pool:"RHYTHMALNOPS",hint:"A repeating pattern of sounds, movements, or beats."},
+      52:{answer:"FOCUS",pool:"FOCUSDARLMP",hint:"The point of attention or sharpness where everything is concentrated."},
+      53:{answer:"ECHO",pool:"ECHOTARMSLK",hint:"A sound that returns after being reflected."},
+      54:{answer:"PULSE",pool:"PULSEAKRMEN",hint:"Regular beats that reveal the activity of the heart."},
+      55:{answer:"TONE",pool:"TONEALMRSC",hint:"It can describe a voice, music, or even a color."},
+      56:{answer:"PORTAL",pool:"PORTALMEKSIN",hint:"An entrance or passage leading to another space or section."},
+      57:{answer:"CHANNEL",pool:"CHANNELTRSMO",hint:"Water, signals, information, or transport can pass through it."},
+      58:{answer:"FILTER",pool:"FILTERSAKON",hint:"It lets wanted things through and holds unwanted things back."},
+      59:{answer:"STAGE",pool:"STAGEARIMOK",hint:"A place where a performance, action, or important scene happens."},
+      60:{answer:"SYMBOL",pool:"SYMBOLTAREKN",hint:"A sign or image that represents an idea, meaning, or object."}
     },
     az:{
       1:{answer:'İT',pool:'İTPİŞKALMONR',hint:'İnsanın ən yaxın dostu adlandırılan ev heyvanı.'},
@@ -156,7 +176,17 @@
       47:{answer:"TRAEKTORİYA",pool:"TRAEKTORİYABCÇDƏF",hint:"Cismin və ya obyektin hərəkət yolu."},
       48:{answer:"KODEKS",pool:"KODEKSABCÇƏF",hint:"Qaydalar və ya qanunlar toplusu."},
       49:{answer:"KOMPAS",pool:"KOMPASBCÇDEƏ",hint:"İstiqaməti müəyyən etməyə kömək edən cihaz."},
-      50:{answer:"TARAZLIQ",pool:"TARAZLIQBCMN",hint:"Tərəflər, qüvvələr və ya seçimlər arasında tarazlıq vəziyyəti."}
+      50:{answer:"TARAZLIQ",pool:"TARAZLIQBCMN",hint:"Tərəflər, qüvvələr və ya seçimlər arasında tarazlıq vəziyyəti."},
+      51:{answer:"RİTM",pool:"RİTMLASOKN",hint:"Səslərin, hərəkətlərin və ya vurğuların təkrarlanan ardıcıllığı."},
+      52:{answer:"FOKUS",pool:"FOKUSDARLMN",hint:"Diqqətin və ya aydınlığın cəmləndiyi nöqtə."},
+      53:{answer:"SƏDA",pool:"SƏDATRMKLN",hint:"Əks olunaraq geri qayıdan səs."},
+      54:{answer:"NƏBZ",pool:"NƏBZAKRMLƏ",hint:"Ürəyin işini göstərən ritmik döyüntülər."},
+      55:{answer:"TON",pool:"TONALMERSK",hint:"Səsdə, musiqidə və rəngdə işlənən anlayış."},
+      56:{answer:"PORTAL",pool:"PORTALMEKSİN",hint:"Başqa məkana və ya bölməyə aparan keçid və ya giriş."},
+      57:{answer:"KANAL",pool:"KANALTRƏSOM",hint:"Su, siqnal, məlumat və ya nəqliyyat onunla hərəkət edə bilər."},
+      58:{answer:"FİLTR",pool:"FİLTRSAKON",hint:"Lazım olanı buraxır, artıq olanı saxlayır."},
+      59:{answer:"SƏHNƏ",pool:"SƏHNƏARTİMO",hint:"Tamaşanın, çıxışın və ya mühüm hadisənin baş verdiyi yer."},
+      60:{answer:"SİMVOL",pool:"SİMVOLTARƏKN",hint:"Fikri, mənanı və ya obyekti ifadə edən işarə və ya obraz."}
     }
   };
   let gameLang='ru';try{gameLang=localStorage.getItem('pw.language')||'ru'}catch{}
@@ -168,7 +198,7 @@
   function validateLanguageLevels(){
     const supported=['ru','en','az'];
     for(const lang of supported){
-      for(let n=1;n<=50;n++){
+      for(let n=1;n<=60;n++){
         const item=lang==='ru'?LEVELS[n]:TRANSLATED[lang][n];
         if(!item||!item.answer||!item.pool||!item.hint)throw new Error('Incomplete language level '+lang+' '+n);
         const need=[...item.answer].reduce((m,ch)=>(m[ch]=(m[ch]||0)+1,m),{});
@@ -179,9 +209,9 @@
   }
   validateLanguageLevels();
   const GAME_UI={
-    ru:{chapter:n=>'Глава '+n,warm:'Разминка',assoc:'Ассоциации',level:n=>'Уровень '+n,textHint:'Текстовая подсказка',tap:'Нажми, чтобы открыть',wrong:'Неверное слово. Попробуй ещё раз.',checking:'Проверяю и сохраняю ответ…',passed:n=>'Уровень '+n+' пройден!',reward:'+20 монет · +15 XP',already:'Награда за этот уровень уже получена',next:'СЛЕДУЮЩИЙ УРОВЕНЬ',sync:'Профиль синхронизирован.',shuffle:'Буквы перемешаны. Бесплатно.',letter:'Буква открыта. −50 монет.',remove:'Лишние буквы убраны. −100 монет.',text:'Подсказка открыта. −150 монет.',textOpened:'Подсказка уже открыта.',allLetters:'Все буквы уже открыты.',noExtra:'Лишних букв не осталось.',hintWait:'Подсказка: ожидаю ответ сервера…',locked:n=>'Сначала пройди уровень '+n+'.',home:'НА ГЛАВНУЮ',nextChapter:'СЛЕДУЮЩАЯ ГЛАВА',chapterPassed:n=>'Глава '+n+' пройдена!',chapterUnlocked:n=>'Глава '+n+' открыта',slot:n=>'Буква '+n,image:n=>'Изображение '+n,placeFail:'Не удалось разместить букву.'},
-    en:{chapter:n=>'Chapter '+n,warm:'Warm-up',assoc:'Associations',level:n=>'Level '+n,textHint:'Text hint',tap:'Tap to reveal',wrong:'Wrong word. Try again.',checking:'Checking and saving your answer…',passed:n=>'Level '+n+' completed!',reward:'+20 coins · +15 XP',already:'Reward for this level has already been claimed',next:'NEXT LEVEL',sync:'Profile synced.',shuffle:'Letters shuffled. Free.',letter:'Letter revealed. −50 coins.',remove:'Extra letters removed. −100 coins.',text:'Hint revealed. −150 coins.',textOpened:'Hint already revealed.',allLetters:'All letters are already revealed.',noExtra:'No extra letters remain.',hintWait:'Getting hint from the server…',locked:n=>'Complete level '+n+' first.',home:'HOME',nextChapter:'NEXT CHAPTER',chapterPassed:n=>'Chapter '+n+' completed!',chapterUnlocked:n=>'Chapter '+n+' unlocked',slot:n=>'Letter '+n,image:n=>'Image '+n,placeFail:'Could not place the letter.'},
-    az:{chapter:n=>'Fəsil '+n,warm:'İsinmə',assoc:'Assosiasiyalar',level:n=>n+'-ci səviyyə',textHint:'Mətn ipucu',tap:'Açmaq üçün toxun',wrong:'Söz yanlışdır. Yenidən cəhd et.',checking:'Cavab yoxlanılır və yadda saxlanılır…',passed:n=>n+'-ci səviyyə keçildi!',reward:'+20 sikkə · +15 XP',already:'Bu səviyyənin mükafatı artıq alınıb',next:'NÖVBƏTİ SƏVİYYƏ',sync:'Profil sinxronlaşdırıldı.',shuffle:'Hərflər qarışdırıldı. Pulsuz.',letter:'Hərf açıldı. −50 sikkə.',remove:'Artıq hərflər silindi. −100 sikkə.',text:'İpucu açıldı. −150 sikkə.',textOpened:'İpucu artıq açılıb.',allLetters:'Bütün hərflər artıq açılıb.',noExtra:'Artıq hərf qalmayıb.',hintWait:'İpucu serverdən alınır…',locked:n=>'Əvvəlcə '+n+'-ci səviyyəni keç.',home:'ANA SƏHİFƏ',nextChapter:'NÖVBƏTİ FƏSİL',chapterPassed:n=>n+'-ci fəsil tamamlandı!',chapterUnlocked:n=>n+'-ci fəsil açıldı',slot:n=>n+'-ci hərf',image:n=>n+'-ci şəkil',placeFail:'Hərfi yerləşdirmək mümkün olmadı.'}
+    ru:{chapter:n=>'Глава '+n,warm:'Разминка',assoc:'Ассоциации',chapter3:'Связи',level:n=>'Уровень '+n,textHint:'Текстовая подсказка',tap:'Нажми, чтобы открыть',wrong:'Неверное слово. Попробуй ещё раз.',checking:'Проверяю и сохраняю ответ…',passed:n=>'Уровень '+n+' пройден!',reward:'+20 монет · +15 XP',already:'Награда за этот уровень уже получена',next:'СЛЕДУЮЩИЙ УРОВЕНЬ',sync:'Профиль синхронизирован.',shuffle:'Буквы перемешаны. Бесплатно.',letter:'Буква открыта. −50 монет.',remove:'Лишние буквы убраны. −100 монет.',text:'Подсказка открыта. −150 монет.',textOpened:'Подсказка уже открыта.',allLetters:'Все буквы уже открыты.',noExtra:'Лишних букв не осталось.',hintWait:'Подсказка: ожидаю ответ сервера…',locked:n=>'Сначала пройди уровень '+n+'.',home:'НА ГЛАВНУЮ',nextChapter:'СЛЕДУЮЩАЯ ГЛАВА',chapterPassed:n=>'Глава '+n+' пройдена!',chapterUnlocked:n=>'Глава '+n+' открыта',slot:n=>'Буква '+n,image:n=>'Изображение '+n,placeFail:'Не удалось разместить букву.'},
+    en:{chapter:n=>'Chapter '+n,warm:'Warm-up',assoc:'Associations',chapter3:'Connections',level:n=>'Level '+n,textHint:'Text hint',tap:'Tap to reveal',wrong:'Wrong word. Try again.',checking:'Checking and saving your answer…',passed:n=>'Level '+n+' completed!',reward:'+20 coins · +15 XP',already:'Reward for this level has already been claimed',next:'NEXT LEVEL',sync:'Profile synced.',shuffle:'Letters shuffled. Free.',letter:'Letter revealed. −50 coins.',remove:'Extra letters removed. −100 coins.',text:'Hint revealed. −150 coins.',textOpened:'Hint already revealed.',allLetters:'All letters are already revealed.',noExtra:'No extra letters remain.',hintWait:'Getting hint from the server…',locked:n=>'Complete level '+n+' first.',home:'HOME',nextChapter:'NEXT CHAPTER',chapterPassed:n=>'Chapter '+n+' completed!',chapterUnlocked:n=>'Chapter '+n+' unlocked',slot:n=>'Letter '+n,image:n=>'Image '+n,placeFail:'Could not place the letter.'},
+    az:{chapter:n=>'Fəsil '+n,warm:'İsinmə',assoc:'Assosiasiyalar',chapter3:'Əlaqələr',level:n=>n+'-ci səviyyə',textHint:'Mətn ipucu',tap:'Açmaq üçün toxun',wrong:'Söz yanlışdır. Yenidən cəhd et.',checking:'Cavab yoxlanılır və yadda saxlanılır…',passed:n=>n+'-ci səviyyə keçildi!',reward:'+20 sikkə · +15 XP',already:'Bu səviyyənin mükafatı artıq alınıb',next:'NÖVBƏTİ SƏVİYYƏ',sync:'Profil sinxronlaşdırıldı.',shuffle:'Hərflər qarışdırıldı. Pulsuz.',letter:'Hərf açıldı. −50 sikkə.',remove:'Artıq hərflər silindi. −100 sikkə.',text:'İpucu açıldı. −150 sikkə.',textOpened:'İpucu artıq açılıb.',allLetters:'Bütün hərflər artıq açılıb.',noExtra:'Artıq hərf qalmayıb.',hintWait:'İpucu serverdən alınır…',locked:n=>'Əvvəlcə '+n+'-ci səviyyəni keç.',home:'ANA SƏHİFƏ',nextChapter:'NÖVBƏTİ FƏSİL',chapterPassed:n=>n+'-ci fəsil tamamlandı!',chapterUnlocked:n=>n+'-ci fəsil açıldı',slot:n=>n+'-ci hərf',image:n=>n+'-ci şəkil',placeFail:'Hərfi yerləşdirmək mümkün olmadı.'}
   };
   const requested = Number(new URLSearchParams(location.search).get('level') || 1);
   const levelId = LEVELS[requested] ? requested : 1, level = LEVELS[levelId], answer=[...level.answer];
@@ -191,9 +221,9 @@
 
   const ui=GAME_UI[gameLang]||GAME_UI.ru;
   document.documentElement.lang=gameLang;
-  const chapterNum=levelId<=20?1:2;
+  const chapterNum=levelId<=20?1:levelId<=50?2:3;
   document.querySelector('.game-head>div b').textContent=ui.chapter(chapterNum);
-  $('levelTitle').textContent=(chapterNum===1?ui.warm:ui.assoc)+' · '+ui.level(levelId);
+  $('levelTitle').textContent=(chapterNum===1?ui.warm:chapterNum===2?ui.assoc:ui.chapter3)+' · '+ui.level(levelId);
   $('textHint').querySelector('b').textContent=ui.textHint;$('hintValue').textContent=ui.tap;
   $('slots').style.gridTemplateColumns='repeat('+answer.length+',1fr)';$('slots').classList.toggle('long-answer',answer.length>=9);
   level.photos.forEach(([emoji],index)=>{const d=document.createElement('div');d.className='photo';d.setAttribute('role','img');d.setAttribute('aria-label',ui.image(index+1));d.textContent=emoji;$('photos').append(d);});
@@ -238,15 +268,16 @@
     const next=$('nextLevel'),chapterNote=$('successChapter');
     if(chapterNote){chapterNote.hidden=true;chapterNote.textContent='';}
     if(levelId===20){if(chapterNote){chapterNote.hidden=false;chapterNote.textContent=ui.chapterPassed(1)+' '+ui.chapterUnlocked(2)+'.';}next.href='./game.html?level=21';next.innerHTML=ui.nextChapter+' <span>▶</span>';}
-    else if(levelId<50){next.href='./game.html?level='+(levelId+1);next.innerHTML=ui.next+' <span>▶</span>';}
-    else{if(chapterNote){chapterNote.hidden=false;chapterNote.textContent=ui.chapterPassed(2);}next.href='./index.html';next.innerHTML=ui.home+' <span>✓</span>';}
+    else if(levelId===50){if(chapterNote){chapterNote.hidden=false;chapterNote.textContent=ui.chapterPassed(2)+' '+ui.chapterUnlocked(3)+'.';}next.href='./game.html?level=51';next.innerHTML=ui.nextChapter+' <span>▶</span>';}
+    else if(levelId<60){next.href='./game.html?level='+(levelId+1);next.innerHTML=ui.next+' <span>▶</span>';}
+    else{next.href='./index.html';next.innerHTML=ui.home+' <span>✓</span>';}
   }
   async function check(){
     if(selected.some(id=>id===null))return;
     busy=true;paint();
     const word=selected.map(id=>tiles[id].letter).join('');
     if(word!==level.answer){
-      track('wrong_answer',{levelId,chapterId:levelId<=20?1:2});pw.status(ui.wrong);$('slots').classList.add('wrong');
+      track('wrong_answer',{levelId,chapterId:chapterNum});pw.status(ui.wrong);$('slots').classList.add('wrong');
       setTimeout(()=>{clearInput();busy=false;$('slots').classList.remove('wrong');paint();},700);
       pw.sfx('error');pw.haptic('error');return;
     }
@@ -255,7 +286,7 @@
       await pw.login();
       const previous=pw.player?.completed_levels??0;
       const p=await pw.api('complete_level',{levelId,answer:word});
-      solved=true;track('level_complete',{levelId,chapterId:levelId<=20?1:2});pw.sfx('success');pw.haptic('success');showSuccess(p.completed_levels>previous);
+      solved=true;track('level_complete',{levelId,chapterId:chapterNum});pw.sfx('success');pw.haptic('success');showSuccess(p.completed_levels>previous);
     }catch(e){pw.status(e.message);clearInput();}
     finally{busy=false;paint();}
   }
@@ -279,7 +310,7 @@
       }else if(type==='remove'){
         bad.slice(0,3).forEach(t=>{removed.add(t.id);selected=selected.map(id=>id===t.id?null:id);});pw.status(ui.remove);
       }else{textOpen=true;pw.status(ui.text);}
-      save();track('hint_use',{levelId,chapterId:levelId<=20?1:2,metadata:{type}});pw.sfx('hint');pw.haptic();
+      save();track('hint_use',{levelId,chapterId:chapterNum,metadata:{type}});pw.sfx('hint');pw.haptic();
     }catch(e){pw.status(e.message);}
     finally{busy=false;paint();}
     if(selected.every(id=>id!==null))check();
@@ -289,6 +320,6 @@
   shuffle();paint();
   pw.login().then(p=>{
     if(levelId>(p.current_level??1)){pw.status(ui.locked(p.current_level??1));busy=true;paint();return;}
-    restore(p);track('level_open',{levelId,chapterId:levelId<=20?1:2});pw.status(ui.sync);
+    restore(p);track('level_open',{levelId,chapterId:chapterNum});pw.status(ui.sync);
   }).catch(e=>pw.status(e.message));
 })();
