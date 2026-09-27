@@ -25,12 +25,12 @@ jobs:
         run: |
           node scripts/check-clean.mjs
           node scripts/full-audit.mjs
-      - name: Wait for r72 and verify published files
+      - name: Wait for r73 and verify published files
         shell: bash
         run: |
           set -euo pipefail
           base='https://firstgame001-star.github.io/Photoword2026/clean'
-          release='20260928-r72'
+          release='20260928-r73'
           ok=0
           for i in $(seq 1 48); do
             if curl --fail --silent --show-error --location --max-time 20 "$base/release.json?check=$i" -o "$RUNNER_TEMP/release.json" && grep -q "$release" "$RUNNER_TEMP/release.json"; then
@@ -132,6 +132,7 @@ jobs:
           grep -q '"id":"travel","levels":100,"available_through":100,"status":"complete"' "$RUNNER_TEMP/release.json"
           grep -q '"id":"science","levels":100,"available_through":100,"status":"complete"' "$RUNNER_TEMP/release.json"
           grep -q '"id":"technology","levels":100,"available_through":100,"status":"complete"' "$RUNNER_TEMP/release.json"
+          grep -q '"thematic_answers_unique_across_ready_categories":true' "$RUNNER_TEMP/release.json"
           grep -q 'privacy.html' "$RUNNER_TEMP/index.html"
           grep -q 'terms.html' "$RUNNER_TEMP/index.html"
           grep -q "$release" "$RUNNER_TEMP/release.json"
@@ -140,4 +141,4 @@ jobs:
           node --check "$RUNNER_TEMP/game.js"
           node --check "$RUNNER_TEMP/theme-game.js"
           node --check "$RUNNER_TEMP/challenge.js"
-          printf '### PhotoWord r72 publication check\n\nMain levels 1–280, Chapters 1–12, Chapter 7 through level 280, full DOM/localization/theme audit, unique main answers in RU/EN/AZ, unique backgrounds, absolute chapter progress and earned titles, featured thematic mode, Sport 1–100, Art 1–100, Professions 1–100, Travel 1–100, Science 1–100 and Technology 1–100, three playable challenge modes with server-authoritative time and paid Blitz hints, explicit next-step feedback, 400 challenge words with no repeats until the bank is exhausted, and fixed language selection, legal/settings surfaces and JavaScript all verified.\n' >> "$GITHUB_STEP_SUMMARY"
+          printf '### PhotoWord r73 publication check\n\nMain levels 1–280, Chapters 1–12, Chapter 7 through level 280, full DOM/localization/theme audit, unique main answers in RU/EN/AZ, unique backgrounds, absolute chapter progress and earned titles, featured thematic mode, Sport 1–100, Art 1–100, Professions 1–100, Travel 1–100, Science 1–100 and Technology 1–100, three playable challenge modes with server-authoritative time and paid Blitz hints, explicit next-step feedback, 400 challenge words with no repeats until the bank is exhausted, and fixed language selection, legal/settings surfaces and JavaScript all verified.\n' >> "$GITHUB_STEP_SUMMARY"
