@@ -4,11 +4,11 @@ const $=id=>document.getElementById(id),pw=window.PW;
 const getLang=()=>{try{return localStorage.getItem('pw.language')||'ru'}catch{return'ru'}};
 const lang=getLang();
 const themeParam=new URLSearchParams(location.search).get('theme');
-const themeId=['sport','art','professions','travel'].includes(themeParam)?themeParam:'sport';
+const themeId=['sport','art','professions','travel','science'].includes(themeParam)?themeParam:'sport';
 const UI={
- ru:{sport:'⚽ Спорт',art:'🎨 Искусство',professions:'🧑‍💼 Профессии',travel:'🌍 Путешествия',level:n=>'Тематический уровень '+n,textHint:'Текстовая подсказка',tap:'Нажми, чтобы открыть',wrong:'Неверное слово. Попробуй ещё раз.',passed:n=>'Уровень '+n+' пройден!',saved:'Прогресс сохранён отдельно от основной игры.',next:'СЛЕДУЮЩИЙ УРОВЕНЬ',back:'К ТЕМАМ',locked:n=>'Сначала пройди уровень '+n+'.',letter:'Буква открыта.',remove:'Лишние буквы убраны.',shuffle:'Буквы перемешаны.',text:'Подсказка открыта.',allLetters:'Все буквы уже открыты.',noExtra:'Лишних букв не осталось.',placeFail:'Не удалось разместить букву.',image:n=>'Изображение '+n},
- en:{sport:'⚽ Sport',art:'🎨 Art',professions:'🧑‍💼 Professions',travel:'🌍 Travel',level:n=>'Themed level '+n,textHint:'Text hint',tap:'Tap to reveal',wrong:'Wrong word. Try again.',passed:n=>'Level '+n+' completed!',saved:'Progress saved separately from the main game.',next:'NEXT LEVEL',back:'BACK TO THEMES',locked:n=>'Complete level '+n+' first.',letter:'Letter revealed.',remove:'Extra letters removed.',shuffle:'Letters shuffled.',text:'Hint revealed.',allLetters:'All letters are already revealed.',noExtra:'No extra letters remain.',placeFail:'Could not place the letter.',image:n=>'Image '+n},
- az:{sport:'⚽ İdman',art:'🎨 İncəsənət',professions:'🧑‍💼 Peşələr',travel:'🌍 Səyahət',level:n=>n+'-ci mövzu səviyyəsi',textHint:'Mətn ipucu',tap:'Açmaq üçün toxun',wrong:'Söz yanlışdır. Yenidən cəhd et.',passed:n=>n+'-ci səviyyə keçildi!',saved:'Tərəqqi əsas oyundan ayrıca saxlanıldı.',next:'NÖVBƏTİ SƏVİYYƏ',back:'MÖVZULARA QAYIT',locked:n=>'Əvvəlcə '+n+'-ci səviyyəni keç.',letter:'Hərf açıldı.',remove:'Artıq hərflər silindi.',shuffle:'Hərflər qarışdırıldı.',text:'İpucu açıldı.',allLetters:'Bütün hərflər artıq açılıb.',noExtra:'Artıq hərf qalmayıb.',placeFail:'Hərfi yerləşdirmək mümkün olmadı.',image:n=>n+'-ci şəkil'}
+ ru:{sport:'⚽ Спорт',art:'🎨 Искусство',professions:'🧑‍💼 Профессии',travel:'🌍 Путешествия',science:'🔬 Наука',level:n=>'Тематический уровень '+n,textHint:'Текстовая подсказка',tap:'Нажми, чтобы открыть',wrong:'Неверное слово. Попробуй ещё раз.',passed:n=>'Уровень '+n+' пройден!',saved:'Прогресс сохранён отдельно от основной игры.',next:'СЛЕДУЮЩИЙ УРОВЕНЬ',back:'К ТЕМАМ',locked:n=>'Сначала пройди уровень '+n+'.',letter:'Буква открыта.',remove:'Лишние буквы убраны.',shuffle:'Буквы перемешаны.',text:'Подсказка открыта.',allLetters:'Все буквы уже открыты.',noExtra:'Лишних букв не осталось.',placeFail:'Не удалось разместить букву.',image:n=>'Изображение '+n},
+ en:{sport:'⚽ Sport',art:'🎨 Art',professions:'🧑‍💼 Professions',travel:'🌍 Travel',science:'🔬 Science',level:n=>'Themed level '+n,textHint:'Text hint',tap:'Tap to reveal',wrong:'Wrong word. Try again.',passed:n=>'Level '+n+' completed!',saved:'Progress saved separately from the main game.',next:'NEXT LEVEL',back:'BACK TO THEMES',locked:n=>'Complete level '+n+' first.',letter:'Letter revealed.',remove:'Extra letters removed.',shuffle:'Letters shuffled.',text:'Hint revealed.',allLetters:'All letters are already revealed.',noExtra:'No extra letters remain.',placeFail:'Could not place the letter.',image:n=>'Image '+n},
+ az:{sport:'⚽ İdman',art:'🎨 İncəsənət',professions:'🧑‍💼 Peşələr',travel:'🌍 Səyahət',science:'🔬 Elm',level:n=>n+'-ci mövzu səviyyəsi',textHint:'Mətn ipucu',tap:'Açmaq üçün toxun',wrong:'Söz yanlışdır. Yenidən cəhd et.',passed:n=>n+'-ci səviyyə keçildi!',saved:'Tərəqqi əsas oyundan ayrıca saxlanıldı.',next:'NÖVBƏTİ SƏVİYYƏ',back:'MÖVZULARA QAYIT',locked:n=>'Əvvəlcə '+n+'-ci səviyyəni keç.',letter:'Hərf açıldı.',remove:'Artıq hərflər silindi.',shuffle:'Hərflər qarışdırıldı.',text:'İpucu açıldı.',allLetters:'Bütün hərflər artıq açılıb.',noExtra:'Artıq hərf qalmayıb.',placeFail:'Hərfi yerləşdirmək mümkün olmadı.',image:n=>n+'-ci şəkil'}
 };
 const ui=UI[lang]||UI.ru;
 const SETTINGS_UI={
@@ -6593,7 +6593,3015 @@ const TRAVEL_TRANSLATED={
   }
  }
 };
-const THEME_BANKS={sport:[LEVELS,TRANSLATED],art:[ART_LEVELS,ART_TRANSLATED],professions:[PROF_LEVELS,PROF_TRANSLATED],travel:[TRAVEL_LEVELS,TRAVEL_TRANSLATED]};
+const SCIENCE_LEVELS={
+ "1": {
+  "answer": "НАУКА",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "🔬",
+    "🔬"
+   ],
+   [
+    "🧪",
+    "🧪"
+   ],
+   [
+    "📚",
+    "📚"
+   ],
+   [
+    "💡",
+    "💡"
+   ]
+  ]
+ },
+ "2": {
+  "answer": "УЧЕНЫЙ",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "🥼",
+    "🥼"
+   ],
+   [
+    "🔬",
+    "🔬"
+   ],
+   [
+    "📚",
+    "📚"
+   ],
+   [
+    "💡",
+    "💡"
+   ]
+  ]
+ },
+ "3": {
+  "answer": "ЛАБОРАТОРИЯ",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "🧪",
+    "🧪"
+   ],
+   [
+    "🔬",
+    "🔬"
+   ],
+   [
+    "🥼",
+    "🥼"
+   ],
+   [
+    "⚗️",
+    "⚗️"
+   ]
+  ]
+ },
+ "4": {
+  "answer": "ЭКСПЕРИМЕНТ",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "🧪",
+    "🧪"
+   ],
+   [
+    "⚗️",
+    "⚗️"
+   ],
+   [
+    "📋",
+    "📋"
+   ],
+   [
+    "✅",
+    "✅"
+   ]
+  ]
+ },
+ "5": {
+  "answer": "МИКРОСКОП",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "🔬",
+    "🔬"
+   ],
+   [
+    "🦠",
+    "🦠"
+   ],
+   [
+    "🧫",
+    "🧫"
+   ],
+   [
+    "👁️",
+    "👁️"
+   ]
+  ]
+ },
+ "6": {
+  "answer": "ТЕЛЕСКОП",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "🔭",
+    "🔭"
+   ],
+   [
+    "⭐",
+    "⭐"
+   ],
+   [
+    "🌌",
+    "🌌"
+   ],
+   [
+    "🪐",
+    "🪐"
+   ]
+  ]
+ },
+ "7": {
+  "answer": "ПРОБИРКА",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "🧪",
+    "🧪"
+   ],
+   [
+    "⚗️",
+    "⚗️"
+   ],
+   [
+    "💧",
+    "💧"
+   ],
+   [
+    "🥼",
+    "🥼"
+   ]
+  ]
+ },
+ "8": {
+  "answer": "КОЛБА",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "⚗️",
+    "⚗️"
+   ],
+   [
+    "🧪",
+    "🧪"
+   ],
+   [
+    "🔥",
+    "🔥"
+   ],
+   [
+    "💧",
+    "💧"
+   ]
+  ]
+ },
+ "9": {
+  "answer": "РЕАКТИВ",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "🧪",
+    "🧪"
+   ],
+   [
+    "⚗️",
+    "⚗️"
+   ],
+   [
+    "🧴",
+    "🧴"
+   ],
+   [
+    "🔬",
+    "🔬"
+   ]
+  ]
+ },
+ "10": {
+  "answer": "ФОРМУЛА",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "🧮",
+    "🧮"
+   ],
+   [
+    "📐",
+    "📐"
+   ],
+   [
+    "✏️",
+    "✏️"
+   ],
+   [
+    "📘",
+    "📘"
+   ]
+  ]
+ },
+ "11": {
+  "answer": "АТОМ",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "⚛️",
+    "⚛️"
+   ],
+   [
+    "🔬",
+    "🔬"
+   ],
+   [
+    "🧪",
+    "🧪"
+   ],
+   [
+    "✨",
+    "✨"
+   ]
+  ]
+ },
+ "12": {
+  "answer": "МОЛЕКУЛА",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "⚛️",
+    "⚛️"
+   ],
+   [
+    "🔗",
+    "🔗"
+   ],
+   [
+    "🧪",
+    "🧪"
+   ],
+   [
+    "🔬",
+    "🔬"
+   ]
+  ]
+ },
+ "13": {
+  "answer": "ЭЛЕМЕНТ",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "🧪",
+    "🧪"
+   ],
+   [
+    "🔤",
+    "🔤"
+   ],
+   [
+    "⚛️",
+    "⚛️"
+   ],
+   [
+    "📊",
+    "📊"
+   ]
+  ]
+ },
+ "14": {
+  "answer": "ПРОТОН",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "⚛️",
+    "⚛️"
+   ],
+   [
+    "➕",
+    "➕"
+   ],
+   [
+    "🔬",
+    "🔬"
+   ],
+   [
+    "🧪",
+    "🧪"
+   ]
+  ]
+ },
+ "15": {
+  "answer": "НЕЙТРОН",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "⚛️",
+    "⚛️"
+   ],
+   [
+    "0️⃣",
+    "0️⃣"
+   ],
+   [
+    "🔬",
+    "🔬"
+   ],
+   [
+    "🧪",
+    "🧪"
+   ]
+  ]
+ },
+ "16": {
+  "answer": "ЭЛЕКТРОН",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "⚛️",
+    "⚛️"
+   ],
+   [
+    "➖",
+    "➖"
+   ],
+   [
+    "⚡",
+    "⚡"
+   ],
+   [
+    "🔬",
+    "🔬"
+   ]
+  ]
+ },
+ "17": {
+  "answer": "ИОН",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "⚛️",
+    "⚛️"
+   ],
+   [
+    "⚡",
+    "⚡"
+   ],
+   [
+    "➕",
+    "➕"
+   ],
+   [
+    "➖",
+    "➖"
+   ]
+  ]
+ },
+ "18": {
+  "answer": "ЯДРО",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "⚛️",
+    "⚛️"
+   ],
+   [
+    "🎯",
+    "🎯"
+   ],
+   [
+    "🔬",
+    "🔬"
+   ],
+   [
+    "🧪",
+    "🧪"
+   ]
+  ]
+ },
+ "19": {
+  "answer": "КРИСТАЛЛ",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "💎",
+    "💎"
+   ],
+   [
+    "🔬",
+    "🔬"
+   ],
+   [
+    "✨",
+    "✨"
+   ],
+   [
+    "🧊",
+    "🧊"
+   ]
+  ]
+ },
+ "20": {
+  "answer": "РАСТВОР",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "🧪",
+    "🧪"
+   ],
+   [
+    "💧",
+    "💧"
+   ],
+   [
+    "⚗️",
+    "⚗️"
+   ],
+   [
+    "🥄",
+    "🥄"
+   ]
+  ]
+ },
+ "21": {
+  "answer": "КИСЛОТА",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "🧪",
+    "🧪"
+   ],
+   [
+    "⚠️",
+    "⚠️"
+   ],
+   [
+    "💧",
+    "💧"
+   ],
+   [
+    "⚗️",
+    "⚗️"
+   ]
+  ]
+ },
+ "22": {
+  "answer": "ЩЕЛОЧЬ",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "🧪",
+    "🧪"
+   ],
+   [
+    "🧼",
+    "🧼"
+   ],
+   [
+    "⚗️",
+    "⚗️"
+   ],
+   [
+    "📊",
+    "📊"
+   ]
+  ]
+ },
+ "23": {
+  "answer": "ГАЗ",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "💨",
+    "💨"
+   ],
+   [
+    "🧪",
+    "🧪"
+   ],
+   [
+    "☁️",
+    "☁️"
+   ],
+   [
+    "🎈",
+    "🎈"
+   ]
+  ]
+ },
+ "24": {
+  "answer": "ЖИДКОСТЬ",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "💧",
+    "💧"
+   ],
+   [
+    "🧪",
+    "🧪"
+   ],
+   [
+    "🥤",
+    "🥤"
+   ],
+   [
+    "🌊",
+    "🌊"
+   ]
+  ]
+ },
+ "25": {
+  "answer": "ВЕЩЕСТВО",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "🧪",
+    "🧪"
+   ],
+   [
+    "⚛️",
+    "⚛️"
+   ],
+   [
+    "🧊",
+    "🧊"
+   ],
+   [
+    "💨",
+    "💨"
+   ]
+  ]
+ },
+ "26": {
+  "answer": "ТЕМПЕРАТУРА",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "🌡️",
+    "🌡️"
+   ],
+   [
+    "🔥",
+    "🔥"
+   ],
+   [
+    "❄️",
+    "❄️"
+   ],
+   [
+    "📈",
+    "📈"
+   ]
+  ]
+ },
+ "27": {
+  "answer": "ДАВЛЕНИЕ",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "📊",
+    "📊"
+   ],
+   [
+    "🌬️",
+    "🌬️"
+   ],
+   [
+    "🧪",
+    "🧪"
+   ],
+   [
+    "⬇️",
+    "⬇️"
+   ]
+  ]
+ },
+ "28": {
+  "answer": "СКОРОСТЬ",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "🏎️",
+    "🏎️"
+   ],
+   [
+    "⏱️",
+    "⏱️"
+   ],
+   [
+    "➡️",
+    "➡️"
+   ],
+   [
+    "📈",
+    "📈"
+   ]
+  ]
+ },
+ "29": {
+  "answer": "СИЛА",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "💪",
+    "💪"
+   ],
+   [
+    "➡️",
+    "➡️"
+   ],
+   [
+    "⚙️",
+    "⚙️"
+   ],
+   [
+    "📐",
+    "📐"
+   ]
+  ]
+ },
+ "30": {
+  "answer": "РАБОТА",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "⚙️",
+    "⚙️"
+   ],
+   [
+    "📐",
+    "📐"
+   ],
+   [
+    "➡️",
+    "➡️"
+   ],
+   [
+    "🔋",
+    "🔋"
+   ]
+  ]
+ },
+ "31": {
+  "answer": "МОЩНОСТЬ",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "⚡",
+    "⚡"
+   ],
+   [
+    "🔋",
+    "🔋"
+   ],
+   [
+    "📈",
+    "📈"
+   ],
+   [
+    "⚙️",
+    "⚙️"
+   ]
+  ]
+ },
+ "32": {
+  "answer": "ЭНЕРГИЯ",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "⚡",
+    "⚡"
+   ],
+   [
+    "🔋",
+    "🔋"
+   ],
+   [
+    "☀️",
+    "☀️"
+   ],
+   [
+    "🔥",
+    "🔥"
+   ]
+  ]
+ },
+ "33": {
+  "answer": "ИМПУЛЬС",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "➡️",
+    "➡️"
+   ],
+   [
+    "⚽",
+    "⚽"
+   ],
+   [
+    "📐",
+    "📐"
+   ],
+   [
+    "💨",
+    "💨"
+   ]
+  ]
+ },
+ "34": {
+  "answer": "ТРЕНИЕ",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "🛞",
+    "🛞"
+   ],
+   [
+    "🧱",
+    "🧱"
+   ],
+   [
+    "🔥",
+    "🔥"
+   ],
+   [
+    "✋",
+    "✋"
+   ]
+  ]
+ },
+ "35": {
+  "answer": "ИНЕРЦИЯ",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "🚗",
+    "🚗"
+   ],
+   [
+    "➡️",
+    "➡️"
+   ],
+   [
+    "🧍",
+    "🧍"
+   ],
+   [
+    "⚙️",
+    "⚙️"
+   ]
+  ]
+ },
+ "36": {
+  "answer": "ГРАВИТАЦИЯ",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "🌍",
+    "🌍"
+   ],
+   [
+    "⬇️",
+    "⬇️"
+   ],
+   [
+    "🍎",
+    "🍎"
+   ],
+   [
+    "🪐",
+    "🪐"
+   ]
+  ]
+ },
+ "37": {
+  "answer": "ВОЛНА",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "🌊",
+    "🌊"
+   ],
+   [
+    "〰️",
+    "〰️"
+   ],
+   [
+    "📡",
+    "📡"
+   ],
+   [
+    "🎵",
+    "🎵"
+   ]
+  ]
+ },
+ "38": {
+  "answer": "ЗВУК",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "🔊",
+    "🔊"
+   ],
+   [
+    "🎵",
+    "🎵"
+   ],
+   [
+    "👂",
+    "👂"
+   ],
+   [
+    "〰️",
+    "〰️"
+   ]
+  ]
+ },
+ "39": {
+  "answer": "СВЕТ",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "💡",
+    "💡"
+   ],
+   [
+    "☀️",
+    "☀️"
+   ],
+   [
+    "🌈",
+    "🌈"
+   ],
+   [
+    "👁️",
+    "👁️"
+   ]
+  ]
+ },
+ "40": {
+  "answer": "ОПТИКА",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "👓",
+    "👓"
+   ],
+   [
+    "🔭",
+    "🔭"
+   ],
+   [
+    "🔬",
+    "🔬"
+   ],
+   [
+    "💡",
+    "💡"
+   ]
+  ]
+ },
+ "41": {
+  "answer": "ЛИНЗА",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "🔍",
+    "🔍"
+   ],
+   [
+    "👓",
+    "👓"
+   ],
+   [
+    "📷",
+    "📷"
+   ],
+   [
+    "🔭",
+    "🔭"
+   ]
+  ]
+ },
+ "42": {
+  "answer": "СПЕКТР",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "🌈",
+    "🌈"
+   ],
+   [
+    "📊",
+    "📊"
+   ],
+   [
+    "💡",
+    "💡"
+   ],
+   [
+    "🔬",
+    "🔬"
+   ]
+  ]
+ },
+ "43": {
+  "answer": "ЛАЗЕР",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "🔴",
+    "🔴"
+   ],
+   [
+    "💡",
+    "💡"
+   ],
+   [
+    "🔬",
+    "🔬"
+   ],
+   [
+    "📏",
+    "📏"
+   ]
+  ]
+ },
+ "44": {
+  "answer": "МАГНИТ",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "🧲",
+    "🧲"
+   ],
+   [
+    "📎",
+    "📎"
+   ],
+   [
+    "🧭",
+    "🧭"
+   ],
+   [
+    "⚙️",
+    "⚙️"
+   ]
+  ]
+ },
+ "45": {
+  "answer": "ТОК",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "⚡",
+    "⚡"
+   ],
+   [
+    "🔌",
+    "🔌"
+   ],
+   [
+    "💡",
+    "💡"
+   ],
+   [
+    "🔋",
+    "🔋"
+   ]
+  ]
+ },
+ "46": {
+  "answer": "НАПРЯЖЕНИЕ",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "⚡",
+    "⚡"
+   ],
+   [
+    "🔌",
+    "🔌"
+   ],
+   [
+    "📈",
+    "📈"
+   ],
+   [
+    "🔋",
+    "🔋"
+   ]
+  ]
+ },
+ "47": {
+  "answer": "ЗАРЯД",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "⚡",
+    "⚡"
+   ],
+   [
+    "➕",
+    "➕"
+   ],
+   [
+    "➖",
+    "➖"
+   ],
+   [
+    "🔋",
+    "🔋"
+   ]
+  ]
+ },
+ "48": {
+  "answer": "ПОЛЕ",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "🧲",
+    "🧲"
+   ],
+   [
+    "🌐",
+    "🌐"
+   ],
+   [
+    "⚡",
+    "⚡"
+   ],
+   [
+    "📐",
+    "📐"
+   ]
+  ]
+ },
+ "49": {
+  "answer": "ЧАСТИЦА",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "⚛️",
+    "⚛️"
+   ],
+   [
+    "✨",
+    "✨"
+   ],
+   [
+    "🔬",
+    "🔬"
+   ],
+   [
+    "🧪",
+    "🧪"
+   ]
+  ]
+ },
+ "50": {
+  "answer": "КВАНТ",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "⚛️",
+    "⚛️"
+   ],
+   [
+    "✨",
+    "✨"
+   ],
+   [
+    "📐",
+    "📐"
+   ],
+   [
+    "🔬",
+    "🔬"
+   ]
+  ]
+ },
+ "51": {
+  "answer": "КЛЕТКА",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "🔬",
+    "🔬"
+   ],
+   [
+    "🧬",
+    "🧬"
+   ],
+   [
+    "🦠",
+    "🦠"
+   ],
+   [
+    "🌱",
+    "🌱"
+   ]
+  ]
+ },
+ "52": {
+  "answer": "ТКАНЬ",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "🧬",
+    "🧬"
+   ],
+   [
+    "🔬",
+    "🔬"
+   ],
+   [
+    "🫀",
+    "🫀"
+   ],
+   [
+    "🧫",
+    "🧫"
+   ]
+  ]
+ },
+ "53": {
+  "answer": "ОРГАН",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "🫀",
+    "🫀"
+   ],
+   [
+    "🧠",
+    "🧠"
+   ],
+   [
+    "🫁",
+    "🫁"
+   ],
+   [
+    "🧬",
+    "🧬"
+   ]
+  ]
+ },
+ "54": {
+  "answer": "ГЕН",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "🧬",
+    "🧬"
+   ],
+   [
+    "👨‍👩‍👧",
+    "👨‍👩‍👧"
+   ],
+   [
+    "🔬",
+    "🔬"
+   ],
+   [
+    "📘",
+    "📘"
+   ]
+  ]
+ },
+ "55": {
+  "answer": "ДНК",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "🧬",
+    "🧬"
+   ],
+   [
+    "🔬",
+    "🔬"
+   ],
+   [
+    "👨‍👩‍👧",
+    "👨‍👩‍👧"
+   ],
+   [
+    "🧪",
+    "🧪"
+   ]
+  ]
+ },
+ "56": {
+  "answer": "ХРОМОСОМА",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "🧬",
+    "🧬"
+   ],
+   [
+    "🔬",
+    "🔬"
+   ],
+   [
+    "🧪",
+    "🧪"
+   ],
+   [
+    "📊",
+    "📊"
+   ]
+  ]
+ },
+ "57": {
+  "answer": "БЕЛОК",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "🥚",
+    "🥚"
+   ],
+   [
+    "🧬",
+    "🧬"
+   ],
+   [
+    "🔬",
+    "🔬"
+   ],
+   [
+    "💪",
+    "💪"
+   ]
+  ]
+ },
+ "58": {
+  "answer": "ФЕРМЕНТ",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "🧪",
+    "🧪"
+   ],
+   [
+    "⚗️",
+    "⚗️"
+   ],
+   [
+    "🔬",
+    "🔬"
+   ],
+   [
+    "🍽️",
+    "🍽️"
+   ]
+  ]
+ },
+ "59": {
+  "answer": "БАКТЕРИЯ",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "🦠",
+    "🦠"
+   ],
+   [
+    "🔬",
+    "🔬"
+   ],
+   [
+    "🧫",
+    "🧫"
+   ],
+   [
+    "🧪",
+    "🧪"
+   ]
+  ]
+ },
+ "60": {
+  "answer": "ВИРУС",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "🦠",
+    "🦠"
+   ],
+   [
+    "🔬",
+    "🔬"
+   ],
+   [
+    "🧬",
+    "🧬"
+   ],
+   [
+    "😷",
+    "😷"
+   ]
+  ]
+ },
+ "61": {
+  "answer": "МИКРОБ",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "🦠",
+    "🦠"
+   ],
+   [
+    "🔬",
+    "🔬"
+   ],
+   [
+    "🧫",
+    "🧫"
+   ],
+   [
+    "👀",
+    "👀"
+   ]
+  ]
+ },
+ "62": {
+  "answer": "ИММУНИТЕТ",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "🛡️",
+    "🛡️"
+   ],
+   [
+    "🦠",
+    "🦠"
+   ],
+   [
+    "💉",
+    "💉"
+   ],
+   [
+    "🧬",
+    "🧬"
+   ]
+  ]
+ },
+ "63": {
+  "answer": "ЭВОЛЮЦИЯ",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "🐒",
+    "🐒"
+   ],
+   [
+    "🧬",
+    "🧬"
+   ],
+   [
+    "🌳",
+    "🌳"
+   ],
+   [
+    "⏳",
+    "⏳"
+   ]
+  ]
+ },
+ "64": {
+  "answer": "МУТАЦИЯ",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "🧬",
+    "🧬"
+   ],
+   [
+    "⚡",
+    "⚡"
+   ],
+   [
+    "🔬",
+    "🔬"
+   ],
+   [
+    "🔄",
+    "🔄"
+   ]
+  ]
+ },
+ "65": {
+  "answer": "ВИД",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "🐾",
+    "🐾"
+   ],
+   [
+    "🌱",
+    "🌱"
+   ],
+   [
+    "🧬",
+    "🧬"
+   ],
+   [
+    "📚",
+    "📚"
+   ]
+  ]
+ },
+ "66": {
+  "answer": "ПОПУЛЯЦИЯ",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "👥",
+    "👥"
+   ],
+   [
+    "🐾",
+    "🐾"
+   ],
+   [
+    "🌍",
+    "🌍"
+   ],
+   [
+    "📊",
+    "📊"
+   ]
+  ]
+ },
+ "67": {
+  "answer": "ЭКОСИСТЕМА",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "🌳",
+    "🌳"
+   ],
+   [
+    "🐦",
+    "🐦"
+   ],
+   [
+    "💧",
+    "💧"
+   ],
+   [
+    "🌱",
+    "🌱"
+   ]
+  ]
+ },
+ "68": {
+  "answer": "БИОСФЕРА",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "🌍",
+    "🌍"
+   ],
+   [
+    "🌱",
+    "🌱"
+   ],
+   [
+    "🐋",
+    "🐋"
+   ],
+   [
+    "🌳",
+    "🌳"
+   ]
+  ]
+ },
+ "69": {
+  "answer": "ФОТОСИНТЕЗ",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "🌿",
+    "🌿"
+   ],
+   [
+    "☀️",
+    "☀️"
+   ],
+   [
+    "💧",
+    "💧"
+   ],
+   [
+    "🌬️",
+    "🌬️"
+   ]
+  ]
+ },
+ "70": {
+  "answer": "ХЛОРОФИЛЛ",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "🌿",
+    "🌿"
+   ],
+   [
+    "🟢",
+    "🟢"
+   ],
+   [
+    "☀️",
+    "☀️"
+   ],
+   [
+    "🔬",
+    "🔬"
+   ]
+  ]
+ },
+ "71": {
+  "answer": "МИНЕРАЛ",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "💎",
+    "💎"
+   ],
+   [
+    "🪨",
+    "🪨"
+   ],
+   [
+    "⛏️",
+    "⛏️"
+   ],
+   [
+    "🔬",
+    "🔬"
+   ]
+  ]
+ },
+ "72": {
+  "answer": "ПОРОДА",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "🪨",
+    "🪨"
+   ],
+   [
+    "⛰️",
+    "⛰️"
+   ],
+   [
+    "⛏️",
+    "⛏️"
+   ],
+   [
+    "🔬",
+    "🔬"
+   ]
+  ]
+ },
+ "73": {
+  "answer": "МАГМА",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "🌋",
+    "🌋"
+   ],
+   [
+    "🔥",
+    "🔥"
+   ],
+   [
+    "🪨",
+    "🪨"
+   ],
+   [
+    "🌍",
+    "🌍"
+   ]
+  ]
+ },
+ "74": {
+  "answer": "ВУЛКАН",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "🌋",
+    "🌋"
+   ],
+   [
+    "🔥",
+    "🔥"
+   ],
+   [
+    "🌫️",
+    "🌫️"
+   ],
+   [
+    "🪨",
+    "🪨"
+   ]
+  ]
+ },
+ "75": {
+  "answer": "СЕЙСМОГРАФ",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "📈",
+    "📈"
+   ],
+   [
+    "🌍",
+    "🌍"
+   ],
+   [
+    "⚡",
+    "⚡"
+   ],
+   [
+    "🏚️",
+    "🏚️"
+   ]
+  ]
+ },
+ "76": {
+  "answer": "ЗЕМЛЕТРЯСЕНИЕ",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "🌍",
+    "🌍"
+   ],
+   [
+    "🏚️",
+    "🏚️"
+   ],
+   [
+    "⚡",
+    "⚡"
+   ],
+   [
+    "📈",
+    "📈"
+   ]
+  ]
+ },
+ "77": {
+  "answer": "ЭРОЗИЯ",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "🌊",
+    "🌊"
+   ],
+   [
+    "🪨",
+    "🪨"
+   ],
+   [
+    "💨",
+    "💨"
+   ],
+   [
+    "⏳",
+    "⏳"
+   ]
+  ]
+ },
+ "78": {
+  "answer": "КЛИМАТ",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "☀️",
+    "☀️"
+   ],
+   [
+    "🌧️",
+    "🌧️"
+   ],
+   [
+    "❄️",
+    "❄️"
+   ],
+   [
+    "🌬️",
+    "🌬️"
+   ]
+  ]
+ },
+ "79": {
+  "answer": "АТМОСФЕРА",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "🌍",
+    "🌍"
+   ],
+   [
+    "☁️",
+    "☁️"
+   ],
+   [
+    "🌬️",
+    "🌬️"
+   ],
+   [
+    "🌌",
+    "🌌"
+   ]
+  ]
+ },
+ "80": {
+  "answer": "ОЗОН",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "🌍",
+    "🌍"
+   ],
+   [
+    "☀️",
+    "☀️"
+   ],
+   [
+    "🛡️",
+    "🛡️"
+   ],
+   [
+    "🌤️",
+    "🌤️"
+   ]
+  ]
+ },
+ "81": {
+  "answer": "ПЛАНЕТА",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "🪐",
+    "🪐"
+   ],
+   [
+    "🌍",
+    "🌍"
+   ],
+   [
+    "🌌",
+    "🌌"
+   ],
+   [
+    "🔭",
+    "🔭"
+   ]
+  ]
+ },
+ "82": {
+  "answer": "ЗВЕЗДА",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "⭐",
+    "⭐"
+   ],
+   [
+    "🌌",
+    "🌌"
+   ],
+   [
+    "🔭",
+    "🔭"
+   ],
+   [
+    "☀️",
+    "☀️"
+   ]
+  ]
+ },
+ "83": {
+  "answer": "ГАЛАКТИКА",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "🌌",
+    "🌌"
+   ],
+   [
+    "⭐",
+    "⭐"
+   ],
+   [
+    "🌀",
+    "🌀"
+   ],
+   [
+    "🔭",
+    "🔭"
+   ]
+  ]
+ },
+ "84": {
+  "answer": "ТУМАННОСТЬ",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "🌌",
+    "🌌"
+   ],
+   [
+    "☁️",
+    "☁️"
+   ],
+   [
+    "✨",
+    "✨"
+   ],
+   [
+    "🔭",
+    "🔭"
+   ]
+  ]
+ },
+ "85": {
+  "answer": "КОМЕТА",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "☄️",
+    "☄️"
+   ],
+   [
+    "🌌",
+    "🌌"
+   ],
+   [
+    "⭐",
+    "⭐"
+   ],
+   [
+    "🔭",
+    "🔭"
+   ]
+  ]
+ },
+ "86": {
+  "answer": "АСТЕРОИД",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "🪨",
+    "🪨"
+   ],
+   [
+    "🌌",
+    "🌌"
+   ],
+   [
+    "☄️",
+    "☄️"
+   ],
+   [
+    "🔭",
+    "🔭"
+   ]
+  ]
+ },
+ "87": {
+  "answer": "МЕТЕОР",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "☄️",
+    "☄️"
+   ],
+   [
+    "🔥",
+    "🔥"
+   ],
+   [
+    "🌌",
+    "🌌"
+   ],
+   [
+    "✨",
+    "✨"
+   ]
+  ]
+ },
+ "88": {
+  "answer": "ОРБИТА",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "🪐",
+    "🪐"
+   ],
+   [
+    "⭕",
+    "⭕"
+   ],
+   [
+    "🌍",
+    "🌍"
+   ],
+   [
+    "🛰️",
+    "🛰️"
+   ]
+  ]
+ },
+ "89": {
+  "answer": "СПУТНИК",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "🛰️",
+    "🛰️"
+   ],
+   [
+    "🌍",
+    "🌍"
+   ],
+   [
+    "📡",
+    "📡"
+   ],
+   [
+    "🌌",
+    "🌌"
+   ]
+  ]
+ },
+ "90": {
+  "answer": "КОСМОС",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "🌌",
+    "🌌"
+   ],
+   [
+    "🚀",
+    "🚀"
+   ],
+   [
+    "⭐",
+    "⭐"
+   ],
+   [
+    "🪐",
+    "🪐"
+   ]
+  ]
+ },
+ "91": {
+  "answer": "МАТЕМАТИКА",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "➗",
+    "➗"
+   ],
+   [
+    "📐",
+    "📐"
+   ],
+   [
+    "🧮",
+    "🧮"
+   ],
+   [
+    "📊",
+    "📊"
+   ]
+  ]
+ },
+ "92": {
+  "answer": "ЧИСЛО",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "🔢",
+    "🔢"
+   ],
+   [
+    "🧮",
+    "🧮"
+   ],
+   [
+    "📊",
+    "📊"
+   ],
+   [
+    "✏️",
+    "✏️"
+   ]
+  ]
+ },
+ "93": {
+  "answer": "ГРАФИК",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "📈",
+    "📈"
+   ],
+   [
+    "📊",
+    "📊"
+   ],
+   [
+    "📉",
+    "📉"
+   ],
+   [
+    "🧮",
+    "🧮"
+   ]
+  ]
+ },
+ "94": {
+  "answer": "УРАВНЕНИЕ",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "🧮",
+    "🧮"
+   ],
+   [
+    "=",
+    "="
+   ],
+   [
+    "✏️",
+    "✏️"
+   ],
+   [
+    "📐",
+    "📐"
+   ]
+  ]
+ },
+ "95": {
+  "answer": "ВЕРОЯТНОСТЬ",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "🎲",
+    "🎲"
+   ],
+   [
+    "📊",
+    "📊"
+   ],
+   [
+    "❓",
+    "❓"
+   ],
+   [
+    "🧮",
+    "🧮"
+   ]
+  ]
+ },
+ "96": {
+  "answer": "СТАТИСТИКА",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "📊",
+    "📊"
+   ],
+   [
+    "📈",
+    "📈"
+   ],
+   [
+    "🔢",
+    "🔢"
+   ],
+   [
+    "🧮",
+    "🧮"
+   ]
+  ]
+ },
+ "97": {
+  "answer": "ГИПОТЕЗА",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "💭",
+    "💭"
+   ],
+   [
+    "🔬",
+    "🔬"
+   ],
+   [
+    "❓",
+    "❓"
+   ],
+   [
+    "📝",
+    "📝"
+   ]
+  ]
+ },
+ "98": {
+  "answer": "ТЕОРИЯ",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "📚",
+    "📚"
+   ],
+   [
+    "💡",
+    "💡"
+   ],
+   [
+    "🔬",
+    "🔬"
+   ],
+   [
+    "🧠",
+    "🧠"
+   ]
+  ]
+ },
+ "99": {
+  "answer": "ДАННЫЕ",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "💾",
+    "💾"
+   ],
+   [
+    "📊",
+    "📊"
+   ],
+   [
+    "🔢",
+    "🔢"
+   ],
+   [
+    "💻",
+    "💻"
+   ]
+  ]
+ },
+ "100": {
+  "answer": "ОТКРЫТИЕ",
+  "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
+  "photos": [
+   [
+    "💡",
+    "💡"
+   ],
+   [
+    "🔬",
+    "🔬"
+   ],
+   [
+    "🎉",
+    "🎉"
+   ],
+   [
+    "📚",
+    "📚"
+   ]
+  ]
+ }
+};
+const SCIENCE_TRANSLATED={
+ "en": {
+  "1": {
+   "answer": "SCIENCE",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "2": {
+   "answer": "SCIENTIST",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "3": {
+   "answer": "LABORATORY",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "4": {
+   "answer": "EXPERIMENT",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "5": {
+   "answer": "MICROSCOPE",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "6": {
+   "answer": "TELESCOPE",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "7": {
+   "answer": "TESTTUBE",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "8": {
+   "answer": "FLASK",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "9": {
+   "answer": "REAGENT",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "10": {
+   "answer": "FORMULA",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "11": {
+   "answer": "ATOM",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "12": {
+   "answer": "MOLECULE",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "13": {
+   "answer": "ELEMENT",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "14": {
+   "answer": "PROTON",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "15": {
+   "answer": "NEUTRON",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "16": {
+   "answer": "ELECTRON",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "17": {
+   "answer": "ION",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "18": {
+   "answer": "NUCLEUS",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "19": {
+   "answer": "CRYSTAL",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "20": {
+   "answer": "SOLUTION",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "21": {
+   "answer": "ACID",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "22": {
+   "answer": "ALKALI",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "23": {
+   "answer": "GAS",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "24": {
+   "answer": "LIQUID",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "25": {
+   "answer": "MATTER",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "26": {
+   "answer": "TEMPERATURE",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "27": {
+   "answer": "PRESSURE",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "28": {
+   "answer": "SPEED",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "29": {
+   "answer": "FORCE",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "30": {
+   "answer": "WORK",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "31": {
+   "answer": "POWER",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "32": {
+   "answer": "ENERGY",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "33": {
+   "answer": "MOMENTUM",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "34": {
+   "answer": "FRICTION",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "35": {
+   "answer": "INERTIA",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "36": {
+   "answer": "GRAVITY",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "37": {
+   "answer": "WAVE",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "38": {
+   "answer": "SOUND",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "39": {
+   "answer": "LIGHT",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "40": {
+   "answer": "OPTICS",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "41": {
+   "answer": "LENS",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "42": {
+   "answer": "SPECTRUM",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "43": {
+   "answer": "LASER",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "44": {
+   "answer": "MAGNET",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "45": {
+   "answer": "CURRENT",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "46": {
+   "answer": "VOLTAGE",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "47": {
+   "answer": "CHARGE",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "48": {
+   "answer": "FIELD",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "49": {
+   "answer": "PARTICLE",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "50": {
+   "answer": "QUANTUM",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "51": {
+   "answer": "CELL",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "52": {
+   "answer": "TISSUE",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "53": {
+   "answer": "ORGAN",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "54": {
+   "answer": "GENE",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "55": {
+   "answer": "DNA",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "56": {
+   "answer": "CHROMOSOME",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "57": {
+   "answer": "PROTEIN",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "58": {
+   "answer": "ENZYME",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "59": {
+   "answer": "BACTERIA",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "60": {
+   "answer": "VIRUS",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "61": {
+   "answer": "MICROBE",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "62": {
+   "answer": "IMMUNITY",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "63": {
+   "answer": "EVOLUTION",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "64": {
+   "answer": "MUTATION",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "65": {
+   "answer": "SPECIES",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "66": {
+   "answer": "POPULATION",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "67": {
+   "answer": "ECOSYSTEM",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "68": {
+   "answer": "BIOSPHERE",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "69": {
+   "answer": "PHOTOSYNTHESIS",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "70": {
+   "answer": "CHLOROPHYLL",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "71": {
+   "answer": "MINERAL",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "72": {
+   "answer": "ROCK",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "73": {
+   "answer": "MAGMA",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "74": {
+   "answer": "VOLCANO",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "75": {
+   "answer": "SEISMOGRAPH",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "76": {
+   "answer": "EARTHQUAKE",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "77": {
+   "answer": "EROSION",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "78": {
+   "answer": "CLIMATE",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "79": {
+   "answer": "ATMOSPHERE",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "80": {
+   "answer": "OZONE",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "81": {
+   "answer": "PLANET",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "82": {
+   "answer": "STAR",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "83": {
+   "answer": "GALAXY",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "84": {
+   "answer": "NEBULA",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "85": {
+   "answer": "COMET",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "86": {
+   "answer": "ASTEROID",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "87": {
+   "answer": "METEOR",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "88": {
+   "answer": "ORBIT",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "89": {
+   "answer": "SATELLITE",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "90": {
+   "answer": "SPACE",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "91": {
+   "answer": "MATHEMATICS",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "92": {
+   "answer": "NUMBER",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "93": {
+   "answer": "GRAPH",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "94": {
+   "answer": "EQUATION",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "95": {
+   "answer": "PROBABILITY",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "96": {
+   "answer": "STATISTICS",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "97": {
+   "answer": "HYPOTHESIS",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "98": {
+   "answer": "THEORY",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "99": {
+   "answer": "DATA",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  },
+  "100": {
+   "answer": "DISCOVERY",
+   "hint": "A concept, object, or tool connected with science and understanding the world."
+  }
+ },
+ "az": {
+  "1": {
+   "answer": "ELM",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "2": {
+   "answer": "ALİM",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "3": {
+   "answer": "LABORATORİYA",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "4": {
+   "answer": "TƏCRÜBƏ",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "5": {
+   "answer": "MİKROSKOP",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "6": {
+   "answer": "TELESKOP",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "7": {
+   "answer": "SINAQŞÜŞƏSİ",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "8": {
+   "answer": "KOLBA",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "9": {
+   "answer": "REAKTİV",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "10": {
+   "answer": "FORMUL",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "11": {
+   "answer": "ATOM",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "12": {
+   "answer": "MOLEKUL",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "13": {
+   "answer": "ELEMENT",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "14": {
+   "answer": "PROTON",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "15": {
+   "answer": "NEYTRON",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "16": {
+   "answer": "ELEKTRON",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "17": {
+   "answer": "İON",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "18": {
+   "answer": "NÜVƏ",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "19": {
+   "answer": "KRİSTAL",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "20": {
+   "answer": "MƏHLUL",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "21": {
+   "answer": "TURŞU",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "22": {
+   "answer": "QƏLƏVİ",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "23": {
+   "answer": "QAZ",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "24": {
+   "answer": "MAYE",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "25": {
+   "answer": "MADDƏ",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "26": {
+   "answer": "TEMPERATUR",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "27": {
+   "answer": "TƏZYİQ",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "28": {
+   "answer": "SÜRƏT",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "29": {
+   "answer": "QÜVVƏ",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "30": {
+   "answer": "İŞ",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "31": {
+   "answer": "GÜC",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "32": {
+   "answer": "ENERJİ",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "33": {
+   "answer": "İMPULS",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "34": {
+   "answer": "SÜRTÜNMƏ",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "35": {
+   "answer": "ƏTALƏT",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "36": {
+   "answer": "CAZİBƏ",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "37": {
+   "answer": "DALĞA",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "38": {
+   "answer": "SƏS",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "39": {
+   "answer": "İŞIQ",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "40": {
+   "answer": "OPTİKA",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "41": {
+   "answer": "LİNZA",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "42": {
+   "answer": "SPEKTR",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "43": {
+   "answer": "LAZER",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "44": {
+   "answer": "MAQNİT",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "45": {
+   "answer": "CƏRƏYAN",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "46": {
+   "answer": "GƏRGİNLİK",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "47": {
+   "answer": "YÜK",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "48": {
+   "answer": "SAHƏ",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "49": {
+   "answer": "ZƏRRƏCİK",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "50": {
+   "answer": "KVANT",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "51": {
+   "answer": "HÜCEYRƏ",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "52": {
+   "answer": "TOXUMA",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "53": {
+   "answer": "ORQAN",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "54": {
+   "answer": "GEN",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "55": {
+   "answer": "DNT",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "56": {
+   "answer": "XROMOSOM",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "57": {
+   "answer": "ZÜLAL",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "58": {
+   "answer": "FERMENT",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "59": {
+   "answer": "BAKTERİYA",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "60": {
+   "answer": "VİRUS",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "61": {
+   "answer": "MİKROB",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "62": {
+   "answer": "İMMUNİTET",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "63": {
+   "answer": "TƏKAMÜL",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "64": {
+   "answer": "MUTASİYA",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "65": {
+   "answer": "NÖV",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "66": {
+   "answer": "POPULYASİYA",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "67": {
+   "answer": "EKOSİSTEM",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "68": {
+   "answer": "BİOSFER",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "69": {
+   "answer": "FOTOSİNTEZ",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "70": {
+   "answer": "XLOROFİL",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "71": {
+   "answer": "MİNERAL",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "72": {
+   "answer": "SÜXUR",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "73": {
+   "answer": "MAQMA",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "74": {
+   "answer": "VULKAN",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "75": {
+   "answer": "SEYSMOQRAF",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "76": {
+   "answer": "ZƏLZƏLƏ",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "77": {
+   "answer": "EROZİYA",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "78": {
+   "answer": "İQLİM",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "79": {
+   "answer": "ATMOSFER",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "80": {
+   "answer": "OZON",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "81": {
+   "answer": "PLANET",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "82": {
+   "answer": "ULDUZ",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "83": {
+   "answer": "QALAKTİKA",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "84": {
+   "answer": "DUMANLIQ",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "85": {
+   "answer": "KOMETA",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "86": {
+   "answer": "ASTEROİD",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "87": {
+   "answer": "METEOR",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "88": {
+   "answer": "ORBİT",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "89": {
+   "answer": "PEYK",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "90": {
+   "answer": "KOSMOS",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "91": {
+   "answer": "RİYAZİYYAT",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "92": {
+   "answer": "ƏDƏD",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "93": {
+   "answer": "QRAFİK",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "94": {
+   "answer": "TƏNLİK",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "95": {
+   "answer": "EHTİMAL",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "96": {
+   "answer": "STATİSTİKA",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "97": {
+   "answer": "FƏRZİYYƏ",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "98": {
+   "answer": "NƏZƏRİYYƏ",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "99": {
+   "answer": "MƏLUMAT",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  },
+  "100": {
+   "answer": "KƏŞF",
+   "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
+  }
+ }
+};
+const THEME_BANKS={sport:[LEVELS,TRANSLATED],art:[ART_LEVELS,ART_TRANSLATED],professions:[PROF_LEVELS,PROF_TRANSLATED],travel:[TRAVEL_LEVELS,TRAVEL_TRANSLATED],science:[SCIENCE_LEVELS,SCIENCE_TRANSLATED]};
 const [ACTIVE_LEVELS,ACTIVE_TRANSLATED]=THEME_BANKS[themeId]||THEME_BANKS.sport;
 if(ACTIVE_TRANSLATED[lang])Object.keys(ACTIVE_LEVELS).forEach(k=>Object.assign(ACTIVE_LEVELS[k],ACTIVE_TRANSLATED[lang][k]));
 
