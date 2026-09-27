@@ -4,7 +4,7 @@ from pathlib import Path
 from playwright.sync_api import sync_playwright, expect
 
 BASE='https://firstgame001-star.github.io/Photoword2026/'
-RELEASE='20260927-r42'
+RELEASE='20260927-r43'
 OUT=Path('test-results'); OUT.mkdir(exist_ok=True)
 
 for attempt in range(48):
@@ -167,6 +167,15 @@ with sync_playwright() as pw:
       page.evaluate("localStorage.setItem('pw.themeProgress.sport',JSON.stringify(Array.from({length:49},(_,i)=>i+1)))")
       page.goto(BASE+'clean/theme-game.html?theme=sport&level=50#'+fragment,wait_until='domcontentloaded',timeout=45000)
       answer50={'ru':'СЕКУНДОМЕР','en':'STOPWATCH','az':'SANİYƏÖLÇƏN'}[language];tap_word(page,answer50);expect(page.locator('#successPanel')).to_be_visible()
+      page.evaluate("localStorage.setItem('pw.themeProgress.sport',JSON.stringify(Array.from({length:50},(_,i)=>i+1)))")
+      page.goto(BASE+'clean/theme-game.html?theme=sport&level=51#'+fragment,wait_until='domcontentloaded',timeout=45000)
+      answer51={'ru':'ФУТБОЛ','en':'FOOTBALL','az':'FUTBOL'}[language];tap_word(page,answer51);expect(page.locator('#successPanel')).to_be_visible()
+      page.evaluate("localStorage.setItem('pw.themeProgress.sport',JSON.stringify(Array.from({length:74},(_,i)=>i+1)))")
+      page.goto(BASE+'clean/theme-game.html?theme=sport&level=75#'+fragment,wait_until='domcontentloaded',timeout=45000)
+      answer75={'ru':'КОРТ','en':'COURT','az':'KORT'}[language];tap_word(page,answer75);expect(page.locator('#successPanel')).to_be_visible()
+      page.evaluate("localStorage.setItem('pw.themeProgress.sport',JSON.stringify(Array.from({length:99},(_,i)=>i+1)))")
+      page.goto(BASE+'clean/theme-game.html?theme=sport&level=100#'+fragment,wait_until='domcontentloaded',timeout=45000)
+      answer100={'ru':'ОЛИМПИАДА','en':'OLYMPICS','az':'OLİMPİADA'}[language];tap_word(page,answer100);expect(page.locator('#successPanel')).to_be_visible();expect(page.locator('#nextLevel')).to_have_attribute('href','./index.html')
       assert not relevant_errors(errors),errors;ctx.close()
 
     # Representative main-game browser checks. Loading game.js also validates every published answer/pool in RU/EN/AZ.
