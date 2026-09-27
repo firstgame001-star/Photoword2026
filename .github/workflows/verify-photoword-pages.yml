@@ -114,6 +114,8 @@ jobs:
           grep -q '12 тем · 1200 уровней' "$RUNNER_TEMP/index.html"
           ! grep -q 'id="tasksBtn"' "$RUNNER_TEMP/index.html"
           grep -q 'data-coins' "$RUNNER_TEMP/theme-game.html"
+          grep -q 'THEME_REWARD_COINS=15,THEME_REWARD_XP=10' "$RUNNER_TEMP/theme-game.js"
+          grep -q 'HINT_COSTS={letter:50,remove:100,text:150}' "$RUNNER_TEMP/theme-game.js"
           ! grep -q 'id="themeSettingsBtn"' "$RUNNER_TEMP/theme-game.html"
           grep -q 'const ART_LEVELS={' "$RUNNER_TEMP/theme-game.js"
           grep -q 'const ART_TRANSLATED={' "$RUNNER_TEMP/theme-game.js"
