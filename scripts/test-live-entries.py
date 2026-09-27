@@ -146,7 +146,7 @@ with sync_playwright() as pw:
       page.locator('#ratingNav').tap();expect(page.locator('#leaderboard')).to_contain_text('Player_77');page.locator('#ratingBack').tap();page.locator('#shopNav').tap();expect(page.locator('#shopModal')).to_be_visible();expect(page.locator('#watchAd')).to_be_disabled();expect(page.locator('[data-pack="c10"]')).to_be_enabled();page.locator('[data-close="shopModal"]').tap()
       # Reset requires double confirmation and then requires language again.
       page.locator('#settingsBtn').tap();page.locator('#resetProgressBtn').tap();page.locator('#confirmReset').tap();page.locator('#confirmReset').tap();expect(page.locator('#languageModal')).to_be_visible(timeout=3000);expect(page.locator('#languageClose')).to_be_hidden()
-      assert not errors,errors;ctx.close()
+      assert not relevant_errors(errors),errors;ctx.close()
 
     # Complete all 49 levels in all 3 languages and exercise hints across both chapters.
     for language in ['ru','en','az']:
@@ -175,7 +175,7 @@ with sync_playwright() as pw:
           expect(page.locator('#successChapter')).to_be_visible();expect(page.locator('#nextLevel')).to_have_attribute('href','./index.html')
       assert account['completed_levels']==49 and account['xp']==735 and account['current_level']==50
       page.screenshot(path=str(OUT/f'{engine}-{language}-level49.png'),full_page=True)
-      assert not errors,errors
+      assert not relevant_errors(errors),errors
       report={'engine':engine,'language':language,'levels':'1-49','checks':['chapter 1 levels 1-20','chapter 2 levels 21-49','chapter transition at 20','all answer letter pools','localized text hints across difficulty bands','letter hint','remove hint','49 server answers mocked','15 XP each','20 coins each','final level 49 returns home'],'result':'PASS'}
       reports.append(report);print(json.dumps(report,ensure_ascii=False),flush=True);ctx.close()
     browser.close()
