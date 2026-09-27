@@ -38,10 +38,11 @@ function localWrite(d){try{localStorage.setItem(localKey,JSON.stringify(d))}catc
 async function api(action,extra={}){
  const initData=rawInit();
  if(initData){
-  try{
-   const r=await fetch(ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action,initData,...extra})});
-   const j=await r.json();if(!r.ok)throw Object.assign(new Error(j.error||'challenge_error'),{data:j});serverMode=true;return j.challenge;
-  }catch(e){if(e?.data?.challenge)state=e.data.challenge;if(e?.message==='challenge_no_energy')throw e;}
+  const r=await fetch(ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action,initData,...extra})});
+  const j=await r.json();
+  if(!r.ok)throw Object.assign(new Error(j.error||'challenge_error'),{data:j});
+  if(!j.challenge)throw new Error('challenge_state_missing');
+  serverMode=true;return j.challenge;
  }
  serverMode=false;let d=localRead();
  if(action==='start'&&extra.mode==='limited'){if(d.energy<=0)throw Object.assign(new Error('challenge_no_energy'),{data:{challenge:d}});if(d.energy===5)d.ref=Date.now();d.energy--;localWrite(d);}
