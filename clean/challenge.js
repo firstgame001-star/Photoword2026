@@ -4,7 +4,7 @@ const $=id=>document.getElementById(id),pw=window.PW;
 const modeParam=new URLSearchParams(location.search).get('challenge');
 const lang=()=>{try{return localStorage.getItem('pw.language')||'ru'}catch{return'ru'}};
 const ENDPOINT='https://bqoraxewpcnmidvjlpuy.supabase.co/functions/v1/challenge-game';
-const ENERGY_MAX=5,ENERGY_MS=30*60*1000;
+const ENERGY_MAX=25,ENERGY_MS=30*60*1000;
 const Q=[
  {
   "ru": "СОБАКА",
