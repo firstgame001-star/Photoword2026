@@ -923,7 +923,7 @@ def install_mock(ctx,account,completed,lang):
             theme_done=account.setdefault('_theme_completed',[])
             rewarded=key not in theme_done
             if rewarded:
-                theme_done.append(key);account['coins']+=10;account['xp']+=10;account['rank']=1
+                theme_done.append(key);account['coins']+=15;account['xp']+=10;account['rank']=1
             data={'player':account.copy(),'theme_rewarded':rewarded}
         elif action=='reset_progress':
             completed.clear();account['_theme_completed']=[];account.update(xp=0,completed_levels=0,current_level=1,rank=0)
@@ -1105,8 +1105,8 @@ with sync_playwright() as pw:
       page.locator('#letterHint').tap();expect(page.locator('[data-coins]')).to_have_text('4271');expect(page.locator('#slots .fixed')).to_have_count(1)
       page.locator('#removeHint').tap();expect(page.locator('[data-coins]')).to_have_text('4171')
       page.locator('#textHint').tap();expect(page.locator('[data-coins]')).to_have_text('4021');expect(page.locator('#hintValue')).not_to_have_text({'ru':'Нажми, чтобы открыть','en':'Tap to reveal','az':'Açmaq üçün toxun'}[language])
-      sport_answer={'ru':'ГОЛ','en':'GOAL','az':'QOL'}[language];tap_word(page,sport_answer);expect(page.locator('#successPanel')).to_be_visible();expect(page.locator('[data-coins]')).to_have_text('4031');expect(page.locator('#successReward')).to_contain_text('+10');assert account['xp']==310;assert page.evaluate("JSON.parse(localStorage.getItem('pw.themeProgress.sport')).includes(1)")
-      page.goto(BASE+'clean/theme-game.html?theme=sport&level=1#'+fragment,wait_until='domcontentloaded',timeout=45000);tap_word(page,sport_answer);expect(page.locator('#successPanel')).to_be_visible();expect(page.locator('[data-coins]')).to_have_text('4031');assert account['xp']==310
+      sport_answer={'ru':'ГОЛ','en':'GOAL','az':'QOL'}[language];tap_word(page,sport_answer);expect(page.locator('#successPanel')).to_be_visible();expect(page.locator('[data-coins]')).to_have_text('4036');expect(page.locator('#successReward')).to_contain_text('+15');assert account['xp']==310;assert page.evaluate("JSON.parse(localStorage.getItem('pw.themeProgress.sport')).includes(1)")
+      page.goto(BASE+'clean/theme-game.html?theme=sport&level=1#'+fragment,wait_until='domcontentloaded',timeout=45000);tap_word(page,sport_answer);expect(page.locator('#successPanel')).to_be_visible();expect(page.locator('[data-coins]')).to_have_text('4036');assert account['xp']==310
       page.evaluate("localStorage.setItem('pw.themeProgress.sport',JSON.stringify(Array.from({length:20},(_,i)=>i+1)))")
       page.goto(BASE+'clean/theme-game.html?theme=sport&level=21#'+fragment,wait_until='domcontentloaded',timeout=45000)
       answer21={'ru':'БОКС','en':'BOXING','az':'BOKS'}[language];tap_word(page,answer21);expect(page.locator('#successPanel')).to_be_visible()
