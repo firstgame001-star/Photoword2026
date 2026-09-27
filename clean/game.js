@@ -102,6 +102,38 @@
     98:{answer:"ТРАНСФОРМАЦИЯ",pool:"ТРАНСФОРМАЦИЯБВГДЕ",hint:"Заметное изменение формы, состояния или структуры.",photos:[["🐛","До"],["🦋","После"],["🔄","Изменение"],["✨","Новая форма"]]},
     99:{answer:"ИНТЕГРАЦИЯ",pool:"ИНТЕГРАЦИЯБВДЖЗ",hint:"Объединение отдельных частей в единую работающую систему.",photos:[["🧩","Части"],["🤝","Объединение"],["🔗","Связь"],["⚙️","Единая система"]]},
     100:{answer:"АБСТРАКЦИЯ",pool:"АБСТРАКЦИЯВГДЕЖ",hint:"Идея или образ, отвлечённый от конкретного предмета.",photos:[["🎨","Форма"],["🧠","Идея"],["〰️","Необычный образ"],["❓","Не конкретный предмет"]]}
+  ,
+    101:{"answer":"БАЛАНС","pool":"БАЛАНСБВГДЖЗ","hint":"Равновесие между частями, силами или интересами.","photos":[["⚖️","Равновесие"],["↔️","Две стороны"],["🧘","Устойчивость"],["🎯","Точность"]]},
+    102:{"answer":"АРХИТЕКТУРА","pool":"АРХИТЕКТУРАБВГДЖЗ","hint":"Продуманное устройство здания, системы или сложной структуры.","photos":[["🏛️","Здание"],["📐","Проект"],["🧱","Структура"],["🏗️","Создание"]]},
+    103:{"answer":"СИНХРОНИЗАЦИЯ","pool":"СИНХРОНИЗАЦИЯБВГДЖЗ","hint":"Согласование процессов так, чтобы они происходили в одном ритме или времени.","photos":[["⏱️","Время"],["🔄","Согласование"],["🎵","Ритм"],["🔗","Связь"]]},
+    104:{"answer":"АДАПТАЦИЯ","pool":"АДАПТАЦИЯБВГДЖЗ","hint":"Приспособление к новым условиям или изменившейся среде.","photos":[["🦎","Приспособление"],["🌦️","Среда"],["🔄","Изменение"],["🧩","Подстройка"]]},
+    105:{"answer":"ЭВОЛЮЦИЯ","pool":"ЭВОЛЮЦИЯБВГДЖЗ","hint":"Постепенное развитие и изменение системы, организма или идеи.","photos":[["🐒","Развитие"],["🧬","Изменения"],["➡️","Процесс"],["🌱","Рост"]]},
+    106:{"answer":"СТРАТЕГИЯ","pool":"СТРАТЕГИЯБВГДЖЗ","hint":"Общий план действий для достижения долгосрочной цели.","photos":[["♟️","План"],["🎯","Цель"],["🗺️","Маршрут"],["🧠","Расчёт"]]},
+    107:{"answer":"ЛОГИКА","pool":"ЛОГИКАБВГДЖЗ","hint":"Последовательное рассуждение, связывающее причины, факты и выводы.","photos":[["🧠","Мышление"],["➡️","Последовательность"],["🧩","Связи"],["✅","Вывод"]]},
+    108:{"answer":"ГИПОТЕЗА","pool":"ГИПОТЕЗАБВГДЖЗ","hint":"Предположение, которое нужно проверить фактами или экспериментом.","photos":[["❓","Предположение"],["🧪","Проверка"],["🔍","Исследование"],["💡","Идея"]]},
+    109:{"answer":"АНАЛИЗ","pool":"АНАЛИЗБВГДЖЗ","hint":"Разбор целого на части для понимания причин, свойств и связей.","photos":[["🔍","Изучение"],["📊","Данные"],["🧩","Части"],["🧠","Вывод"]]},
+    110:{"answer":"СИНТЕЗ","pool":"СИНТЕЗБВГДЖЗ","hint":"Соединение отдельных элементов в новое целое.","photos":[["🧩","Части"],["➕","Соединение"],["🔗","Связь"],["✨","Новое целое"]]},
+    111:{"answer":"ПРИОРИТЕТ","pool":"ПРИОРИТЕТБВГДЖЗ","hint":"То, что имеет преимущество и должно быть сделано раньше другого.","photos":[["🥇","Первое место"],["📋","Задачи"],["⬆️","Выше"],["🎯","Главное"]]},
+    112:{"answer":"ПОТЕНЦИАЛ","pool":"ПОТЕНЦИАЛБВГДЖЗ","hint":"Скрытые возможности или запас для будущего развития.","photos":[["🔋","Запас"],["🌱","Рост"],["🚀","Развитие"],["💡","Возможность"]]},
+    113:{"answer":"СТАБИЛЬНОСТЬ","pool":"СТАБИЛЬНОСТЬБВГДЖЗ","hint":"Способность сохранять состояние и не разрушаться при изменениях.","photos":[["⚓","Устойчивость"],["📈","Ровность"],["🧱","Опора"],["🛡️","Надёжность"]]},
+    114:{"answer":"ДИНАМИКА","pool":"ДИНАМИКАБВГДЖЗ","hint":"Характер и скорость изменения процесса во времени.","photos":[["📈","Изменение"],["🏃","Движение"],["⏱️","Время"],["⚡","Темп"]]},
+    115:{"answer":"ИНЕРЦИЯ","pool":"ИНЕРЦИЯБВГДЖЗ","hint":"Свойство сохранять движение или покой без внешнего воздействия.","photos":[["⚽","Движение"],["➡️","Продолжение"],["🧱","Сопротивление"],["⏸️","Покой"]]},
+    116:{"answer":"ГРАВИТАЦИЯ","pool":"ГРАВИТАЦИЯБВГДЖЗ","hint":"Сила притяжения, из-за которой тела стремятся друг к другу.","photos":[["🌍","Земля"],["🍎","Падение"],["⬇️","Притяжение"],["🌌","Космос"]]},
+    117:{"answer":"СИММЕТРИЯ","pool":"СИММЕТРИЯБВГДЖЗ","hint":"Соответствие частей относительно центра, линии или плоскости.","photos":[["🦋","Две стороны"],["🪞","Отражение"],["↔️","Равенство"],["📐","Геометрия"]]},
+    118:{"answer":"ПРОЕКЦИЯ","pool":"ПРОЕКЦИЯБВГДЖЗ","hint":"Отображение объекта на плоскости или представление будущего результата.","photos":[["📽️","Изображение"],["📐","Плоскость"],["➡️","Перенос"],["🖥️","Отображение"]]},
+    119:{"answer":"ИЗМЕРЕНИЕ","pool":"ИЗМЕРЕНИЕБВГДЖЗ","hint":"Величина или направление, по которому можно описать пространство или объект.","photos":[["📏","Размер"],["📐","Пространство"],["↔️","Направление"],["🔢","Величина"]]},
+    120:{"answer":"ПЕРЕХОД","pool":"ПЕРЕХОДБВГДЖЗ","hint":"Изменение состояния или перемещение от одного этапа к другому.","photos":[["🚪","Из одного в другое"],["➡️","Движение"],["🌉","Связь"],["🔄","Смена"]]},
+    121:{"answer":"ПОРЯДОК","pool":"ПОРЯДОКБВГДЖЗ","hint":"Организованная последовательность или установленное расположение элементов.","photos":[["1️⃣","Последовательность"],["2️⃣","Шаги"],["📋","Система"],["✅","Организация"]]},
+    122:{"answer":"ПРИЧИНА","pool":"ПРИЧИНАБВГДЖЗ","hint":"То, из-за чего происходит событие или возникает результат.","photos":[["❓","Почему"],["➡️","Ведёт к"],["⚙️","Источник"],["💥","Событие"]]},
+    123:{"answer":"СЛЕДСТВИЕ","pool":"СЛЕДСТВИЕБВГДЖЗ","hint":"Результат, который возник из-за определённой причины.","photos":[["➡️","После"],["🎯","Результат"],["📌","Итог"],["🔗","Связь"]]},
+    124:{"answer":"УСЛОВИЕ","pool":"УСЛОВИЕБВГДЖЗ","hint":"Требование или обстоятельство, от которого зависит результат.","photos":[["📋","Требование"],["✅","Выполнение"],["🔐","Доступ"],["➡️","Результат"]]},
+    125:{"answer":"МЕТОД","pool":"МЕТОДБВГДЖЗ","hint":"Определённый способ действий для решения задачи.","photos":[["🛠️","Способ"],["📋","Шаги"],["🎯","Задача"],["✅","Решение"]]},
+    126:{"answer":"КРИТЕРИЙ","pool":"КРИТЕРИЙБВГДЖЗ","hint":"Признак или правило, по которому оценивают и сравнивают.","photos":[["📏","Мера"],["✅","Проверка"],["⚖️","Сравнение"],["📋","Правило"]]},
+    127:{"answer":"ПРИНЦИП","pool":"ПРИНЦИПБВГДЖЗ","hint":"Основное правило или идея, на которой строится система или решение.","photos":[["📜","Правило"],["🏛️","Основа"],["🧭","Ориентир"],["⚙️","Система"]]},
+    128:{"answer":"ТЕОРИЯ","pool":"ТЕОРИЯБВГДЖЗ","hint":"Система идей, объясняющая явления и связи между ними.","photos":[["📚","Знания"],["🧠","Идеи"],["🔬","Объяснение"],["🔗","Связи"]]},
+    129:{"answer":"МАССА","pool":"МАССАБВГДЖЗ","hint":"Физическая величина, показывающая количество вещества и инерционность тела.","photos":[["⚖️","Весы"],["🏋️","Тяжесть"],["🧱","Тело"],["🔢","Величина"]]},
+    130:{"answer":"ФОРМА","pool":"ФОРМАБВГДЖЗ","hint":"Внешний вид, очертание или способ организации чего-либо.","photos":[["🔺","Очертание"],["⬛","Фигура"],["🧩","Структура"],["🎨","Вид"]]},
+    131:{"answer":"ГЛУБИНА","pool":"ГЛУБИНАБВГДЖЗ","hint":"Расстояние от поверхности внутрь; также степень сложности и проникновения в смысл.","photos":[["🌊","Вода"],["⬇️","Внутрь"],["🕳️","Расстояние"],["🧠","Смысл"]]}
   };
   const TRANSLATED={
     en:{
@@ -205,6 +237,38 @@
       98:{answer:"TRANSFORMATION",pool:"TRANSFORMATIONBCDEG",hint:"A significant change in form, state, or structure."},
       99:{answer:"INTEGRATION",pool:"INTEGRATIONBCDFH",hint:"Combining separate parts into one working system."},
       100:{answer:"ABSTRACTION",pool:"ABSTRACTIONDEFGH",hint:"An idea or image separated from a specific concrete object."}
+    ,
+      101:{"answer":"BALANCE","pool":"BALANCEBDFGJK","hint":"A state of equilibrium between parts, forces, or interests."},
+      102:{"answer":"ARCHITECTURE","pool":"ARCHITECTUREBDFGJK","hint":"The designed structure of a building, system, or complex whole."},
+      103:{"answer":"SYNCHRONIZATION","pool":"SYNCHRONIZATIONBDFGJK","hint":"Coordinating processes so they happen in the same rhythm or time."},
+      104:{"answer":"ADAPTATION","pool":"ADAPTATIONBDFGJK","hint":"Adjustment to new conditions or a changed environment."},
+      105:{"answer":"EVOLUTION","pool":"EVOLUTIONBDFGJK","hint":"Gradual development and change of a system, organism, or idea."},
+      106:{"answer":"STRATEGY","pool":"STRATEGYBDFGJK","hint":"An overall plan of action for reaching a long-term goal."},
+      107:{"answer":"LOGIC","pool":"LOGICBDFGJK","hint":"Consistent reasoning that connects causes, facts, and conclusions."},
+      108:{"answer":"HYPOTHESIS","pool":"HYPOTHESISBDFGJK","hint":"An assumption that must be tested with facts or an experiment."},
+      109:{"answer":"ANALYSIS","pool":"ANALYSISBDFGJK","hint":"Breaking a whole into parts to understand causes, properties, and links."},
+      110:{"answer":"SYNTHESIS","pool":"SYNTHESISBDFGJK","hint":"Combining separate elements into a new whole."},
+      111:{"answer":"PRIORITY","pool":"PRIORITYBDFGJK","hint":"Something given precedence and handled before other things."},
+      112:{"answer":"POTENTIAL","pool":"POTENTIALBDFGJK","hint":"Hidden capacity or room for future development."},
+      113:{"answer":"STABILITY","pool":"STABILITYBDFGJK","hint":"The ability to remain steady and resist disruptive change."},
+      114:{"answer":"DYNAMICS","pool":"DYNAMICSBDFGJK","hint":"The pattern and speed of how a process changes over time."},
+      115:{"answer":"INERTIA","pool":"INERTIABDFGJK","hint":"The tendency to maintain motion or rest without an external force."},
+      116:{"answer":"GRAVITY","pool":"GRAVITYBDFGJK","hint":"The force of attraction that pulls bodies toward one another."},
+      117:{"answer":"SYMMETRY","pool":"SYMMETRYBDFGJK","hint":"Matching parts around a center, line, or plane."},
+      118:{"answer":"PROJECTION","pool":"PROJECTIONBDFGJK","hint":"A representation of an object on a plane or an estimate of a future result."},
+      119:{"answer":"DIMENSION","pool":"DIMENSIONBDFGJK","hint":"A magnitude or direction used to describe space or an object."},
+      120:{"answer":"TRANSITION","pool":"TRANSITIONBDFGJK","hint":"A change of state or movement from one stage to another."},
+      121:{"answer":"ORDER","pool":"ORDERBDFGJK","hint":"An organized sequence or established arrangement of elements."},
+      122:{"answer":"CAUSE","pool":"CAUSEBDFGJK","hint":"What makes an event happen or produces a result."},
+      123:{"answer":"EFFECT","pool":"EFFECTBDFGJK","hint":"A result produced by a particular cause."},
+      124:{"answer":"CONDITION","pool":"CONDITIONBDFGJK","hint":"A requirement or circumstance on which a result depends."},
+      125:{"answer":"METHOD","pool":"METHODBDFGJK","hint":"A defined way of doing something to solve a task."},
+      126:{"answer":"CRITERION","pool":"CRITERIONBDFGJK","hint":"A standard or rule used to evaluate and compare."},
+      127:{"answer":"PRINCIPLE","pool":"PRINCIPLEBDFGJK","hint":"A fundamental rule or idea on which a system or decision is based."},
+      128:{"answer":"THEORY","pool":"THEORYBDFGJK","hint":"A system of ideas that explains phenomena and their relationships."},
+      129:{"answer":"MASS","pool":"MASSBDFGJK","hint":"A physical quantity related to the amount of matter and inertia of a body."},
+      130:{"answer":"FORM","pool":"FORMBDFGJK","hint":"The shape, appearance, or organization of something."},
+      131:{"answer":"DEPTH","pool":"DEPTHBDFGJK","hint":"Distance inward from a surface; also the degree of complexity or insight."}
     },
     az:{
       1:{answer:'İT',pool:'İTPİŞKALMONR',hint:'İnsanın ən yaxın dostu adlandırılan ev heyvanı.'},
@@ -307,6 +371,38 @@
       98:{answer:"TRANSFORMASİYA",pool:"TRANSFORMASİYABCÇDE",hint:"Forma, vəziyyət və ya strukturun nəzərəçarpan dəyişməsi."},
       99:{answer:"İNTEQRASİYA",pool:"İNTEQRASİYABCÇDƏ",hint:"Ayrı hissələrin vahid işləyən sistemdə birləşdirilməsi."},
       100:{answer:"ABSTRAKSİYA",pool:"ABSTRAKSİYACÇDEƏ",hint:"Konkret obyektdən ayrılmış ümumi fikir və ya obraz."}
+    ,
+      101:{"answer":"TARAZLIQ","pool":"TARAZLIQBCÇDƏF","hint":"Hissələr, qüvvələr və ya maraqlar arasındakı tarazlıq."},
+      102:{"answer":"MEMARLIQ","pool":"MEMARLIQBCÇDƏF","hint":"Bina, sistem və ya mürəkkəb quruluşun düşünülmüş strukturu."},
+      103:{"answer":"SİNXRONLAŞMA","pool":"SİNXRONLAŞMABCÇDƏF","hint":"Proseslərin eyni ritmdə və ya zamanda işləməsi üçün uyğunlaşdırılması."},
+      104:{"answer":"UYĞUNLAŞMA","pool":"UYĞUNLAŞMABCÇDƏF","hint":"Yeni şəraitə və ya dəyişmiş mühitə uyğunlaşma."},
+      105:{"answer":"TƏKAMÜL","pool":"TƏKAMÜLBCÇDƏF","hint":"Sistem, orqanizm və ya ideyanın tədricən inkişafı və dəyişməsi."},
+      106:{"answer":"STRATEGİYA","pool":"STRATEGİYABCÇDƏF","hint":"Uzunmüddətli məqsədə çatmaq üçün ümumi fəaliyyət planı."},
+      107:{"answer":"MƏNTİQ","pool":"MƏNTİQBCÇDƏF","hint":"Səbəbləri, faktları və nəticələri birləşdirən ardıcıl düşüncə."},
+      108:{"answer":"FƏRZİYYƏ","pool":"FƏRZİYYƏBCÇDƏF","hint":"Fakt və ya təcrübə ilə yoxlanmalı olan fərziyyə."},
+      109:{"answer":"TƏHLİL","pool":"TƏHLİLBCÇDƏF","hint":"Səbəbləri, xüsusiyyətləri və əlaqələri anlamaq üçün bütövün hissələrə ayrılması."},
+      110:{"answer":"SİNTEZ","pool":"SİNTEZBCÇDƏF","hint":"Ayrı-ayrı elementlərin yeni bir bütövdə birləşdirilməsi."},
+      111:{"answer":"PRİORİTET","pool":"PRİORİTETBCÇDƏF","hint":"Üstünlük verilən və digərlərindən əvvəl görülməli olan şey."},
+      112:{"answer":"POTENSİAL","pool":"POTENSİALBCÇDƏF","hint":"Gələcək inkişaf üçün gizli imkan və ya ehtiyat."},
+      113:{"answer":"SABİTLİK","pool":"SABİTLİKBCÇDƏF","hint":"Dəyişikliklər zamanı vəziyyəti qorumaq və dağılmamaq qabiliyyəti."},
+      114:{"answer":"DİNAMİKA","pool":"DİNAMİKABCÇDƏF","hint":"Prosesin zamanla dəyişməsinin xarakteri və sürəti."},
+      115:{"answer":"ƏTALƏT","pool":"ƏTALƏTBCÇDƏF","hint":"Xarici təsir olmadan hərəkəti və ya sakitliyi saxlamaq xüsusiyyəti."},
+      116:{"answer":"CAZİBƏ","pool":"CAZİBƏBCÇDƏF","hint":"Cisimləri bir-birinə çəkən cazibə qüvvəsi."},
+      117:{"answer":"SİMMETRİYA","pool":"SİMMETRİYABCÇDƏF","hint":"Hissələrin mərkəzə, xəttə və ya müstəviyə görə uyğunluğu."},
+      118:{"answer":"PROYEKSİYA","pool":"PROYEKSİYABCÇDƏF","hint":"Obyektin müstəvidə təsviri və ya gələcək nəticənin hesablanmış görünüşü."},
+      119:{"answer":"ÖLÇÜ","pool":"ÖLÇÜBCÇDƏF","hint":"Məkanı və ya obyekti təsvir etmək üçün istifadə olunan ölçü və ya istiqamət."},
+      120:{"answer":"KEÇİD","pool":"KEÇİDBCÇDƏF","hint":"Bir vəziyyətdən və ya mərhələdən digərinə keçid."},
+      121:{"answer":"QAYDA","pool":"QAYDABCÇDƏF","hint":"Elementlərin təşkil olunmuş ardıcıllığı və ya müəyyən düzülüşü."},
+      122:{"answer":"SƏBƏB","pool":"SƏBƏBBCÇDƏF","hint":"Hadisənin baş verməsinə və ya nəticənin yaranmasına səbəb olan amil."},
+      123:{"answer":"NƏTİCƏ","pool":"NƏTİCƏBCÇDƏF","hint":"Müəyyən səbəb nəticəsində yaranan nəticə."},
+      124:{"answer":"ŞƏRT","pool":"ŞƏRTBCÇDƏF","hint":"Nəticənin asılı olduğu tələb və ya şərait."},
+      125:{"answer":"METOD","pool":"METODBCÇDƏF","hint":"Tapşırığı həll etmək üçün müəyyən fəaliyyət üsulu."},
+      126:{"answer":"MEYAR","pool":"MEYARBCÇDƏF","hint":"Qiymətləndirmə və müqayisə üçün istifadə olunan əlamət və ya qayda."},
+      127:{"answer":"PRİNSİP","pool":"PRİNSİPBCÇDƏF","hint":"Sistem və ya qərarın qurulduğu əsas qayda və ya fikir."},
+      128:{"answer":"NƏZƏRİYYƏ","pool":"NƏZƏRİYYƏBCÇDƏF","hint":"Hadisələri və onların əlaqələrini izah edən ideyalar sistemi."},
+      129:{"answer":"KÜTLƏ","pool":"KÜTLƏBCÇDƏF","hint":"Cismin maddə miqdarı və ətaləti ilə bağlı fiziki kəmiyyət."},
+      130:{"answer":"FORMA","pool":"FORMABCÇDƏF","hint":"Bir şeyin xarici görünüşü, konturu və ya təşkil olunma üsulu."},
+      131:{"answer":"DƏRİNLİK","pool":"DƏRİNLİKBCÇDƏF","hint":"Səthdən içəri məsafə, həm də məna və mürəkkəblik dərəcəsi."}
     }
   };
   let gameLang='ru';try{gameLang=localStorage.getItem('pw.language')||'ru'}catch{}
@@ -318,7 +414,7 @@
   function validateLanguageLevels(){
     const supported=['ru','en','az'];
     for(const lang of supported){
-      for(let n=1;n<=100;n++){
+      for(let n=1;n<=131;n++){
         const item=lang==='ru'?LEVELS[n]:TRANSLATED[lang][n];
         if(!item||!item.answer||!item.pool||!item.hint)throw new Error('Incomplete language level '+lang+' '+n);
         const need=[...item.answer].reduce((m,ch)=>(m[ch]=(m[ch]||0)+1,m),{});
@@ -396,7 +492,8 @@
     if(levelId===20){if(chapterNote){chapterNote.hidden=false;chapterNote.textContent=ui.chapterPassed(1)+' '+ui.newTitle(chapterEarnedTitle(1))+'. '+ui.chapterUnlocked(2)+'.';}next.href='./game.html?level=21';next.innerHTML=ui.nextChapter+' <span>▶</span>';}
     else if(levelId===50){if(chapterNote){chapterNote.hidden=false;chapterNote.textContent=ui.chapterPassed(2)+' '+ui.newTitle(chapterEarnedTitle(2))+'. '+ui.chapterUnlocked(3)+'.';}next.href='./game.html?level=51';next.innerHTML=ui.nextChapter+' <span>▶</span>';}
     else if(levelId===90){if(chapterNote){chapterNote.hidden=false;chapterNote.textContent=ui.chapterPassed(3)+' '+ui.newTitle(chapterEarnedTitle(3))+'. '+ui.chapterUnlocked(4)+'.';}next.href='./game.html?level=91';next.innerHTML=ui.nextChapter+' <span>▶</span>';}
-    else if(levelId<100){next.href='./game.html?level='+(levelId+1);next.innerHTML=ui.next+' <span>▶</span>';}
+    else if(levelId===131){if(chapterNote){chapterNote.hidden=false;chapterNote.textContent=ui.chapterPassed(4)+' '+ui.newTitle(chapterEarnedTitle(4))+'.';}next.href='./index.html';next.innerHTML=ui.home+' <span>✓</span>';}
+    else if(levelId<131){next.href='./game.html?level='+(levelId+1);next.innerHTML=ui.next+' <span>▶</span>';}
     else{next.href='./index.html';next.innerHTML=ui.home+' <span>✓</span>';}
   }
   async function check(){
