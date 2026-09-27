@@ -4,7 +4,7 @@ from pathlib import Path
 from playwright.sync_api import sync_playwright, expect
 
 BASE='https://firstgame001-star.github.io/Photoword2026/'
-RELEASE='20260927-r41'
+RELEASE='20260927-r42'
 OUT=Path('test-results'); OUT.mkdir(exist_ok=True)
 
 for attempt in range(48):
@@ -110,7 +110,7 @@ with sync_playwright() as pw:
       page.goto(BASE+'clean/#'+fragment,wait_until='domcontentloaded',timeout=45000)
       # Chapters: chapter 2 is unlocked after level 20 and uses a 30-level counter; chapter 3 is present.
       expect(page.locator('#homeChapter1')).to_be_visible();expect(page.locator('#homeChapter2')).to_be_visible();page.locator('#homeChapter1').scroll_into_view_if_needed();expect(page.locator('#homeChapter1Title')).to_be_visible();page.locator('#homeChapter2').scroll_into_view_if_needed();expect(page.locator('#homeChapter2Title')).to_be_visible();page.locator('#homeChapter1').scroll_into_view_if_needed();expect(page.locator('#homeChapter1Title')).to_be_visible()
-      page.locator('#chaptersNav').tap();expect(page.locator('#chaptersScreen')).to_be_visible();expect(page.locator('#chapter1Label')).to_contain_text('1–20');expect(page.locator('#chapter2Label')).to_contain_text('21–50');expect(page.locator('#chapter2Count')).to_contain_text('30');expect(page.locator('#chapter2Play')).not_to_have_class(re.compile('locked'));expect(page.locator('#chapter2Play')).to_have_attribute('href','./game.html?level=21');page.locator('#chaptersBack').tap()
+      page.locator('#chaptersNav').tap();expect(page.locator('#chaptersScreen')).to_be_visible();expect(page.locator('#chapter1Label')).to_contain_text('1–20');expect(page.locator('#chapter2Label')).to_contain_text('21–50');expect(page.locator('#chapter2Done')).to_have_text('21');expect(page.locator('#chapter2Count')).to_contain_text('50');expect(page.locator('#chapter2Play')).not_to_have_class(re.compile('locked'));expect(page.locator('#chapter2Play')).to_have_attribute('href','./game.html?level=21');page.locator('#chaptersBack').tap()
       # Every visual theme must apply and persist.
       for theme in ['game','night','light','neon','gold']:
         page.locator('#settingsBtn').tap();page.locator('#themeBtn').tap();expect(page.locator('#themeModal')).to_be_visible();page.locator(f'button[data-theme="{theme}"]').tap();assert page.evaluate("document.documentElement.dataset.theme")==theme;assert page.evaluate("localStorage.getItem('pw.theme')")==theme
@@ -130,6 +130,10 @@ with sync_playwright() as pw:
       page.locator('#settingsBtn').tap();page.locator('#eraseAccountBtn').tap();expect(page.locator('#eraseAccountModal')).to_be_visible();expect(page.locator('#confirmEraseAccount')).to_be_visible();page.locator('#cancelEraseAccount').tap()
       # Privacy and terms follow the selected language.
       legal=ctx.new_page();legal.goto(BASE+'clean/privacy.html?r='+RELEASE,wait_until='domcontentloaded');expected_priv={'ru':'Политика конфиденциальности','en':'Privacy Policy','az':'Məxfilik siyasəti'}[language];expect(legal.locator('#pt')).to_have_text(expected_priv);legal.goto(BASE+'clean/terms.html?r='+RELEASE,wait_until='domcontentloaded');expected_terms={'ru':'Пользовательское соглашение','en':'Terms of Use','az':'İstifadəçi razılaşması'}[language];expect(legal.locator('#tt')).to_have_text(expected_terms);body_legal=legal.locator('body').inner_text();assert 'will be added before public launch' not in body_legal;assert 'будет добавлен до публичного запуска' not in body_legal;legal.close()
+      # Chapter-earned title appears after completing Chapter 1.
+      expected_title={'ru':'Новичок','en':'Novice','az':'Yeni başlayan'}[language]
+      expect(page.locator('#rankLabel')).to_contain_text(expected_title)
+      page.locator('#profileBtn').tap();expect(page.locator('#profileTitle')).to_have_text(expected_title);page.locator('[data-close="profileModal"]').tap()
       # Nickname is one-time UI and becomes the displayed name.
       page.locator('#profileBtn').tap();page.locator('#nicknameBtn').tap();page.locator('#nicknameInput').fill('Player_77');page.locator('#saveNickname').tap();expect(page.locator('#name')).to_have_text('Player_77');page.locator('#profileBtn').tap();expect(page.locator('#nicknameBtn')).to_be_disabled()
       # Share-game control is available from the profile.
@@ -186,7 +190,7 @@ with sync_playwright() as pw:
           page.locator('#removeHint').tap();expect(page.locator('#letters .removed')).to_have_count(3)
         tap_word(page,answer);expect(page.locator('#successPanel')).to_be_visible(timeout=5000);expect(page.locator('#successTitle')).to_contain_text(str(level))
         if level==20:
-          expect(page.locator('#successChapter')).to_be_visible();expect(page.locator('#nextLevel')).to_have_attribute('href','./game.html?level=21')
+          expect(page.locator('#successChapter')).to_be_visible();expect(page.locator('#successChapter')).to_contain_text({'ru':'Новичок','en':'Novice','az':'Yeni başlayan'}[language]);expect(page.locator('#nextLevel')).to_have_attribute('href','./game.html?level=21')
         elif level==50:
           expect(page.locator('#successChapter')).to_be_visible();expect(page.locator('#nextLevel')).to_have_attribute('href','./game.html?level=51')
         elif level==90:
