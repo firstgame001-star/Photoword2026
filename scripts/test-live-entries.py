@@ -4,7 +4,7 @@ from pathlib import Path
 from playwright.sync_api import sync_playwright, expect
 
 BASE='https://firstgame001-star.github.io/Photoword2026/'
-RELEASE='20260927-r23'
+RELEASE='20260927-r24'
 OUT=Path('test-results'); OUT.mkdir(exist_ok=True)
 
 for attempt in range(48):
@@ -98,7 +98,7 @@ with sync_playwright() as pw:
     page.goto(BASE+'clean/#'+fragment,wait_until='domcontentloaded',timeout=45000)
     expect(page.locator('#languageModal')).to_be_visible();expect(page.locator('#languageTitle')).to_contain_text('Choose language');expect(page.locator('#languageTitle')).to_contain_text('Dil seçin');expect(page.locator('#languageClose')).to_be_hidden()
     page.locator('[data-language="az"]').tap();expect(page.locator('#languageModal')).to_be_hidden()
-    expect(page.locator('#activeChapterTitle')).to_have_text('İsinmə');expect(page.locator('#shopOffer')).to_contain_text('Daha çox sikkə');expect(page.locator('#logoWord')).to_have_text('1 SÖZ');page.locator('#chaptersNav').tap();expect(page.locator('#chapter1Label')).to_contain_text('1–20');expect(page.locator('#chapter2Label')).to_contain_text('21–49');expect(page.locator('#chapter2Select .chapter-cover-mark')).to_have_text('II');expect(page.locator('#chapter2Play')).to_have_class(re.compile('locked'));page.locator('#chaptersBack').tap()
+    expect(page.locator('#homeChapter1Title')).to_have_text('İsinmə');expect(page.locator('#homeChapter2Title')).to_have_text('Assosiasiyalar');expect(page.locator('[data-home-chapter="3"]')).to_be_visible();expect(page.locator('[data-home-chapter="4"]')).to_be_visible();expect(page.locator('#shopOffer')).to_contain_text('Daha çox sikkə');expect(page.locator('#logoWord')).to_have_text('1 SÖZ');page.locator('#chaptersNav').tap();expect(page.locator('#chapter1Label')).to_contain_text('1–20');expect(page.locator('#chapter2Label')).to_contain_text('21–49');expect(page.locator('#chapter2Select .chapter-cover-mark')).to_have_text('II');expect(page.locator('#chapter2Play')).to_have_class(re.compile('locked'));page.locator('#chaptersBack').tap()
     body=page.locator('body').inner_text()
     for leak in ['Больше монет','Главная','Задания','Рейтинг','Сегодня награда']: assert leak not in body,('AZ leak',leak)
     assert not relevant_errors(errors),errors;ctx.close()
@@ -111,7 +111,7 @@ with sync_playwright() as pw:
       completed=set(range(1,21));install_mock(ctx,account,completed,language);page=ctx.new_page();errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
       page.goto(BASE+'clean/#'+fragment,wait_until='domcontentloaded',timeout=45000)
       # Chapters: chapter 2 is unlocked after level 20 and uses a 29-level counter.
-      expect(page.locator('#activeChapterLabel')).to_contain_text('2')
+      expect(page.locator('#homeChapter1')).to_be_visible();expect(page.locator('#homeChapter2')).to_be_visible();page.evaluate("document.getElementById('homeChapterCarousel').scrollLeft=0");expect(page.locator('#homeChapter1Title')).to_be_visible();page.evaluate("showHomeChapter(2,false)");expect(page.locator('#homeChapter2Title')).to_be_visible();page.evaluate("showHomeChapter(1,false)");expect(page.locator('#homeChapter1Title')).to_be_visible()
       page.locator('#chaptersNav').tap();expect(page.locator('#chaptersScreen')).to_be_visible();expect(page.locator('#chapter1Label')).to_contain_text('1–20');expect(page.locator('#chapter2Label')).to_contain_text('21–49');expect(page.locator('#chapter2Count')).to_contain_text('29');expect(page.locator('#chapter2Play')).not_to_have_class(re.compile('locked'));expect(page.locator('#chapter2Play')).to_have_attribute('href','./game.html?level=21');page.locator('#chaptersBack').tap()
       # Every visual theme must apply and persist.
       for theme in ['game','night','light','neon','gold']:
