@@ -23,12 +23,12 @@ jobs:
           persist-credentials: false
       - name: Verify repository clean build
         run: node scripts/check-clean.mjs
-      - name: Wait for r68 and verify published files
+      - name: Wait for r69 and verify published files
         shell: bash
         run: |
           set -euo pipefail
           base='https://firstgame001-star.github.io/Photoword2026/clean'
-          release='20260927-r68'
+          release='20260927-r69'
           ok=0
           for i in $(seq 1 48); do
             if curl --fail --silent --show-error --location --max-time 20 "$base/release.json?check=$i" -o "$RUNNER_TEMP/release.json" && grep -q "$release" "$RUNNER_TEMP/release.json"; then
@@ -51,7 +51,7 @@ jobs:
           grep -q 'chapter4Select' "$RUNNER_TEMP/index.html"
           grep -q '91–131' "$RUNNER_TEMP/index.html"
           grep -q '131:{' "$RUNNER_TEMP/game.js"
-          grep -q 'for(let n=1;n<=230;n++)' "$RUNNER_TEMP/game.js"
+          grep -q 'for(let n=1;n<=280;n++)' "$RUNNER_TEMP/game.js"
           grep -q 'levelId===131' "$RUNNER_TEMP/game.js"
           grep -q '132–180' "$RUNNER_TEMP/index.html"
           grep -q '132:{' "$RUNNER_TEMP/game.js"
@@ -61,6 +61,11 @@ jobs:
           grep -q '181:{' "$RUNNER_TEMP/game.js"
           grep -q '230:{' "$RUNNER_TEMP/game.js"
           grep -q 'levelId===230' "$RUNNER_TEMP/game.js"
+          grep -q '231–280' "$RUNNER_TEMP/index.html"
+          grep -q '231:{' "$RUNNER_TEMP/game.js"
+          grep -q '280:{' "$RUNNER_TEMP/game.js"
+          grep -q 'levelId===280' "$RUNNER_TEMP/game.js"
+          grep -q '"main_answers_unique_all_languages":true' "$RUNNER_TEMP/release.json"
           grep -q 'chapter12Select' "$RUNNER_TEMP/index.html"
           grep -q 'data-home-chapter="12"' "$RUNNER_TEMP/index.html"
           grep -q 'id="profileTitle"' "$RUNNER_TEMP/index.html"
@@ -133,4 +138,4 @@ jobs:
           node --check "$RUNNER_TEMP/game.js"
           node --check "$RUNNER_TEMP/theme-game.js"
           node --check "$RUNNER_TEMP/challenge.js"
-          printf '### PhotoWord r68 publication check\n\nMain levels 1–230, Chapters 1–12, unique backgrounds, absolute chapter progress and earned titles, featured thematic mode, Sport 1–100, Art 1–100, Professions 1–100, Travel 1–100, Science 1–100 and Technology 1–100, three playable challenge modes with server-authoritative time and paid Blitz hints, explicit next-step feedback, 400 challenge words with no repeats until the bank is exhausted, and fixed language selection, legal/settings surfaces and JavaScript all verified.\n' >> "$GITHUB_STEP_SUMMARY"
+          printf '### PhotoWord r69 publication check\n\nMain levels 1–280, Chapters 1–12, Chapter 7 through level 280, unique main answers in RU/EN/AZ, unique backgrounds, absolute chapter progress and earned titles, featured thematic mode, Sport 1–100, Art 1–100, Professions 1–100, Travel 1–100, Science 1–100 and Technology 1–100, three playable challenge modes with server-authoritative time and paid Blitz hints, explicit next-step feedback, 400 challenge words with no repeats until the bank is exhausted, and fixed language selection, legal/settings surfaces and JavaScript all verified.\n' >> "$GITHUB_STEP_SUMMARY"
