@@ -182,7 +182,57 @@
     177:{"answer":"АМПЛИТУДА","pool":"АМПЛИТУДАБВГЕЖ","hint":"Наибольшее отклонение колебания от среднего положения.","photos":[["📈","📈"],["〰️","〰️"],["🔊","🔊"],["📡","📡"]]},
     178:{"answer":"РАДИУС","pool":"РАДИУСБВГЕЖЗ","hint":"Расстояние от центра круга или сферы до границы.","photos":[["⭕","⭕"],["📐","📐"],["📏","📏"],["🎯","🎯"]]},
     179:{"answer":"ДИАГРАММА","pool":"ДИАГРАММАБВЕЖЗ","hint":"Наглядное графическое представление данных или связей.","photos":[["📊","📊"],["📈","📈"],["🧩","🧩"],["📝","📝"]]},
-    180:{"answer":"ОРИЕНТИР","pool":"ОРИЕНТИРАБВГД","hint":"Заметный объект или признак, помогающий выбрать направление.","photos":[["🧭","🧭"],["🚩","🚩"],["👀","👀"],["🏔️","🏔️"]]}
+    180:{"answer":"ОРИЕНТИР","pool":"ОРИЕНТИРАБВГД","hint":"Заметный объект или признак, помогающий выбрать направление.","photos":[["🧭","🧭"],["🚩","🚩"],["👀","👀"],["🏔️","🏔️"]]},
+    181:{"answer":"ПЛАНЕТА","pool":"ПЛАНЕТАБВГДЖ","hint":"Крупное небесное тело, которое движется вокруг звезды.","photos":[["🪐","🪐"],["🌍","🌍"],["🌌","🌌"],["🔭","🔭"]]},
+    182:{"answer":"АЙСБЕРГ","pool":"АЙСБЕРГВДЖЗИ","hint":"Большая плавающая глыба льда, отколовшаяся от ледника.","photos":[["🧊","🧊"],["🌊","🌊"],["🚢","🚢"],["❄️","❄️"]]},
+    183:{"answer":"ВОДОПАД","pool":"ВОДОПАДБГЕЖЗ","hint":"Поток воды, который падает с высоты.","photos":[["💦","💦"],["🏞️","🏞️"],["⬇️","⬇️"],["🌊","🌊"]]},
+    184:{"answer":"ДЕЛЬТА","pool":"ДЕЛЬТАБВГЖЗИ","hint":"Область у устья реки, где русло делится на рукава.","photos":[["🏞️","🏞️"],["🌊","🌊"],["🔱","🔱"],["🗺️","🗺️"]]},
+    185:{"answer":"ОАЗИС","pool":"ОАЗИСБВГДЕЖЙ","hint":"Зелёное место с водой среди пустыни.","photos":[["🌴","🌴"],["🏜️","🏜️"],["💧","💧"],["🐪","🐪"]]},
+    186:{"answer":"ЛАВИНА","pool":"ЛАВИНАБГДЕЖЗ","hint":"Масса снега, быстро сходящая со склона.","photos":[["🏔️","🏔️"],["❄️","❄️"],["⬇️","⬇️"],["⚠️","⚠️"]]},
+    187:{"answer":"ТОРНАДО","pool":"ТОРНАДОБВГЕЖ","hint":"Сильный вращающийся воздушный вихрь.","photos":[["🌪️","🌪️"],["☁️","☁️"],["💨","💨"],["🏠","🏠"]]},
+    188:{"answer":"ЦУНАМИ","pool":"ЦУНАМИБВГДЕЖ","hint":"Очень высокая морская волна, вызванная подводным событием.","photos":[["🌊","🌊"],["🏝️","🏝️"],["⚠️","⚠️"],["🌋","🌋"]]},
+    189:{"answer":"КРАТЕР","pool":"КРАТЕРБВГДЖЗ","hint":"Круглое углубление на поверхности планеты или вулкана.","photos":[["🌋","🌋"],["🌑","🌑"],["🕳️","🕳️"],["☄️","☄️"]]},
+    190:{"answer":"ПЕЩЕРА","pool":"ПЕЩЕРАБВГДЖЗ","hint":"Естественная полость внутри горы или скалы.","photos":[["🪨","🪨"],["🕳️","🕳️"],["🦇","🦇"],["🔦","🔦"]]},
+    191:{"answer":"КОМПЬЮТЕР","pool":"КОМПЬЮТЕРАБВГД","hint":"Устройство для обработки данных и выполнения программ.","photos":[["💻","💻"],["⌨️","⌨️"],["🖱️","🖱️"],["💾","💾"]]},
+    192:{"answer":"МИКРОЧИП","pool":"МИКРОЧИПАБВГД","hint":"Миниатюрная электронная схема внутри современных устройств.","photos":[["🔬","🔬"],["💻","💻"],["⚙️","⚙️"],["📱","📱"]]},
+    193:{"answer":"РОБОТ","pool":"РОБОТАВГДЕЖЗ","hint":"Машина, способная выполнять запрограммированные действия.","photos":[["🤖","🤖"],["⚙️","⚙️"],["🦾","🦾"],["🔋","🔋"]]},
+    194:{"answer":"АНТЕННА","pool":"АНТЕННАБВГДЖ","hint":"Устройство для передачи или приёма радиосигналов.","photos":[["📡","📡"],["📶","📶"],["📻","📻"],["📺","📺"]]},
+    195:{"answer":"РАДАР","pool":"РАДАРБВГЕЖЗИ","hint":"Система, которая обнаруживает объекты с помощью радиоволн.","photos":[["📡","📡"],["✈️","✈️"],["🟢","🟢"],["🛰️","🛰️"]]},
+    196:{"answer":"ЛАЗЕР","pool":"ЛАЗЕРБВГДЖИЙ","hint":"Узкий и направленный пучок света.","photos":[["🔴","🔴"],["💡","💡"],["🔬","🔬"],["📏","📏"]]},
+    197:{"answer":"БАТАРЕЯ","pool":"БАТАРЕЯВГДЖЗ","hint":"Источник, который хранит электрическую энергию.","photos":[["🔋","🔋"],["⚡","⚡"],["📱","📱"],["🔌","🔌"]]},
+    198:{"answer":"МОТОР","pool":"МОТОРАБВГДЕЖ","hint":"Механизм, который превращает энергию в движение.","photos":[["⚙️","⚙️"],["🚗","🚗"],["🏍️","🏍️"],["🔥","🔥"]]},
+    199:{"answer":"ТУРБИНА","pool":"ТУРБИНАВГДЕЖ","hint":"Вращающийся механизм, который получает энергию от потока.","photos":[["🌬️","🌬️"],["⚙️","⚙️"],["💨","💨"],["⚡","⚡"]]},
+    200:{"answer":"ГЕНЕРАТОР","pool":"ГЕНЕРАТОРБВДЖЗ","hint":"Устройство, которое производит электрическую энергию.","photos":[["⚡","⚡"],["⚙️","⚙️"],["🔌","🔌"],["🏭","🏭"]]},
+    201:{"answer":"МОЛЕКУЛА","pool":"МОЛЕКУЛАБВГДЖ","hint":"Группа связанных атомов, образующая вещество.","photos":[["⚛️","⚛️"],["🧪","🧪"],["🔗","🔗"],["🔬","🔬"]]},
+    202:{"answer":"АТОМ","pool":"АТОМБВГДЕЖЗИ","hint":"Одна из основных частиц, из которых состоит вещество.","photos":[["⚛️","⚛️"],["🔬","🔬"],["🧪","🧪"],["✨","✨"]]},
+    203:{"answer":"КЛЕТКА","pool":"КЛЕТКАБВГДЖЗ","hint":"Основная структурная единица живого организма.","photos":[["🔬","🔬"],["🧬","🧬"],["🦠","🦠"],["🌱","🌱"]]},
+    204:{"answer":"ДНК","pool":"ДНКАБВГЕЖЗИЙ","hint":"Молекула, которая хранит наследственную информацию.","photos":[["🧬","🧬"],["🧪","🧪"],["👨‍👩‍👧","👨‍👩‍👧"],["🔬","🔬"]]},
+    205:{"answer":"ФЕРМЕНТ","pool":"ФЕРМЕНТАБВГД","hint":"Биологическое вещество, ускоряющее химические реакции.","photos":[["🧪","🧪"],["⚗️","⚗️"],["🔬","🔬"],["🍽️","🍽️"]]},
+    206:{"answer":"НЕЙРОН","pool":"НЕЙРОНАБВГДЖ","hint":"Клетка нервной системы, передающая сигналы.","photos":[["🧠","🧠"],["⚡","⚡"],["🔗","🔗"],["🔬","🔬"]]},
+    207:{"answer":"ВИРУС","pool":"ВИРУСАБГДЕЖЗ","hint":"Микроскопический инфекционный агент.","photos":[["🦠","🦠"],["🔬","🔬"],["🧬","🧬"],["😷","😷"]]},
+    208:{"answer":"ИММУНИТЕТ","pool":"ИММУНИТЕТАБВГД","hint":"Система защиты организма от инфекций.","photos":[["🛡️","🛡️"],["🦠","🦠"],["💉","💉"],["🧬","🧬"]]},
+    209:{"answer":"ТЕЛЕСКОП","pool":"ТЕЛЕСКОПАБВГД","hint":"Прибор для наблюдения за далёкими объектами в космосе.","photos":[["🔭","🔭"],["🌌","🌌"],["⭐","⭐"],["🪐","🪐"]]},
+    210:{"answer":"МИКРОСКОП","pool":"МИКРОСКОПАБВГД","hint":"Прибор для сильного увеличения очень маленьких объектов.","photos":[["🔬","🔬"],["🦠","🦠"],["🧫","🧫"],["👁️","👁️"]]},
+    211:{"answer":"МЕРИДИАН","pool":"МЕРИДИАНБВГЖЗ","hint":"Условная линия на глобусе, соединяющая полюса.","photos":[["🌍","🌍"],["🗺️","🗺️"],["↕️","↕️"],["🧭","🧭"]]},
+    212:{"answer":"ЭКВАТОР","pool":"ЭКВАТОРБГДЕЖ","hint":"Воображаемая линия, делящая Землю на два полушария.","photos":[["🌍","🌍"],["⭕","⭕"],["☀️","☀️"],["🗺️","🗺️"]]},
+    213:{"answer":"ПОЛЮС","pool":"ПОЛЮСАБВГДЕЖ","hint":"Одна из крайних точек оси вращения планеты.","photos":[["🧊","🧊"],["🌍","🌍"],["🧭","🧭"],["❄️","❄️"]]},
+    214:{"answer":"КЛИМАТ","pool":"КЛИМАТБВГДЕЖ","hint":"Долговременный характер погоды в определённой местности.","photos":[["☀️","☀️"],["🌧️","🌧️"],["❄️","❄️"],["🌬️","🌬️"]]},
+    215:{"answer":"МУССОН","pool":"МУССОНАБВГДЕ","hint":"Сезонный ветер, который часто приносит сильные дожди.","photos":[["🌧️","🌧️"],["💨","💨"],["🌊","🌊"],["☁️","☁️"]]},
+    216:{"answer":"СЕЙСМОГРАФ","pool":"СЕЙСМОГРАФБВДЖЗ","hint":"Прибор, который записывает колебания земной поверхности.","photos":[["🌍","🌍"],["📈","📈"],["⚡","⚡"],["🏚️","🏚️"]]},
+    217:{"answer":"БАРОМЕТР","pool":"БАРОМЕТРВГДЖЗ","hint":"Прибор для измерения атмосферного давления.","photos":[["🌡️","🌡️"],["☁️","☁️"],["📉","📉"],["🌦️","🌦️"]]},
+    218:{"answer":"ТЕРМОМЕТР","pool":"ТЕРМОМЕТРАБВГД","hint":"Прибор для измерения температуры.","photos":[["🌡️","🌡️"],["🔥","🔥"],["❄️","❄️"],["🤒","🤒"]]},
+    219:{"answer":"КАЛЕЙДОСКОП","pool":"КАЛЕЙДОСКОПБВГЖЗ","hint":"Оптическая игрушка, создающая меняющиеся симметричные узоры.","photos":[["🔭","🔭"],["🌈","🌈"],["🔷","🔷"],["✨","✨"]]},
+    220:{"answer":"ПРОТОН","pool":"ПРОТОНАБВГДЕ","hint":"Положительно заряженная частица атомного ядра.","photos":[["⚛️","⚛️"],["➕","➕"],["🔬","🔬"],["🧪","🧪"]]},
+    221:{"answer":"ЭЛЕКТРОН","pool":"ЭЛЕКТРОНАБВГД","hint":"Отрицательно заряженная элементарная частица.","photos":[["⚛️","⚛️"],["➖","➖"],["⚡","⚡"],["🔬","🔬"]]},
+    222:{"answer":"ФОТОН","pool":"ФОТОНАБВГДЕЖ","hint":"Квант света и носитель электромагнитного излучения.","photos":[["💡","💡"],["✨","✨"],["⚡","⚡"],["🌈","🌈"]]},
+    223:{"answer":"КВАНТ","pool":"КВАНТБГДЕЖЗИ","hint":"Минимальная дискретная порция физической величины.","photos":[["⚛️","⚛️"],["🔬","🔬"],["✨","✨"],["📐","📐"]]},
+    224:{"answer":"ВАКУУМ","pool":"ВАКУУМБГДЕЖЗ","hint":"Пространство с крайне малым количеством вещества.","photos":[["🌌","🌌"],["🫙","🫙"],["⭕","⭕"],["🚀","🚀"]]},
+    225:{"answer":"ПЛАЗМА","pool":"ПЛАЗМАБВГДЕЖ","hint":"Ионизированное состояние вещества, встречающееся в звёздах.","photos":[["☀️","☀️"],["⚡","⚡"],["🔥","🔥"],["🌌","🌌"]]},
+    226:{"answer":"ИЗОТОП","pool":"ИЗОТОПАБВГДЕ","hint":"Разновидность атома одного элемента с другим числом нейтронов.","photos":[["⚛️","⚛️"],["🔢","🔢"],["🧪","🧪"],["☢️","☢️"]]},
+    227:{"answer":"ОРГАНИЗМ","pool":"ОРГАНИЗМБВДЕЖ","hint":"Отдельное живое существо как единая система.","photos":[["🌱","🌱"],["🐾","🐾"],["🧬","🧬"],["🫀","🫀"]]},
+    228:{"answer":"ЭКОСИСТЕМА","pool":"ЭКОСИСТЕМАБВГДЖ","hint":"Сообщество живых организмов и окружающей их среды.","photos":[["🌳","🌳"],["🐦","🐦"],["💧","💧"],["🌱","🌱"]]},
+    229:{"answer":"БИОСФЕРА","pool":"БИОСФЕРАВГДЖЗ","hint":"Область Земли, где существует жизнь.","photos":[["🌍","🌍"],["🌱","🌱"],["🐋","🐋"],["🌳","🌳"]]},
+    230:{"answer":"ГАЛАКТИКА","pool":"ГАЛАКТИКАБВДЕЖ","hint":"Огромная система звёзд, газа и пыли, связанная гравитацией.","photos":[["🌌","🌌"],["⭐","⭐"],["🌀","🌀"],["🔭","🔭"]]}
   };
   const TRANSLATED={
     en:{
@@ -366,7 +416,57 @@
       177:{"answer":"AMPLITUDE","pool":"AMPLITUDEBCFGH","hint":"The maximum displacement of an oscillation from its middle position."},
       178:{"answer":"RADIUS","pool":"RADIUSBCEFGH","hint":"The distance from the center of a circle or sphere to its edge."},
       179:{"answer":"DIAGRAM","pool":"DIAGRAMBCEFH","hint":"A visual graphic representation of data or relationships."},
-      180:{"answer":"LANDMARK","pool":"LANDMARKBCEFG","hint":"A noticeable feature that helps with orientation or direction."}
+      180:{"answer":"LANDMARK","pool":"LANDMARKBCEFG","hint":"A noticeable feature that helps with orientation or direction."},
+      181:{"answer":"PLANET","pool":"PLANETBCDFGH","hint":"A large celestial body that orbits a star."},
+      182:{"answer":"ICEBERG","pool":"ICEBERGADFHJ","hint":"A huge floating block of ice broken from a glacier."},
+      183:{"answer":"WATERFALL","pool":"WATERFALLBCDGH","hint":"A stream of water falling from a height."},
+      184:{"answer":"DELTA","pool":"DELTABCFGHJK","hint":"The area near a river mouth where it splits into branches."},
+      185:{"answer":"OASIS","pool":"OASISBCDEFGH","hint":"A green place with water in a desert."},
+      186:{"answer":"AVALANCHE","pool":"AVALANCHEBDFGJ","hint":"A mass of snow rushing down a mountain slope."},
+      187:{"answer":"TORNADO","pool":"TORNADOBCEFG","hint":"A violently rotating column of air."},
+      188:{"answer":"TSUNAMI","pool":"TSUNAMIBCDEF","hint":"A huge sea wave caused by an underwater event."},
+      189:{"answer":"CRATER","pool":"CRATERBDFGHJ","hint":"A round depression on a planet or volcano."},
+      190:{"answer":"CAVE","pool":"CAVEBDFGHJKL","hint":"A natural hollow inside rock or a mountain."},
+      191:{"answer":"COMPUTER","pool":"COMPUTERABDFG","hint":"A device that processes data and runs programs."},
+      192:{"answer":"MICROCHIP","pool":"MICROCHIPABDEF","hint":"A tiny electronic circuit inside modern devices."},
+      193:{"answer":"ROBOT","pool":"ROBOTACDEFGH","hint":"A machine able to perform programmed actions."},
+      194:{"answer":"ANTENNA","pool":"ANTENNABCDFG","hint":"A device for sending or receiving radio signals."},
+      195:{"answer":"RADAR","pool":"RADARBCEFGHJ","hint":"A system that detects objects using radio waves."},
+      196:{"answer":"LASER","pool":"LASERBCDFGHJ","hint":"A narrow and highly directed beam of light."},
+      197:{"answer":"BATTERY","pool":"BATTERYCDFGH","hint":"A source that stores electrical energy."},
+      198:{"answer":"ENGINE","pool":"ENGINEABCDFH","hint":"A mechanism that turns energy into motion."},
+      199:{"answer":"TURBINE","pool":"TURBINEACDFG","hint":"A rotating machine powered by a flowing fluid or gas."},
+      200:{"answer":"GENERATOR","pool":"GENERATORBCDFH","hint":"A device that produces electrical energy."},
+      201:{"answer":"MOLECULE","pool":"MOLECULEABDFG","hint":"A group of bonded atoms forming a substance."},
+      202:{"answer":"ATOM","pool":"ATOMBCDEFGHJ","hint":"One of the basic units that matter is made of."},
+      203:{"answer":"CELL","pool":"CELLABDFGHJK","hint":"The basic structural unit of a living organism."},
+      204:{"answer":"DNA","pool":"DNABCEFGHJKL","hint":"The molecule that stores hereditary information."},
+      205:{"answer":"ENZYME","pool":"ENZYMEABCDFG","hint":"A biological substance that speeds up chemical reactions."},
+      206:{"answer":"NEURON","pool":"NEURONABCDFG","hint":"A nerve cell that transmits signals."},
+      207:{"answer":"VIRUS","pool":"VIRUSABCDEFG","hint":"A microscopic infectious agent."},
+      208:{"answer":"IMMUNITY","pool":"IMMUNITYABCDE","hint":"The body's defense against infections."},
+      209:{"answer":"TELESCOPE","pool":"TELESCOPEABDFG","hint":"An instrument for observing distant objects in space."},
+      210:{"answer":"MICROSCOPE","pool":"MICROSCOPEABDFG","hint":"An instrument that magnifies very small objects."},
+      211:{"answer":"MERIDIAN","pool":"MERIDIANBCFGH","hint":"An imaginary line on Earth connecting the poles."},
+      212:{"answer":"EQUATOR","pool":"EQUATORBCDFG","hint":"An imaginary line dividing Earth into two hemispheres."},
+      213:{"answer":"POLE","pool":"POLEABCDFGHJ","hint":"One of the extreme points of a planet's rotation axis."},
+      214:{"answer":"CLIMATE","pool":"CLIMATEBDFGH","hint":"The long-term pattern of weather in a region."},
+      215:{"answer":"MONSOON","pool":"MONSOONABCDE","hint":"A seasonal wind that often brings heavy rain."},
+      216:{"answer":"SEISMOGRAPH","pool":"SEISMOGRAPHBCDFJ","hint":"An instrument that records ground vibrations."},
+      217:{"answer":"BAROMETER","pool":"BAROMETERCDFGH","hint":"An instrument for measuring atmospheric pressure."},
+      218:{"answer":"THERMOMETER","pool":"THERMOMETERABCDF","hint":"An instrument for measuring temperature."},
+      219:{"answer":"KALEIDOSCOPE","pool":"KALEIDOSCOPEBFGHJ","hint":"An optical toy that creates changing symmetrical patterns."},
+      220:{"answer":"PROTON","pool":"PROTONABCDEF","hint":"A positively charged particle in an atomic nucleus."},
+      221:{"answer":"ELECTRON","pool":"ELECTRONABDFG","hint":"A negatively charged elementary particle."},
+      222:{"answer":"PHOTON","pool":"PHOTONABCDEF","hint":"A quantum of light and carrier of electromagnetic radiation."},
+      223:{"answer":"QUANTUM","pool":"QUANTUMBCDEF","hint":"A smallest discrete amount of a physical quantity."},
+      224:{"answer":"VACUUM","pool":"VACUUMBDEFGH","hint":"A space containing extremely little matter."},
+      225:{"answer":"PLASMA","pool":"PLASMABCDEFG","hint":"An ionized state of matter found in stars."},
+      226:{"answer":"ISOTOPE","pool":"ISOTOPEABCDF","hint":"A form of an element with a different number of neutrons."},
+      227:{"answer":"ORGANISM","pool":"ORGANISMBCDEF","hint":"An individual living being functioning as a whole."},
+      228:{"answer":"ECOSYSTEM","pool":"ECOSYSTEMABDFG","hint":"A community of organisms interacting with their environment."},
+      229:{"answer":"BIOSPHERE","pool":"BIOSPHEREACDFG","hint":"The part of Earth where life exists."},
+      230:{"answer":"GALAXY","pool":"GALAXYBCDEFH","hint":"A huge system of stars, gas, and dust held by gravity."}
     },
     az:{
       1:{answer:'İT',pool:'İTPİŞKALMONR',hint:'İnsanın ən yaxın dostu adlandırılan ev heyvanı.'},
@@ -549,7 +649,57 @@
       177:{"answer":"AMPLİTUDA","pool":"AMPLİTUDABCÇEƏ","hint":"Titrəmənin orta vəziyyətdən ən böyük yayınması."},
       178:{"answer":"RADİUS","pool":"RADİUSBCÇEƏF","hint":"Dairə və ya kürənin mərkəzindən sərhədinə qədər məsafə."},
       179:{"answer":"DİAQRAM","pool":"DİAQRAMBCÇEƏ","hint":"Məlumatların və ya əlaqələrin qrafik təsviri."},
-      180:{"answer":"ORİYENTİR","pool":"ORİYENTİRABCÇD","hint":"İstiqaməti müəyyən etməyə kömək edən nəzərəçarpan obyekt və ya əlamət."}
+      180:{"answer":"ORİYENTİR","pool":"ORİYENTİRABCÇD","hint":"İstiqaməti müəyyən etməyə kömək edən nəzərəçarpan obyekt və ya əlamət."},
+      181:{"answer":"PLANET","pool":"PLANETBCÇDƏF","hint":"Ulduzun ətrafında hərəkət edən böyük göy cismi."},
+      182:{"answer":"AYSBERQ","pool":"AYSBERQCÇDƏF","hint":"Buzlaqdan qopmuş və suda üzən böyük buz parçası."},
+      183:{"answer":"ŞƏLALƏ","pool":"ŞƏLALƏBCÇDEF","hint":"Hündürlükdən aşağı tökülən su axını."},
+      184:{"answer":"DELTA","pool":"DELTABCÇƏFGĞ","hint":"Çayın mənsəbində qollara ayrıldığı ərazi."},
+      185:{"answer":"VAHA","pool":"VAHABCÇDEƏFG","hint":"Səhrada su və yaşıllıq olan yer."},
+      186:{"answer":"UÇQUN","pool":"UÇQUNABCDEƏF","hint":"Dağ yamacından sürətlə aşağı enən qar kütləsi."},
+      187:{"answer":"TORNADO","pool":"TORNADOBCÇEƏ","hint":"Güclü fırlanan hava burulğanı."},
+      188:{"answer":"SUNAMİ","pool":"SUNAMİBCÇDEƏ","hint":"Sualtı hadisə nəticəsində yaranan çox böyük dəniz dalğası."},
+      189:{"answer":"KRATER","pool":"KRATERBCÇDƏF","hint":"Planet və ya vulkan səthində dairəvi çökəklik."},
+      190:{"answer":"MAĞARA","pool":"MAĞARABCÇDEƏ","hint":"Qaya və ya dağın içində təbii boşluq."},
+      191:{"answer":"KOMPÜTER","pool":"KOMPÜTERABCÇD","hint":"Məlumatları emal edən və proqramları işlədən cihaz."},
+      192:{"answer":"MİKROÇİP","pool":"MİKROÇİPABCDE","hint":"Müasir cihazların içindəki kiçik elektron sxem."},
+      193:{"answer":"ROBOT","pool":"ROBOTACÇDEƏF","hint":"Proqramlaşdırılmış hərəkətləri yerinə yetirən maşın."},
+      194:{"answer":"ANTENA","pool":"ANTENABCÇDƏF","hint":"Radio siqnallarını ötürən və ya qəbul edən cihaz."},
+      195:{"answer":"RADAR","pool":"RADARBCÇEƏFG","hint":"Radio dalğaları ilə obyektləri aşkar edən sistem."},
+      196:{"answer":"LAZER","pool":"LAZERBCÇDƏFG","hint":"Dar və istiqamətləndirilmiş işıq şüası."},
+      197:{"answer":"BATAREYA","pool":"BATAREYACÇDƏF","hint":"Elektrik enerjisini saxlayan mənbə."},
+      198:{"answer":"MÜHƏRRİK","pool":"MÜHƏRRİKABCÇD","hint":"Enerjini hərəkətə çevirən mexanizm."},
+      199:{"answer":"TURBİN","pool":"TURBİNACÇDEƏ","hint":"Axından enerji alan fırlanan mexanizm."},
+      200:{"answer":"GENERATOR","pool":"GENERATORBCÇDƏ","hint":"Elektrik enerjisi istehsal edən cihaz."},
+      201:{"answer":"MOLEKUL","pool":"MOLEKULABCÇD","hint":"Maddəni yaradan bir-birinə bağlı atomlar qrupu."},
+      202:{"answer":"ATOM","pool":"ATOMBCÇDEƏFG","hint":"Maddənin təşkil olunduğu əsas vahidlərdən biri."},
+      203:{"answer":"HÜCEYRƏ","pool":"HÜCEYRƏABÇDF","hint":"Canlı orqanizmin əsas quruluş vahidi."},
+      204:{"answer":"DNT","pool":"DNTABCÇEƏFGĞ","hint":"İrsi məlumatı saxlayan molekul."},
+      205:{"answer":"FERMENT","pool":"FERMENTABCÇD","hint":"Kimyəvi reaksiyaları sürətləndirən bioloji maddə."},
+      206:{"answer":"NEYRON","pool":"NEYRONABCÇDƏ","hint":"Siqnalları ötürən sinir sistemi hüceyrəsi."},
+      207:{"answer":"VİRUS","pool":"VİRUSABCÇDEƏ","hint":"Mikroskopik yoluxucu amil."},
+      208:{"answer":"İMMUNİTET","pool":"İMMUNİTETABCÇD","hint":"Orqanizmin infeksiyalara qarşı müdafiə sistemi."},
+      209:{"answer":"TELESKOP","pool":"TELESKOPABCÇD","hint":"Kosmosdakı uzaq obyektləri müşahidə edən cihaz."},
+      210:{"answer":"MİKROSKOP","pool":"MİKROSKOPABCÇD","hint":"Çox kiçik obyektləri böyüdən cihaz."},
+      211:{"answer":"MERİDİAN","pool":"MERİDİANBCÇƏF","hint":"Yer kürəsində qütbləri birləşdirən şərti xətt."},
+      212:{"answer":"EKVATOR","pool":"EKVATORBCÇDƏ","hint":"Yeri iki yarımkürəyə bölən şərti xətt."},
+      213:{"answer":"QÜTB","pool":"QÜTBACÇDEƏFG","hint":"Planetin fırlanma oxunun son nöqtələrindən biri."},
+      214:{"answer":"İQLİM","pool":"İQLİMABCÇDEƏ","hint":"Müəyyən ərazidə havanın uzunmüddətli xüsusiyyəti."},
+      215:{"answer":"MUSSON","pool":"MUSSONABCÇDE","hint":"Çox vaxt güclü yağış gətirən mövsümi külək."},
+      216:{"answer":"SEYSMOQRAF","pool":"SEYSMOQRAFBCÇDƏ","hint":"Yer səthinin titrəyişlərini qeyd edən cihaz."},
+      217:{"answer":"BAROMETR","pool":"BAROMETRCÇDƏF","hint":"Atmosfer təzyiqini ölçən cihaz."},
+      218:{"answer":"TERMOMETR","pool":"TERMOMETRABCÇD","hint":"Temperaturu ölçən cihaz."},
+      219:{"answer":"KALEYDOSKOP","pool":"KALEYDOSKOPBCÇƏF","hint":"Dəyişən simmetrik naxışlar yaradan optik oyuncaq."},
+      220:{"answer":"PROTON","pool":"PROTONABCÇDE","hint":"Atom nüvəsində müsbət yüklü hissəcik."},
+      221:{"answer":"ELEKTRON","pool":"ELEKTRONABCÇD","hint":"Mənfi yüklü elementar hissəcik."},
+      222:{"answer":"FOTON","pool":"FOTONABCÇDEƏ","hint":"İşıq kvantı və elektromaqnit şüalanmasının daşıyıcısı."},
+      223:{"answer":"KVANT","pool":"KVANTBCÇDEƏF","hint":"Fiziki kəmiyyətin ən kiçik diskret porsiyası."},
+      224:{"answer":"VAKUUM","pool":"VAKUUMBCÇDEƏ","hint":"Çox az maddə olan məkan."},
+      225:{"answer":"PLAZMA","pool":"PLAZMABCÇDEƏ","hint":"Ulduzlarda rast gəlinən ionlaşmış maddə halı."},
+      226:{"answer":"İZOTOP","pool":"İZOTOPABCÇDE","hint":"Neytron sayı fərqli olan eyni element atomunun növü."},
+      227:{"answer":"ORQANİZM","pool":"ORQANİZMBCÇDE","hint":"Vahid sistem kimi fəaliyyət göstərən canlı varlıq."},
+      228:{"answer":"EKOSİSTEM","pool":"EKOSİSTEMABCÇD","hint":"Canlıların və onların mühitinin qarşılıqlı sistemi."},
+      229:{"answer":"BİOSFER","pool":"BİOSFERACÇDƏ","hint":"Yer üzündə həyatın mövcud olduğu sahə."},
+      230:{"answer":"QALAKTİKA","pool":"QALAKTİKABCÇDE","hint":"Cazibə ilə bağlı nəhəng ulduz, qaz və toz sistemi."}
     }
   };
   let gameLang='ru';try{gameLang=localStorage.getItem('pw.language')||'ru'}catch{}
@@ -561,7 +711,7 @@
   function validateLanguageLevels(){
     const supported=['ru','en','az'];
     for(const lang of supported){
-      for(let n=1;n<=180;n++){
+      for(let n=1;n<=230;n++){
         const item=lang==='ru'?LEVELS[n]:TRANSLATED[lang][n];
         if(!item||!item.answer||!item.pool||!item.hint)throw new Error('Incomplete language level '+lang+' '+n);
         const need=[...item.answer].reduce((m,ch)=>(m[ch]=(m[ch]||0)+1,m),{});
@@ -572,9 +722,9 @@
   }
   validateLanguageLevels();
   const GAME_UI={
-    ru:{chapter:n=>'Глава '+n,warm:'Разминка',assoc:'Ассоциации',chapter3:'Связи',chapter4:'Глубина',chapter5:'Мастерство',level:n=>'Уровень '+n,textHint:'Текстовая подсказка',tap:'Нажми, чтобы открыть',wrong:'Неверное слово. Попробуй ещё раз.',checking:'Проверяю и сохраняю ответ…',passed:n=>'Уровень '+n+' пройден!',reward:'+20 монет · +15 XP',already:'Награда за этот уровень уже получена',next:'СЛЕДУЮЩИЙ УРОВЕНЬ',sync:'Профиль синхронизирован.',shuffle:'Буквы перемешаны. Бесплатно.',letter:'Буква открыта. −50 монет.',remove:'Лишние буквы убраны. −100 монет.',text:'Подсказка открыта. −150 монет.',textOpened:'Подсказка уже открыта.',allLetters:'Все буквы уже открыты.',noExtra:'Лишних букв не осталось.',hintWait:'Подсказка: ожидаю ответ сервера…',locked:n=>'Сначала пройди уровень '+n+'.',home:'НА ГЛАВНУЮ',nextChapter:'СЛЕДУЮЩАЯ ГЛАВА',chapterPassed:n=>'Глава '+n+' пройдена!',chapterUnlocked:n=>'Глава '+n+' открыта',newTitle:title=>'Новый титул: '+title,slot:n=>'Буква '+n,image:n=>'Изображение '+n,placeFail:'Не удалось разместить букву.'},
-    en:{chapter:n=>'Chapter '+n,warm:'Warm-up',assoc:'Associations',chapter3:'Connections',chapter4:'Depth',chapter5:'Mastery',level:n=>'Level '+n,textHint:'Text hint',tap:'Tap to reveal',wrong:'Wrong word. Try again.',checking:'Checking and saving your answer…',passed:n=>'Level '+n+' completed!',reward:'+20 coins · +15 XP',already:'Reward for this level has already been claimed',next:'NEXT LEVEL',sync:'Profile synced.',shuffle:'Letters shuffled. Free.',letter:'Letter revealed. −50 coins.',remove:'Extra letters removed. −100 coins.',text:'Hint revealed. −150 coins.',textOpened:'Hint already revealed.',allLetters:'All letters are already revealed.',noExtra:'No extra letters remain.',hintWait:'Getting hint from the server…',locked:n=>'Complete level '+n+' first.',home:'HOME',nextChapter:'NEXT CHAPTER',chapterPassed:n=>'Chapter '+n+' completed!',chapterUnlocked:n=>'Chapter '+n+' unlocked',newTitle:title=>'New title: '+title,slot:n=>'Letter '+n,image:n=>'Image '+n,placeFail:'Could not place the letter.'},
-    az:{chapter:n=>'Fəsil '+n,warm:'İsinmə',assoc:'Assosiasiyalar',chapter3:'Əlaqələr',chapter4:'Dərinlik',chapter5:'Ustalıq',level:n=>n+'-ci səviyyə',textHint:'Mətn ipucu',tap:'Açmaq üçün toxun',wrong:'Söz yanlışdır. Yenidən cəhd et.',checking:'Cavab yoxlanılır və yadda saxlanılır…',passed:n=>n+'-ci səviyyə keçildi!',reward:'+20 sikkə · +15 XP',already:'Bu səviyyənin mükafatı artıq alınıb',next:'NÖVBƏTİ SƏVİYYƏ',sync:'Profil sinxronlaşdırıldı.',shuffle:'Hərflər qarışdırıldı. Pulsuz.',letter:'Hərf açıldı. −50 sikkə.',remove:'Artıq hərflər silindi. −100 sikkə.',text:'İpucu açıldı. −150 sikkə.',textOpened:'İpucu artıq açılıb.',allLetters:'Bütün hərflər artıq açılıb.',noExtra:'Artıq hərf qalmayıb.',hintWait:'İpucu serverdən alınır…',locked:n=>'Əvvəlcə '+n+'-ci səviyyəni keç.',home:'ANA SƏHİFƏ',nextChapter:'NÖVBƏTİ FƏSİL',chapterPassed:n=>n+'-ci fəsil tamamlandı!',chapterUnlocked:n=>n+'-ci fəsil açıldı',newTitle:title=>'Yeni titul: '+title,slot:n=>n+'-ci hərf',image:n=>n+'-ci şəkil',placeFail:'Hərfi yerləşdirmək mümkün olmadı.'}
+    ru:{chapter:n=>'Глава '+n,warm:'Разминка',assoc:'Ассоциации',chapter3:'Связи',chapter4:'Глубина',chapter5:'Мастерство',chapter6:'Исследование',level:n=>'Уровень '+n,textHint:'Текстовая подсказка',tap:'Нажми, чтобы открыть',wrong:'Неверное слово. Попробуй ещё раз.',checking:'Проверяю и сохраняю ответ…',passed:n=>'Уровень '+n+' пройден!',reward:'+20 монет · +15 XP',already:'Награда за этот уровень уже получена',next:'СЛЕДУЮЩИЙ УРОВЕНЬ',sync:'Профиль синхронизирован.',shuffle:'Буквы перемешаны. Бесплатно.',letter:'Буква открыта. −50 монет.',remove:'Лишние буквы убраны. −100 монет.',text:'Подсказка открыта. −150 монет.',textOpened:'Подсказка уже открыта.',allLetters:'Все буквы уже открыты.',noExtra:'Лишних букв не осталось.',hintWait:'Подсказка: ожидаю ответ сервера…',locked:n=>'Сначала пройди уровень '+n+'.',home:'НА ГЛАВНУЮ',nextChapter:'СЛЕДУЮЩАЯ ГЛАВА',chapterPassed:n=>'Глава '+n+' пройдена!',chapterUnlocked:n=>'Глава '+n+' открыта',newTitle:title=>'Новый титул: '+title,slot:n=>'Буква '+n,image:n=>'Изображение '+n,placeFail:'Не удалось разместить букву.'},
+    en:{chapter:n=>'Chapter '+n,warm:'Warm-up',assoc:'Associations',chapter3:'Connections',chapter4:'Depth',chapter5:'Mastery',chapter6:'Exploration',level:n=>'Level '+n,textHint:'Text hint',tap:'Tap to reveal',wrong:'Wrong word. Try again.',checking:'Checking and saving your answer…',passed:n=>'Level '+n+' completed!',reward:'+20 coins · +15 XP',already:'Reward for this level has already been claimed',next:'NEXT LEVEL',sync:'Profile synced.',shuffle:'Letters shuffled. Free.',letter:'Letter revealed. −50 coins.',remove:'Extra letters removed. −100 coins.',text:'Hint revealed. −150 coins.',textOpened:'Hint already revealed.',allLetters:'All letters are already revealed.',noExtra:'No extra letters remain.',hintWait:'Getting hint from the server…',locked:n=>'Complete level '+n+' first.',home:'HOME',nextChapter:'NEXT CHAPTER',chapterPassed:n=>'Chapter '+n+' completed!',chapterUnlocked:n=>'Chapter '+n+' unlocked',newTitle:title=>'New title: '+title,slot:n=>'Letter '+n,image:n=>'Image '+n,placeFail:'Could not place the letter.'},
+    az:{chapter:n=>'Fəsil '+n,warm:'İsinmə',assoc:'Assosiasiyalar',chapter3:'Əlaqələr',chapter4:'Dərinlik',chapter5:'Ustalıq',chapter6:'Araşdırma',level:n=>n+'-ci səviyyə',textHint:'Mətn ipucu',tap:'Açmaq üçün toxun',wrong:'Söz yanlışdır. Yenidən cəhd et.',checking:'Cavab yoxlanılır və yadda saxlanılır…',passed:n=>n+'-ci səviyyə keçildi!',reward:'+20 sikkə · +15 XP',already:'Bu səviyyənin mükafatı artıq alınıb',next:'NÖVBƏTİ SƏVİYYƏ',sync:'Profil sinxronlaşdırıldı.',shuffle:'Hərflər qarışdırıldı. Pulsuz.',letter:'Hərf açıldı. −50 sikkə.',remove:'Artıq hərflər silindi. −100 sikkə.',text:'İpucu açıldı. −150 sikkə.',textOpened:'İpucu artıq açılıb.',allLetters:'Bütün hərflər artıq açılıb.',noExtra:'Artıq hərf qalmayıb.',hintWait:'İpucu serverdən alınır…',locked:n=>'Əvvəlcə '+n+'-ci səviyyəni keç.',home:'ANA SƏHİFƏ',nextChapter:'NÖVBƏTİ FƏSİL',chapterPassed:n=>n+'-ci fəsil tamamlandı!',chapterUnlocked:n=>n+'-ci fəsil açıldı',newTitle:title=>'Yeni titul: '+title,slot:n=>n+'-ci hərf',image:n=>n+'-ci şəkil',placeFail:'Hərfi yerləşdirmək mümkün olmadı.'}
   };
   const CHAPTER_TITLES={
     ru:{1:'Новичок',2:'Любитель',3:'Знаток',4:'Опытный',5:'Эксперт',6:'Профессионал',7:'Мастер',8:'Виртуоз',9:'Легенда',10:'Мастер слов'},
@@ -590,9 +740,9 @@
 
   const ui=GAME_UI[gameLang]||GAME_UI.ru;
   document.documentElement.lang=gameLang;
-  const chapterNum=levelId<=20?1:levelId<=50?2:levelId<=90?3:levelId<=131?4:5;
+  const chapterNum=levelId<=20?1:levelId<=50?2:levelId<=90?3:levelId<=131?4:levelId<=180?5:6;
   document.querySelector('.game-head>div b').textContent=ui.chapter(chapterNum);
-  $('levelTitle').textContent=(chapterNum===1?ui.warm:chapterNum===2?ui.assoc:chapterNum===3?ui.chapter3:chapterNum===4?ui.chapter4:ui.chapter5)+' · '+ui.level(levelId);
+  $('levelTitle').textContent=(chapterNum===1?ui.warm:chapterNum===2?ui.assoc:chapterNum===3?ui.chapter3:chapterNum===4?ui.chapter4:chapterNum===5?ui.chapter5:ui.chapter6)+' · '+ui.level(levelId);
   $('textHint').querySelector('b').textContent=ui.textHint;$('hintValue').textContent=ui.tap;
   $('slots').style.gridTemplateColumns='repeat('+answer.length+',1fr)';$('slots').classList.toggle('long-answer',answer.length>=9);
   level.photos.forEach(([emoji],index)=>{const d=document.createElement('div');d.className='photo';d.setAttribute('role','img');d.setAttribute('aria-label',ui.image(index+1));d.textContent=emoji;$('photos').append(d);});
@@ -640,8 +790,8 @@
     else if(levelId===50){if(chapterNote){chapterNote.hidden=false;chapterNote.textContent=ui.chapterPassed(2)+' '+ui.newTitle(chapterEarnedTitle(2))+'. '+ui.chapterUnlocked(3)+'.';}next.href='./game.html?level=51';next.innerHTML=ui.nextChapter+' <span>▶</span>';}
     else if(levelId===90){if(chapterNote){chapterNote.hidden=false;chapterNote.textContent=ui.chapterPassed(3)+' '+ui.newTitle(chapterEarnedTitle(3))+'. '+ui.chapterUnlocked(4)+'.';}next.href='./game.html?level=91';next.innerHTML=ui.nextChapter+' <span>▶</span>';}
     else if(levelId===131){if(chapterNote){chapterNote.hidden=false;chapterNote.textContent=ui.chapterPassed(4)+' '+ui.newTitle(chapterEarnedTitle(4))+'. '+ui.chapterUnlocked(5)+'.';}next.href='./game.html?level=132';next.innerHTML=ui.nextChapter+' <span>▶</span>';}
-    else if(levelId===180){if(chapterNote){chapterNote.hidden=false;chapterNote.textContent=ui.chapterPassed(5)+' '+ui.newTitle(chapterEarnedTitle(5))+'.';}next.href='./index.html';next.innerHTML=ui.home+' <span>✓</span>';}
-    else if(levelId<180){next.href='./game.html?level='+(levelId+1);next.innerHTML=ui.next+' <span>▶</span>';}
+    else if(levelId===180){if(chapterNote){chapterNote.hidden=false;chapterNote.textContent=ui.chapterPassed(5)+' '+ui.newTitle(chapterEarnedTitle(5))+'. '+ui.chapterUnlocked(6)+'.';}next.href='./game.html?level=181';next.innerHTML=ui.nextChapter+' <span>▶</span>';}\n    else if(levelId===230){if(chapterNote){chapterNote.hidden=false;chapterNote.textContent=ui.chapterPassed(6)+' '+ui.newTitle(chapterEarnedTitle(6))+'.';}next.href='./index.html';next.innerHTML=ui.home+' <span>✓</span>';}
+    else if(levelId<230){next.href='./game.html?level='+(levelId+1);next.innerHTML=ui.next+' <span>▶</span>';}
     else{next.href='./index.html';next.innerHTML=ui.home+' <span>✓</span>';}
   }
   async function check(){
