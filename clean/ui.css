@@ -250,3 +250,20 @@ html[data-theme="light"] .challenge-head p{color:#5d7480}
 html[data-theme="light"] .challenge-card{background:#f8fbfd;color:#17303c}
 html[data-theme="light"] .challenge-copy small{color:#627a86}
 html[data-theme="light"] .challenge-copy em{background:#e6eef2;color:#395563}
+
+
+/* Playable challenge modes */
+#challengeScreen{max-width:500px}
+.challenge-run-panel{margin:18px 0;padding:18px;border:1px solid #4c7288;border-radius:20px;background:linear-gradient(160deg,#0b3348e8,#071f31ee);text-align:center;box-shadow:0 10px 26px #0004}
+.challenge-run-icon{display:grid;place-items:center;width:72px;height:72px;margin:2px auto 8px;border-radius:22px;background:#ffffff13;border:1px solid #ffffff26;font-size:38px}
+.challenge-run-panel h1{margin:6px 0;font-size:27px}.challenge-run-panel>p{margin:5px auto 14px;max-width:360px;color:#b7cbd5;font-size:12px;line-height:1.5}
+.challenge-intro-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:12px 0}.challenge-intro-stats>div{padding:10px;border:1px solid #365f74;border-radius:12px;background:#06283b}.challenge-intro-stats small,.challenge-intro-stats b{display:block}.challenge-intro-stats small{color:#97b5c4;font-size:9px}.challenge-intro-stats b{margin-top:3px;font-size:18px}.challenge-local-note{grid-column:1/-1;color:#8fa9b6;font-size:9px}
+.challenge-start{width:100%;border:0}.challenge-start:disabled{filter:grayscale(.6);opacity:.55}
+.challenge-energy-buy{margin-top:10px}.challenge-purchase-note{display:block;margin-top:8px;color:#e0c670;font-size:10px}.challenge-energy-countdown{margin:8px 0 0!important;color:#f0d67d!important;font-size:11px!important}
+.challenge-hud{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin:14px 0 2px}.challenge-hud>div{padding:8px 4px;border:1px solid #35637a;border-radius:12px;background:#072b3f;text-align:center}.challenge-hud small,.challenge-hud b{display:block}.challenge-hud small{color:#9cb8c5;font-size:8px}.challenge-hud b{margin-top:3px;font-size:15px;color:#fff}
+.challenge-puzzle-tools{display:flex;justify-content:flex-end;margin-top:13px}.challenge-puzzle-tools .tool{min-width:64px}
+#challengeStatus{min-height:38px}.challenge-good{border-color:#58d892!important;color:#9ff0bd!important}
+.challenge-result{margin-top:20px}.challenge-result .success-copy small{display:block;margin-top:5px}.challenge-result .next-level{width:100%;border:0;margin-top:10px}.challenge-home-link{display:block;text-decoration:none;text-align:center;margin-top:10px}
+html[data-theme="light"] .challenge-run-panel,html[data-theme="light"] .challenge-hud>div,html[data-theme="light"] .challenge-intro-stats>div{background:#f8fbfd;color:#17303c;border-color:#b9ccd5}
+html[data-theme="light"] .challenge-run-panel>p,html[data-theme="light"] .challenge-hud small,html[data-theme="light"] .challenge-intro-stats small{color:#617985}
+@media(max-width:380px){.challenge-hud{gap:5px}.challenge-hud>div{padding:7px 2px}.challenge-hud b{font-size:13px}.challenge-hud small{font-size:7px}}
