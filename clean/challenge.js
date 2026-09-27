@@ -102,9 +102,9 @@ function renderIntro(){
  else{$('challengeStart').disabled=false;$('energyRefill').hidden=true;$('energyRefillNote').hidden=true;if(mode==='nohint'){add(x.record,state?.nohint_best_streak||0);add(x.errors,'❤️❤️❤️')}else{add(x.record,state?.blitz_best_score||0);add(x.series,state?.blitz_best_streak||0)}}
  if(!serverMode){const note=document.createElement('small');note.className='challenge-local-note';note.textContent=x.serverFallback;stats.append(note)}
 }
-async function loadState(){try{state=await api('state');renderIntro()}catch{state=localRead();serverMode=false;renderIntro()}}
+async function loadState(){try{state=await api('state');renderIntro()}catch{if(rawInit()){state={energy:5,energy_max:5,next_energy_at:null,limited_best_score:0,nohint_best_streak:0,blitz_best_score:0,blitz_best_streak:0};serverMode=true;renderIntro();$('challengeStart').disabled=true;pw?.status?.(lang()==='en'?'Could not load the mode. Try again.':lang()==='az'?'Rejimi yükləmək olmadı. Yenidən cəhd et.':'Не удалось загрузить режим. Попробуй ещё раз.')}else{state=localRead();serverMode=false;renderIntro()}}}
 async function startRun(){
- try{state=await api('start',{mode,language:lang()})}catch(e){if(e?.data?.challenge)state=e.data.challenge;if(String(e?.message)==='challenge_no_energy'){renderIntro();flash(tr().energyEmpty);return}state=localRead()}
+ try{state=await api('start',{mode,language:lang()})}catch(e){if(e?.data?.challenge)state=e.data.challenge;if(String(e?.message)==='challenge_no_energy'){renderIntro();pw?.status?.(tr().energyEmpty);return}if(rawInit()){pw?.status?.(lang()==='en'?'Could not start the mode. Try again.':lang()==='az'?'Rejimi başlatmaq olmadı. Yenidən cəhd et.':'Не удалось запустить режим. Попробуй ещё раз.');return}state=localRead()}
  running=true;hearts=3;correct=0;streak=0;bestRunStreak=0;score=0;resetOrder();clearInterval(timer);clearInterval(energyTimer);
  $('challengeIntro').hidden=true;$('challengeResult').hidden=true;$('challengeHud').hidden=false;$('challengePuzzle').hidden=false;
  if(mode==='blitz'){deadline=Date.now()+60000;timer=setInterval(()=>{updateHud();if(running&&Date.now()>=deadline)finish('time')},150)}
