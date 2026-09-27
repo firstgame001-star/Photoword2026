@@ -49,9 +49,9 @@ if(!index.includes('id="profileTitle"'))throw Error('Chapter-earned profile titl
 if(!homeJs.includes("chapter_progress_mode") && !homeJs.includes('shownChapterLevel'))throw Error('Absolute chapter progress helper is missing');
 if(homeJs.includes('requestAnimationFrame(()=>showHomeChapter'))throw Error('Initial carousel must not auto-scroll after profile sync');
 for(let n=1;n<=10;n++){
- const homeNeed=n===1?'#homeChapter1':('[data-home-chapter="'+n+'"]');
+ const hasHome=uiCss.includes('#homeChapter'+n)||uiCss.includes('[data-home-chapter="'+n+'"]');
  const listNeed='#chapter'+n+'Select';
- if(!uiCss.includes(homeNeed)||!uiCss.includes(listNeed))throw Error('Missing chapter background '+n);
+ if(!hasHome||!uiCss.includes(listNeed))throw Error('Missing chapter background '+n);
 }
 if(release.ui?.chapter_progress_mode!=='absolute_level')throw Error('Release must declare absolute chapter progress');
 if(release.ui?.chapter_titles!==true)throw Error('Release must declare chapter title system');
