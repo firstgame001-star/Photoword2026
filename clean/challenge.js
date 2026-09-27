@@ -121,7 +121,7 @@ async function finish(reason){
 }
 function openMode(m){
  if(!I.ru[m])m='blitz';mode=m;document.documentElement.lang=lang();document.querySelectorAll('.screen').forEach(e=>e.classList.toggle('active',e.id==='challengeScreen'));window.scrollTo(0,0);
- $('challengeIntro').hidden=false;$('challengeHud').hidden=true;$('challengePuzzle').hidden=true;$('challengeResult').hidden=true;loadState();
+ $('challengeHome').textContent=tr().home;$('challengeIntro').hidden=false;$('challengeHud').hidden=true;$('challengePuzzle').hidden=true;$('challengeResult').hidden=true;loadState();
 }
 function closeMode(){running=false;clearInterval(timer);clearInterval(energyTimer);document.querySelectorAll('.screen').forEach(e=>e.classList.toggle('active',e.id==='home'));window.scrollTo(0,0)}
 $('challengeStart')?.addEventListener('click',startRun);$('challengeAgain')?.addEventListener('click',startRun);$('challengeShuffle')?.addEventListener('click',()=>{if(!running)return;tiles=shuffle([...tiles]);selected.fill(null);used.clear();renderInput()});$('challengeBack')?.addEventListener('click',closeMode);$('challengeHome')?.addEventListener('click',closeMode);
