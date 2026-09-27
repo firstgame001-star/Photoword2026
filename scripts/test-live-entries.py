@@ -4,7 +4,7 @@ from pathlib import Path
 from playwright.sync_api import sync_playwright, expect
 
 BASE='https://firstgame001-star.github.io/Photoword2026/'
-RELEASE='20260927-r68'
+RELEASE='20260927-r69'
 OUT=Path('test-results'); OUT.mkdir(exist_ok=True)
 
 for attempt in range(48):
@@ -251,7 +251,57 @@ ANSWERS={
   "ОРГАНИЗМ",
   "ЭКОСИСТЕМА",
   "БИОСФЕРА",
-  "ГАЛАКТИКА"
+  "ГАЛАКТИКА",
+  "ГОРОД",
+  "СТОЛИЦА",
+  "КРЕПОСТЬ",
+  "БАШНЯ",
+  "АРКА",
+  "КОЛОННА",
+  "ФОНТАН",
+  "ПАМЯТНИК",
+  "ПИРАМИДА",
+  "АМФИТЕАТР",
+  "БИБЛИОТЕКА",
+  "УНИВЕРСИТЕТ",
+  "БОЛЬНИЦА",
+  "ТЕАТР",
+  "СТАДИОН",
+  "ФАБРИКА",
+  "ЗАВОД",
+  "ГАВАНЬ",
+  "РЫНОК",
+  "БАНК",
+  "СУД",
+  "ПАРЛАМЕНТ",
+  "МЭРИЯ",
+  "ПЛОЩАДЬ",
+  "УЛИЦА",
+  "ПЕРЕКРЕСТОК",
+  "СВЕТОФОР",
+  "ТРОТУАР",
+  "ПАРК",
+  "БУЛЬВАР",
+  "НАБЕРЕЖНАЯ",
+  "ВОКЗАЛ",
+  "АЭРОПОРТ",
+  "СТАНЦИЯ",
+  "ТЕРМИНАЛ",
+  "ЭСКАЛАТОР",
+  "ЛИФТ",
+  "ТУННЕЛЬ",
+  "ПЛОТИНА",
+  "АКВЕДУК",
+  "ШОССЕ",
+  "ПЕРЕУЛОК",
+  "РАЙОН",
+  "КВАРТАЛ",
+  "ПРИГОРОД",
+  "МЕГАПОЛИС",
+  "НАСЕЛЕНИЕ",
+  "ОБЩЕСТВО",
+  "КУЛЬТУРА",
+  "ЦИВИЛИЗАЦИЯ"
  ],
  "en": [
   "DOG",
@@ -483,7 +533,57 @@ ANSWERS={
   "ORGANISM",
   "ECOSYSTEM",
   "BIOSPHERE",
-  "GALAXY"
+  "GALAXY",
+  "CITY",
+  "CAPITAL",
+  "FORTRESS",
+  "TOWER",
+  "ARCH",
+  "COLUMN",
+  "FOUNTAIN",
+  "MONUMENT",
+  "PYRAMID",
+  "AMPHITHEATER",
+  "LIBRARY",
+  "UNIVERSITY",
+  "HOSPITAL",
+  "THEATER",
+  "STADIUM",
+  "FACTORY",
+  "PLANT",
+  "HARBOR",
+  "MARKET",
+  "BANK",
+  "COURT",
+  "PARLIAMENT",
+  "CITYHALL",
+  "SQUARE",
+  "STREET",
+  "CROSSROAD",
+  "TRAFFICLIGHT",
+  "SIDEWALK",
+  "PARK",
+  "BOULEVARD",
+  "EMBANKMENT",
+  "TERMINUS",
+  "AIRPORT",
+  "STATION",
+  "TERMINAL",
+  "ESCALATOR",
+  "ELEVATOR",
+  "TUNNEL",
+  "DAM",
+  "AQUEDUCT",
+  "HIGHWAY",
+  "ALLEY",
+  "DISTRICT",
+  "BLOCK",
+  "SUBURB",
+  "MEGACITY",
+  "POPULATION",
+  "SOCIETY",
+  "CULTURE",
+  "CIVILIZATION"
  ],
  "az": [
   "İT",
@@ -715,9 +815,63 @@ ANSWERS={
   "ORQANİZM",
   "EKOSİSTEM",
   "BİOSFER",
-  "QALAKTİKA"
+  "QALAKTİKA",
+  "ŞƏHƏR",
+  "PAYTAXT",
+  "QALA",
+  "QÜLLƏ",
+  "TAĞ",
+  "SÜTUN",
+  "FƏVVARƏ",
+  "ABİDƏ",
+  "PİRAMİDA",
+  "AMFİTEATR",
+  "KİTABXANA",
+  "UNİVERSİTET",
+  "XƏSTƏXANA",
+  "TEATR",
+  "STADİON",
+  "FABRİK",
+  "ZAVOD",
+  "LİMAN",
+  "BAZAR",
+  "BANK",
+  "MƏHKƏMƏ",
+  "PARLAMENT",
+  "BƏLƏDİYYƏ",
+  "MEYDAN",
+  "KÜÇƏ",
+  "YOLAYRICI",
+  "SVETOFOR",
+  "SƏKİ",
+  "PARK",
+  "BULVAR",
+  "SAHİLBOYU",
+  "VAĞZAL",
+  "AEROPORT",
+  "STANSİYA",
+  "TERMİNAL",
+  "ESKALATOR",
+  "LİFT",
+  "TUNEL",
+  "BƏND",
+  "AKVEDUK",
+  "ŞOSSE",
+  "DÖNGƏ",
+  "RAYON",
+  "MƏHƏLLƏ",
+  "ŞƏHƏRYANI",
+  "MEQAPOLİS",
+  "ƏHALİ",
+  "CƏMİYYƏT",
+  "MƏDƏNİYYƏT",
+  "SİVİLİZASİYA"
  ]
 }
+for _lang,_answers in ANSWERS.items():
+    assert len(_answers)==280,(_lang,len(_answers))
+    assert len(set(_answers))==280,('duplicate-main-answer',_lang)
+
 HINTS={
 'ru':{1:'Домашнее животное',11:'Она появляется рядом',21:'Соединяет два берега',31:'Её ставят на документ',41:'Направленная величина',51:'Повторяющийся рисунок'},
 'en':{1:'loyal domestic animal',11:'object blocks light',21:'connects two sides',31:'put on a document',41:'directed quantity',51:'repeating pattern'},
@@ -965,11 +1119,11 @@ with sync_playwright() as pw:
       assert not relevant_errors(errors),errors;ctx.close()
 
     # Representative main-game browser checks. Loading game.js also validates every published answer/pool in RU/EN/AZ.
-    sample_levels=[1,20,21,50,51,60,61,90,91,100,101,131,132,150,180,181,200,230]
+    sample_levels=[1,20,21,50,51,60,61,90,91,100,101,131,132,150,180,181,200,230,231,250,280]
     for language in ['ru','en','az']:
       ctx=browser.new_context(viewport={'width':390,'height':800},has_touch=True,is_mobile=True)
       ctx.add_init_script(f"localStorage.setItem('pw.language','{language}'); localStorage.setItem('pw.theme','game');")
-      account={'photoword_id':'PW-TESTONLY','first_name':'Test','last_name':'','username':None,'game_nickname':None,'nickname_changed':False,'coins':10000,'xp':0,'completed_levels':0,'current_level':231,'rank':1,'daily_streak':0,'last_daily_reward':None}
+      account={'photoword_id':'PW-TESTONLY','first_name':'Test','last_name':'','username':None,'game_nickname':None,'nickname_changed':False,'coins':10000,'xp':0,'completed_levels':0,'current_level':281,'rank':1,'daily_streak':0,'last_daily_reward':None}
       completed=set();install_mock(ctx,account,completed,language);page=ctx.new_page();errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
       for level in sample_levels:
         page.goto(BASE+f'clean/game.html?level={level}#'+fragment,wait_until='domcontentloaded',timeout=45000)
@@ -997,11 +1151,13 @@ with sync_playwright() as pw:
         elif level==180:
           expect(page.locator('#successChapter')).to_be_visible();expect(page.locator('#successChapter')).to_contain_text({'ru':'Эксперт','en':'Expert','az':'Ekspert'}[language]);expect(page.locator('#nextLevel')).to_have_attribute('href','./game.html?level=181')
         elif level==230:
-          expect(page.locator('#successChapter')).to_be_visible();expect(page.locator('#successChapter')).to_contain_text({'ru':'Профессионал','en':'Professional','az':'Peşəkar'}[language]);expect(page.locator('#nextLevel')).to_have_attribute('href','./index.html')
+          expect(page.locator('#successChapter')).to_be_visible();expect(page.locator('#successChapter')).to_contain_text({'ru':'Профессионал','en':'Professional','az':'Peşəkar'}[language]);expect(page.locator('#nextLevel')).to_have_attribute('href','./game.html?level=231')
+        elif level==280:
+          expect(page.locator('#successChapter')).to_be_visible();expect(page.locator('#successChapter')).to_contain_text({'ru':'Мастер','en':'Master','az':'Usta'}[language]);expect(page.locator('#nextLevel')).to_have_attribute('href','./index.html')
       assert account['completed_levels']==len(sample_levels) and account['xp']==15*len(sample_levels)
-      page.screenshot(path=str(OUT/f'{engine}-{language}-level230.png'),full_page=True)
+      page.screenshot(path=str(OUT/f'{engine}-{language}-level280.png'),full_page=True)
       assert not relevant_errors(errors),errors
-      report={'engine':engine,'language':language,'levels':'1-230 validated / boundary samples played','checks':['runtime validation of all 230 answer pools','chapter 1 sample','chapter 2 boundaries 21 and 50','completed chapter 3 through 90','chapter 4 complete 91-131','chapter 5 complete 132-180','chapter 6 complete 181-230','transitions at 20, 50, 90, 131, 180 and completion at 230','localized text hint','letter hint','remove hint','level 100 continues to 101, level 131 opens 132, level 180 opens 181, and level 230 returns home'],'result':'PASS'}
+      report={'engine':engine,'language':language,'levels':'1-280 validated / boundary samples played','checks':['runtime validation of all 280 answer pools','chapter 1 sample','chapter 2 boundaries 21 and 50','completed chapter 3 through 90','chapter 4 complete 91-131','chapter 5 complete 132-180','chapter 6 complete 181-230','chapter 7 complete 231-280','transitions at 20, 50, 90, 131, 180, 230 and completion at 280','localized text hint','letter hint','remove hint','level 100 continues to 101, level 131 opens 132, level 180 opens 181, level 230 opens 231, and level 280 returns home'],'result':'PASS'}
       reports.append(report);print(json.dumps(report,ensure_ascii=False),flush=True);ctx.close()
     browser.close()
 
