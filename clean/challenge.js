@@ -2207,6 +2207,7 @@ const Q=[
   ]
  }
 ];
+if(Array.isArray(window.PW_CHALLENGE_EXTRA))Q.push(...window.PW_CHALLENGE_EXTRA);
 const TEXT_HINTS={
  "ru": {
   "СОБАКА": "Домашнее животное, которое часто называют другом человека.",
@@ -2823,7 +2824,7 @@ const I={
 const tr=()=>I[lang()]||I.ru;
 const alphabet=()=>lang()==='az'?'ABCÇDEƏFGĞHXIİJKLMNOÖPQRSŞTUÜVYZ':lang()==='en'?'ABCDEFGHJKLMNPQRSTUVWXYZ':'АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЫЭЮЯ';
 const rawInit=()=>window.Telegram?.WebApp?.initData||'';
-let mode='blitz',state=null,running=false,question=null,answer='',tiles=[],selected=[],used=new Set(),fixed=new Map(),removed=new Set(),letterOrder=[],textHintOpen=false,hintBusy=false,hearts=3,correct=0,streak=0,bestRunStreak=0,score=0,deadline=0,timer=null,order=[],pos=0,energyTimer=null,serverMode=true,serverNowMs=0,serverPerfMs=0;
+let mode='blitz',state=null,running=false,question=null,answer='',tiles=[],selected=[],used=new Set(),fixed=new Map(),removed=new Set(),letterOrder=[],textHintOpen=false,hintBusy=false,hearts=3,correct=0,streak=0,bestRunStreak=0,score=0,deadline=0,timer=null,energyTimer=null,serverMode=true,serverNowMs=0,serverPerfMs=0;
 function syncTrustedClock(s){const n=Date.parse(s?.server_now||'');if(Number.isFinite(n)){serverNowMs=n;serverPerfMs=performance.now()}}
 function trustedNow(){return serverNowMs?serverNowMs+(performance.now()-serverPerfMs):Date.now()}
 const localKey='pw.challenge.local.v1';
@@ -2855,8 +2856,25 @@ async function api(action,extra={}){
  return localRead();
 }
 function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
-function resetOrder(){order=shuffle(Q.map((_,i)=>i));pos=0}
-function nextQ(){if(pos>=order.length)resetOrder();question=Q[order[pos++]];answer=question[lang()]||question.ru;buildPuzzle()}
+const BANK_VERSION='r51-350';
+function deckKey(){return 'pw.challenge.deck.'+BANK_VERSION+'.'+mode}
+function lastKey(){return 'pw.challenge.last.'+BANK_VERSION+'.'+mode}
+function loadDeck(){
+ let deck=[];try{deck=JSON.parse(localStorage.getItem(deckKey())||'[]')}catch{}
+ deck=Array.isArray(deck)?deck.filter(i=>Number.isInteger(i)&&i>=0&&i<Q.length):[];
+ if(!deck.length){
+   deck=shuffle(Q.map((_,i)=>i));
+   let last=null;try{last=Number(localStorage.getItem(lastKey()))}catch{}
+   if(deck.length>1&&Number.isInteger(last)&&deck[0]===last){[deck[0],deck[1]]=[deck[1],deck[0]]}
+ }
+ return deck;
+}
+function resetOrder(){const deck=loadDeck();try{localStorage.setItem(deckKey(),JSON.stringify(deck))}catch{}}
+function nextQ(){
+ const deck=loadDeck(),idx=deck.shift();
+ try{localStorage.setItem(deckKey(),JSON.stringify(deck));localStorage.setItem(lastKey(),String(idx))}catch{}
+ question=Q[idx];answer=question[lang()]||question.ru;buildPuzzle();
+}
 function pool(word){const a=[...word],want=Math.max(12,a.length+5),chars=[...alphabet()].filter(ch=>!a.includes(ch));shuffle(chars);return shuffle([...a,...chars.slice(0,Math.max(0,want-a.length))])}
 function buildPuzzle(){
  selected=Array([...answer].length).fill(null);used.clear();fixed.clear();removed.clear();textHintOpen=false;hintBusy=false;tiles=pool(answer);letterOrder=tiles.map((_,i)=>i);
@@ -2901,7 +2919,7 @@ async function blitzHint(type){
    }else if(type==='remove'){
      bad.slice(0,3).forEach(t=>{removed.add(t.id);const p=selected.indexOf(t.id);if(p>=0)selected[p]=null;used.delete(t.id)});flash(x.hintRemove,true);
    }else{
-     textHintOpen=true;const box=$('blitzTextHintBox');box.textContent=(TEXT_HINTS[lang()]||TEXT_HINTS.ru)[question.ru]||'';box.hidden=false;flash(x.hintText,true);
+     textHintOpen=true;const box=$('blitzTextHintBox');box.textContent=question.h?.[lang()]||question.h?.ru||(TEXT_HINTS[lang()]||TEXT_HINTS.ru)[question.ru]||'';box.hidden=false;flash(x.hintText,true);
    }
    pw?.sfx?.('hint');pw?.haptic?.();
  }catch(e){
