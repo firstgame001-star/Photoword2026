@@ -306,3 +306,32 @@ html[data-theme="light"] .challenge-correct-panel{background:#f5fff9;color:#1730
 .challenge-energy-shop button{min-height:44px;border:1px solid #52778b;border-radius:12px;background:#092c40;color:#fff;font-weight:800}
 .challenge-energy-shop button:disabled{opacity:.55}
 html[data-theme="light"] .challenge-energy-shop button{background:#f7fbfd;color:#17303c;border-color:#b6cad4}
+
+
+/* r76: fit puzzle into Telegram Mini App viewport on short iPhone screens */
+@media (max-height:900px){
+  .game-wrap{padding-top:calc(6px + env(safe-area-inset-top));padding-bottom:calc(10px + env(safe-area-inset-bottom))}
+  .game-head{gap:7px}
+  .game-head .back{min-height:38px;min-width:36px;font-size:28px}
+  .game-head .wallet{padding:6px 8px}
+  .photos{width:min(58svh,100%);max-width:330px;margin-top:8px;gap:6px}
+  .photo{font-size:clamp(48px,7svh,64px)}
+  .slots{margin:10px auto;gap:4px}
+  .slot{font-size:clamp(17px,2.8svh,22px)}
+  .letters{gap:5px}
+  .letter{font-size:clamp(18px,2.8svh,22px)}
+  .tools{margin-top:8px;gap:6px}
+  .tool{min-height:40px;padding:7px 10px;font-size:15px}
+  .textHint{margin-top:9px;padding:10px 12px}
+  .textHint small{margin-top:3px}
+  .game-wrap .status{margin-top:7px;min-height:0;padding:6px 10px}
+  .version{margin:6px 0 0}
+}
+@media (max-height:760px){
+  .photos{width:min(50svh,100%);max-width:280px;margin-top:5px}
+  .slots{margin:7px auto}
+  .letters{gap:4px}
+  .tools{margin-top:6px}
+  .textHint{margin-top:7px;padding:8px 10px}
+  .version{display:none}
+}
