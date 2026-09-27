@@ -894,7 +894,7 @@
   document.querySelector('.game-head>div b').textContent=ui.chapter(chapterNum);
   $('levelTitle').textContent=(chapterNum===1?ui.warm:chapterNum===2?ui.assoc:chapterNum===3?ui.chapter3:chapterNum===4?ui.chapter4:chapterNum===5?ui.chapter5:chapterNum===6?ui.chapter6:ui.chapter7)+' · '+ui.level(levelId);
   $('textHint').querySelector('b').textContent=ui.textHint;$('hintValue').textContent=ui.tap;
-  $('slots').style.gridTemplateColumns='repeat('+answer.length+',1fr)';$('slots').classList.toggle('long-answer',answer.length>=9);
+  $('slots').style.gridTemplateColumns='repeat('+answer.length+',1fr)';$('slots').classList.toggle('long-answer',answer.length>=9);$('letters').classList.toggle('dense',tiles.length>=19);
   level.photos.forEach(([emoji],index)=>{const d=document.createElement('div');d.className='photo';d.setAttribute('role','img');d.setAttribute('aria-label',ui.image(index+1));d.textContent=emoji;$('photos').append(d);});
 
   function shuffle(){
