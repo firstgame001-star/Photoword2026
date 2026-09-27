@@ -97,6 +97,7 @@ function setThemeHubLabels(){
  const m=themeMode();
  text('themesEntryTitle',m.entry);text('themesEntryDesc',m.entryDesc);text('themesTitle',m.title);text('themesSubtitle',m.subtitle);
 }
+function getThemeProgress(id){try{const raw=JSON.parse(localStorage.getItem('pw.themeProgress.'+id)||'[]');return new Set(Array.isArray(raw)?raw.map(Number).filter(Number.isInteger):[])}catch{return new Set()}}
 function renderThemeHub(p){
  setThemeHubLabels();
  const m=themeMode(),done=Number(p?.completed_levels||0),unlocked=done>=10,wrap=$('themeCards');
@@ -104,10 +105,10 @@ function renderThemeHub(p){
  if(!wrap)return;
  wrap.replaceChildren();
  for(const cat of THEME_CATEGORIES){
-   const copy=m.cats[cat.id]||[cat.id,''],button=document.createElement('button');
+   const copy=m.cats[cat.id]||[cat.id,''],button=document.createElement('button'),progressSet=getThemeProgress(cat.id),count=progressSet.size;
    button.type='button';button.className='theme-card'+(unlocked?'':' locked');button.disabled=!unlocked;
    const icon=document.createElement('span'),body=document.createElement('span'),title=document.createElement('b'),desc=document.createElement('small'),progress=document.createElement('em');
-   icon.className='theme-card-icon';icon.textContent=cat.icon;title.textContent=copy[0];desc.textContent=copy[1];progress.textContent=unlocked?'0 / 100':m.unlock;
+   icon.className='theme-card-icon';icon.textContent=cat.icon;title.textContent=copy[0];desc.textContent=copy[1];progress.textContent=unlocked?(count+' / 100'):m.unlock;
    body.append(title,desc);button.append(icon,body,progress);
    if(unlocked)button.onclick=()=>openThemeCategory(cat.id);
    wrap.append(button);
@@ -115,10 +116,17 @@ function renderThemeHub(p){
 }
 function openThemeCategory(id){
  const cat=themeCategory(id);if(!cat)return;
- const m=themeMode(),copy=m.cats[id]||[id,''];
- text('themeDetailTitle',cat.icon+' '+copy[0]);text('themeDetailSubtitle','0 / 100 · '+m.detail);text('themeDetailInfo',m.preparing);
+ const m=themeMode(),copy=m.cats[id]||[id,''],progress=getThemeProgress(id),done=progress.size,isSport=id==='sport';
+ text('themeDetailTitle',cat.icon+' '+copy[0]);text('themeDetailSubtitle',done+' / 100 · '+m.detail);text('themeDetailInfo',isSport?(lang()==='ru'?'Готовы первые 20 уровней. Остальные добавим следующим блоком.':lang()==='en'?'The first 20 levels are ready. More will be added in the next block.':'İlk 20 səviyyə hazırdır. Qalanları növbəti blokda əlavə ediləcək.'):m.preparing);
  const grid=$('themeLevelGrid');grid.replaceChildren();
- for(let n=1;n<=100;n++){const b=document.createElement('button');b.type='button';b.textContent=n;b.disabled=true;b.setAttribute('aria-label',copy[0]+' '+n);grid.append(b)}
+ const next=Math.min(20,done+1);
+ for(let n=1;n<=100;n++){
+   const b=document.createElement('button');b.type='button';b.textContent=n;b.setAttribute('aria-label',copy[0]+' '+n);
+   const completed=progress.has(n),available=isSport&&n<=20&&(completed||n<=next);
+   b.disabled=!available;b.classList.toggle('done',completed);b.classList.toggle('next',available&&!completed);
+   if(available)b.onclick=()=>{location.href='./theme-game.html?theme='+encodeURIComponent(id)+'&level='+n};
+   grid.append(b);
+ }
  screen('themeDetailScreen');track('theme_category_open',{metadata:{theme:id}});
 }
 
@@ -267,5 +275,5 @@ async function rating(){const x=t();screen('ratingScreen');const id=++ratingReq,
 ['ratingNav','ratingShortcut','refreshRating'].forEach(id=>$(id).onclick=rating);
 
 window.addEventListener('pw:player',e=>update(e.detail));
-pw.login().then(async()=>{pw.status(t().profileSynced);track('app_open',{metadata:{version:'r32'}});configureAds();try{const start=window.Telegram?.WebApp?.initDataUnsafe?.start_param||'';if(start.startsWith('ref_PW-'))await pw.api('register_referral',{referrer:start.slice(4)})}catch{}}).catch(e=>pw.status(e.message));
+pw.login().then(async()=>{pw.status(t().profileSynced);track('app_open',{metadata:{version:'r33'}});configureAds();try{const start=window.Telegram?.WebApp?.initDataUnsafe?.start_param||'';if(start.startsWith('ref_PW-'))await pw.api('register_referral',{referrer:start.slice(4)})}catch{}}).catch(e=>pw.status(e.message));
 })();
