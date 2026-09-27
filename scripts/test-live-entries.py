@@ -4,7 +4,7 @@ from pathlib import Path
 from playwright.sync_api import sync_playwright, expect
 
 BASE='https://firstgame001-star.github.io/Photoword2026/'
-RELEASE='20260927-r24'
+RELEASE='20260927-r38'
 OUT=Path('test-results'); OUT.mkdir(exist_ok=True)
 
 for attempt in range(48):
@@ -16,19 +16,19 @@ for attempt in range(48):
     time.sleep(5)
 else: raise AssertionError('Public Pages never reached '+RELEASE)
 
-for path in ['clean/','clean/game.html','clean/core.js','clean/home.js','clean/game.js','clean/ui.css','clean/privacy.html','clean/terms.html']:
+for path in ['clean/','clean/game.html','clean/theme-game.html','clean/core.js','clean/home.js','clean/game.js','clean/theme-game.js','clean/ui.css','clean/privacy.html','clean/terms.html']:
     with urllib.request.urlopen(BASE+path+'?r='+RELEASE,timeout=20) as r: assert r.status==200,path
     print('LIVE HTTP 200:',path,flush=True)
 
 ANSWERS={
-'ru':["СОБАКА","КОШКА","МОРЕ","ДОЖДЬ","ВРЕМЯ","ТЕПЛО","ПАМЯТЬ","СВЕТ","ПУТЬ","ТАЙНА","ТЕНЬ","СЛЕД","ВОЛНА","КЛЮЧ","КОРЕНЬ","СЕТЬ","ТОК","КАДР","СВЯЗЬ","ИСТОЧНИК","МОСТ","МАСКА","ИСКРА","ЗЕРКАЛО","ПУСТЫНЯ","ШИФР","ПЛАМЯ","КОМЕТА","ЛАБИРИНТ","СИГНАЛ","ПЕЧАТЬ","УЗЕЛ","СПУТНИК","ОБЛАКО","ГРАНЬ","КОНТУР","ОСКОЛОК","ИМПУЛЬС","АРХИВ","ГОРИЗОНТ","ВЕКТОР","СПЕКТР","ОРБИТА","РЕЗОНАНС","ПАРАДОКС","МАТРИЦА","ТРАЕКТОРИЯ","КОДЕКС","КОМПАС"],
-'en':["DOG","CAT","SEA","RAIN","TIME","WARMTH","MEMORY","LIGHT","PATH","SECRET","SHADOW","TRACE","WAVE","KEY","ROOT","NET","CURRENT","FRAME","LINK","SOURCE","BRIDGE","MASK","SPARK","MIRROR","DESERT","CODE","FLAME","COMET","MAZE","SIGNAL","STAMP","KNOT","SATELLITE","CLOUD","EDGE","OUTLINE","SHARD","IMPULSE","ARCHIVE","HORIZON","VECTOR","SPECTRUM","ORBIT","RESONANCE","PARADOX","MATRIX","TRAJECTORY","CODEX","COMPASS"],
-'az':["İT","PİŞİK","DƏNİZ","YAĞIŞ","ZAMAN","İSTİ","YADDAŞ","İŞIQ","YOL","SİRR","KÖLGƏ","İZ","DALĞA","AÇAR","KÖK","ŞƏBƏKƏ","CƏRƏYAN","KADR","ƏLAQƏ","MƏNBƏ","KÖRPÜ","MASKA","QILCIM","GÜZGÜ","SƏHRA","ŞİFRƏ","ALOV","KOMETA","LABİRİNT","SİQNAL","MÖHÜR","DÜYÜN","PEYK","BULUD","KƏNAR","KONTUR","QIRINTI","İMPULS","ARXİV","ÜFÜQ","VEKTOR","SPEKTR","ORBİT","REZONANS","PARADOKS","MATRİSA","TRAEKTORİYA","KODEKS","KOMPAS"]
+'ru':["СОБАКА","КОШКА","МОРЕ","ДОЖДЬ","ВРЕМЯ","ТЕПЛО","ПАМЯТЬ","СВЕТ","ПУТЬ","ТАЙНА","ТЕНЬ","СЛЕД","ВОЛНА","КЛЮЧ","КОРЕНЬ","СЕТЬ","ТОК","КАДР","СВЯЗЬ","ИСТОЧНИК","МОСТ","МАСКА","ИСКРА","ЗЕРКАЛО","ПУСТЫНЯ","ШИФР","ПЛАМЯ","КОМЕТА","ЛАБИРИНТ","СИГНАЛ","ПЕЧАТЬ","УЗЕЛ","СПУТНИК","ОБЛАКО","ГРАНЬ","КОНТУР","ОСКОЛОК","ИМПУЛЬС","АРХИВ","ГОРИЗОНТ","ВЕКТОР","СПЕКТР","ОРБИТА","РЕЗОНАНС","ПАРАДОКС","МАТРИЦА","ТРАЕКТОРИЯ","КОДЕКС","КОМПАС","БАЛАНС","РИТМ","ФОКУС","ЭХО","ПУЛЬС","ТОН","ПОРТАЛ","КАНАЛ","ФИЛЬТР","СЦЕНА","СИМВОЛ"],
+'en':["DOG","CAT","SEA","RAIN","TIME","WARMTH","MEMORY","LIGHT","PATH","SECRET","SHADOW","TRACE","WAVE","KEY","ROOT","NET","CURRENT","FRAME","LINK","SOURCE","BRIDGE","MASK","SPARK","MIRROR","DESERT","CODE","FLAME","COMET","MAZE","SIGNAL","STAMP","KNOT","SATELLITE","CLOUD","EDGE","OUTLINE","SHARD","IMPULSE","ARCHIVE","HORIZON","VECTOR","SPECTRUM","ORBIT","RESONANCE","PARADOX","MATRIX","TRAJECTORY","CODEX","COMPASS","BALANCE","RHYTHM","FOCUS","ECHO","PULSE","TONE","PORTAL","CHANNEL","FILTER","STAGE","SYMBOL"],
+'az':["İT","PİŞİK","DƏNİZ","YAĞIŞ","ZAMAN","İSTİ","YADDAŞ","İŞIQ","YOL","SİRR","KÖLGƏ","İZ","DALĞA","AÇAR","KÖK","ŞƏBƏKƏ","CƏRƏYAN","KADR","ƏLAQƏ","MƏNBƏ","KÖRPÜ","MASKA","QILCIM","GÜZGÜ","SƏHRA","ŞİFRƏ","ALOV","KOMETA","LABİRİNT","SİQNAL","MÖHÜR","DÜYÜN","PEYK","BULUD","KƏNAR","KONTUR","QIRINTI","İMPULS","ARXİV","ÜFÜQ","VEKTOR","SPEKTR","ORBİT","REZONANS","PARADOKS","MATRİSA","TRAEKTORİYA","KODEKS","KOMPAS","TARAZLIQ","RİTM","FOKUS","SƏDA","NƏBZ","TON","PORTAL","KANAL","FİLTR","SƏHNƏ","SİMVOL"]
 }
 HINTS={
-'ru':{1:'Домашнее животное',11:'Она появляется рядом',21:'Соединяет два берега',31:'Её ставят на документ',41:'Направленная величина'},
-'en':{1:'loyal domestic animal',11:'object blocks light',21:'connects two sides',31:'put on a document',41:'directed quantity'},
-'az':{1:'ən yaxın dostu',11:'İşığın qarşısı kəsiləndə',21:'İki sahili',31:'sənədə və ya kağıza',41:'istiqamətli kəmiyyət'}
+'ru':{1:'Домашнее животное',11:'Она появляется рядом',21:'Соединяет два берега',31:'Её ставят на документ',41:'Направленная величина',51:'Повторяющийся рисунок'},
+'en':{1:'loyal domestic animal',11:'object blocks light',21:'connects two sides',31:'put on a document',41:'directed quantity',51:'repeating pattern'},
+'az':{1:'ən yaxın dostu',11:'İşığın qarşısı kəsiləndə',21:'İki sahili',31:'sənədə və ya kağıza',41:'istiqamətli kəmiyyət',51:'təkrarlanan ardıcıllığı'}
 }
 reports=[]
 
