@@ -57,8 +57,8 @@ const artBank=themeGameJs.match(/const ART_LEVELS=\{\n([\s\S]*?)\n\};\nconst ART
 if(!artBank||(artBank[1].match(/^\s*\d+:\{/gm)||[]).length!==100)throw Error('Art theme must contain 100 levels');
 const profBank=themeGameJs.match(/const PROF_LEVELS=\{\n([\s\S]*?)\n\};\nconst PROF_TRANSLATED=/);
 if(!profBank||(profBank[1].match(/^\s*"?(?:\d+)"?:\s*\{/gm)||[]).length!==100)throw Error('Professions theme must contain 100 levels');
-if(!homeJs.includes("['sport','art','professions'].includes(id)"))throw Error('Professions theme must be enabled in the category hub');
 const homeJs=readFileSync(resolve(base,'home.js'),'utf8');
+if(!homeJs.includes("['sport','art','professions'].includes(id)"))throw Error('Professions theme must be enabled in the category hub');
 const uiCss=readFileSync(resolve(base,'ui.css'),'utf8');
 if(!index.includes('id="profileTitle"'))throw Error('Chapter-earned profile title surface is missing');
 if(!homeJs.includes("chapter_progress_mode") && !homeJs.includes('shownChapterLevel'))throw Error('Absolute chapter progress helper is missing');
