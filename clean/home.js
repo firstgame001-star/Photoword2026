@@ -18,7 +18,7 @@ window.addEventListener('unhandledrejection',e=>track('client_error',{metadata:{
 const T={
 ru:{
 logo:['4','Ф','О','Т','О'],one:'1 СЛОВО',tagline:'Больше, чем просто слова',
-chapter:n=>'Глава '+n,chapter1:'Разминка',chapter1Desc:'От простых слов к более сложным ассоциациям',chapter2:'Ассоциации',chapter2Desc:'Более сложные слова и связи между образами',levels:'уровней',
+chapter:n=>'Глава '+n,chapter1:'Разминка',chapter1Desc:'От простых слов к более сложным ассоциациям',chapter2:'Ассоциации',chapter2Desc:'Более сложные слова и связи между образами',future:'Скоро',futureDesc:'Новая глава готовится',futureState:'Закрыто',levels:'уровней',
 play:'ИГРАТЬ',replay:'ПЕРЕИГРАТЬ',locked:'ЗАКРЫТО',allDone:'ГЛАВЫ 1–2 ПРОЙДЕНЫ',
 home:'Главная',chapters:'Главы',chaptersSubtitle:'Выбирай главу и продолжай игру',rating:'Рейтинг',ratingSubtitle:'Лучшие игроки PhotoWord',overallRating:'🏆 Общий рейтинг',myPosition:'Твоя позиция',refresh:'Обновить рейтинг',
 friends:'Друзья',shop:'Магазин',daily:'Ежедневная награда',tasks:'Задания',
@@ -35,7 +35,7 @@ profileSynced:'Профиль синхронизирован',loading:'Загр�
 },
 en:{
 logo:['4','P','I','C','S'],one:'1 WORD',tagline:'More than just words',
-chapter:n=>'Chapter '+n,chapter1:'Warm-up',chapter1Desc:'From simple words to more challenging associations',chapter2:'Associations',chapter2Desc:'More challenging words and deeper image connections',levels:'levels',
+chapter:n=>'Chapter '+n,chapter1:'Warm-up',chapter1Desc:'From simple words to more challenging associations',chapter2:'Associations',chapter2Desc:'More challenging words and deeper image connections',future:'Coming soon',futureDesc:'A new chapter is being prepared',futureState:'Locked',levels:'levels',
 play:'PLAY',replay:'REPLAY',locked:'LOCKED',allDone:'CHAPTERS 1–2 COMPLETED',
 home:'Home',chapters:'Chapters',chaptersSubtitle:'Choose a chapter and continue',rating:'Leaderboard',ratingSubtitle:'Top PhotoWord players',overallRating:'🏆 Overall leaderboard',myPosition:'Your position',refresh:'Refresh leaderboard',
 friends:'Friends',shop:'Shop',daily:'Daily reward',tasks:'Tasks',
@@ -52,7 +52,7 @@ profileSynced:'Profile synced',loading:'Loading…',noPlayers:'No players yet',n
 },
 az:{
 logo:['4','F','O','T','O'],one:'1 SÖZ',tagline:'Sadəcə sözlərdən daha çox',
-chapter:n=>'Fəsil '+n,chapter1:'İsinmə',chapter1Desc:'Sadə sözlərdən daha çətin assosiasiyalara',chapter2:'Assosiasiyalar',chapter2Desc:'Daha çətin sözlər və şəkillər arasında daha dərin əlaqələr',levels:'səviyyə',
+chapter:n=>'Fəsil '+n,chapter1:'İsinmə',chapter1Desc:'Sadə sözlərdən daha çətin assosiasiyalara',chapter2:'Assosiasiyalar',chapter2Desc:'Daha çətin sözlər və şəkillər arasında daha dərin əlaqələr',future:'Tezliklə',futureDesc:'Yeni fəsil hazırlanır',futureState:'Bağlıdır',levels:'səviyyə',
 play:'OYNA',replay:'YENİDƏN OYNA',locked:'BAĞLIDIR',allDone:'1–2-Cİ FƏSİLLƏR TAMAMLANDI',
 home:'Ana səhifə',chapters:'Fəsillər',chaptersSubtitle:'Fəsli seç və oyuna davam et',rating:'Reytinq',ratingSubtitle:'PhotoWord-un ən yaxşı oyunçuları',overallRating:'🏆 Ümumi reytinq',myPosition:'Sənin yerin',refresh:'Reytinqi yenilə',
 friends:'Dostlar',shop:'Mağaza',daily:'Gündəlik mükafat',tasks:'Tapşırıqlar',
@@ -98,20 +98,24 @@ function updateChapterCards(p){
    $('chapter2Play').classList.add('locked');$('chapter2Play').setAttribute('aria-disabled','true');$('chapter2Play').removeAttribute('href');$('chapter2Play').textContent=x.locked;
  }
 }
+function updateHomeCarousel(p){
+ const x=t(),done=Math.min(49,p.completed_levels||0),d1=Math.min(20,done),d2=Math.max(0,Math.min(29,done-20)),unlocked2=(p.current_level||1)>=21||d1>=20;
+ text('homeChapter1Label',x.chapter(1));text('homeChapter1Title',x.chapter1);text('homeChapter1Desc',x.chapter1Desc);text('homeChapter1Done',d1);text('homeChapter1Count','/ 20 '+x.levels);$('homeChapter1Progress').style.width=d1*5+'%';
+ const n1=d1>=20?1:Math.max(1,Math.min(20,p.current_level||1));$('homeChapter1Play').href='./game.html?level='+n1;$('homeChapter1Play').innerHTML=(d1>=20?x.replay:x.play)+' <span>▶</span>';
+ text('homeChapter2Label',x.chapter(2));text('homeChapter2Title',x.chapter2);text('homeChapter2Desc',x.chapter2Desc);text('homeChapter2Done',d2);text('homeChapter2Count','/ 29 '+x.levels);$('homeChapter2Progress').style.width=(d2/29*100)+'%';
+ if(unlocked2){$('homeChapter2LockNote').hidden=true;$('homeChapter2Play').classList.remove('locked');$('homeChapter2Play').removeAttribute('aria-disabled');const n2=d2>=29?21:Math.max(21,Math.min(49,p.current_level||21));$('homeChapter2Play').href='./game.html?level='+n2;$('homeChapter2Play').innerHTML=(d2>=29?x.replay:x.play)+' <span>▶</span>';}
+ else{$('homeChapter2LockNote').hidden=false;text('homeChapter2LockNote',x.chapter2Lock);$('homeChapter2Play').classList.add('locked');$('homeChapter2Play').setAttribute('aria-disabled','true');$('homeChapter2Play').removeAttribute('href');$('homeChapter2Play').textContent=x.locked;}
+ for(const n of [3,4]){text('homeChapter'+n+'Label',x.chapter(n));text('homeChapter'+n+'Title',x.future);text('homeChapter'+n+'Desc',x.futureDesc);text('homeChapter'+n+'State',x.futureState);text('homeChapter'+n+'Play',x.future);}
+}
 function update(p){
  const x=t(),name=pw.name(p),rank=p.rank>0?'#'+p.rank:'—';
  text('name',name);text('profileName',name);text('rankLabel',leagueName(p)+' · '+(p.rank>0?x.place+' #'+p.rank:x.unranked));text('profileRank',rank);
  text('photoWordId',p.photoword_id);text('profileXp',p.xp);text('profileDone',p.completed_levels);text('profileUsername',p.username?'@'+p.username:x.noUsername);
  for(const id of ['avatar','profileAvatar'])text(id,(name||'P').charAt(0).toUpperCase());text('myRank',rank);text('myXp',p.xp+' XP');
  text('nicknameBtn',p.nickname_changed?x.nicknameDone:x.nicknameSet);$('nicknameBtn').disabled=Boolean(p.nickname_changed);
- const done=Math.min(49,p.completed_levels||0),cd=chapterData(p,x),chapterDone=cd.num===1?Math.min(20,done):Math.max(0,Math.min(29,done-20));
- text('done',chapterDone);text('chapterCountSuffix','/ '+cd.total+' '+x.levels);$('progress').style.width=(chapterDone/cd.total*100)+'%';
- text('activeChapterLabel',x.chapter(cd.num));text('activeChapterTitle',cd.title);text('activeChapterDesc',cd.desc);
- $('activeChapterCard').classList.toggle('assoc',cd.num===2);$('activeChapterHero').classList.toggle('assoc-hero',cd.num===2);
- const next=(p.current_level||1)>49?21:Math.max(cd.start,Math.min(cd.end,p.current_level||cd.start));$('playLink').href='./game.html?level='+next;
- if((p.current_level||1)>49)$('playLink').innerHTML=x.allDone+' <span>✓</span>'; else $('playLink').innerHTML=x.play+' <span>▶</span>';
- updateChapterCards(p);
- text('notificationsState',p.notifications_enabled?x.notifyAllowed:x.notifyAllow);const claimed=String(p.last_daily_reward||'')===today();$('claimDaily').disabled=claimed;text('claimDaily',claimed?x.claimed:x.claim);text('dailyStreak',x.streak+': '+(p.daily_streak||0));
+ updateHomeCarousel(p);updateChapterCards(p);
+ const claimed=String(p.last_daily_reward||'')===today();$('claimDaily').disabled=claimed;text('claimDaily',claimed?x.claimed:x.claim);text('dailyStreak',x.streak+': '+(p.daily_streak||0));text('notificationsState',p.notifications_enabled?x.notifyAllowed:x.notifyAllow);
+ const target=(p.current_level||1)>49?2:((p.current_level||1)>=21?2:1);requestAnimationFrame(()=>showHomeChapter(target,false));
 }
 function applyLanguage(l){
  if(!T[l])l='ru';try{localStorage.setItem('pw.language',l)}catch{};document.documentElement.lang=l;const x=T[l];setLogo(x);
@@ -126,9 +130,11 @@ function applyLanguage(l){
  $('dailyModal').querySelector('h2').textContent=x.daily;text('dailyCopy',x.dailyCopy);text('tasksTitle',x.taskTitle);text('task1Title',x.task1);text('task1Reward',x.reward+': 40 🪙');text('task2Title',x.task2);text('task2Reward',x.reward+': 80 🪙');document.querySelectorAll('[data-task]').forEach(b=>{if(!b.disabled)b.textContent=x.take});text('tasksFootnote',x.tasksFoot);
  const shortcuts=document.querySelectorAll('.shortcuts button b');if(shortcuts[0])shortcuts[0].textContent=x.daily;if(shortcuts[1])shortcuts[1].textContent=x.tasks;if(shortcuts[2])shortcuts[2].textContent=x.rating;
  text('rulesTitle',x.rulesTitle);$('rulesBody').innerHTML=RULES[l]||RULES.ru;text('resetTitle',x.resetTitle);text('resetBody',RESET[l]||RESET.ru);text('cancelReset',x.cancel);text('confirmReset',x.resetButton);text('eraseAccountTitle',x.eraseTitle);text('eraseAccountText',x.eraseText);text('confirmEraseAccount',x.eraseButton);text('cancelEraseAccount',x.cancel);
- setThemeLabels(x);text('themeCurrent',x.themeNames[getTheme()]);text('languageCurrent',l==='ru'?'Русский':l==='en'?'English':'Azərbaycan dili');document.querySelectorAll('[data-language]').forEach(b=>b.classList.toggle('selected',b.dataset.language===l));
+ for(const n of [3,4]){text('homeChapter'+n+'Label',x.chapter(n));text('homeChapter'+n+'Title',x.future);text('homeChapter'+n+'Desc',x.futureDesc);text('homeChapter'+n+'State',x.futureState);text('homeChapter'+n+'Play',x.future);}setThemeLabels(x);text('themeCurrent',x.themeNames[getTheme()]);text('languageCurrent',l==='ru'?'Русский':l==='en'?'English':'Azərbaycan dili');document.querySelectorAll('[data-language]').forEach(b=>b.classList.toggle('selected',b.dataset.language===l));
  if(pw.player)update(pw.player);
 }
+function showHomeChapter(n,smooth=true){const car=$('homeChapterCarousel'),slide=car?.querySelector('[data-home-chapter="'+n+'"]');if(!car||!slide)return;car.scrollTo({left:slide.offsetLeft-(car.clientWidth-slide.clientWidth)/2,behavior:smooth?'smooth':'auto'});document.querySelectorAll('#homeChapterDots button').forEach(b=>b.classList.toggle('on',Number(b.dataset.dot)===n));try{sessionStorage.setItem('pw.homeChapter',String(n))}catch{}}
+function initHomeCarousel(){const car=$('homeChapterCarousel');if(!car)return;let timer;car.addEventListener('scroll',()=>{clearTimeout(timer);timer=setTimeout(()=>{const center=car.scrollLeft+car.clientWidth/2;let best=1,dist=Infinity;car.querySelectorAll('[data-home-chapter]').forEach(s=>{const d=Math.abs(s.offsetLeft+s.clientWidth/2-center);if(d<dist){dist=d;best=Number(s.dataset.homeChapter)}});document.querySelectorAll('#homeChapterDots button').forEach(b=>b.classList.toggle('on',Number(b.dataset.dot)===best));},70)},{passive:true});document.querySelectorAll('#homeChapterDots button').forEach(b=>b.onclick=()=>showHomeChapter(Number(b.dataset.dot)));}
 function showRequiredLanguagePicker(){const c=$('languageClose');if(c)c.hidden=true;open('languageModal')}
 
 const RULES={
@@ -142,7 +148,7 @@ en:'All completed levels, XP and leaderboard position will be removed. The game 
 az:'Bütün keçilmiş səviyyələr, XP və reytinq mövqeyi silinəcək. Oyun 1-ci səviyyədən başlayacaq və dil yenidən seçiləcək. Sikkələr, Telegram Stars alışları və artıq alınmış mükafatların tarixçəsi saxlanılır.'
 };
 
-const initial=getLang();applyTheme(getTheme());if(initial)applyLanguage(initial);else{applyLanguage('ru');setTimeout(showRequiredLanguagePicker,250)}
+const initial=getLang();applyTheme(getTheme());initHomeCarousel();if(initial)applyLanguage(initial);else{applyLanguage('ru');setTimeout(showRequiredLanguagePicker,250)}
 
 $('settingsBtn').onclick=()=>open('settingsModal');
 $('languageBtn').onclick=()=>{close('settingsModal');const c=$('languageClose');if(c)c.hidden=false;setTimeout(()=>open('languageModal'),0)};
