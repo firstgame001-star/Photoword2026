@@ -27,11 +27,11 @@ for(const file of ['core.js','home.js','game.js','theme-game.js','challenge.js',
 }
 
 const release=JSON.parse(readFileSync(resolve(base,'release.json'),'utf8'));
-if(release.release!=='20260927-r51')throw Error('Unexpected release: '+release.release);
-if(!Array.isArray(release.levels)||!release.levels.includes(100))throw Error('Main levels are not published through 100');
-if(release.chapters?.length!==10)throw Error('Main chapter navigation must contain 10 chapters');
+if(release.release!=='20260927-r52')throw Error('Unexpected release: '+release.release);
+if(!Array.isArray(release.levels)||!release.levels.includes(131))throw Error('Main levels are not published through 131');
+if(release.chapters?.length!==12)throw Error('Main chapter navigation must contain 12 chapters');
 if(release.chapters.find(x=>x.id===3)?.status!=='live')throw Error('Chapter 3 must be complete');
-if(release.chapters.find(x=>x.id===4)?.available_through!==100)throw Error('Chapter 4 preview must be available through 100');
+if(release.chapters.find(x=>x.id===4)?.available_through!==131||release.chapters.find(x=>x.id===4)?.status!=='live')throw Error('Chapter 4 must be complete through 131');
 if(release.thematic_mode?.categories?.length!==12)throw Error('Thematic catalog must contain 12 categories');
 const sport=release.thematic_mode.categories.find(x=>x.id==='sport');
 if(!sport||sport.available_through!==100)throw Error('Sport theme must be playable through level 100');
@@ -48,13 +48,16 @@ const uiCss=readFileSync(resolve(base,'ui.css'),'utf8');
 if(!index.includes('id="profileTitle"'))throw Error('Chapter-earned profile title surface is missing');
 if(!homeJs.includes("chapter_progress_mode") && !homeJs.includes('shownChapterLevel'))throw Error('Absolute chapter progress helper is missing');
 if(homeJs.includes('requestAnimationFrame(()=>showHomeChapter'))throw Error('Initial carousel must not auto-scroll after profile sync');
-for(let n=1;n<=10;n++){
+for(let n=1;n<=12;n++){
  const hasHome=uiCss.includes('#homeChapter'+n)||uiCss.includes('[data-home-chapter="'+n+'"]');
  const listNeed='#chapter'+n+'Select';
  if(!hasHome||!uiCss.includes(listNeed))throw Error('Missing chapter background '+n);
 }
 if(release.ui?.chapter_progress_mode!=='absolute_level')throw Error('Release must declare absolute chapter progress');
 if(release.ui?.chapter_titles!==true)throw Error('Release must declare chapter title system');
+const gameJs=readFileSync(resolve(base,'game.js'),'utf8');
+if(!gameJs.includes('for(let n=1;n<=131;n++){')||!gameJs.includes('131:{')||!gameJs.includes('levelId===131'))throw Error('Chapter 4 levels 101-131 are incomplete');
+if(!index.includes('data-home-chapter="12"')||!index.includes('id="chapter12Select"')||index.match(/data-dot="/g)?.length!==12)throw Error('Chapter 12 navigation is incomplete');
 if(!index.includes('id="challengeModes"')||!index.includes('data-challenge="limited"')||!index.includes('data-challenge="nohint"')||!index.includes('data-challenge="blitz"'))throw Error('Challenge mode cards are missing');
 if(!index.includes('id="challengeScreen"'))throw Error('Playable challenge screen is missing');
 if(!index.includes('./challenge.js'))throw Error('Challenge game module is missing');
@@ -85,11 +88,11 @@ const eMatch=extraJs.match(/window\.PW_CHALLENGE_EXTRA=(\[[\s\S]*\]);\}\)\(\);/)
 if(!eMatch)throw Error('Challenge extra question bank is missing');
 const extraBank=JSON.parse(eMatch[1]);
 const fullBank=[...qBank,...extraBank];
-if(fullBank.length!==350)throw Error('Challenge question bank must contain 350 words');
+if(fullBank.length!==400)throw Error('Challenge question bank must contain 400 words');
 if(fullBank.some(x=>!x.ru||!x.en||!x.az||!Array.isArray(x.p)||x.p.length!==4))throw Error('Challenge question bank contains incomplete entries');
-if(new Set(fullBank.map(x=>x.ru)).size!==350)throw Error('Challenge question bank contains duplicate answers');
-if(release.challenge_modes?.question_bank?.total!==350||release.challenge_modes?.question_bank?.no_repeat_until_exhausted!==true)throw Error('Challenge question-bank manifest is incorrect');
-if(!challengeJs.includes("BANK_VERSION='r51-350'")||!challengeJs.includes('pw.challenge.deck.')||!challengeJs.includes('pw.challenge.last.'))throw Error('Non-repeating challenge deck is missing');
+if(new Set(fullBank.map(x=>x.ru)).size!==400)throw Error('Challenge question bank contains duplicate answers');
+if(release.challenge_modes?.question_bank?.total!==400||release.challenge_modes?.question_bank?.no_repeat_until_exhausted!==true)throw Error('Challenge question-bank manifest is incorrect');
+if(!challengeJs.includes("BANK_VERSION='r52-400'")||!challengeJs.includes('pw.challenge.deck.')||!challengeJs.includes('pw.challenge.last.'))throw Error('Non-repeating challenge deck is missing');
 if(!homeJs.includes('function showRequiredLanguagePicker(){if(getLang())return;'))throw Error('Language picker re-open guard is missing');
 if(release.ui?.language_gate_fix!=='no_reopen_after_selection')throw Error('Language gate fix manifest is missing');
-console.log('PASS: r51 entrypoints, Chapters 1-10, backgrounds, absolute progress, chapter titles and JavaScript syntax.');
+console.log('PASS: r52 entrypoints, Chapters 1-12, backgrounds, absolute progress, chapter titles and JavaScript syntax.');
