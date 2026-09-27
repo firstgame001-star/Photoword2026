@@ -300,3 +300,9 @@ html[data-theme="light"] .challenge-text-hint{background:#f8fbfd;color:#17303c;b
 .challenge-correct-panel>b{display:block;font-size:20px}.challenge-correct-panel>strong{display:block;margin:6px 0 14px;color:#ffe173;font-size:24px;letter-spacing:1px}
 .challenge-correct-panel .play{width:100%;border:0;font-size:18px}
 html[data-theme="light"] .challenge-correct-panel{background:#f5fff9;color:#17303c;border-color:#62c996}
+
+.challenge-energy-shop{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:10px}
+.challenge-energy-shop[hidden]{display:none}
+.challenge-energy-shop button{min-height:44px;border:1px solid #52778b;border-radius:12px;background:#092c40;color:#fff;font-weight:800}
+.challenge-energy-shop button:disabled{opacity:.55}
+html[data-theme="light"] .challenge-energy-shop button{background:#f7fbfd;color:#17303c;border-color:#b6cad4}
