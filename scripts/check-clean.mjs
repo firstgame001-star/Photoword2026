@@ -27,7 +27,7 @@ for(const file of ['core.js','home.js','game.js','theme-game.js','challenge.js',
 }
 
 const release=JSON.parse(readFileSync(resolve(base,'release.json'),'utf8'));
-if(release.release!=='20260927-r66')throw Error('Unexpected release: '+release.release);
+if(release.release!=='20260927-r67')throw Error('Unexpected release: '+release.release);
 if(!Array.isArray(release.levels)||!release.levels.includes(230))throw Error('Main levels are not published through 230');
 if(release.chapters?.length!==12)throw Error('Main chapter navigation must contain 12 chapters');
 if(release.chapters.find(x=>x.id===3)?.status!=='live')throw Error('Chapter 3 must be complete');
@@ -43,6 +43,8 @@ const professions=release.thematic_mode.categories.find(x=>x.id==='professions')
 if(!professions||professions.available_through!==100||professions.status!=='complete')throw Error('Professions theme must be playable through level 100');
 const travel=release.thematic_mode.categories.find(x=>x.id==='travel');
 if(!travel||travel.available_through!==100||travel.status!=='complete')throw Error('Travel theme must be playable through level 100');
+const science=release.thematic_mode.categories.find(x=>x.id==='science');
+if(!science||science.available_through!==100||science.status!=='complete')throw Error('Science theme must be playable through level 100');
 
 const index=readFileSync(resolve(base,'index.html'),'utf8');
 const themeGame=readFileSync(resolve(base,'theme-game.html'),'utf8');
@@ -55,15 +57,18 @@ if(themeGame.includes('id="themeSettingsBtn"')||themeGame.includes('id="themePro
 if(!themeGameJs.includes('const ART_LEVELS={')||!themeGameJs.includes('const ART_TRANSLATED={'))throw Error('Art theme bank is missing');
 if(!themeGameJs.includes('const PROF_LEVELS=')||!themeGameJs.includes('const PROF_TRANSLATED='))throw Error('Professions theme bank is missing');
 if(!themeGameJs.includes('const TRAVEL_LEVELS=')||!themeGameJs.includes('const TRAVEL_TRANSLATED='))throw Error('Travel theme bank is missing');
-if(!themeGameJs.includes("['sport','art','professions','travel'].includes(themeParam)")||!themeGameJs.includes("return 'pw.themeProgress.'+themeId")||!themeGameJs.includes("theme='+themeId+'&level="))throw Error('Thematic routing/progress is not category-specific');
+if(!themeGameJs.includes('const SCIENCE_LEVELS=')||!themeGameJs.includes('const SCIENCE_TRANSLATED='))throw Error('Science theme bank is missing');
+if(!themeGameJs.includes("['sport','art','professions','travel','science'].includes(themeParam)")||!themeGameJs.includes("return 'pw.themeProgress.'+themeId")||!themeGameJs.includes("theme='+themeId+'&level="))throw Error('Thematic routing/progress is not category-specific');
 const artBank=themeGameJs.match(/const ART_LEVELS=\{\n([\s\S]*?)\n\};\nconst ART_TRANSLATED=/);
 if(!artBank||(artBank[1].match(/^\s*\d+:\{/gm)||[]).length!==100)throw Error('Art theme must contain 100 levels');
 const profBank=themeGameJs.match(/const PROF_LEVELS=\{\n([\s\S]*?)\n\};\nconst PROF_TRANSLATED=/);
 if(!profBank||(profBank[1].match(/^\s*"?(?:\d+)"?:\s*\{/gm)||[]).length!==100)throw Error('Professions theme must contain 100 levels');
 const travelBank=themeGameJs.match(/const TRAVEL_LEVELS=\{\n([\s\S]*?)\n\};\nconst TRAVEL_TRANSLATED=/);
 if(!travelBank||(travelBank[1].match(/^\s*"?(?:\d+)"?:\s*\{/gm)||[]).length!==100)throw Error('Travel theme must contain 100 levels');
+const scienceBank=themeGameJs.match(/const SCIENCE_LEVELS=\{\n([\s\S]*?)\n\};\nconst SCIENCE_TRANSLATED=/);
+if(!scienceBank||(scienceBank[1].match(/^\s*"?(?:\d+)"?:\s*\{/gm)||[]).length!==100)throw Error('Science theme must contain 100 levels');
 const homeJs=readFileSync(resolve(base,'home.js'),'utf8');
-if(!homeJs.includes("['sport','art','professions','travel'].includes(id)"))throw Error('Travel theme must be enabled in the category hub');
+if(!homeJs.includes("['sport','art','professions','travel','science'].includes(id)"))throw Error('Science theme must be enabled in the category hub');
 const uiCss=readFileSync(resolve(base,'ui.css'),'utf8');
 if(!index.includes('id="profileTitle"'))throw Error('Chapter-earned profile title surface is missing');
 if(!homeJs.includes("chapter_progress_mode") && !homeJs.includes('shownChapterLevel'))throw Error('Absolute chapter progress helper is missing');
@@ -128,4 +133,4 @@ if(release.ui?.language_gate_fix!=='first_launch_unset_then_persist_choice')thro
 if(!homeJs.includes("sessionStorage.getItem('pw.profileSyncedShown')")||!homeJs.includes("setTimeout(()=>{const e=$('status')"))throw Error('One-time profile sync notice is missing');
 if(release.ui?.profile_synced_notice?.show!=='once_per_session'||release.ui?.profile_synced_notice?.auto_hide_ms!==1800)throw Error('Profile sync notice manifest is incorrect');
 if(!homeJs.includes("applyLanguage('ru',false)")||!homeJs.includes("function applyLanguage(l,persist=true)"))throw Error('First-launch language selection flow is incorrect');
-console.log('PASS: r66 entrypoints, Chapters 1-12, backgrounds, absolute progress, chapter titles and JavaScript syntax.');
+console.log('PASS: r67 entrypoints, Chapters 1-12, backgrounds, absolute progress, chapter titles and JavaScript syntax.');
