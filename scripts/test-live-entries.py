@@ -4,7 +4,7 @@ from pathlib import Path
 from playwright.sync_api import sync_playwright, expect
 
 BASE='https://firstgame001-star.github.io/Photoword2026/'
-RELEASE='20260927-r46'
+RELEASE='20260927-r47'
 OUT=Path('test-results'); OUT.mkdir(exist_ok=True)
 
 for attempt in range(48):
@@ -151,7 +151,7 @@ with sync_playwright() as pw:
       # Thematic mode is a prominent separate surface and unlocks after 10 main levels.
       expect(page.locator('#challengeModes')).to_be_visible();expect(page.locator('[data-challenge]')).to_have_count(3)
       page.locator('[data-challenge="blitz"]').tap();expect(page.locator('#challengeScreen')).to_be_visible();expect(page.locator('#challengeIntroTitle')).to_have_text({'ru':'Блиц','en':'Blitz','az':'Blits'}[language]);page.locator('#challengeStart').tap();expect(page.locator('#challengeHud')).to_be_visible();expect(page.locator('#challengePhotos .photo')).to_have_count(4);page.locator('#challengeBack').tap();expect(page.locator('#home')).to_be_visible()
-      page.locator('[data-challenge="nohint"]').tap();expect(page.locator('#challengeScreen')).to_be_visible();page.locator('#challengeStart').tap();expect(page.locator('#challengeHud')).to_be_visible();expect(page.locator('#hudValue2')).to_contain_text('❤');page.locator('#challengeBack').tap()
+      page.locator('[data-challenge="nohint"]').tap();expect(page.locator('#challengeScreen')).to_be_visible();page.locator('#challengeStart').tap();expect(page.locator('#challengeHud')).to_be_visible();expect(page.locator('#hudValue2')).to_contain_text('🛡');page.locator('#challengeBack').tap()
       page.locator('[data-challenge="limited"]').tap();expect(page.locator('#challengeScreen')).to_be_visible();expect(page.locator('#challengeIntroStats')).to_contain_text('5');page.locator('#challengeStart').tap();expect(page.locator('#challengeHud')).to_be_visible();expect(page.locator('#hudValue3')).to_have_text('4/5');page.locator('#challengeBack').tap()
       expect(page.locator('#themesEntry')).to_be_visible();expect(page.locator('#themesEntryBadge')).to_be_visible();page.locator('#themesEntry').tap();expect(page.locator('#themesScreen')).to_be_visible();expect(page.locator('#themeCards .theme-card')).to_have_count(12);expect(page.locator('#themeCards .theme-card').first).to_be_enabled();page.locator('#themeCards .theme-card').first.tap();expect(page.locator('#themeDetailScreen')).to_be_visible();expect(page.locator('#themeLevelGrid button')).to_have_count(100);expect(page.locator('#themeLevelGrid button').nth(0)).to_be_enabled();expect(page.locator('#themeLevelGrid button').nth(20)).to_be_disabled();page.locator('#themeDetailBack').tap();page.locator('#themesBack').tap()
       # Friends use nickname and progress.
