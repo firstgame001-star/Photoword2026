@@ -55,6 +55,9 @@ assertLanguageKeys(evalConst(game,'GAME_UI'),'Game translations');
 assertLanguageKeys(evalConst(theme,'UI'),'Theme translations');
 assertLanguageKeys(evalConst(theme,'SETTINGS_UI'),'Theme settings translations');
 assertLanguageKeys(evalConst(challenge,'I'),'Challenge translations');
+const coreErrors=evalConst(core,'ERR');
+assertLanguageKeys(coreErrors,'Core error translations');
+for(const lang of ['ru','en','az'])if(!coreErrors[lang]?.energy_full)throw Error('Missing '+lang+' energy_full localization');
 
 const ruleBlock=home.slice(home.indexOf('const RULES='),home.indexOf('const RESET='));
 if(!ruleBlock.includes('Глава 7 «Цивилизация» — уровни 231–280'))throw Error('RU Chapter 7 rules are stale');
