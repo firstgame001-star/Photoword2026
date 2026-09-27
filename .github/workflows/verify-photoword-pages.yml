@@ -2,7 +2,7 @@ name: Verify PhotoWord Pages
 on:
   push:
     branches: [main]
-    paths: ['clean/**', 'scripts/check-clean.mjs', '.github/workflows/verify-photoword-pages.yml']
+    paths: ['clean/**', 'scripts/check-clean.mjs', 'scripts/full-audit.mjs', '.github/workflows/verify-photoword-pages.yml']
   workflow_run:
     workflows: ["pages build and deployment"]
     types: [completed]
