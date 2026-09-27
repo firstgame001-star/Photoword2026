@@ -57,7 +57,37 @@ const LEVELS={
  17:{answer:'ПРЫЖОК',hint:'Движение, при котором спортсмен на время отрывается от поверхности.',photos:[['🏃','Разбег'],['⬆️','Вверх'],['🏅','Соревнование'],['🤸','Отрыв от земли']]},
  18:{answer:'СКОРОСТЬ',hint:'Показывает, насколько быстро движется спортсмен или техника.',photos:[['🏎️','Гонка'],['🚴','Движение'],['⏱️','Время'],['💨','Быстро']]},
  19:{answer:'ПОБЕДА',hint:'Итог соревнования, когда соперник оказался позади.',photos:[['🏁','Конец'],['🙌','Радость'],['🏆','Трофей'],['🎉','Празднование']]},
- 20:{answer:'ЧЕМПИОН',hint:'Спортсмен или команда, занявшие первое место в главном соревновании.',photos:[['🏆','Кубок'],['👑','Лучший'],['🥇','Первое место'],['🎉','Празднование']]}
+ 20:{answer:'ЧЕМПИОН',hint:'Спортсмен или команда, занявшие первое место в главном соревновании.',photos:[['🏆','Кубок'],['👑','Лучший'],['🥇','Первое место'],['🎉','Празднование']]},
+ 21:{answer:'БОКС',hint:'Единоборство, где соперники сражаются в перчатках на ринге.',photos:[['🔔','Раунд'],['⏱️','Время'],['👊','Удар'],['🥊','Перчатки']]},
+ 22:{answer:'БАСКЕТБОЛ',hint:'Командная игра, где мяч стараются забросить в высоко расположенную корзину.',photos:[['👟','Площадка'],['⛹️','Игрок'],['🧺','Корзина'],['🏀','Мяч']]},
+ 23:{answer:'ВОЛЕЙБОЛ',hint:'Игра через сетку, где мяч обычно отбивают руками.',photos:[['🏖️','Площадка'],['🙌','Удар руками'],['🕸️','Сетка'],['🏐','Мяч']]},
+ 24:{answer:'ПЛАВАНИЕ',hint:'Спортивное движение в воде на скорость или выносливость.',photos:[['⏱️','Время'],['🥽','Очки'],['💦','Вода'],['🏊','Спортсмен']]},
+ 25:{answer:'ГОНКА',hint:'Соревнование, в котором важно прийти к финишу раньше соперников.',photos:[['⏱️','Время'],['🛣️','Трасса'],['💨','Скорость'],['🏁','Финиш']]},
+ 26:{answer:'ПЕНАЛЬТИ',hint:'Особый удар по воротам за нарушение правил.',photos:[['🟨','Нарушение'],['⚽','Мяч'],['🥅','Ворота'],['🎯','Точный удар']]},
+ 27:{answer:'ДРИБЛИНГ',hint:'Ведение мяча с контролем во время движения.',photos:[['👟','Движение'],['🔄','Контроль'],['🏃','Продвижение'],['🏀','Мяч']]},
+ 28:{answer:'БАССЕЙН',hint:'Место с водой, где проводят тренировки и соревнования по плаванию.',photos:[['🥽','Очки'],['💦','Вода'],['🏊','Пловец'],['🟦','Дорожка']]},
+ 29:{answer:'РИНГ',hint:'Ограниченная площадка для поединков в некоторых единоборствах.',photos:[['🔔','Раунд'],['🟥','Угол'],['👊','Бой'],['🥊','Перчатки']]},
+ 30:{answer:'ТАБЛО',hint:'Показывает счёт, время и другую информацию во время матча.',photos:[['👀','Зрители'],['⏱️','Время'],['2️⃣','Счёт'],['📊','Информация']]},
+ 31:{answer:'КУБОК',hint:'Трофей, который часто вручают победителю турнира.',photos:[['🏁','Финиш'],['🥇','Первое место'],['🎉','Праздник'],['🏆','Трофей']]},
+ 32:{answer:'ФОРМА',hint:'Одежда спортсмена или команды, обычно выполненная в общих цветах.',photos:[['👥','Команда'],['🎽','Экипировка'],['🧢','Цвета'],['👕','Одежда']]},
+ 33:{answer:'РАЗМИНКА',hint:'Подготовительные упражнения перед основной нагрузкой.',photos:[['🌡️','Разогрев'],['🤸','Упражнение'],['🏃','Движение'],['⏱️','Перед стартом']]},
+ 34:{answer:'ТРИБУНА',hint:'Место для зрителей рядом со спортивной площадкой.',photos:[['🎟️','Билет'],['📣','Болельщики'],['👥','Зрители'],['🏟️','Арена']]},
+ 35:{answer:'ТУРНИР',hint:'Серия соревнований, в которой участники борются за общий итоговый результат.',photos:[['🗓️','Расписание'],['👥','Участники'],['🔀','Сетка игр'],['🏆','Приз']]},
+ 36:{answer:'ВРАТАРЬ',hint:'Игрок, основная задача которого — защищать ворота.',photos:[['🧤','Перчатки'],['🥅','Ворота'],['⚽','Мяч'],['🛡️','Защита']]},
+ 37:{answer:'ЗАЩИТА',hint:'Действия команды, направленные на то, чтобы не дать сопернику набрать очки.',photos:[['↩️','Возврат'],['👥','Линия игроков'],['🥅','Свои ворота'],['🛡️','Оборона']]},
+ 38:{answer:'АТАКА',hint:'Активные действия команды или спортсмена ради набора очков.',photos:[['➡️','Вперёд'],['🏃','Рывок'],['⚽','Мяч'],['🎯','Цель']]},
+ 39:{answer:'ПАС',hint:'Передача мяча партнёру по команде.',photos:[['🤝','Партнёр'],['➡️','Передача'],['⚽','Мяч'],['👥','Команда']]},
+ 40:{answer:'НОКАУТ',hint:'Завершение боя, когда соперник не может продолжить поединок.',photos:[['🔔','Раунд'],['😵','Падение'],['👊','Удар'],['🥊','Бой']]},
+ 41:{answer:'МАРАФОН',hint:'Очень длинная беговая дистанция на выносливость.',photos:[['👟','Бег'],['🛣️','Дистанция'],['⏱️','Время'],['🏃','Долгий забег']]},
+ 42:{answer:'СПРИНТ',hint:'Короткий забег, где особенно важна максимальная скорость.',photos:[['⚡','Быстро'],['⏱️','Секунды'],['🏃','Бег'],['💨','Скорость']]},
+ 43:{answer:'ФИТНЕС',hint:'Тренировки для поддержания силы, выносливости и общей физической формы.',photos:[['💧','Нагрузка'],['❤️','Здоровье'],['🏃','Кардио'],['🏋️','Тренировка']]},
+ 44:{answer:'ГАНТЕЛЬ',hint:'Компактный спортивный снаряд, который держат одной рукой.',photos:[['💪','Сила'],['🏠','Тренировка дома'],['🏋️','Вес'],['🔩','Металл']]},
+ 45:{answer:'ШТАНГА',hint:'Силовой снаряд с длинным грифом и весом по краям.',photos:[['🏋️','Подъём'],['💪','Сила'],['⚫','Вес'],['➖','Длинный гриф']]},
+ 46:{answer:'БАРЬЕР',hint:'Препятствие, через которое спортсмен должен перепрыгнуть на беговой дорожке.',photos:[['🏃','Разбег'],['⬆️','Прыжок'],['🛣️','Дорожка'],['🚧','Препятствие']]},
+ 47:{answer:'СВИСТОК',hint:'С его помощью судья подаёт короткий звуковой сигнал.',photos:[['🧑‍⚖️','Судья'],['👂','Звук'],['⏱️','Остановка'],['🟨','Правило']]},
+ 48:{answer:'ДИСТАНЦИЯ',hint:'Расстояние, которое нужно преодолеть от старта до финиша.',photos:[['📏','Расстояние'],['🏃','Движение'],['🛣️','Маршрут'],['🏁','Финиш']]},
+ 49:{answer:'ТАКТИКА',hint:'План действий спортсмена или команды для достижения результата.',photos:[['🧠','Решение'],['📋','План'],['↔️','Перестроение'],['👥','Команда']]},
+ 50:{answer:'СЕКУНДОМЕР',hint:'Прибор для точного измерения времени в тренировке или соревновании.',photos:[['🏃','Забег'],['🏁','Финиш'],['🕐','Время'],['⏱️','Измерение']]}
 };
 
 const TRANSLATED={
@@ -65,13 +95,25 @@ const TRANSLATED={
  1:{answer:'GOAL',hint:'A scoring shot or play that changes the score.'},2:{answer:'MATCH',hint:'A contest between opponents under the rules of a sport.'},3:{answer:'COACH',hint:'A person who prepares an athlete or team for competition.'},4:{answer:'STADIUM',hint:'A large sports venue with stands for spectators.'},5:{answer:'RECORD',hint:'The best officially measured result.'},
  6:{answer:'MEDAL',hint:'An award given for a top finishing position.'},7:{answer:'TEAM',hint:'A group of players competing together for one goal.'},8:{answer:'REFEREE',hint:'The official who enforces rules and makes decisions during play.'},9:{answer:'RACKET',hint:'Equipment used to hit a ball or shuttlecock.'},10:{answer:'SKIS',hint:'Equipment used to move across snow.'},
  11:{answer:'HELMET',hint:'Protective equipment worn on the head in risky sports.'},12:{answer:'RELAY',hint:'A team race where athletes complete sections one after another.'},13:{answer:'FINISH',hint:'The final point of a race or distance.'},14:{answer:'NET',hint:'It divides a court or catches the ball behind a goal.'},15:{answer:'SERVE',hint:'The action that starts a rally or puts the ball into play.'},
- 16:{answer:'HALF',hint:'One of the main time sections of a sports match.'},17:{answer:'JUMP',hint:'A movement where the athlete leaves the ground for a moment.'},18:{answer:'SPEED',hint:'How fast an athlete or vehicle moves.'},19:{answer:'VICTORY',hint:'The result when you defeat the opponent.'},20:{answer:'CHAMPION',hint:'The athlete or team that wins the top competition.'}
+ 16:{answer:'HALF',hint:'One of the main time sections of a sports match.'},17:{answer:'JUMP',hint:'A movement where the athlete leaves the ground for a moment.'},18:{answer:'SPEED',hint:'How fast an athlete or vehicle moves.'},19:{answer:'VICTORY',hint:'The result when you defeat the opponent.'},20:{answer:'CHAMPION',hint:'The athlete or team that wins the top competition.'},
+ 21:{answer:'BOXING',hint:'A combat sport where opponents fight with gloves in a ring.'},22:{answer:'BASKETBALL',hint:'A team game where players try to put the ball through a raised hoop.'},23:{answer:'VOLLEYBALL',hint:'A game across a net where the ball is usually struck with the hands.'},24:{answer:'SWIMMING',hint:'Moving through water as a sport for speed or endurance.'},25:{answer:'RACE',hint:'A contest where the goal is to reach the finish before opponents.'},
+ 26:{answer:'PENALTY',hint:'A special attempt awarded after a rule violation.'},27:{answer:'DRIBBLE',hint:'Controlling and moving the ball while advancing.'},28:{answer:'POOL',hint:'A place filled with water used for swimming practice and competition.'},29:{answer:'RING',hint:'A bounded area used for bouts in some combat sports.'},30:{answer:'SCOREBOARD',hint:'It displays the score, time, and other match information.'},
+ 31:{answer:'TROPHY',hint:'An award often presented to the winner of a competition.'},32:{answer:'UNIFORM',hint:'Matching sports clothing worn by an athlete or team.'},33:{answer:'WARMUP',hint:'Preparatory exercises performed before the main physical effort.'},34:{answer:'STANDS',hint:'The seating area for spectators beside a sports venue.'},35:{answer:'TOURNAMENT',hint:'A series of contests leading to an overall winner.'},
+ 36:{answer:'GOALKEEPER',hint:'The player whose main job is to protect the goal.'},37:{answer:'DEFENSE',hint:'Actions used to stop the opponent from scoring.'},38:{answer:'ATTACK',hint:'Active play aimed at creating a scoring chance.'},39:{answer:'PASS',hint:'Sending the ball to a teammate.'},40:{answer:'KNOCKOUT',hint:'A fight ending when an opponent cannot continue.'},
+ 41:{answer:'MARATHON',hint:'A very long running event that tests endurance.'},42:{answer:'SPRINT',hint:'A short race where maximum speed is especially important.'},43:{answer:'FITNESS',hint:'Training that supports strength, endurance, and general physical condition.'},44:{answer:'DUMBBELL',hint:'A compact weight usually held in one hand.'},45:{answer:'BARBELL',hint:'A long strength-training bar with weights at the ends.'},
+ 46:{answer:'HURDLE',hint:'An obstacle an athlete jumps over during a track race.'},47:{answer:'WHISTLE',hint:'A referee uses it to make a short sharp signal.'},48:{answer:'DISTANCE',hint:'The length that must be covered from start to finish.'},49:{answer:'TACTICS',hint:'A plan of actions used by an athlete or team to get a result.'},50:{answer:'STOPWATCH',hint:'A device used to measure time precisely in training or competition.'}
  },
  az:{
  1:{answer:'QOL',hint:'Hesabı dəyişən uğurlu zərbə və ya atış.'},2:{answer:'MATÇ',hint:'İdman qaydaları ilə iki rəqib arasında keçirilən görüş.'},3:{answer:'MƏŞQÇİ',hint:'İdmançını və ya komandanı yarışa hazırlayan şəxs.'},4:{answer:'STADİON',hint:'Tamaşaçı tribunaları olan böyük idman meydanı.'},5:{answer:'REKORD',hint:'Rəsmi şəkildə qeydə alınmış ən yaxşı nəticə.'},
  6:{answer:'MEDAL',hint:'Mükafat yeri üçün verilən mükafat.'},7:{answer:'KOMANDA',hint:'Ortaq məqsəd üçün birlikdə çıxış edən oyunçular qrupu.'},8:{answer:'HAKİM',hint:'Yarış zamanı qaydalara nəzarət edən və qərar verən şəxs.'},9:{answer:'RAKETKA',hint:'Topa və ya volana vurmaq üçün istifadə olunan idman aləti.'},10:{answer:'XİZƏK',hint:'Qar üzərində hərəkət etmək üçün istifadə olunan vasitə.'},
  11:{answer:'DƏBİLQƏ',hint:'Təhlükəli idman növlərində başı qoruyan vasitə.'},12:{answer:'ESTAFET',hint:'İştirakçıların mərhələləri növbə ilə keçdiyi komanda yarışı.'},13:{answer:'FİNİŞ',hint:'Yarış məsafəsinin son nöqtəsi.'},14:{answer:'TOR',hint:'Meydanı ayırır və ya qapının arxasında topu saxlayır.'},15:{answer:'SERVİS',hint:'Topu oyuna daxil edən başlanğıc zərbəsi.'},
- 16:{answer:'HİSSƏ',hint:'İdman matçının əsas vaxt bölmələrindən biri.'},17:{answer:'TULLANMA',hint:'İdmançının qısa müddətə yerdən ayrıldığı hərəkət.'},18:{answer:'SÜRƏT',hint:'İdmançının və ya texnikanın nə qədər tez hərəkət etdiyini göstərir.'},19:{answer:'QƏLƏBƏ',hint:'Rəqib məğlub ediləndə əldə olunan nəticə.'},20:{answer:'ÇEMPİON',hint:'Əsas yarışda birinci yeri tutan idmançı və ya komanda.'}
+ 16:{answer:'HİSSƏ',hint:'İdman matçının əsas vaxt bölmələrindən biri.'},17:{answer:'TULLANMA',hint:'İdmançının qısa müddətə yerdən ayrıldığı hərəkət.'},18:{answer:'SÜRƏT',hint:'İdmançının və ya texnikanın nə qədər tez hərəkət etdiyini göstərir.'},19:{answer:'QƏLƏBƏ',hint:'Rəqib məğlub ediləndə əldə olunan nəticə.'},20:{answer:'ÇEMPİON',hint:'Əsas yarışda birinci yeri tutan idmançı və ya komanda.'},
+ 21:{answer:'BOKS',hint:'Rəqiblərin əlcəklə rinqdə döyüşdüyü idman növü.'},22:{answer:'BASKETBOL',hint:'Topu hündür səbətə atmağa çalışılan komanda oyunu.'},23:{answer:'VOLEYBOL',hint:'Topun adətən əllə vurulduğu və tor üzərindən oynanan komanda oyunu.'},24:{answer:'ÜZGÜÇÜLÜK',hint:'Suda sürət və ya dözümlülük üçün edilən idman hərəkəti.'},25:{answer:'YARIŞ',hint:'Məqsədin rəqiblərdən əvvəl finişə çatmaq olduğu mübarizə.'},
+ 26:{answer:'PENALTİ',hint:'Qayda pozuntusundan sonra verilən xüsusi zərbə.'},27:{answer:'DRİBLİNQ',hint:'Hərəkət zamanı topu nəzarətdə saxlayaraq irəliləmək.'},28:{answer:'HOVUZ',hint:'Üzgüçülük məşqləri və yarışları üçün su ilə dolu yer.'},29:{answer:'RİNQ',hint:'Bəzi döyüş idmanlarında qarşılaşmanın keçirildiyi məhdud meydan.'},30:{answer:'TABLO',hint:'Oyun zamanı hesabı, vaxtı və digər məlumatları göstərir.'},
+ 31:{answer:'KUBOK',hint:'Turnirin qalibinə tez-tez verilən mükafat.'},32:{answer:'FORMA',hint:'İdmançı və ya komandanın eyni üslubda geyindiyi idman geyimi.'},33:{answer:'İSİNMƏ',hint:'Əsas fiziki yükdən əvvəl edilən hazırlıq hərəkətləri.'},34:{answer:'TRİBUNA',hint:'İdman meydançasının yanında tamaşaçılar üçün ayrılmış yer.'},35:{answer:'TURNİR',hint:'Ümumi qalibi müəyyən edən ardıcıl yarışlar sistemi.'},
+ 36:{answer:'QAPIÇI',hint:'Əsas vəzifəsi qapını qorumaq olan oyunçu.'},37:{answer:'MÜDAFİƏ',hint:'Rəqibin xal qazanmasına mane olmağa yönələn hərəkətlər.'},38:{answer:'HÜCUM',hint:'Xal qazanmaq üçün irəli yönəlmiş aktiv oyun.'},39:{answer:'ÖTÜRMƏ',hint:'Topu komanda yoldaşına göndərmək.'},40:{answer:'NOKAUT',hint:'Rəqib davam edə bilmədikdə döyüşün bitməsi.'},
+ 41:{answer:'MARAFON',hint:'Dözümlülüyü yoxlayan çox uzun qaçış məsafəsi.'},42:{answer:'SPRİNT',hint:'Maksimum sürətin xüsusilə vacib olduğu qısa qaçış.'},43:{answer:'FİTNES',hint:'Güc, dözümlülük və ümumi fiziki formanı qorumaq üçün məşqlər.'},44:{answer:'QANTEL',hint:'Adətən bir əllə tutulan yığcam ağırlıq aləti.'},45:{answer:'ŞTANQ',hint:'Kənarlarında ağırlıq olan uzun güc məşqi aləti.'},
+ 46:{answer:'MANEƏ',hint:'Qaçış zamanı idmançının üzərindən tullanmalı olduğu əngəl.'},47:{answer:'FİT',hint:'Hakimin qısa səs siqnalı vermək üçün istifadə etdiyi vasitə.'},48:{answer:'MƏSAFƏ',hint:'Startdan finişə qədər keçilməli olan uzunluq.'},49:{answer:'TAKTİKA',hint:'Nəticə əldə etmək üçün idmançı və ya komandanın fəaliyyət planı.'},50:{answer:'SANİYƏÖLÇƏN',hint:'Məşq və yarışda vaxtı dəqiq ölçən cihaz.'}
  }
 };
 if(TRANSLATED[lang])Object.keys(LEVELS).forEach(k=>Object.assign(LEVELS[k],TRANSLATED[lang][k]));
@@ -83,9 +125,9 @@ function makePool(answer){
  return [...a,...extras];
 }
 function progressKey(){return 'pw.themeProgress.sport'}
-function getProgress(){try{const a=JSON.parse(localStorage.getItem(progressKey())||'[]');return new Set(Array.isArray(a)?a.map(Number).filter(n=>Number.isInteger(n)&&n>=1&&n<=20):[])}catch{return new Set()}}
+function getProgress(){try{const a=JSON.parse(localStorage.getItem(progressKey())||'[]');return new Set(Array.isArray(a)?a.map(Number).filter(n=>Number.isInteger(n)&&n>=1&&n<=50):[])}catch{return new Set()}}
 function saveProgress(set){try{localStorage.setItem(progressKey(),JSON.stringify([...set].sort((a,b)=>a-b)))}catch{}}
-function firstIncomplete(set){for(let n=1;n<=20;n++)if(!set.has(n))return n;return 21}
+function firstIncomplete(set){for(let n=1;n<=50;n++)if(!set.has(n))return n;return 51}
 
 const requested=Number(new URLSearchParams(location.search).get('level')||1),levelId=LEVELS[requested]?requested:1,level=LEVELS[levelId],answer=[...level.answer];
 const progress=getProgress(),unlock=firstIncomplete(progress);
@@ -114,7 +156,7 @@ function clearInput(){selected=Array(answer.length).fill(null);for(const [pos,id
 function choose(id){if(busy||solved)return;const pos=selected.indexOf(null);if(pos<0)return;pw?.sfx?.('tap');pw?.haptic?.();selected[pos]=id;paint();check()}
 function showSuccess(){
  const p=getProgress();p.add(levelId);saveProgress(p);$('status').hidden=true;$('successPanel').hidden=false;$('successTitle').textContent=ui.passed(levelId);$('successReward').textContent=ui.saved;
- const next=$('nextLevel');if(levelId<20){next.href='./theme-game.html?theme=sport&level='+(levelId+1);next.innerHTML=ui.next+' <span>▶</span>'}else{next.href='./index.html';next.innerHTML=ui.back+' <span>✓</span>'}
+ const next=$('nextLevel');if(levelId<50){next.href='./theme-game.html?theme=sport&level='+(levelId+1);next.innerHTML=ui.next+' <span>▶</span>'}else{next.href='./index.html';next.innerHTML=ui.back+' <span>✓</span>'}
 }
 function check(){
  if(selected.some(id=>id===null))return;
