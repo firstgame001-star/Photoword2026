@@ -107,8 +107,9 @@ function setChallengeLabels(){
 }
 function openChallengeMode(id){
  const m=challengeMode(),d=m.modes[id];if(!d)return;
- text('challengeModalIcon',d[0]);text('challengeModalBadge',m.state);text('challengeModalTitle',d[1]);text('challengeModalText',m.modal);text('challengeModalClose',m.close);
- open('challengeModal');track('challenge_mode_open',{metadata:{mode:id}});
+ track('challenge_mode_open',{metadata:{mode:id}});
+ if(window.PWChallenge?.open)window.PWChallenge.open(id);
+ else location.href='./index.html?challenge='+encodeURIComponent(id);
 }
 function themeMode(){return THEME_MODE[lang()]||THEME_MODE.ru}
 function themeCategory(id){return THEME_CATEGORIES.find(x=>x.id===id)}
@@ -309,5 +310,5 @@ async function rating(){const x=t();screen('ratingScreen');const id=++ratingReq,
 ['ratingNav','ratingShortcut','refreshRating'].forEach(id=>$(id).onclick=rating);
 
 window.addEventListener('pw:player',e=>update(e.detail));
-pw.login().then(async()=>{pw.status(t().profileSynced);track('app_open',{metadata:{version:'r44'}});configureAds();try{const start=window.Telegram?.WebApp?.initDataUnsafe?.start_param||'';if(start.startsWith('ref_PW-'))await pw.api('register_referral',{referrer:start.slice(4)})}catch{}}).catch(e=>pw.status(e.message));
+pw.login().then(async()=>{pw.status(t().profileSynced);track('app_open',{metadata:{version:'r45'}});configureAds();try{const start=window.Telegram?.WebApp?.initDataUnsafe?.start_param||'';if(start.startsWith('ref_PW-'))await pw.api('register_referral',{referrer:start.slice(4)})}catch{}}).catch(e=>pw.status(e.message));
 })();
