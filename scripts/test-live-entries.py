@@ -4,7 +4,7 @@ from pathlib import Path
 from playwright.sync_api import sync_playwright, expect
 
 BASE='https://firstgame001-star.github.io/Photoword2026/'
-RELEASE='20260927-r43'
+RELEASE='20260927-r44'
 OUT=Path('test-results'); OUT.mkdir(exist_ok=True)
 
 for attempt in range(48):
@@ -143,6 +143,7 @@ with sync_playwright() as pw:
       # High-reward daily tasks were removed from the product surface.
       expect(page.locator('#tasksBtn')).to_have_count(0);expect(page.locator('#tasksModal')).to_have_count(0)
       # Thematic mode is a prominent separate surface and unlocks after 10 main levels.
+      expect(page.locator('#challengeModes')).to_be_visible();expect(page.locator('[data-challenge]')).to_have_count(3);page.locator('[data-challenge="blitz"]').tap();expect(page.locator('#challengeModal')).to_be_visible();expect(page.locator('#challengeModalTitle')).to_have_text({'ru':'Блиц','en':'Blitz','az':'Blits'}[language]);page.locator('#challengeModalClose').tap();expect(page.locator('#challengeModal')).to_be_hidden()
       expect(page.locator('#themesEntry')).to_be_visible();expect(page.locator('#themesEntryBadge')).to_be_visible();page.locator('#themesEntry').tap();expect(page.locator('#themesScreen')).to_be_visible();expect(page.locator('#themeCards .theme-card')).to_have_count(12);expect(page.locator('#themeCards .theme-card').first).to_be_enabled();page.locator('#themeCards .theme-card').first.tap();expect(page.locator('#themeDetailScreen')).to_be_visible();expect(page.locator('#themeLevelGrid button')).to_have_count(100);expect(page.locator('#themeLevelGrid button').nth(0)).to_be_enabled();expect(page.locator('#themeLevelGrid button').nth(20)).to_be_disabled();page.locator('#themeDetailBack').tap();page.locator('#themesBack').tap()
       # Friends use nickname and progress.
       page.locator('#friendsNav').tap();expect(page.locator('#friendsList')).to_contain_text('FriendOne');expect(page.locator('#friendsList')).to_contain_text('7 / 10');page.locator('[data-close="friendsModal"]').tap()
