@@ -61,7 +61,47 @@
     57:{answer:"КАНАЛ",pool:"КАНАЛТРЕСОМ",hint:"По нему может идти вода, сигнал, информация или транспорт.",photos:[["📺","Передача"],["🌊","Вода"],["📡","Сигнал"],["🚢","Судоходство"]]},
     58:{answer:"ФИЛЬТР",pool:"ФИЛЬТРСАКОН",hint:"Он пропускает нужное и задерживает лишнее.",photos:[["☕","Кофе"],["📷","Изображение"],["😷","Защита"],["💧","Очистка"]]},
     59:{answer:"СЦЕНА",pool:"СЦЕНАРТИМОК",hint:"Место, где происходит выступление, действие или важный эпизод.",photos:[["🎤","Выступление"],["💡","Свет"],["👥","Зрители"],["🎭","Театр"]]},
-    60:{answer:"СИМВОЛ",pool:"СИМВОЛТАРЕКН",hint:"Знак или образ, который представляет идею, значение или объект.",photos:[["❤️","Значение"],["🚦","Знак"],["🏳️","Обозначение"],["🔣","Знаки"]]}
+    60:{answer:"СИМВОЛ",pool:"СИМВОЛТАРЕКН",hint:"Знак или образ, который представляет идею, значение или объект.",photos:[["❤️","Значение"],["🚦","Знак"],["🏳️","Обозначение"],["🔣","Знаки"]]},
+    61:{answer:"ПОТОК",pool:"ПОТОКАБВГДЕЖ",hint:"Непрерывное движение чего-либо в одном направлении.",photos:[["🚰","Движение воды"],["🚗","Дорога"],["📡","Данные"],["➡️","Направление"]]},
+    62:{answer:"ПРЕДЕЛ",pool:"ПРЕДЕЛАБВГЖЗ",hint:"Граница, дальше которой что-либо не продолжается.",photos:[["📏","Измерение"],["⏱️","Ограничение"],["🛑","Стоп"],["🚧","Граница"]]},
+    63:{answer:"МОМЕНТ",pool:"МОМЕНТАБВГДЖ",hint:"Короткий отрезок времени или важная точка события.",photos:[["📸","Снимок"],["⏳","Время"],["👀","Мгновение"],["✨","Особый миг"]]},
+    64:{answer:"ОБРАЗ",pool:"ОБРАЗВГДЕЖИЙ",hint:"Представление, вид или мысленная картина чего-либо.",photos:[["🎨","Рисунок"],["👤","Силуэт"],["🪞","Отражение"],["🖼️","Картина"]]},
+    65:{answer:"ЭНЕРГИЯ",pool:"ЭНЕРГИЯАБВДЖ",hint:"То, что даёт способность действовать, двигаться или выполнять работу.",photos:[["🔋","Запас"],["🏃","Движение"],["☀️","Солнце"],["⚡","Сила"]]},
+    66:{answer:"ЧАСТОТА",pool:"ЧАСТОТАБВГДЕ",hint:"Показывает, как часто повторяется событие или колебание.",photos:[["📻","Радио"],["〰️","Колебание"],["⏱️","Повтор"],["📈","Измерение"]]},
+    67:{answer:"СИСТЕМА",pool:"СИСТЕМАБВГДЖ",hint:"Набор связанных элементов, работающих как единое целое.",photos:[["⚙️","Механизмы"],["🧩","Части"],["🔗","Связи"],["💻","Работа вместе"]]},
+    68:{answer:"МОДЕЛЬ",pool:"МОДЕЛЬАБВГЖЗ",hint:"Упрощённое представление реального объекта, процесса или идеи.",photos:[["🏗️","Макет"],["📐","Схема"],["🧠","Представление"],["🧩","Устройство"]]},
+    69:{answer:"КОНТАКТ",pool:"КОНТАКТБВГДЕ",hint:"Связь или непосредственное взаимодействие между людьми или объектами.",photos:[["📞","Связь"],["🤝","Встреча"],["🔌","Соединение"],["👥","Взаимодействие"]]},
+    70:{answer:"РЕСУРС",pool:"РЕСУРСАБВГДЖ",hint:"Запас или средство, которое можно использовать для достижения цели.",photos:[["📦","Запас"],["💰","Средства"],["🔋","Энергия"],["🧰","Возможности"]]},
+    71:{answer:"МАСШТАБ",pool:"МАСШТАБВГДЕЖ",hint:"Соотношение размеров или степень охвата чего-либо.",photos:[["🗺️","Карта"],["🔍","Увеличение"],["📏","Размер"],["🌍","Охват"]]},
+    72:{answer:"ТОЧКА",pool:"ТОЧКАБВГДЕЖЗ",hint:"Маленькая отметка, конкретное место или положение.",photos:[["📍","Место"],["✏️","Отметка"],["🎯","Позиция"],["•","Знак"]]},
+    73:{answer:"ЛИНИЯ",pool:"ЛИНИЯАБВГДЕЖ",hint:"Протяжённый след, граница или направление между точками.",photos:[["✏️","Штрих"],["📈","График"],["🛣️","Направление"],["➖","Черта"]]},
+    74:{answer:"ФОРМУЛА",pool:"ФОРМУЛАБВГДЕ",hint:"Краткая запись правила, зависимости или способа вычисления.",photos:[["🧮","Расчёт"],["🔢","Числа"],["🧪","Соотношение"],["➗","Вычисление"]]},
+    75:{answer:"СТРУКТУРА",pool:"СТРУКТУРАБВГДЕ",hint:"Порядок расположения и связи частей внутри целого.",photos:[["🏗️","Каркас"],["🧱","Части"],["🗂️","Порядок"],["🔗","Связи"]]},
+    76:{answer:"ПРОЦЕСС",pool:"ПРОЦЕССАБВГД",hint:"Последовательность действий или изменений, ведущих к результату.",photos:[["1️⃣","Начало"],["🔄","Изменение"],["⚙️","Работа"],["✅","Результат"]]},
+    77:{answer:"ШАБЛОН",pool:"ШАБЛОНВГДЕЖЗ",hint:"Повторяющийся образец или форма, по которой создают похожие вещи.",photos:[["🧩","Повтор"],["🧵","Узор"],["📐","Форма"],["🔁","Повторение"]]},
+    78:{answer:"СХЕМА",pool:"СХЕМАБВГДЖЗИ",hint:"Условное изображение устройства, связи или порядка действий.",photos:[["✏️","Черновик"],["🔗","Связи"],["📐","Чертёж"],["🗺️","План"]]},
+    79:{answer:"КОНТЕКСТ",pool:"КОНТЕКСТАБВГД",hint:"Окружение и условия, которые помогают правильно понять смысл.",photos:[["💬","Фраза"],["📖","Текст"],["🧠","Смысл"],["🔎","Уточнение"]]},
+    80:{answer:"ФАКТОР",pool:"ФАКТОРБВГДЕЖ",hint:"Причина или условие, влияющее на результат.",photos:[["⚙️","Влияние"],["📊","Результат"],["➕","Составляющая"],["🎯","Эффект"]]},
+    81:{answer:"ДИАЛОГ",pool:"ДИАЛОГБВЕЖЗЙ",hint:"Обмен репликами или информацией между двумя сторонами.",photos:[["🗣️","Речь"],["👂","Слушать"],["💬","Реплики"],["👥","Две стороны"]]},
+    82:{answer:"ГРАНИЦА",pool:"ГРАНИЦАБВДЕЖ",hint:"Линия или условный рубеж, отделяющий одно от другого.",photos:[["🗺️","Карта"],["🚧","Рубеж"],["↔️","Две стороны"],["📍","Разделение"]]},
+    83:{answer:"ЦИКЛ",pool:"ЦИКЛАБВГДЕЖЗ",hint:"Последовательность, которая после завершения снова повторяется.",photos:[["🔄","Повтор"],["🌙","Фазы"],["🔁","Возврат"],["⏱️","Период"]]},
+    84:{answer:"ЯДРО",pool:"ЯДРОАБВГЕЖЗИ",hint:"Центральная и наиболее важная часть системы или объекта.",photos:[["🍎","Середина"],["🎯","Центр"],["⚛️","Центральная часть"],["💻","Основа системы"]]},
+    85:{answer:"МОДУЛЬ",pool:"МОДУЛЬАБВГЕЖ",hint:"Отдельная часть системы, которая выполняет определённую функцию.",photos:[["🧩","Часть"],["🔌","Подключение"],["⚙️","Функция"],["🏗️","Блок"]]},
+    86:{answer:"ПАРАМЕТР",pool:"ПАРАМЕТРБВГДЖ",hint:"Характеристика или значение, задающее условия работы или сравнения.",photos:[["⚙️","Настройка"],["📏","Значение"],["🎚️","Регулировка"],["📊","Показатель"]]},
+    87:{answer:"АЛГОРИТМ",pool:"АЛГОРИТМБВДЕЖ",hint:"Точная последовательность шагов для решения задачи.",photos:[["1️⃣","Шаг"],["2️⃣","Следующий шаг"],["💻","Выполнение"],["✅","Решение"]]},
+    88:{answer:"СЦЕНАРИЙ",pool:"СЦЕНАРИЙБВГДЖ",hint:"Продуманная последовательность событий или возможный вариант развития.",photos:[["🎬","Сцена"],["📝","План"],["🔀","Варианты"],["➡️","Развитие"]]},
+    89:{answer:"СМЫСЛ",pool:"СМЫСЛАБВГДЕЖ",hint:"Главная идея или значение, заключённое в словах, действиях или образах.",photos:[["💬","Слова"],["🧠","Понимание"],["🔎","Значение"],["💡","Идея"]]},
+    90:{answer:"СВЯЗКА",pool:"СВЯЗКАБГДЕЖИ",hint:"То, что объединяет несколько элементов и помогает им работать вместе.",photos:[["🔗","Соединение"],["🧩","Части"],["🤝","Объединение"],["⚙️","Совместная работа"]]},
+    91:{answer:"МЕХАНИЗМ",pool:"МЕХАНИЗМБВГДЖ",hint:"Система деталей или действий, благодаря которой что-либо работает.",photos:[["🧩","Части"],["🔄","Движение"],["🔧","Устройство"],["⚙️","Работа"]]},
+    92:{answer:"КООРДИНАТА",pool:"КООРДИНАТАБВГЕЖ",hint:"Число или значение, которое задаёт точное положение точки.",photos:[["🗺️","Карта"],["📍","Положение"],["📐","Оси"],["🔢","Значение"]]},
+    93:{answer:"ПЕРСПЕКТИВА",pool:"ПЕРСПЕКТИВАБГДЖЗ",hint:"Способ видеть пространство или оценивать ситуацию с определённой точки.",photos:[["👁️","Взгляд"],["🛣️","Даль"],["📐","Глубина"],["🏙️","Пространство"]]},
+    94:{answer:"ИНТЕРВАЛ",pool:"ИНТЕРВАЛБГДЖЗ",hint:"Промежуток между двумя моментами, значениями или объектами.",photos:[["⏱️","Время"],["↔️","Промежуток"],["🎵","Расстояние в звуке"],["📏","Отрезок"]]},
+    95:{answer:"ПРОПОРЦИЯ",pool:"ПРОПОРЦИЯАБВГД",hint:"Соотношение частей или величин между собой.",photos:[["⚖️","Соотношение"],["📐","Размеры"],["➗","Отношение"],["🧩","Части"]]},
+    96:{answer:"ИЕРАРХИЯ",pool:"ИЕРАРХИЯБВГДЖ",hint:"Порядок уровней, где одни элементы находятся выше или ниже других.",photos:[["👑","Верх"],["🏢","Уровни"],["⬆️","Выше"],["⬇️","Ниже"]]},
+    97:{answer:"КОНФИГУРАЦИЯ",pool:"КОНФИГУРАЦИЯБВДЕЖ",hint:"Определённое расположение и сочетание частей системы.",photos:[["🧩","Сочетание"],["⚙️","Настройка"],["🖥️","Система"],["🔧","Расположение"]]},
+    98:{answer:"ТРАНСФОРМАЦИЯ",pool:"ТРАНСФОРМАЦИЯБВГДЕ",hint:"Заметное изменение формы, состояния или структуры.",photos:[["🐛","До"],["🦋","После"],["🔄","Изменение"],["✨","Новая форма"]]},
+    99:{answer:"ИНТЕГРАЦИЯ",pool:"ИНТЕГРАЦИЯБВДЖЗ",hint:"Объединение отдельных частей в единую работающую систему.",photos:[["🧩","Части"],["🤝","Объединение"],["🔗","Связь"],["⚙️","Единая система"]]},
+    100:{answer:"АБСТРАКЦИЯ",pool:"АБСТРАКЦИЯВГДЕЖ",hint:"Идея или образ, отвлечённый от конкретного предмета.",photos:[["🎨","Форма"],["🧠","Идея"],["〰️","Необычный образ"],["❓","Не конкретный предмет"]]}
   };
   const TRANSLATED={
     en:{
@@ -124,7 +164,47 @@
       57:{answer:"CHANNEL",pool:"CHANNELTRSMO",hint:"Water, signals, information, or transport can pass through it."},
       58:{answer:"FILTER",pool:"FILTERSAKON",hint:"It lets wanted things through and holds unwanted things back."},
       59:{answer:"STAGE",pool:"STAGEARIMOK",hint:"A place where a performance, action, or important scene happens."},
-      60:{answer:"SYMBOL",pool:"SYMBOLTAREKN",hint:"A sign or image that represents an idea, meaning, or object."}
+      60:{answer:"SYMBOL",pool:"SYMBOLTAREKN",hint:"A sign or image that represents an idea, meaning, or object."},
+      61:{answer:"FLOW",pool:"FLOWABCDEGHI",hint:"Continuous movement of something in one direction."},
+      62:{answer:"LIMIT",pool:"LIMITABCDEFG",hint:"A boundary beyond which something does not continue."},
+      63:{answer:"MOMENT",pool:"MOMENTABCDFG",hint:"A short point in time or an important instant in an event."},
+      64:{answer:"IMAGE",pool:"IMAGEBCDFHJK",hint:"A representation, appearance, or mental picture of something."},
+      65:{answer:"ENERGY",pool:"ENERGYABCDFH",hint:"What provides the ability to act, move, or do work."},
+      66:{answer:"FREQUENCY",pool:"FREQUENCYABDGH",hint:"It shows how often an event or vibration repeats."},
+      67:{answer:"SYSTEM",pool:"SYSTEMABCDFG",hint:"A set of connected elements working as one whole."},
+      68:{answer:"MODEL",pool:"MODELABCFGHI",hint:"A simplified representation of a real object, process, or idea."},
+      69:{answer:"CONTACT",pool:"CONTACTBDEFG",hint:"A connection or direct interaction between people or objects."},
+      70:{answer:"RESOURCE",pool:"RESOURCEABDFG",hint:"A supply or means that can be used to achieve a goal."},
+      71:{answer:"SCALE",pool:"SCALEBDFGHIJ",hint:"The ratio of sizes or the extent of something."},
+      72:{answer:"POINT",pool:"POINTABCDEFG",hint:"A small mark, specific place, or position."},
+      73:{answer:"LINE",pool:"LINEABCDFGHJ",hint:"A continuous mark, boundary, or direction between points."},
+      74:{answer:"FORMULA",pool:"FORMULABCDEG",hint:"A concise expression of a rule, relationship, or calculation method."},
+      75:{answer:"STRUCTURE",pool:"STRUCTUREABDFG",hint:"The arrangement and relationships of parts within a whole."},
+      76:{answer:"PROCESS",pool:"PROCESSABDFG",hint:"A sequence of actions or changes leading to a result."},
+      77:{answer:"PATTERN",pool:"PATTERNBCDFG",hint:"A repeating model or form used to create similar things."},
+      78:{answer:"SCHEME",pool:"SCHEMEABDFGI",hint:"A simplified diagram of a device, connection, or sequence."},
+      79:{answer:"CONTEXT",pool:"CONTEXTABDFG",hint:"The surrounding conditions that help clarify meaning."},
+      80:{answer:"FACTOR",pool:"FACTORBDEGHI",hint:"A cause or condition that influences a result."},
+      81:{answer:"DIALOGUE",pool:"DIALOGUEBCFHJ",hint:"An exchange of words or information between two sides."},
+      82:{answer:"BOUNDARY",pool:"BOUNDARYCEFGH",hint:"A line or conceptual border separating one thing from another."},
+      83:{answer:"CYCLE",pool:"CYCLEABDFGHI",hint:"A sequence that repeats again after it finishes."},
+      84:{answer:"CORE",pool:"COREABDFGHIJ",hint:"The central and most important part of a system or object."},
+      85:{answer:"MODULE",pool:"MODULEABCFGH",hint:"A separate part of a system that performs a specific function."},
+      86:{answer:"PARAMETER",pool:"PARAMETERBCDFG",hint:"A characteristic or value defining conditions for operation or comparison."},
+      87:{answer:"ALGORITHM",pool:"ALGORITHMBCDEF",hint:"A precise sequence of steps used to solve a problem."},
+      88:{answer:"SCENARIO",pool:"SCENARIOBDFGH",hint:"A planned sequence of events or a possible course of development."},
+      89:{answer:"MEANING",pool:"MEANINGBCDFH",hint:"The main idea or significance contained in words, actions, or images."},
+      90:{answer:"LINKAGE",pool:"LINKAGEBCDFH",hint:"Something that joins several elements and helps them work together."},
+      91:{answer:"MECHANISM",pool:"MECHANISMBDFGJ",hint:"A system of parts or actions through which something works."},
+      92:{answer:"COORDINATE",pool:"COORDINATEBFGHJ",hint:"A number or value that specifies an exact position."},
+      93:{answer:"PERSPECTIVE",pool:"PERSPECTIVEABDFG",hint:"A way of viewing space or judging a situation from a certain point."},
+      94:{answer:"INTERVAL",pool:"INTERVALBCDFG",hint:"A gap between two moments, values, or objects."},
+      95:{answer:"PROPORTION",pool:"PROPORTIONABCDE",hint:"The relationship in size or amount between parts or quantities."},
+      96:{answer:"HIERARCHY",pool:"HIERARCHYBDFGJ",hint:"An arrangement of levels where some elements are above or below others."},
+      97:{answer:"CONFIGURATION",pool:"CONFIGURATIONBDEHJ",hint:"A particular arrangement and combination of parts in a system."},
+      98:{answer:"TRANSFORMATION",pool:"TRANSFORMATIONBCDEG",hint:"A significant change in form, state, or structure."},
+      99:{answer:"INTEGRATION",pool:"INTEGRATIONBCDFH",hint:"Combining separate parts into one working system."},
+      100:{answer:"ABSTRACTION",pool:"ABSTRACTIONDEFGH",hint:"An idea or image separated from a specific concrete object."}
     },
     az:{
       1:{answer:'İT',pool:'İTPİŞKALMONR',hint:'İnsanın ən yaxın dostu adlandırılan ev heyvanı.'},
@@ -186,7 +266,47 @@
       57:{answer:"KANAL",pool:"KANALTRƏSOM",hint:"Su, siqnal, məlumat və ya nəqliyyat onunla hərəkət edə bilər."},
       58:{answer:"FİLTR",pool:"FİLTRSAKON",hint:"Lazım olanı buraxır, artıq olanı saxlayır."},
       59:{answer:"SƏHNƏ",pool:"SƏHNƏARTİMO",hint:"Tamaşanın, çıxışın və ya mühüm hadisənin baş verdiyi yer."},
-      60:{answer:"SİMVOL",pool:"SİMVOLTARƏKN",hint:"Fikri, mənanı və ya obyekti ifadə edən işarə və ya obraz."}
+      60:{answer:"SİMVOL",pool:"SİMVOLTARƏKN",hint:"Fikri, mənanı və ya obyekti ifadə edən işarə və ya obraz."},
+      61:{answer:"AXIN",pool:"AXINBCÇDEƏFG",hint:"Bir istiqamətdə fasiləsiz hərəkət."},
+      62:{answer:"HƏDD",pool:"HƏDDABCÇEFGĞ",hint:"Bir şeyin davam etmədiyi sərhəd."},
+      63:{answer:"AN",pool:"ANBCÇDEƏFGĞH",hint:"Qısa zaman anı və ya hadisənin mühüm nöqtəsi."},
+      64:{answer:"TƏSVİR",pool:"TƏSVİRABCÇDE",hint:"Bir şeyin görünüşü, təsviri və ya zehni şəkli."},
+      65:{answer:"ENERJİ",pool:"ENERJİABCÇDƏ",hint:"Hərəkət etməyə və iş görməyə imkan verən güc."},
+      66:{answer:"TEZLİK",pool:"TEZLİKABCÇDƏ",hint:"Hadisənin və ya titrəyişin nə qədər tez-tez təkrarlandığını göstərir."},
+      67:{answer:"SİSTEM",pool:"SİSTEMABCÇDƏ",hint:"Bir bütöv kimi işləyən əlaqəli elementlər toplusu."},
+      68:{answer:"MODEL",pool:"MODELABCÇƏFG",hint:"Real obyektin, prosesin və ya ideyanın sadələşdirilmiş təsviri."},
+      69:{answer:"TƏMAS",pool:"TƏMASBCÇDEFG",hint:"İnsanlar və ya obyektlər arasında birbaşa əlaqə."},
+      70:{answer:"RESURS",pool:"RESURSABCÇDƏ",hint:"Məqsədə çatmaq üçün istifadə edilə bilən ehtiyat və ya vasitə."},
+      71:{answer:"MİQYAS",pool:"MİQYASBCÇDEƏ",hint:"Ölçülərin nisbəti və ya bir şeyin əhatə dərəcəsi."},
+      72:{answer:"NÖQTƏ",pool:"NÖQTƏABCÇDEF",hint:"Kiçik işarə, konkret yer və ya mövqe."},
+      73:{answer:"XƏTT",pool:"XƏTTABCÇDEFG",hint:"Nöqtələr arasında uzanan iz, sərhəd və ya istiqamət."},
+      74:{answer:"FORMUL",pool:"FORMULABCÇDE",hint:"Qaydanın, əlaqənin və ya hesablama üsulunun qısa yazılışı."},
+      75:{answer:"STRUKTUR",pool:"STRUKTURABCÇD",hint:"Bütöv daxilində hissələrin yerləşmə və əlaqə qaydası."},
+      76:{answer:"PROSES",pool:"PROSESABCÇDƏ",hint:"Nəticəyə aparan hərəkət və ya dəyişikliklər ardıcıllığı."},
+      77:{answer:"NÜMUNƏ",pool:"NÜMUNƏABCÇDE",hint:"Oxşar şeylər yaratmaq üçün istifadə olunan təkrarlanan nümunə."},
+      78:{answer:"SXEM",pool:"SXEMABCÇDƏFG",hint:"Qurğunun, əlaqənin və ya addımların şərti təsviri."},
+      79:{answer:"KONTEKST",pool:"KONTEKSTABCÇD",hint:"Mənanı düzgün başa düşməyə kömək edən şərait və mühit."},
+      80:{answer:"AMİL",pool:"AMİLBCÇDEƏFG",hint:"Nəticəyə təsir edən səbəb və ya şərt."},
+      81:{answer:"DİALOQ",pool:"DİALOQBCÇEƏF",hint:"İki tərəf arasında söz və ya məlumat mübadiləsi."},
+      82:{answer:"SƏRHƏD",pool:"SƏRHƏDABCÇEF",hint:"Bir şeyi digərindən ayıran xətt və ya şərti sərhəd."},
+      83:{answer:"DÖVR",pool:"DÖVRABCÇEƏFG",hint:"Bitdikdən sonra yenidən təkrarlanan ardıcıllıq."},
+      84:{answer:"NÜVƏ",pool:"NÜVƏABCÇDEFG",hint:"Sistemin və ya obyektin mərkəzi və əsas hissəsi."},
+      85:{answer:"MODUL",pool:"MODULABCÇEƏF",hint:"Sistemin müəyyən funksiyanı yerinə yetirən ayrıca hissəsi."},
+      86:{answer:"PARAMETR",pool:"PARAMETRBCÇDƏ",hint:"İş və ya müqayisə şərtlərini müəyyən edən göstərici və ya dəyər."},
+      87:{answer:"ALQORİTM",pool:"ALQORİTMBCÇDE",hint:"Məsələni həll etmək üçün dəqiq addımlar ardıcıllığı."},
+      88:{answer:"SSENARİ",pool:"SSENARİBCÇDƏ",hint:"Hadisələrin planlaşdırılmış ardıcıllığı və ya mümkün inkişaf variantı."},
+      89:{answer:"MƏNA",pool:"MƏNABCÇDEFGĞ",hint:"Sözlərdə, hərəkətlərdə və ya obrazlarda olan əsas fikir və məna."},
+      90:{answer:"BAĞLANTI",pool:"BAĞLANTICÇDEƏ",hint:"Bir neçə elementi birləşdirən və birlikdə işləməsinə kömək edən əlaqə."},
+      91:{answer:"MEXANİZM",pool:"MEXANİZMBCÇDƏ",hint:"Bir şeyin işləməsini təmin edən hissələr və ya hərəkətlər sistemi."},
+      92:{answer:"KOORDİNAT",pool:"KOORDİNATBCÇEƏ",hint:"Nöqtənin dəqiq mövqeyini göstərən ədəd və ya dəyər."},
+      93:{answer:"PERSPEKTİV",pool:"PERSPEKTİVABCÇD",hint:"Məkana və ya vəziyyətə müəyyən nöqtədən baxış üsulu."},
+      94:{answer:"İNTERVAL",pool:"İNTERVALBCÇDƏ",hint:"İki an, dəyər və ya obyekt arasındakı aralıq."},
+      95:{answer:"NİSBƏT",pool:"NİSBƏTACÇDEF",hint:"Hissələr və ya kəmiyyətlər arasındakı ölçü münasibəti."},
+      96:{answer:"İYERARXİYA",pool:"İYERARXİYABCÇDƏ",hint:"Bəzi elementlərin digərlərindən yuxarı və ya aşağı olduğu səviyyə qaydası."},
+      97:{answer:"KONFİQURASİYA",pool:"KONFİQURASİYABCÇDE",hint:"Sistem hissələrinin müəyyən yerləşməsi və birləşməsi."},
+      98:{answer:"TRANSFORMASİYA",pool:"TRANSFORMASİYABCÇDE",hint:"Forma, vəziyyət və ya strukturun nəzərəçarpan dəyişməsi."},
+      99:{answer:"İNTEQRASİYA",pool:"İNTEQRASİYABCÇDƏ",hint:"Ayrı hissələrin vahid işləyən sistemdə birləşdirilməsi."},
+      100:{answer:"ABSTRAKSİYA",pool:"ABSTRAKSİYACÇDEƏ",hint:"Konkret obyektdən ayrılmış ümumi fikir və ya obraz."}
     }
   };
   let gameLang='ru';try{gameLang=localStorage.getItem('pw.language')||'ru'}catch{}
@@ -198,7 +318,7 @@
   function validateLanguageLevels(){
     const supported=['ru','en','az'];
     for(const lang of supported){
-      for(let n=1;n<=60;n++){
+      for(let n=1;n<=100;n++){
         const item=lang==='ru'?LEVELS[n]:TRANSLATED[lang][n];
         if(!item||!item.answer||!item.pool||!item.hint)throw new Error('Incomplete language level '+lang+' '+n);
         const need=[...item.answer].reduce((m,ch)=>(m[ch]=(m[ch]||0)+1,m),{});
@@ -209,9 +329,9 @@
   }
   validateLanguageLevels();
   const GAME_UI={
-    ru:{chapter:n=>'Глава '+n,warm:'Разминка',assoc:'Ассоциации',chapter3:'Связи',level:n=>'Уровень '+n,textHint:'Текстовая подсказка',tap:'Нажми, чтобы открыть',wrong:'Неверное слово. Попробуй ещё раз.',checking:'Проверяю и сохраняю ответ…',passed:n=>'Уровень '+n+' пройден!',reward:'+20 монет · +15 XP',already:'Награда за этот уровень уже получена',next:'СЛЕДУЮЩИЙ УРОВЕНЬ',sync:'Профиль синхронизирован.',shuffle:'Буквы перемешаны. Бесплатно.',letter:'Буква открыта. −50 монет.',remove:'Лишние буквы убраны. −100 монет.',text:'Подсказка открыта. −150 монет.',textOpened:'Подсказка уже открыта.',allLetters:'Все буквы уже открыты.',noExtra:'Лишних букв не осталось.',hintWait:'Подсказка: ожидаю ответ сервера…',locked:n=>'Сначала пройди уровень '+n+'.',home:'НА ГЛАВНУЮ',nextChapter:'СЛЕДУЮЩАЯ ГЛАВА',chapterPassed:n=>'Глава '+n+' пройдена!',chapterUnlocked:n=>'Глава '+n+' открыта',slot:n=>'Буква '+n,image:n=>'Изображение '+n,placeFail:'Не удалось разместить букву.'},
-    en:{chapter:n=>'Chapter '+n,warm:'Warm-up',assoc:'Associations',chapter3:'Connections',level:n=>'Level '+n,textHint:'Text hint',tap:'Tap to reveal',wrong:'Wrong word. Try again.',checking:'Checking and saving your answer…',passed:n=>'Level '+n+' completed!',reward:'+20 coins · +15 XP',already:'Reward for this level has already been claimed',next:'NEXT LEVEL',sync:'Profile synced.',shuffle:'Letters shuffled. Free.',letter:'Letter revealed. −50 coins.',remove:'Extra letters removed. −100 coins.',text:'Hint revealed. −150 coins.',textOpened:'Hint already revealed.',allLetters:'All letters are already revealed.',noExtra:'No extra letters remain.',hintWait:'Getting hint from the server…',locked:n=>'Complete level '+n+' first.',home:'HOME',nextChapter:'NEXT CHAPTER',chapterPassed:n=>'Chapter '+n+' completed!',chapterUnlocked:n=>'Chapter '+n+' unlocked',slot:n=>'Letter '+n,image:n=>'Image '+n,placeFail:'Could not place the letter.'},
-    az:{chapter:n=>'Fəsil '+n,warm:'İsinmə',assoc:'Assosiasiyalar',chapter3:'Əlaqələr',level:n=>n+'-ci səviyyə',textHint:'Mətn ipucu',tap:'Açmaq üçün toxun',wrong:'Söz yanlışdır. Yenidən cəhd et.',checking:'Cavab yoxlanılır və yadda saxlanılır…',passed:n=>n+'-ci səviyyə keçildi!',reward:'+20 sikkə · +15 XP',already:'Bu səviyyənin mükafatı artıq alınıb',next:'NÖVBƏTİ SƏVİYYƏ',sync:'Profil sinxronlaşdırıldı.',shuffle:'Hərflər qarışdırıldı. Pulsuz.',letter:'Hərf açıldı. −50 sikkə.',remove:'Artıq hərflər silindi. −100 sikkə.',text:'İpucu açıldı. −150 sikkə.',textOpened:'İpucu artıq açılıb.',allLetters:'Bütün hərflər artıq açılıb.',noExtra:'Artıq hərf qalmayıb.',hintWait:'İpucu serverdən alınır…',locked:n=>'Əvvəlcə '+n+'-ci səviyyəni keç.',home:'ANA SƏHİFƏ',nextChapter:'NÖVBƏTİ FƏSİL',chapterPassed:n=>n+'-ci fəsil tamamlandı!',chapterUnlocked:n=>n+'-ci fəsil açıldı',slot:n=>n+'-ci hərf',image:n=>n+'-ci şəkil',placeFail:'Hərfi yerləşdirmək mümkün olmadı.'}
+    ru:{chapter:n=>'Глава '+n,warm:'Разминка',assoc:'Ассоциации',chapter3:'Связи',chapter4:'Глубина',level:n=>'Уровень '+n,textHint:'Текстовая подсказка',tap:'Нажми, чтобы открыть',wrong:'Неверное слово. Попробуй ещё раз.',checking:'Проверяю и сохраняю ответ…',passed:n=>'Уровень '+n+' пройден!',reward:'+20 монет · +15 XP',already:'Награда за этот уровень уже получена',next:'СЛЕДУЮЩИЙ УРОВЕНЬ',sync:'Профиль синхронизирован.',shuffle:'Буквы перемешаны. Бесплатно.',letter:'Буква открыта. −50 монет.',remove:'Лишние буквы убраны. −100 монет.',text:'Подсказка открыта. −150 монет.',textOpened:'Подсказка уже открыта.',allLetters:'Все буквы уже открыты.',noExtra:'Лишних букв не осталось.',hintWait:'Подсказка: ожидаю ответ сервера…',locked:n=>'Сначала пройди уровень '+n+'.',home:'НА ГЛАВНУЮ',nextChapter:'СЛЕДУЮЩАЯ ГЛАВА',chapterPassed:n=>'Глава '+n+' пройдена!',chapterUnlocked:n=>'Глава '+n+' открыта',slot:n=>'Буква '+n,image:n=>'Изображение '+n,placeFail:'Не удалось разместить букву.'},
+    en:{chapter:n=>'Chapter '+n,warm:'Warm-up',assoc:'Associations',chapter3:'Connections',chapter4:'Depth',level:n=>'Level '+n,textHint:'Text hint',tap:'Tap to reveal',wrong:'Wrong word. Try again.',checking:'Checking and saving your answer…',passed:n=>'Level '+n+' completed!',reward:'+20 coins · +15 XP',already:'Reward for this level has already been claimed',next:'NEXT LEVEL',sync:'Profile synced.',shuffle:'Letters shuffled. Free.',letter:'Letter revealed. −50 coins.',remove:'Extra letters removed. −100 coins.',text:'Hint revealed. −150 coins.',textOpened:'Hint already revealed.',allLetters:'All letters are already revealed.',noExtra:'No extra letters remain.',hintWait:'Getting hint from the server…',locked:n=>'Complete level '+n+' first.',home:'HOME',nextChapter:'NEXT CHAPTER',chapterPassed:n=>'Chapter '+n+' completed!',chapterUnlocked:n=>'Chapter '+n+' unlocked',slot:n=>'Letter '+n,image:n=>'Image '+n,placeFail:'Could not place the letter.'},
+    az:{chapter:n=>'Fəsil '+n,warm:'İsinmə',assoc:'Assosiasiyalar',chapter3:'Əlaqələr',chapter4:'Dərinlik',level:n=>n+'-ci səviyyə',textHint:'Mətn ipucu',tap:'Açmaq üçün toxun',wrong:'Söz yanlışdır. Yenidən cəhd et.',checking:'Cavab yoxlanılır və yadda saxlanılır…',passed:n=>n+'-ci səviyyə keçildi!',reward:'+20 sikkə · +15 XP',already:'Bu səviyyənin mükafatı artıq alınıb',next:'NÖVBƏTİ SƏVİYYƏ',sync:'Profil sinxronlaşdırıldı.',shuffle:'Hərflər qarışdırıldı. Pulsuz.',letter:'Hərf açıldı. −50 sikkə.',remove:'Artıq hərflər silindi. −100 sikkə.',text:'İpucu açıldı. −150 sikkə.',textOpened:'İpucu artıq açılıb.',allLetters:'Bütün hərflər artıq açılıb.',noExtra:'Artıq hərf qalmayıb.',hintWait:'İpucu serverdən alınır…',locked:n=>'Əvvəlcə '+n+'-ci səviyyəni keç.',home:'ANA SƏHİFƏ',nextChapter:'NÖVBƏTİ FƏSİL',chapterPassed:n=>n+'-ci fəsil tamamlandı!',chapterUnlocked:n=>n+'-ci fəsil açıldı',slot:n=>n+'-ci hərf',image:n=>n+'-ci şəkil',placeFail:'Hərfi yerləşdirmək mümkün olmadı.'}
   };
   const requested = Number(new URLSearchParams(location.search).get('level') || 1);
   const levelId = LEVELS[requested] ? requested : 1, level = LEVELS[levelId], answer=[...level.answer];
@@ -221,9 +341,9 @@
 
   const ui=GAME_UI[gameLang]||GAME_UI.ru;
   document.documentElement.lang=gameLang;
-  const chapterNum=levelId<=20?1:levelId<=50?2:3;
+  const chapterNum=levelId<=20?1:levelId<=50?2:levelId<=90?3:4;
   document.querySelector('.game-head>div b').textContent=ui.chapter(chapterNum);
-  $('levelTitle').textContent=(chapterNum===1?ui.warm:chapterNum===2?ui.assoc:ui.chapter3)+' · '+ui.level(levelId);
+  $('levelTitle').textContent=(chapterNum===1?ui.warm:chapterNum===2?ui.assoc:chapterNum===3?ui.chapter3:ui.chapter4)+' · '+ui.level(levelId);
   $('textHint').querySelector('b').textContent=ui.textHint;$('hintValue').textContent=ui.tap;
   $('slots').style.gridTemplateColumns='repeat('+answer.length+',1fr)';$('slots').classList.toggle('long-answer',answer.length>=9);
   level.photos.forEach(([emoji],index)=>{const d=document.createElement('div');d.className='photo';d.setAttribute('role','img');d.setAttribute('aria-label',ui.image(index+1));d.textContent=emoji;$('photos').append(d);});
@@ -269,7 +389,8 @@
     if(chapterNote){chapterNote.hidden=true;chapterNote.textContent='';}
     if(levelId===20){if(chapterNote){chapterNote.hidden=false;chapterNote.textContent=ui.chapterPassed(1)+' '+ui.chapterUnlocked(2)+'.';}next.href='./game.html?level=21';next.innerHTML=ui.nextChapter+' <span>▶</span>';}
     else if(levelId===50){if(chapterNote){chapterNote.hidden=false;chapterNote.textContent=ui.chapterPassed(2)+' '+ui.chapterUnlocked(3)+'.';}next.href='./game.html?level=51';next.innerHTML=ui.nextChapter+' <span>▶</span>';}
-    else if(levelId<60){next.href='./game.html?level='+(levelId+1);next.innerHTML=ui.next+' <span>▶</span>';}
+    else if(levelId===90){if(chapterNote){chapterNote.hidden=false;chapterNote.textContent=ui.chapterPassed(3)+' '+ui.chapterUnlocked(4)+'.';}next.href='./game.html?level=91';next.innerHTML=ui.nextChapter+' <span>▶</span>';}
+    else if(levelId<100){next.href='./game.html?level='+(levelId+1);next.innerHTML=ui.next+' <span>▶</span>';}
     else{next.href='./index.html';next.innerHTML=ui.home+' <span>✓</span>';}
   }
   async function check(){
