@@ -120,6 +120,18 @@ for(const [id,bn,tn] of themeBanks){
  }
 }
 
+// Cross-theme answer uniqueness: ready thematic categories must not repeat each other's answers.
+for(const lang of ['ru','en','az']){
+ const seen=new Map();
+ for(const [id,bn,tn] of themeBanks){
+  const bank=evalConst(theme,bn),tr=evalConst(theme,tn),obj=lang==='ru'?bank:tr[lang];
+  for(const [level,item] of Object.entries(obj)){
+   if(seen.has(item.answer)){const prev=seen.get(item.answer);throw Error('Cross-theme duplicate '+lang+' '+item.answer+' at '+prev.id+' '+prev.level+' and '+id+' '+level)}
+   seen.set(item.answer,{id,level});
+  }
+ }
+}
+if(release.verification?.thematic_answers_unique_across_ready_categories!==true)throw Error('Cross-theme uniqueness manifest flag missing');
 const completeThemes=release.thematic_mode.categories.filter(x=>x.status==='complete');
 if(completeThemes.length!==6)throw Error('Expected 6 complete thematic categories, got '+completeThemes.length);
 if(release.verification?.main_levels_available_through!==280)throw Error('Main game manifest is not at 280');
