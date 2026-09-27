@@ -232,7 +232,57 @@
     227:{"answer":"ОРГАНИЗМ","pool":"ОРГАНИЗМБВДЕЖ","hint":"Отдельное живое существо как единая система.","photos":[["🌱","🌱"],["🐾","🐾"],["🧬","🧬"],["🫀","🫀"]]},
     228:{"answer":"ЭКОСИСТЕМА","pool":"ЭКОСИСТЕМАБВГДЖ","hint":"Сообщество живых организмов и окружающей их среды.","photos":[["🌳","🌳"],["🐦","🐦"],["💧","💧"],["🌱","🌱"]]},
     229:{"answer":"БИОСФЕРА","pool":"БИОСФЕРАВГДЖЗ","hint":"Область Земли, где существует жизнь.","photos":[["🌍","🌍"],["🌱","🌱"],["🐋","🐋"],["🌳","🌳"]]},
-    230:{"answer":"ГАЛАКТИКА","pool":"ГАЛАКТИКАБВДЕЖ","hint":"Огромная система звёзд, газа и пыли, связанная гравитацией.","photos":[["🌌","🌌"],["⭐","⭐"],["🌀","🌀"],["🔭","🔭"]]}
+    230:{"answer":"ГАЛАКТИКА","pool":"ГАЛАКТИКАБВДЕЖ","hint":"Огромная система звёзд, газа и пыли, связанная гравитацией.","photos":[["🌌","🌌"],["⭐","⭐"],["🌀","🌀"],["🔭","🔭"]]},
+    231:{"answer":"ГОРОД","pool":"ГОРОДАБВЕЖЗИ","hint":"Крупный населённый пункт с улицами, зданиями и инфраструктурой.","photos":[["🏙️","🏙️"],["🏢","🏢"],["🚦","🚦"],["🗺️","🗺️"]]},
+    232:{"answer":"СТОЛИЦА","pool":"СТОЛИЦАБВГДЕ","hint":"Главный город государства или региона.","photos":[["🏛️","🏛️"],["🏙️","🏙️"],["🚩","🚩"],["🗺️","🗺️"]]},
+    233:{"answer":"КРЕПОСТЬ","pool":"КРЕПОСТЬАБВГД","hint":"Укреплённое сооружение для защиты территории.","photos":[["🏰","🏰"],["🧱","🧱"],["🛡️","🛡️"],["🏔️","🏔️"]]},
+    234:{"answer":"БАШНЯ","pool":"БАШНЯВГДЕЖЗИ","hint":"Высокое узкое сооружение, заметное издалека.","photos":[["🗼","🗼"],["🏙️","🏙️"],["⬆️","⬆️"],["👀","👀"]]},
+    235:{"answer":"АРКА","pool":"АРКАБВГДЕЖЗИ","hint":"Изогнутая архитектурная конструкция над проёмом.","photos":[["🏛️","🏛️"],["🌉","🌉"],["◼️","◼️"],["📐","📐"]]},
+    236:{"answer":"КОЛОННА","pool":"КОЛОННАБВГДЕ","hint":"Вертикальная опора, часто используемая в архитектуре.","photos":[["🏛️","🏛️"],["⬆️","⬆️"],["🧱","🧱"],["📐","📐"]]},
+    237:{"answer":"ФОНТАН","pool":"ФОНТАНБВГДЕЖ","hint":"Сооружение, из которого декоративно подаётся вода.","photos":[["⛲","⛲"],["💧","💧"],["🏙️","🏙️"],["✨","✨"]]},
+    238:{"answer":"ПАМЯТНИК","pool":"ПАМЯТНИКБВГДЕ","hint":"Сооружение или скульптура в память о событии или человеке.","photos":[["🗿","🗿"],["🏛️","🏛️"],["📷","📷"],["🌟","🌟"]]},
+    239:{"answer":"ПИРАМИДА","pool":"ПИРАМИДАБВГЕЖ","hint":"Монументальное сооружение с треугольными сторонами.","photos":[["🔺","🔺"],["🏜️","🏜️"],["🧱","🧱"],["🏛️","🏛️"]]},
+    240:{"answer":"АМФИТЕАТР","pool":"АМФИТЕАТРБВГДЖ","hint":"Открытое сооружение с рядами мест вокруг сцены.","photos":[["🏛️","🏛️"],["🎭","🎭"],["👥","👥"],["⭕","⭕"]]},
+    241:{"answer":"БИБЛИОТЕКА","pool":"БИБЛИОТЕКАВГДЖЗ","hint":"Место, где хранят и выдают книги и другие материалы.","photos":[["📚","📚"],["🏛️","🏛️"],["🤫","🤫"],["🔖","🔖"]]},
+    242:{"answer":"УНИВЕРСИТЕТ","pool":"УНИВЕРСИТЕТАБГДЖ","hint":"Высшее учебное заведение для обучения и исследований.","photos":[["🎓","🎓"],["🏫","🏫"],["📚","📚"],["👩‍🎓","👩‍🎓"]]},
+    243:{"answer":"БОЛЬНИЦА","pool":"БОЛЬНИЦАВГДЕЖ","hint":"Медицинское учреждение для лечения пациентов.","photos":[["🏥","🏥"],["🩺","🩺"],["🚑","🚑"],["💊","💊"]]},
+    244:{"answer":"ТЕАТР","pool":"ТЕАТРБВГДЖЗИ","hint":"Место, где показывают спектакли перед зрителями.","photos":[["🎭","🎭"],["🎟️","🎟️"],["👏","👏"],["🏛️","🏛️"]]},
+    245:{"answer":"СТАДИОН","pool":"СТАДИОНБВГЕЖ","hint":"Большое сооружение для спортивных соревнований и зрителей.","photos":[["🏟️","🏟️"],["🏃","🏃"],["⚽","⚽"],["👥","👥"]]},
+    246:{"answer":"ФАБРИКА","pool":"ФАБРИКАВГДЕЖ","hint":"Предприятие, где массово производят товары.","photos":[["🏭","🏭"],["⚙️","⚙️"],["📦","📦"],["👷","👷"]]},
+    247:{"answer":"ЗАВОД","pool":"ЗАВОДБГЕЖИЙК","hint":"Промышленное предприятие с производственным оборудованием.","photos":[["🏭","🏭"],["🔥","🔥"],["⚙️","⚙️"],["🚚","🚚"]]},
+    248:{"answer":"ГАВАНЬ","pool":"ГАВАНЬБДЕЖЗИ","hint":"Защищённое место у берега для стоянки судов.","photos":[["⚓","⚓"],["🚢","🚢"],["🌊","🌊"],["🏙️","🏙️"]]},
+    249:{"answer":"РЫНОК","pool":"РЫНОКАБВГДЕЖ","hint":"Место торговли товарами и услугами.","photos":[["🛍️","🛍️"],["🍎","🍎"],["👥","👥"],["💰","💰"]]},
+    250:{"answer":"БАНК","pool":"БАНКВГДЕЖЗИЙ","hint":"Финансовое учреждение для денег, счетов и платежей.","photos":[["🏦","🏦"],["💳","💳"],["💰","💰"],["📈","📈"]]},
+    251:{"answer":"СУД","pool":"СУДАБВГЕЖЗИЙ","hint":"Орган, который рассматривает юридические споры и дела.","photos":[["⚖️","⚖️"],["🏛️","🏛️"],["📜","📜"],["👨‍⚖️","👨‍⚖️"]]},
+    252:{"answer":"ПАРЛАМЕНТ","pool":"ПАРЛАМЕНТБВГДЖ","hint":"Представительный орган, принимающий законы.","photos":[["🏛️","🏛️"],["🗳️","🗳️"],["📜","📜"],["👥","👥"]]},
+    253:{"answer":"МЭРИЯ","pool":"МЭРИЯАБВГДЕЖ","hint":"Здание или орган городского управления.","photos":[["🏛️","🏛️"],["🏙️","🏙️"],["📋","📋"],["👥","👥"]]},
+    254:{"answer":"ПЛОЩАДЬ","pool":"ПЛОЩАДЬБВГЕЖ","hint":"Открытое общественное пространство внутри города.","photos":[["🏙️","🏙️"],["⛲","⛲"],["👥","👥"],["🏛️","🏛️"]]},
+    255:{"answer":"УЛИЦА","pool":"УЛИЦАБВГДЕЖЗ","hint":"Городской путь между зданиями и кварталами.","photos":[["🏙️","🏙️"],["🚶","🚶"],["🚗","🚗"],["🏘️","🏘️"]]},
+    256:{"answer":"ПЕРЕКРЕСТОК","pool":"ПЕРЕКРЕСТОКАБВГД","hint":"Место пересечения двух или нескольких дорог.","photos":[["➕","➕"],["🚦","🚦"],["🚗","🚗"],["🛣️","🛣️"]]},
+    257:{"answer":"СВЕТОФОР","pool":"СВЕТОФОРАБГДЖ","hint":"Сигнальное устройство, регулирующее движение.","photos":[["🚦","🚦"],["🚗","🚗"],["🛣️","🛣️"],["👣","👣"]]},
+    258:{"answer":"ТРОТУАР","pool":"ТРОТУАРБВГДЕ","hint":"Часть улицы, предназначенная для пешеходов.","photos":[["🚶","🚶"],["🏙️","🏙️"],["🧱","🧱"],["🚗","🚗"]]},
+    259:{"answer":"ПАРК","pool":"ПАРКБВГДЕЖЗИ","hint":"Озеленённое общественное пространство для отдыха.","photos":[["🌳","🌳"],["🚶","🚶"],["🪑","🪑"],["🌿","🌿"]]},
+    260:{"answer":"БУЛЬВАР","pool":"БУЛЬВАРГДЕЖЗ","hint":"Широкая городская улица, часто с аллеей или зеленью.","photos":[["🌳","🌳"],["🚶","🚶"],["🏙️","🏙️"],["🛣️","🛣️"]]},
+    261:{"answer":"НАБЕРЕЖНАЯ","pool":"НАБЕРЕЖНАЯВГДЗИ","hint":"Улица или прогулочная зона вдоль берега.","photos":[["🌊","🌊"],["🚶","🚶"],["🏙️","🏙️"],["🛶","🛶"]]},
+    262:{"answer":"ВОКЗАЛ","pool":"ВОКЗАЛБГДЕЖИ","hint":"Крупное здание для обслуживания пассажиров транспорта.","photos":[["🚉","🚉"],["🚆","🚆"],["🎫","🎫"],["🕒","🕒"]]},
+    263:{"answer":"АЭРОПОРТ","pool":"АЭРОПОРТБВГДЕ","hint":"Комплекс для вылета, прилёта и обслуживания самолётов.","photos":[["✈️","✈️"],["🛫","🛫"],["🛄","🛄"],["🛬","🛬"]]},
+    264:{"answer":"СТАНЦИЯ","pool":"СТАНЦИЯБВГДЕ","hint":"Пункт остановки и обслуживания транспорта.","photos":[["🚉","🚉"],["🚆","🚆"],["📍","📍"],["🕒","🕒"]]},
+    265:{"answer":"ТЕРМИНАЛ","pool":"ТЕРМИНАЛБВГДЖ","hint":"Конечный или обслуживающий пункт транспортной системы.","photos":[["🛄","🛄"],["✈️","✈️"],["🚉","🚉"],["📦","📦"]]},
+    266:{"answer":"ЭСКАЛАТОР","pool":"ЭСКАЛАТОРБВГДЕ","hint":"Движущаяся лестница для перевозки людей между уровнями.","photos":[["⬆️","⬆️"],["⬇️","⬇️"],["🚇","🚇"],["🛗","🛗"]]},
+    267:{"answer":"ЛИФТ","pool":"ЛИФТАБВГДЕЖЗ","hint":"Кабина, перемещающая людей между этажами.","photos":[["🛗","🛗"],["⬆️","⬆️"],["🏢","🏢"],["🔘","🔘"]]},
+    268:{"answer":"ТУННЕЛЬ","pool":"ТУННЕЛЬАБВГД","hint":"Подземный или закрытый проход для транспорта и людей.","photos":[["🚇","🚇"],["🕳️","🕳️"],["🚗","🚗"],["💡","💡"]]},
+    269:{"answer":"ПЛОТИНА","pool":"ПЛОТИНАБВГДЕ","hint":"Сооружение, перекрывающее поток воды.","photos":[["🌊","🌊"],["🧱","🧱"],["⚡","⚡"],["🏞️","🏞️"]]},
+    270:{"answer":"АКВЕДУК","pool":"АКВЕДУКБГЖЗИ","hint":"Сооружение для транспортировки воды на расстояние.","photos":[["🌉","🌉"],["💧","💧"],["🏛️","🏛️"],["🧱","🧱"]]},
+    271:{"answer":"ШОССЕ","pool":"ШОССЕАБВГДЖЗ","hint":"Крупная дорога для быстрого движения транспорта.","photos":[["🛣️","🛣️"],["🚗","🚗"],["➡️","➡️"],["🏙️","🏙️"]]},
+    272:{"answer":"ПЕРЕУЛОК","pool":"ПЕРЕУЛОКАБВГД","hint":"Небольшая улица между более крупными улицами.","photos":[["🏘️","🏘️"],["🚶","🚶"],["↪️","↪️"],["🏙️","🏙️"]]},
+    273:{"answer":"РАЙОН","pool":"РАЙОНБВГДЕЖЗ","hint":"Часть города или территории с определёнными границами.","photos":[["🗺️","🗺️"],["🏙️","🏙️"],["📍","📍"],["🏘️","🏘️"]]},
+    274:{"answer":"КВАРТАЛ","pool":"КВАРТАЛБГДЕЖ","hint":"Группа зданий, ограниченная улицами.","photos":[["🏘️","🏘️"],["🗺️","🗺️"],["⬛","⬛"],["🏙️","🏙️"]]},
+    275:{"answer":"ПРИГОРОД","pool":"ПРИГОРОДАБВЕЖ","hint":"Жилая территория рядом с крупным городом.","photos":[["🏘️","🏘️"],["🌳","🌳"],["🚆","🚆"],["🏙️","🏙️"]]},
+    276:{"answer":"МЕГАПОЛИС","pool":"МЕГАПОЛИСБВДЖЗ","hint":"Очень крупный город с большим населением и инфраструктурой.","photos":[["🌆","🌆"],["🏙️","🏙️"],["🚇","🚇"],["👥","👥"]]},
+    277:{"answer":"НАСЕЛЕНИЕ","pool":"НАСЕЛЕНИЕБВГДЖ","hint":"Совокупность людей, живущих на определённой территории.","photos":[["👥","👥"],["🏙️","🏙️"],["📊","📊"],["🌍","🌍"]]},
+    278:{"answer":"ОБЩЕСТВО","pool":"ОБЩЕСТВОАГДЖЗ","hint":"Сообщество людей, связанных отношениями и правилами.","photos":[["👥","👥"],["🤝","🤝"],["🏙️","🏙️"],["💬","💬"]]},
+    279:{"answer":"КУЛЬТУРА","pool":"КУЛЬТУРАБВГДЕ","hint":"Совокупность традиций, искусства, знаний и образа жизни.","photos":[["🎭","🎭"],["📚","📚"],["🎨","🎨"],["🏛️","🏛️"]]},
+    280:{"answer":"ЦИВИЛИЗАЦИЯ","pool":"ЦИВИЛИЗАЦИЯБГДЕЖ","hint":"Развитое общество с культурой, институтами и технологиями.","photos":[["🏛️","🏛️"],["🏙️","🏙️"],["📚","📚"],["⚙️","⚙️"]]}
   };
   const TRANSLATED={
     en:{
@@ -466,7 +516,57 @@
       227:{"answer":"ORGANISM","pool":"ORGANISMBCDEF","hint":"An individual living being functioning as a whole."},
       228:{"answer":"ECOSYSTEM","pool":"ECOSYSTEMABDFG","hint":"A community of organisms interacting with their environment."},
       229:{"answer":"BIOSPHERE","pool":"BIOSPHEREACDFG","hint":"The part of Earth where life exists."},
-      230:{"answer":"GALAXY","pool":"GALAXYBCDEFH","hint":"A huge system of stars, gas, and dust held by gravity."}
+      230:{"answer":"GALAXY","pool":"GALAXYBCDEFH","hint":"A huge system of stars, gas, and dust held by gravity."},
+      231:{"answer":"CITY","pool":"CITYABDEFGHJ","hint":"A large populated place with streets, buildings, and infrastructure."},
+      232:{"answer":"CAPITAL","pool":"CAPITALBDEFG","hint":"The main city of a country or region."},
+      233:{"answer":"FORTRESS","pool":"FORTRESSABCDG","hint":"A fortified structure built for defense."},
+      234:{"answer":"TOWER","pool":"TOWERABCDFGH","hint":"A tall narrow structure visible from far away."},
+      235:{"answer":"ARCH","pool":"ARCHBDEFGJKL","hint":"A curved architectural structure over an opening."},
+      236:{"answer":"COLUMN","pool":"COLUMNABDEFG","hint":"A vertical support often used in architecture."},
+      237:{"answer":"FOUNTAIN","pool":"FOUNTAINBCDEG","hint":"A structure that sprays or displays water decoratively."},
+      238:{"answer":"MONUMENT","pool":"MONUMENTABCDF","hint":"A structure or sculpture commemorating a person or event."},
+      239:{"answer":"PYRAMID","pool":"PYRAMIDBCEFG","hint":"A monumental structure with triangular sides."},
+      240:{"answer":"AMPHITHEATER","pool":"AMPHITHEATERBCDFG","hint":"An open venue with rows of seats around an arena or stage."},
+      241:{"answer":"LIBRARY","pool":"LIBRARYCDEFG","hint":"A place where books and other materials are stored and borrowed."},
+      242:{"answer":"UNIVERSITY","pool":"UNIVERSITYABCDF","hint":"A higher education institution for study and research."},
+      243:{"answer":"HOSPITAL","pool":"HOSPITALBCDEF","hint":"A medical institution where patients receive treatment."},
+      244:{"answer":"THEATER","pool":"THEATERBCDFG","hint":"A place where live performances are presented to audiences."},
+      245:{"answer":"STADIUM","pool":"STADIUMBCEFG","hint":"A large venue for sports events and spectators."},
+      246:{"answer":"FACTORY","pool":"FACTORYBDEGH","hint":"A facility where goods are manufactured at scale."},
+      247:{"answer":"PLANT","pool":"PLANTBCDEFGH","hint":"An industrial facility with production equipment."},
+      248:{"answer":"HARBOR","pool":"HARBORCDEFGJ","hint":"A sheltered coastal place where ships can dock."},
+      249:{"answer":"MARKET","pool":"MARKETBCDFGH","hint":"A place where goods and services are bought and sold."},
+      250:{"answer":"BANK","pool":"BANKCDEFGHJL","hint":"A financial institution for money, accounts, and payments."},
+      251:{"answer":"COURT","pool":"COURTABDEFGH","hint":"An institution that hears legal disputes and cases."},
+      252:{"answer":"PARLIAMENT","pool":"PARLIAMENTBCDFG","hint":"A representative body that makes laws."},
+      253:{"answer":"CITYHALL","pool":"CITYHALLBDEFG","hint":"The building or institution of city government."},
+      254:{"answer":"SQUARE","pool":"SQUAREBCDFGH","hint":"An open public space within a city."},
+      255:{"answer":"STREET","pool":"STREETABCDFG","hint":"An urban road running between buildings and blocks."},
+      256:{"answer":"CROSSROAD","pool":"CROSSROADBEFGH","hint":"A place where two or more roads intersect."},
+      257:{"answer":"TRAFFICLIGHT","pool":"TRAFFICLIGHTBDEJK","hint":"A signaling device that controls traffic."},
+      258:{"answer":"SIDEWALK","pool":"SIDEWALKBCFGH","hint":"The part of a street intended for pedestrians."},
+      259:{"answer":"PARK","pool":"PARKBCDEFGHJ","hint":"A green public space for recreation."},
+      260:{"answer":"BOULEVARD","pool":"BOULEVARDCFGHJ","hint":"A broad city street often lined with trees or promenades."},
+      261:{"answer":"EMBANKMENT","pool":"EMBANKMENTCDFGH","hint":"A street or promenade running along a waterfront."},
+      262:{"answer":"TERMINUS","pool":"TERMINUSABCDF","hint":"A major passenger terminal for transport services."},
+      263:{"answer":"AIRPORT","pool":"AIRPORTBCDEF","hint":"A complex for aircraft departures, arrivals, and services."},
+      264:{"answer":"STATION","pool":"STATIONBCDEF","hint":"A stop and service point for transport."},
+      265:{"answer":"TERMINAL","pool":"TERMINALBCDFG","hint":"An endpoint or service facility in a transport system."},
+      266:{"answer":"ESCALATOR","pool":"ESCALATORBDFGH","hint":"A moving staircase that carries people between levels."},
+      267:{"answer":"ELEVATOR","pool":"ELEVATORBCDFG","hint":"A cabin that moves people between floors."},
+      268:{"answer":"TUNNEL","pool":"TUNNELABCDFG","hint":"An underground or enclosed passage for transport or people."},
+      269:{"answer":"DAM","pool":"DAMBCEFGHJKL","hint":"A structure built across a flow of water."},
+      270:{"answer":"AQUEDUCT","pool":"AQUEDUCTBFGHJ","hint":"A structure built to carry water over distance."},
+      271:{"answer":"HIGHWAY","pool":"HIGHWAYBCDEF","hint":"A major road designed for faster vehicle travel."},
+      272:{"answer":"ALLEY","pool":"ALLEYBCDFGHJ","hint":"A small street between larger streets."},
+      273:{"answer":"DISTRICT","pool":"DISTRICTABEFG","hint":"A defined part of a city or territory."},
+      274:{"answer":"BLOCK","pool":"BLOCKADEFGHJ","hint":"A group of buildings bounded by streets."},
+      275:{"answer":"SUBURB","pool":"SUBURBACDEFG","hint":"A residential area near a large city."},
+      276:{"answer":"MEGACITY","pool":"MEGACITYBDFHJ","hint":"A very large city with a huge population and infrastructure."},
+      277:{"answer":"POPULATION","pool":"POPULATIONBCDEF","hint":"The people living within a particular territory."},
+      278:{"answer":"SOCIETY","pool":"SOCIETYABDFG","hint":"A community of people connected by relationships and rules."},
+      279:{"answer":"CULTURE","pool":"CULTUREABDFG","hint":"The traditions, arts, knowledge, and ways of life of a society."},
+      280:{"answer":"CIVILIZATION","pool":"CIVILIZATIONBDEFG","hint":"An advanced society with culture, institutions, and technology."}
     },
     az:{
       1:{answer:'İT',pool:'İTPİŞKALMONR',hint:'İnsanın ən yaxın dostu adlandırılan ev heyvanı.'},
@@ -699,7 +799,57 @@
       227:{"answer":"ORQANİZM","pool":"ORQANİZMBCÇDE","hint":"Vahid sistem kimi fəaliyyət göstərən canlı varlıq."},
       228:{"answer":"EKOSİSTEM","pool":"EKOSİSTEMABCÇD","hint":"Canlıların və onların mühitinin qarşılıqlı sistemi."},
       229:{"answer":"BİOSFER","pool":"BİOSFERACÇDƏ","hint":"Yer üzündə həyatın mövcud olduğu sahə."},
-      230:{"answer":"QALAKTİKA","pool":"QALAKTİKABCÇDE","hint":"Cazibə ilə bağlı nəhəng ulduz, qaz və toz sistemi."}
+      230:{"answer":"QALAKTİKA","pool":"QALAKTİKABCÇDE","hint":"Cazibə ilə bağlı nəhəng ulduz, qaz və toz sistemi."},
+      231:{"answer":"ŞƏHƏR","pool":"ŞƏHƏRABCÇDEF","hint":"Küçələri, binaları və infrastrukturu olan böyük yaşayış məntəqəsi."},
+      232:{"answer":"PAYTAXT","pool":"PAYTAXTBCÇDE","hint":"Dövlətin və ya regionun əsas şəhəri."},
+      233:{"answer":"QALA","pool":"QALABCÇDEƏFG","hint":"Ərazini qorumaq üçün tikilmiş möhkəmləndirilmiş qurğu."},
+      234:{"answer":"QÜLLƏ","pool":"QÜLLƏABCÇDEF","hint":"Uzaqdan görünən hündür və dar tikili."},
+      235:{"answer":"TAĞ","pool":"TAĞBCÇDEƏFGH","hint":"Açılışın üzərində qurulan əyri memarlıq konstruksiyası."},
+      236:{"answer":"SÜTUN","pool":"SÜTUNABCÇDEƏ","hint":"Memarlıqda tez-tez istifadə olunan şaquli dayaq."},
+      237:{"answer":"FƏVVARƏ","pool":"FƏVVARƏBCÇDE","hint":"Suyu dekorativ şəkildə püskürdən qurğu."},
+      238:{"answer":"ABİDƏ","pool":"ABİDƏCÇEFGĞH","hint":"Şəxs və ya hadisənin xatirəsinə ucaldılan qurğu və ya heykəl."},
+      239:{"answer":"PİRAMİDA","pool":"PİRAMİDABCÇEƏ","hint":"Üçbucaqlı tərəfləri olan monumental tikili."},
+      240:{"answer":"AMFİTEATR","pool":"AMFİTEATRBCÇDƏ","hint":"Səhnə və ya meydanın ətrafında oturacaqları olan açıq tikili."},
+      241:{"answer":"KİTABXANA","pool":"KİTABXANACÇDEƏ","hint":"Kitabların və digər materialların saxlanıldığı və verildiyi yer."},
+      242:{"answer":"UNİVERSİTET","pool":"UNİVERSİTETABCÇD","hint":"Təhsil və tədqiqat üçün ali təhsil müəssisəsi."},
+      243:{"answer":"XƏSTƏXANA","pool":"XƏSTƏXANABCÇDE","hint":"Xəstələrin müalicə aldığı tibb müəssisəsi."},
+      244:{"answer":"TEATR","pool":"TEATRBCÇDƏFG","hint":"Tamaşaların tamaşaçılara təqdim olunduğu yer."},
+      245:{"answer":"STADİON","pool":"STADİONBCÇEƏ","hint":"İdman yarışları və tamaşaçılar üçün böyük məkan."},
+      246:{"answer":"FABRİK","pool":"FABRİKCÇDEƏG","hint":"Məhsulların kütləvi istehsal olunduğu müəssisə."},
+      247:{"answer":"ZAVOD","pool":"ZAVODBCÇEƏFG","hint":"İstehsal avadanlığı olan sənaye müəssisəsi."},
+      248:{"answer":"LİMAN","pool":"LİMANBCÇDEƏF","hint":"Gəmilərin dayanması üçün sahildə qorunan yer."},
+      249:{"answer":"BAZAR","pool":"BAZARCÇDEƏFG","hint":"Malların və xidmətlərin alınıb-satıldığı yer."},
+      250:{"answer":"BANK","pool":"BANKCÇDEƏFGĞ","hint":"Pul, hesab və ödənişlərlə işləyən maliyyə qurumu."},
+      251:{"answer":"MƏHKƏMƏ","pool":"MƏHKƏMƏABCÇD","hint":"Hüquqi mübahisə və işlərə baxan orqan."},
+      252:{"answer":"PARLAMENT","pool":"PARLAMENTBCÇDƏ","hint":"Qanun qəbul edən nümayəndəli orqan."},
+      253:{"answer":"BƏLƏDİYYƏ","pool":"BƏLƏDİYYƏACÇEF","hint":"Şəhər idarəçiliyinin binası və ya qurumu."},
+      254:{"answer":"MEYDAN","pool":"MEYDANBCÇƏFG","hint":"Şəhər daxilində açıq ictimai məkan."},
+      255:{"answer":"KÜÇƏ","pool":"KÜÇƏABCDEFGĞ","hint":"Bina və məhəllələr arasından keçən şəhər yolu."},
+      256:{"answer":"YOLAYRICI","pool":"YOLAYRICIBÇDEƏ","hint":"İki və ya daha çox yolun kəsişdiyi yer."},
+      257:{"answer":"SVETOFOR","pool":"SVETOFORABCÇD","hint":"Yol hərəkətini tənzimləyən siqnal qurğusu."},
+      258:{"answer":"SƏKİ","pool":"SƏKİABCÇDEFG","hint":"Küçənin piyadalar üçün nəzərdə tutulmuş hissəsi."},
+      259:{"answer":"PARK","pool":"PARKBCÇDEƏFG","hint":"İstirahət üçün yaşıllaşdırılmış ictimai məkan."},
+      260:{"answer":"BULVAR","pool":"BULVARCÇDEƏF","hint":"Çox vaxt ağac və gəzinti zolağı olan geniş şəhər küçəsi."},
+      261:{"answer":"SAHİLBOYU","pool":"SAHİLBOYUCÇDEƏ","hint":"Sahil boyunca uzanan küçə və ya gəzinti zonası."},
+      262:{"answer":"VAĞZAL","pool":"VAĞZALBCÇDEƏ","hint":"Sərnişin nəqliyyatına xidmət edən böyük terminal binası."},
+      263:{"answer":"AEROPORT","pool":"AEROPORTBCÇDƏ","hint":"Təyyarələrin uçuşu, enişi və xidmətinə aid kompleks."},
+      264:{"answer":"STANSİYA","pool":"STANSİYABCÇDE","hint":"Nəqliyyatın dayanma və xidmət məntəqəsi."},
+      265:{"answer":"TERMİNAL","pool":"TERMİNALBCÇDƏ","hint":"Nəqliyyat sisteminin son və ya xidmət məntəqəsi."},
+      266:{"answer":"ESKALATOR","pool":"ESKALATORBCÇDƏ","hint":"İnsanları mərtəbələr arasında daşıyan hərəkətli pilləkən."},
+      267:{"answer":"LİFT","pool":"LİFTABCÇDEƏG","hint":"İnsanları mərtəbələr arasında daşıyan kabina."},
+      268:{"answer":"TUNEL","pool":"TUNELABCÇDƏF","hint":"Nəqliyyat və insanlar üçün yeraltı və ya qapalı keçid."},
+      269:{"answer":"BƏND","pool":"BƏNDACÇEFGĞH","hint":"Su axınının qarşısını alan qurğu."},
+      270:{"answer":"AKVEDUK","pool":"AKVEDUKBCÇƏF","hint":"Suyu məsafə boyunca daşımaq üçün qurulan tikili."},
+      271:{"answer":"ŞOSSE","pool":"ŞOSSEABCÇDƏF","hint":"Nəqliyyatın sürətli hərəkəti üçün iri yol."},
+      272:{"answer":"DÖNGƏ","pool":"DÖNGƏABCÇEFĞ","hint":"Böyük küçələr arasında yerləşən kiçik küçə."},
+      273:{"answer":"RAYON","pool":"RAYONBCÇDEƏF","hint":"Şəhərin və ya ərazinin müəyyən sərhədləri olan hissəsi."},
+      274:{"answer":"MƏHƏLLƏ","pool":"MƏHƏLLƏABCÇD","hint":"Küçələrlə əhatələnən binalar qrupu."},
+      275:{"answer":"ŞƏHƏRYANI","pool":"ŞƏHƏRYANIBCÇDE","hint":"Böyük şəhərin yaxınlığında yerləşən yaşayış ərazisi."},
+      276:{"answer":"MEQAPOLİS","pool":"MEQAPOLİSBCÇDƏ","hint":"Çox böyük əhalisi və infrastrukturu olan iri şəhər."},
+      277:{"answer":"ƏHALİ","pool":"ƏHALİBCÇDEFG","hint":"Müəyyən ərazidə yaşayan insanların məcmusu."},
+      278:{"answer":"CƏMİYYƏT","pool":"CƏMİYYƏTABÇDE","hint":"Münasibət və qaydalarla bağlı insanlar birliyi."},
+      279:{"answer":"MƏDƏNİYYƏT","pool":"MƏDƏNİYYƏTABCÇE","hint":"Cəmiyyətin ənənələri, sənəti, biliyi və həyat tərzi."},
+      280:{"answer":"SİVİLİZASİYA","pool":"SİVİLİZASİYABCÇDE","hint":"Mədəniyyəti, institutları və texnologiyası olan inkişaf etmiş cəmiyyət."}
     }
   };
   let gameLang='ru';try{gameLang=localStorage.getItem('pw.language')||'ru'}catch{}
@@ -711,7 +861,7 @@
   function validateLanguageLevels(){
     const supported=['ru','en','az'];
     for(const lang of supported){
-      for(let n=1;n<=230;n++){
+      for(let n=1;n<=280;n++){
         const item=lang==='ru'?LEVELS[n]:TRANSLATED[lang][n];
         if(!item||!item.answer||!item.pool||!item.hint)throw new Error('Incomplete language level '+lang+' '+n);
         const need=[...item.answer].reduce((m,ch)=>(m[ch]=(m[ch]||0)+1,m),{});
@@ -722,9 +872,9 @@
   }
   validateLanguageLevels();
   const GAME_UI={
-    ru:{chapter:n=>'Глава '+n,warm:'Разминка',assoc:'Ассоциации',chapter3:'Связи',chapter4:'Глубина',chapter5:'Мастерство',chapter6:'Исследование',level:n=>'Уровень '+n,textHint:'Текстовая подсказка',tap:'Нажми, чтобы открыть',wrong:'Неверное слово. Попробуй ещё раз.',checking:'Проверяю и сохраняю ответ…',passed:n=>'Уровень '+n+' пройден!',reward:'+20 монет · +15 XP',already:'Награда за этот уровень уже получена',next:'СЛЕДУЮЩИЙ УРОВЕНЬ',sync:'Профиль синхронизирован.',shuffle:'Буквы перемешаны. Бесплатно.',letter:'Буква открыта. −50 монет.',remove:'Лишние буквы убраны. −100 монет.',text:'Подсказка открыта. −150 монет.',textOpened:'Подсказка уже открыта.',allLetters:'Все буквы уже открыты.',noExtra:'Лишних букв не осталось.',hintWait:'Подсказка: ожидаю ответ сервера…',locked:n=>'Сначала пройди уровень '+n+'.',home:'НА ГЛАВНУЮ',nextChapter:'СЛЕДУЮЩАЯ ГЛАВА',chapterPassed:n=>'Глава '+n+' пройдена!',chapterUnlocked:n=>'Глава '+n+' открыта',newTitle:title=>'Новый титул: '+title,slot:n=>'Буква '+n,image:n=>'Изображение '+n,placeFail:'Не удалось разместить букву.'},
-    en:{chapter:n=>'Chapter '+n,warm:'Warm-up',assoc:'Associations',chapter3:'Connections',chapter4:'Depth',chapter5:'Mastery',chapter6:'Exploration',level:n=>'Level '+n,textHint:'Text hint',tap:'Tap to reveal',wrong:'Wrong word. Try again.',checking:'Checking and saving your answer…',passed:n=>'Level '+n+' completed!',reward:'+20 coins · +15 XP',already:'Reward for this level has already been claimed',next:'NEXT LEVEL',sync:'Profile synced.',shuffle:'Letters shuffled. Free.',letter:'Letter revealed. −50 coins.',remove:'Extra letters removed. −100 coins.',text:'Hint revealed. −150 coins.',textOpened:'Hint already revealed.',allLetters:'All letters are already revealed.',noExtra:'No extra letters remain.',hintWait:'Getting hint from the server…',locked:n=>'Complete level '+n+' first.',home:'HOME',nextChapter:'NEXT CHAPTER',chapterPassed:n=>'Chapter '+n+' completed!',chapterUnlocked:n=>'Chapter '+n+' unlocked',newTitle:title=>'New title: '+title,slot:n=>'Letter '+n,image:n=>'Image '+n,placeFail:'Could not place the letter.'},
-    az:{chapter:n=>'Fəsil '+n,warm:'İsinmə',assoc:'Assosiasiyalar',chapter3:'Əlaqələr',chapter4:'Dərinlik',chapter5:'Ustalıq',chapter6:'Araşdırma',level:n=>n+'-ci səviyyə',textHint:'Mətn ipucu',tap:'Açmaq üçün toxun',wrong:'Söz yanlışdır. Yenidən cəhd et.',checking:'Cavab yoxlanılır və yadda saxlanılır…',passed:n=>n+'-ci səviyyə keçildi!',reward:'+20 sikkə · +15 XP',already:'Bu səviyyənin mükafatı artıq alınıb',next:'NÖVBƏTİ SƏVİYYƏ',sync:'Profil sinxronlaşdırıldı.',shuffle:'Hərflər qarışdırıldı. Pulsuz.',letter:'Hərf açıldı. −50 sikkə.',remove:'Artıq hərflər silindi. −100 sikkə.',text:'İpucu açıldı. −150 sikkə.',textOpened:'İpucu artıq açılıb.',allLetters:'Bütün hərflər artıq açılıb.',noExtra:'Artıq hərf qalmayıb.',hintWait:'İpucu serverdən alınır…',locked:n=>'Əvvəlcə '+n+'-ci səviyyəni keç.',home:'ANA SƏHİFƏ',nextChapter:'NÖVBƏTİ FƏSİL',chapterPassed:n=>n+'-ci fəsil tamamlandı!',chapterUnlocked:n=>n+'-ci fəsil açıldı',newTitle:title=>'Yeni titul: '+title,slot:n=>n+'-ci hərf',image:n=>n+'-ci şəkil',placeFail:'Hərfi yerləşdirmək mümkün olmadı.'}
+    ru:{chapter:n=>'Глава '+n,warm:'Разминка',assoc:'Ассоциации',chapter3:'Связи',chapter4:'Глубина',chapter5:'Мастерство',chapter6:'Исследование',chapter7:'Цивилизация',level:n=>'Уровень '+n,textHint:'Текстовая подсказка',tap:'Нажми, чтобы открыть',wrong:'Неверное слово. Попробуй ещё раз.',checking:'Проверяю и сохраняю ответ…',passed:n=>'Уровень '+n+' пройден!',reward:'+20 монет · +15 XP',already:'Награда за этот уровень уже получена',next:'СЛЕДУЮЩИЙ УРОВЕНЬ',sync:'Профиль синхронизирован.',shuffle:'Буквы перемешаны. Бесплатно.',letter:'Буква открыта. −50 монет.',remove:'Лишние буквы убраны. −100 монет.',text:'Подсказка открыта. −150 монет.',textOpened:'Подсказка уже открыта.',allLetters:'Все буквы уже открыты.',noExtra:'Лишних букв не осталось.',hintWait:'Подсказка: ожидаю ответ сервера…',locked:n=>'Сначала пройди уровень '+n+'.',home:'НА ГЛАВНУЮ',nextChapter:'СЛЕДУЮЩАЯ ГЛАВА',chapterPassed:n=>'Глава '+n+' пройдена!',chapterUnlocked:n=>'Глава '+n+' открыта',newTitle:title=>'Новый титул: '+title,slot:n=>'Буква '+n,image:n=>'Изображение '+n,placeFail:'Не удалось разместить букву.'},
+    en:{chapter:n=>'Chapter '+n,warm:'Warm-up',assoc:'Associations',chapter3:'Connections',chapter4:'Depth',chapter5:'Mastery',chapter6:'Exploration',chapter7:'Civilization',level:n=>'Level '+n,textHint:'Text hint',tap:'Tap to reveal',wrong:'Wrong word. Try again.',checking:'Checking and saving your answer…',passed:n=>'Level '+n+' completed!',reward:'+20 coins · +15 XP',already:'Reward for this level has already been claimed',next:'NEXT LEVEL',sync:'Profile synced.',shuffle:'Letters shuffled. Free.',letter:'Letter revealed. −50 coins.',remove:'Extra letters removed. −100 coins.',text:'Hint revealed. −150 coins.',textOpened:'Hint already revealed.',allLetters:'All letters are already revealed.',noExtra:'No extra letters remain.',hintWait:'Getting hint from the server…',locked:n=>'Complete level '+n+' first.',home:'HOME',nextChapter:'NEXT CHAPTER',chapterPassed:n=>'Chapter '+n+' completed!',chapterUnlocked:n=>'Chapter '+n+' unlocked',newTitle:title=>'New title: '+title,slot:n=>'Letter '+n,image:n=>'Image '+n,placeFail:'Could not place the letter.'},
+    az:{chapter:n=>'Fəsil '+n,warm:'İsinmə',assoc:'Assosiasiyalar',chapter3:'Əlaqələr',chapter4:'Dərinlik',chapter5:'Ustalıq',chapter6:'Araşdırma',chapter7:'Sivilizasiya',level:n=>n+'-ci səviyyə',textHint:'Mətn ipucu',tap:'Açmaq üçün toxun',wrong:'Söz yanlışdır. Yenidən cəhd et.',checking:'Cavab yoxlanılır və yadda saxlanılır…',passed:n=>n+'-ci səviyyə keçildi!',reward:'+20 sikkə · +15 XP',already:'Bu səviyyənin mükafatı artıq alınıb',next:'NÖVBƏTİ SƏVİYYƏ',sync:'Profil sinxronlaşdırıldı.',shuffle:'Hərflər qarışdırıldı. Pulsuz.',letter:'Hərf açıldı. −50 sikkə.',remove:'Artıq hərflər silindi. −100 sikkə.',text:'İpucu açıldı. −150 sikkə.',textOpened:'İpucu artıq açılıb.',allLetters:'Bütün hərflər artıq açılıb.',noExtra:'Artıq hərf qalmayıb.',hintWait:'İpucu serverdən alınır…',locked:n=>'Əvvəlcə '+n+'-ci səviyyəni keç.',home:'ANA SƏHİFƏ',nextChapter:'NÖVBƏTİ FƏSİL',chapterPassed:n=>n+'-ci fəsil tamamlandı!',chapterUnlocked:n=>n+'-ci fəsil açıldı',newTitle:title=>'Yeni titul: '+title,slot:n=>n+'-ci hərf',image:n=>n+'-ci şəkil',placeFail:'Hərfi yerləşdirmək mümkün olmadı.'}
   };
   const CHAPTER_TITLES={
     ru:{1:'Новичок',2:'Любитель',3:'Знаток',4:'Опытный',5:'Эксперт',6:'Профессионал',7:'Мастер',8:'Виртуоз',9:'Легенда',10:'Мастер слов'},
@@ -740,9 +890,9 @@
 
   const ui=GAME_UI[gameLang]||GAME_UI.ru;
   document.documentElement.lang=gameLang;
-  const chapterNum=levelId<=20?1:levelId<=50?2:levelId<=90?3:levelId<=131?4:levelId<=180?5:6;
+  const chapterNum=levelId<=20?1:levelId<=50?2:levelId<=90?3:levelId<=131?4:levelId<=180?5:levelId<=230?6:7;
   document.querySelector('.game-head>div b').textContent=ui.chapter(chapterNum);
-  $('levelTitle').textContent=(chapterNum===1?ui.warm:chapterNum===2?ui.assoc:chapterNum===3?ui.chapter3:chapterNum===4?ui.chapter4:chapterNum===5?ui.chapter5:ui.chapter6)+' · '+ui.level(levelId);
+  $('levelTitle').textContent=(chapterNum===1?ui.warm:chapterNum===2?ui.assoc:chapterNum===3?ui.chapter3:chapterNum===4?ui.chapter4:chapterNum===5?ui.chapter5:chapterNum===6?ui.chapter6:ui.chapter7)+' · '+ui.level(levelId);
   $('textHint').querySelector('b').textContent=ui.textHint;$('hintValue').textContent=ui.tap;
   $('slots').style.gridTemplateColumns='repeat('+answer.length+',1fr)';$('slots').classList.toggle('long-answer',answer.length>=9);
   level.photos.forEach(([emoji],index)=>{const d=document.createElement('div');d.className='photo';d.setAttribute('role','img');d.setAttribute('aria-label',ui.image(index+1));d.textContent=emoji;$('photos').append(d);});
@@ -791,8 +941,8 @@
     else if(levelId===90){if(chapterNote){chapterNote.hidden=false;chapterNote.textContent=ui.chapterPassed(3)+' '+ui.newTitle(chapterEarnedTitle(3))+'. '+ui.chapterUnlocked(4)+'.';}next.href='./game.html?level=91';next.innerHTML=ui.nextChapter+' <span>▶</span>';}
     else if(levelId===131){if(chapterNote){chapterNote.hidden=false;chapterNote.textContent=ui.chapterPassed(4)+' '+ui.newTitle(chapterEarnedTitle(4))+'. '+ui.chapterUnlocked(5)+'.';}next.href='./game.html?level=132';next.innerHTML=ui.nextChapter+' <span>▶</span>';}
     else if(levelId===180){if(chapterNote){chapterNote.hidden=false;chapterNote.textContent=ui.chapterPassed(5)+' '+ui.newTitle(chapterEarnedTitle(5))+'. '+ui.chapterUnlocked(6)+'.';}next.href='./game.html?level=181';next.innerHTML=ui.nextChapter+' <span>▶</span>';}
-    else if(levelId===230){if(chapterNote){chapterNote.hidden=false;chapterNote.textContent=ui.chapterPassed(6)+' '+ui.newTitle(chapterEarnedTitle(6))+'.';}next.href='./index.html';next.innerHTML=ui.home+' <span>✓</span>';}
-    else if(levelId<230){next.href='./game.html?level='+(levelId+1);next.innerHTML=ui.next+' <span>▶</span>';}
+    else if(levelId===230){if(chapterNote){chapterNote.hidden=false;chapterNote.textContent=ui.chapterPassed(6)+' '+ui.newTitle(chapterEarnedTitle(6))+'. '+ui.chapterUnlocked(7)+'.';}next.href='./game.html?level=231';next.innerHTML=ui.nextChapter+' <span>▶</span>';}\n    else if(levelId===280){if(chapterNote){chapterNote.hidden=false;chapterNote.textContent=ui.chapterPassed(7)+' '+ui.newTitle(chapterEarnedTitle(7))+'.';}next.href='./index.html';next.innerHTML=ui.home+' <span>✓</span>';}
+    else if(levelId<280){next.href='./game.html?level='+(levelId+1);next.innerHTML=ui.next+' <span>▶</span>';}
     else{next.href='./index.html';next.innerHTML=ui.home+' <span>✓</span>';}
   }
   async function check(){
