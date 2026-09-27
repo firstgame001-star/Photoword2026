@@ -138,6 +138,8 @@ with sync_playwright() as pw:
       before=int(page.locator('[data-coins]').first.inner_text());page.locator('#dailyRewardBtn').tap();page.locator('#claimDaily').tap();expect(page.locator('[data-coins]').first).to_have_text(str(before+5));expect(page.locator('#dailyModal')).to_be_hidden(timeout=2500)
       # High-reward daily tasks were removed from the product surface.
       expect(page.locator('#tasksBtn')).to_have_count(0);expect(page.locator('#tasksModal')).to_have_count(0)
+      # Thematic mode is a prominent separate surface and unlocks after 10 main levels.
+      expect(page.locator('#themesEntry')).to_be_visible();expect(page.locator('#themesEntryBadge')).to_be_visible();page.locator('#themesEntry').tap();expect(page.locator('#themesScreen')).to_be_visible();expect(page.locator('#themeCards .theme-card')).to_have_count(12);expect(page.locator('#themeCards .theme-card').first).to_be_enabled();page.locator('#themeCards .theme-card').first.tap();expect(page.locator('#themeDetailScreen')).to_be_visible();expect(page.locator('#themeLevelGrid button')).to_have_count(100);expect(page.locator('#themeLevelGrid button').nth(0)).to_be_enabled();expect(page.locator('#themeLevelGrid button').nth(20)).to_be_disabled();page.locator('#themeDetailBack').tap();page.locator('#themesBack').tap()
       # Friends use nickname and progress.
       page.locator('#friendsNav').tap();expect(page.locator('#friendsList')).to_contain_text('FriendOne');expect(page.locator('#friendsList')).to_contain_text('7 / 10');page.locator('[data-close="friendsModal"]').tap()
       # Rating and shop surfaces are reachable/localized; native Stars invoice UI is Telegram-controlled.
