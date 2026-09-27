@@ -122,7 +122,7 @@ ANSWERS={
   "ТРАНСФОРМАЦИЯ",
   "ИНТЕГРАЦИЯ",
   "АБСТРАКЦИЯ",
-  "БАЛАНС",
+  "РАВНОВЕСИЕ",
   "АРХИТЕКТУРА",
   "СИНХРОНИЗАЦИЯ",
   "АДАПТАЦИЯ",
@@ -255,7 +255,7 @@ ANSWERS={
   "TRANSFORMATION",
   "INTEGRATION",
   "ABSTRACTION",
-  "BALANCE",
+  "EQUILIBRIUM",
   "ARCHITECTURE",
   "SYNCHRONIZATION",
   "ADAPTATION",
@@ -388,7 +388,7 @@ ANSWERS={
   "TRANSFORMASİYA",
   "İNTEQRASİYA",
   "ABSTRAKSİYA",
-  "TARAZLIQ",
+  "MÜVAZİNƏT",
   "MEMARLIQ",
   "SİNXRONLAŞMA",
   "UYĞUNLAŞMA",
@@ -421,6 +421,7 @@ ANSWERS={
   "DƏRİNLİK"
  ]
 }
+
 HINTS={
 'ru':{1:'Домашнее животное',11:'Она появляется рядом',21:'Соединяет два берега',31:'Её ставят на документ',41:'Направленная величина',51:'Повторяющийся рисунок'},
 'en':{1:'loyal domestic animal',11:'object blocks light',21:'connects two sides',31:'put on a document',41:'directed quantity',51:'repeating pattern'},
