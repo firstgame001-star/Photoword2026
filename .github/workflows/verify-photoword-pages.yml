@@ -112,7 +112,7 @@ jobs:
           grep -q 'const ART_TRANSLATED={' "$RUNNER_TEMP/theme-game.js"
           grep -q 'const PROF_LEVELS=' "$RUNNER_TEMP/theme-game.js"
           grep -q 'const PROF_TRANSLATED=' "$RUNNER_TEMP/theme-game.js"
-          grep -q "['sport','art','professions'].includes(themeParam)" "$RUNNER_TEMP/theme-game.js"
+          grep -Fq "['sport','art','professions'].includes(themeParam)" "$RUNNER_TEMP/theme-game.js"
           grep -q "pw.themeProgress.'+themeId" "$RUNNER_TEMP/theme-game.js"
           grep -q '"id":"art","levels":100,"available_through":100,"status":"complete"' "$RUNNER_TEMP/release.json"
           grep -q '"id":"professions","levels":100,"available_through":100,"status":"complete"' "$RUNNER_TEMP/release.json"
