@@ -37,9 +37,10 @@ if(release.chapters.find(x=>x.id===6)?.available_through!==230||release.chapters
 if(release.chapters.find(x=>x.id===7)?.available_through!==280||release.chapters.find(x=>x.id===7)?.status!=='live')throw Error('Chapter 7 must be complete through 280');
 if(release.thematic_mode?.categories?.length!==12)throw Error('Thematic catalog must contain 12 categories');
 if(release.verification?.thematic_answers_unique_across_ready_categories!==true)throw Error('Cross-theme answer uniqueness flag is missing');
-if(release.thematic_mode?.economy?.first_completion?.coins!==10||release.thematic_mode?.economy?.first_completion?.xp!==10||release.thematic_mode?.economy?.replay_reward!==false)throw Error('Thematic completion reward manifest is incorrect');
+if(release.thematic_mode?.economy?.first_completion?.coins!==15||release.thematic_mode?.economy?.first_completion?.xp!==10||release.thematic_mode?.economy?.replay_reward!==false)throw Error('Thematic completion reward manifest is incorrect');
 if(release.thematic_mode?.economy?.hints?.letter!==50||release.thematic_mode?.economy?.hints?.remove!==100||release.thematic_mode?.economy?.hints?.text!==150||release.thematic_mode?.economy?.hints?.shuffle!==0)throw Error('Thematic hint prices are incorrect');
 if(release.thematic_mode?.economy?.server_authoritative!==true||release.verification?.thematic_economy_server_authoritative!==true)throw Error('Thematic economy must be server-authoritative');
+if(release.verification?.thematic_win_reward_coins!==15)throw Error('Thematic win reward verification is incorrect');
 const sport=release.thematic_mode.categories.find(x=>x.id==='sport');
 if(!sport||sport.available_through!==100||sport.status!=='complete')throw Error('Sport theme must be playable through level 100');
 const art=release.thematic_mode.categories.find(x=>x.id==='art');
@@ -61,7 +62,7 @@ if(!index.includes('themes-entry-featured'))throw Error('Featured thematic mode 
 if(!index.includes('12 тем · 1200 уровней'))throw Error('Thematic mode headline is missing');
 if(!themeGame.includes('data-coins'))throw Error('Thematic game coin balance is missing');
 if(themeGame.includes('id="themeSettingsBtn"')||themeGame.includes('id="themeProgress"'))throw Error('Thematic header must contain coins only');
-if(!themeGameJs.includes("pw.actionRequest('theme_complete'")||!themeGameJs.includes("pw.actionRequest('theme_hint'")||!themeGameJs.includes("HINT_COSTS={letter:50,remove:100,text:150}")||!themeGameJs.includes("THEME_REWARD_COINS=10,THEME_REWARD_XP=10"))throw Error('Thematic reward/hint economy client wiring is missing');
+if(!themeGameJs.includes("pw.actionRequest('theme_complete'")||!themeGameJs.includes("pw.actionRequest('theme_hint'")||!themeGameJs.includes("HINT_COSTS={letter:50,remove:100,text:150}")||!themeGameJs.includes("THEME_REWARD_COINS=15,THEME_REWARD_XP=10"))throw Error('Thematic reward/hint economy client wiring is missing');
 if(!themeGame.includes('💡 50')||!themeGame.includes('🪄 100')||!themeGame.includes('150 🪙'))throw Error('Thematic hint prices must be visible in the UI');
 if(!themeGameJs.includes('const ART_LEVELS={')||!themeGameJs.includes('const ART_TRANSLATED={'))throw Error('Art theme bank is missing');
 if(!themeGameJs.includes('const PROF_LEVELS=')||!themeGameJs.includes('const PROF_TRANSLATED='))throw Error('Professions theme bank is missing');
