@@ -50,7 +50,8 @@
     46:{answer:"МАТРИЦА",pool:"МАТРИЦАБВГДЕЖ",hint:"Таблица, структура или система элементов.",photos:[["🔢","Образ" ],["🧮","Образ" ],["🟩","Образ" ],["💻","Образ" ]]},
     47:{answer:"ТРАЕКТОРИЯ",pool:"ТРАЕКТОРИЯБВГДЖЗ",hint:"Линия движения тела или объекта.",photos:[["🏀","Образ" ],["🚀","Образ" ],["🏹","Образ" ],["📈","Образ" ]]},
     48:{answer:"КОДЕКС",pool:"КОДЕКСАБВГЖЗ",hint:"Свод правил или законов.",photos:[["📕","Образ" ],["⚖️","Образ" ],["📜","Образ" ],["🏛️","Образ" ]]},
-    49:{answer:"КОМПАС",pool:"КОМПАСБВГДЕЖ",hint:"Прибор, который помогает определить направление.",photos:[["🧭","Образ" ],["🗺️","Образ" ],["🥾","Образ" ],["⛰️","Образ" ]]}
+    49:{answer:"КОМПАС",pool:"КОМПАСБВГДЕЖ",hint:"Прибор, который помогает определить направление.",photos:[["🧭","Образ" ],["🗺️","Образ" ],["🥾","Образ" ],["⛰️","Образ" ]]},
+    50:{answer:"БАЛАНС",pool:"БАЛАНСТРЕКО",hint:"Равновесие между разными сторонами, силами или решениями.",photos:[["⚖️","Весы"],["🧘","Равновесие"],["🤸","Баланс тела"],["📊","Соотношение"]]}
   };
   const TRANSLATED={
     en:{
@@ -102,7 +103,8 @@
       46:{answer:"MATRIX",pool:"MATRIXBCDEFG",hint:"A table, structure, or system of elements."},
       47:{answer:"TRAJECTORY",pool:"TRAJECTORYBDFGHI",hint:"The path of movement of an object or body."},
       48:{answer:"CODEX",pool:"CODEXABFGHI",hint:"A set of rules or laws."},
-      49:{answer:"COMPASS",pool:"COMPASSBDEFGH",hint:"A tool used to determine direction."}
+      49:{answer:"COMPASS",pool:"COMPASSBDEFGH",hint:"A tool used to determine direction."},
+      50:{answer:"BALANCE",pool:"BALANCETRMSO",hint:"A state where different sides, forces, or choices are in equilibrium."}
     },
     az:{
       1:{answer:'İT',pool:'İTPİŞKALMONR',hint:'İnsanın ən yaxın dostu adlandırılan ev heyvanı.'},
@@ -153,7 +155,8 @@
       46:{answer:"MATRİSA",pool:"MATRİSABCÇDEƏ",hint:"Elementlərdən ibarət cədvəl, struktur və ya sistem."},
       47:{answer:"TRAEKTORİYA",pool:"TRAEKTORİYABCÇDƏF",hint:"Cismin və ya obyektin hərəkət yolu."},
       48:{answer:"KODEKS",pool:"KODEKSABCÇƏF",hint:"Qaydalar və ya qanunlar toplusu."},
-      49:{answer:"KOMPAS",pool:"KOMPASBCÇDEƏ",hint:"İstiqaməti müəyyən etməyə kömək edən cihaz."}
+      49:{answer:"KOMPAS",pool:"KOMPASBCÇDEƏ",hint:"İstiqaməti müəyyən etməyə kömək edən cihaz."},
+      50:{answer:"TARAZLIQ",pool:"TARAZLIQBCMN",hint:"Tərəflər, qüvvələr və ya seçimlər arasında tarazlıq vəziyyəti."}
     }
   };
   let gameLang='ru';try{gameLang=localStorage.getItem('pw.language')||'ru'}catch{}
@@ -165,7 +168,7 @@
   function validateLanguageLevels(){
     const supported=['ru','en','az'];
     for(const lang of supported){
-      for(let n=1;n<=49;n++){
+      for(let n=1;n<=50;n++){
         const item=lang==='ru'?LEVELS[n]:TRANSLATED[lang][n];
         if(!item||!item.answer||!item.pool||!item.hint)throw new Error('Incomplete language level '+lang+' '+n);
         const need=[...item.answer].reduce((m,ch)=>(m[ch]=(m[ch]||0)+1,m),{});
@@ -235,7 +238,7 @@
     const next=$('nextLevel'),chapterNote=$('successChapter');
     if(chapterNote){chapterNote.hidden=true;chapterNote.textContent='';}
     if(levelId===20){if(chapterNote){chapterNote.hidden=false;chapterNote.textContent=ui.chapterPassed(1)+' '+ui.chapterUnlocked(2)+'.';}next.href='./game.html?level=21';next.innerHTML=ui.nextChapter+' <span>▶</span>';}
-    else if(levelId<49){next.href='./game.html?level='+(levelId+1);next.innerHTML=ui.next+' <span>▶</span>';}
+    else if(levelId<50){next.href='./game.html?level='+(levelId+1);next.innerHTML=ui.next+' <span>▶</span>';}
     else{if(chapterNote){chapterNote.hidden=false;chapterNote.textContent=ui.chapterPassed(2);}next.href='./index.html';next.innerHTML=ui.home+' <span>✓</span>';}
   }
   async function check(){
