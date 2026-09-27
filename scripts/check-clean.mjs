@@ -27,11 +27,11 @@ for(const file of ['core.js','home.js','game.js','theme-game.js']){
 }
 
 const release=JSON.parse(readFileSync(resolve(base,'release.json'),'utf8'));
-if(release.release!=='20260927-r39')throw Error('Unexpected release: '+release.release);
+if(release.release!=='20260927-r40')throw Error('Unexpected release: '+release.release);
 if(!Array.isArray(release.levels)||!release.levels.includes(60))throw Error('Main levels are not published through 60');
 if(release.thematic_mode?.categories?.length!==12)throw Error('Thematic catalog must contain 12 categories');
 const sport=release.thematic_mode.categories.find(x=>x.id==='sport');
-if(!sport||sport.available_through!==20)throw Error('Sport theme must be playable through level 20');
+if(!sport||sport.available_through!==50)throw Error('Sport theme must be playable through level 50');
 
 const index=readFileSync(resolve(base,'index.html'),'utf8');
 const themeGame=readFileSync(resolve(base,'theme-game.html'),'utf8');
