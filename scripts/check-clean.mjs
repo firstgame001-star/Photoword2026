@@ -27,7 +27,7 @@ for(const file of ['core.js','home.js','game.js','theme-game.js','challenge.js']
 }
 
 const release=JSON.parse(readFileSync(resolve(base,'release.json'),'utf8'));
-if(release.release!=='20260927-r48')throw Error('Unexpected release: '+release.release);
+if(release.release!=='20260927-r49')throw Error('Unexpected release: '+release.release);
 if(!Array.isArray(release.levels)||!release.levels.includes(100))throw Error('Main levels are not published through 100');
 if(release.chapters?.length!==10)throw Error('Main chapter navigation must contain 10 chapters');
 if(release.chapters.find(x=>x.id===3)?.status!=='live')throw Error('Chapter 3 must be complete');
@@ -74,4 +74,7 @@ if(!index.includes('id="blitzLetterHint"')||!index.includes('id="blitzRemoveHint
 if(!challengeJs.includes("hintLetter:'Буква открыта. −75")||!challengeJs.includes("hintRemove:'Лишние буквы убраны. −125")||!challengeJs.includes("hintText:'Текстовая подсказка открыта. −200"))throw Error('Blitz hint pricing/copy is missing');
 const blitz=release.challenge_modes?.modes?.find(x=>x.id==='blitz');
 if(blitz?.hints?.letter?.cost_coins!==75||blitz?.hints?.remove?.cost_coins!==125||blitz?.hints?.text?.cost_coins!==200)throw Error('Blitz hint manifest pricing is incorrect');
-console.log('PASS: r48 entrypoints, Chapters 1-10, backgrounds, absolute progress, chapter titles and JavaScript syntax.');
+if(!index.includes('id="challengeCorrectPanel"')||!index.includes('id="challengeCorrectNext"'))throw Error('Challenge correct-answer step is missing');
+if(!challengeJs.includes("correctWord:'Верно!'")||!challengeJs.includes("nextWord:'ДАЛЬШЕ'"))throw Error('Challenge correct-answer localization is missing');
+if(release.challenge_modes?.correct_answer_step?.limited_attempts!=='manual_next'||release.challenge_modes?.correct_answer_step?.no_hints!=='manual_next'||release.challenge_modes?.correct_answer_step?.blitz!=='fast_auto_next')throw Error('Challenge next-step manifest is incorrect');
+console.log('PASS: r49 entrypoints, Chapters 1-10, backgrounds, absolute progress, chapter titles and JavaScript syntax.');
