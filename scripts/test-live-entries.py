@@ -4,7 +4,7 @@ from pathlib import Path
 from playwright.sync_api import sync_playwright, expect
 
 BASE='https://firstgame001-star.github.io/Photoword2026/'
-RELEASE='20260927-r39'
+RELEASE='20260927-r40'
 OUT=Path('test-results'); OUT.mkdir(exist_ok=True)
 
 for attempt in range(48):
@@ -157,6 +157,12 @@ with sync_playwright() as pw:
       page.goto(BASE+'clean/theme-game.html?theme=sport&level=1#'+fragment,wait_until='domcontentloaded',timeout=45000)
       expect(page.locator('[data-coins]')).to_have_text('4321');expect(page.locator('#themeSettingsBtn')).to_have_count(0);expect(page.locator('#themeProgress')).to_have_count(0)
       sport_answer={'ru':'ГОЛ','en':'GOAL','az':'QOL'}[language];tap_word(page,sport_answer);expect(page.locator('#successPanel')).to_be_visible();assert page.evaluate("JSON.parse(localStorage.getItem('pw.themeProgress.sport')).includes(1)")
+      page.evaluate("localStorage.setItem('pw.themeProgress.sport',JSON.stringify(Array.from({length:20},(_,i)=>i+1)))")
+      page.goto(BASE+'clean/theme-game.html?theme=sport&level=21#'+fragment,wait_until='domcontentloaded',timeout=45000)
+      answer21={'ru':'БОКС','en':'BOXING','az':'BOKS'}[language];tap_word(page,answer21);expect(page.locator('#successPanel')).to_be_visible()
+      page.evaluate("localStorage.setItem('pw.themeProgress.sport',JSON.stringify(Array.from({length:49},(_,i)=>i+1)))")
+      page.goto(BASE+'clean/theme-game.html?theme=sport&level=50#'+fragment,wait_until='domcontentloaded',timeout=45000)
+      answer50={'ru':'СЕКУНДОМЕР','en':'STOPWATCH','az':'SANİYƏÖLÇƏN'}[language];tap_word(page,answer50);expect(page.locator('#successPanel')).to_be_visible()
       assert not relevant_errors(errors),errors;ctx.close()
 
     # Representative main-game browser checks. Loading game.js also validates every published answer/pool in RU/EN/AZ.
