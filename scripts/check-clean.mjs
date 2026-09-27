@@ -27,7 +27,7 @@ for(const file of ['core.js','home.js','game.js','theme-game.js','challenge.js']
 }
 
 const release=JSON.parse(readFileSync(resolve(base,'release.json'),'utf8'));
-if(release.release!=='20260927-r49')throw Error('Unexpected release: '+release.release);
+if(release.release!=='20260927-r50')throw Error('Unexpected release: '+release.release);
 if(!Array.isArray(release.levels)||!release.levels.includes(100))throw Error('Main levels are not published through 100');
 if(release.chapters?.length!==10)throw Error('Main chapter navigation must contain 10 chapters');
 if(release.chapters.find(x=>x.id===3)?.status!=='live')throw Error('Chapter 3 must be complete');
@@ -77,4 +77,12 @@ if(blitz?.hints?.letter?.cost_coins!==75||blitz?.hints?.remove?.cost_coins!==125
 if(!index.includes('id="challengeCorrectPanel"')||!index.includes('id="challengeCorrectNext"'))throw Error('Challenge correct-answer step is missing');
 if(!challengeJs.includes("correctWord:'Верно!'")||!challengeJs.includes("nextWord:'ДАЛЬШЕ'"))throw Error('Challenge correct-answer localization is missing');
 if(release.challenge_modes?.correct_answer_step?.limited_attempts!=='manual_next'||release.challenge_modes?.correct_answer_step?.no_hints!=='manual_next'||release.challenge_modes?.correct_answer_step?.blitz!=='fast_auto_next')throw Error('Challenge next-step manifest is incorrect');
-console.log('PASS: r49 entrypoints, Chapters 1-10, backgrounds, absolute progress, chapter titles and JavaScript syntax.');
+const qMatch=challengeJs.match(/const Q=(\[[\s\S]*?\]);\nconst TEXT_HINTS=/);
+if(!qMatch)throw Error('Challenge question bank is missing');
+const qBank=JSON.parse(qMatch[1]);
+if(qBank.length!==200)throw Error('Challenge question bank must contain 200 words');
+if(qBank.some(x=>!x.ru||!x.en||!x.az||!Array.isArray(x.p)||x.p.length!==4))throw Error('Challenge question bank contains incomplete entries');
+if(release.challenge_modes?.question_bank?.total!==200)throw Error('Challenge question-bank manifest is incorrect');
+if(!homeJs.includes('function showRequiredLanguagePicker(){if(getLang())return;'))throw Error('Language picker re-open guard is missing');
+if(release.ui?.language_gate_fix!=='no_reopen_after_selection')throw Error('Language gate fix manifest is missing');
+console.log('PASS: r50 entrypoints, Chapters 1-10, backgrounds, absolute progress, chapter titles and JavaScript syntax.');
