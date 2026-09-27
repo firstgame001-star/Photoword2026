@@ -277,3 +277,11 @@ html[data-theme="light"] .challenge-run-panel>p,html[data-theme="light"] .challe
 .challenge-blitz-hints .tool:nth-child(3){background:#176f9a}
 .challenge-text-hint{margin-top:10px;padding:11px 12px;border:1px solid #4a7489;border-radius:12px;background:#082b3d;color:#cce0e9;font-size:11px;line-height:1.45;text-align:left}
 html[data-theme="light"] .challenge-text-hint{background:#f8fbfd;color:#17303c;border-color:#b6cad4}
+
+
+/* Correct-answer step for challenge modes */
+.challenge-correct-panel{margin:18px 0;padding:18px;border:1px solid #4fdc94;border-radius:20px;background:linear-gradient(160deg,#0b4637e8,#08291fee);text-align:center;box-shadow:0 10px 24px #0004}
+.challenge-correct-mark{display:grid;place-items:center;width:58px;height:58px;margin:0 auto 8px;border-radius:50%;background:#23b968;color:#fff;font-size:30px;font-weight:900;box-shadow:0 0 20px #2de08455}
+.challenge-correct-panel>b{display:block;font-size:20px}.challenge-correct-panel>strong{display:block;margin:6px 0 14px;color:#ffe173;font-size:24px;letter-spacing:1px}
+.challenge-correct-panel .play{width:100%;border:0;font-size:18px}
+html[data-theme="light"] .challenge-correct-panel{background:#f5fff9;color:#17303c;border-color:#62c996}
