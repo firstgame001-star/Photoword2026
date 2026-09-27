@@ -4,11 +4,11 @@ const $=id=>document.getElementById(id),pw=window.PW;
 const getLang=()=>{try{return localStorage.getItem('pw.language')||'ru'}catch{return'ru'}};
 const lang=getLang();
 const themeParam=new URLSearchParams(location.search).get('theme');
-const themeId=themeParam==='art'?'art':'sport';
+const themeId=['sport','art','professions'].includes(themeParam)?themeParam:'sport';
 const UI={
- ru:{sport:'⚽ Спорт',art:'🎨 Искусство',level:n=>'Тематический уровень '+n,textHint:'Текстовая подсказка',tap:'Нажми, чтобы открыть',wrong:'Неверное слово. Попробуй ещё раз.',passed:n=>'Уровень '+n+' пройден!',saved:'Прогресс сохранён отдельно от основной игры.',next:'СЛЕДУЮЩИЙ УРОВЕНЬ',back:'К ТЕМАМ',locked:n=>'Сначала пройди уровень '+n+'.',letter:'Буква открыта.',remove:'Лишние буквы убраны.',shuffle:'Буквы перемешаны.',text:'Подсказка открыта.',allLetters:'Все буквы уже открыты.',noExtra:'Лишних букв не осталось.',placeFail:'Не удалось разместить букву.',image:n=>'Изображение '+n},
- en:{sport:'⚽ Sport',art:'🎨 Art',level:n=>'Themed level '+n,textHint:'Text hint',tap:'Tap to reveal',wrong:'Wrong word. Try again.',passed:n=>'Level '+n+' completed!',saved:'Progress saved separately from the main game.',next:'NEXT LEVEL',back:'BACK TO THEMES',locked:n=>'Complete level '+n+' first.',letter:'Letter revealed.',remove:'Extra letters removed.',shuffle:'Letters shuffled.',text:'Hint revealed.',allLetters:'All letters are already revealed.',noExtra:'No extra letters remain.',placeFail:'Could not place the letter.',image:n=>'Image '+n},
- az:{sport:'⚽ İdman',art:'🎨 İncəsənət',level:n=>n+'-ci mövzu səviyyəsi',textHint:'Mətn ipucu',tap:'Açmaq üçün toxun',wrong:'Söz yanlışdır. Yenidən cəhd et.',passed:n=>n+'-ci səviyyə keçildi!',saved:'Tərəqqi əsas oyundan ayrıca saxlanıldı.',next:'NÖVBƏTİ SƏVİYYƏ',back:'MÖVZULARA QAYIT',locked:n=>'Əvvəlcə '+n+'-ci səviyyəni keç.',letter:'Hərf açıldı.',remove:'Artıq hərflər silindi.',shuffle:'Hərflər qarışdırıldı.',text:'İpucu açıldı.',allLetters:'Bütün hərflər artıq açılıb.',noExtra:'Artıq hərf qalmayıb.',placeFail:'Hərfi yerləşdirmək mümkün olmadı.',image:n=>n+'-ci şəkil'}
+ ru:{sport:'⚽ Спорт',art:'🎨 Искусство',professions:'🧑‍💼 Профессии',level:n=>'Тематический уровень '+n,textHint:'Текстовая подсказка',tap:'Нажми, чтобы открыть',wrong:'Неверное слово. Попробуй ещё раз.',passed:n=>'Уровень '+n+' пройден!',saved:'Прогресс сохранён отдельно от основной игры.',next:'СЛЕДУЮЩИЙ УРОВЕНЬ',back:'К ТЕМАМ',locked:n=>'Сначала пройди уровень '+n+'.',letter:'Буква открыта.',remove:'Лишние буквы убраны.',shuffle:'Буквы перемешаны.',text:'Подсказка открыта.',allLetters:'Все буквы уже открыты.',noExtra:'Лишних букв не осталось.',placeFail:'Не удалось разместить букву.',image:n=>'Изображение '+n},
+ en:{sport:'⚽ Sport',art:'🎨 Art',professions:'🧑‍💼 Professions',level:n=>'Themed level '+n,textHint:'Text hint',tap:'Tap to reveal',wrong:'Wrong word. Try again.',passed:n=>'Level '+n+' completed!',saved:'Progress saved separately from the main game.',next:'NEXT LEVEL',back:'BACK TO THEMES',locked:n=>'Complete level '+n+' first.',letter:'Letter revealed.',remove:'Extra letters removed.',shuffle:'Letters shuffled.',text:'Hint revealed.',allLetters:'All letters are already revealed.',noExtra:'No extra letters remain.',placeFail:'Could not place the letter.',image:n=>'Image '+n},
+ az:{sport:'⚽ İdman',art:'🎨 İncəsənət',professions:'🧑‍💼 Peşələr',level:n=>n+'-ci mövzu səviyyəsi',textHint:'Mətn ipucu',tap:'Açmaq üçün toxun',wrong:'Söz yanlışdır. Yenidən cəhd et.',passed:n=>n+'-ci səviyyə keçildi!',saved:'Tərəqqi əsas oyundan ayrıca saxlanıldı.',next:'NÖVBƏTİ SƏVİYYƏ',back:'MÖVZULARA QAYIT',locked:n=>'Əvvəlcə '+n+'-ci səviyyəni keç.',letter:'Hərf açıldı.',remove:'Artıq hərflər silindi.',shuffle:'Hərflər qarışdırıldı.',text:'İpucu açıldı.',allLetters:'Bütün hərflər artıq açılıb.',noExtra:'Artıq hərf qalmayıb.',placeFail:'Hərfi yerləşdirmək mümkün olmadı.',image:n=>n+'-ci şəkil'}
 };
 const ui=UI[lang]||UI.ru;
 const SETTINGS_UI={
@@ -577,8 +577,3016 @@ const ART_TRANSLATED={
  100:{"answer":"YARADICILIQ","hint":"Bədii üslub, dövr və ya sənətkarlıqla bağlı termin."}
  }
 };
-const ACTIVE_LEVELS=themeId==='art'?ART_LEVELS:LEVELS;
-const ACTIVE_TRANSLATED=themeId==='art'?ART_TRANSLATED:TRANSLATED;
+const PROF_LEVELS={
+ "1": {
+  "answer": "ВРАЧ",
+  "hint": "Профессия, связанная с медициной и здоровьем.",
+  "photos": [
+   [
+    "🩺",
+    "🩺"
+   ],
+   [
+    "🏥",
+    "🏥"
+   ],
+   [
+    "💊",
+    "💊"
+   ],
+   [
+    "👨‍⚕️",
+    "👨‍⚕️"
+   ]
+  ]
+ },
+ "2": {
+  "answer": "УЧИТЕЛЬ",
+  "hint": "Профессия, связанная с обучением и развитием людей.",
+  "photos": [
+   [
+    "🏫",
+    "🏫"
+   ],
+   [
+    "📚",
+    "📚"
+   ],
+   [
+    "✏️",
+    "✏️"
+   ],
+   [
+    "👩‍🏫",
+    "👩‍🏫"
+   ]
+  ]
+ },
+ "3": {
+  "answer": "ПОВАР",
+  "hint": "Профессия, связанная с приготовлением еды.",
+  "photos": [
+   [
+    "👨‍🍳",
+    "👨‍🍳"
+   ],
+   [
+    "🍳",
+    "🍳"
+   ],
+   [
+    "🥘",
+    "🥘"
+   ],
+   [
+    "🔪",
+    "🔪"
+   ]
+  ]
+ },
+ "4": {
+  "answer": "ПОЛИЦЕЙСКИЙ",
+  "hint": "Профессия, связанная с безопасностью и защитой людей.",
+  "photos": [
+   [
+    "👮",
+    "👮"
+   ],
+   [
+    "🚓",
+    "🚓"
+   ],
+   [
+    "🚨",
+    "🚨"
+   ],
+   [
+    "🛡️",
+    "🛡️"
+   ]
+  ]
+ },
+ "5": {
+  "answer": "ПОЖАРНЫЙ",
+  "hint": "Профессия, связанная с безопасностью и защитой людей.",
+  "photos": [
+   [
+    "🧑‍🚒",
+    "🧑‍🚒"
+   ],
+   [
+    "🚒",
+    "🚒"
+   ],
+   [
+    "🔥",
+    "🔥"
+   ],
+   [
+    "🧯",
+    "🧯"
+   ]
+  ]
+ },
+ "6": {
+  "answer": "ВОДИТЕЛЬ",
+  "hint": "Профессия, связанная с транспортом и перевозками.",
+  "photos": [
+   [
+    "🚗",
+    "🚗"
+   ],
+   [
+    "🛣️",
+    "🛣️"
+   ],
+   [
+    "🛞",
+    "🛞"
+   ],
+   [
+    "🚦",
+    "🚦"
+   ]
+  ]
+ },
+ "7": {
+  "answer": "ПИЛОТ",
+  "hint": "Профессия, связанная с транспортом и перевозками.",
+  "photos": [
+   [
+    "✈️",
+    "✈️"
+   ],
+   [
+    "🛫",
+    "🛫"
+   ],
+   [
+    "☁️",
+    "☁️"
+   ],
+   [
+    "🧑‍✈️",
+    "🧑‍✈️"
+   ]
+  ]
+ },
+ "8": {
+  "answer": "СТРОИТЕЛЬ",
+  "hint": "Профессия, связанная с строительством и обслуживанием зданий.",
+  "photos": [
+   [
+    "🏗️",
+    "🏗️"
+   ],
+   [
+    "🧱",
+    "🧱"
+   ],
+   [
+    "🔨",
+    "🔨"
+   ],
+   [
+    "🏠",
+    "🏠"
+   ]
+  ]
+ },
+ "9": {
+  "answer": "ПРОДАВЕЦ",
+  "hint": "Профессия, связанная с торговлей и покупателями.",
+  "photos": [
+   [
+    "🛒",
+    "🛒"
+   ],
+   [
+    "🏪",
+    "🏪"
+   ],
+   [
+    "💳",
+    "💳"
+   ],
+   [
+    "📦",
+    "📦"
+   ]
+  ]
+ },
+ "10": {
+  "answer": "ФЕРМЕР",
+  "hint": "Профессия, связанная с природой, растениями или сельским хозяйством.",
+  "photos": [
+   [
+    "🚜",
+    "🚜"
+   ],
+   [
+    "🌾",
+    "🌾"
+   ],
+   [
+    "🐄",
+    "🐄"
+   ],
+   [
+    "🌱",
+    "🌱"
+   ]
+  ]
+ },
+ "11": {
+  "answer": "МЕХАНИК",
+  "hint": "Профессия, связанная с техникой и технологиями.",
+  "photos": [
+   [
+    "🔧",
+    "🔧"
+   ],
+   [
+    "🚗",
+    "🚗"
+   ],
+   [
+    "⚙️",
+    "⚙️"
+   ],
+   [
+    "🛠️",
+    "🛠️"
+   ]
+  ]
+ },
+ "12": {
+  "answer": "ЭЛЕКТРИК",
+  "hint": "Профессия, связанная с техникой и технологиями.",
+  "photos": [
+   [
+    "⚡",
+    "⚡"
+   ],
+   [
+    "🔌",
+    "🔌"
+   ],
+   [
+    "💡",
+    "💡"
+   ],
+   [
+    "🪛",
+    "🪛"
+   ]
+  ]
+ },
+ "13": {
+  "answer": "САНТЕХНИК",
+  "hint": "Профессия, связанная с строительством и обслуживанием зданий.",
+  "photos": [
+   [
+    "🚰",
+    "🚰"
+   ],
+   [
+    "🔧",
+    "🔧"
+   ],
+   [
+    "🚿",
+    "🚿"
+   ],
+   [
+    "💧",
+    "💧"
+   ]
+  ]
+ },
+ "14": {
+  "answer": "ПАРИКМАХЕР",
+  "hint": "Профессия, связанная с обслуживанием людей.",
+  "photos": [
+   [
+    "✂️",
+    "✂️"
+   ],
+   [
+    "💇",
+    "💇"
+   ],
+   [
+    "🪮",
+    "🪮"
+   ],
+   [
+    "🪞",
+    "🪞"
+   ]
+  ]
+ },
+ "15": {
+  "answer": "ПЕКАРЬ",
+  "hint": "Профессия, связанная с приготовлением еды.",
+  "photos": [
+   [
+    "🍞",
+    "🍞"
+   ],
+   [
+    "🥖",
+    "🥖"
+   ],
+   [
+    "🔥",
+    "🔥"
+   ],
+   [
+    "👨‍🍳",
+    "👨‍🍳"
+   ]
+  ]
+ },
+ "16": {
+  "answer": "КОНДИТЕР",
+  "hint": "Профессия, связанная с приготовлением еды.",
+  "photos": [
+   [
+    "🎂",
+    "🎂"
+   ],
+   [
+    "🧁",
+    "🧁"
+   ],
+   [
+    "🍰",
+    "🍰"
+   ],
+   [
+    "🍫",
+    "🍫"
+   ]
+  ]
+ },
+ "17": {
+  "answer": "ОФИЦИАНТ",
+  "hint": "Профессия, связанная с обслуживанием людей.",
+  "photos": [
+   [
+    "🍽️",
+    "🍽️"
+   ],
+   [
+    "📝",
+    "📝"
+   ],
+   [
+    "☕",
+    "☕"
+   ],
+   [
+    "🍴",
+    "🍴"
+   ]
+  ]
+ },
+ "18": {
+  "answer": "БАРМЕН",
+  "hint": "Профессия, связанная с обслуживанием людей.",
+  "photos": [
+   [
+    "🍹",
+    "🍹"
+   ],
+   [
+    "🥃",
+    "🥃"
+   ],
+   [
+    "🍸",
+    "🍸"
+   ],
+   [
+    "🧊",
+    "🧊"
+   ]
+  ]
+ },
+ "19": {
+  "answer": "ФОТОГРАФ",
+  "hint": "Профессия, связанная с информацией, текстом или медиа.",
+  "photos": [
+   [
+    "📷",
+    "📷"
+   ],
+   [
+    "📸",
+    "📸"
+   ],
+   [
+    "💡",
+    "💡"
+   ],
+   [
+    "🖼️",
+    "🖼️"
+   ]
+  ]
+ },
+ "20": {
+  "answer": "ЖУРНАЛИСТ",
+  "hint": "Профессия, связанная с информацией, текстом или медиа.",
+  "photos": [
+   [
+    "📰",
+    "📰"
+   ],
+   [
+    "🎤",
+    "🎤"
+   ],
+   [
+    "📝",
+    "📝"
+   ],
+   [
+    "📺",
+    "📺"
+   ]
+  ]
+ },
+ "21": {
+  "answer": "РЕДАКТОР",
+  "hint": "Профессия, связанная с информацией, текстом или медиа.",
+  "photos": [
+   [
+    "📝",
+    "📝"
+   ],
+   [
+    "📚",
+    "📚"
+   ],
+   [
+    "✏️",
+    "✏️"
+   ],
+   [
+    "✅",
+    "✅"
+   ]
+  ]
+ },
+ "22": {
+  "answer": "ПИСАТЕЛЬ",
+  "hint": "Профессия, связанная с информацией, текстом или медиа.",
+  "photos": [
+   [
+    "✍️",
+    "✍️"
+   ],
+   [
+    "📖",
+    "📖"
+   ],
+   [
+    "💭",
+    "💭"
+   ],
+   [
+    "📝",
+    "📝"
+   ]
+  ]
+ },
+ "23": {
+  "answer": "ПЕРЕВОДЧИК",
+  "hint": "Профессия, связанная с информацией, текстом или медиа.",
+  "photos": [
+   [
+    "🌐",
+    "🌐"
+   ],
+   [
+    "🗣️",
+    "🗣️"
+   ],
+   [
+    "📖",
+    "📖"
+   ],
+   [
+    "🔤",
+    "🔤"
+   ]
+  ]
+ },
+ "24": {
+  "answer": "ЮРИСТ",
+  "hint": "Профессия, связанная с правом, расследованием или законом.",
+  "photos": [
+   [
+    "⚖️",
+    "⚖️"
+   ],
+   [
+    "📜",
+    "📜"
+   ],
+   [
+    "🏛️",
+    "🏛️"
+   ],
+   [
+    "📚",
+    "📚"
+   ]
+  ]
+ },
+ "25": {
+  "answer": "АДВОКАТ",
+  "hint": "Профессия, связанная с правом, расследованием или законом.",
+  "photos": [
+   [
+    "⚖️",
+    "⚖️"
+   ],
+   [
+    "👔",
+    "👔"
+   ],
+   [
+    "📄",
+    "📄"
+   ],
+   [
+    "🏛️",
+    "🏛️"
+   ]
+  ]
+ },
+ "26": {
+  "answer": "ПРОКУРОР",
+  "hint": "Профессия, связанная с правом, расследованием или законом.",
+  "photos": [
+   [
+    "⚖️",
+    "⚖️"
+   ],
+   [
+    "🏛️",
+    "🏛️"
+   ],
+   [
+    "📁",
+    "📁"
+   ],
+   [
+    "🔍",
+    "🔍"
+   ]
+  ]
+ },
+ "27": {
+  "answer": "НОТАРИУС",
+  "hint": "Профессия, связанная с правом, расследованием или законом.",
+  "photos": [
+   [
+    "📜",
+    "📜"
+   ],
+   [
+    "🖋️",
+    "🖋️"
+   ],
+   [
+    "✅",
+    "✅"
+   ],
+   [
+    "🔏",
+    "🔏"
+   ]
+  ]
+ },
+ "28": {
+  "answer": "БУХГАЛТЕР",
+  "hint": "Профессия, связанная с финансами и расчётами.",
+  "photos": [
+   [
+    "🧮",
+    "🧮"
+   ],
+   [
+    "📊",
+    "📊"
+   ],
+   [
+    "💰",
+    "💰"
+   ],
+   [
+    "🧾",
+    "🧾"
+   ]
+  ]
+ },
+ "29": {
+  "answer": "ЭКОНОМИСТ",
+  "hint": "Профессия, связанная с финансами и расчётами.",
+  "photos": [
+   [
+    "📈",
+    "📈"
+   ],
+   [
+    "💰",
+    "💰"
+   ],
+   [
+    "📊",
+    "📊"
+   ],
+   [
+    "🧮",
+    "🧮"
+   ]
+  ]
+ },
+ "30": {
+  "answer": "МЕНЕДЖЕР",
+  "hint": "Профессия, связанная с управлением, данными или продвижением.",
+  "photos": [
+   [
+    "👔",
+    "👔"
+   ],
+   [
+    "📋",
+    "📋"
+   ],
+   [
+    "👥",
+    "👥"
+   ],
+   [
+    "📊",
+    "📊"
+   ]
+  ]
+ },
+ "31": {
+  "answer": "МАРКЕТОЛОГ",
+  "hint": "Профессия, связанная с управлением, данными или продвижением.",
+  "photos": [
+   [
+    "📣",
+    "📣"
+   ],
+   [
+    "📊",
+    "📊"
+   ],
+   [
+    "🎯",
+    "🎯"
+   ],
+   [
+    "🛍️",
+    "🛍️"
+   ]
+  ]
+ },
+ "32": {
+  "answer": "ДИЗАЙНЕР",
+  "hint": "Профессия, связанная с творчеством, сценой или визуальным искусством.",
+  "photos": [
+   [
+    "🎨",
+    "🎨"
+   ],
+   [
+    "💻",
+    "💻"
+   ],
+   [
+    "✏️",
+    "✏️"
+   ],
+   [
+    "📐",
+    "📐"
+   ]
+  ]
+ },
+ "33": {
+  "answer": "АРХИТЕКТОР",
+  "hint": "Профессия, связанная с строительством и обслуживанием зданий.",
+  "photos": [
+   [
+    "🏛️",
+    "🏛️"
+   ],
+   [
+    "📐",
+    "📐"
+   ],
+   [
+    "🏗️",
+    "🏗️"
+   ],
+   [
+    "✏️",
+    "✏️"
+   ]
+  ]
+ },
+ "34": {
+  "answer": "ИНЖЕНЕР",
+  "hint": "Профессия, связанная с техникой и технологиями.",
+  "photos": [
+   [
+    "⚙️",
+    "⚙️"
+   ],
+   [
+    "📐",
+    "📐"
+   ],
+   [
+    "🛠️",
+    "🛠️"
+   ],
+   [
+    "🏗️",
+    "🏗️"
+   ]
+  ]
+ },
+ "35": {
+  "answer": "ПРОГРАММИСТ",
+  "hint": "Профессия, связанная с техникой и технологиями.",
+  "photos": [
+   [
+    "💻",
+    "💻"
+   ],
+   [
+    "⌨️",
+    "⌨️"
+   ],
+   [
+    "🧑‍💻",
+    "🧑‍💻"
+   ],
+   [
+    "⚙️",
+    "⚙️"
+   ]
+  ]
+ },
+ "36": {
+  "answer": "ТЕСТИРОВЩИК",
+  "hint": "Профессия, связанная с техникой и технологиями.",
+  "photos": [
+   [
+    "🧪",
+    "🧪"
+   ],
+   [
+    "💻",
+    "💻"
+   ],
+   [
+    "🐞",
+    "🐞"
+   ],
+   [
+    "✅",
+    "✅"
+   ]
+  ]
+ },
+ "37": {
+  "answer": "АДМИНИСТРАТОР",
+  "hint": "Профессия, связанная с управлением, данными или продвижением.",
+  "photos": [
+   [
+    "🖥️",
+    "🖥️"
+   ],
+   [
+    "⚙️",
+    "⚙️"
+   ],
+   [
+    "🔐",
+    "🔐"
+   ],
+   [
+    "📋",
+    "📋"
+   ]
+  ]
+ },
+ "38": {
+  "answer": "АНАЛИТИК",
+  "hint": "Профессия, связанная с управлением, данными или продвижением.",
+  "photos": [
+   [
+    "📊",
+    "📊"
+   ],
+   [
+    "🔍",
+    "🔍"
+   ],
+   [
+    "💻",
+    "💻"
+   ],
+   [
+    "📈",
+    "📈"
+   ]
+  ]
+ },
+ "39": {
+  "answer": "ДИСПЕТЧЕР",
+  "hint": "Профессия, связанная с доставкой и координацией маршрутов.",
+  "photos": [
+   [
+    "🎧",
+    "🎧"
+   ],
+   [
+    "📞",
+    "📞"
+   ],
+   [
+    "🗺️",
+    "🗺️"
+   ],
+   [
+    "🚦",
+    "🚦"
+   ]
+  ]
+ },
+ "40": {
+  "answer": "ЛОГИСТ",
+  "hint": "Профессия, связанная с доставкой и координацией маршрутов.",
+  "photos": [
+   [
+    "📦",
+    "📦"
+   ],
+   [
+    "🚚",
+    "🚚"
+   ],
+   [
+    "🗺️",
+    "🗺️"
+   ],
+   [
+    "📋",
+    "📋"
+   ]
+  ]
+ },
+ "41": {
+  "answer": "КУРЬЕР",
+  "hint": "Профессия, связанная с доставкой и координацией маршрутов.",
+  "photos": [
+   [
+    "📦",
+    "📦"
+   ],
+   [
+    "🛵",
+    "🛵"
+   ],
+   [
+    "📍",
+    "📍"
+   ],
+   [
+    "📱",
+    "📱"
+   ]
+  ]
+ },
+ "42": {
+  "answer": "ПОЧТАЛЬОН",
+  "hint": "Профессия, связанная с доставкой и координацией маршрутов.",
+  "photos": [
+   [
+    "✉️",
+    "✉️"
+   ],
+   [
+    "📮",
+    "📮"
+   ],
+   [
+    "📦",
+    "📦"
+   ],
+   [
+    "🚶",
+    "🚶"
+   ]
+  ]
+ },
+ "43": {
+  "answer": "МАШИНИСТ",
+  "hint": "Профессия, связанная с транспортом и перевозками.",
+  "photos": [
+   [
+    "🚆",
+    "🚆"
+   ],
+   [
+    "🛤️",
+    "🛤️"
+   ],
+   [
+    "🚦",
+    "🚦"
+   ],
+   [
+    "👨‍✈️",
+    "👨‍✈️"
+   ]
+  ]
+ },
+ "44": {
+  "answer": "КАПИТАН",
+  "hint": "Профессия, связанная с транспортом и перевозками.",
+  "photos": [
+   [
+    "🚢",
+    "🚢"
+   ],
+   [
+    "⚓",
+    "⚓"
+   ],
+   [
+    "🧭",
+    "🧭"
+   ],
+   [
+    "🌊",
+    "🌊"
+   ]
+  ]
+ },
+ "45": {
+  "answer": "МОРЯК",
+  "hint": "Профессия, связанная с транспортом и перевозками.",
+  "photos": [
+   [
+    "⚓",
+    "⚓"
+   ],
+   [
+    "🚢",
+    "🚢"
+   ],
+   [
+    "🌊",
+    "🌊"
+   ],
+   [
+    "🪢",
+    "🪢"
+   ]
+  ]
+ },
+ "46": {
+  "answer": "СПАСАТЕЛЬ",
+  "hint": "Профессия, связанная с безопасностью и защитой людей.",
+  "photos": [
+   [
+    "🛟",
+    "🛟"
+   ],
+   [
+    "🚨",
+    "🚨"
+   ],
+   [
+    "⛑️",
+    "⛑️"
+   ],
+   [
+    "🤝",
+    "🤝"
+   ]
+  ]
+ },
+ "47": {
+  "answer": "ОХРАННИК",
+  "hint": "Профессия, связанная с безопасностью и защитой людей.",
+  "photos": [
+   [
+    "🛡️",
+    "🛡️"
+   ],
+   [
+    "🚪",
+    "🚪"
+   ],
+   [
+    "👀",
+    "👀"
+   ],
+   [
+    "🔐",
+    "🔐"
+   ]
+  ]
+ },
+ "48": {
+  "answer": "ВОЕННЫЙ",
+  "hint": "Профессия, связанная с безопасностью и защитой людей.",
+  "photos": [
+   [
+    "🎖️",
+    "🎖️"
+   ],
+   [
+    "🪖",
+    "🪖"
+   ],
+   [
+    "🫡",
+    "🫡"
+   ],
+   [
+    "🏕️",
+    "🏕️"
+   ]
+  ]
+ },
+ "49": {
+  "answer": "СЛЕДОВАТЕЛЬ",
+  "hint": "Профессия, связанная с правом, расследованием или законом.",
+  "photos": [
+   [
+    "🔍",
+    "🔍"
+   ],
+   [
+    "📁",
+    "📁"
+   ],
+   [
+    "🕵️",
+    "🕵️"
+   ],
+   [
+    "📝",
+    "📝"
+   ]
+  ]
+ },
+ "50": {
+  "answer": "ДЕТЕКТИВ",
+  "hint": "Профессия, связанная с правом, расследованием или законом.",
+  "photos": [
+   [
+    "🕵️",
+    "🕵️"
+   ],
+   [
+    "🔎",
+    "🔎"
+   ],
+   [
+    "🧩",
+    "🧩"
+   ],
+   [
+    "📸",
+    "📸"
+   ]
+  ]
+ },
+ "51": {
+  "answer": "КРИМИНАЛИСТ",
+  "hint": "Профессия, связанная с исследованиями и наукой.",
+  "photos": [
+   [
+    "🔬",
+    "🔬"
+   ],
+   [
+    "🔍",
+    "🔍"
+   ],
+   [
+    "🧤",
+    "🧤"
+   ],
+   [
+    "🧬",
+    "🧬"
+   ]
+  ]
+ },
+ "52": {
+  "answer": "ВЕТЕРИНАР",
+  "hint": "Профессия, связанная с медициной и здоровьем.",
+  "photos": [
+   [
+    "🐕",
+    "🐕"
+   ],
+   [
+    "🐈",
+    "🐈"
+   ],
+   [
+    "🩺",
+    "🩺"
+   ],
+   [
+    "💉",
+    "💉"
+   ]
+  ]
+ },
+ "53": {
+  "answer": "ФАРМАЦЕВТ",
+  "hint": "Профессия, связанная с медициной и здоровьем.",
+  "photos": [
+   [
+    "💊",
+    "💊"
+   ],
+   [
+    "⚗️",
+    "⚗️"
+   ],
+   [
+    "🏥",
+    "🏥"
+   ],
+   [
+    "🧾",
+    "🧾"
+   ]
+  ]
+ },
+ "54": {
+  "answer": "МЕДСЕСТРА",
+  "hint": "Профессия, связанная с медициной и здоровьем.",
+  "photos": [
+   [
+    "🏥",
+    "🏥"
+   ],
+   [
+    "💉",
+    "💉"
+   ],
+   [
+    "🩹",
+    "🩹"
+   ],
+   [
+    "🩺",
+    "🩺"
+   ]
+  ]
+ },
+ "55": {
+  "answer": "ХИРУРГ",
+  "hint": "Профессия, связанная с медициной и здоровьем.",
+  "photos": [
+   [
+    "🏥",
+    "🏥"
+   ],
+   [
+    "🩺",
+    "🩺"
+   ],
+   [
+    "🔪",
+    "🔪"
+   ],
+   [
+    "🧤",
+    "🧤"
+   ]
+  ]
+ },
+ "56": {
+  "answer": "СТОМАТОЛОГ",
+  "hint": "Профессия, связанная с медициной и здоровьем.",
+  "photos": [
+   [
+    "🦷",
+    "🦷"
+   ],
+   [
+    "🪥",
+    "🪥"
+   ],
+   [
+    "🩺",
+    "🩺"
+   ],
+   [
+    "😁",
+    "😁"
+   ]
+  ]
+ },
+ "57": {
+  "answer": "ПСИХОЛОГ",
+  "hint": "Профессия, связанная с медициной и здоровьем.",
+  "photos": [
+   [
+    "🧠",
+    "🧠"
+   ],
+   [
+    "💬",
+    "💬"
+   ],
+   [
+    "🛋️",
+    "🛋️"
+   ],
+   [
+    "❤️",
+    "❤️"
+   ]
+  ]
+ },
+ "58": {
+  "answer": "ЛОГОПЕД",
+  "hint": "Профессия, связанная с обучением и развитием людей.",
+  "photos": [
+   [
+    "🗣️",
+    "🗣️"
+   ],
+   [
+    "👄",
+    "👄"
+   ],
+   [
+    "🔤",
+    "🔤"
+   ],
+   [
+    "👧",
+    "👧"
+   ]
+  ]
+ },
+ "59": {
+  "answer": "ТРЕНЕР",
+  "hint": "Профессия, связанная с обучением и развитием людей.",
+  "photos": [
+   [
+    "🏃",
+    "🏃"
+   ],
+   [
+    "📋",
+    "📋"
+   ],
+   [
+    "🏆",
+    "🏆"
+   ],
+   [
+    "💪",
+    "💪"
+   ]
+  ]
+ },
+ "60": {
+  "answer": "ПРОФЕССОР",
+  "hint": "Профессия, связанная с обучением и развитием людей.",
+  "photos": [
+   [
+    "🎓",
+    "🎓"
+   ],
+   [
+    "🏫",
+    "🏫"
+   ],
+   [
+    "📚",
+    "📚"
+   ],
+   [
+    "🔬",
+    "🔬"
+   ]
+  ]
+ },
+ "61": {
+  "answer": "ВОСПИТАТЕЛЬ",
+  "hint": "Профессия, связанная с обучением и развитием людей.",
+  "photos": [
+   [
+    "🧸",
+    "🧸"
+   ],
+   [
+    "👧",
+    "👧"
+   ],
+   [
+    "📚",
+    "📚"
+   ],
+   [
+    "🏫",
+    "🏫"
+   ]
+  ]
+ },
+ "62": {
+  "answer": "БИБЛИОТЕКАРЬ",
+  "hint": "Профессия, связанная с обучением и развитием людей.",
+  "photos": [
+   [
+    "📚",
+    "📚"
+   ],
+   [
+    "🏛️",
+    "🏛️"
+   ],
+   [
+    "🔖",
+    "🔖"
+   ],
+   [
+    "🤫",
+    "🤫"
+   ]
+  ]
+ },
+ "63": {
+  "answer": "АРХЕОЛОГ",
+  "hint": "Профессия, связанная с исследованиями и наукой.",
+  "photos": [
+   [
+    "🏺",
+    "🏺"
+   ],
+   [
+    "⛏️",
+    "⛏️"
+   ],
+   [
+    "🗿",
+    "🗿"
+   ],
+   [
+    "📜",
+    "📜"
+   ]
+  ]
+ },
+ "64": {
+  "answer": "ИСТОРИК",
+  "hint": "Профессия, связанная с исследованиями и наукой.",
+  "photos": [
+   [
+    "📜",
+    "📜"
+   ],
+   [
+    "🏛️",
+    "🏛️"
+   ],
+   [
+    "📚",
+    "📚"
+   ],
+   [
+    "🕰️",
+    "🕰️"
+   ]
+  ]
+ },
+ "65": {
+  "answer": "БИОЛОГ",
+  "hint": "Профессия, связанная с исследованиями и наукой.",
+  "photos": [
+   [
+    "🧬",
+    "🧬"
+   ],
+   [
+    "🔬",
+    "🔬"
+   ],
+   [
+    "🌱",
+    "🌱"
+   ],
+   [
+    "🦠",
+    "🦠"
+   ]
+  ]
+ },
+ "66": {
+  "answer": "ХИМИК",
+  "hint": "Профессия, связанная с исследованиями и наукой.",
+  "photos": [
+   [
+    "🧪",
+    "🧪"
+   ],
+   [
+    "⚗️",
+    "⚗️"
+   ],
+   [
+    "🥼",
+    "🥼"
+   ],
+   [
+    "🔬",
+    "🔬"
+   ]
+  ]
+ },
+ "67": {
+  "answer": "ФИЗИК",
+  "hint": "Профессия, связанная с исследованиями и наукой.",
+  "photos": [
+   [
+    "⚛️",
+    "⚛️"
+   ],
+   [
+    "📐",
+    "📐"
+   ],
+   [
+    "🔬",
+    "🔬"
+   ],
+   [
+    "⚡",
+    "⚡"
+   ]
+  ]
+ },
+ "68": {
+  "answer": "АСТРОНОМ",
+  "hint": "Профессия, связанная с исследованиями и наукой.",
+  "photos": [
+   [
+    "🔭",
+    "🔭"
+   ],
+   [
+    "🌌",
+    "🌌"
+   ],
+   [
+    "⭐",
+    "⭐"
+   ],
+   [
+    "🪐",
+    "🪐"
+   ]
+  ]
+ },
+ "69": {
+  "answer": "ГЕОЛОГ",
+  "hint": "Профессия, связанная с исследованиями и наукой.",
+  "photos": [
+   [
+    "🪨",
+    "🪨"
+   ],
+   [
+    "⛏️",
+    "⛏️"
+   ],
+   [
+    "🏔️",
+    "🏔️"
+   ],
+   [
+    "🗺️",
+    "🗺️"
+   ]
+  ]
+ },
+ "70": {
+  "answer": "ЭКОЛОГ",
+  "hint": "Профессия, связанная с исследованиями и наукой.",
+  "photos": [
+   [
+    "🌿",
+    "🌿"
+   ],
+   [
+    "🌍",
+    "🌍"
+   ],
+   [
+    "♻️",
+    "♻️"
+   ],
+   [
+    "💧",
+    "💧"
+   ]
+  ]
+ },
+ "71": {
+  "answer": "МЕТЕОРОЛОГ",
+  "hint": "Профессия, связанная с исследованиями и наукой.",
+  "photos": [
+   [
+    "🌦️",
+    "🌦️"
+   ],
+   [
+    "🌡️",
+    "🌡️"
+   ],
+   [
+    "☁️",
+    "☁️"
+   ],
+   [
+    "📡",
+    "📡"
+   ]
+  ]
+ },
+ "72": {
+  "answer": "КАРТОГРАФ",
+  "hint": "Профессия, связанная с исследованиями и наукой.",
+  "photos": [
+   [
+    "🗺️",
+    "🗺️"
+   ],
+   [
+    "📐",
+    "📐"
+   ],
+   [
+    "🌍",
+    "🌍"
+   ],
+   [
+    "✏️",
+    "✏️"
+   ]
+  ]
+ },
+ "73": {
+  "answer": "ГЕОДЕЗИСТ",
+  "hint": "Профессия, связанная с исследованиями и наукой.",
+  "photos": [
+   [
+    "📐",
+    "📐"
+   ],
+   [
+    "📍",
+    "📍"
+   ],
+   [
+    "🗺️",
+    "🗺️"
+   ],
+   [
+    "🔭",
+    "🔭"
+   ]
+  ]
+ },
+ "74": {
+  "answer": "ЛАБОРАНТ",
+  "hint": "Профессия, связанная с исследованиями и наукой.",
+  "photos": [
+   [
+    "🔬",
+    "🔬"
+   ],
+   [
+    "🧪",
+    "🧪"
+   ],
+   [
+    "🥼",
+    "🥼"
+   ],
+   [
+    "🧫",
+    "🧫"
+   ]
+  ]
+ },
+ "75": {
+  "answer": "УЧЕНЫЙ",
+  "hint": "Профессия, связанная с исследованиями и наукой.",
+  "photos": [
+   [
+    "🔬",
+    "🔬"
+   ],
+   [
+    "📚",
+    "📚"
+   ],
+   [
+    "🧪",
+    "🧪"
+   ],
+   [
+    "💡",
+    "💡"
+   ]
+  ]
+ },
+ "76": {
+  "answer": "АКТЕР",
+  "hint": "Профессия, связанная с творчеством, сценой или визуальным искусством.",
+  "photos": [
+   [
+    "🎭",
+    "🎭"
+   ],
+   [
+    "🎬",
+    "🎬"
+   ],
+   [
+    "🎥",
+    "🎥"
+   ],
+   [
+    "👏",
+    "👏"
+   ]
+  ]
+ },
+ "77": {
+  "answer": "РЕЖИССЕР",
+  "hint": "Профессия, связанная с творчеством, сценой или визуальным искусством.",
+  "photos": [
+   [
+    "🎬",
+    "🎬"
+   ],
+   [
+    "🎥",
+    "🎥"
+   ],
+   [
+    "📣",
+    "📣"
+   ],
+   [
+    "🎭",
+    "🎭"
+   ]
+  ]
+ },
+ "78": {
+  "answer": "ОПЕРАТОР",
+  "hint": "Профессия, связанная с творчеством, сценой или визуальным искусством.",
+  "photos": [
+   [
+    "🎥",
+    "🎥"
+   ],
+   [
+    "📷",
+    "📷"
+   ],
+   [
+    "🎬",
+    "🎬"
+   ],
+   [
+    "🎞️",
+    "🎞️"
+   ]
+  ]
+ },
+ "79": {
+  "answer": "СЦЕНАРИСТ",
+  "hint": "Профессия, связанная с творчеством, сценой или визуальным искусством.",
+  "photos": [
+   [
+    "📝",
+    "📝"
+   ],
+   [
+    "🎬",
+    "🎬"
+   ],
+   [
+    "💭",
+    "💭"
+   ],
+   [
+    "📖",
+    "📖"
+   ]
+  ]
+ },
+ "80": {
+  "answer": "ПРОДЮСЕР",
+  "hint": "Профессия, связанная с творчеством, сценой или визуальным искусством.",
+  "photos": [
+   [
+    "🎬",
+    "🎬"
+   ],
+   [
+    "💰",
+    "💰"
+   ],
+   [
+    "📋",
+    "📋"
+   ],
+   [
+    "🎤",
+    "🎤"
+   ]
+  ]
+ },
+ "81": {
+  "answer": "МУЗЫКАНТ",
+  "hint": "Профессия, связанная с творчеством, сценой или визуальным искусством.",
+  "photos": [
+   [
+    "🎵",
+    "🎵"
+   ],
+   [
+    "🎸",
+    "🎸"
+   ],
+   [
+    "🎹",
+    "🎹"
+   ],
+   [
+    "🎶",
+    "🎶"
+   ]
+  ]
+ },
+ "82": {
+  "answer": "ПЕВЕЦ",
+  "hint": "Профессия, связанная с творчеством, сценой или визуальным искусством.",
+  "photos": [
+   [
+    "🎤",
+    "🎤"
+   ],
+   [
+    "🎵",
+    "🎵"
+   ],
+   [
+    "🎶",
+    "🎶"
+   ],
+   [
+    "👏",
+    "👏"
+   ]
+  ]
+ },
+ "83": {
+  "answer": "ТАНЦОР",
+  "hint": "Профессия, связанная с творчеством, сценой или визуальным искусством.",
+  "photos": [
+   [
+    "💃",
+    "💃"
+   ],
+   [
+    "🕺",
+    "🕺"
+   ],
+   [
+    "🎵",
+    "🎵"
+   ],
+   [
+    "🎭",
+    "🎭"
+   ]
+  ]
+ },
+ "84": {
+  "answer": "ХОРЕОГРАФ",
+  "hint": "Профессия, связанная с творчеством, сценой или визуальным искусством.",
+  "photos": [
+   [
+    "💃",
+    "💃"
+   ],
+   [
+    "📝",
+    "📝"
+   ],
+   [
+    "🎵",
+    "🎵"
+   ],
+   [
+    "👥",
+    "👥"
+   ]
+  ]
+ },
+ "85": {
+  "answer": "ХУДОЖНИК",
+  "hint": "Профессия, связанная с творчеством, сценой или визуальным искусством.",
+  "photos": [
+   [
+    "🎨",
+    "🎨"
+   ],
+   [
+    "🖌️",
+    "🖌️"
+   ],
+   [
+    "🖼️",
+    "🖼️"
+   ],
+   [
+    "👨‍🎨",
+    "👨‍🎨"
+   ]
+  ]
+ },
+ "86": {
+  "answer": "СКУЛЬПТОР",
+  "hint": "Профессия, связанная с творчеством, сценой или визуальным искусством.",
+  "photos": [
+   [
+    "🗿",
+    "🗿"
+   ],
+   [
+    "🔨",
+    "🔨"
+   ],
+   [
+    "🪨",
+    "🪨"
+   ],
+   [
+    "🎨",
+    "🎨"
+   ]
+  ]
+ },
+ "87": {
+  "answer": "ЮВЕЛИР",
+  "hint": "Профессия, связанная с ручным трудом и профессиональным мастерством.",
+  "photos": [
+   [
+    "💍",
+    "💍"
+   ],
+   [
+    "💎",
+    "💎"
+   ],
+   [
+    "🔨",
+    "🔨"
+   ],
+   [
+    "✨",
+    "✨"
+   ]
+  ]
+ },
+ "88": {
+  "answer": "ПОРТНОЙ",
+  "hint": "Профессия, связанная с ручным трудом и профессиональным мастерством.",
+  "photos": [
+   [
+    "🧵",
+    "🧵"
+   ],
+   [
+    "✂️",
+    "✂️"
+   ],
+   [
+    "👔",
+    "👔"
+   ],
+   [
+    "📏",
+    "📏"
+   ]
+  ]
+ },
+ "89": {
+  "answer": "ШВЕЯ",
+  "hint": "Профессия, связанная с ручным трудом и профессиональным мастерством.",
+  "photos": [
+   [
+    "🪡",
+    "🪡"
+   ],
+   [
+    "🧵",
+    "🧵"
+   ],
+   [
+    "👗",
+    "👗"
+   ],
+   [
+    "✂️",
+    "✂️"
+   ]
+  ]
+ },
+ "90": {
+  "answer": "МОДЕЛЬЕР",
+  "hint": "Профессия, связанная с ручным трудом и профессиональным мастерством.",
+  "photos": [
+   [
+    "👗",
+    "👗"
+   ],
+   [
+    "✏️",
+    "✏️"
+   ],
+   [
+    "🧵",
+    "🧵"
+   ],
+   [
+    "🎨",
+    "🎨"
+   ]
+  ]
+ },
+ "91": {
+  "answer": "ФЛОРИСТ",
+  "hint": "Профессия, связанная с природой, растениями или сельским хозяйством.",
+  "photos": [
+   [
+    "💐",
+    "💐"
+   ],
+   [
+    "🌷",
+    "🌷"
+   ],
+   [
+    "✂️",
+    "✂️"
+   ],
+   [
+    "🎁",
+    "🎁"
+   ]
+  ]
+ },
+ "92": {
+  "answer": "САДОВНИК",
+  "hint": "Профессия, связанная с природой, растениями или сельским хозяйством.",
+  "photos": [
+   [
+    "🌱",
+    "🌱"
+   ],
+   [
+    "🌳",
+    "🌳"
+   ],
+   [
+    "🪴",
+    "🪴"
+   ],
+   [
+    "💧",
+    "💧"
+   ]
+  ]
+ },
+ "93": {
+  "answer": "АГРОНОМ",
+  "hint": "Профессия, связанная с природой, растениями или сельским хозяйством.",
+  "photos": [
+   [
+    "🌾",
+    "🌾"
+   ],
+   [
+    "🌱",
+    "🌱"
+   ],
+   [
+    "🚜",
+    "🚜"
+   ],
+   [
+    "📋",
+    "📋"
+   ]
+  ]
+ },
+ "94": {
+  "answer": "ЛЕСНИК",
+  "hint": "Профессия, связанная с природой, растениями или сельским хозяйством.",
+  "photos": [
+   [
+    "🌲",
+    "🌲"
+   ],
+   [
+    "🦌",
+    "🦌"
+   ],
+   [
+    "🔥",
+    "🔥"
+   ],
+   [
+    "🥾",
+    "🥾"
+   ]
+  ]
+ },
+ "95": {
+  "answer": "ШАХТЕР",
+  "hint": "Профессия, связанная с ручным трудом и профессиональным мастерством.",
+  "photos": [
+   [
+    "⛏️",
+    "⛏️"
+   ],
+   [
+    "🪨",
+    "🪨"
+   ],
+   [
+    "🪖",
+    "🪖"
+   ],
+   [
+    "⬇️",
+    "⬇️"
+   ]
+  ]
+ },
+ "96": {
+  "answer": "СВАРЩИК",
+  "hint": "Профессия, связанная с ручным трудом и профессиональным мастерством.",
+  "photos": [
+   [
+    "🔥",
+    "🔥"
+   ],
+   [
+    "🥽",
+    "🥽"
+   ],
+   [
+    "🔧",
+    "🔧"
+   ],
+   [
+    "⚙️",
+    "⚙️"
+   ]
+  ]
+ },
+ "97": {
+  "answer": "ТОКАРЬ",
+  "hint": "Профессия, связанная с ручным трудом и профессиональным мастерством.",
+  "photos": [
+   [
+    "⚙️",
+    "⚙️"
+   ],
+   [
+    "🔩",
+    "🔩"
+   ],
+   [
+    "🛠️",
+    "🛠️"
+   ],
+   [
+    "🏭",
+    "🏭"
+   ]
+  ]
+ },
+ "98": {
+  "answer": "СЛЕСАРЬ",
+  "hint": "Профессия, связанная с ручным трудом и профессиональным мастерством.",
+  "photos": [
+   [
+    "🔧",
+    "🔧"
+   ],
+   [
+    "🔩",
+    "🔩"
+   ],
+   [
+    "🛠️",
+    "🛠️"
+   ],
+   [
+    "⚙️",
+    "⚙️"
+   ]
+  ]
+ },
+ "99": {
+  "answer": "ПЛОТНИК",
+  "hint": "Профессия, связанная с ручным трудом и профессиональным мастерством.",
+  "photos": [
+   [
+    "🪚",
+    "🪚"
+   ],
+   [
+    "🪵",
+    "🪵"
+   ],
+   [
+    "🔨",
+    "🔨"
+   ],
+   [
+    "📐",
+    "📐"
+   ]
+  ]
+ },
+ "100": {
+  "answer": "ШТУКАТУР",
+  "hint": "Профессия, связанная с строительством и обслуживанием зданий.",
+  "photos": [
+   [
+    "🧱",
+    "🧱"
+   ],
+   [
+    "🏠",
+    "🏠"
+   ],
+   [
+    "🪣",
+    "🪣"
+   ],
+   [
+    "🛠️",
+    "🛠️"
+   ]
+  ]
+ }
+};
+const PROF_TRANSLATED={
+ "en": {
+  "1": {
+   "answer": "DOCTOR",
+   "hint": "A profession connected with medicine and health."
+  },
+  "2": {
+   "answer": "TEACHER",
+   "hint": "A profession connected with education and development."
+  },
+  "3": {
+   "answer": "CHEF",
+   "hint": "A profession connected with food preparation."
+  },
+  "4": {
+   "answer": "POLICE",
+   "hint": "A profession connected with safety and protection."
+  },
+  "5": {
+   "answer": "FIREFIGHTER",
+   "hint": "A profession connected with safety and protection."
+  },
+  "6": {
+   "answer": "DRIVER",
+   "hint": "A profession connected with transport and travel."
+  },
+  "7": {
+   "answer": "PILOT",
+   "hint": "A profession connected with transport and travel."
+  },
+  "8": {
+   "answer": "BUILDER",
+   "hint": "A profession connected with construction and buildings."
+  },
+  "9": {
+   "answer": "SELLER",
+   "hint": "A profession connected with sales and customers."
+  },
+  "10": {
+   "answer": "FARMER",
+   "hint": "A profession connected with nature, plants, or agriculture."
+  },
+  "11": {
+   "answer": "MECHANIC",
+   "hint": "A profession connected with technology and machinery."
+  },
+  "12": {
+   "answer": "ELECTRICIAN",
+   "hint": "A profession connected with technology and machinery."
+  },
+  "13": {
+   "answer": "PLUMBER",
+   "hint": "A profession connected with construction and buildings."
+  },
+  "14": {
+   "answer": "HAIRDRESSER",
+   "hint": "A profession connected with customer service."
+  },
+  "15": {
+   "answer": "BAKER",
+   "hint": "A profession connected with food preparation."
+  },
+  "16": {
+   "answer": "PASTRYCHEF",
+   "hint": "A profession connected with food preparation."
+  },
+  "17": {
+   "answer": "WAITER",
+   "hint": "A profession connected with customer service."
+  },
+  "18": {
+   "answer": "BARTENDER",
+   "hint": "A profession connected with customer service."
+  },
+  "19": {
+   "answer": "PHOTOGRAPHER",
+   "hint": "A profession connected with information, writing, or media."
+  },
+  "20": {
+   "answer": "JOURNALIST",
+   "hint": "A profession connected with information, writing, or media."
+  },
+  "21": {
+   "answer": "EDITOR",
+   "hint": "A profession connected with information, writing, or media."
+  },
+  "22": {
+   "answer": "WRITER",
+   "hint": "A profession connected with information, writing, or media."
+  },
+  "23": {
+   "answer": "TRANSLATOR",
+   "hint": "A profession connected with information, writing, or media."
+  },
+  "24": {
+   "answer": "LAWYER",
+   "hint": "A profession connected with law or investigation."
+  },
+  "25": {
+   "answer": "ATTORNEY",
+   "hint": "A profession connected with law or investigation."
+  },
+  "26": {
+   "answer": "PROSECUTOR",
+   "hint": "A profession connected with law or investigation."
+  },
+  "27": {
+   "answer": "NOTARY",
+   "hint": "A profession connected with law or investigation."
+  },
+  "28": {
+   "answer": "ACCOUNTANT",
+   "hint": "A profession connected with finance and accounting."
+  },
+  "29": {
+   "answer": "ECONOMIST",
+   "hint": "A profession connected with finance and accounting."
+  },
+  "30": {
+   "answer": "MANAGER",
+   "hint": "A profession connected with management, data, or promotion."
+  },
+  "31": {
+   "answer": "MARKETER",
+   "hint": "A profession connected with management, data, or promotion."
+  },
+  "32": {
+   "answer": "DESIGNER",
+   "hint": "A profession connected with creative arts and performance."
+  },
+  "33": {
+   "answer": "ARCHITECT",
+   "hint": "A profession connected with construction and buildings."
+  },
+  "34": {
+   "answer": "ENGINEER",
+   "hint": "A profession connected with technology and machinery."
+  },
+  "35": {
+   "answer": "PROGRAMMER",
+   "hint": "A profession connected with technology and machinery."
+  },
+  "36": {
+   "answer": "TESTER",
+   "hint": "A profession connected with technology and machinery."
+  },
+  "37": {
+   "answer": "ADMINISTRATOR",
+   "hint": "A profession connected with management, data, or promotion."
+  },
+  "38": {
+   "answer": "ANALYST",
+   "hint": "A profession connected with management, data, or promotion."
+  },
+  "39": {
+   "answer": "DISPATCHER",
+   "hint": "A profession connected with delivery and logistics."
+  },
+  "40": {
+   "answer": "LOGISTICIAN",
+   "hint": "A profession connected with delivery and logistics."
+  },
+  "41": {
+   "answer": "COURIER",
+   "hint": "A profession connected with delivery and logistics."
+  },
+  "42": {
+   "answer": "POSTMAN",
+   "hint": "A profession connected with delivery and logistics."
+  },
+  "43": {
+   "answer": "TRAINDRIVER",
+   "hint": "A profession connected with transport and travel."
+  },
+  "44": {
+   "answer": "CAPTAIN",
+   "hint": "A profession connected with transport and travel."
+  },
+  "45": {
+   "answer": "SAILOR",
+   "hint": "A profession connected with transport and travel."
+  },
+  "46": {
+   "answer": "RESCUER",
+   "hint": "A profession connected with safety and protection."
+  },
+  "47": {
+   "answer": "GUARD",
+   "hint": "A profession connected with safety and protection."
+  },
+  "48": {
+   "answer": "SERVICEMAN",
+   "hint": "A profession connected with safety and protection."
+  },
+  "49": {
+   "answer": "INVESTIGATOR",
+   "hint": "A profession connected with law or investigation."
+  },
+  "50": {
+   "answer": "DETECTIVE",
+   "hint": "A profession connected with law or investigation."
+  },
+  "51": {
+   "answer": "FORENSICEXPERT",
+   "hint": "A profession connected with science and research."
+  },
+  "52": {
+   "answer": "VETERINARIAN",
+   "hint": "A profession connected with medicine and health."
+  },
+  "53": {
+   "answer": "PHARMACIST",
+   "hint": "A profession connected with medicine and health."
+  },
+  "54": {
+   "answer": "NURSE",
+   "hint": "A profession connected with medicine and health."
+  },
+  "55": {
+   "answer": "SURGEON",
+   "hint": "A profession connected with medicine and health."
+  },
+  "56": {
+   "answer": "DENTIST",
+   "hint": "A profession connected with medicine and health."
+  },
+  "57": {
+   "answer": "PSYCHOLOGIST",
+   "hint": "A profession connected with medicine and health."
+  },
+  "58": {
+   "answer": "SPEECHTHERAPIST",
+   "hint": "A profession connected with education and development."
+  },
+  "59": {
+   "answer": "COACH",
+   "hint": "A profession connected with education and development."
+  },
+  "60": {
+   "answer": "PROFESSOR",
+   "hint": "A profession connected with education and development."
+  },
+  "61": {
+   "answer": "EDUCATOR",
+   "hint": "A profession connected with education and development."
+  },
+  "62": {
+   "answer": "LIBRARIAN",
+   "hint": "A profession connected with education and development."
+  },
+  "63": {
+   "answer": "ARCHAEOLOGIST",
+   "hint": "A profession connected with science and research."
+  },
+  "64": {
+   "answer": "HISTORIAN",
+   "hint": "A profession connected with science and research."
+  },
+  "65": {
+   "answer": "BIOLOGIST",
+   "hint": "A profession connected with science and research."
+  },
+  "66": {
+   "answer": "CHEMIST",
+   "hint": "A profession connected with science and research."
+  },
+  "67": {
+   "answer": "PHYSICIST",
+   "hint": "A profession connected with science and research."
+  },
+  "68": {
+   "answer": "ASTRONOMER",
+   "hint": "A profession connected with science and research."
+  },
+  "69": {
+   "answer": "GEOLOGIST",
+   "hint": "A profession connected with science and research."
+  },
+  "70": {
+   "answer": "ECOLOGIST",
+   "hint": "A profession connected with science and research."
+  },
+  "71": {
+   "answer": "METEOROLOGIST",
+   "hint": "A profession connected with science and research."
+  },
+  "72": {
+   "answer": "CARTOGRAPHER",
+   "hint": "A profession connected with science and research."
+  },
+  "73": {
+   "answer": "SURVEYOR",
+   "hint": "A profession connected with science and research."
+  },
+  "74": {
+   "answer": "LABTECHNICIAN",
+   "hint": "A profession connected with science and research."
+  },
+  "75": {
+   "answer": "SCIENTIST",
+   "hint": "A profession connected with science and research."
+  },
+  "76": {
+   "answer": "ACTOR",
+   "hint": "A profession connected with creative arts and performance."
+  },
+  "77": {
+   "answer": "DIRECTOR",
+   "hint": "A profession connected with creative arts and performance."
+  },
+  "78": {
+   "answer": "CAMERAMAN",
+   "hint": "A profession connected with creative arts and performance."
+  },
+  "79": {
+   "answer": "SCREENWRITER",
+   "hint": "A profession connected with creative arts and performance."
+  },
+  "80": {
+   "answer": "PRODUCER",
+   "hint": "A profession connected with creative arts and performance."
+  },
+  "81": {
+   "answer": "MUSICIAN",
+   "hint": "A profession connected with creative arts and performance."
+  },
+  "82": {
+   "answer": "SINGER",
+   "hint": "A profession connected with creative arts and performance."
+  },
+  "83": {
+   "answer": "DANCER",
+   "hint": "A profession connected with creative arts and performance."
+  },
+  "84": {
+   "answer": "CHOREOGRAPHER",
+   "hint": "A profession connected with creative arts and performance."
+  },
+  "85": {
+   "answer": "ARTIST",
+   "hint": "A profession connected with creative arts and performance."
+  },
+  "86": {
+   "answer": "SCULPTOR",
+   "hint": "A profession connected with creative arts and performance."
+  },
+  "87": {
+   "answer": "JEWELER",
+   "hint": "A profession connected with skilled craft and manual work."
+  },
+  "88": {
+   "answer": "TAILOR",
+   "hint": "A profession connected with skilled craft and manual work."
+  },
+  "89": {
+   "answer": "SEAMSTRESS",
+   "hint": "A profession connected with skilled craft and manual work."
+  },
+  "90": {
+   "answer": "FASHIONDESIGNER",
+   "hint": "A profession connected with skilled craft and manual work."
+  },
+  "91": {
+   "answer": "FLORIST",
+   "hint": "A profession connected with nature, plants, or agriculture."
+  },
+  "92": {
+   "answer": "GARDENER",
+   "hint": "A profession connected with nature, plants, or agriculture."
+  },
+  "93": {
+   "answer": "AGRONOMIST",
+   "hint": "A profession connected with nature, plants, or agriculture."
+  },
+  "94": {
+   "answer": "FORESTER",
+   "hint": "A profession connected with nature, plants, or agriculture."
+  },
+  "95": {
+   "answer": "MINER",
+   "hint": "A profession connected with skilled craft and manual work."
+  },
+  "96": {
+   "answer": "WELDER",
+   "hint": "A profession connected with skilled craft and manual work."
+  },
+  "97": {
+   "answer": "TURNER",
+   "hint": "A profession connected with skilled craft and manual work."
+  },
+  "98": {
+   "answer": "LOCKSMITH",
+   "hint": "A profession connected with skilled craft and manual work."
+  },
+  "99": {
+   "answer": "CARPENTER",
+   "hint": "A profession connected with skilled craft and manual work."
+  },
+  "100": {
+   "answer": "PLASTERER",
+   "hint": "A profession connected with construction and buildings."
+  }
+ },
+ "az": {
+  "1": {
+   "answer": "HƏKİM",
+   "hint": "tibb və sağlamlıqla bağlı peşə."
+  },
+  "2": {
+   "answer": "MÜƏLLİM",
+   "hint": "təhsil və inkişafla bağlı peşə."
+  },
+  "3": {
+   "answer": "AŞPAZ",
+   "hint": "yemək hazırlanması ilə bağlı peşə."
+  },
+  "4": {
+   "answer": "POLİS",
+   "hint": "təhlükəsizlik və mühafizə ilə bağlı peşə."
+  },
+  "5": {
+   "answer": "YANĞINSÖNDÜRƏN",
+   "hint": "təhlükəsizlik və mühafizə ilə bağlı peşə."
+  },
+  "6": {
+   "answer": "SÜRÜCÜ",
+   "hint": "nəqliyyat və daşınma ilə bağlı peşə."
+  },
+  "7": {
+   "answer": "PİLOT",
+   "hint": "nəqliyyat və daşınma ilə bağlı peşə."
+  },
+  "8": {
+   "answer": "İNŞAATÇI",
+   "hint": "tikinti və binalarla bağlı peşə."
+  },
+  "9": {
+   "answer": "SATICI",
+   "hint": "ticarət və müştərilərlə bağlı peşə."
+  },
+  "10": {
+   "answer": "FERMER",
+   "hint": "təbiət, bitkilər və kənd təsərrüfatı ilə bağlı peşə."
+  },
+  "11": {
+   "answer": "MEXANİK",
+   "hint": "texnika və texnologiya ilə bağlı peşə."
+  },
+  "12": {
+   "answer": "ELEKTRİK",
+   "hint": "texnika və texnologiya ilə bağlı peşə."
+  },
+  "13": {
+   "answer": "SANTEXNİK",
+   "hint": "tikinti və binalarla bağlı peşə."
+  },
+  "14": {
+   "answer": "BƏRBƏR",
+   "hint": "insanlara xidmətlə bağlı peşə."
+  },
+  "15": {
+   "answer": "ÇÖRƏKÇİ",
+   "hint": "yemək hazırlanması ilə bağlı peşə."
+  },
+  "16": {
+   "answer": "ŞİRNİYYATÇI",
+   "hint": "yemək hazırlanması ilə bağlı peşə."
+  },
+  "17": {
+   "answer": "OFİSİANT",
+   "hint": "insanlara xidmətlə bağlı peşə."
+  },
+  "18": {
+   "answer": "BARMEN",
+   "hint": "insanlara xidmətlə bağlı peşə."
+  },
+  "19": {
+   "answer": "FOTOQRAF",
+   "hint": "məlumat, mətn və media ilə bağlı peşə."
+  },
+  "20": {
+   "answer": "JURNALİST",
+   "hint": "məlumat, mətn və media ilə bağlı peşə."
+  },
+  "21": {
+   "answer": "REDAKTOR",
+   "hint": "məlumat, mətn və media ilə bağlı peşə."
+  },
+  "22": {
+   "answer": "YAZIÇI",
+   "hint": "məlumat, mətn və media ilə bağlı peşə."
+  },
+  "23": {
+   "answer": "TƏRCÜMƏÇİ",
+   "hint": "məlumat, mətn və media ilə bağlı peşə."
+  },
+  "24": {
+   "answer": "HÜQUQŞÜNAS",
+   "hint": "hüquq, araşdırma və qanunla bağlı peşə."
+  },
+  "25": {
+   "answer": "VƏKİL",
+   "hint": "hüquq, araşdırma və qanunla bağlı peşə."
+  },
+  "26": {
+   "answer": "PROKUROR",
+   "hint": "hüquq, araşdırma və qanunla bağlı peşə."
+  },
+  "27": {
+   "answer": "NOTARİUS",
+   "hint": "hüquq, araşdırma və qanunla bağlı peşə."
+  },
+  "28": {
+   "answer": "MÜHASİB",
+   "hint": "maliyyə və hesablamalarla bağlı peşə."
+  },
+  "29": {
+   "answer": "İQTİSADÇI",
+   "hint": "maliyyə və hesablamalarla bağlı peşə."
+  },
+  "30": {
+   "answer": "MENECER",
+   "hint": "idarəetmə, məlumat və tanıtımla bağlı peşə."
+  },
+  "31": {
+   "answer": "MARKETOLOQ",
+   "hint": "idarəetmə, məlumat və tanıtımla bağlı peşə."
+  },
+  "32": {
+   "answer": "DİZAYNER",
+   "hint": "yaradıcılıq və səhnə sənəti ilə bağlı peşə."
+  },
+  "33": {
+   "answer": "MEMAR",
+   "hint": "tikinti və binalarla bağlı peşə."
+  },
+  "34": {
+   "answer": "MÜHƏNDİS",
+   "hint": "texnika və texnologiya ilə bağlı peşə."
+  },
+  "35": {
+   "answer": "PROQRAMÇI",
+   "hint": "texnika və texnologiya ilə bağlı peşə."
+  },
+  "36": {
+   "answer": "TESTÇİ",
+   "hint": "texnika və texnologiya ilə bağlı peşə."
+  },
+  "37": {
+   "answer": "ADMİNİSTRATOR",
+   "hint": "idarəetmə, məlumat və tanıtımla bağlı peşə."
+  },
+  "38": {
+   "answer": "ANALİTİK",
+   "hint": "idarəetmə, məlumat və tanıtımla bağlı peşə."
+  },
+  "39": {
+   "answer": "DİSPETÇER",
+   "hint": "çatdırılma və logistika ilə bağlı peşə."
+  },
+  "40": {
+   "answer": "LOGİST",
+   "hint": "çatdırılma və logistika ilə bağlı peşə."
+  },
+  "41": {
+   "answer": "KURYER",
+   "hint": "çatdırılma və logistika ilə bağlı peşə."
+  },
+  "42": {
+   "answer": "POÇTALYON",
+   "hint": "çatdırılma və logistika ilə bağlı peşə."
+  },
+  "43": {
+   "answer": "MAŞİNİST",
+   "hint": "nəqliyyat və daşınma ilə bağlı peşə."
+  },
+  "44": {
+   "answer": "KAPİTAN",
+   "hint": "nəqliyyat və daşınma ilə bağlı peşə."
+  },
+  "45": {
+   "answer": "DƏNİZÇİ",
+   "hint": "nəqliyyat və daşınma ilə bağlı peşə."
+  },
+  "46": {
+   "answer": "XİLASEDİCİ",
+   "hint": "təhlükəsizlik və mühafizə ilə bağlı peşə."
+  },
+  "47": {
+   "answer": "MÜHAFİZƏÇİ",
+   "hint": "təhlükəsizlik və mühafizə ilə bağlı peşə."
+  },
+  "48": {
+   "answer": "HƏRBÇİ",
+   "hint": "təhlükəsizlik və mühafizə ilə bağlı peşə."
+  },
+  "49": {
+   "answer": "MÜSTƏNTİQ",
+   "hint": "hüquq, araşdırma və qanunla bağlı peşə."
+  },
+  "50": {
+   "answer": "DETEKTİV",
+   "hint": "hüquq, araşdırma və qanunla bağlı peşə."
+  },
+  "51": {
+   "answer": "KRİMİNALİST",
+   "hint": "elm və tədqiqatla bağlı peşə."
+  },
+  "52": {
+   "answer": "BAYTAR",
+   "hint": "tibb və sağlamlıqla bağlı peşə."
+  },
+  "53": {
+   "answer": "ƏCZAÇI",
+   "hint": "tibb və sağlamlıqla bağlı peşə."
+  },
+  "54": {
+   "answer": "TİBBBACISI",
+   "hint": "tibb və sağlamlıqla bağlı peşə."
+  },
+  "55": {
+   "answer": "CƏRRAH",
+   "hint": "tibb və sağlamlıqla bağlı peşə."
+  },
+  "56": {
+   "answer": "DİŞHƏKİMİ",
+   "hint": "tibb və sağlamlıqla bağlı peşə."
+  },
+  "57": {
+   "answer": "PSİXOLOQ",
+   "hint": "tibb və sağlamlıqla bağlı peşə."
+  },
+  "58": {
+   "answer": "LOQOPED",
+   "hint": "təhsil və inkişafla bağlı peşə."
+  },
+  "59": {
+   "answer": "MƏŞQÇİ",
+   "hint": "təhsil və inkişafla bağlı peşə."
+  },
+  "60": {
+   "answer": "PROFESSOR",
+   "hint": "təhsil və inkişafla bağlı peşə."
+  },
+  "61": {
+   "answer": "TƏRBİYƏÇİ",
+   "hint": "təhsil və inkişafla bağlı peşə."
+  },
+  "62": {
+   "answer": "KİTABXANAÇI",
+   "hint": "təhsil və inkişafla bağlı peşə."
+  },
+  "63": {
+   "answer": "ARXEOLOQ",
+   "hint": "elm və tədqiqatla bağlı peşə."
+  },
+  "64": {
+   "answer": "TARİXÇİ",
+   "hint": "elm və tədqiqatla bağlı peşə."
+  },
+  "65": {
+   "answer": "BİOLOQ",
+   "hint": "elm və tədqiqatla bağlı peşə."
+  },
+  "66": {
+   "answer": "KİMYAÇI",
+   "hint": "elm və tədqiqatla bağlı peşə."
+  },
+  "67": {
+   "answer": "FİZİK",
+   "hint": "elm və tədqiqatla bağlı peşə."
+  },
+  "68": {
+   "answer": "ASTRONOM",
+   "hint": "elm və tədqiqatla bağlı peşə."
+  },
+  "69": {
+   "answer": "GEOLOQ",
+   "hint": "elm və tədqiqatla bağlı peşə."
+  },
+  "70": {
+   "answer": "EKOLOQ",
+   "hint": "elm və tədqiqatla bağlı peşə."
+  },
+  "71": {
+   "answer": "METEOROLOQ",
+   "hint": "elm və tədqiqatla bağlı peşə."
+  },
+  "72": {
+   "answer": "KARTOQRAF",
+   "hint": "elm və tədqiqatla bağlı peşə."
+  },
+  "73": {
+   "answer": "GEODEZİST",
+   "hint": "elm və tədqiqatla bağlı peşə."
+  },
+  "74": {
+   "answer": "LABORANT",
+   "hint": "elm və tədqiqatla bağlı peşə."
+  },
+  "75": {
+   "answer": "ALİM",
+   "hint": "elm və tədqiqatla bağlı peşə."
+  },
+  "76": {
+   "answer": "AKTYOR",
+   "hint": "yaradıcılıq və səhnə sənəti ilə bağlı peşə."
+  },
+  "77": {
+   "answer": "REJİSSOR",
+   "hint": "yaradıcılıq və səhnə sənəti ilə bağlı peşə."
+  },
+  "78": {
+   "answer": "OPERATOR",
+   "hint": "yaradıcılıq və səhnə sənəti ilə bağlı peşə."
+  },
+  "79": {
+   "answer": "SSENARİST",
+   "hint": "yaradıcılıq və səhnə sənəti ilə bağlı peşə."
+  },
+  "80": {
+   "answer": "PRODÜSER",
+   "hint": "yaradıcılıq və səhnə sənəti ilə bağlı peşə."
+  },
+  "81": {
+   "answer": "MUSİQİÇİ",
+   "hint": "yaradıcılıq və səhnə sənəti ilə bağlı peşə."
+  },
+  "82": {
+   "answer": "MÜĞƏNNİ",
+   "hint": "yaradıcılıq və səhnə sənəti ilə bağlı peşə."
+  },
+  "83": {
+   "answer": "RƏQQAS",
+   "hint": "yaradıcılıq və səhnə sənəti ilə bağlı peşə."
+  },
+  "84": {
+   "answer": "XOREOQRAF",
+   "hint": "yaradıcılıq və səhnə sənəti ilə bağlı peşə."
+  },
+  "85": {
+   "answer": "RƏSSAM",
+   "hint": "yaradıcılıq və səhnə sənəti ilə bağlı peşə."
+  },
+  "86": {
+   "answer": "HEYKƏLTƏRAŞ",
+   "hint": "yaradıcılıq və səhnə sənəti ilə bağlı peşə."
+  },
+  "87": {
+   "answer": "ZƏRGƏR",
+   "hint": "peşəkar sənətkarlıq və əl əməyi ilə bağlı peşə."
+  },
+  "88": {
+   "answer": "DƏRZİ",
+   "hint": "peşəkar sənətkarlıq və əl əməyi ilə bağlı peşə."
+  },
+  "89": {
+   "answer": "TİKİŞÇİ",
+   "hint": "peşəkar sənətkarlıq və əl əməyi ilə bağlı peşə."
+  },
+  "90": {
+   "answer": "MODELYER",
+   "hint": "peşəkar sənətkarlıq və əl əməyi ilə bağlı peşə."
+  },
+  "91": {
+   "answer": "FLORİST",
+   "hint": "təbiət, bitkilər və kənd təsərrüfatı ilə bağlı peşə."
+  },
+  "92": {
+   "answer": "BAĞBAN",
+   "hint": "təbiət, bitkilər və kənd təsərrüfatı ilə bağlı peşə."
+  },
+  "93": {
+   "answer": "AQRONOM",
+   "hint": "təbiət, bitkilər və kənd təsərrüfatı ilə bağlı peşə."
+  },
+  "94": {
+   "answer": "MEŞƏÇİ",
+   "hint": "təbiət, bitkilər və kənd təsərrüfatı ilə bağlı peşə."
+  },
+  "95": {
+   "answer": "MƏDƏNÇİ",
+   "hint": "peşəkar sənətkarlıq və əl əməyi ilə bağlı peşə."
+  },
+  "96": {
+   "answer": "QAYNAQÇI",
+   "hint": "peşəkar sənətkarlıq və əl əməyi ilə bağlı peşə."
+  },
+  "97": {
+   "answer": "TORNAÇI",
+   "hint": "peşəkar sənətkarlıq və əl əməyi ilə bağlı peşə."
+  },
+  "98": {
+   "answer": "ÇİLİNGƏR",
+   "hint": "peşəkar sənətkarlıq və əl əməyi ilə bağlı peşə."
+  },
+  "99": {
+   "answer": "DÜLGƏR",
+   "hint": "peşəkar sənətkarlıq və əl əməyi ilə bağlı peşə."
+  },
+  "100": {
+   "answer": "SUVAQÇI",
+   "hint": "tikinti və binalarla bağlı peşə."
+  }
+ }
+};
+const THEME_BANKS={sport:[LEVELS,TRANSLATED],art:[ART_LEVELS,ART_TRANSLATED],professions:[PROF_LEVELS,PROF_TRANSLATED]};
+const [ACTIVE_LEVELS,ACTIVE_TRANSLATED]=THEME_BANKS[themeId]||THEME_BANKS.sport;
 if(ACTIVE_TRANSLATED[lang])Object.keys(ACTIVE_LEVELS).forEach(k=>Object.assign(ACTIVE_LEVELS[k],ACTIVE_TRANSLATED[lang][k]));
 
 
