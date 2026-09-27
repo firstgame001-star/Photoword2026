@@ -27,7 +27,7 @@ for(const file of ['core.js','home.js','game.js','theme-game.js','challenge.js',
 }
 
 const release=JSON.parse(readFileSync(resolve(base,'release.json'),'utf8'));
-if(release.release!=='20260927-r54')throw Error('Unexpected release: '+release.release);
+if(release.release!=='20260927-r55')throw Error('Unexpected release: '+release.release);
 if(!Array.isArray(release.levels)||!release.levels.includes(131))throw Error('Main levels are not published through 131');
 if(release.chapters?.length!==12)throw Error('Main chapter navigation must contain 12 chapters');
 if(release.chapters.find(x=>x.id===3)?.status!=='live')throw Error('Chapter 3 must be complete');
@@ -98,5 +98,7 @@ if(release.challenge_modes?.question_bank?.unique_in_each_language!==true)throw 
 if(!challengeJs.includes("BANK_VERSION='r54-400'")||!challengeJs.includes('pw.challenge.deck.')||!challengeJs.includes('pw.challenge.last.'))throw Error('Non-repeating challenge deck is missing');
 if(!homeJs.includes('function showRequiredLanguagePicker(){if(getLang())return;'))throw Error('Language picker re-open guard is missing');
 if(release.ui?.language_gate_fix!=='first_launch_unset_then_persist_choice')throw Error('Language gate fix manifest is missing');
+if(!homeJs.includes("sessionStorage.getItem('pw.profileSyncedShown')")||!homeJs.includes("setTimeout(()=>{const e=$('status')"))throw Error('One-time profile sync notice is missing');
+if(release.ui?.profile_synced_notice?.show!=='once_per_session'||release.ui?.profile_synced_notice?.auto_hide_ms!==1800)throw Error('Profile sync notice manifest is incorrect');
 if(!homeJs.includes("applyLanguage('ru',false)")||!homeJs.includes("function applyLanguage(l,persist=true)"))throw Error('First-launch language selection flow is incorrect');
-console.log('PASS: r54 entrypoints, Chapters 1-12, backgrounds, absolute progress, chapter titles and JavaScript syntax.');
+console.log('PASS: r55 entrypoints, Chapters 1-12, backgrounds, absolute progress, chapter titles and JavaScript syntax.');
