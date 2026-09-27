@@ -6,11 +6,12 @@ const lang=getLang();
 const themeParam=new URLSearchParams(location.search).get('theme');
 const themeId=['sport','art','professions','travel','science','technology'].includes(themeParam)?themeParam:'sport';
 const UI={
- ru:{sport:'⚽ Спорт',art:'🎨 Искусство',professions:'🧑‍💼 Профессии',travel:'🌍 Путешествия',science:'🔬 Наука',technology:'💻 Технологии',level:n=>'Тематический уровень '+n,textHint:'Текстовая подсказка',tap:'Нажми, чтобы открыть',wrong:'Неверное слово. Попробуй ещё раз.',passed:n=>'Уровень '+n+' пройден!',saved:'Прогресс сохранён отдельно от основной игры.',next:'СЛЕДУЮЩИЙ УРОВЕНЬ',back:'К ТЕМАМ',locked:n=>'Сначала пройди уровень '+n+'.',letter:'Буква открыта.',remove:'Лишние буквы убраны.',shuffle:'Буквы перемешаны.',text:'Подсказка открыта.',allLetters:'Все буквы уже открыты.',noExtra:'Лишних букв не осталось.',placeFail:'Не удалось разместить букву.',image:n=>'Изображение '+n},
- en:{sport:'⚽ Sport',art:'🎨 Art',professions:'🧑‍💼 Professions',travel:'🌍 Travel',science:'🔬 Science',technology:'💻 Technology',level:n=>'Themed level '+n,textHint:'Text hint',tap:'Tap to reveal',wrong:'Wrong word. Try again.',passed:n=>'Level '+n+' completed!',saved:'Progress saved separately from the main game.',next:'NEXT LEVEL',back:'BACK TO THEMES',locked:n=>'Complete level '+n+' first.',letter:'Letter revealed.',remove:'Extra letters removed.',shuffle:'Letters shuffled.',text:'Hint revealed.',allLetters:'All letters are already revealed.',noExtra:'No extra letters remain.',placeFail:'Could not place the letter.',image:n=>'Image '+n},
- az:{sport:'⚽ İdman',art:'🎨 İncəsənət',professions:'🧑‍💼 Peşələr',travel:'🌍 Səyahət',science:'🔬 Elm',technology:'💻 Texnologiya',level:n=>n+'-ci mövzu səviyyəsi',textHint:'Mətn ipucu',tap:'Açmaq üçün toxun',wrong:'Söz yanlışdır. Yenidən cəhd et.',passed:n=>n+'-ci səviyyə keçildi!',saved:'Tərəqqi əsas oyundan ayrıca saxlanıldı.',next:'NÖVBƏTİ SƏVİYYƏ',back:'MÖVZULARA QAYIT',locked:n=>'Əvvəlcə '+n+'-ci səviyyəni keç.',letter:'Hərf açıldı.',remove:'Artıq hərflər silindi.',shuffle:'Hərflər qarışdırıldı.',text:'İpucu açıldı.',allLetters:'Bütün hərflər artıq açılıb.',noExtra:'Artıq hərf qalmayıb.',placeFail:'Hərfi yerləşdirmək mümkün olmadı.',image:n=>n+'-ci şəkil'}
+ ru:{sport:'⚽ Спорт',art:'🎨 Искусство',professions:'🧑‍💼 Профессии',travel:'🌍 Путешествия',science:'🔬 Наука',technology:'💻 Технологии',level:n=>'Тематический уровень '+n,textHint:'Текстовая подсказка',tap:'Нажми, чтобы открыть',wrong:'Неверное слово. Попробуй ещё раз.',passed:n=>'Уровень '+n+' пройден!',saved:'Прогресс сохранён отдельно от основной игры.',next:'СЛЕДУЮЩИЙ УРОВЕНЬ',back:'К ТЕМАМ',locked:n=>'Сначала пройди уровень '+n+'.',letter:'Буква открыта.',remove:'Лишние буквы убраны.',shuffle:'Буквы перемешаны.',text:'Подсказка открыта.',allLetters:'Все буквы уже открыты.',noExtra:'Лишних букв не осталось.',placeFail:'Не удалось разместить букву.',saving:'Сохраняю результат…',reward:'+10 🪙 · +10 XP',replayReward:'Уровень уже был пройден · награда не начисляется.',needTelegram:'Открой игру через Telegram, чтобы получать награды и использовать подсказки.',spent:(n,msg)=>'−'+n+' 🪙 · '+msg,image:n=>'Изображение '+n},
+ en:{sport:'⚽ Sport',art:'🎨 Art',professions:'🧑‍💼 Professions',travel:'🌍 Travel',science:'🔬 Science',technology:'💻 Technology',level:n=>'Themed level '+n,textHint:'Text hint',tap:'Tap to reveal',wrong:'Wrong word. Try again.',passed:n=>'Level '+n+' completed!',saved:'Progress saved separately from the main game.',next:'NEXT LEVEL',back:'BACK TO THEMES',locked:n=>'Complete level '+n+' first.',letter:'Letter revealed.',remove:'Extra letters removed.',shuffle:'Letters shuffled.',text:'Hint revealed.',allLetters:'All letters are already revealed.',noExtra:'No extra letters remain.',placeFail:'Could not place the letter.',saving:'Saving result…',reward:'+10 🪙 · +10 XP',replayReward:'Level already completed · no repeat reward.',needTelegram:'Open the game in Telegram to receive rewards and use hints.',spent:(n,msg)=>'−'+n+' 🪙 · '+msg,image:n=>'Image '+n},
+ az:{sport:'⚽ İdman',art:'🎨 İncəsənət',professions:'🧑‍💼 Peşələr',travel:'🌍 Səyahət',science:'🔬 Elm',technology:'💻 Texnologiya',level:n=>n+'-ci mövzu səviyyəsi',textHint:'Mətn ipucu',tap:'Açmaq üçün toxun',wrong:'Söz yanlışdır. Yenidən cəhd et.',passed:n=>n+'-ci səviyyə keçildi!',saved:'Tərəqqi əsas oyundan ayrıca saxlanıldı.',next:'NÖVBƏTİ SƏVİYYƏ',back:'MÖVZULARA QAYIT',locked:n=>'Əvvəlcə '+n+'-ci səviyyəni keç.',letter:'Hərf açıldı.',remove:'Artıq hərflər silindi.',shuffle:'Hərflər qarışdırıldı.',text:'İpucu açıldı.',allLetters:'Bütün hərflər artıq açılıb.',noExtra:'Artıq hərf qalmayıb.',placeFail:'Hərfi yerləşdirmək mümkün olmadı.',saving:'Nəticə saxlanılır…',reward:'+10 🪙 · +10 XP',replayReward:'Səviyyə artıq keçilib · təkrar mükafat verilmir.',needTelegram:'Mükafat almaq və ipuclarından istifadə etmək üçün oyunu Telegram-da aç.',spent:(n,msg)=>'−'+n+' 🪙 · '+msg,image:n=>n+'-ci şəkil'}
 };
 const ui=UI[lang]||UI.ru;
+const THEME_REWARD_COINS=10,THEME_REWARD_XP=10,HINT_COSTS={letter:50,remove:100,text:150};
 const SETTINGS_UI={
  ru:{settings:'Настройки',sound:'Звук',soundDesc:'Буквы, победа, ошибка и подсказки',haptic:'Вибрация',hapticDesc:'Нажатия, верный и неверный ответ',music:'Музыка',musicDesc:'Спокойная фоновая музыка',language:'Язык',notifications:'Уведомления',notify:'Разрешить сообщения от бота',notifyOn:'Разрешены',theme:'Тема',rules:'Правила игры',rulesDesc:'Как играть в тематическом режиме',support:'Поддержка',supportDesc:'Связаться с поддержкой',privacy:'Конфиденциальность',terms:'Пользовательское соглашение',languageTitle:'Выберите язык',themeTitle:'Тема',rulesTitle:'Правила игры',supportText:'Напиши в поддержку через Telegram-бота. Ответ придёт в этот же чат.',supportOpen:'НАПИСАТЬ В ПОДДЕРЖКУ',notifyNeed:'Открой игру внутри Telegram, чтобы разрешить уведомления.',notifyDenied:'Разрешение не предоставлено.',notifySent:'Уведомления разрешены. Тестовое сообщение отправлено.',themeNames:{game:'🎮 Игровая',night:'🌙 Ночная',light:'☀️ Светлая',neon:'⚡ Неон',gold:'👑 Золотая'}},
  en:{settings:'Settings',sound:'Sound',soundDesc:'Letters, wins, mistakes and hints',haptic:'Haptics',hapticDesc:'Taps, correct and wrong answers',music:'Music',musicDesc:'Calm background music',language:'Language',notifications:'Notifications',notify:'Allow bot messages',notifyOn:'Allowed',theme:'Theme',rules:'Game rules',rulesDesc:'How themed mode works',support:'Support',supportDesc:'Contact support',privacy:'Privacy',terms:'Terms of use',languageTitle:'Choose language',themeTitle:'Theme',rulesTitle:'Game rules',supportText:'Message support through the Telegram bot. The reply will arrive in the same chat.',supportOpen:'CONTACT SUPPORT',notifyNeed:'Open the game inside Telegram to enable notifications.',notifyDenied:'Permission was not granted.',notifySent:'Notifications enabled. A test message was sent.',themeNames:{game:'🎮 Game',night:'🌙 Night',light:'☀️ Light',neon:'⚡ Neon',gold:'👑 Gold'}},
@@ -13228,10 +13229,10 @@ function firstIncomplete(set){for(let n=1;n<=100;n++)if(!set.has(n))return n;ret
 const requested=Number(new URLSearchParams(location.search).get('level')||1),levelId=ACTIVE_LEVELS[requested]?requested:1,level=ACTIVE_LEVELS[levelId],answer=[...level.answer];
 const progress=getProgress(),unlock=firstIncomplete(progress);
 const pool=makePool(level.answer),tiles=pool.map((letter,id)=>({id,letter}));
-let order=tiles.map(t=>t.id),selected=Array(answer.length).fill(null),fixed=new Map(),removed=new Set(),busy=false,solved=false,textOpen=false;
+let order=tiles.map(t=>t.id),selected=Array(answer.length).fill(null),fixed=new Map(),removed=new Set(),busy=false,solved=false,textOpen=false,hintBusy=false;
 
 document.documentElement.lang=lang;
-$('themeGameTitle').textContent=ui[themeId]||ui.sport;$('levelTitle').textContent=ui.level(levelId);$('textHintLabel').textContent=ui.textHint;$('hintValue').textContent=ui.tap;
+$('themeGameTitle').textContent=ui[themeId]||ui.sport;$('levelTitle').textContent=ui.level(levelId);$('letterHint').textContent='💡 '+HINT_COSTS.letter;$('removeHint').textContent='🪄 '+HINT_COSTS.remove;$('textHintLabel').textContent=ui.textHint+' · '+HINT_COSTS.text+' 🪙';$('hintValue').textContent=ui.tap;
 $('slots').style.gridTemplateColumns='repeat('+answer.length+',1fr)';$('slots').classList.toggle('long-answer',answer.length>=9);
 level.photos.forEach(([emoji],index)=>{const d=document.createElement('div');d.className='photo';d.setAttribute('role','img');d.setAttribute('aria-label',ui.image(index+1));d.textContent=emoji;$('photos').append(d)});
 
@@ -13243,34 +13244,66 @@ function shuffle(){
 function paint(){
  const used=new Set(selected.filter(id=>id!==null));
  $('slots').replaceChildren();$('letters').replaceChildren();
- answer.forEach((_,pos)=>{const b=document.createElement('button');b.type='button';b.className='slot'+(fixed.has(pos)?' fixed':'');b.textContent=tiles[selected[pos]]?.letter||'';b.disabled=busy||solved||fixed.has(pos);b.onclick=()=>{selected[pos]=null;paint()};$('slots').append(b)});
- order.forEach(id=>{const b=document.createElement('button');b.type='button';b.className='letter'+(used.has(id)?' used':'')+(removed.has(id)?' removed':'');b.textContent=tiles[id].letter;b.disabled=busy||solved||used.has(id)||removed.has(id);b.onclick=()=>choose(id);$('letters').append(b)});
- ['letterHint','removeHint','textHint','shuffle'].forEach(id=>$(id).disabled=busy||solved);
+ answer.forEach((_,pos)=>{const b=document.createElement('button');b.type='button';b.className='slot'+(fixed.has(pos)?' fixed':'');b.textContent=tiles[selected[pos]]?.letter||'';b.disabled=busy||solved||hintBusy||fixed.has(pos);b.onclick=()=>{selected[pos]=null;paint()};$('slots').append(b)});
+ order.forEach(id=>{const b=document.createElement('button');b.type='button';b.className='letter'+(used.has(id)?' used':'')+(removed.has(id)?' removed':'');b.textContent=tiles[id].letter;b.disabled=busy||solved||hintBusy||used.has(id)||removed.has(id);b.onclick=()=>choose(id);$('letters').append(b)});
+ ['letterHint','removeHint','textHint','shuffle'].forEach(id=>$(id).disabled=busy||solved||hintBusy);
  if(textOpen)$('hintValue').textContent=level.hint;
 }
 function clearInput(){selected=Array(answer.length).fill(null);for(const [pos,id] of fixed)selected[pos]=id}
-function choose(id){if(busy||solved)return;const pos=selected.indexOf(null);if(pos<0)return;pw?.sfx?.('tap');pw?.haptic?.();selected[pos]=id;paint();check()}
-function showSuccess(){
- const p=getProgress();p.add(levelId);saveProgress(p);$('status').hidden=true;$('successPanel').hidden=false;$('successTitle').textContent=ui.passed(levelId);$('successReward').textContent=ui.saved;
- const next=$('nextLevel');if(levelId<100){next.href='./theme-game.html?theme='+themeId+'&level='+(levelId+1);next.innerHTML=ui.next+' <span>▶</span>'}else{next.href='./index.html';next.innerHTML=ui.back+' <span>✓</span>'}
+function choose(id){if(busy||solved||hintBusy)return;const pos=selected.indexOf(null);if(pos<0)return;pw?.sfx?.('tap');pw?.haptic?.();selected[pos]=id;paint();check()}
+function applyServerPlayer(result){
+ const p=result?.player;if(!p)return;
+ document.querySelectorAll('[data-coins]').forEach(e=>e.textContent=String(p.coins??0));
 }
-function check(){
+async function showSuccess(){
+ let rewarded=false;
+ if(pw.hasAuth){
+   pw.status(ui.saving);
+   try{
+     const result=await pw.actionRequest('theme_complete',{themeId,levelId,language:lang,answer:level.answer});
+     applyServerPlayer(result);rewarded=Boolean(result?.theme_rewarded);
+   }catch(e){
+     solved=false;busy=false;paint();pw.status(e?.message||String(e));return false;
+   }
+ }
+ progress.add(levelId);saveProgress(progress);$('status').hidden=true;$('successPanel').hidden=false;$('successTitle').textContent=ui.passed(levelId);
+ $('successReward').textContent=pw.hasAuth?(rewarded?ui.reward:ui.replayReward):ui.saved;
+ const next=$('nextLevel');if(levelId<100){next.href='./theme-game.html?theme='+themeId+'&level='+(levelId+1);next.innerHTML=ui.next+' <span>▶</span>'}else{next.href='./index.html';next.innerHTML=ui.back+' <span>✓</span>'}
+ return true;
+}
+async function check(){
  if(selected.some(id=>id===null))return;
  const word=selected.map(id=>tiles[id].letter).join('');
  if(word!==level.answer){busy=true;paint();pw?.status?.(ui.wrong);$('slots').classList.add('wrong');pw?.sfx?.('error');pw?.haptic?.('error');setTimeout(()=>{clearInput();busy=false;$('slots').classList.remove('wrong');paint()},700);return}
- solved=true;pw?.sfx?.('success');pw?.haptic?.('success');paint();showSuccess();
+ busy=true;solved=true;pw?.sfx?.('success');pw?.haptic?.('success');paint();await showSuccess();
 }
-function hint(type){
- if(busy||solved)return;
- if(type==='text'){textOpen=true;$('hintValue').textContent=level.hint;pw?.status?.(ui.text);return}
- if(type==='letter'){
-   const available=answer.map((_,i)=>i).filter(i=>!fixed.has(i));if(!available.length){pw?.status?.(ui.allLetters);return}
+async function hint(type){
+ if(busy||solved||hintBusy)return;
+ if(!pw.hasAuth){pw.status(ui.needTelegram);return}
+ const cost=HINT_COSTS[type];if(!cost)return;
+ let target=null,bad=null;
+ if(type==='text'){if(textOpen){pw.status(ui.text);return}}
+ else if(type==='letter'){
+   const available=answer.map((_,i)=>i).filter(i=>!fixed.has(i));if(!available.length){pw.status(ui.allLetters);return}
    const pos=available[Math.floor(Math.random()*available.length)],reserved=new Set(fixed.values()),tile=tiles.find(t=>t.letter===answer[pos]&&!reserved.has(t.id));
-   if(!tile){pw?.status?.(ui.placeFail);return}
-   selected=selected.map(id=>id===tile.id?null:id);selected[pos]=tile.id;fixed.set(pos,tile.id);pw?.status?.(ui.letter);pw?.sfx?.('hint');paint();if(selected.every(id=>id!==null))check();return
+   if(!tile){pw.status(ui.placeFail);return}target={pos,tile};
+ }else{
+   bad=tiles.filter(t=>!answer.includes(t.letter)&&!removed.has(t.id));if(!bad.length){pw.status(ui.noExtra);return}
  }
- const bad=tiles.filter(t=>!answer.includes(t.letter)&&!removed.has(t.id));if(!bad.length){pw?.status?.(ui.noExtra);return}
- bad.slice(0,3).forEach(t=>{removed.add(t.id);selected=selected.map(id=>id===t.id?null:id)});pw?.status?.(ui.remove);pw?.sfx?.('hint');paint();
+ hintBusy=true;paint();
+ try{
+   const result=await pw.actionRequest('theme_hint',{themeId,levelId,hintType:type});
+   applyServerPlayer(result);
+   if(type==='text'){textOpen=true;$('hintValue').textContent=level.hint;pw.status(ui.spent(cost,ui.text))}
+   else if(type==='letter'){
+     const {pos,tile}=target;selected=selected.map(id=>id===tile.id?null:id);selected[pos]=tile.id;fixed.set(pos,tile.id);pw.status(ui.spent(cost,ui.letter));
+   }else{
+     bad.slice(0,3).forEach(t=>{removed.add(t.id);selected=selected.map(id=>id===t.id?null:id)});pw.status(ui.spent(cost,ui.remove));
+   }
+   pw?.sfx?.('hint');
+ }catch(e){pw.status(e?.message||String(e))}
+ finally{hintBusy=false;paint()}
+ if(type==='letter'&&selected.every(id=>id!==null))check();
 }
 $('shuffle').onclick=()=>{shuffle();paint();pw?.status?.(ui.shuffle);pw?.sfx?.('tap')};$('letterHint').onclick=()=>hint('letter');$('removeHint').onclick=()=>hint('remove');$('textHint').onclick=()=>hint('text');
 
