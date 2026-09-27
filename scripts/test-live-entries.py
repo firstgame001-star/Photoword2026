@@ -146,35 +146,37 @@ with sync_playwright() as pw:
       page.locator('#settingsBtn').tap();page.locator('#resetProgressBtn').tap();page.locator('#confirmReset').tap();page.locator('#confirmReset').tap();expect(page.locator('#languageModal')).to_be_visible(timeout=3000);expect(page.locator('#languageClose')).to_be_hidden()
       assert not relevant_errors(errors),errors;ctx.close()
 
-    # Complete all 49 levels in all 3 languages and exercise hints across both chapters.
+    # Complete all 60 published main levels in all 3 languages and exercise hints across all live chapters.
     for language in ['ru','en','az']:
       ctx=browser.new_context(viewport={'width':390,'height':800},has_touch=True,is_mobile=True)
       ctx.add_init_script(f"localStorage.setItem('pw.language','{language}'); localStorage.setItem('pw.theme','game');")
       account={'photoword_id':'PW-TESTONLY','first_name':'Test','last_name':'','username':None,'game_nickname':None,'nickname_changed':False,'coins':10000,'xp':0,'completed_levels':0,'current_level':1,'rank':0,'daily_streak':0,'last_daily_reward':None}
       completed=set();install_mock(ctx,account,completed,language);page=ctx.new_page();errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
-      page.goto(BASE+'clean/#'+fragment,wait_until='domcontentloaded',timeout=45000);page.locator('#playLink').tap();expect(page.locator('#shuffle')).to_be_visible()
-      for level in range(1,50):
+      page.goto(BASE+'clean/#'+fragment,wait_until='domcontentloaded',timeout=45000);page.locator('#homeChapter1Play').tap();expect(page.locator('#shuffle')).to_be_visible()
+      for level in range(1,61):
         expect(page.locator('#levelTitle')).to_contain_text(str(level))
         answer=ANSWERS[language][level-1]
         available=page.locator('#letters .letter').all_inner_texts()
         for ch in set(answer): assert available.count(ch)>=answer.count(ch),(language,level,ch,available)
-        if level in (1,11,21,31,41):
+        if level in (1,11,21,31,41,51):
           page.locator('#textHint').tap();expect(page.locator('#hintValue')).to_contain_text(HINTS[language][level])
-        if level in (2,12,22,32,42):
+        if level in (2,12,22,32,42,52):
           page.locator('#letterHint').tap();expect(page.locator('#slots .fixed')).to_have_count(1)
-        if level in (3,13,23,33,43):
+        if level in (3,13,23,33,43,53):
           page.locator('#removeHint').tap();expect(page.locator('#letters .removed')).to_have_count(3)
         tap_word(page,answer);expect(page.locator('#successPanel')).to_be_visible(timeout=5000);expect(page.locator('#successTitle')).to_contain_text(str(level));expect(page.locator('#successReward')).to_contain_text('15 XP')
         if level==20:
           expect(page.locator('#successChapter')).to_be_visible();expect(page.locator('#successChapter')).to_contain_text('2' if language=='az' else ('Chapter 2' if language=='en' else 'Глава 2'));expect(page.locator('#nextLevel')).to_have_attribute('href','./game.html?level=21');page.locator('#nextLevel').tap();expect(page.locator('.game-head>div:nth-child(2)>b')).to_contain_text('2');expect(page.locator('#shuffle')).to_be_visible()
-        elif level<49:
+        elif level==50:
+          expect(page.locator('#successChapter')).to_be_visible();expect(page.locator('#successChapter')).to_contain_text('3' if language=='az' else ('Chapter 3' if language=='en' else 'Глава 3'));expect(page.locator('#nextLevel')).to_have_attribute('href','./game.html?level=51');page.locator('#nextLevel').tap();expect(page.locator('.game-head>div:nth-child(2)>b')).to_contain_text('3');expect(page.locator('#shuffle')).to_be_visible()
+        elif level<60:
           page.locator('#nextLevel').tap();expect(page.locator('#shuffle')).to_be_visible()
         else:
-          expect(page.locator('#successChapter')).to_be_visible();expect(page.locator('#nextLevel')).to_have_attribute('href','./index.html')
-      assert account['completed_levels']==49 and account['xp']==735 and account['current_level']==50
-      page.screenshot(path=str(OUT/f'{engine}-{language}-level49.png'),full_page=True)
+          expect(page.locator('#nextLevel')).to_have_attribute('href','./index.html')
+      assert account['completed_levels']==60 and account['xp']==900 and account['current_level']==61
+      page.screenshot(path=str(OUT/f'{engine}-{language}-level60.png'),full_page=True)
       assert not relevant_errors(errors),errors
-      report={'engine':engine,'language':language,'levels':'1-49','checks':['chapter 1 levels 1-20','chapter 2 levels 21-49','chapter transition at 20','all answer letter pools','localized text hints across difficulty bands','letter hint','remove hint','49 server answers mocked','15 XP each','20 coins each','final level 49 returns home'],'result':'PASS'}
+      report={'engine':engine,'language':language,'levels':'1-60','checks':['chapter 1 levels 1-20','chapter 2 levels 21-50','chapter 3 preview levels 51-60','chapter transitions at 20 and 50','all answer letter pools','localized text hints across difficulty bands','letter hint','remove hint','60 server answers mocked','15 XP each','20 coins each','final published level 60 returns home'],'result':'PASS'}
       reports.append(report);print(json.dumps(report,ensure_ascii=False),flush=True);ctx.close()
     browser.close()
 
