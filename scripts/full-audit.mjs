@@ -4,7 +4,7 @@ import { resolve } from 'node:path';
 const base=resolve('clean');
 const read=name=>readFileSync(resolve(base,name),'utf8');
 const index=read('index.html'),gameHtml=read('game.html'),themeHtml=read('theme-game.html');
-const home=read('home.js'),game=read('game.js'),theme=read('theme-game.js'),challenge=read('challenge.js'),core=read('core.js');
+const home=read('home.js'),game=read('game.js'),theme=read('theme-game.js'),challenge=read('challenge.js'),challengeExtra=read('challenge-bank-extra.js'),core=read('core.js');
 const release=JSON.parse(read('release.json'));
 
 function ids(html){return [...html.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1])}
@@ -59,6 +59,40 @@ const coreErrors=evalConst(core,'ERR');
 assertLanguageKeys(coreErrors,'Core error translations');
 for(const lang of ['ru','en','az'])if(!coreErrors[lang]?.energy_full)throw Error('Missing '+lang+' energy_full localization');
 
+// Main content audit: 280 levels, three languages, valid pools and four clues.
+const mainLevels=evalConst(game,'LEVELS'),mainTr=evalConst(game,'TRANSLATED');
+for(const [lang,obj] of [['ru',mainLevels],['en',mainTr.en],['az',mainTr.az]]){
+ if(Object.keys(obj||{}).length!==280)throw Error('Main '+lang+' must contain 280 levels');
+ const words=Object.values(obj).map(x=>x.answer);
+ if(words.some(x=>!x))throw Error('Main '+lang+' has empty answer');
+ if(new Set(words).size!==280)throw Error('Main '+lang+' contains duplicate answers');
+ for(let n=1;n<=280;n++){
+  const x=obj[n];if(!x?.answer||!x?.pool||!x?.hint)throw Error('Main '+lang+' incomplete level '+n);
+  if(lang==='ru'&&(!x.photos||x.photos.length!==4))throw Error('Main RU level '+n+' must have 4 clues');
+  const need={};for(const ch of [...x.answer])need[ch]=(need[ch]||0)+1;
+  const have={};for(const ch of [...x.pool])have[ch]=(have[ch]||0)+1;
+  for(const ch in need)if((have[ch]||0)<need[ch])throw Error('Main '+lang+' pool missing '+ch+' at level '+n);
+ }
+}
+
+// Challenge content audit: exact 200+200 bank, three-language uniqueness and four clues.
+const challengeBase=evalConst(challenge,'Q');
+const extraToken='window.PW_CHALLENGE_EXTRA=',extraStart=challengeExtra.indexOf(extraToken);
+if(extraStart<0)throw Error('Missing PW_CHALLENGE_EXTRA');
+const extraArrayStart=challengeExtra.indexOf('[',extraStart);
+const extraArrayEnd=challengeExtra.lastIndexOf(']');
+const challengeAdded=JSON.parse(challengeExtra.slice(extraArrayStart,extraArrayEnd+1));
+const challengeAll=[...challengeBase,...challengeAdded];
+if(challengeBase.length!==200||challengeAdded.length!==200||challengeAll.length!==400)throw Error('Challenge bank must be 200+200=400');
+for(const lang of ['ru','en','az']){
+ const words=challengeAll.map(x=>x[lang]);
+ if(words.some(x=>!x))throw Error('Challenge '+lang+' has empty answer');
+ if(new Set(words).size!==400)throw Error('Challenge '+lang+' contains duplicate answers');
+}
+challengeAll.forEach((x,i)=>{if(!Array.isArray(x.p)||x.p.length!==4)throw Error('Challenge item '+(i+1)+' must have 4 clues')});
+challengeAdded.forEach((x,i)=>{for(const lang of ['ru','en','az'])if(!x.h?.[lang])throw Error('Challenge extra hint missing '+lang+' at '+(i+201))});
+if(!challenge.includes('ENERGY_MAX=5')||challenge.includes('reserve_energy'))throw Error('Challenge energy must remain strict 0-5 with no reserve');
+if(!challenge.includes("BANK_VERSION='r54-400'")||!challenge.includes('pw.challenge.deck.'))throw Error('Challenge no-repeat deck/version missing');
 const ruleBlock=home.slice(home.indexOf('const RULES='),home.indexOf('const RESET='));
 if(!ruleBlock.includes('Глава 7 «Цивилизация» — уровни 231–280'))throw Error('RU Chapter 7 rules are stale');
 if(!ruleBlock.includes('Chapter 7 “Civilization” contains levels 231–280'))throw Error('EN Chapter 7 rules are stale');
@@ -95,4 +129,4 @@ for(const required of ['settingsBtn','profileBtn','dailyRewardBtn','ratingNav','
 }
 if(!theme.includes('.long-answer') && !read('ui.css').includes('.slots.long-answer'))throw Error('Long-answer mobile styling missing');
 
-console.log('PASS: full PhotoWord audit — DOM integrity, translations, chapters, six theme banks, settings surfaces and manifest consistency.');
+console.log('PASS: full PhotoWord audit — DOM integrity, 280 main levels, 400 unique challenge words, translations, chapters, six theme banks, settings surfaces and manifest consistency.');
