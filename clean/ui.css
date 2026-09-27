@@ -95,3 +95,20 @@ html[data-theme="light"] .success-copy #successChapter{color:#087ca7}
 #eraseAccountModal .resetbody{color:#efc9cf}
 html[data-theme="light"] .chapter-lock-note{color:#59707c}
 html[data-theme="light"] .chapter.assoc .chapter-foot{background:#f8fbfd}
+
+/* Home chapter swipe carousel */
+.home-chapter-carousel{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;margin:0 -24px;padding:0 24px 8px;scrollbar-width:none;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
+.home-chapter-carousel::-webkit-scrollbar{display:none}
+.home-chapter-slide{flex:0 0 calc(100% - 38px);scroll-snap-align:center;margin:0}
+.home-chapter-slide:first-child{scroll-snap-align:start}
+.home-chapter-slide:last-child{scroll-snap-align:end}
+.chapter-dots{display:flex;justify-content:center;gap:7px;margin:2px 0 12px}
+.chapter-dots button{width:7px;height:7px;padding:0;border:0;border-radius:99px;background:#6f8996;opacity:.45;transition:.2s}
+.chapter-dots button.on{width:20px;background:#41d9ff;opacity:1}
+.future-chapter{border-color:#516b7a;opacity:.88}
+.future-hero{height:360px;background:linear-gradient(145deg,#132a38,#162536 55%,#20263d)!important;position:relative;overflow:hidden}
+.chapter3-hero:before,.chapter4-hero:before{content:"";position:absolute;width:180px;height:180px;border:1px solid #6da0b52c;border-radius:50%;left:50%;top:50%;transform:translate(-50%,-50%)}
+.chapter4-hero{background:linear-gradient(145deg,#1e2632,#30263a 55%,#3b2935)!important}
+.future-chapter .chapter-foot{filter:saturate(.55)}
+.future-chapter .play{display:block;text-align:center;pointer-events:none}
+@media(max-width:380px){.home-chapter-slide{flex-basis:calc(100% - 28px)}.home-chapter-carousel{gap:10px}}
