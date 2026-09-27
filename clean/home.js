@@ -136,7 +136,7 @@ function renderThemeHub(p){
 }
 function openThemeCategory(id){
  const cat=themeCategory(id);if(!cat)return;
- const m=themeMode(),copy=m.cats[id]||[id,''],progress=getThemeProgress(id),done=progress.size,isReady=['sport','art','professions','travel','science'].includes(id);
+ const m=themeMode(),copy=m.cats[id]||[id,''],progress=getThemeProgress(id),done=progress.size,isReady=['sport','art','professions','travel','science','technology'].includes(id);
  text('themeDetailTitle',cat.icon+' '+copy[0]);text('themeDetailSubtitle',done+' / 100 · '+m.detail);text('themeDetailInfo',isReady?(lang()==='ru'?'Все 100 уровней раздела готовы.':lang()==='en'?'All 100 levels in this category are ready.':'Bu bölmənin bütün 100 səviyyəsi hazırdır.'):m.preparing);
  const grid=$('themeLevelGrid');grid.replaceChildren();
  const next=Math.min(100,done+1);
