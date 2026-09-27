@@ -103,7 +103,7 @@
     99:{answer:"ИНТЕГРАЦИЯ",pool:"ИНТЕГРАЦИЯБВДЖЗ",hint:"Объединение отдельных частей в единую работающую систему.",photos:[["🧩","Части"],["🤝","Объединение"],["🔗","Связь"],["⚙️","Единая система"]]},
     100:{answer:"АБСТРАКЦИЯ",pool:"АБСТРАКЦИЯВГДЕЖ",hint:"Идея или образ, отвлечённый от конкретного предмета.",photos:[["🎨","Форма"],["🧠","Идея"],["〰️","Необычный образ"],["❓","Не конкретный предмет"]]}
   ,
-    101:{"answer":"БАЛАНС","pool":"БАЛАНСБВГДЖЗ","hint":"Равновесие между частями, силами или интересами.","photos":[["⚖️","Равновесие"],["↔️","Две стороны"],["🧘","Устойчивость"],["🎯","Точность"]]},
+    101:{"answer":"РАВНОВЕСИЕ","pool":"РАВНОВЕСИЕБВГДЖЗ","hint":"Состояние устойчивого баланса между противоположными силами или частями.","photos":[["⚖️","Равновесие"],["↔️","Две стороны"],["🧘","Устойчивость"],["🎯","Точность"]]},
     102:{"answer":"АРХИТЕКТУРА","pool":"АРХИТЕКТУРАБВГДЖЗ","hint":"Продуманное устройство здания, системы или сложной структуры.","photos":[["🏛️","Здание"],["📐","Проект"],["🧱","Структура"],["🏗️","Создание"]]},
     103:{"answer":"СИНХРОНИЗАЦИЯ","pool":"СИНХРОНИЗАЦИЯБВГДЖЗ","hint":"Согласование процессов так, чтобы они происходили в одном ритме или времени.","photos":[["⏱️","Время"],["🔄","Согласование"],["🎵","Ритм"],["🔗","Связь"]]},
     104:{"answer":"АДАПТАЦИЯ","pool":"АДАПТАЦИЯБВГДЖЗ","hint":"Приспособление к новым условиям или изменившейся среде.","photos":[["🦎","Приспособление"],["🌦️","Среда"],["🔄","Изменение"],["🧩","Подстройка"]]},
@@ -238,7 +238,7 @@
       99:{answer:"INTEGRATION",pool:"INTEGRATIONBCDFH",hint:"Combining separate parts into one working system."},
       100:{answer:"ABSTRACTION",pool:"ABSTRACTIONDEFGH",hint:"An idea or image separated from a specific concrete object."}
     ,
-      101:{"answer":"BALANCE","pool":"BALANCEBDFGJK","hint":"A state of equilibrium between parts, forces, or interests."},
+      101:{"answer":"EQUILIBRIUM","pool":"EQUILIBRIUMBDFGJK","hint":"A stable balance between opposing forces or parts."},
       102:{"answer":"ARCHITECTURE","pool":"ARCHITECTUREBDFGJK","hint":"The designed structure of a building, system, or complex whole."},
       103:{"answer":"SYNCHRONIZATION","pool":"SYNCHRONIZATIONBDFGJK","hint":"Coordinating processes so they happen in the same rhythm or time."},
       104:{"answer":"ADAPTATION","pool":"ADAPTATIONBDFGJK","hint":"Adjustment to new conditions or a changed environment."},
@@ -372,7 +372,7 @@
       99:{answer:"İNTEQRASİYA",pool:"İNTEQRASİYABCÇDƏ",hint:"Ayrı hissələrin vahid işləyən sistemdə birləşdirilməsi."},
       100:{answer:"ABSTRAKSİYA",pool:"ABSTRAKSİYACÇDEƏ",hint:"Konkret obyektdən ayrılmış ümumi fikir və ya obraz."}
     ,
-      101:{"answer":"TARAZLIQ","pool":"TARAZLIQBCÇDƏF","hint":"Hissələr, qüvvələr və ya maraqlar arasındakı tarazlıq."},
+      101:{"answer":"MÜVAZİNƏT","pool":"MÜVAZİNƏTBCÇDƏF","hint":"Əks qüvvələr və ya hissələr arasında sabit tarazlıq vəziyyəti."},
       102:{"answer":"MEMARLIQ","pool":"MEMARLIQBCÇDƏF","hint":"Bina, sistem və ya mürəkkəb quruluşun düşünülmüş strukturu."},
       103:{"answer":"SİNXRONLAŞMA","pool":"SİNXRONLAŞMABCÇDƏF","hint":"Proseslərin eyni ritmdə və ya zamanda işləməsi üçün uyğunlaşdırılması."},
       104:{"answer":"UYĞUNLAŞMA","pool":"UYĞUNLAŞMABCÇDƏF","hint":"Yeni şəraitə və ya dəyişmiş mühitə uyğunlaşma."},
