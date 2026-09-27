@@ -59,8 +59,6 @@ def install_mock(ctx,account,completed,lang):
             completed.clear();account.update(xp=0,completed_levels=0,current_level=1,rank=0)
         elif action=='claim_daily':
             account['coins']+=5;account['daily_streak']=max(1,account.get('daily_streak',0)+1);account['last_daily_reward']=time.strftime('%Y-%m-%d')
-        elif action=='claim_task':
-            account['coins']+=40 if body.get('taskKey')=='level_1' else 80
         elif action=='set_nickname':
             nick=body.get('nickname','');assert re.fullmatch(r'[A-Za-z0-9_]{3,16}',nick);account['game_nickname']=nick;account['nickname_changed']=True
         elif action=='friends':
@@ -98,7 +96,7 @@ with sync_playwright() as pw:
     page.goto(BASE+'clean/#'+fragment,wait_until='domcontentloaded',timeout=45000)
     expect(page.locator('#languageModal')).to_be_visible();expect(page.locator('#languageTitle')).to_contain_text('Choose language');expect(page.locator('#languageTitle')).to_contain_text('Dil seçin');expect(page.locator('#languageClose')).to_be_hidden()
     page.locator('[data-language="az"]').tap();expect(page.locator('#languageModal')).to_be_hidden()
-    expect(page.locator('#homeChapter1Title')).to_have_text('İsinmə');expect(page.locator('#homeChapter2Title')).to_have_text('Assosiasiyalar');expect(page.locator('[data-home-chapter="3"]')).to_be_visible();expect(page.locator('[data-home-chapter="4"]')).to_be_visible();expect(page.locator('#shopOffer')).to_contain_text('Daha çox sikkə');expect(page.locator('#logoWord')).to_have_text('1 SÖZ');page.locator('#chaptersNav').tap();expect(page.locator('#chapter1Label')).to_contain_text('1–20');expect(page.locator('#chapter2Label')).to_contain_text('21–49');expect(page.locator('#chapter2Select .chapter-cover-mark')).to_have_text('II');expect(page.locator('#chapter2Play')).to_have_class(re.compile('locked'));page.locator('#chaptersBack').tap()
+    expect(page.locator('#homeChapter1Title')).to_have_text('İsinmə');expect(page.locator('#homeChapter2Title')).to_have_text('Assosiasiyalar');expect(page.locator('[data-home-chapter="3"]')).to_be_visible();expect(page.locator('[data-home-chapter="4"]')).to_be_visible();expect(page.locator('#shopOffer')).to_contain_text('Daha çox sikkə');expect(page.locator('#logoWord')).to_have_text('1 SÖZ');page.locator('#chaptersNav').tap();expect(page.locator('#chapter1Label')).to_contain_text('1–20');expect(page.locator('#chapter2Label')).to_contain_text('21–50');expect(page.locator('#chapter2Select .chapter-cover-mark')).to_have_text('II');expect(page.locator('#chapter2Play')).to_have_class(re.compile('locked'));page.locator('#chaptersBack').tap()
     body=page.locator('body').inner_text()
     for leak in ['Больше монет','Главная','Задания','Рейтинг','Сегодня награда']: assert leak not in body,('AZ leak',leak)
     assert not relevant_errors(errors),errors;ctx.close()
@@ -110,9 +108,9 @@ with sync_playwright() as pw:
       account={'photoword_id':'PW-TESTONLY','first_name':'Test','last_name':'','username':None,'game_nickname':None,'nickname_changed':False,'coins':5000,'xp':300,'completed_levels':20,'current_level':21,'rank':1,'daily_streak':0,'last_daily_reward':None}
       completed=set(range(1,21));install_mock(ctx,account,completed,language);page=ctx.new_page();errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
       page.goto(BASE+'clean/#'+fragment,wait_until='domcontentloaded',timeout=45000)
-      # Chapters: chapter 2 is unlocked after level 20 and uses a 29-level counter.
+      # Chapters: chapter 2 is unlocked after level 20 and uses a 30-level counter; chapter 3 is present.
       expect(page.locator('#homeChapter1')).to_be_visible();expect(page.locator('#homeChapter2')).to_be_visible();page.evaluate("document.getElementById('homeChapterCarousel').scrollLeft=0");expect(page.locator('#homeChapter1Title')).to_be_visible();page.evaluate("showHomeChapter(2,false)");expect(page.locator('#homeChapter2Title')).to_be_visible();page.evaluate("showHomeChapter(1,false)");expect(page.locator('#homeChapter1Title')).to_be_visible()
-      page.locator('#chaptersNav').tap();expect(page.locator('#chaptersScreen')).to_be_visible();expect(page.locator('#chapter1Label')).to_contain_text('1–20');expect(page.locator('#chapter2Label')).to_contain_text('21–49');expect(page.locator('#chapter2Count')).to_contain_text('29');expect(page.locator('#chapter2Play')).not_to_have_class(re.compile('locked'));expect(page.locator('#chapter2Play')).to_have_attribute('href','./game.html?level=21');page.locator('#chaptersBack').tap()
+      page.locator('#chaptersNav').tap();expect(page.locator('#chaptersScreen')).to_be_visible();expect(page.locator('#chapter1Label')).to_contain_text('1–20');expect(page.locator('#chapter2Label')).to_contain_text('21–50');expect(page.locator('#chapter2Count')).to_contain_text('30');expect(page.locator('#chapter2Play')).not_to_have_class(re.compile('locked'));expect(page.locator('#chapter2Play')).to_have_attribute('href','./game.html?level=21');page.locator('#chaptersBack').tap()
       # Every visual theme must apply and persist.
       for theme in ['game','night','light','neon','gold']:
         page.locator('#settingsBtn').tap();page.locator('#themeBtn').tap();expect(page.locator('#themeModal')).to_be_visible();page.locator(f'button[data-theme="{theme}"]').tap();assert page.evaluate("document.documentElement.dataset.theme")==theme;assert page.evaluate("localStorage.getItem('pw.theme')")==theme
@@ -138,8 +136,8 @@ with sync_playwright() as pw:
       expect(page.locator('#shareGameBtn')).to_be_visible();page.locator('[data-close="profileModal"]').tap()
       # Daily +5 updates balance, marks claimed and closes.
       before=int(page.locator('[data-coins]').first.inner_text());page.locator('#dailyRewardBtn').tap();page.locator('#claimDaily').tap();expect(page.locator('[data-coins]').first).to_have_text(str(before+5));expect(page.locator('#dailyModal')).to_be_hidden(timeout=2500)
-      # Daily tasks claim and update balance.
-      before=int(page.locator('[data-coins]').first.inner_text());page.locator('#tasksBtn').tap();page.locator('[data-task="level_1"]').tap();expect(page.locator('[data-coins]').first).to_have_text(str(before+40));page.locator('[data-close="tasksModal"]').tap()
+      # High-reward daily tasks were removed from the product surface.
+      expect(page.locator('#tasksBtn')).to_have_count(0);expect(page.locator('#tasksModal')).to_have_count(0)
       # Friends use nickname and progress.
       page.locator('#friendsNav').tap();expect(page.locator('#friendsList')).to_contain_text('FriendOne');expect(page.locator('#friendsList')).to_contain_text('7 / 10');page.locator('[data-close="friendsModal"]').tap()
       # Rating and shop surfaces are reachable/localized; native Stars invoice UI is Telegram-controlled.
