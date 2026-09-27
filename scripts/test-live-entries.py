@@ -4,7 +4,7 @@ from pathlib import Path
 from playwright.sync_api import sync_playwright, expect
 
 BASE='https://firstgame001-star.github.io/Photoword2026/'
-RELEASE='20260927-r50'
+RELEASE='20260927-r51'
 OUT=Path('test-results'); OUT.mkdir(exist_ok=True)
 
 for attempt in range(48):
@@ -16,7 +16,7 @@ for attempt in range(48):
     time.sleep(5)
 else: raise AssertionError('Public Pages never reached '+RELEASE)
 
-for path in ['clean/','clean/game.html','clean/theme-game.html','clean/core.js','clean/home.js','clean/game.js','clean/theme-game.js','clean/challenge.js','clean/ui.css','clean/privacy.html','clean/terms.html']:
+for path in ['clean/','clean/game.html','clean/theme-game.html','clean/core.js','clean/home.js','clean/game.js','clean/theme-game.js','clean/challenge-bank-extra.js','clean/challenge.js','clean/ui.css','clean/privacy.html','clean/terms.html']:
     with urllib.request.urlopen(BASE+path+'?r='+RELEASE,timeout=20) as r: assert r.status==200,path
     print('LIVE HTTP 200:',path,flush=True)
 
@@ -156,7 +156,7 @@ with sync_playwright() as pw:
       expect(page.locator('#tasksBtn')).to_have_count(0);expect(page.locator('#tasksModal')).to_have_count(0)
       # Thematic mode is a prominent separate surface and unlocks after 10 main levels.
       expect(page.locator('#challengeModes')).to_be_visible();expect(page.locator('[data-challenge]')).to_have_count(3)
-      page.locator('[data-challenge="blitz"]').tap();expect(page.locator('#challengeScreen')).to_be_visible();expect(page.locator('#challengeIntroTitle')).to_have_text({'ru':'Блиц','en':'Blitz','az':'Blits'}[language]);page.locator('#challengeStart').tap();expect(page.locator('#challengeHud')).to_be_visible();expect(page.locator('#challengePhotos .photo')).to_have_count(4);expect(page.locator('#blitzHints')).to_be_visible();expect(page.locator('#challengeCorrectPanel')).to_be_hidden();coins_before=int(page.locator('[data-coins]').first.inner_text());page.locator('#blitzLetterHint').tap();expect(page.locator('#challengeSlots .slot.fixed')).to_have_count(1);expect(page.locator('[data-coins]').first).to_have_text(str(coins_before-75));page.locator('#challengeBack').tap();expect(page.locator('#home')).to_be_visible()
+      page.locator('[data-challenge="blitz"]').tap();expect(page.locator('#challengeScreen')).to_be_visible();expect(page.locator('#challengeIntroTitle')).to_have_text({'ru':'Блиц','en':'Blitz','az':'Blits'}[language]);page.locator('#challengeStart').tap();expect(page.locator('#challengeHud')).to_be_visible();expect(page.locator('#challengePhotos .photo')).to_have_count(4);expect(page.locator('#blitzHints')).to_be_visible();expect(page.locator('#challengeCorrectPanel')).to_be_hidden();assert page.evaluate("window.PW_CHALLENGE_EXTRA.length")==150;coins_before=int(page.locator('[data-coins]').first.inner_text());page.locator('#blitzLetterHint').tap();expect(page.locator('#challengeSlots .slot.fixed')).to_have_count(1);expect(page.locator('[data-coins]').first).to_have_text(str(coins_before-75));page.locator('#challengeBack').tap();expect(page.locator('#home')).to_be_visible()
       page.locator('[data-challenge="nohint"]').tap();expect(page.locator('#challengeScreen')).to_be_visible();page.locator('#challengeStart').tap();expect(page.locator('#challengeHud')).to_be_visible();expect(page.locator('#hudValue2')).to_contain_text('🛡');page.locator('#challengeBack').tap()
       page.locator('[data-challenge="limited"]').tap();expect(page.locator('#challengeScreen')).to_be_visible();expect(page.locator('#challengeIntroStats')).to_contain_text('5');page.locator('#challengeStart').tap();expect(page.locator('#challengeHud')).to_be_visible();expect(page.locator('#hudValue3')).to_have_text('4/5');page.locator('#challengeBack').tap()
       expect(page.locator('#themesEntry')).to_be_visible();expect(page.locator('#themesEntryBadge')).to_be_visible();page.locator('#themesEntry').tap();expect(page.locator('#themesScreen')).to_be_visible();expect(page.locator('#themeCards .theme-card')).to_have_count(12);expect(page.locator('#themeCards .theme-card').first).to_be_enabled();page.locator('#themeCards .theme-card').first.tap();expect(page.locator('#themeDetailScreen')).to_be_visible();expect(page.locator('#themeLevelGrid button')).to_have_count(100);expect(page.locator('#themeLevelGrid button').nth(0)).to_be_enabled();expect(page.locator('#themeLevelGrid button').nth(20)).to_be_disabled();page.locator('#themeDetailBack').tap();page.locator('#themesBack').tap()
