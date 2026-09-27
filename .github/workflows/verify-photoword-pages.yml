@@ -2,7 +2,7 @@ name: Verify PhotoWord Pages
 on:
   push:
     branches: [main]
-    paths: ['clean/**', '.github/workflows/verify-photoword-pages.yml']
+    paths: ['clean/**', 'scripts/check-clean.mjs', '.github/workflows/verify-photoword-pages.yml']
   workflow_run:
     workflows: ["pages build and deployment"]
     types: [completed]
@@ -18,32 +18,46 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 8
     steps:
-      - name: Wait for r24 and verify published files
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - name: Verify repository clean build
+        run: node scripts/check-clean.mjs
+      - name: Wait for r38 and verify published files
         shell: bash
         run: |
           set -euo pipefail
           base='https://firstgame001-star.github.io/Photoword2026/clean'
+          release='20260927-r38'
           ok=0
           for i in $(seq 1 48); do
-            if curl --fail --silent --show-error --location --max-time 20 "$base/release.json?check=$i" -o "$RUNNER_TEMP/release.json" && grep -q '20260927-r24' "$RUNNER_TEMP/release.json"; then
+            if curl --fail --silent --show-error --location --max-time 20 "$base/release.json?check=$i" -o "$RUNNER_TEMP/release.json" && grep -q "$release" "$RUNNER_TEMP/release.json"; then
               ok=1
               break
             fi
             sleep 5
           done
           test "$ok" = 1
-          for file in index.html game.html core.js home.js game.js ui.css privacy.html terms.html release.json; do
-            curl --fail --silent --show-error --location --retry 4 --retry-all-errors --retry-delay 3 --max-time 30 "$base/$file?r=20260927-r24" -o "$RUNNER_TEMP/$file"
+          for file in index.html game.html theme-game.html core.js home.js game.js theme-game.js ui.css privacy.html terms.html release.json; do
+            curl --fail --silent --show-error --location --retry 4 --retry-all-errors --retry-delay 3 --max-time 30 "$base/$file?r=$release" -o "$RUNNER_TEMP/$file"
             echo "HTTP 200: $file"
           done
           grep -q 'chapter1Select' "$RUNNER_TEMP/index.html"
           grep -q '1–20' "$RUNNER_TEMP/index.html"
           grep -q 'chapter2Select' "$RUNNER_TEMP/index.html"
-          grep -q '21–49' "$RUNNER_TEMP/index.html"
+          grep -q '21–50' "$RUNNER_TEMP/index.html"
+          grep -q 'chapter3Select' "$RUNNER_TEMP/index.html"
+          grep -q '51–90' "$RUNNER_TEMP/index.html"
+          grep -q 'themes-entry-featured' "$RUNNER_TEMP/index.html"
+          grep -q '12 тем · 1200 уровней' "$RUNNER_TEMP/index.html"
+          ! grep -q 'id="tasksBtn"' "$RUNNER_TEMP/index.html"
+          grep -q 'data-coins' "$RUNNER_TEMP/theme-game.html"
+          ! grep -q 'id="themeSettingsBtn"' "$RUNNER_TEMP/theme-game.html"
           grep -q 'privacy.html' "$RUNNER_TEMP/index.html"
           grep -q 'terms.html' "$RUNNER_TEMP/index.html"
-          grep -q '20260927-r24' "$RUNNER_TEMP/release.json"
+          grep -q "$release" "$RUNNER_TEMP/release.json"
           node --check "$RUNNER_TEMP/core.js"
           node --check "$RUNNER_TEMP/home.js"
           node --check "$RUNNER_TEMP/game.js"
-          printf '### PhotoWord r24 publication check\n\n49 levels, launch support, analytics, account deletion and chapter 2 assets are live and parse successfully.\n' >> "$GITHUB_STEP_SUMMARY"
+          node --check "$RUNNER_TEMP/theme-game.js"
+          printf '### PhotoWord r38 publication check\n\nMain levels 1–60, Chapters 1–4 structure, featured thematic mode, Sport 1–20, legal/settings surfaces and JavaScript all verified.\n' >> "$GITHUB_STEP_SUMMARY"
