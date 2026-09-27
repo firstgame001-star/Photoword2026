@@ -372,209 +372,809 @@ const ART_LEVELS={
  100:{"answer":"ТВОРЧЕСТВО","hint":"Термин, связанный с художественными стилями, эпохами или мастерством.","photos":[["💡","💡"],["🎨","🎨"],["🧠","🧠"],["✨","✨"]]}
 };
 const ART_TRANSLATED={
- en:{
- 1:{"answer":"BRUSH","hint":"A concept or tool from painting and image-making."},
- 2:{"answer":"PAINT","hint":"A concept or tool from painting and image-making."},
- 3:{"answer":"CANVAS","hint":"A concept or tool from painting and image-making."},
- 4:{"answer":"PALETTE","hint":"A concept or tool from painting and image-making."},
- 5:{"answer":"PAINTING","hint":"A concept or tool from painting and image-making."},
- 6:{"answer":"PORTRAIT","hint":"A concept or tool from painting and image-making."},
- 7:{"answer":"LANDSCAPE","hint":"A concept or tool from painting and image-making."},
- 8:{"answer":"STILLLIFE","hint":"A concept or tool from painting and image-making."},
- 9:{"answer":"SKETCH","hint":"A concept or tool from painting and image-making."},
- 10:{"answer":"FRAME","hint":"A concept or tool from painting and image-making."},
- 11:{"answer":"GALLERY","hint":"A concept or tool from painting and image-making."},
- 12:{"answer":"MUSEUM","hint":"A concept or tool from painting and image-making."},
- 13:{"answer":"ARTIST","hint":"A concept or tool from painting and image-making."},
- 14:{"answer":"EASEL","hint":"A concept or tool from painting and image-making."},
- 15:{"answer":"WATERCOLOR","hint":"A concept or tool from painting and image-making."},
- 16:{"answer":"GOUACHE","hint":"A concept or tool from painting and image-making."},
- 17:{"answer":"OIL","hint":"A concept or tool from painting and image-making."},
- 18:{"answer":"FRESCO","hint":"A concept or tool from painting and image-making."},
- 19:{"answer":"GRAPHICS","hint":"A concept or tool from painting and image-making."},
- 20:{"answer":"ENGRAVING","hint":"A concept or tool from painting and image-making."},
- 21:{"answer":"SCULPTURE","hint":"A material or technique connected with sculpture and three-dimensional form."},
- 22:{"answer":"STATUE","hint":"A material or technique connected with sculpture and three-dimensional form."},
- 23:{"answer":"MARBLE","hint":"A material or technique connected with sculpture and three-dimensional form."},
- 24:{"answer":"CLAY","hint":"A material or technique connected with sculpture and three-dimensional form."},
- 25:{"answer":"CHISEL","hint":"A material or technique connected with sculpture and three-dimensional form."},
- 26:{"answer":"MUSIC","hint":"A concept from music, sound, and performance."},
- 27:{"answer":"MELODY","hint":"A concept from music, sound, and performance."},
- 28:{"answer":"RHYTHM","hint":"A concept from music, sound, and performance."},
- 29:{"answer":"NOTE","hint":"A concept from music, sound, and performance."},
- 30:{"answer":"CHORD","hint":"A concept from music, sound, and performance."},
- 31:{"answer":"VIOLIN","hint":"A concept from music, sound, and performance."},
- 32:{"answer":"PIANO","hint":"A concept from music, sound, and performance."},
- 33:{"answer":"GUITAR","hint":"A concept from music, sound, and performance."},
- 34:{"answer":"DRUM","hint":"A concept from music, sound, and performance."},
- 35:{"answer":"FLUTE","hint":"A concept from music, sound, and performance."},
- 36:{"answer":"ORCHESTRA","hint":"A concept from music, sound, and performance."},
- 37:{"answer":"CONDUCTOR","hint":"A concept from music, sound, and performance."},
- 38:{"answer":"CONCERT","hint":"A concept from music, sound, and performance."},
- 39:{"answer":"STAGE","hint":"A concept from theater, dance, and stage art."},
- 40:{"answer":"THEATER","hint":"A concept from theater, dance, and stage art."},
- 41:{"answer":"ACTOR","hint":"A concept from theater, dance, and stage art."},
- 42:{"answer":"BALLET","hint":"A concept from theater, dance, and stage art."},
- 43:{"answer":"DANCE","hint":"A concept from theater, dance, and stage art."},
- 44:{"answer":"OPERA","hint":"A concept from theater, dance, and stage art."},
- 45:{"answer":"MASK","hint":"A concept from theater, dance, and stage art."},
- 46:{"answer":"CURTAIN","hint":"A concept from theater, dance, and stage art."},
- 47:{"answer":"SCENERY","hint":"A concept from theater, dance, and stage art."},
- 48:{"answer":"COSTUME","hint":"A concept from theater, dance, and stage art."},
- 49:{"answer":"REHEARSAL","hint":"A concept from theater, dance, and stage art."},
- 50:{"answer":"PREMIERE","hint":"A concept from theater, dance, and stage art."},
- 51:{"answer":"ARCHITECTURE","hint":"An element of architecture, decoration, or artistic form."},
- 52:{"answer":"ARCH","hint":"An element of architecture, decoration, or artistic form."},
- 53:{"answer":"COLUMN","hint":"An element of architecture, decoration, or artistic form."},
- 54:{"answer":"FACADE","hint":"An element of architecture, decoration, or artistic form."},
- 55:{"answer":"STAINEDGLASS","hint":"An element of architecture, decoration, or artistic form."},
- 56:{"answer":"MOSAIC","hint":"An element of architecture, decoration, or artistic form."},
- 57:{"answer":"ORNAMENT","hint":"An element of architecture, decoration, or artistic form."},
- 58:{"answer":"PATTERN","hint":"An element of architecture, decoration, or artistic form."},
- 59:{"answer":"SYMMETRY","hint":"An element of architecture, decoration, or artistic form."},
- 60:{"answer":"COMPOSITION","hint":"An element of architecture, decoration, or artistic form."},
- 61:{"answer":"PHOTO","hint":"A concept from photography and camera-based image-making."},
- 62:{"answer":"CAMERA","hint":"A concept from photography and camera-based image-making."},
- 63:{"answer":"LENS","hint":"A concept from photography and camera-based image-making."},
- 64:{"answer":"FLASH","hint":"A concept from photography and camera-based image-making."},
- 65:{"answer":"EXPOSURE","hint":"A concept from photography and camera-based image-making."},
- 66:{"answer":"ANGLE","hint":"A concept from photography and camera-based image-making."},
- 67:{"answer":"SHOT","hint":"A concept from photography and camera-based image-making."},
- 68:{"answer":"PHOTOGRAPHER","hint":"A concept from photography and camera-based image-making."},
- 69:{"answer":"FILM","hint":"A concept from photography and camera-based image-making."},
- 70:{"answer":"RETOUCH","hint":"A concept from photography and camera-based image-making."},
- 71:{"answer":"DESIGN","hint":"A concept from design, illustration, or decorative art."},
- 72:{"answer":"FONT","hint":"A concept from design, illustration, or decorative art."},
- 73:{"answer":"LOGO","hint":"A concept from design, illustration, or decorative art."},
- 74:{"answer":"POSTER","hint":"A concept from design, illustration, or decorative art."},
- 75:{"answer":"COLLAGE","hint":"A concept from design, illustration, or decorative art."},
- 76:{"answer":"ILLUSTRATION","hint":"A concept from design, illustration, or decorative art."},
- 77:{"answer":"COMIC","hint":"A concept from design, illustration, or decorative art."},
- 78:{"answer":"ANIMATION","hint":"A concept from design, illustration, or decorative art."},
- 79:{"answer":"CERAMICS","hint":"A concept from design, illustration, or decorative art."},
- 80:{"answer":"PORCELAIN","hint":"A concept from design, illustration, or decorative art."},
- 81:{"answer":"JEWELER","hint":"A concept from design, illustration, or decorative art."},
- 82:{"answer":"ENAMEL","hint":"A concept from design, illustration, or decorative art."},
- 83:{"answer":"TAPESTRY","hint":"A concept from design, illustration, or decorative art."},
- 84:{"answer":"EMBROIDERY","hint":"A concept from design, illustration, or decorative art."},
- 85:{"answer":"CALLIGRAPHY","hint":"A concept from design, illustration, or decorative art."},
- 86:{"answer":"POETRY","hint":"A concept from literature and artistic writing."},
- 87:{"answer":"NOVEL","hint":"A concept from literature and artistic writing."},
- 88:{"answer":"VERSE","hint":"A concept from literature and artistic writing."},
- 89:{"answer":"RHYME","hint":"A concept from literature and artistic writing."},
- 90:{"answer":"METAPHOR","hint":"A concept from literature and artistic writing."},
- 91:{"answer":"MINIATURE","hint":"A term connected with artistic styles, periods, or mastery."},
- 92:{"answer":"ICON","hint":"A term connected with artistic styles, periods, or mastery."},
- 93:{"answer":"AVANTGARDE","hint":"A term connected with artistic styles, periods, or mastery."},
- 94:{"answer":"IMPRESSIONISM","hint":"A term connected with artistic styles, periods, or mastery."},
- 95:{"answer":"CUBISM","hint":"A term connected with artistic styles, periods, or mastery."},
- 96:{"answer":"SURREALISM","hint":"A term connected with artistic styles, periods, or mastery."},
- 97:{"answer":"REALISM","hint":"A term connected with artistic styles, periods, or mastery."},
- 98:{"answer":"RENAISSANCE","hint":"A term connected with artistic styles, periods, or mastery."},
- 99:{"answer":"MASTERPIECE","hint":"A term connected with artistic styles, periods, or mastery."},
- 100:{"answer":"CREATIVITY","hint":"A term connected with artistic styles, periods, or mastery."}
+ "en": {
+  "1": {
+   "answer": "BRUSH",
+   "hint": "A concept or tool from painting and image-making."
+  },
+  "2": {
+   "answer": "PAINT",
+   "hint": "A concept or tool from painting and image-making."
+  },
+  "3": {
+   "answer": "CANVAS",
+   "hint": "A concept or tool from painting and image-making."
+  },
+  "4": {
+   "answer": "PALETTE",
+   "hint": "A concept or tool from painting and image-making."
+  },
+  "5": {
+   "answer": "PAINTING",
+   "hint": "A concept or tool from painting and image-making."
+  },
+  "6": {
+   "answer": "PORTRAIT",
+   "hint": "A concept or tool from painting and image-making."
+  },
+  "7": {
+   "answer": "LANDSCAPE",
+   "hint": "A concept or tool from painting and image-making."
+  },
+  "8": {
+   "answer": "STILLLIFE",
+   "hint": "A concept or tool from painting and image-making."
+  },
+  "9": {
+   "answer": "SKETCH",
+   "hint": "A concept or tool from painting and image-making."
+  },
+  "10": {
+   "answer": "FRAME",
+   "hint": "A concept or tool from painting and image-making."
+  },
+  "11": {
+   "answer": "GALLERY",
+   "hint": "A concept or tool from painting and image-making."
+  },
+  "12": {
+   "answer": "MUSEUM",
+   "hint": "A concept or tool from painting and image-making."
+  },
+  "13": {
+   "answer": "ARTIST",
+   "hint": "A concept or tool from painting and image-making."
+  },
+  "14": {
+   "answer": "EASEL",
+   "hint": "A concept or tool from painting and image-making."
+  },
+  "15": {
+   "answer": "WATERCOLOR",
+   "hint": "A concept or tool from painting and image-making."
+  },
+  "16": {
+   "answer": "GOUACHE",
+   "hint": "A concept or tool from painting and image-making."
+  },
+  "17": {
+   "answer": "OIL",
+   "hint": "A concept or tool from painting and image-making."
+  },
+  "18": {
+   "answer": "FRESCO",
+   "hint": "A concept or tool from painting and image-making."
+  },
+  "19": {
+   "answer": "GRAPHICS",
+   "hint": "A concept or tool from painting and image-making."
+  },
+  "20": {
+   "answer": "ENGRAVING",
+   "hint": "A concept or tool from painting and image-making."
+  },
+  "21": {
+   "answer": "SCULPTURE",
+   "hint": "A material or technique connected with sculpture and three-dimensional form."
+  },
+  "22": {
+   "answer": "STATUE",
+   "hint": "A material or technique connected with sculpture and three-dimensional form."
+  },
+  "23": {
+   "answer": "MARBLE",
+   "hint": "A material or technique connected with sculpture and three-dimensional form."
+  },
+  "24": {
+   "answer": "CLAY",
+   "hint": "A material or technique connected with sculpture and three-dimensional form."
+  },
+  "25": {
+   "answer": "CHISEL",
+   "hint": "A material or technique connected with sculpture and three-dimensional form."
+  },
+  "26": {
+   "answer": "MUSIC",
+   "hint": "A concept from music, sound, and performance."
+  },
+  "27": {
+   "answer": "MELODY",
+   "hint": "A concept from music, sound, and performance."
+  },
+  "28": {
+   "answer": "RHYTHM",
+   "hint": "A concept from music, sound, and performance."
+  },
+  "29": {
+   "answer": "NOTE",
+   "hint": "A concept from music, sound, and performance."
+  },
+  "30": {
+   "answer": "CHORD",
+   "hint": "A concept from music, sound, and performance."
+  },
+  "31": {
+   "answer": "VIOLIN",
+   "hint": "A concept from music, sound, and performance."
+  },
+  "32": {
+   "answer": "PIANO",
+   "hint": "A concept from music, sound, and performance."
+  },
+  "33": {
+   "answer": "GUITAR",
+   "hint": "A concept from music, sound, and performance."
+  },
+  "34": {
+   "answer": "DRUM",
+   "hint": "A concept from music, sound, and performance."
+  },
+  "35": {
+   "answer": "FLUTE",
+   "hint": "A concept from music, sound, and performance."
+  },
+  "36": {
+   "answer": "ORCHESTRA",
+   "hint": "A concept from music, sound, and performance."
+  },
+  "37": {
+   "answer": "CONDUCTOR",
+   "hint": "A concept from music, sound, and performance."
+  },
+  "38": {
+   "answer": "CONCERT",
+   "hint": "A concept from music, sound, and performance."
+  },
+  "39": {
+   "answer": "STAGE",
+   "hint": "A concept from theater, dance, and stage art."
+  },
+  "40": {
+   "answer": "THEATER",
+   "hint": "A concept from theater, dance, and stage art."
+  },
+  "41": {
+   "answer": "ACTOR",
+   "hint": "A concept from theater, dance, and stage art."
+  },
+  "42": {
+   "answer": "BALLET",
+   "hint": "A concept from theater, dance, and stage art."
+  },
+  "43": {
+   "answer": "DANCE",
+   "hint": "A concept from theater, dance, and stage art."
+  },
+  "44": {
+   "answer": "OPERA",
+   "hint": "A concept from theater, dance, and stage art."
+  },
+  "45": {
+   "answer": "MASK",
+   "hint": "A concept from theater, dance, and stage art."
+  },
+  "46": {
+   "answer": "CURTAIN",
+   "hint": "A concept from theater, dance, and stage art."
+  },
+  "47": {
+   "answer": "SCENERY",
+   "hint": "A concept from theater, dance, and stage art."
+  },
+  "48": {
+   "answer": "COSTUME",
+   "hint": "A concept from theater, dance, and stage art."
+  },
+  "49": {
+   "answer": "REHEARSAL",
+   "hint": "A concept from theater, dance, and stage art."
+  },
+  "50": {
+   "answer": "PREMIERE",
+   "hint": "A concept from theater, dance, and stage art."
+  },
+  "51": {
+   "answer": "ARCHITECTURE",
+   "hint": "An element of architecture, decoration, or artistic form."
+  },
+  "52": {
+   "answer": "ARCH",
+   "hint": "An element of architecture, decoration, or artistic form."
+  },
+  "53": {
+   "answer": "COLUMN",
+   "hint": "An element of architecture, decoration, or artistic form."
+  },
+  "54": {
+   "answer": "FACADE",
+   "hint": "An element of architecture, decoration, or artistic form."
+  },
+  "55": {
+   "answer": "STAINEDGLASS",
+   "hint": "An element of architecture, decoration, or artistic form."
+  },
+  "56": {
+   "answer": "MOSAIC",
+   "hint": "An element of architecture, decoration, or artistic form."
+  },
+  "57": {
+   "answer": "ORNAMENT",
+   "hint": "An element of architecture, decoration, or artistic form."
+  },
+  "58": {
+   "answer": "PATTERN",
+   "hint": "An element of architecture, decoration, or artistic form."
+  },
+  "59": {
+   "answer": "SYMMETRY",
+   "hint": "An element of architecture, decoration, or artistic form."
+  },
+  "60": {
+   "answer": "COMPOSITION",
+   "hint": "An element of architecture, decoration, or artistic form."
+  },
+  "61": {
+   "answer": "PHOTO",
+   "hint": "A concept from photography and camera-based image-making."
+  },
+  "62": {
+   "answer": "CAMERA",
+   "hint": "A concept from photography and camera-based image-making."
+  },
+  "63": {
+   "answer": "LENS",
+   "hint": "A concept from photography and camera-based image-making."
+  },
+  "64": {
+   "answer": "FLASH",
+   "hint": "A concept from photography and camera-based image-making."
+  },
+  "65": {
+   "answer": "EXPOSURE",
+   "hint": "A concept from photography and camera-based image-making."
+  },
+  "66": {
+   "answer": "ANGLE",
+   "hint": "A concept from photography and camera-based image-making."
+  },
+  "67": {
+   "answer": "SHOT",
+   "hint": "A concept from photography and camera-based image-making."
+  },
+  "68": {
+   "answer": "PHOTOGRAPHER",
+   "hint": "A concept from photography and camera-based image-making."
+  },
+  "69": {
+   "answer": "FILM",
+   "hint": "A concept from photography and camera-based image-making."
+  },
+  "70": {
+   "answer": "RETOUCH",
+   "hint": "A concept from photography and camera-based image-making."
+  },
+  "71": {
+   "answer": "DESIGN",
+   "hint": "A concept from design, illustration, or decorative art."
+  },
+  "72": {
+   "answer": "FONT",
+   "hint": "A concept from design, illustration, or decorative art."
+  },
+  "73": {
+   "answer": "LOGO",
+   "hint": "A concept from design, illustration, or decorative art."
+  },
+  "74": {
+   "answer": "POSTER",
+   "hint": "A concept from design, illustration, or decorative art."
+  },
+  "75": {
+   "answer": "COLLAGE",
+   "hint": "A concept from design, illustration, or decorative art."
+  },
+  "76": {
+   "answer": "ILLUSTRATION",
+   "hint": "A concept from design, illustration, or decorative art."
+  },
+  "77": {
+   "answer": "COMIC",
+   "hint": "A concept from design, illustration, or decorative art."
+  },
+  "78": {
+   "answer": "ANIMATION",
+   "hint": "A concept from design, illustration, or decorative art."
+  },
+  "79": {
+   "answer": "CERAMICS",
+   "hint": "A concept from design, illustration, or decorative art."
+  },
+  "80": {
+   "answer": "PORCELAIN",
+   "hint": "A concept from design, illustration, or decorative art."
+  },
+  "81": {
+   "answer": "JEWELER",
+   "hint": "A concept from design, illustration, or decorative art."
+  },
+  "82": {
+   "answer": "ENAMEL",
+   "hint": "A concept from design, illustration, or decorative art."
+  },
+  "83": {
+   "answer": "TAPESTRY",
+   "hint": "A concept from design, illustration, or decorative art."
+  },
+  "84": {
+   "answer": "EMBROIDERY",
+   "hint": "A concept from design, illustration, or decorative art."
+  },
+  "85": {
+   "answer": "CALLIGRAPHY",
+   "hint": "A concept from design, illustration, or decorative art."
+  },
+  "86": {
+   "answer": "POETRY",
+   "hint": "A concept from literature and artistic writing."
+  },
+  "87": {
+   "answer": "NOVEL",
+   "hint": "A concept from literature and artistic writing."
+  },
+  "88": {
+   "answer": "VERSE",
+   "hint": "A concept from literature and artistic writing."
+  },
+  "89": {
+   "answer": "RHYME",
+   "hint": "A concept from literature and artistic writing."
+  },
+  "90": {
+   "answer": "METAPHOR",
+   "hint": "A concept from literature and artistic writing."
+  },
+  "91": {
+   "answer": "MINIATURE",
+   "hint": "A term connected with artistic styles, periods, or mastery."
+  },
+  "92": {
+   "answer": "ICON",
+   "hint": "A term connected with artistic styles, periods, or mastery."
+  },
+  "93": {
+   "answer": "AVANTGARDE",
+   "hint": "A term connected with artistic styles, periods, or mastery."
+  },
+  "94": {
+   "answer": "IMPRESSIONISM",
+   "hint": "A term connected with artistic styles, periods, or mastery."
+  },
+  "95": {
+   "answer": "CUBISM",
+   "hint": "A term connected with artistic styles, periods, or mastery."
+  },
+  "96": {
+   "answer": "SURREALISM",
+   "hint": "A term connected with artistic styles, periods, or mastery."
+  },
+  "97": {
+   "answer": "REALISM",
+   "hint": "A term connected with artistic styles, periods, or mastery."
+  },
+  "98": {
+   "answer": "RENAISSANCE",
+   "hint": "A term connected with artistic styles, periods, or mastery."
+  },
+  "99": {
+   "answer": "MASTERPIECE",
+   "hint": "A term connected with artistic styles, periods, or mastery."
+  },
+  "100": {
+   "answer": "CREATIVITY",
+   "hint": "A term connected with artistic styles, periods, or mastery."
+  }
  },
- az:{
- 1:{"answer":"FIRÇA","hint":"Rəssamlıq və təsvir yaratma ilə bağlı anlayış və ya alət."},
- 2:{"answer":"BOYA","hint":"Rəssamlıq və təsvir yaratma ilə bağlı anlayış və ya alət."},
- 3:{"answer":"KƏTAN","hint":"Rəssamlıq və təsvir yaratma ilə bağlı anlayış və ya alət."},
- 4:{"answer":"PALETRA","hint":"Rəssamlıq və təsvir yaratma ilə bağlı anlayış və ya alət."},
- 5:{"answer":"TABLO","hint":"Rəssamlıq və təsvir yaratma ilə bağlı anlayış və ya alət."},
- 6:{"answer":"PORTRET","hint":"Rəssamlıq və təsvir yaratma ilə bağlı anlayış və ya alət."},
- 7:{"answer":"MƏNZƏRƏ","hint":"Rəssamlıq və təsvir yaratma ilə bağlı anlayış və ya alət."},
- 8:{"answer":"NATÜRMORT","hint":"Rəssamlıq və təsvir yaratma ilə bağlı anlayış və ya alət."},
- 9:{"answer":"ESKİZ","hint":"Rəssamlıq və təsvir yaratma ilə bağlı anlayış və ya alət."},
- 10:{"answer":"ÇƏRÇİVƏ","hint":"Rəssamlıq və təsvir yaratma ilə bağlı anlayış və ya alət."},
- 11:{"answer":"QALEREYA","hint":"Rəssamlıq və təsvir yaratma ilə bağlı anlayış və ya alət."},
- 12:{"answer":"MUZEY","hint":"Rəssamlıq və təsvir yaratma ilə bağlı anlayış və ya alət."},
- 13:{"answer":"RƏSSAM","hint":"Rəssamlıq və təsvir yaratma ilə bağlı anlayış və ya alət."},
- 14:{"answer":"MOLBERT","hint":"Rəssamlıq və təsvir yaratma ilə bağlı anlayış və ya alət."},
- 15:{"answer":"AKVAREL","hint":"Rəssamlıq və təsvir yaratma ilə bağlı anlayış və ya alət."},
- 16:{"answer":"QUAŞ","hint":"Rəssamlıq və təsvir yaratma ilə bağlı anlayış və ya alət."},
- 17:{"answer":"YAĞ","hint":"Rəssamlıq və təsvir yaratma ilə bağlı anlayış və ya alət."},
- 18:{"answer":"FRESKA","hint":"Rəssamlıq və təsvir yaratma ilə bağlı anlayış və ya alət."},
- 19:{"answer":"QRAFİKA","hint":"Rəssamlıq və təsvir yaratma ilə bağlı anlayış və ya alət."},
- 20:{"answer":"QRAVÜRA","hint":"Rəssamlıq və təsvir yaratma ilə bağlı anlayış və ya alət."},
- 21:{"answer":"HEYKƏLTƏRAŞLIQ","hint":"Heykəltəraşlıq və həcmli forma ilə bağlı material və ya üsul."},
- 22:{"answer":"HEYKƏL","hint":"Heykəltəraşlıq və həcmli forma ilə bağlı material və ya üsul."},
- 23:{"answer":"MƏRMƏR","hint":"Heykəltəraşlıq və həcmli forma ilə bağlı material və ya üsul."},
- 24:{"answer":"GİL","hint":"Heykəltəraşlıq və həcmli forma ilə bağlı material və ya üsul."},
- 25:{"answer":"KƏSKİ","hint":"Heykəltəraşlıq və həcmli forma ilə bağlı material və ya üsul."},
- 26:{"answer":"MUSİQİ","hint":"Musiqi, səs və ifa ilə bağlı anlayış."},
- 27:{"answer":"MELODİYA","hint":"Musiqi, səs və ifa ilə bağlı anlayış."},
- 28:{"answer":"RİTM","hint":"Musiqi, səs və ifa ilə bağlı anlayış."},
- 29:{"answer":"NOT","hint":"Musiqi, səs və ifa ilə bağlı anlayış."},
- 30:{"answer":"AKKORD","hint":"Musiqi, səs və ifa ilə bağlı anlayış."},
- 31:{"answer":"SKRİPKA","hint":"Musiqi, səs və ifa ilə bağlı anlayış."},
- 32:{"answer":"PİANO","hint":"Musiqi, səs və ifa ilə bağlı anlayış."},
- 33:{"answer":"GİTARA","hint":"Musiqi, səs və ifa ilə bağlı anlayış."},
- 34:{"answer":"BARABAN","hint":"Musiqi, səs və ifa ilə bağlı anlayış."},
- 35:{"answer":"FLEYTA","hint":"Musiqi, səs və ifa ilə bağlı anlayış."},
- 36:{"answer":"ORKESTR","hint":"Musiqi, səs və ifa ilə bağlı anlayış."},
- 37:{"answer":"DİRİJOR","hint":"Musiqi, səs və ifa ilə bağlı anlayış."},
- 38:{"answer":"KONSERT","hint":"Musiqi, səs və ifa ilə bağlı anlayış."},
- 39:{"answer":"SƏHNƏ","hint":"Teatr, rəqs və səhnə sənəti ilə bağlı anlayış."},
- 40:{"answer":"TEATR","hint":"Teatr, rəqs və səhnə sənəti ilə bağlı anlayış."},
- 41:{"answer":"AKTYOR","hint":"Teatr, rəqs və səhnə sənəti ilə bağlı anlayış."},
- 42:{"answer":"BALET","hint":"Teatr, rəqs və səhnə sənəti ilə bağlı anlayış."},
- 43:{"answer":"RƏQS","hint":"Teatr, rəqs və səhnə sənəti ilə bağlı anlayış."},
- 44:{"answer":"OPERA","hint":"Teatr, rəqs və səhnə sənəti ilə bağlı anlayış."},
- 45:{"answer":"MASKA","hint":"Teatr, rəqs və səhnə sənəti ilə bağlı anlayış."},
- 46:{"answer":"PƏRDƏ","hint":"Teatr, rəqs və səhnə sənəti ilə bağlı anlayış."},
- 47:{"answer":"DEKORASİYA","hint":"Teatr, rəqs və səhnə sənəti ilə bağlı anlayış."},
- 48:{"answer":"KOSTYUM","hint":"Teatr, rəqs və səhnə sənəti ilə bağlı anlayış."},
- 49:{"answer":"REPETİSİYA","hint":"Teatr, rəqs və səhnə sənəti ilə bağlı anlayış."},
- 50:{"answer":"PREMYERA","hint":"Teatr, rəqs və səhnə sənəti ilə bağlı anlayış."},
- 51:{"answer":"MEMARLIQ","hint":"Memarlıq, dekor və bədii forma quruluşu ilə bağlı element."},
- 52:{"answer":"TAĞ","hint":"Memarlıq, dekor və bədii forma quruluşu ilə bağlı element."},
- 53:{"answer":"SÜTUN","hint":"Memarlıq, dekor və bədii forma quruluşu ilə bağlı element."},
- 54:{"answer":"FASAD","hint":"Memarlıq, dekor və bədii forma quruluşu ilə bağlı element."},
- 55:{"answer":"VİTRAJ","hint":"Memarlıq, dekor və bədii forma quruluşu ilə bağlı element."},
- 56:{"answer":"MOZAİKA","hint":"Memarlıq, dekor və bədii forma quruluşu ilə bağlı element."},
- 57:{"answer":"ORNAMENT","hint":"Memarlıq, dekor və bədii forma quruluşu ilə bağlı element."},
- 58:{"answer":"NAXIŞ","hint":"Memarlıq, dekor və bədii forma quruluşu ilə bağlı element."},
- 59:{"answer":"SİMMETRİYA","hint":"Memarlıq, dekor və bədii forma quruluşu ilə bağlı element."},
- 60:{"answer":"KOMPOZİSİYA","hint":"Memarlıq, dekor və bədii forma quruluşu ilə bağlı element."},
- 61:{"answer":"FOTO","hint":"Fotoqrafiya və kamera ilə təsvir yaratma sahəsinə aid anlayış."},
- 62:{"answer":"KAMERA","hint":"Fotoqrafiya və kamera ilə təsvir yaratma sahəsinə aid anlayış."},
- 63:{"answer":"OBYEKTİV","hint":"Fotoqrafiya və kamera ilə təsvir yaratma sahəsinə aid anlayış."},
- 64:{"answer":"FLAŞ","hint":"Fotoqrafiya və kamera ilə təsvir yaratma sahəsinə aid anlayış."},
- 65:{"answer":"EKSPOZİSİYA","hint":"Fotoqrafiya və kamera ilə təsvir yaratma sahəsinə aid anlayış."},
- 66:{"answer":"RAKURS","hint":"Fotoqrafiya və kamera ilə təsvir yaratma sahəsinə aid anlayış."},
- 67:{"answer":"KADR","hint":"Fotoqrafiya və kamera ilə təsvir yaratma sahəsinə aid anlayış."},
- 68:{"answer":"FOTOQRAF","hint":"Fotoqrafiya və kamera ilə təsvir yaratma sahəsinə aid anlayış."},
- 69:{"answer":"LENT","hint":"Fotoqrafiya və kamera ilə təsvir yaratma sahəsinə aid anlayış."},
- 70:{"answer":"RETUŞ","hint":"Fotoqrafiya və kamera ilə təsvir yaratma sahəsinə aid anlayış."},
- 71:{"answer":"DİZAYN","hint":"Dizayn, illüstrasiya və ya dekorativ sənətlə bağlı anlayış."},
- 72:{"answer":"ŞRİFT","hint":"Dizayn, illüstrasiya və ya dekorativ sənətlə bağlı anlayış."},
- 73:{"answer":"LOQO","hint":"Dizayn, illüstrasiya və ya dekorativ sənətlə bağlı anlayış."},
- 74:{"answer":"POSTER","hint":"Dizayn, illüstrasiya və ya dekorativ sənətlə bağlı anlayış."},
- 75:{"answer":"KOLLAJ","hint":"Dizayn, illüstrasiya və ya dekorativ sənətlə bağlı anlayış."},
- 76:{"answer":"İLLÜSTRASİYA","hint":"Dizayn, illüstrasiya və ya dekorativ sənətlə bağlı anlayış."},
- 77:{"answer":"KOMİKS","hint":"Dizayn, illüstrasiya və ya dekorativ sənətlə bağlı anlayış."},
- 78:{"answer":"ANİMASİYA","hint":"Dizayn, illüstrasiya və ya dekorativ sənətlə bağlı anlayış."},
- 79:{"answer":"KERAMİKA","hint":"Dizayn, illüstrasiya və ya dekorativ sənətlə bağlı anlayış."},
- 80:{"answer":"FARFOR","hint":"Dizayn, illüstrasiya və ya dekorativ sənətlə bağlı anlayış."},
- 81:{"answer":"ZƏRGƏR","hint":"Dizayn, illüstrasiya və ya dekorativ sənətlə bağlı anlayış."},
- 82:{"answer":"MİNA","hint":"Dizayn, illüstrasiya və ya dekorativ sənətlə bağlı anlayış."},
- 83:{"answer":"QOBELEN","hint":"Dizayn, illüstrasiya və ya dekorativ sənətlə bağlı anlayış."},
- 84:{"answer":"TİKMƏ","hint":"Dizayn, illüstrasiya və ya dekorativ sənətlə bağlı anlayış."},
- 85:{"answer":"KALLİQRAFİYA","hint":"Dizayn, illüstrasiya və ya dekorativ sənətlə bağlı anlayış."},
- 86:{"answer":"POEZİYA","hint":"Ədəbiyyat və bədii mətnlə bağlı anlayış."},
- 87:{"answer":"ROMAN","hint":"Ədəbiyyat və bədii mətnlə bağlı anlayış."},
- 88:{"answer":"ŞEİR","hint":"Ədəbiyyat və bədii mətnlə bağlı anlayış."},
- 89:{"answer":"QAFİYƏ","hint":"Ədəbiyyat və bədii mətnlə bağlı anlayış."},
- 90:{"answer":"METAFORA","hint":"Ədəbiyyat və bədii mətnlə bağlı anlayış."},
- 91:{"answer":"MİNİATÜR","hint":"Bədii üslub, dövr və ya sənətkarlıqla bağlı termin."},
- 92:{"answer":"İKONA","hint":"Bədii üslub, dövr və ya sənətkarlıqla bağlı termin."},
- 93:{"answer":"AVANQARD","hint":"Bədii üslub, dövr və ya sənətkarlıqla bağlı termin."},
- 94:{"answer":"İMPRESSİONİZM","hint":"Bədii üslub, dövr və ya sənətkarlıqla bağlı termin."},
- 95:{"answer":"KUBİZM","hint":"Bədii üslub, dövr və ya sənətkarlıqla bağlı termin."},
- 96:{"answer":"SÜRREALİZM","hint":"Bədii üslub, dövr və ya sənətkarlıqla bağlı termin."},
- 97:{"answer":"REALİZM","hint":"Bədii üslub, dövr və ya sənətkarlıqla bağlı termin."},
- 98:{"answer":"RENESSANS","hint":"Bədii üslub, dövr və ya sənətkarlıqla bağlı termin."},
- 99:{"answer":"ŞEDEVR","hint":"Bədii üslub, dövr və ya sənətkarlıqla bağlı termin."},
- 100:{"answer":"YARADICILIQ","hint":"Bədii üslub, dövr və ya sənətkarlıqla bağlı termin."}
+ "az": {
+  "1": {
+   "answer": "FIRÇA",
+   "hint": "Rəssamlıq və təsvir yaratma ilə bağlı anlayış və ya alət."
+  },
+  "2": {
+   "answer": "BOYA",
+   "hint": "Rəssamlıq və təsvir yaratma ilə bağlı anlayış və ya alət."
+  },
+  "3": {
+   "answer": "KƏTAN",
+   "hint": "Rəssamlıq və təsvir yaratma ilə bağlı anlayış və ya alət."
+  },
+  "4": {
+   "answer": "PALETRA",
+   "hint": "Rəssamlıq və təsvir yaratma ilə bağlı anlayış və ya alət."
+  },
+  "5": {
+   "answer": "RƏSM",
+   "hint": "Rəssamlıq və təsvir yaratma ilə bağlı anlayış və ya alət."
+  },
+  "6": {
+   "answer": "PORTRET",
+   "hint": "Rəssamlıq və təsvir yaratma ilə bağlı anlayış və ya alət."
+  },
+  "7": {
+   "answer": "MƏNZƏRƏ",
+   "hint": "Rəssamlıq və təsvir yaratma ilə bağlı anlayış və ya alət."
+  },
+  "8": {
+   "answer": "NATÜRMORT",
+   "hint": "Rəssamlıq və təsvir yaratma ilə bağlı anlayış və ya alət."
+  },
+  "9": {
+   "answer": "ESKİZ",
+   "hint": "Rəssamlıq və təsvir yaratma ilə bağlı anlayış və ya alət."
+  },
+  "10": {
+   "answer": "ÇƏRÇİVƏ",
+   "hint": "Rəssamlıq və təsvir yaratma ilə bağlı anlayış və ya alət."
+  },
+  "11": {
+   "answer": "QALEREYA",
+   "hint": "Rəssamlıq və təsvir yaratma ilə bağlı anlayış və ya alət."
+  },
+  "12": {
+   "answer": "MUZEY",
+   "hint": "Rəssamlıq və təsvir yaratma ilə bağlı anlayış və ya alət."
+  },
+  "13": {
+   "answer": "RƏSSAM",
+   "hint": "Rəssamlıq və təsvir yaratma ilə bağlı anlayış və ya alət."
+  },
+  "14": {
+   "answer": "MOLBERT",
+   "hint": "Rəssamlıq və təsvir yaratma ilə bağlı anlayış və ya alət."
+  },
+  "15": {
+   "answer": "AKVAREL",
+   "hint": "Rəssamlıq və təsvir yaratma ilə bağlı anlayış və ya alət."
+  },
+  "16": {
+   "answer": "QUAŞ",
+   "hint": "Rəssamlıq və təsvir yaratma ilə bağlı anlayış və ya alət."
+  },
+  "17": {
+   "answer": "YAĞ",
+   "hint": "Rəssamlıq və təsvir yaratma ilə bağlı anlayış və ya alət."
+  },
+  "18": {
+   "answer": "FRESKA",
+   "hint": "Rəssamlıq və təsvir yaratma ilə bağlı anlayış və ya alət."
+  },
+  "19": {
+   "answer": "QRAFİKA",
+   "hint": "Rəssamlıq və təsvir yaratma ilə bağlı anlayış və ya alət."
+  },
+  "20": {
+   "answer": "QRAVÜRA",
+   "hint": "Rəssamlıq və təsvir yaratma ilə bağlı anlayış və ya alət."
+  },
+  "21": {
+   "answer": "HEYKƏLTƏRAŞLIQ",
+   "hint": "Heykəltəraşlıq və həcmli forma ilə bağlı material və ya üsul."
+  },
+  "22": {
+   "answer": "HEYKƏL",
+   "hint": "Heykəltəraşlıq və həcmli forma ilə bağlı material və ya üsul."
+  },
+  "23": {
+   "answer": "MƏRMƏR",
+   "hint": "Heykəltəraşlıq və həcmli forma ilə bağlı material və ya üsul."
+  },
+  "24": {
+   "answer": "GİL",
+   "hint": "Heykəltəraşlıq və həcmli forma ilə bağlı material və ya üsul."
+  },
+  "25": {
+   "answer": "KƏSKİ",
+   "hint": "Heykəltəraşlıq və həcmli forma ilə bağlı material və ya üsul."
+  },
+  "26": {
+   "answer": "MUSİQİ",
+   "hint": "Musiqi, səs və ifa ilə bağlı anlayış."
+  },
+  "27": {
+   "answer": "MELODİYA",
+   "hint": "Musiqi, səs və ifa ilə bağlı anlayış."
+  },
+  "28": {
+   "answer": "RİTM",
+   "hint": "Musiqi, səs və ifa ilə bağlı anlayış."
+  },
+  "29": {
+   "answer": "NOT",
+   "hint": "Musiqi, səs və ifa ilə bağlı anlayış."
+  },
+  "30": {
+   "answer": "AKKORD",
+   "hint": "Musiqi, səs və ifa ilə bağlı anlayış."
+  },
+  "31": {
+   "answer": "SKRİPKA",
+   "hint": "Musiqi, səs və ifa ilə bağlı anlayış."
+  },
+  "32": {
+   "answer": "PİANO",
+   "hint": "Musiqi, səs və ifa ilə bağlı anlayış."
+  },
+  "33": {
+   "answer": "GİTARA",
+   "hint": "Musiqi, səs və ifa ilə bağlı anlayış."
+  },
+  "34": {
+   "answer": "BARABAN",
+   "hint": "Musiqi, səs və ifa ilə bağlı anlayış."
+  },
+  "35": {
+   "answer": "FLEYTA",
+   "hint": "Musiqi, səs və ifa ilə bağlı anlayış."
+  },
+  "36": {
+   "answer": "ORKESTR",
+   "hint": "Musiqi, səs və ifa ilə bağlı anlayış."
+  },
+  "37": {
+   "answer": "DİRİJOR",
+   "hint": "Musiqi, səs və ifa ilə bağlı anlayış."
+  },
+  "38": {
+   "answer": "KONSERT",
+   "hint": "Musiqi, səs və ifa ilə bağlı anlayış."
+  },
+  "39": {
+   "answer": "SƏHNƏ",
+   "hint": "Teatr, rəqs və səhnə sənəti ilə bağlı anlayış."
+  },
+  "40": {
+   "answer": "TEATR",
+   "hint": "Teatr, rəqs və səhnə sənəti ilə bağlı anlayış."
+  },
+  "41": {
+   "answer": "AKTYOR",
+   "hint": "Teatr, rəqs və səhnə sənəti ilə bağlı anlayış."
+  },
+  "42": {
+   "answer": "BALET",
+   "hint": "Teatr, rəqs və səhnə sənəti ilə bağlı anlayış."
+  },
+  "43": {
+   "answer": "RƏQS",
+   "hint": "Teatr, rəqs və səhnə sənəti ilə bağlı anlayış."
+  },
+  "44": {
+   "answer": "OPERA",
+   "hint": "Teatr, rəqs və səhnə sənəti ilə bağlı anlayış."
+  },
+  "45": {
+   "answer": "MASKA",
+   "hint": "Teatr, rəqs və səhnə sənəti ilə bağlı anlayış."
+  },
+  "46": {
+   "answer": "PƏRDƏ",
+   "hint": "Teatr, rəqs və səhnə sənəti ilə bağlı anlayış."
+  },
+  "47": {
+   "answer": "DEKORASİYA",
+   "hint": "Teatr, rəqs və səhnə sənəti ilə bağlı anlayış."
+  },
+  "48": {
+   "answer": "KOSTYUM",
+   "hint": "Teatr, rəqs və səhnə sənəti ilə bağlı anlayış."
+  },
+  "49": {
+   "answer": "REPETİSİYA",
+   "hint": "Teatr, rəqs və səhnə sənəti ilə bağlı anlayış."
+  },
+  "50": {
+   "answer": "PREMYERA",
+   "hint": "Teatr, rəqs və səhnə sənəti ilə bağlı anlayış."
+  },
+  "51": {
+   "answer": "MEMARLIQ",
+   "hint": "Memarlıq, dekor və bədii forma quruluşu ilə bağlı element."
+  },
+  "52": {
+   "answer": "TAĞ",
+   "hint": "Memarlıq, dekor və bədii forma quruluşu ilə bağlı element."
+  },
+  "53": {
+   "answer": "SÜTUN",
+   "hint": "Memarlıq, dekor və bədii forma quruluşu ilə bağlı element."
+  },
+  "54": {
+   "answer": "FASAD",
+   "hint": "Memarlıq, dekor və bədii forma quruluşu ilə bağlı element."
+  },
+  "55": {
+   "answer": "VİTRAJ",
+   "hint": "Memarlıq, dekor və bədii forma quruluşu ilə bağlı element."
+  },
+  "56": {
+   "answer": "MOZAİKA",
+   "hint": "Memarlıq, dekor və bədii forma quruluşu ilə bağlı element."
+  },
+  "57": {
+   "answer": "ORNAMENT",
+   "hint": "Memarlıq, dekor və bədii forma quruluşu ilə bağlı element."
+  },
+  "58": {
+   "answer": "NAXIŞ",
+   "hint": "Memarlıq, dekor və bədii forma quruluşu ilə bağlı element."
+  },
+  "59": {
+   "answer": "SİMMETRİYA",
+   "hint": "Memarlıq, dekor və bədii forma quruluşu ilə bağlı element."
+  },
+  "60": {
+   "answer": "KOMPOZİSİYA",
+   "hint": "Memarlıq, dekor və bədii forma quruluşu ilə bağlı element."
+  },
+  "61": {
+   "answer": "FOTO",
+   "hint": "Fotoqrafiya və kamera ilə təsvir yaratma sahəsinə aid anlayış."
+  },
+  "62": {
+   "answer": "KAMERA",
+   "hint": "Fotoqrafiya və kamera ilə təsvir yaratma sahəsinə aid anlayış."
+  },
+  "63": {
+   "answer": "OBYEKTİV",
+   "hint": "Fotoqrafiya və kamera ilə təsvir yaratma sahəsinə aid anlayış."
+  },
+  "64": {
+   "answer": "FLAŞ",
+   "hint": "Fotoqrafiya və kamera ilə təsvir yaratma sahəsinə aid anlayış."
+  },
+  "65": {
+   "answer": "EKSPOZİSİYA",
+   "hint": "Fotoqrafiya və kamera ilə təsvir yaratma sahəsinə aid anlayış."
+  },
+  "66": {
+   "answer": "RAKURS",
+   "hint": "Fotoqrafiya və kamera ilə təsvir yaratma sahəsinə aid anlayış."
+  },
+  "67": {
+   "answer": "KADR",
+   "hint": "Fotoqrafiya və kamera ilə təsvir yaratma sahəsinə aid anlayış."
+  },
+  "68": {
+   "answer": "FOTOQRAF",
+   "hint": "Fotoqrafiya və kamera ilə təsvir yaratma sahəsinə aid anlayış."
+  },
+  "69": {
+   "answer": "LENT",
+   "hint": "Fotoqrafiya və kamera ilə təsvir yaratma sahəsinə aid anlayış."
+  },
+  "70": {
+   "answer": "RETUŞ",
+   "hint": "Fotoqrafiya və kamera ilə təsvir yaratma sahəsinə aid anlayış."
+  },
+  "71": {
+   "answer": "DİZAYN",
+   "hint": "Dizayn, illüstrasiya və ya dekorativ sənətlə bağlı anlayış."
+  },
+  "72": {
+   "answer": "ŞRİFT",
+   "hint": "Dizayn, illüstrasiya və ya dekorativ sənətlə bağlı anlayış."
+  },
+  "73": {
+   "answer": "LOQO",
+   "hint": "Dizayn, illüstrasiya və ya dekorativ sənətlə bağlı anlayış."
+  },
+  "74": {
+   "answer": "POSTER",
+   "hint": "Dizayn, illüstrasiya və ya dekorativ sənətlə bağlı anlayış."
+  },
+  "75": {
+   "answer": "KOLLAJ",
+   "hint": "Dizayn, illüstrasiya və ya dekorativ sənətlə bağlı anlayış."
+  },
+  "76": {
+   "answer": "İLLÜSTRASİYA",
+   "hint": "Dizayn, illüstrasiya və ya dekorativ sənətlə bağlı anlayış."
+  },
+  "77": {
+   "answer": "KOMİKS",
+   "hint": "Dizayn, illüstrasiya və ya dekorativ sənətlə bağlı anlayış."
+  },
+  "78": {
+   "answer": "ANİMASİYA",
+   "hint": "Dizayn, illüstrasiya və ya dekorativ sənətlə bağlı anlayış."
+  },
+  "79": {
+   "answer": "KERAMİKA",
+   "hint": "Dizayn, illüstrasiya və ya dekorativ sənətlə bağlı anlayış."
+  },
+  "80": {
+   "answer": "FARFOR",
+   "hint": "Dizayn, illüstrasiya və ya dekorativ sənətlə bağlı anlayış."
+  },
+  "81": {
+   "answer": "ZƏRGƏR",
+   "hint": "Dizayn, illüstrasiya və ya dekorativ sənətlə bağlı anlayış."
+  },
+  "82": {
+   "answer": "MİNA",
+   "hint": "Dizayn, illüstrasiya və ya dekorativ sənətlə bağlı anlayış."
+  },
+  "83": {
+   "answer": "QOBELEN",
+   "hint": "Dizayn, illüstrasiya və ya dekorativ sənətlə bağlı anlayış."
+  },
+  "84": {
+   "answer": "TİKMƏ",
+   "hint": "Dizayn, illüstrasiya və ya dekorativ sənətlə bağlı anlayış."
+  },
+  "85": {
+   "answer": "KALLİQRAFİYA",
+   "hint": "Dizayn, illüstrasiya və ya dekorativ sənətlə bağlı anlayış."
+  },
+  "86": {
+   "answer": "POEZİYA",
+   "hint": "Ədəbiyyat və bədii mətnlə bağlı anlayış."
+  },
+  "87": {
+   "answer": "ROMAN",
+   "hint": "Ədəbiyyat və bədii mətnlə bağlı anlayış."
+  },
+  "88": {
+   "answer": "ŞEİR",
+   "hint": "Ədəbiyyat və bədii mətnlə bağlı anlayış."
+  },
+  "89": {
+   "answer": "QAFİYƏ",
+   "hint": "Ədəbiyyat və bədii mətnlə bağlı anlayış."
+  },
+  "90": {
+   "answer": "METAFORA",
+   "hint": "Ədəbiyyat və bədii mətnlə bağlı anlayış."
+  },
+  "91": {
+   "answer": "MİNİATÜR",
+   "hint": "Bədii üslub, dövr və ya sənətkarlıqla bağlı termin."
+  },
+  "92": {
+   "answer": "İKONA",
+   "hint": "Bədii üslub, dövr və ya sənətkarlıqla bağlı termin."
+  },
+  "93": {
+   "answer": "AVANQARD",
+   "hint": "Bədii üslub, dövr və ya sənətkarlıqla bağlı termin."
+  },
+  "94": {
+   "answer": "İMPRESSİONİZM",
+   "hint": "Bədii üslub, dövr və ya sənətkarlıqla bağlı termin."
+  },
+  "95": {
+   "answer": "KUBİZM",
+   "hint": "Bədii üslub, dövr və ya sənətkarlıqla bağlı termin."
+  },
+  "96": {
+   "answer": "SÜRREALİZM",
+   "hint": "Bədii üslub, dövr və ya sənətkarlıqla bağlı termin."
+  },
+  "97": {
+   "answer": "REALİZM",
+   "hint": "Bədii üslub, dövr və ya sənətkarlıqla bağlı termin."
+  },
+  "98": {
+   "answer": "RENESSANS",
+   "hint": "Bədii üslub, dövr və ya sənətkarlıqla bağlı termin."
+  },
+  "99": {
+   "answer": "ŞEDEVR",
+   "hint": "Bədii üslub, dövr və ya sənətkarlıqla bağlı termin."
+  },
+  "100": {
+   "answer": "YARADICILIQ",
+   "hint": "Bədii üslub, dövr və ya sənətkarlıqla bağlı termin."
+  }
  }
 };
 const PROF_LEVELS={
@@ -975,24 +1575,24 @@ const PROF_LEVELS={
   ]
  },
  "19": {
-  "answer": "ФОТОГРАФ",
+  "answer": "ВИДЕОГРАФ",
   "hint": "Профессия, связанная с информацией, текстом или медиа.",
   "photos": [
    [
+    "🎥",
+    "🎥"
+   ],
+   [
+    "📹",
+    "📹"
+   ],
+   [
+    "🎬",
+    "🎬"
+   ],
+   [
     "📷",
     "📷"
-   ],
-   [
-    "📸",
-    "📸"
-   ],
-   [
-    "💡",
-    "💡"
-   ],
-   [
-    "🖼️",
-    "🖼️"
    ]
   ]
  },
@@ -1525,24 +2125,24 @@ const PROF_LEVELS={
   ]
  },
  "44": {
-  "answer": "КАПИТАН",
+  "answer": "ШТУРМАН",
   "hint": "Профессия, связанная с транспортом и перевозками.",
   "photos": [
-   [
-    "🚢",
-    "🚢"
-   ],
-   [
-    "⚓",
-    "⚓"
-   ],
    [
     "🧭",
     "🧭"
    ],
    [
-    "🌊",
-    "🌊"
+    "🚢",
+    "🚢"
+   ],
+   [
+    "🗺️",
+    "🗺️"
+   ],
+   [
+    "⚓",
+    "⚓"
    ]
   ]
  },
@@ -1855,24 +2455,24 @@ const PROF_LEVELS={
   ]
  },
  "59": {
-  "answer": "ТРЕНЕР",
+  "answer": "ИНСТРУКТОР",
   "hint": "Профессия, связанная с обучением и развитием людей.",
   "photos": [
    [
-    "🏃",
-    "🏃"
+    "👨‍🏫",
+    "👨‍🏫"
    ],
    [
     "📋",
     "📋"
    ],
    [
-    "🏆",
-    "🏆"
+    "🧭",
+    "🧭"
    ],
    [
-    "💪",
-    "💪"
+    "✅",
+    "✅"
    ]
   ]
  },
@@ -2229,24 +2829,24 @@ const PROF_LEVELS={
   ]
  },
  "76": {
-  "answer": "АКТЕР",
+  "answer": "КАСКАДЕР",
   "hint": "Профессия, связанная с творчеством, сценой или визуальным искусством.",
   "photos": [
-   [
-    "🎭",
-    "🎭"
-   ],
    [
     "🎬",
     "🎬"
    ],
    [
-    "🎥",
-    "🎥"
+    "🏍️",
+    "🏍️"
    ],
    [
-    "👏",
-    "👏"
+    "🔥",
+    "🔥"
+   ],
+   [
+    "🎭",
+    "🎭"
    ]
   ]
  },
@@ -2427,24 +3027,24 @@ const PROF_LEVELS={
   ]
  },
  "85": {
-  "answer": "ХУДОЖНИК",
+  "answer": "ИЛЛЮСТРАТОР",
   "hint": "Профессия, связанная с творчеством, сценой или визуальным искусством.",
   "photos": [
+   [
+    "✏️",
+    "✏️"
+   ],
    [
     "🎨",
     "🎨"
    ],
    [
-    "🖌️",
-    "🖌️"
+    "📖",
+    "📖"
    ],
    [
-    "🖼️",
-    "🖼️"
-   ],
-   [
-    "👨‍🎨",
-    "👨‍🎨"
+    "🖥️",
+    "🖥️"
    ]
   ]
  },
@@ -2471,24 +3071,24 @@ const PROF_LEVELS={
   ]
  },
  "87": {
-  "answer": "ЮВЕЛИР",
+  "answer": "ЧАСОВЩИК",
   "hint": "Профессия, связанная с ручным трудом и профессиональным мастерством.",
   "photos": [
    [
-    "💍",
-    "💍"
+    "⌚",
+    "⌚"
    ],
    [
-    "💎",
-    "💎"
+    "⚙️",
+    "⚙️"
    ],
    [
-    "🔨",
-    "🔨"
+    "🔧",
+    "🔧"
    ],
    [
-    "✨",
-    "✨"
+    "🕰️",
+    "🕰️"
    ]
   ]
  },
@@ -2854,7 +3454,7 @@ const PROF_TRANSLATED={
    "hint": "A profession connected with customer service."
   },
   "19": {
-   "answer": "PHOTOGRAPHER",
+   "answer": "VIDEOGRAPHER",
    "hint": "A profession connected with information, writing, or media."
   },
   "20": {
@@ -2954,7 +3554,7 @@ const PROF_TRANSLATED={
    "hint": "A profession connected with transport and travel."
   },
   "44": {
-   "answer": "CAPTAIN",
+   "answer": "NAVALOFFICER",
    "hint": "A profession connected with transport and travel."
   },
   "45": {
@@ -3014,7 +3614,7 @@ const PROF_TRANSLATED={
    "hint": "A profession connected with education and development."
   },
   "59": {
-   "answer": "COACH",
+   "answer": "INSTRUCTOR",
    "hint": "A profession connected with education and development."
   },
   "60": {
@@ -3082,7 +3682,7 @@ const PROF_TRANSLATED={
    "hint": "A profession connected with science and research."
   },
   "76": {
-   "answer": "ACTOR",
+   "answer": "STUNTMAN",
    "hint": "A profession connected with creative arts and performance."
   },
   "77": {
@@ -3118,7 +3718,7 @@ const PROF_TRANSLATED={
    "hint": "A profession connected with creative arts and performance."
   },
   "85": {
-   "answer": "ARTIST",
+   "answer": "ILLUSTRATOR",
    "hint": "A profession connected with creative arts and performance."
   },
   "86": {
@@ -3126,7 +3726,7 @@ const PROF_TRANSLATED={
    "hint": "A profession connected with creative arts and performance."
   },
   "87": {
-   "answer": "JEWELER",
+   "answer": "WATCHMAKER",
    "hint": "A profession connected with skilled craft and manual work."
   },
   "88": {
@@ -3256,7 +3856,7 @@ const PROF_TRANSLATED={
    "hint": "insanlara xidmətlə bağlı peşə."
   },
   "19": {
-   "answer": "FOTOQRAF",
+   "answer": "VİDEOQRAF",
    "hint": "məlumat, mətn və media ilə bağlı peşə."
   },
   "20": {
@@ -3356,7 +3956,7 @@ const PROF_TRANSLATED={
    "hint": "nəqliyyat və daşınma ilə bağlı peşə."
   },
   "44": {
-   "answer": "KAPİTAN",
+   "answer": "ŞTURMAN",
    "hint": "nəqliyyat və daşınma ilə bağlı peşə."
   },
   "45": {
@@ -3416,7 +4016,7 @@ const PROF_TRANSLATED={
    "hint": "təhsil və inkişafla bağlı peşə."
   },
   "59": {
-   "answer": "MƏŞQÇİ",
+   "answer": "TƏLİMATÇI",
    "hint": "təhsil və inkişafla bağlı peşə."
   },
   "60": {
@@ -3484,7 +4084,7 @@ const PROF_TRANSLATED={
    "hint": "elm və tədqiqatla bağlı peşə."
   },
   "76": {
-   "answer": "AKTYOR",
+   "answer": "KASKADYOR",
    "hint": "yaradıcılıq və səhnə sənəti ilə bağlı peşə."
   },
   "77": {
@@ -3520,7 +4120,7 @@ const PROF_TRANSLATED={
    "hint": "yaradıcılıq və səhnə sənəti ilə bağlı peşə."
   },
   "85": {
-   "answer": "RƏSSAM",
+   "answer": "İLLÜSTRATOR",
    "hint": "yaradıcılıq və səhnə sənəti ilə bağlı peşə."
   },
   "86": {
@@ -3528,7 +4128,7 @@ const PROF_TRANSLATED={
    "hint": "yaradıcılıq və səhnə sənəti ilə bağlı peşə."
   },
   "87": {
-   "answer": "ZƏRGƏR",
+   "answer": "SAATUSTASI",
    "hint": "peşəkar sənətkarlıq və əl əməyi ilə bağlı peşə."
   },
   "88": {
@@ -4687,7 +5287,7 @@ const TRAVEL_LEVELS={
   ]
  },
  "51": {
-  "answer": "ФОТО",
+  "answer": "СНИМОК",
   "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
   "photos": [
    [
@@ -4753,7 +5353,7 @@ const TRAVEL_LEVELS={
   ]
  },
  "54": {
-  "answer": "МУЗЕЙ",
+  "answer": "РУИНЫ",
   "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
   "photos": [
    [
@@ -4761,16 +5361,16 @@ const TRAVEL_LEVELS={
     "🏛️"
    ],
    [
-    "🖼️",
-    "🖼️"
+    "🧱",
+    "🧱"
    ],
    [
     "🏺",
     "🏺"
    ],
    [
-    "🎟️",
-    "🎟️"
+    "📷",
+    "📷"
    ]
   ]
  },
@@ -5061,12 +5661,12 @@ const TRAVEL_LEVELS={
   ]
  },
  "68": {
-  "answer": "ВЕЛОСИПЕД",
+  "answer": "САМОКАТ",
   "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
   "photos": [
    [
-    "🚲",
-    "🚲"
+    "🛴",
+    "🛴"
    ],
    [
     "🛣️",
@@ -5545,46 +6145,46 @@ const TRAVEL_LEVELS={
   ]
  },
  "90": {
-  "answer": "СЕРФИНГ",
+  "answer": "РАФТИНГ",
   "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
   "photos": [
    [
-    "🏄",
-    "🏄"
+    "🛶",
+    "🛶"
    ],
    [
     "🌊",
     "🌊"
    ],
    [
-    "☀️",
-    "☀️"
+    "🦺",
+    "🦺"
    ],
    [
-    "🏖️",
-    "🏖️"
+    "🏞️",
+    "🏞️"
    ]
   ]
  },
  "91": {
-  "answer": "ЛЫЖИ",
+  "answer": "СНЕГОХОД",
   "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
   "photos": [
    [
-    "🎿",
-    "🎿"
+    "🏔️",
+    "🏔️"
    ],
    [
     "❄️",
     "❄️"
    ],
    [
-    "🏔️",
-    "🏔️"
+    "🛷",
+    "🛷"
    ],
    [
-    "🚠",
-    "🚠"
+    "⚙️",
+    "⚙️"
    ]
   ]
  },
@@ -5990,7 +6590,7 @@ const TRAVEL_TRANSLATED={
    "hint": "A word connected with travel, routes, holidays, or exploring new places."
   },
   "51": {
-   "answer": "PHOTO",
+   "answer": "SNAPSHOT",
    "hint": "A word connected with travel, routes, holidays, or exploring new places."
   },
   "52": {
@@ -6002,7 +6602,7 @@ const TRAVEL_TRANSLATED={
    "hint": "A word connected with travel, routes, holidays, or exploring new places."
   },
   "54": {
-   "answer": "MUSEUM",
+   "answer": "RUINS",
    "hint": "A word connected with travel, routes, holidays, or exploring new places."
   },
   "55": {
@@ -6058,7 +6658,7 @@ const TRAVEL_TRANSLATED={
    "hint": "A word connected with travel, routes, holidays, or exploring new places."
   },
   "68": {
-   "answer": "BICYCLE",
+   "answer": "SCOOTER",
    "hint": "A word connected with travel, routes, holidays, or exploring new places."
   },
   "69": {
@@ -6146,11 +6746,11 @@ const TRAVEL_TRANSLATED={
    "hint": "A word connected with travel, routes, holidays, or exploring new places."
   },
   "90": {
-   "answer": "SURFING",
+   "answer": "RAFTING",
    "hint": "A word connected with travel, routes, holidays, or exploring new places."
   },
   "91": {
-   "answer": "SKIING",
+   "answer": "SNOWMOBILE",
    "hint": "A word connected with travel, routes, holidays, or exploring new places."
   },
   "92": {
@@ -6166,7 +6766,7 @@ const TRAVEL_TRANSLATED={
    "hint": "A word connected with travel, routes, holidays, or exploring new places."
   },
   "95": {
-   "answer": "PASS",
+   "answer": "MOUNTAINPASS",
    "hint": "A word connected with travel, routes, holidays, or exploring new places."
   },
   "96": {
@@ -6392,7 +6992,7 @@ const TRAVEL_TRANSLATED={
    "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
   },
   "51": {
-   "answer": "FOTO",
+   "answer": "ŞƏKİL",
    "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
   },
   "52": {
@@ -6404,7 +7004,7 @@ const TRAVEL_TRANSLATED={
    "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
   },
   "54": {
-   "answer": "MUZEY",
+   "answer": "XARABALIQ",
    "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
   },
   "55": {
@@ -6460,7 +7060,7 @@ const TRAVEL_TRANSLATED={
    "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
   },
   "68": {
-   "answer": "VELOSİPED",
+   "answer": "SKUTER",
    "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
   },
   "69": {
@@ -6548,11 +7148,11 @@ const TRAVEL_TRANSLATED={
    "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
   },
   "90": {
-   "answer": "SÖRFİNQ",
+   "answer": "RAFTİNQ",
    "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
   },
   "91": {
-   "answer": "XİZƏK",
+   "answer": "QARMAŞINI",
    "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
   },
   "92": {
@@ -6617,13 +7217,9 @@ const SCIENCE_LEVELS={
   ]
  },
  "2": {
-  "answer": "УЧЕНЫЙ",
+  "answer": "ИССЛЕДОВАТЕЛЬ",
   "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
   "photos": [
-   [
-    "🥼",
-    "🥼"
-   ],
    [
     "🔬",
     "🔬"
@@ -6631,6 +7227,10 @@ const SCIENCE_LEVELS={
    [
     "📚",
     "📚"
+   ],
+   [
+    "🧪",
+    "🧪"
    ],
    [
     "💡",
@@ -7189,7 +7789,7 @@ const SCIENCE_LEVELS={
   ]
  },
  "28": {
-  "answer": "СКОРОСТЬ",
+  "answer": "УСКОРЕНИЕ",
   "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
   "photos": [
    [
@@ -7197,16 +7797,16 @@ const SCIENCE_LEVELS={
     "🏎️"
    ],
    [
-    "⏱️",
-    "⏱️"
-   ],
-   [
-    "➡️",
-    "➡️"
+    "💨",
+    "💨"
    ],
    [
     "📈",
     "📈"
+   ],
+   [
+    "⏱️",
+    "⏱️"
    ]
   ]
  },
@@ -7475,24 +8075,24 @@ const SCIENCE_LEVELS={
   ]
  },
  "41": {
-  "answer": "ЛИНЗА",
+  "answer": "ПРЕЛОМЛЕНИЕ",
   "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
   "photos": [
+   [
+    "🌈",
+    "🌈"
+   ],
+   [
+    "💧",
+    "💧"
+   ],
    [
     "🔍",
     "🔍"
    ],
    [
-    "👓",
-    "👓"
-   ],
-   [
-    "📷",
-    "📷"
-   ],
-   [
-    "🔭",
-    "🔭"
+    "➡️",
+    "➡️"
    ]
   ]
  },
@@ -8201,24 +8801,24 @@ const SCIENCE_LEVELS={
   ]
  },
  "74": {
-  "answer": "ВУЛКАН",
+  "answer": "ТЕКТОНИКА",
   "hint": "Понятие, объект или инструмент, связанный с наукой и исследованием мира.",
   "photos": [
    [
-    "🌋",
-    "🌋"
-   ],
-   [
-    "🔥",
-    "🔥"
-   ],
-   [
-    "🌫️",
-    "🌫️"
+    "🌍",
+    "🌍"
    ],
    [
     "🪨",
     "🪨"
+   ],
+   [
+    "↔️",
+    "↔️"
+   ],
+   [
+    "🏔️",
+    "🏔️"
    ]
   ]
  },
@@ -8802,7 +9402,7 @@ const SCIENCE_TRANSLATED={
    "hint": "A concept, object, or tool connected with science and understanding the world."
   },
   "2": {
-   "answer": "SCIENTIST",
+   "answer": "RESEARCHER",
    "hint": "A concept, object, or tool connected with science and understanding the world."
   },
   "3": {
@@ -8906,7 +9506,7 @@ const SCIENCE_TRANSLATED={
    "hint": "A concept, object, or tool connected with science and understanding the world."
   },
   "28": {
-   "answer": "SPEED",
+   "answer": "ACCELERATION",
    "hint": "A concept, object, or tool connected with science and understanding the world."
   },
   "29": {
@@ -8958,7 +9558,7 @@ const SCIENCE_TRANSLATED={
    "hint": "A concept, object, or tool connected with science and understanding the world."
   },
   "41": {
-   "answer": "LENS",
+   "answer": "REFRACTION",
    "hint": "A concept, object, or tool connected with science and understanding the world."
   },
   "42": {
@@ -9090,7 +9690,7 @@ const SCIENCE_TRANSLATED={
    "hint": "A concept, object, or tool connected with science and understanding the world."
   },
   "74": {
-   "answer": "VOLCANO",
+   "answer": "TECTONICS",
    "hint": "A concept, object, or tool connected with science and understanding the world."
   },
   "75": {
@@ -9204,7 +9804,7 @@ const SCIENCE_TRANSLATED={
    "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
   },
   "2": {
-   "answer": "ALİM",
+   "answer": "TƏDQİQATÇI",
    "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
   },
   "3": {
@@ -9308,7 +9908,7 @@ const SCIENCE_TRANSLATED={
    "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
   },
   "28": {
-   "answer": "SÜRƏT",
+   "answer": "SÜRƏTLƏNMƏ",
    "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
   },
   "29": {
@@ -9360,7 +9960,7 @@ const SCIENCE_TRANSLATED={
    "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
   },
   "41": {
-   "answer": "LİNZA",
+   "answer": "SINMA",
    "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
   },
   "42": {
@@ -9492,7 +10092,7 @@ const SCIENCE_TRANSLATED={
    "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
   },
   "74": {
-   "answer": "VULKAN",
+   "answer": "TEKTONİKA",
    "hint": "Elm və dünyanı öyrənməklə bağlı anlayış, obyekt və ya alət."
   },
   "75": {
@@ -9823,24 +10423,24 @@ const TECHNOLOGY_LEVELS={
   ]
  },
  "11": {
-  "answer": "КАМЕРА",
+  "answer": "ВЕБКАМЕРА",
   "hint": "Понятие, устройство или технология из цифрового и технического мира.",
   "photos": [
    [
-    "📷",
-    "📷"
+    "📹",
+    "📹"
+   ],
+   [
+    "💻",
+    "💻"
    ],
    [
     "🎥",
     "🎥"
    ],
    [
-    "📸",
-    "📸"
-   ],
-   [
-    "💾",
-    "💾"
+    "🌐",
+    "🌐"
    ]
   ]
  },
@@ -11055,24 +11655,24 @@ const TECHNOLOGY_LEVELS={
   ]
  },
  "67": {
-  "answer": "МЕНЮ",
+  "answer": "ПАНЕЛЬ",
   "hint": "Понятие, устройство или технология из цифрового и технического мира.",
   "photos": [
-   [
-    "☰",
-    "☰"
-   ],
-   [
-    "📱",
-    "📱"
-   ],
    [
     "🖥️",
     "🖥️"
    ],
    [
-    "👆",
-    "👆"
+    "📊",
+    "📊"
+   ],
+   [
+    "🔘",
+    "🔘"
+   ],
+   [
+    "⚙️",
+    "⚙️"
    ]
   ]
  },
@@ -11319,24 +11919,24 @@ const TECHNOLOGY_LEVELS={
   ]
  },
  "79": {
-  "answer": "СПУТНИК",
+  "answer": "БАЗОВАЯСТАНЦИЯ",
   "hint": "Понятие, устройство или технология из цифрового и технического мира.",
   "photos": [
-   [
-    "🛰️",
-    "🛰️"
-   ],
-   [
-    "🌍",
-    "🌍"
-   ],
    [
     "📡",
     "📡"
    ],
    [
-    "🌌",
-    "🌌"
+    "🏙️",
+    "🏙️"
+   ],
+   [
+    "📶",
+    "📶"
+   ],
+   [
+    "📱",
+    "📱"
    ]
   ]
  },
@@ -11473,7 +12073,7 @@ const TECHNOLOGY_LEVELS={
   ]
  },
  "86": {
-  "answer": "ДАННЫЕ",
+  "answer": "МЕТАДАННЫЕ",
   "hint": "Понятие, устройство или технология из цифрового и технического мира.",
   "photos": [
    [
@@ -11481,16 +12081,16 @@ const TECHNOLOGY_LEVELS={
     "💾"
    ],
    [
+    "🏷️",
+    "🏷️"
+   ],
+   [
     "📊",
     "📊"
    ],
    [
-    "🔢",
-    "🔢"
-   ],
-   [
-    "💻",
-    "💻"
+    "🔍",
+    "🔍"
    ]
   ]
  },
@@ -11583,12 +12183,12 @@ const TECHNOLOGY_LEVELS={
   ]
  },
  "91": {
-  "answer": "ВИРУС",
+  "answer": "ТРОЯН",
   "hint": "Понятие, устройство или технология из цифрового и технического мира.",
   "photos": [
    [
-    "🦠",
-    "🦠"
+    "🐴",
+    "🐴"
    ],
    [
     "💻",
@@ -11846,7 +12446,7 @@ const TECHNOLOGY_TRANSLATED={
    "hint": "A concept, device, or technology from the digital and technical world."
   },
   "11": {
-   "answer": "CAMERA",
+   "answer": "WEBCAM",
    "hint": "A concept, device, or technology from the digital and technical world."
   },
   "12": {
@@ -12070,7 +12670,7 @@ const TECHNOLOGY_TRANSLATED={
    "hint": "A concept, device, or technology from the digital and technical world."
   },
   "67": {
-   "answer": "MENU",
+   "answer": "PANEL",
    "hint": "A concept, device, or technology from the digital and technical world."
   },
   "68": {
@@ -12118,7 +12718,7 @@ const TECHNOLOGY_TRANSLATED={
    "hint": "A concept, device, or technology from the digital and technical world."
   },
   "79": {
-   "answer": "SATELLITE",
+   "answer": "BASESTATION",
    "hint": "A concept, device, or technology from the digital and technical world."
   },
   "80": {
@@ -12146,7 +12746,7 @@ const TECHNOLOGY_TRANSLATED={
    "hint": "A concept, device, or technology from the digital and technical world."
   },
   "86": {
-   "answer": "DATA",
+   "answer": "METADATA",
    "hint": "A concept, device, or technology from the digital and technical world."
   },
   "87": {
@@ -12166,7 +12766,7 @@ const TECHNOLOGY_TRANSLATED={
    "hint": "A concept, device, or technology from the digital and technical world."
   },
   "91": {
-   "answer": "VIRUS",
+   "answer": "TROJAN",
    "hint": "A concept, device, or technology from the digital and technical world."
   },
   "92": {
@@ -12248,7 +12848,7 @@ const TECHNOLOGY_TRANSLATED={
    "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
   },
   "11": {
-   "answer": "KAMERA",
+   "answer": "VEBKAMERA",
    "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
   },
   "12": {
@@ -12384,7 +12984,7 @@ const TECHNOLOGY_TRANSLATED={
    "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
   },
   "45": {
-   "answer": "HESAB",
+   "answer": "AKKAUNT",
    "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
   },
   "46": {
@@ -12472,7 +13072,7 @@ const TECHNOLOGY_TRANSLATED={
    "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
   },
   "67": {
-   "answer": "MENYU",
+   "answer": "PANEL",
    "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
   },
   "68": {
@@ -12520,7 +13120,7 @@ const TECHNOLOGY_TRANSLATED={
    "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
   },
   "79": {
-   "answer": "PEYK",
+   "answer": "BAZASTANSİYASI",
    "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
   },
   "80": {
@@ -12548,7 +13148,7 @@ const TECHNOLOGY_TRANSLATED={
    "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
   },
   "86": {
-   "answer": "MƏLUMAT",
+   "answer": "METAMƏLUMAT",
    "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
   },
   "87": {
@@ -12568,7 +13168,7 @@ const TECHNOLOGY_TRANSLATED={
    "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
   },
   "91": {
-   "answer": "VİRUS",
+   "answer": "TROYAN",
    "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
   },
   "92": {
