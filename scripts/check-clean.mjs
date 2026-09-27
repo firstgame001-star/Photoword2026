@@ -27,11 +27,12 @@ for(const file of ['core.js','home.js','game.js','theme-game.js','challenge.js',
 }
 
 const release=JSON.parse(readFileSync(resolve(base,'release.json'),'utf8'));
-if(release.release!=='20260927-r57')throw Error('Unexpected release: '+release.release);
-if(!Array.isArray(release.levels)||!release.levels.includes(131))throw Error('Main levels are not published through 131');
+if(release.release!=='20260927-r58')throw Error('Unexpected release: '+release.release);
+if(!Array.isArray(release.levels)||!release.levels.includes(180))throw Error('Main levels are not published through 180');
 if(release.chapters?.length!==12)throw Error('Main chapter navigation must contain 12 chapters');
 if(release.chapters.find(x=>x.id===3)?.status!=='live')throw Error('Chapter 3 must be complete');
 if(release.chapters.find(x=>x.id===4)?.available_through!==131||release.chapters.find(x=>x.id===4)?.status!=='live')throw Error('Chapter 4 must be complete through 131');
+if(release.chapters.find(x=>x.id===5)?.available_through!==180||release.chapters.find(x=>x.id===5)?.status!=='live')throw Error('Chapter 5 must be complete through 180');
 if(release.thematic_mode?.categories?.length!==12)throw Error('Thematic catalog must contain 12 categories');
 const sport=release.thematic_mode.categories.find(x=>x.id==='sport');
 if(!sport||sport.available_through!==100)throw Error('Sport theme must be playable through level 100');
@@ -56,8 +57,9 @@ for(let n=1;n<=12;n++){
 if(release.ui?.chapter_progress_mode!=='absolute_level')throw Error('Release must declare absolute chapter progress');
 if(release.ui?.chapter_titles!==true)throw Error('Release must declare chapter title system');
 const gameJs=readFileSync(resolve(base,'game.js'),'utf8');
-if(!gameJs.includes('for(let n=1;n<=131;n++){')||!gameJs.includes('131:{')||!gameJs.includes('levelId===131'))throw Error('Chapter 4 levels 101-131 are incomplete');
+if(!gameJs.includes('for(let n=1;n<=180;n++){')||!gameJs.includes('131:{')||!gameJs.includes('132:{')||!gameJs.includes('180:{')||!gameJs.includes('levelId===131')||!gameJs.includes('levelId===180'))throw Error('Main levels through Chapter 5 are incomplete');
 if(!index.includes('data-home-chapter="12"')||!index.includes('id="chapter12Select"')||index.match(/data-dot="/g)?.length!==12)throw Error('Chapter 12 navigation is incomplete');
+if(!index.includes('id="chapter5Progress"')||!index.includes('id="homeChapter5Progress"')||!index.includes('132–180'))throw Error('Chapter 5 UI is incomplete');
 if(!index.includes('id="challengeModes"')||!index.includes('data-challenge="limited"')||!index.includes('data-challenge="nohint"')||!index.includes('data-challenge="blitz"'))throw Error('Challenge mode cards are missing');
 if(!index.includes('id="challengeScreen"'))throw Error('Playable challenge screen is missing');
 if(!index.includes('./challenge.js'))throw Error('Challenge game module is missing');
@@ -101,4 +103,4 @@ if(release.ui?.language_gate_fix!=='first_launch_unset_then_persist_choice')thro
 if(!homeJs.includes("sessionStorage.getItem('pw.profileSyncedShown')")||!homeJs.includes("setTimeout(()=>{const e=$('status')"))throw Error('One-time profile sync notice is missing');
 if(release.ui?.profile_synced_notice?.show!=='once_per_session'||release.ui?.profile_synced_notice?.auto_hide_ms!==1800)throw Error('Profile sync notice manifest is incorrect');
 if(!homeJs.includes("applyLanguage('ru',false)")||!homeJs.includes("function applyLanguage(l,persist=true)"))throw Error('First-launch language selection flow is incorrect');
-console.log('PASS: r57 entrypoints, Chapters 1-12, backgrounds, absolute progress, chapter titles and JavaScript syntax.');
+console.log('PASS: r58 entrypoints, Chapters 1-12, backgrounds, absolute progress, chapter titles and JavaScript syntax.');
