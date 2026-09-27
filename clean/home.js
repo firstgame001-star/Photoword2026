@@ -274,5 +274,5 @@ async function rating(){const x=t();screen('ratingScreen');const id=++ratingReq,
 ['ratingNav','ratingShortcut','refreshRating'].forEach(id=>$(id).onclick=rating);
 
 window.addEventListener('pw:player',e=>update(e.detail));
-pw.login().then(async()=>{pw.status(t().profileSynced);track('app_open',{metadata:{version:'r37'}});configureAds();try{const start=window.Telegram?.WebApp?.initDataUnsafe?.start_param||'';if(start.startsWith('ref_PW-'))await pw.api('register_referral',{referrer:start.slice(4)})}catch{}}).catch(e=>pw.status(e.message));
+pw.login().then(async()=>{pw.status(t().profileSynced);track('app_open',{metadata:{version:'r38'}});configureAds();try{const start=window.Telegram?.WebApp?.initDataUnsafe?.start_param||'';if(start.startsWith('ref_PW-'))await pw.api('register_referral',{referrer:start.slice(4)})}catch{}}).catch(e=>pw.status(e.message));
 })();
