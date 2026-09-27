@@ -985,9 +985,21 @@ CHALLENGE_BY_PHOTOS={tuple(item['p']):item for item in CHALLENGE_BANK}
 assert len(CHALLENGE_BY_PHOTOS)==400
 
 def current_challenge_answer(page,language):
-    clues=tuple(page.locator('#challengePhotos .photo').all_inner_texts())
-    assert clues in CHALLENGE_BY_PHOTOS,clues
-    return CHALLENGE_BY_PHOTOS[clues][language]
+    # The mode start is asynchronous. Wait until the visible clue set and its
+    # generated letter pool belong to the same puzzle before typing.
+    deadline=time.time()+3
+    last_clues=()
+    while time.time()<deadline:
+        clues=tuple(page.locator('#challengePhotos .photo').all_inner_texts())
+        last_clues=clues
+        item=CHALLENGE_BY_PHOTOS.get(clues)
+        if item:
+            answer=item[language]
+            letters=page.locator('#challengeLetters .letter').all_inner_texts()
+            if all(letters.count(ch)>=answer.count(ch) for ch in set(answer)):
+                return answer
+        page.wait_for_timeout(50)
+    raise AssertionError(('challenge puzzle did not stabilize',language,last_clues))
 
 
 fragment=auth_fragment()
