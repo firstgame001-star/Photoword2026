@@ -2825,6 +2825,9 @@ const tr=()=>I[lang()]||I.ru;
 const alphabet=()=>lang()==='az'?'ABCÇDEƏFGĞHXIİJKLMNOÖPQRSŞTUÜVYZ':lang()==='en'?'ABCDEFGHJKLMNPQRSTUVWXYZ':'АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЫЭЮЯ';
 const rawInit=()=>window.Telegram?.WebApp?.initData||'';
 let mode='blitz',state=null,running=false,question=null,answer='',tiles=[],selected=[],used=new Set(),fixed=new Map(),removed=new Set(),letterOrder=[],textHintOpen=false,hintBusy=false,hearts=3,correct=0,streak=0,bestRunStreak=0,score=0,deadline=0,timer=null,energyTimer=null,serverMode=true,serverNowMs=0,serverPerfMs=0;
+let runEpoch=0,pendingTimeouts=new Set();
+function cancelPending(){runEpoch++;for(const id of pendingTimeouts)clearTimeout(id);pendingTimeouts.clear()}
+function later(fn,ms){const epoch=runEpoch,id=setTimeout(()=>{pendingTimeouts.delete(id);if(epoch===runEpoch)fn()},ms);pendingTimeouts.add(id);return id}
 function syncTrustedClock(s){const n=Date.parse(s?.server_now||'');if(Number.isFinite(n)){serverNowMs=n;serverPerfMs=performance.now()}}
 function trustedNow(){return serverNowMs?serverNowMs+(performance.now()-serverPerfMs):Date.now()}
 const localKey='pw.challenge.local.v1';
@@ -2888,7 +2891,7 @@ function renderInput(){
  letterOrder.forEach(i=>{const ch=tiles[i],b=document.createElement('button');b.className='letter'+(used.has(i)?' used':'')+(removed.has(i)?' removed':'');b.textContent=ch;b.disabled=used.has(i)||removed.has(i)||!running||hintBusy;b.onclick=()=>choose(i);letters.append(b)});
  ['blitzLetterHint','blitzRemoveHint','blitzTextHint','challengeShuffle'].forEach(id=>{const e=$(id);if(e)e.disabled=!running||hintBusy});
 }
-function choose(i){if(!running||hintBusy||used.has(i)||removed.has(i))return;const s=selected.indexOf(null);if(s<0)return;selected[s]=i;used.add(i);renderInput();if(!selected.includes(null))setTimeout(checkWord,70)}
+function choose(i){if(!running||hintBusy||used.has(i)||removed.has(i))return;const s=selected.indexOf(null);if(s<0)return;selected[s]=i;used.add(i);renderInput();if(!selected.includes(null))later(checkWord,70)}
 function clearWord(){selected=Array([...answer].length).fill(null);used.clear();for(const [pos,id] of fixed){selected[pos]=id;used.add(id)}renderInput()}
 function heartsText(){return '🛡️'.repeat(Math.max(0,hearts))+'💥'.repeat(Math.max(0,3-hearts))}
 function setHud(labels,values){for(let i=0;i<4;i++){const n=i+1;$('hudLabel'+n).textContent=labels[i]||'';$('hudValue'+n).textContent=values[i]??''}}
@@ -2925,22 +2928,22 @@ async function blitzHint(type){
  }catch(e){
    flash(String(e?.message)==='insufficient_coins'?x.notEnough:(e?.message||'Hint error'));
  }finally{hintBusy=false;renderInput()}
- if(selected.every(v=>v!==null))setTimeout(checkWord,70);
+ if(selected.every(v=>v!==null))later(checkWord,70);
 }
 function checkWord(){
  if(!running)return;const word=selected.map(i=>tiles[i]).join('');
  if(word===answer){
   pw?.sfx?.('success');pw?.haptic?.('success');correct++;streak++;bestRunStreak=Math.max(bestRunStreak,streak);
   if(mode==='blitz'){
-    score++;deadline+=3000;flash(tr().correct,true);updateHud();setTimeout(nextQ,220);return;
+    score++;deadline+=3000;flash(tr().correct,true);updateHud();later(nextQ,220);return;
   }
   updateHud();hintBusy=true;renderInput();
   $('challengeCorrectTitle').textContent=tr().correctWord;$('challengeCorrectWord').textContent=answer;$('challengeCorrectNext').textContent=tr().nextWord+' ▶';$('challengeCorrectPanel').hidden=false;
  }else{
   pw?.sfx?.('error');pw?.haptic?.('error');streak=0;flash(tr().wrong,false);
   $('challengeSlots').classList.add('wrong');
-  if(mode==='blitz'){deadline-=3000;updateHud();setTimeout(()=>{if(running){$('challengeSlots').classList.remove('wrong');clearWord()}},330);if(deadline<=performance.now())setTimeout(()=>finish('time'),340);return}
-  hearts--;updateHud();setTimeout(()=>{$('challengeSlots').classList.remove('wrong');if(hearts<=0)finish('lives');else clearWord()},380);
+  if(mode==='blitz'){deadline-=3000;updateHud();later(()=>{if(running){$('challengeSlots').classList.remove('wrong');clearWord()}},330);if(deadline<=performance.now())later(()=>finish('time'),340);return}
+  hearts--;updateHud();later(()=>{$('challengeSlots').classList.remove('wrong');if(hearts<=0)finish('lives');else clearWord()},380);
  }
 }
 function formatLeft(ms){const s=Math.max(0,Math.ceil(ms/1000)),h=Math.floor(s/3600),m=Math.floor((s%3600)/60),ss=s%60;return h? h+':'+String(m).padStart(2,'0')+':'+String(ss).padStart(2,'0'):m+':'+String(ss).padStart(2,'0')}
@@ -2954,6 +2957,7 @@ function renderIntro(){
 }
 async function loadState(){try{state=await api('state');renderIntro()}catch{if(rawInit()){state={energy:5,energy_max:ENERGY_MAX,next_energy_at:null,limited_best_score:0,nohint_best_streak:0,blitz_best_score:0,blitz_best_streak:0};serverMode=true;renderIntro();$('challengeStart').disabled=true;pw?.status?.(lang()==='en'?'Could not load the mode. Try again.':lang()==='az'?'Rejimi yükləmək olmadı. Yenidən cəhd et.':'Не удалось загрузить режим. Попробуй ещё раз.')}else{state=localRead();serverMode=false;renderIntro()}}}
 async function startRun(){
+ cancelPending();
  try{state=await api('start',{mode,language:lang()})}catch(e){if(e?.data?.challenge)state=e.data.challenge;if(String(e?.message)==='challenge_no_energy'){renderIntro();pw?.status?.(tr().energyEmpty);return}if(rawInit()){pw?.status?.(lang()==='en'?'Could not start the mode. Try again.':lang()==='az'?'Rejimi başlatmaq olmadı. Yenidən cəhd et.':'Не удалось запустить режим. Попробуй ещё раз.');return}state=localRead()}
  running=true;hearts=3;correct=0;streak=0;bestRunStreak=0;score=0;resetOrder();clearInterval(timer);clearInterval(energyTimer);
  $('challengeIntro').hidden=true;$('challengeResult').hidden=true;$('challengeCorrectPanel').hidden=true;$('challengeHud').hidden=false;$('challengePuzzle').hidden=false;
@@ -2961,7 +2965,7 @@ async function startRun(){
  updateHud();nextQ();
 }
 async function finish(reason){
- if(!running)return;running=false;clearInterval(timer);$('challengeCorrectPanel').hidden=true;renderInput();$('challengePuzzle').hidden=true;$('challengeHud').hidden=true;
+ if(!running)return;cancelPending();running=false;clearInterval(timer);$('challengeCorrectPanel').hidden=true;renderInput();$('challengePuzzle').hidden=true;$('challengeHud').hidden=true;
  const x=tr(),finishScore=mode==='blitz'?score:correct,finishStreak=bestRunStreak;
  try{state=await api('finish',{mode,score:finishScore,streak:finishStreak,language:lang()})}catch{}
  $('challengeResult').hidden=false;$('challengeResultTitle').textContent=reason==='time'?x.timeDone:x.done;
@@ -2971,10 +2975,11 @@ async function finish(reason){
  $('challengeAgain').textContent=(mode==='nohint'?x.restart:x.again)+' ▶';
 }
 function openMode(m){
+ cancelPending();
  if(!I.ru[m])m='blitz';mode=m;document.documentElement.lang=lang();document.querySelectorAll('.screen').forEach(e=>e.classList.toggle('active',e.id==='challengeScreen'));window.scrollTo(0,0);
  $('challengeHome').textContent=tr().home;$('challengeIntro').hidden=false;$('challengeHud').hidden=true;$('challengePuzzle').hidden=true;$('challengeCorrectPanel').hidden=true;$('challengeResult').hidden=true;loadState();
 }
-function closeMode(){running=false;clearInterval(timer);clearInterval(energyTimer);document.querySelectorAll('.screen').forEach(e=>e.classList.toggle('active',e.id==='home'));window.scrollTo(0,0)}
+function closeMode(){cancelPending();running=false;clearInterval(timer);clearInterval(energyTimer);document.querySelectorAll('.screen').forEach(e=>e.classList.toggle('active',e.id==='home'));window.scrollTo(0,0)}
 $('challengeStart')?.addEventListener('click',startRun);$('challengeAgain')?.addEventListener('click',startRun);$('challengeCorrectNext')?.addEventListener('click',()=>{if(mode==='blitz')return;$('challengeCorrectPanel').hidden=true;hintBusy=false;if(mode==='limited'&&correct>=10)finish('complete');else nextQ()});$('challengeShuffle')?.addEventListener('click',()=>{if(!running||hintBusy)return;letterOrder=shuffle([...letterOrder]);renderInput();pw?.sfx?.('tap');pw?.haptic?.()});$('blitzLetterHint')?.addEventListener('click',()=>blitzHint('letter'));$('blitzRemoveHint')?.addEventListener('click',()=>blitzHint('remove'));$('blitzTextHint')?.addEventListener('click',()=>blitzHint('text'));$('challengeBack')?.addEventListener('click',closeMode);$('challengeHome')?.addEventListener('click',closeMode);
 $('energyRefill')?.addEventListener('click',()=>{const shop=$('energyShop');shop.hidden=!shop.hidden;$('energyRefillNote').hidden=shop.hidden;$('energyRefillNote').textContent=tr().refillNote});
 document.querySelectorAll('[data-energy-pack]').forEach(b=>b.addEventListener('click',async()=>{
