@@ -4,7 +4,7 @@ from pathlib import Path
 from playwright.sync_api import sync_playwright, expect
 
 BASE='https://firstgame001-star.github.io/Photoword2026/'
-RELEASE='20260927-r65'
+RELEASE='20260927-r66'
 OUT=Path('test-results'); OUT.mkdir(exist_ok=True)
 
 for attempt in range(48):
@@ -852,7 +852,7 @@ with sync_playwright() as pw:
       page.locator('[data-challenge="blitz"]').tap();expect(page.locator('#challengeScreen')).to_be_visible();expect(page.locator('#challengeIntroTitle')).to_have_text({'ru':'Блиц','en':'Blitz','az':'Blits'}[language]);page.locator('#challengeStart').tap();expect(page.locator('#challengeHud')).to_be_visible();expect(page.locator('#challengePhotos .photo')).to_have_count(4);expect(page.locator('#blitzHints')).to_be_visible();expect(page.locator('#challengeCorrectPanel')).to_be_hidden();assert page.evaluate("window.PW_CHALLENGE_EXTRA.length")==200;coins_before=int(page.locator('[data-coins]').first.inner_text());page.locator('#blitzLetterHint').tap();expect(page.locator('#challengeSlots .slot.fixed')).to_have_count(1);expect(page.locator('[data-coins]').first).to_have_text(str(coins_before-75));page.locator('#challengeBack').tap();expect(page.locator('#home')).to_be_visible()
       page.locator('[data-challenge="nohint"]').tap();expect(page.locator('#challengeScreen')).to_be_visible();page.locator('#challengeStart').tap();expect(page.locator('#challengeHud')).to_be_visible();expect(page.locator('#hudValue2')).to_contain_text('🛡');page.locator('#challengeBack').tap()
       page.locator('[data-challenge="limited"]').tap();expect(page.locator('#challengeScreen')).to_be_visible();expect(page.locator('#challengeIntroStats')).to_contain_text('5');expect(page.locator('#energyRefill')).to_be_visible();expect(page.locator('[data-energy-pack]')).to_have_count(2);page.locator('#challengeStart').tap();expect(page.locator('#challengeHud')).to_be_visible();expect(page.locator('#hudValue3')).to_have_text('4/5');page.locator('#challengeBack').tap()
-      expect(page.locator('#themesEntry')).to_be_visible();expect(page.locator('#themesEntryBadge')).to_be_visible();page.locator('#themesEntry').tap();expect(page.locator('#themesScreen')).to_be_visible();expect(page.locator('#themeCards .theme-card')).to_have_count(12);expect(page.locator('#themeCards .theme-card').first).to_be_enabled();expect(page.locator('#themeCards .theme-card').nth(2)).to_be_enabled();page.locator('#themeCards .theme-card').first.tap();expect(page.locator('#themeDetailScreen')).to_be_visible();expect(page.locator('#themeLevelGrid button')).to_have_count(100);expect(page.locator('#themeLevelGrid button').nth(0)).to_be_enabled();expect(page.locator('#themeLevelGrid button').nth(20)).to_be_disabled();page.locator('#themeDetailBack').tap();page.locator('#themesBack').tap()
+      expect(page.locator('#themesEntry')).to_be_visible();expect(page.locator('#themesEntryBadge')).to_be_visible();page.locator('#themesEntry').tap();expect(page.locator('#themesScreen')).to_be_visible();expect(page.locator('#themeCards .theme-card')).to_have_count(12);expect(page.locator('#themeCards .theme-card').first).to_be_enabled();expect(page.locator('#themeCards .theme-card').nth(2)).to_be_enabled();expect(page.locator('#themeCards .theme-card').nth(3)).to_be_enabled();page.locator('#themeCards .theme-card').first.tap();expect(page.locator('#themeDetailScreen')).to_be_visible();expect(page.locator('#themeLevelGrid button')).to_have_count(100);expect(page.locator('#themeLevelGrid button').nth(0)).to_be_enabled();expect(page.locator('#themeLevelGrid button').nth(20)).to_be_disabled();page.locator('#themeDetailBack').tap();page.locator('#themesBack').tap()
       # Friends use nickname and progress.
       page.locator('#friendsNav').tap();expect(page.locator('#friendsList')).to_contain_text('FriendOne');expect(page.locator('#friendsList')).to_contain_text('7 / 10');page.locator('[data-close="friendsModal"]').tap()
       # Rating and shop surfaces are reachable/localized; native Stars invoice UI is Telegram-controlled.
@@ -917,6 +917,21 @@ with sync_playwright() as pw:
       page.evaluate("localStorage.setItem('pw.themeProgress.professions',JSON.stringify(Array.from({length:99},(_,i)=>i+1)))")
       page.goto(BASE+'clean/theme-game.html?theme=professions&level=100#'+fragment,wait_until='domcontentloaded',timeout=45000)
       prof100={'ru':'ШТУКАТУР','en':'PLASTERER','az':'SUVAQÇI'}[language];tap_word(page,prof100);expect(page.locator('#successPanel')).to_be_visible();expect(page.locator('#nextLevel')).to_have_attribute('href','./index.html')
+      assert not relevant_errors(errors),errors;ctx.close()
+
+    # Thematic Travel has its own 100-level bank and separate progress.
+    for language in ['ru','en','az']:
+      ctx=browser.new_context(viewport={'width':390,'height':800},has_touch=True,is_mobile=True)
+      ctx.add_init_script(f"localStorage.setItem('pw.language','{language}'); localStorage.setItem('pw.theme','game');")
+      account={'photoword_id':'PW-TESTONLY','first_name':'Test','last_name':'','username':None,'game_nickname':None,'nickname_changed':False,'coins':4321,'xp':300,'completed_levels':20,'current_level':21,'rank':1,'daily_streak':0,'last_daily_reward':None}
+      completed=set(range(1,21));install_mock(ctx,account,completed,language);page=ctx.new_page();errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
+      page.goto(BASE+'clean/theme-game.html?theme=travel&level=1#'+fragment,wait_until='domcontentloaded',timeout=45000)
+      expect(page.locator('#themeGameTitle')).to_contain_text({'ru':'Путешествия','en':'Travel','az':'Səyahət'}[language])
+      travel_answer={'ru':'ПАСПОРТ','en':'PASSPORT','az':'PASPORT'}[language];tap_word(page,travel_answer);expect(page.locator('#successPanel')).to_be_visible()
+      assert page.evaluate("JSON.parse(localStorage.getItem('pw.themeProgress.travel')).includes(1)")
+      page.evaluate("localStorage.setItem('pw.themeProgress.travel',JSON.stringify(Array.from({length:99},(_,i)=>i+1)))")
+      page.goto(BASE+'clean/theme-game.html?theme=travel&level=100#'+fragment,wait_until='domcontentloaded',timeout=45000)
+      travel100={'ru':'ПУТЕШЕСТВИЕ','en':'TRAVEL','az':'SƏYAHƏT'}[language];tap_word(page,travel100);expect(page.locator('#successPanel')).to_be_visible();expect(page.locator('#nextLevel')).to_have_attribute('href','./index.html')
       assert not relevant_errors(errors),errors;ctx.close()
 
     # Representative main-game browser checks. Loading game.js also validates every published answer/pool in RU/EN/AZ.
