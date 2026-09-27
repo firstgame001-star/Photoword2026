@@ -4,7 +4,7 @@ from pathlib import Path
 from playwright.sync_api import sync_playwright, expect
 
 BASE='https://firstgame001-star.github.io/Photoword2026/'
-RELEASE='20260927-r69'
+RELEASE='20260928-r70'
 OUT=Path('test-results'); OUT.mkdir(exist_ok=True)
 
 for attempt in range(48):
@@ -980,7 +980,7 @@ with sync_playwright() as pw:
       # Notification setting is present and localized; native permission is controlled by Telegram.
       page.locator('#settingsBtn').tap();expect(page.locator('#notificationsBtn')).to_be_visible();expect(page.locator('#notificationsState')).not_to_be_empty();page.locator('[data-close="settingsModal"]').tap()
       # Rules and support are localized.
-      page.locator('#settingsBtn').tap();page.locator('#rulesBtn').tap();expect(page.locator('#rulesModal')).to_be_visible();assert len(page.locator('#rulesBody').inner_text())>100;page.locator('[data-close="rulesModal"]').tap()
+      page.locator('#settingsBtn').tap();page.locator('#rulesBtn').tap();expect(page.locator('#rulesModal')).to_be_visible();assert len(page.locator('#rulesBody').inner_text())>100;rules_text=page.locator('#rulesBody').inner_text();\n      if language=='az': assert '7-ci fəsil “Sivilizasiya”' in rules_text and '5–12-ci fəsillər artıq' not in rules_text\n      page.locator('[data-close="rulesModal"]').tap()
       page.locator('#settingsBtn').tap();page.locator('#supportBtn').tap();expect(page.locator('#supportModal')).to_be_visible()
       if language=='az': expect(page.locator('#supportTitle')).to_have_text('Dəstək')
       if language=='en': expect(page.locator('#supportTitle')).to_have_text('Support')
@@ -1113,6 +1113,11 @@ with sync_playwright() as pw:
       expect(page.locator('#themeGameTitle')).to_contain_text({'ru':'Технологии','en':'Technology','az':'Texnologiya'}[language])
       technology_answer={'ru':'ТЕХНОЛОГИЯ','en':'TECHNOLOGY','az':'TEXNOLOGİYA'}[language];tap_word(page,technology_answer);expect(page.locator('#successPanel')).to_be_visible()
       assert page.evaluate("JSON.parse(localStorage.getItem('pw.themeProgress.technology')).includes(1)")
+      page.evaluate("localStorage.setItem('pw.themeProgress.technology',JSON.stringify(Array.from({length:87},(_,i)=>i+1)))")
+      page.goto(BASE+'clean/theme-game.html?theme=technology&level=88#'+fragment,wait_until='domcontentloaded',timeout=45000)
+      long_answer={'ru':'КИБЕРБЕЗОПАСНОСТЬ','en':'CYBERSECURITY','az':'KİBERTƏHLÜKƏSİZLİK'}[language]
+      slots_box=page.locator('#slots').bounding_box();assert slots_box and slots_box['x']>=0 and slots_box['x']+slots_box['width']<=391,(language,slots_box)
+      tap_word(page,long_answer);expect(page.locator('#successPanel')).to_be_visible()
       page.evaluate("localStorage.setItem('pw.themeProgress.technology',JSON.stringify(Array.from({length:99},(_,i)=>i+1)))")
       page.goto(BASE+'clean/theme-game.html?theme=technology&level=100#'+fragment,wait_until='domcontentloaded',timeout=45000)
       technology100={'ru':'ИННОВАЦИЯ','en':'INNOVATION','az':'İNNOVASİYA'}[language];tap_word(page,technology100);expect(page.locator('#successPanel')).to_be_visible();expect(page.locator('#nextLevel')).to_have_attribute('href','./index.html')
