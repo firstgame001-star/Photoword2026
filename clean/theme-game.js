@@ -93,7 +93,7 @@ const pool=makePool(level.answer),tiles=pool.map((letter,id)=>({id,letter}));
 let order=tiles.map(t=>t.id),selected=Array(answer.length).fill(null),fixed=new Map(),removed=new Set(),busy=false,solved=false,textOpen=false;
 
 document.documentElement.lang=lang;
-$('themeGameTitle').textContent=ui.sport;$('levelTitle').textContent=ui.level(levelId);$('themeProgress').textContent=progress.size+' / 100';$('textHintLabel').textContent=ui.textHint;$('hintValue').textContent=ui.tap;
+$('themeGameTitle').textContent=ui.sport;$('levelTitle').textContent=ui.level(levelId);$('textHintLabel').textContent=ui.textHint;$('hintValue').textContent=ui.tap;
 $('slots').style.gridTemplateColumns='repeat('+answer.length+',1fr)';$('slots').classList.toggle('long-answer',answer.length>=9);
 level.photos.forEach(([emoji],index)=>{const d=document.createElement('div');d.className='photo';d.setAttribute('role','img');d.setAttribute('aria-label',ui.image(index+1));d.textContent=emoji;$('photos').append(d)});
 
@@ -113,7 +113,7 @@ function paint(){
 function clearInput(){selected=Array(answer.length).fill(null);for(const [pos,id] of fixed)selected[pos]=id}
 function choose(id){if(busy||solved)return;const pos=selected.indexOf(null);if(pos<0)return;pw?.sfx?.('tap');pw?.haptic?.();selected[pos]=id;paint();check()}
 function showSuccess(){
- const p=getProgress();p.add(levelId);saveProgress(p);$('themeProgress').textContent=p.size+' / 100';$('status').hidden=true;$('successPanel').hidden=false;$('successTitle').textContent=ui.passed(levelId);$('successReward').textContent=ui.saved;
+ const p=getProgress();p.add(levelId);saveProgress(p);$('status').hidden=true;$('successPanel').hidden=false;$('successTitle').textContent=ui.passed(levelId);$('successReward').textContent=ui.saved;
  const next=$('nextLevel');if(levelId<20){next.href='./theme-game.html?theme=sport&level='+(levelId+1);next.innerHTML=ui.next+' <span>▶</span>'}else{next.href='./index.html';next.innerHTML=ui.back+' <span>✓</span>'}
 }
 function check(){
@@ -136,7 +136,6 @@ function hint(type){
 }
 $('shuffle').onclick=()=>{shuffle();paint();pw?.status?.(ui.shuffle);pw?.sfx?.('tap')};$('letterHint').onclick=()=>hint('letter');$('removeHint').onclick=()=>hint('remove');$('textHint').onclick=()=>hint('text');
 
-$('themeSettingsBtn').onclick=()=>{textSettingLabels();openModal('tgSettingsModal')};
 $('tgSoundToggle').checked=Boolean(pw.prefs.sound);$('tgSoundToggle').onchange=()=>{pw.prefs.sound=$('tgSoundToggle').checked;persistPrefs();if(pw.prefs.sound)pw.sfx('tap')};
 $('tgHapticToggle').checked=Boolean(pw.prefs.haptic);$('tgHapticToggle').onchange=()=>{pw.prefs.haptic=$('tgHapticToggle').checked;persistPrefs();pw.haptic()};
 $('tgMusicToggle').checked=Boolean(pw.prefs.music);$('tgMusicToggle').onchange=()=>pw.setMusic($('tgMusicToggle').checked);
