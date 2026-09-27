@@ -27,8 +27,11 @@ for(const file of ['core.js','home.js','game.js','theme-game.js']){
 }
 
 const release=JSON.parse(readFileSync(resolve(base,'release.json'),'utf8'));
-if(release.release!=='20260927-r40')throw Error('Unexpected release: '+release.release);
-if(!Array.isArray(release.levels)||!release.levels.includes(60))throw Error('Main levels are not published through 60');
+if(release.release!=='20260927-r41')throw Error('Unexpected release: '+release.release);
+if(!Array.isArray(release.levels)||!release.levels.includes(100))throw Error('Main levels are not published through 100');
+if(release.chapters?.length!==10)throw Error('Main chapter navigation must contain 10 chapters');
+if(release.chapters.find(x=>x.id===3)?.status!=='live')throw Error('Chapter 3 must be complete');
+if(release.chapters.find(x=>x.id===4)?.available_through!==100)throw Error('Chapter 4 preview must be available through 100');
 if(release.thematic_mode?.categories?.length!==12)throw Error('Thematic catalog must contain 12 categories');
 const sport=release.thematic_mode.categories.find(x=>x.id==='sport');
 if(!sport||sport.available_through!==50)throw Error('Sport theme must be playable through level 50');
@@ -40,4 +43,4 @@ if(!index.includes('themes-entry-featured'))throw Error('Featured thematic mode 
 if(!index.includes('12 тем · 1200 уровней'))throw Error('Thematic mode headline is missing');
 if(!themeGame.includes('data-coins'))throw Error('Thematic game coin balance is missing');
 if(themeGame.includes('id="themeSettingsBtn"')||themeGame.includes('id="themeProgress"'))throw Error('Thematic header must contain coins only');
-console.log('PASS: clean entrypoints, r39 manifest, thematic mode, reward balance and JavaScript syntax.');
+console.log('PASS: clean entrypoints, r41 manifest, Chapters 1-10, main levels through 100, thematic mode and JavaScript syntax.');
