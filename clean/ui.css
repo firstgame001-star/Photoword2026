@@ -221,12 +221,27 @@ body{overflow-x:hidden}
  radial-gradient(circle at 50% 58%,#ffbc3b1d 0 18%,transparent 45%),
  linear-gradient(155deg,#0c0d12,#17140e 52%,#2b2210)!important
 }
+[data-home-chapter="11"] .hero,#chapter11Select .hero{
+ background:
+ radial-gradient(circle at 24% 32%,#63ffd34a 0 8%,transparent 24%),
+ radial-gradient(circle at 76% 62%,#4b8dff36 0 12%,transparent 30%),
+ repeating-linear-gradient(135deg,#64ffd011 0 2px,transparent 2px 34px),
+ linear-gradient(150deg,#071d1b,#0d3430 50%,#132b43)!important
+}
+[data-home-chapter="12"] .hero,#chapter12Select .hero{
+ background:
+ radial-gradient(circle at 50% 44%,#ff6edb38 0 10%,transparent 28%),
+ conic-gradient(from 20deg at 50% 44%,#7b61ff24,transparent 20% 45%,#ff6edb22 62%,transparent 78%),
+ linear-gradient(150deg,#150b24,#24163a 52%,#10273b)!important
+}
 [data-home-chapter="5"] .chapter-cover-mark,#chapter5Select .chapter-cover-mark,
 [data-home-chapter="6"] .chapter-cover-mark,#chapter6Select .chapter-cover-mark,
 [data-home-chapter="7"] .chapter-cover-mark,#chapter7Select .chapter-cover-mark,
 [data-home-chapter="8"] .chapter-cover-mark,#chapter8Select .chapter-cover-mark,
 [data-home-chapter="9"] .chapter-cover-mark,#chapter9Select .chapter-cover-mark,
-[data-home-chapter="10"] .chapter-cover-mark,#chapter10Select .chapter-cover-mark{opacity:.72}
+[data-home-chapter="10"] .chapter-cover-mark,#chapter10Select .chapter-cover-mark,
+[data-home-chapter="11"] .chapter-cover-mark,#chapter11Select .chapter-cover-mark,
+[data-home-chapter="12"] .chapter-cover-mark,#chapter12Select .chapter-cover-mark{opacity:.72}
 .future-chapter{opacity:.96}
 
 
