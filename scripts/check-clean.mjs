@@ -27,7 +27,7 @@ for(const file of ['core.js','home.js','game.js','theme-game.js','challenge.js',
 }
 
 const release=JSON.parse(readFileSync(resolve(base,'release.json'),'utf8'));
-if(release.release!=='20260927-r64')throw Error('Unexpected release: '+release.release);
+if(release.release!=='20260927-r65')throw Error('Unexpected release: '+release.release);
 if(!Array.isArray(release.levels)||!release.levels.includes(230))throw Error('Main levels are not published through 230');
 if(release.chapters?.length!==12)throw Error('Main chapter navigation must contain 12 chapters');
 if(release.chapters.find(x=>x.id===3)?.status!=='live')throw Error('Chapter 3 must be complete');
@@ -39,6 +39,8 @@ const sport=release.thematic_mode.categories.find(x=>x.id==='sport');
 if(!sport||sport.available_through!==100||sport.status!=='complete')throw Error('Sport theme must be playable through level 100');
 const art=release.thematic_mode.categories.find(x=>x.id==='art');
 if(!art||art.available_through!==100||art.status!=='complete')throw Error('Art theme must be playable through level 100');
+const professions=release.thematic_mode.categories.find(x=>x.id==='professions');
+if(!professions||professions.available_through!==100||professions.status!=='complete')throw Error('Professions theme must be playable through level 100');
 
 const index=readFileSync(resolve(base,'index.html'),'utf8');
 const themeGame=readFileSync(resolve(base,'theme-game.html'),'utf8');
@@ -49,9 +51,13 @@ if(!index.includes('12 тем · 1200 уровней'))throw Error('Thematic mod
 if(!themeGame.includes('data-coins'))throw Error('Thematic game coin balance is missing');
 if(themeGame.includes('id="themeSettingsBtn"')||themeGame.includes('id="themeProgress"'))throw Error('Thematic header must contain coins only');
 if(!themeGameJs.includes('const ART_LEVELS={')||!themeGameJs.includes('const ART_TRANSLATED={'))throw Error('Art theme bank is missing');
-if(!themeGameJs.includes("themeId=themeParam==='art'?'art':'sport'")||!themeGameJs.includes("return 'pw.themeProgress.'+themeId")||!themeGameJs.includes("theme='+themeId+'&level="))throw Error('Thematic routing/progress is not category-specific');
+if(!themeGameJs.includes('const PROF_LEVELS=')||!themeGameJs.includes('const PROF_TRANSLATED='))throw Error('Professions theme bank is missing');
+if(!themeGameJs.includes("['sport','art','professions'].includes(themeParam)")||!themeGameJs.includes("return 'pw.themeProgress.'+themeId")||!themeGameJs.includes("theme='+themeId+'&level="))throw Error('Thematic routing/progress is not category-specific');
 const artBank=themeGameJs.match(/const ART_LEVELS=\{\n([\s\S]*?)\n\};\nconst ART_TRANSLATED=/);
 if(!artBank||(artBank[1].match(/^\s*\d+:\{/gm)||[]).length!==100)throw Error('Art theme must contain 100 levels');
+const profBank=themeGameJs.match(/const PROF_LEVELS=\{\n([\s\S]*?)\n\};\nconst PROF_TRANSLATED=/);
+if(!profBank||(profBank[1].match(/^\s*"?(?:\d+)"?:\s*\{/gm)||[]).length!==100)throw Error('Professions theme must contain 100 levels');
+if(!homeJs.includes("['sport','art','professions'].includes(id)"))throw Error('Professions theme must be enabled in the category hub');
 const homeJs=readFileSync(resolve(base,'home.js'),'utf8');
 const uiCss=readFileSync(resolve(base,'ui.css'),'utf8');
 if(!index.includes('id="profileTitle"'))throw Error('Chapter-earned profile title surface is missing');
@@ -117,4 +123,4 @@ if(release.ui?.language_gate_fix!=='first_launch_unset_then_persist_choice')thro
 if(!homeJs.includes("sessionStorage.getItem('pw.profileSyncedShown')")||!homeJs.includes("setTimeout(()=>{const e=$('status')"))throw Error('One-time profile sync notice is missing');
 if(release.ui?.profile_synced_notice?.show!=='once_per_session'||release.ui?.profile_synced_notice?.auto_hide_ms!==1800)throw Error('Profile sync notice manifest is incorrect');
 if(!homeJs.includes("applyLanguage('ru',false)")||!homeJs.includes("function applyLanguage(l,persist=true)"))throw Error('First-launch language selection flow is incorrect');
-console.log('PASS: r64 entrypoints, Chapters 1-12, backgrounds, absolute progress, chapter titles and JavaScript syntax.');
+console.log('PASS: r65 entrypoints, Chapters 1-12, backgrounds, absolute progress, chapter titles and JavaScript syntax.');
