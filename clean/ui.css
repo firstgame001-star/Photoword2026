@@ -335,3 +335,24 @@ html[data-theme="light"] .challenge-energy-shop button{background:#f7fbfd;color:
   .textHint{margin-top:7px;padding:8px 10px}
   .version{display:none}
 }
+
+
+/* r77: keep long-answer puzzles fully usable inside short Telegram Mini App viewports */
+.letters.dense{grid-template-columns:repeat(7,minmax(0,1fr))}
+@media (max-height:760px){
+  .photos{width:min(46svh,100%);max-width:240px}
+  .letters.dense{gap:3px}
+  .letters.dense .letter{font-size:clamp(16px,2.6svh,19px)}
+  .tool{min-height:36px;padding:6px 9px}
+  .textHint{padding:7px 9px}
+  .game-wrap .status:empty{display:none}
+}
+@media (max-height:680px){
+  .game-wrap{padding-top:calc(4px + env(safe-area-inset-top));padding-bottom:calc(6px + env(safe-area-inset-bottom))}
+  .photos{width:min(40svh,100%);max-width:220px}
+  .photo{font-size:clamp(42px,6.4svh,54px)}
+  .slots{margin:5px auto}
+  .letters{gap:3px}
+  .tools{margin-top:5px}
+  .textHint{margin-top:5px}
+}
