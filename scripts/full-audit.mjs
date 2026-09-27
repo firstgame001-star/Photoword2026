@@ -31,8 +31,8 @@ assertRefs(theme,themeHtml,'theme-game.js');
 assertRefs(challenge,index,'challenge.js');
 
 function extractConstExpr(src,name){
- const token='const '+name+'=',idx=src.indexOf(token);if(idx<0)throw Error('Missing const '+name);
- let i=idx+token.length;while(/\s/.test(src[i]))i++;
+ const re=new RegExp('const\\s+'+name+'\\s*=\\s*'),m=re.exec(src);if(!m)throw Error('Missing const '+name);
+ let i=m.index+m[0].length;while(/\s/.test(src[i]))i++;
  const open=src[i],close=open==='{'?'}':open==='['?']':null;if(!close)throw Error('Unsupported const '+name);
  let depth=0,quote=null,escape=false;
  for(let j=i;j<src.length;j++){
