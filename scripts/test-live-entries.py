@@ -914,8 +914,19 @@ def install_mock(ctx,account,completed,lang):
             level=int(body['levelId']);assert body.get('answer')==ANSWERS[lang][level-1],(lang,level,body.get('answer'))
             if level not in completed:
                 completed.add(level);account['coins']+=20;account['xp']+=15;account['completed_levels']+=1;account['current_level']=max(account['current_level'],level+1);account['rank']=1
+        elif action=='theme_hint':
+            cost={'letter':50,'remove':100,'text':150}[body['hintType']]
+            if account['coins']<cost: status=402;data={'error':'insufficient_coins'}
+            else: account['coins']-=cost
+        elif action=='theme_complete':
+            theme=str(body['themeId']);level=int(body['levelId']);key=theme+':'+str(level)
+            theme_done=account.setdefault('_theme_completed',[])
+            rewarded=key not in theme_done
+            if rewarded:
+                theme_done.append(key);account['coins']+=10;account['xp']+=10;account['rank']=1
+            data={'player':account.copy(),'theme_rewarded':rewarded}
         elif action=='reset_progress':
-            completed.clear();account.update(xp=0,completed_levels=0,current_level=1,rank=0)
+            completed.clear();account['_theme_completed']=[];account.update(xp=0,completed_levels=0,current_level=1,rank=0)
         elif action=='claim_daily':
             account['coins']+=5;account['daily_streak']=max(1,account.get('daily_streak',0)+1);account['last_daily_reward']=time.strftime('%Y-%m-%d')
         elif action=='set_nickname':
@@ -1090,7 +1101,12 @@ with sync_playwright() as pw:
       completed=set(range(1,21));install_mock(ctx,account,completed,language);page=ctx.new_page();errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
       page.goto(BASE+'clean/theme-game.html?theme=sport&level=1#'+fragment,wait_until='domcontentloaded',timeout=45000)
       expect(page.locator('[data-coins]')).to_have_text('4321');expect(page.locator('#themeSettingsBtn')).to_have_count(0);expect(page.locator('#themeProgress')).to_have_count(0)
-      sport_answer={'ru':'ГОЛ','en':'GOAL','az':'QOL'}[language];tap_word(page,sport_answer);expect(page.locator('#successPanel')).to_be_visible();assert page.evaluate("JSON.parse(localStorage.getItem('pw.themeProgress.sport')).includes(1)")
+      expect(page.locator('#letterHint')).to_contain_text('50');expect(page.locator('#removeHint')).to_contain_text('100');expect(page.locator('#textHintLabel')).to_contain_text('150')
+      page.locator('#letterHint').tap();expect(page.locator('[data-coins]')).to_have_text('4271');expect(page.locator('#slots .fixed')).to_have_count(1)
+      page.locator('#removeHint').tap();expect(page.locator('[data-coins]')).to_have_text('4171')
+      page.locator('#textHint').tap();expect(page.locator('[data-coins]')).to_have_text('4021');expect(page.locator('#hintValue')).not_to_have_text({'ru':'Нажми, чтобы открыть','en':'Tap to reveal','az':'Açmaq üçün toxun'}[language])
+      sport_answer={'ru':'ГОЛ','en':'GOAL','az':'QOL'}[language];tap_word(page,sport_answer);expect(page.locator('#successPanel')).to_be_visible();expect(page.locator('[data-coins]')).to_have_text('4031');expect(page.locator('#successReward')).to_contain_text('+10');assert account['xp']==310;assert page.evaluate("JSON.parse(localStorage.getItem('pw.themeProgress.sport')).includes(1)")
+      page.goto(BASE+'clean/theme-game.html?theme=sport&level=1#'+fragment,wait_until='domcontentloaded',timeout=45000);tap_word(page,sport_answer);expect(page.locator('#successPanel')).to_be_visible();expect(page.locator('[data-coins]')).to_have_text('4031');assert account['xp']==310
       page.evaluate("localStorage.setItem('pw.themeProgress.sport',JSON.stringify(Array.from({length:20},(_,i)=>i+1)))")
       page.goto(BASE+'clean/theme-game.html?theme=sport&level=21#'+fragment,wait_until='domcontentloaded',timeout=45000)
       answer21={'ru':'БОКС','en':'BOXING','az':'BOKS'}[language];tap_word(page,answer21);expect(page.locator('#successPanel')).to_be_visible()
@@ -1108,6 +1124,15 @@ with sync_playwright() as pw:
       answer100={'ru':'ОЛИМПИАДА','en':'OLYMPICS','az':'OLİMPİADA'}[language];tap_word(page,answer100);expect(page.locator('#successPanel')).to_be_visible();expect(page.locator('#nextLevel')).to_have_attribute('href','./index.html')
       assert not relevant_errors(errors),errors;ctx.close()
 
+
+    # Thematic hints refuse to apply when the player cannot afford them.
+    ctx=browser.new_context(viewport={'width':390,'height':800},has_touch=True,is_mobile=True)
+    ctx.add_init_script("localStorage.setItem('pw.language','ru'); localStorage.setItem('pw.theme','game');")
+    account={'photoword_id':'PW-TESTONLY','first_name':'Test','last_name':'','username':None,'game_nickname':None,'nickname_changed':False,'coins':40,'xp':0,'completed_levels':20,'current_level':21,'rank':1,'daily_streak':0,'last_daily_reward':None}
+    install_mock(ctx,account,set(range(1,21)),'ru');page=ctx.new_page();errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
+    page.goto(BASE+'clean/theme-game.html?theme=sport&level=1#'+fragment,wait_until='domcontentloaded',timeout=45000)
+    page.locator('#letterHint').tap();expect(page.locator('[data-coins]')).to_have_text('40');expect(page.locator('#slots .fixed')).to_have_count(0);assert account['coins']==40
+    assert not relevant_errors(errors),errors;ctx.close()
 
     # Thematic Art has its own 100-level bank and separate progress from Sport.
     for language in ['ru','en','az']:
