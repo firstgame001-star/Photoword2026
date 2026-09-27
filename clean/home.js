@@ -91,6 +91,25 @@ const THEME_MODE={
   animals:['Heyvanlar','Vəhşi və ev heyvanları'],transport:['Nəqliyyat','Maşınlar, qatarlar, təyyarələr və yollar'],home:['Ev və məişət','Əşyalar, otaqlar və gündəlik həyat'],nature:['Təbiət','Bitkilər, hava, landşaft və təbiət hadisələri']
  }}
 };
+const CHALLENGE_MODE={
+ ru:{kicker:'НОВЫЕ РЕЖИМЫ',title:'Испытания',subtitle:'Три отдельных режима. Механику и награды настроим следующим этапом.',state:'РЕЖИМ СОЗДАН',close:'ПОНЯТНО',modal:'Режим уже добавлен в игру. Правила, результат и награды настроим следующим этапом.',modes:{limited:['❤️','Ограниченные попытки','Проходи задания с ограниченным запасом ошибок'],nohint:['🚫','Без подсказок','Только изображения, буквы и твоя логика'],blitz:['⚡','Блиц','Быстрый режим на время']}},
+ en:{kicker:'NEW MODES',title:'Challenges',subtitle:'Three separate modes. Mechanics and rewards will be configured next.',state:'MODE CREATED',close:'GOT IT',modal:'This mode is already added to the game. Rules, scoring and rewards will be configured next.',modes:{limited:['❤️','Limited attempts','Solve puzzles with a limited number of mistakes'],nohint:['🚫','No hints','Only images, letters and your logic'],blitz:['⚡','Blitz','A fast timed mode']}},
+ az:{kicker:'YENİ REJİMLƏR',title:'Sınaqlar',subtitle:'Üç ayrıca rejim. Mexanika və mükafatları növbəti mərhələdə quracağıq.',state:'REJİM YARADILIB',close:'BAŞA DÜŞDÜM',modal:'Bu rejim artıq oyuna əlavə edilib. Qaydaları, nəticəni və mükafatları növbəti mərhələdə quracağıq.',modes:{limited:['❤️','Məhdud cəhdlər','Məhdud səhv sayı ilə tapşırıqları keç'],nohint:['🚫','İpucusuz','Yalnız şəkillər, hərflər və sənin məntiqin'],blitz:['⚡','Blits','Vaxta qarşı sürətli rejim']}}
+};
+function challengeMode(){return CHALLENGE_MODE[lang()]||CHALLENGE_MODE.ru}
+function setChallengeLabels(){
+ const m=challengeMode();
+ text('challengeKicker',m.kicker);text('challengeTitle',m.title);text('challengeSubtitle',m.subtitle);
+ const ids={limited:'Limited',nohint:'NoHint',blitz:'Blitz'};
+ for(const [key,suffix] of Object.entries(ids)){
+  const d=m.modes[key];text('challenge'+suffix+'Title',d[1]);text('challenge'+suffix+'Desc',d[2]);text('challenge'+suffix+'State',m.state);
+ }
+}
+function openChallengeMode(id){
+ const m=challengeMode(),d=m.modes[id];if(!d)return;
+ text('challengeModalIcon',d[0]);text('challengeModalBadge',m.state);text('challengeModalTitle',d[1]);text('challengeModalText',m.modal);text('challengeModalClose',m.close);
+ open('challengeModal');track('challenge_mode_open',{metadata:{mode:id}});
+}
 function themeMode(){return THEME_MODE[lang()]||THEME_MODE.ru}
 function themeCategory(id){return THEME_CATEGORIES.find(x=>x.id===id)}
 function setThemeHubLabels(){
@@ -211,7 +230,7 @@ function update(p){
  const claimed=String(p.last_daily_reward||'')===today();$('claimDaily').disabled=claimed;text('claimDaily',claimed?x.claimed:x.claim);text('dailyStreak',x.streak+': '+(p.daily_streak||0));text('notificationsState',p.notifications_enabled?x.notifyAllowed:x.notifyAllow);
 }
 function applyLanguage(l){
- if(!T[l])l='ru';try{localStorage.setItem('pw.language',l)}catch{};document.documentElement.lang=l;const x=T[l];setLogo(x);setThemeHubLabels();
+ if(!T[l])l='ru';try{localStorage.setItem('pw.language',l)}catch{};document.documentElement.lang=l;const x=T[l];setLogo(x);setThemeHubLabels();setChallengeLabels();
  const nav=document.querySelectorAll('nav small');[x.home,x.chapters,x.rating,x.friends,x.shop].forEach((v,i)=>{if(nav[i])nav[i].textContent=v});
  text('chaptersTitle',x.chapters);text('chaptersSubtitle',x.chaptersSubtitle);text('ratingTitle',x.rating);text('ratingSubtitle',x.ratingSubtitle);text('ratingLeague',x.overallRating);text('myPositionLabel',x.myPosition);text('refreshRating',x.refresh);
  text('settingsTitle',x.settings);const rows=document.querySelectorAll('#settingsModal .settingrow b');if(rows[0])rows[0].textContent=x.sound;if(rows[1])rows[1].textContent=x.vibration;if(rows[2])rows[2].textContent=x.music;
@@ -249,7 +268,7 @@ $('languageBtn').onclick=()=>{close('settingsModal');const c=$('languageClose');
 $('themeBtn').onclick=()=>{close('settingsModal');setTimeout(()=>open('themeModal'),0)};
 document.querySelectorAll('[data-theme]').forEach(b=>b.onclick=()=>{applyTheme(b.dataset.theme);track('theme_change',{metadata:{theme:b.dataset.theme}});close('themeModal')});
 document.querySelectorAll('[data-language]').forEach(b=>b.onclick=()=>{applyLanguage(b.dataset.language);track('language_change',{metadata:{language:b.dataset.language}});close('languageModal');pw.status(b.dataset.language==='ru'?'Язык игры: Русский':b.dataset.language==='en'?'Game language: English':'Oyun dili: Azərbaycan dili')});
-$('profileBtn').onclick=()=>open('profileModal');$('dailyRewardBtn').onclick=()=>open('dailyModal');$('shopOffer').onclick=()=>{track('shop_open');open('shopModal')};$('shopNav').onclick=()=>{track('shop_open');open('shopModal')};$('themesEntry').onclick=()=>{renderThemeHub(pw.player);screen('themesScreen');track('themes_open')};$('themesBack').onclick=()=>screen('home');$('themeDetailBack').onclick=()=>screen('themesScreen');
+$('profileBtn').onclick=()=>open('profileModal');$('dailyRewardBtn').onclick=()=>open('dailyModal');$('shopOffer').onclick=()=>{track('shop_open');open('shopModal')};$('shopNav').onclick=()=>{track('shop_open');open('shopModal')};$('themesEntry').onclick=()=>{renderThemeHub(pw.player);screen('themesScreen');track('themes_open')};$('themesBack').onclick=()=>screen('home');$('themeDetailBack').onclick=()=>screen('themesScreen');document.querySelectorAll('[data-challenge]').forEach(b=>b.onclick=()=>openChallengeMode(b.dataset.challenge));
 $('chaptersNav').onclick=()=>{track('chapter_open',{chapterId:(pw.player?.current_level||1)<=20?1:2});screen('chaptersScreen')};$('chaptersBack').onclick=()=>screen('home');$('homeNav').onclick=()=>screen('home');
 $('rulesBtn').onclick=()=>{close('settingsModal');applyLanguage(lang());setTimeout(()=>open('rulesModal'),0)};
 $('supportBtn').onclick=()=>{track('support_open');close('settingsModal');setTimeout(()=>open('supportModal'),0)};
@@ -290,5 +309,5 @@ async function rating(){const x=t();screen('ratingScreen');const id=++ratingReq,
 ['ratingNav','ratingShortcut','refreshRating'].forEach(id=>$(id).onclick=rating);
 
 window.addEventListener('pw:player',e=>update(e.detail));
-pw.login().then(async()=>{pw.status(t().profileSynced);track('app_open',{metadata:{version:'r43'}});configureAds();try{const start=window.Telegram?.WebApp?.initDataUnsafe?.start_param||'';if(start.startsWith('ref_PW-'))await pw.api('register_referral',{referrer:start.slice(4)})}catch{}}).catch(e=>pw.status(e.message));
+pw.login().then(async()=>{pw.status(t().profileSynced);track('app_open',{metadata:{version:'r44'}});configureAds();try{const start=window.Telegram?.WebApp?.initDataUnsafe?.start_param||'';if(start.startsWith('ref_PW-'))await pw.api('register_referral',{referrer:start.slice(4)})}catch{}}).catch(e=>pw.status(e.message));
 })();
