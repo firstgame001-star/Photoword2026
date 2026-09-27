@@ -27,7 +27,7 @@ for(const file of ['core.js','home.js','game.js','theme-game.js']){
 }
 
 const release=JSON.parse(readFileSync(resolve(base,'release.json'),'utf8'));
-if(release.release!=='20260927-r43')throw Error('Unexpected release: '+release.release);
+if(release.release!=='20260927-r44')throw Error('Unexpected release: '+release.release);
 if(!Array.isArray(release.levels)||!release.levels.includes(100))throw Error('Main levels are not published through 100');
 if(release.chapters?.length!==10)throw Error('Main chapter navigation must contain 10 chapters');
 if(release.chapters.find(x=>x.id===3)?.status!=='live')throw Error('Chapter 3 must be complete');
@@ -55,4 +55,8 @@ for(let n=1;n<=10;n++){
 }
 if(release.ui?.chapter_progress_mode!=='absolute_level')throw Error('Release must declare absolute chapter progress');
 if(release.ui?.chapter_titles!==true)throw Error('Release must declare chapter title system');
-console.log('PASS: r43 entrypoints, Chapters 1-10, backgrounds, absolute progress, chapter titles and JavaScript syntax.');
+if(!index.includes('id="challengeModes"')||!index.includes('data-challenge="limited"')||!index.includes('data-challenge="nohint"')||!index.includes('data-challenge="blitz"'))throw Error('Challenge mode cards are missing');
+if(!index.includes('id="challengeModal"'))throw Error('Challenge preview modal is missing');
+if(!homeJs.includes('const CHALLENGE_MODE='))throw Error('Challenge localization is missing');
+if(release.challenge_modes?.status!=='created_ui_rules_pending'||release.challenge_modes?.modes?.length!==3)throw Error('Challenge mode manifest is incomplete');
+console.log('PASS: r44 entrypoints, Chapters 1-10, backgrounds, absolute progress, chapter titles and JavaScript syntax.');
