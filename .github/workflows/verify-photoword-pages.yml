@@ -136,7 +136,7 @@ jobs:
           grep -q '"id":"technology","levels":100,"available_through":100,"status":"complete"' "$RUNNER_TEMP/release.json"
           grep -q '"thematic_answers_unique_across_ready_categories":true' "$RUNNER_TEMP/release.json"
           grep -q '"server_authoritative":true' "$RUNNER_TEMP/release.json"
-          grep -q '"first_completion":{"coins":10,"xp":10}' "$RUNNER_TEMP/release.json"
+          grep -q '"first_completion":{"coins":15,"xp":10}' "$RUNNER_TEMP/release.json"
           grep -q '"hints":{"letter":50,"remove":100,"text":150,"shuffle":0}' "$RUNNER_TEMP/release.json"
           grep -q "theme_complete" "$RUNNER_TEMP/theme-game.js"
           grep -q "theme_hint" "$RUNNER_TEMP/theme-game.js"
