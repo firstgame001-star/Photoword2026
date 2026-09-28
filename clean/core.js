@@ -29,9 +29,17 @@
   };
   function lang(){try{return localStorage.getItem('pw.language')||'ru'}catch{return'ru'}}
   function errText(code,statusCode){const t=ERR[lang()]||ERR.ru;return t[code]||(lang()==='en'?'Server error ('+statusCode+').':lang()==='az'?'Server xətası ('+statusCode+').':'Ошибка сервера ('+statusCode+').')}
-  function status(message) {
+  let statusTimer;
+  function status(message, duration = 2200) {
     const e = document.getElementById('status');
-    if (e) { e.textContent = message; e.hidden = false; }
+    if (!e) return;
+    clearTimeout(statusTimer);
+    e.textContent = String(message || '');
+    e.hidden = !message;
+    if (message) statusTimer = setTimeout(() => {
+      e.hidden = true;
+      e.textContent = '';
+    }, duration);
   }
   function name(p) {
     if(p?.game_nickname) return p.game_nickname;
