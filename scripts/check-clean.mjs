@@ -22,19 +22,21 @@ for(const [page,module] of Object.entries(pages)){
  }
 }
 
-for(const file of ['core.js','home.js','game.js','theme-game.js','challenge.js','challenge-bank-extra.js']){
+for(const file of ['core.js','home.js','game.js','main-levels-8-9.js','theme-game.js','challenge.js','challenge-bank-extra.js']){
  execFileSync(process.execPath,['--check',resolve(base,file)]);
 }
 
 const release=JSON.parse(readFileSync(resolve(base,'release.json'),'utf8'));
-if(release.release!=='20260928-r77')throw Error('Unexpected release: '+release.release);
-if(!Array.isArray(release.levels)||!release.levels.includes(280))throw Error('Main levels are not published through 280');
+if(release.release!=='20260928-r78')throw Error('Unexpected release: '+release.release);
+if(!Array.isArray(release.levels)||!release.levels.includes(380))throw Error('Main levels are not published through 380');
 if(release.chapters?.length!==12)throw Error('Main chapter navigation must contain 12 chapters');
 if(release.chapters.find(x=>x.id===3)?.status!=='live')throw Error('Chapter 3 must be complete');
 if(release.chapters.find(x=>x.id===4)?.available_through!==131||release.chapters.find(x=>x.id===4)?.status!=='live')throw Error('Chapter 4 must be complete through 131');
 if(release.chapters.find(x=>x.id===5)?.available_through!==180||release.chapters.find(x=>x.id===5)?.status!=='live')throw Error('Chapter 5 must be complete through 180');
 if(release.chapters.find(x=>x.id===6)?.available_through!==230||release.chapters.find(x=>x.id===6)?.status!=='live')throw Error('Chapter 6 must be complete through 230');
 if(release.chapters.find(x=>x.id===7)?.available_through!==280||release.chapters.find(x=>x.id===7)?.status!=='live')throw Error('Chapter 7 must be complete through 280');
+if(release.chapters.find(x=>x.id===8)?.available_through!==330||release.chapters.find(x=>x.id===8)?.status!=='live')throw Error('Chapter 8 must be complete through 330');
+if(release.chapters.find(x=>x.id===9)?.available_through!==380||release.chapters.find(x=>x.id===9)?.status!=='live')throw Error('Chapter 9 must be complete through 380');
 if(release.thematic_mode?.categories?.length!==12)throw Error('Thematic catalog must contain 12 categories');
 if(release.verification?.thematic_answers_unique_across_ready_categories!==true)throw Error('Cross-theme answer uniqueness flag is missing');
 if(release.thematic_mode?.economy?.first_completion?.coins!==15||release.thematic_mode?.economy?.first_completion?.xp!==10||release.thematic_mode?.economy?.replay_reward!==false)throw Error('Thematic completion reward manifest is incorrect');
@@ -94,7 +96,8 @@ for(let n=1;n<=12;n++){
 if(release.ui?.chapter_progress_mode!=='absolute_level')throw Error('Release must declare absolute chapter progress');
 if(release.ui?.chapter_titles!==true)throw Error('Release must declare chapter title system');
 const gameJs=readFileSync(resolve(base,'game.js'),'utf8');
-if(!gameJs.includes('for(let n=1;n<=280;n++){')||!gameJs.includes('230:{')||!gameJs.includes('231:{')||!gameJs.includes('280:{')||!gameJs.includes('levelId===230')||!gameJs.includes('levelId===280'))throw Error('Main levels through Chapter 7 are incomplete');
+const mainExtraJs=readFileSync(resolve(base,'main-levels-8-9.js'),'utf8');
+if(!gameJs.includes('for(let n=1;n<=380;n++){')||!gameJs.includes('levelId===280')||!gameJs.includes('levelId===330')||!gameJs.includes('levelId===380')||!mainExtraJs.includes('"id": 281')||!mainExtraJs.includes('"id": 380'))throw Error('Main levels through Chapter 9 are incomplete');
 
 const mainBase=gameJs.slice(gameJs.indexOf('const LEVELS'),gameJs.indexOf('const TRANSLATED='));
 const mainTranslated=gameJs.slice(gameJs.indexOf('const TRANSLATED='));
@@ -104,20 +107,20 @@ const mainAz=mainTranslated.slice(mainAzStart,mainTranslated.indexOf('\n  };',ma
 function extractMainAnswers(section){
  return [...section.matchAll(/\b\d+:\{[^}]*["']?answer["']?\s*:\s*["']([^"']+)["']/g)].map(m=>m[1]);
 }
+const extraRows=Function('window={};'+mainExtraJs+';return window.PW_MAIN_EXTRA')();
 for(const [langCode,section] of [['ru',mainBase],['en',mainEn],['az',mainAz]]){
- const answers=extractMainAnswers(section);
- if(answers.length!==280)throw Error('Expected 280 main answers for '+langCode+', got '+answers.length);
+ const answers=extractMainAnswers(section).concat(extraRows.map(row=>row[langCode].answer));
+ if(answers.length!==380)throw Error('Expected 380 main answers for '+langCode+', got '+answers.length);
  const seen=new Set();
- for(const answer of answers){
-   if(seen.has(answer))throw Error('Duplicate main answer in '+langCode+': '+answer);
-   seen.add(answer);
- }
+ for(const answer of answers){if(seen.has(answer))throw Error('Duplicate main answer in '+langCode+': '+answer);seen.add(answer);}
 }
 if(release.verification?.main_answers_unique_all_languages!==true)throw Error('Main answer uniqueness flag is missing');
 if(!index.includes('data-home-chapter="12"')||!index.includes('id="chapter12Select"')||index.match(/data-dot="/g)?.length!==12)throw Error('Chapter 12 navigation is incomplete');
 if(!index.includes('id="chapter5Progress"')||!index.includes('id="homeChapter5Progress"')||!index.includes('132–180'))throw Error('Chapter 5 UI is incomplete');
 if(!index.includes('id="chapter6Progress"')||!index.includes('id="homeChapter6Progress"')||!index.includes('181–230'))throw Error('Chapter 6 UI is incomplete');
 if(!index.includes('id="chapter7Progress"')||!index.includes('id="homeChapter7Progress"')||!index.includes('231–280'))throw Error('Chapter 7 UI is incomplete');
+if(!index.includes('id="chapter8Progress"')||!index.includes('id="homeChapter8Progress"')||!index.includes('281–330'))throw Error('Chapter 8 UI is incomplete');
+if(!index.includes('id="chapter9Progress"')||!index.includes('id="homeChapter9Progress"')||!index.includes('331–380'))throw Error('Chapter 9 UI is incomplete');
 if(!index.includes('id="challengeModes"')||!index.includes('data-challenge="limited"')||!index.includes('data-challenge="nohint"')||!index.includes('data-challenge="blitz"'))throw Error('Challenge mode cards are missing');
 if(!index.includes('id="challengeScreen"'))throw Error('Playable challenge screen is missing');
 if(!index.includes('./challenge.js'))throw Error('Challenge game module is missing');
