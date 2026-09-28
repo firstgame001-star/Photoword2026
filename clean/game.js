@@ -903,7 +903,7 @@
 
   const ui=GAME_UI[gameLang]||GAME_UI.ru;
   document.documentElement.lang=gameLang;
-  const chapterNum=levelId<=20?1:levelId<=50?2:levelId<=90?3:levelId<=131?4:levelId<=180?5:levelId<=230?6:levelId<=280?7:levelId<=330?8:9;
+  const chapterNum=levelId<=20?1:levelId<=50?2:levelId<=90?3:levelId<=130?4:levelId<=180?5:levelId<=230?6:levelId<=280?7:levelId<=330?8:9;
   document.querySelector('.game-head>div b').textContent=ui.chapter(chapterNum);
   const chapterName={1:ui.warm,2:ui.assoc,3:ui.chapter3,4:ui.chapter4,5:ui.chapter5,6:ui.chapter6,7:ui.chapter7,8:ui.chapter8,9:ui.chapter9}[chapterNum]||ui.chapter9;
   $('levelTitle').textContent=chapterName+' · '+ui.level(levelId);
@@ -953,7 +953,7 @@
     if(levelId===20){if(chapterNote){chapterNote.hidden=false;chapterNote.textContent=ui.chapterPassed(1)+' '+ui.newTitle(chapterEarnedTitle(1))+'. '+ui.chapterUnlocked(2)+'.';}next.href='./game.html?level=21';next.innerHTML=ui.nextChapter+' <span>▶</span>';}
     else if(levelId===50){if(chapterNote){chapterNote.hidden=false;chapterNote.textContent=ui.chapterPassed(2)+' '+ui.newTitle(chapterEarnedTitle(2))+'. '+ui.chapterUnlocked(3)+'.';}next.href='./game.html?level=51';next.innerHTML=ui.nextChapter+' <span>▶</span>';}
     else if(levelId===90){if(chapterNote){chapterNote.hidden=false;chapterNote.textContent=ui.chapterPassed(3)+' '+ui.newTitle(chapterEarnedTitle(3))+'. '+ui.chapterUnlocked(4)+'.';}next.href='./game.html?level=91';next.innerHTML=ui.nextChapter+' <span>▶</span>';}
-    else if(levelId===131){if(chapterNote){chapterNote.hidden=false;chapterNote.textContent=ui.chapterPassed(4)+' '+ui.newTitle(chapterEarnedTitle(4))+'. '+ui.chapterUnlocked(5)+'.';}next.href='./game.html?level=132';next.innerHTML=ui.nextChapter+' <span>▶</span>';}
+    else if(levelId===130){if(chapterNote){chapterNote.hidden=false;chapterNote.textContent=ui.chapterPassed(4)+' '+ui.newTitle(chapterEarnedTitle(4))+'. '+ui.chapterUnlocked(5)+'.';}next.href='./game.html?level=131';next.innerHTML=ui.nextChapter+' <span>▶</span>';}
     else if(levelId===180){if(chapterNote){chapterNote.hidden=false;chapterNote.textContent=ui.chapterPassed(5)+' '+ui.newTitle(chapterEarnedTitle(5))+'. '+ui.chapterUnlocked(6)+'.';}next.href='./game.html?level=181';next.innerHTML=ui.nextChapter+' <span>▶</span>';}
     else if(levelId===230){if(chapterNote){chapterNote.hidden=false;chapterNote.textContent=ui.chapterPassed(6)+' '+ui.newTitle(chapterEarnedTitle(6))+'. '+ui.chapterUnlocked(7)+'.';}next.href='./game.html?level=231';next.innerHTML=ui.nextChapter+' <span>▶</span>';}
     else if(levelId===280){if(chapterNote){chapterNote.hidden=false;chapterNote.textContent=ui.chapterPassed(7)+' '+ui.newTitle(chapterEarnedTitle(7))+'. '+ui.chapterUnlocked(8)+'.';}next.href='./game.html?level=281';next.innerHTML=ui.nextChapter+' <span>▶</span>';}
