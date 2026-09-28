@@ -6,9 +6,9 @@ const lang=getLang();
 const themeParam=new URLSearchParams(location.search).get('theme');
 const themeId=['sport','art','professions','travel','science','technology'].includes(themeParam)?themeParam:'sport';
 const UI={
- ru:{sport:'⚽ Спорт',art:'🎨 Искусство',professions:'🧑‍💼 Профессии',travel:'🌍 Путешествия',science:'🔬 Наука',technology:'💻 Технологии',level:n=>'Тематический уровень '+n,textHint:'Текстовая подсказка',tap:'Нажми, чтобы открыть',wrong:'Неверное слово. Попробуй ещё раз.',passed:n=>'Уровень '+n+' пройден!',saved:'Прогресс сохранён отдельно от основной игры.',next:'СЛЕДУЮЩИЙ УРОВЕНЬ',back:'К ТЕМАМ',locked:n=>'Сначала пройди уровень '+n+'.',letter:'Буква открыта.',remove:'Лишние буквы убраны.',shuffle:'Буквы перемешаны.',text:'Подсказка открыта.',allLetters:'Все буквы уже открыты.',noExtra:'Лишних букв не осталось.',placeFail:'Не удалось разместить букву.',saving:'Сохраняю результат…',reward:'+15 🪙 · +10 XP',replayReward:'Уровень уже был пройден · награда не начисляется.',needTelegram:'Открой игру через Telegram, чтобы получать награды и использовать подсказки.',spent:(n,msg)=>'−'+n+' 🪙 · '+msg,image:n=>'Изображение '+n},
- en:{sport:'⚽ Sport',art:'🎨 Art',professions:'🧑‍💼 Professions',travel:'🌍 Travel',science:'🔬 Science',technology:'💻 Technology',level:n=>'Themed level '+n,textHint:'Text hint',tap:'Tap to reveal',wrong:'Wrong word. Try again.',passed:n=>'Level '+n+' completed!',saved:'Progress saved separately from the main game.',next:'NEXT LEVEL',back:'BACK TO THEMES',locked:n=>'Complete level '+n+' first.',letter:'Letter revealed.',remove:'Extra letters removed.',shuffle:'Letters shuffled.',text:'Hint revealed.',allLetters:'All letters are already revealed.',noExtra:'No extra letters remain.',placeFail:'Could not place the letter.',saving:'Saving result…',reward:'+15 🪙 · +10 XP',replayReward:'Level already completed · no repeat reward.',needTelegram:'Open the game in Telegram to receive rewards and use hints.',spent:(n,msg)=>'−'+n+' 🪙 · '+msg,image:n=>'Image '+n},
- az:{sport:'⚽ İdman',art:'🎨 İncəsənət',professions:'🧑‍💼 Peşələr',travel:'🌍 Səyahət',science:'🔬 Elm',technology:'💻 Texnologiya',level:n=>n+'-ci mövzu səviyyəsi',textHint:'Mətn ipucu',tap:'Açmaq üçün toxun',wrong:'Söz yanlışdır. Yenidən cəhd et.',passed:n=>n+'-ci səviyyə keçildi!',saved:'Tərəqqi əsas oyundan ayrıca saxlanıldı.',next:'NÖVBƏTİ SƏVİYYƏ',back:'MÖVZULARA QAYIT',locked:n=>'Əvvəlcə '+n+'-ci səviyyəni keç.',letter:'Hərf açıldı.',remove:'Artıq hərflər silindi.',shuffle:'Hərflər qarışdırıldı.',text:'İpucu açıldı.',allLetters:'Bütün hərflər artıq açılıb.',noExtra:'Artıq hərf qalmayıb.',placeFail:'Hərfi yerləşdirmək mümkün olmadı.',saving:'Nəticə saxlanılır…',reward:'+15 🪙 · +10 XP',replayReward:'Səviyyə artıq keçilib · təkrar mükafat verilmir.',needTelegram:'Mükafat almaq və ipuclarından istifadə etmək üçün oyunu Telegram-da aç.',spent:(n,msg)=>'−'+n+' 🪙 · '+msg,image:n=>n+'-ci şəkil'}
+ ru:{sport:'⚽ Спорт',art:'🎨 Искусство',professions:'🧑‍💼 Профессии',travel:'🌍 Путешествия',science:'🔬 Наука',technology:'💻 Технологии',level:n=>'Тематический уровень '+n,textHint:'Текстовая подсказка',tap:'Нажми, чтобы открыть',wrong:'Неверное слово. Попробуй ещё раз.',passed:n=>'Уровень '+n+' пройден!',saved:'Локальный прогресс сохранён на этом устройстве.',syncing:'Синхронизирую тематический прогресс…',next:'СЛЕДУЮЩИЙ УРОВЕНЬ',back:'К ТЕМАМ',locked:n=>'Сначала пройди уровень '+n+'.',letter:'Буква открыта.',remove:'Лишние буквы убраны.',shuffle:'Буквы перемешаны.',text:'Подсказка открыта.',allLetters:'Все буквы уже открыты.',noExtra:'Лишних букв не осталось.',placeFail:'Не удалось разместить букву.',saving:'Сохраняю результат…',reward:'+15 🪙 · +10 XP',replayReward:'Уровень уже был пройден · награда не начисляется.',needTelegram:'Открой игру через Telegram, чтобы получать награды и использовать подсказки.',spent:(n,msg)=>'−'+n+' 🪙 · '+msg,image:n=>'Изображение '+n},
+ en:{sport:'⚽ Sport',art:'🎨 Art',professions:'🧑‍💼 Professions',travel:'🌍 Travel',science:'🔬 Science',technology:'💻 Technology',level:n=>'Themed level '+n,textHint:'Text hint',tap:'Tap to reveal',wrong:'Wrong word. Try again.',passed:n=>'Level '+n+' completed!',saved:'Local progress saved on this device.',syncing:'Syncing themed progress…',next:'NEXT LEVEL',back:'BACK TO THEMES',locked:n=>'Complete level '+n+' first.',letter:'Letter revealed.',remove:'Extra letters removed.',shuffle:'Letters shuffled.',text:'Hint revealed.',allLetters:'All letters are already revealed.',noExtra:'No extra letters remain.',placeFail:'Could not place the letter.',saving:'Saving result…',reward:'+15 🪙 · +10 XP',replayReward:'Level already completed · no repeat reward.',needTelegram:'Open the game in Telegram to receive rewards and use hints.',spent:(n,msg)=>'−'+n+' 🪙 · '+msg,image:n=>'Image '+n},
+ az:{sport:'⚽ İdman',art:'🎨 İncəsənət',professions:'🧑‍💼 Peşələr',travel:'🌍 Səyahət',science:'🔬 Elm',technology:'💻 Texnologiya',level:n=>n+'-ci mövzu səviyyəsi',textHint:'Mətn ipucu',tap:'Açmaq üçün toxun',wrong:'Söz yanlışdır. Yenidən cəhd et.',passed:n=>n+'-ci səviyyə keçildi!',saved:'Lokal tərəqqi bu cihazda saxlanıldı.',syncing:'Mövzu tərəqqisi sinxronlaşdırılır…',next:'NÖVBƏTİ SƏVİYYƏ',back:'MÖVZULARA QAYIT',locked:n=>'Əvvəlcə '+n+'-ci səviyyəni keç.',letter:'Hərf açıldı.',remove:'Artıq hərflər silindi.',shuffle:'Hərflər qarışdırıldı.',text:'İpucu açıldı.',allLetters:'Bütün hərflər artıq açılıb.',noExtra:'Artıq hərf qalmayıb.',placeFail:'Hərfi yerləşdirmək mümkün olmadı.',saving:'Nəticə saxlanılır…',reward:'+15 🪙 · +10 XP',replayReward:'Səviyyə artıq keçilib · təkrar mükafat verilmir.',needTelegram:'Mükafat almaq və ipuclarından istifadə etmək üçün oyunu Telegram-da aç.',spent:(n,msg)=>'−'+n+' 🪙 · '+msg,image:n=>n+'-ci şəkil'}
 };
 const ui=UI[lang]||UI.ru;
 const THEME_REWARD_COINS=15,THEME_REWARD_XP=10,HINT_COSTS={letter:50,remove:100,text:150};
@@ -18,9 +18,9 @@ const SETTINGS_UI={
  az:{settings:'Ayarlar',sound:'Səs',soundDesc:'Hərflər, qələbə, səhv və ipucları',haptic:'Vibrasiya',hapticDesc:'Toxunuş, düzgün və səhv cavab',music:'Musiqi',musicDesc:'Sakit fon musiqisi',language:'Dil',notifications:'Bildirişlər',notify:'Bot mesajlarına icazə ver',notifyOn:'İcazə verilib',theme:'Tema',rules:'Oyun qaydaları',rulesDesc:'Mövzu rejiminin qaydaları',support:'Dəstək',supportDesc:'Dəstəklə əlaqə',privacy:'Məxfilik',terms:'İstifadəçi razılaşması',languageTitle:'Dil seçin',themeTitle:'Tema',rulesTitle:'Oyun qaydaları',supportText:'Telegram botu vasitəsilə dəstəyə yaz. Cavab eyni çata gələcək.',supportOpen:'DƏSTƏYƏ YAZ',notifyNeed:'Bildirişləri aktivləşdirmək üçün oyunu Telegram daxilində açın.',notifyDenied:'İcazə verilmədi.',notifySent:'Bildirişlər aktiv edildi. Test mesajı göndərildi.',themeNames:{game:'🎮 Oyun',night:'🌙 Gecə',light:'☀️ İşıqlı',neon:'⚡ Neon',gold:'👑 Qızılı'}}
 };
 const RULES={
- ru:'<h3>Тематический режим</h3><p>Выбирай отдельную тему и проходи её уровни независимо от основной игры.</p><h3>Награды</h3><p>Первое прохождение тематического уровня: +15 🪙 и +10 XP. Повторное прохождение награду не даёт.</p><h3>Прогресс</h3><p>Прогресс каждой темы сохраняется отдельно. В каждой готовой теме предусмотрено 100 уровней.</p><h3>Подсказки</h3><p>💡 открыть букву — 50 🪙. 🪄 убрать лишние буквы — 100 🪙. Текстовая подсказка — 150 🪙. Перемешивание букв бесплатно.</p>',
- en:'<h3>Themed mode</h3><p>Choose a category and complete its levels separately from the main game.</p><h3>Rewards</h3><p>First completion of a themed level: +15 🪙 and +10 XP. Replays do not grant another reward.</p><h3>Progress</h3><p>Each theme keeps separate progress. Every completed theme contains 100 levels.</p><h3>Hints</h3><p>💡 reveal a letter — 50 🪙. 🪄 remove extra letters — 100 🪙. Text hint — 150 🪙. Shuffling is free.</p>',
- az:'<h3>Mövzu rejimi</h3><p>Mövzunu seç və onun səviyyələrini əsas oyundan ayrıca keç.</p><h3>Mükafatlar</h3><p>Mövzu səviyyəsinin ilk keçidi: +15 🪙 və +10 XP. Təkrar keçid əlavə mükafat vermir.</p><h3>Tərəqqi</h3><p>Hər mövzunun tərəqqisi ayrıca saxlanılır. Hazır olan hər mövzuda 100 səviyyə var.</p><h3>İpucları</h3><p>💡 hərf açmaq — 50 🪙. 🪄 artıq hərfləri silmək — 100 🪙. Mətn ipucu — 150 🪙. Hərfləri qarışdırmaq pulsuzdur.</p>'
+ ru:'<h3>Тематический режим</h3><p>Выбирай отдельную тему и проходи её уровни независимо от основной игры.</p><h3>Награды</h3><p>Первое прохождение тематического уровня: +15 🪙 и +10 XP. Повторное прохождение награду не даёт.</p><h3>Прогресс</h3><p>Прогресс каждой темы хранится в профиле PhotoWord и синхронизируется между устройствами. Локальное хранилище используется только как быстрый кэш. В каждой готовой теме предусмотрено 100 уровней.</p><h3>Подсказки</h3><p>💡 открыть букву — 50 🪙. 🪄 убрать лишние буквы — 100 🪙. Текстовая подсказка — 150 🪙. Перемешивание букв бесплатно.</p>',
+ en:'<h3>Themed mode</h3><p>Choose a category and complete its levels separately from the main game.</p><h3>Rewards</h3><p>First completion of a themed level: +15 🪙 and +10 XP. Replays do not grant another reward.</p><h3>Progress</h3><p>Each theme's progress is stored in your PhotoWord profile and syncs across devices. Local storage is used only as a fast cache. Every completed theme contains 100 levels.</p><h3>Hints</h3><p>💡 reveal a letter — 50 🪙. 🪄 remove extra letters — 100 🪙. Text hint — 150 🪙. Shuffling is free.</p>',
+ az:'<h3>Mövzu rejimi</h3><p>Mövzunu seç və onun səviyyələrini əsas oyundan ayrıca keç.</p><h3>Mükafatlar</h3><p>Mövzu səviyyəsinin ilk keçidi: +15 🪙 və +10 XP. Təkrar keçid əlavə mükafat vermir.</p><h3>Tərəqqi</h3><p>Hər mövzunun tərəqqisi PhotoWord profilində saxlanılır və cihazlar arasında sinxronlaşır. Lokal yaddaş yalnız sürətli keş kimi istifadə olunur. Hazır olan hər mövzuda 100 səviyyə var.</p><h3>İpucları</h3><p>💡 hərf açmaq — 50 🪙. 🪄 artıq hərfləri silmək — 100 🪙. Mətn ipucu — 150 🪙. Hərfləri qarışdırmaq pulsuzdur.</p>'
 };
 const settingsUI=SETTINGS_UI[lang]||SETTINGS_UI.ru;
 const THEME_KEYS=['game','night','light','neon','gold'];
@@ -13225,9 +13225,25 @@ function progressKey(){return 'pw.themeProgress.'+themeId}
 function getProgress(){try{const a=JSON.parse(localStorage.getItem(progressKey())||'[]');return new Set(Array.isArray(a)?a.map(Number).filter(n=>Number.isInteger(n)&&n>=1&&n<=100):[])}catch{return new Set()}}
 function saveProgress(set){try{localStorage.setItem(progressKey(),JSON.stringify([...set].sort((a,b)=>a-b)))}catch{}}
 function firstIncomplete(set){for(let n=1;n<=100;n++)if(!set.has(n))return n;return 101}
+function replaceProgress(levels){
+ progress.clear();
+ for(const raw of Array.isArray(levels)?levels:[]){const n=Number(raw);if(Number.isInteger(n)&&n>=1&&n<=100)progress.add(n)}
+ saveProgress(progress);unlock=firstIncomplete(progress);
+}
+function applyProgressAccess(){
+ unlock=firstIncomplete(progress);
+ const locked=levelId>unlock&&!progress.has(levelId);
+ busy=locked;paint();pw?.status?.(locked?ui.locked(unlock):ui.level(levelId));
+}
+async function syncServerThemeProgress(){
+ const result=await pw.actionRequest('theme_progress');
+ replaceProgress(result?.theme_progress?.[themeId]||[]);
+ applyProgressAccess();
+ return result;
+}
 
 const requested=Number(new URLSearchParams(location.search).get('level')||1),levelId=ACTIVE_LEVELS[requested]?requested:1,level=ACTIVE_LEVELS[levelId],answer=[...level.answer];
-const progress=getProgress(),unlock=firstIncomplete(progress);
+const progress=getProgress();let unlock=firstIncomplete(progress);
 const pool=makePool(level.answer),tiles=pool.map((letter,id)=>({id,letter}));
 let order=tiles.map(t=>t.id),selected=Array(answer.length).fill(null),fixed=new Map(),removed=new Set(),busy=false,solved=false,textOpen=false,hintBusy=false;
 
@@ -13324,6 +13340,8 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelect
 textSettingLabels();
 
 shuffle();paint();
-if(levelId>unlock&&!progress.has(levelId)){busy=true;paint();pw?.status?.(ui.locked(unlock))}else{pw?.status?.(ui.level(levelId))}
-if(pw.hasAuth)pw.login().catch(e=>pw.status(e.message));
+if(pw.hasAuth){
+ busy=true;paint();pw?.status?.(ui.syncing);
+ pw.login().then(()=>syncServerThemeProgress()).catch(e=>{applyProgressAccess();pw.status(e.message)});
+}else applyProgressAccess();
 })();
