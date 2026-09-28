@@ -27,7 +27,7 @@ for(const file of ['core.js','home.js','game.js','main-levels-8-9.js','theme-gam
 }
 
 const release=JSON.parse(readFileSync(resolve(base,'release.json'),'utf8'));
-if(release.release!=='20260928-r81')throw Error('Unexpected release: '+release.release);
+if(release.release!=='20260929-r82')throw Error('Unexpected release: '+release.release);
 if(!Array.isArray(release.levels)||!release.levels.includes(380))throw Error('Main levels are not published through 380');
 if(release.chapters?.length!==12)throw Error('Main chapter navigation must contain 12 chapters');
 if(release.chapters.find(x=>x.id===3)?.status!=='live')throw Error('Chapter 3 must be complete');
@@ -90,6 +90,9 @@ if(!index.includes('id="profileTitle"'))throw Error('Chapter-earned profile titl
 if(!index.includes('id="profileThemeDone"')||!index.includes('id="profileLimitedBest"')||!index.includes('id="profileBlitzStreak"'))throw Error('Detailed profile statistics UI is missing');
 if(!homeJs.includes("actionRequest('profile_stats')")||!homeJs.includes("rank.className='rank-place'"))throw Error('Profile stats or enriched leaderboard client is missing');
 if(release.verification?.profile_stats_server!==true||release.verification?.profile_challenge_records!==true||release.verification?.leaderboard_titles_and_progress!==true)throw Error('Profile/leaderboard manifest is incomplete');
+if(release.verification?.shop_status_server!==true||release.verification?.shop_purchase_history!==true||release.verification?.shop_energy_status!==true||release.verification?.shop_ad_daily_status!==true)throw Error('Shop manifest is incomplete');
+if(!index.includes('id="shopBalance"')||!index.includes('id="shopEnergyValue"')||!index.includes('id="shopAdsValue"')||!index.includes('id="shopHistory"'))throw Error('Shop dashboard UI is incomplete');
+if(!homeJs.includes("actionRequest('shop_status')")||!homeJs.includes('renderShopHistory')||!homeJs.includes('waitForEnergyCredit'))throw Error('Shop client synchronization is incomplete');
 if(!homeJs.includes("chapter_progress_mode") && !homeJs.includes('shownChapterLevel'))throw Error('Absolute chapter progress helper is missing');
 if(homeJs.includes('requestAnimationFrame(()=>showHomeChapter'))throw Error('Initial carousel must not auto-scroll after profile sync');
 for(let n=1;n<=12;n++){
@@ -176,4 +179,4 @@ if(release.ui?.language_gate_fix!=='first_launch_unset_then_persist_choice')thro
 if(!homeJs.includes("sessionStorage.getItem('pw.profileSyncedShown')")||!homeJs.includes("setTimeout(()=>{const e=$('status')"))throw Error('One-time profile sync notice is missing');
 if(release.ui?.profile_synced_notice?.show!=='once_per_session'||release.ui?.profile_synced_notice?.auto_hide_ms!==1800)throw Error('Profile sync notice manifest is incorrect');
 if(!homeJs.includes("applyLanguage('ru',false)")||!homeJs.includes("function applyLanguage(l,persist=true)"))throw Error('First-launch language selection flow is incorrect');
-console.log('PASS: r81 entrypoints, Chapters 1-12, backgrounds, absolute progress, chapter titles and JavaScript syntax.');
+console.log('PASS: r82 entrypoints, Chapters 1-12, backgrounds, absolute progress, chapter titles and JavaScript syntax.');
