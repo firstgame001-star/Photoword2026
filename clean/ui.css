@@ -487,8 +487,7 @@ body:has(#home.active){background:radial-gradient(circle at 12% 8%,#204866,trans
 #home .challenge-modes{margin:0 0 12px}
 #home .challenge-head{display:block;margin:0 3px 8px}
 #home .challenge-head small{color:#7bd8ee;letter-spacing:1px}
-#home .challenge-head h2{display:inline-block;margin:2px 8px 0 0;font-size:20px}
-#home .challenge-head p{display:inline;color:#a9c4d1;font-size:10px;line-height:1.35}
+#home .challenge-head h2{display:block;margin:0;font-size:20px}
 #home .challenge-grid{gap:7px}
 #home .challenge-card{min-height:68px;gap:10px;padding:9px 11px;border-radius:14px;box-shadow:0 5px 13px #0003;transition:transform .18s ease,border-color .18s ease,background .18s ease}
 #home .challenge-icon{width:40px;height:40px;border-radius:12px;font-size:22px}
@@ -515,6 +514,5 @@ html[data-theme="light"] #home .home-chapter-slide .count,html[data-theme="light
 html[data-theme="light"] #home .home-chapter-slide .bar{background:#d1e2e9}
 html[data-theme="light"] #home .home-chapter-slide .chapter-lock-note{color:#546e7c}
 html[data-theme="light"] #homeChapterPosition{background:#e7f3f7;color:#325668}
-html[data-theme="light"] #home .challenge-head p{color:#526e7b}
 @media(max-width:380px){#home .home-chapter-slide{flex-basis:calc(100% - 30px)}#home .home-chapter-carousel{padding-inline:12px;scroll-padding-inline:12px}#home .home-chapter-slide .hero{height:162px!important}#home .home-chapter-slide .chapter-foot{padding:10px 11px 12px}#home .home-chapter-slide .play{min-width:105px;font-size:12px}#home .themes-entry-icons{font-size:12px}}
 @media(prefers-reduced-motion:reduce){#home.active .home-section-heading,#home.active .home-chapter-carousel,#home.active .themes-entry,#home.active .challenge-modes{animation:none}#home .home-chapter-slide,#home .challenge-card,#home .themes-entry,#home .home-chapter-slide .bar i,#home .home-chapter-slide .play{transition:none}}

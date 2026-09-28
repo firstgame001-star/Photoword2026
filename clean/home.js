@@ -96,14 +96,14 @@ const THEME_MODE={
  }}
 };
 const CHALLENGE_MODE={
- ru:{kicker:'ИСПЫТАНИЯ',title:'Испытания',subtitle:'Играй на результат, ставь рекорды и получай до +15 🪙 и +10 XP за попытку.',state:'НАГРАДЫ АКТИВНЫ',close:'ПОНЯТНО',modal:'Награды начисляются сервером. В каждом режиме оплачиваются до 3 результативных попыток в день.',modes:{limited:['🛡️','Ограниченные попытки','10 слов, 3 ошибки и энергия · награда от 4 правильных'],nohint:['🚫','Без подсказок','3 ошибки, никаких подсказок · награда за серию от 3'],blitz:['⚡','Блиц','60 секунд · награда от 5 очков, подсказки дороже']}},
- en:{kicker:'CHALLENGES',title:'Challenges',subtitle:'Play for score, set records and earn up to +15 🪙 and +10 XP per run.',state:'REWARDS ACTIVE',close:'GOT IT',modal:'Rewards are credited by the server. Up to 3 qualifying runs per mode are rewarded each day.',modes:{limited:['🛡️','Limited attempts','10 words, 3 mistakes and energy · rewards from 4 correct'],nohint:['🚫','No hints','3 mistakes, no hints · rewards from a streak of 3'],blitz:['⚡','Blitz','60 seconds · rewards from 5 points, pricier hints']}},
- az:{kicker:'SINAQLAR',title:'Sınaqlar',subtitle:'Nəticə üçün oyna, rekord vur və hər cəhdə qədər +15 🪙 və +10 XP qazan.',state:'MÜKAFATLAR AKTİVDİR',close:'BAŞA DÜŞDÜM',modal:'Mükafatlar server tərəfindən hesablanır. Hər rejimdə gündə 3 nəticəli cəhd mükafatlandırılır.',modes:{limited:['🛡️','Məhdud cəhdlər','10 söz, 3 səhv və enerji · 4 düzgün sözdən mükafat'],nohint:['🚫','İpucusuz','3 səhv, ipucu yoxdur · 3-lük seriyadan mükafat'],blitz:['⚡','Blits','60 saniyə · 5 xaldan mükafat, ipucları daha bahadır']}}
+ ru:{title:'Испытания',state:'НАГРАДЫ АКТИВНЫ',close:'ПОНЯТНО',modal:'Награды начисляются сервером. В каждом режиме оплачиваются до 3 результативных попыток в день.',modes:{limited:['🛡️','Ограниченные попытки','10 слов, 3 ошибки и энергия · награда от 4 правильных'],nohint:['🚫','Без подсказок','3 ошибки, никаких подсказок · награда за серию от 3'],blitz:['⚡','Блиц','60 секунд · награда от 5 очков, подсказки дороже']}},
+ en:{title:'Challenges',state:'REWARDS ACTIVE',close:'GOT IT',modal:'Rewards are credited by the server. Up to 3 qualifying runs per mode are rewarded each day.',modes:{limited:['🛡️','Limited attempts','10 words, 3 mistakes and energy · rewards from 4 correct'],nohint:['🚫','No hints','3 mistakes, no hints · rewards from a streak of 3'],blitz:['⚡','Blitz','60 seconds · rewards from 5 points, pricier hints']}},
+ az:{title:'Sınaqlar',state:'MÜKAFATLAR AKTİVDİR',close:'BAŞA DÜŞDÜM',modal:'Mükafatlar server tərəfindən hesablanır. Hər rejimdə gündə 3 nəticəli cəhd mükafatlandırılır.',modes:{limited:['🛡️','Məhdud cəhdlər','10 söz, 3 səhv və enerji · 4 düzgün sözdən mükafat'],nohint:['🚫','İpucusuz','3 səhv, ipucu yoxdur · 3-lük seriyadan mükafat'],blitz:['⚡','Blits','60 saniyə · 5 xaldan mükafat, ipucları daha bahadır']}}
 };
 function challengeMode(){return CHALLENGE_MODE[lang()]||CHALLENGE_MODE.ru}
 function setChallengeLabels(){
  const m=challengeMode();
- text('challengeKicker',m.kicker);text('challengeTitle',m.title);text('challengeSubtitle',m.subtitle);
+ text('challengeTitle',m.title);
  const ids={limited:'Limited',nohint:'NoHint',blitz:'Blitz'};
  for(const [key,suffix] of Object.entries(ids)){
   const d=m.modes[key];text('challenge'+suffix+'Title',d[1]);text('challenge'+suffix+'Desc',d[2]);text('challenge'+suffix+'State',m.state);
@@ -467,5 +467,5 @@ function showProfileSyncedOnce(){
  const msg=t().profileSynced;pw.status(msg);
  setTimeout(()=>{const e=$('status');if(e&&!e.hidden&&e.textContent===msg){e.hidden=true;e.textContent=''}},1800);
 }
-pw.login().then(async()=>{showProfileSyncedOnce();track('app_open',{metadata:{version:'r88'}});configureAds();try{await syncThemeProgress()}catch(e){track('server_error',{metadata:{code:'theme_progress_sync',status:0}})}try{const start=window.Telegram?.WebApp?.initDataUnsafe?.start_param||'';if(start.startsWith('ref_PW-'))await pw.api('register_referral',{referrer:start.slice(4)})}catch{}}).catch(e=>pw.status(e.message));
+pw.login().then(async()=>{showProfileSyncedOnce();track('app_open',{metadata:{version:'r89'}});configureAds();try{await syncThemeProgress()}catch(e){track('server_error',{metadata:{code:'theme_progress_sync',status:0}})}try{const start=window.Telegram?.WebApp?.initDataUnsafe?.start_param||'';if(start.startsWith('ref_PW-'))await pw.api('register_referral',{referrer:start.slice(4)})}catch{}}).catch(e=>pw.status(e.message));
 })();
