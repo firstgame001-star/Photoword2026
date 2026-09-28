@@ -399,3 +399,25 @@ html[data-theme="light"] .profile-progress-grid>div,html[data-theme="light"] .pr
 html[data-theme="light"] .profile-progress-grid b,html[data-theme="light"] .profile-challenge-grid b{color:#163747}
 html[data-theme="light"] .profile-section h3{color:#163747}
 @media(max-width:360px){.profile-progress-grid{grid-template-columns:1fr}.profile-challenge-grid{grid-template-columns:1fr 1fr}}
+
+/* r82: finished shop surface */
+.shop-status-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin:12px 0 18px}
+.shop-status-grid>div{min-width:0;padding:10px 5px;border:1px solid #315d73;border-radius:12px;background:#062b3e;text-align:center}
+.shop-status-grid small,.shop-status-grid em{display:block;color:#9fbcc8;font-size:9px;font-style:normal;line-height:1.25}
+.shop-status-grid b{display:block;margin:4px 0 2px;font-size:16px;color:#fff;white-space:nowrap}
+.adreward em{display:block;margin-top:4px;color:#8fb4c4;font-size:9px;font-style:normal}
+.shop-history-section{margin-top:18px;padding-top:4px;border-top:1px solid #31566a}
+.shop-history-head{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.shop-history-head h3{margin:10px 0}
+.shop-refresh{width:34px;height:34px;border:1px solid #3d6e83;border-radius:10px;background:#0a3447;color:#cde7f2;font-size:20px}
+.shop-history{display:grid;gap:7px;max-height:220px;overflow:auto}
+.shop-history-item{display:grid;grid-template-columns:36px minmax(0,1fr) auto;align-items:center;gap:9px;padding:9px;border:1px solid #31596c;border-radius:11px;background:#072a3c;text-align:left}
+.shop-history-item>span{display:grid;place-items:center;width:34px;height:34px;border-radius:10px;background:#0b3b50;font-size:18px}
+.shop-history-item b,.shop-history-item small{display:block}
+.shop-history-item small{margin-top:2px;color:#94b4c2;font-size:9px}
+.shop-history-item strong{font-size:12px;color:#ffd054;white-space:nowrap}
+.shop-status-loading{opacity:.65}
+html[data-theme="light"] .shop-status-grid>div,html[data-theme="light"] .shop-history-item{background:#edf6f9;border-color:#bfd4dd}
+html[data-theme="light"] .shop-status-grid b,html[data-theme="light"] .shop-history-item b{color:#163747}
+html[data-theme="light"] .shop-history-item>span{background:#dbeaf0}
+@media(max-width:355px){.shop-status-grid{grid-template-columns:1fr}.shop-history{max-height:180px}}
