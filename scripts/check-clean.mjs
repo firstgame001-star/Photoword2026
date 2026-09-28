@@ -31,7 +31,7 @@ if(release.release!=='20260929-r85')throw Error('Unexpected release: '+release.r
 if(!Array.isArray(release.levels)||!release.levels.includes(380))throw Error('Main levels are not published through 380');
 if(release.chapters?.length!==12)throw Error('Main chapter navigation must contain 12 chapters');
 if(release.chapters.find(x=>x.id===3)?.status!=='live')throw Error('Chapter 3 must be complete');
-if(release.chapters.find(x=>x.id===4)?.available_through!==131||release.chapters.find(x=>x.id===4)?.status!=='live')throw Error('Chapter 4 must be complete through 131');
+if(release.chapters.find(x=>x.id===4)?.available_through!==130||release.chapters.find(x=>x.id===4)?.status!=='live')throw Error('Chapter 4 must be complete through 130');
 if(release.chapters.find(x=>x.id===5)?.available_through!==180||release.chapters.find(x=>x.id===5)?.status!=='live')throw Error('Chapter 5 must be complete through 180');
 if(release.chapters.find(x=>x.id===6)?.available_through!==230||release.chapters.find(x=>x.id===6)?.status!=='live')throw Error('Chapter 6 must be complete through 230');
 if(release.chapters.find(x=>x.id===7)?.available_through!==280||release.chapters.find(x=>x.id===7)?.status!=='live')throw Error('Chapter 7 must be complete through 280');
