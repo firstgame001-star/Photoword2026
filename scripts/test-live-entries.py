@@ -4,7 +4,7 @@ from pathlib import Path
 from playwright.sync_api import sync_playwright, expect
 
 BASE='https://firstgame001-star.github.io/Photoword2026/'
-RELEASE='20260928-r78'
+RELEASE='20260928-r79'
 OUT=Path('test-results'); OUT.mkdir(exist_ok=True)
 
 for attempt in range(48):
@@ -896,15 +896,33 @@ def install_mock(ctx,account,completed,lang):
         body=json.loads(req.post_data or '{}')
         if '/functions/v1/challenge-game' in req.url:
             action=body.get('action','state');mode=body.get('mode');energy=account.setdefault('_challenge_energy',5)
-            if action=='start' and mode=='limited' and energy>0:
-                account['_challenge_energy']=energy-1
-            ch={'energy':account['_challenge_energy'],'energy_max':5,'next_energy_at':None,'limited_best_score':0,'nohint_best_streak':0,'blitz_best_score':0,'blitz_best_streak':0,'server_now':time.strftime('%Y-%m-%dT%H:%M:%SZ',time.gmtime())}
+            rewards=account.setdefault('_challenge_rewards_today',{'limited':0,'nohint':0,'blitz':0})
+            if action=='start':
+                if mode=='limited' and energy>0: account['_challenge_energy']=energy-1
+                account['_challenge_run_id']='00000000-0000-0000-0000-000000000099'
+            ch={'energy':account['_challenge_energy'],'energy_max':5,'next_energy_at':None,'limited_best_score':0,'nohint_best_streak':0,'blitz_best_score':0,'blitz_best_streak':0,'server_now':time.strftime('%Y-%m-%dT%H:%M:%SZ',time.gmtime()),'rewarded_runs_today':rewards.copy(),'reward_limit':3}
+            if action=='start': ch['run_id']=account['_challenge_run_id']
             if action=='hint':
                 cost={'letter':75,'remove':125,'text':200}[body['hintType']]
                 if account['coins']<cost:
                     route.fulfill(status=402,content_type='application/json',body=json.dumps({'error':'insufficient_coins'}),headers={'Access-Control-Allow-Origin':'*'});return
                 account['coins']-=cost
                 route.fulfill(status=200,content_type='application/json',body=json.dumps({'challenge':ch,'coins':account['coins'],'cost':cost,'hintType':body['hintType']}),headers={'Access-Control-Allow-Origin':'*'});return
+            if action=='finish':
+                score=int(body.get('score') or 0);streak=int(body.get('streak') or 0);coins=xp=0
+                if rewards.get(mode,0)<3:
+                    metric=score if mode in ('limited','blitz') else streak
+                    if mode=='limited':
+                        coins,xp=(15,10) if metric>=10 else (10,6) if metric>=7 else (5,3) if metric>=4 else (0,0)
+                    elif mode=='nohint':
+                        coins,xp=(15,10) if metric>=10 else (10,6) if metric>=6 else (5,3) if metric>=3 else (0,0)
+                    else:
+                        coins,xp=(15,10) if metric>=12 else (10,6) if metric>=8 else (5,3) if metric>=5 else (0,0)
+                if coins or xp:
+                    rewards[mode]=rewards.get(mode,0)+1;account['coins']+=coins;account['xp']+=xp
+                ch['rewarded_runs_today']=rewards.copy()
+                reward={'reward_coins':coins,'reward_xp':xp,'rewarded_runs_today':rewards.get(mode,0),'reward_limit':3}
+                route.fulfill(status=200,content_type='application/json',body=json.dumps({'challenge':ch,'reward':reward,'coins':account['coins'],'xp':account['xp']}),headers={'Access-Control-Allow-Origin':'*'});return
             route.fulfill(status=200,content_type='application/json',body=json.dumps({'challenge':ch}),headers={'Access-Control-Allow-Origin':'*'});return
         if '/rest/v1/rpc/get_leaderboard' in req.url:
             row=account.copy()
@@ -1080,7 +1098,7 @@ with sync_playwright() as pw:
       expect(page.locator('#challengeModes')).to_be_visible();expect(page.locator('[data-challenge]')).to_have_count(3)
       page.locator('[data-challenge="blitz"]').tap();expect(page.locator('#challengeScreen')).to_be_visible();expect(page.locator('#challengeIntroTitle')).to_have_text({'ru':'Блиц','en':'Blitz','az':'Blits'}[language]);page.locator('#challengeStart').tap();expect(page.locator('#challengeHud')).to_be_visible();expect(page.locator('#challengePhotos .photo')).to_have_count(4);expect(page.locator('#blitzHints')).to_be_visible();expect(page.locator('#challengeCorrectPanel')).to_be_hidden();assert page.evaluate("window.PW_CHALLENGE_EXTRA.length")==200;coins_before=int(page.locator('[data-coins]').first.inner_text());page.locator('#blitzLetterHint').tap();expect(page.locator('#challengeSlots .slot.fixed')).to_have_count(1);expect(page.locator('[data-coins]').first).to_have_text(str(coins_before-75));challenge_answer=current_challenge_answer(page,language);tap_challenge_word(page,challenge_answer);expect(page.locator('#hudValue2')).to_have_text('1',timeout=3000);page.locator('#challengeBack').tap();expect(page.locator('#home')).to_be_visible()
       page.locator('[data-challenge="nohint"]').tap();expect(page.locator('#challengeScreen')).to_be_visible();page.locator('#challengeStart').tap();expect(page.locator('#challengeHud')).to_be_visible();expect(page.locator('#hudValue2')).to_contain_text('🛡');challenge_answer=current_challenge_answer(page,language);tap_challenge_word(page,challenge_answer);expect(page.locator('#challengeCorrectPanel')).to_be_visible(timeout=3000);expect(page.locator('#challengeCorrectWord')).to_have_text(challenge_answer);page.locator('#challengeCorrectNext').tap();expect(page.locator('#challengeCorrectPanel')).to_be_hidden();page.locator('#challengeBack').tap()
-      page.locator('[data-challenge="limited"]').tap();expect(page.locator('#challengeScreen')).to_be_visible();expect(page.locator('#challengeIntroStats')).to_contain_text('5');expect(page.locator('#energyRefill')).to_be_visible();expect(page.locator('[data-energy-pack]')).to_have_count(2);page.locator('#challengeStart').tap();expect(page.locator('#challengeHud')).to_be_visible();expect(page.locator('#hudValue3')).to_have_text('4/5');challenge_answer=current_challenge_answer(page,language);tap_challenge_word(page,challenge_answer);expect(page.locator('#challengeCorrectPanel')).to_be_visible(timeout=3000);expect(page.locator('#challengeCorrectWord')).to_have_text(challenge_answer);page.locator('#challengeCorrectNext').tap();expect(page.locator('#challengeCorrectPanel')).to_be_hidden();page.locator('#challengeBack').tap()
+      page.locator('[data-challenge="limited"]').tap();expect(page.locator('#challengeScreen')).to_be_visible();expect(page.locator('#challengeIntroStats')).to_contain_text('5');expect(page.locator('#challengeIntroStats')).to_contain_text('0/3');expect(page.locator('#energyRefill')).to_be_visible();expect(page.locator('[data-energy-pack]')).to_have_count(2);page.locator('#challengeStart').tap();expect(page.locator('#challengeHud')).to_be_visible();expect(page.locator('#hudValue3')).to_have_text('4/5');challenge_answer=current_challenge_answer(page,language);tap_challenge_word(page,challenge_answer);expect(page.locator('#challengeCorrectPanel')).to_be_visible(timeout=3000);expect(page.locator('#challengeCorrectWord')).to_have_text(challenge_answer);page.locator('#challengeCorrectNext').tap();expect(page.locator('#challengeCorrectPanel')).to_be_hidden();page.locator('#challengeBack').tap()
       expect(page.locator('#themesEntry')).to_be_visible();expect(page.locator('#themesEntryBadge')).to_be_visible();page.locator('#themesEntry').tap();expect(page.locator('#themesScreen')).to_be_visible();expect(page.locator('#themeCards .theme-card')).to_have_count(12);expect(page.locator('#themeCards .theme-card').first).to_be_enabled();expect(page.locator('#themeCards .theme-card').nth(2)).to_be_enabled();expect(page.locator('#themeCards .theme-card').nth(3)).to_be_enabled();expect(page.locator('#themeCards .theme-card').nth(4)).to_be_enabled();expect(page.locator('#themeCards .theme-card').nth(5)).to_be_enabled();page.locator('#themeCards .theme-card').first.tap();expect(page.locator('#themeDetailScreen')).to_be_visible();expect(page.locator('#themeLevelGrid button')).to_have_count(100);expect(page.locator('#themeLevelGrid button').nth(0)).to_be_enabled();expect(page.locator('#themeLevelGrid button').nth(20)).to_be_disabled();page.locator('#themeDetailBack').tap();page.locator('#themesBack').tap()
       # Friends use nickname and progress.
       page.locator('#friendsNav').tap();expect(page.locator('#friendsList')).to_contain_text('FriendOne');expect(page.locator('#friendsList')).to_contain_text('7 / 10');page.locator('[data-close="friendsModal"]').tap()
