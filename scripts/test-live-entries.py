@@ -4,7 +4,7 @@ from pathlib import Path
 from playwright.sync_api import sync_playwright, expect
 
 BASE='https://firstgame001-star.github.io/Photoword2026/'
-RELEASE='20260929-r84'
+RELEASE='20260929-r85'
 OUT=Path('test-results'); OUT.mkdir(exist_ok=True)
 
 for attempt in range(48):
@@ -1089,7 +1089,7 @@ with sync_playwright() as pw:
       }""")
       # Chapters: chapter 2 is unlocked after level 20 and uses a 30-level counter; chapter 3 is present.
       expect(page.locator('#homeChapter1')).to_be_visible();expect(page.locator('#homeChapter2')).to_be_visible();page.locator('#homeChapter1').scroll_into_view_if_needed();expect(page.locator('#homeChapter1Title')).to_be_visible();page.locator('#homeChapter2').scroll_into_view_if_needed();expect(page.locator('#homeChapter2Title')).to_be_visible();page.locator('#homeChapter1').scroll_into_view_if_needed();expect(page.locator('#homeChapter1Title')).to_be_visible()
-      page.locator('#chaptersNav').tap();expect(page.locator('#chaptersScreen')).to_be_visible();expect(page.locator('#chapter1Label')).to_contain_text('1–20');expect(page.locator('#chapter2Label')).to_contain_text('21–50');expect(page.locator('#chapter2Done')).to_have_text('0');expect(page.locator('#chapter2Count')).to_contain_text('30');expect(page.locator('#chapter2Play')).not_to_have_class(re.compile('locked'));expect(page.locator('#chapter2Play')).to_have_attribute('href','./game.html?level=21');expect(page.locator('#chapter3Done')).to_have_text('0');expect(page.locator('#chapter3Count')).to_contain_text('40');page.locator('#chaptersBack').tap()
+      page.locator('#chaptersNav').tap();expect(page.locator('#chaptersScreen')).to_be_visible();expect(page.locator('#chapter1Label')).to_contain_text('1–20');expect(page.locator('#chapter2Label')).to_contain_text('21–50');expect(page.locator('#chapter2Done')).to_have_text('21');expect(page.locator('#chapter2Count')).to_contain_text('50');expect(page.locator('#chapter2Play')).not_to_have_class(re.compile('locked'));expect(page.locator('#chapter2Play')).to_have_attribute('href','./game.html?level=21');expect(page.locator('#chapter3Done')).to_have_text('51');expect(page.locator('#chapter3Count')).to_contain_text('90');page.locator('#chaptersBack').tap()
       # Every visual theme must apply and persist.
       for theme in ['game','night','light','neon','gold']:
         page.locator('#settingsBtn').tap();page.locator('#themeBtn').tap();expect(page.locator('#themeModal')).to_be_visible();page.locator(f'button[data-theme="{theme}"]').tap();assert page.evaluate("document.documentElement.dataset.theme")==theme;assert page.evaluate("localStorage.getItem('pw.theme')")==theme
@@ -1285,7 +1285,7 @@ with sync_playwright() as pw:
       assert not relevant_errors(errors),errors;ctx.close()
 
     # Representative main-game browser checks. Loading game.js also validates every published answer/pool in RU/EN/AZ.
-    sample_levels=[1,20,21,50,51,60,61,90,91,100,101,131,132,150,180,181,200,230,231,250,280,281,300,330,331,350,380]
+    sample_levels=[1,20,21,50,51,60,61,90,91,100,101,130,131,150,180,181,200,230,231,250,280,281,300,330,331,350,380]
     for language in ['ru','en','az']:
       ctx=browser.new_context(viewport={'width':390,'height':800},has_touch=True,is_mobile=True)
       ctx.add_init_script(f"localStorage.setItem('pw.language','{language}'); localStorage.setItem('pw.theme','game');")
@@ -1312,8 +1312,8 @@ with sync_playwright() as pw:
           expect(page.locator('#successChapter')).to_be_visible();expect(page.locator('#nextLevel')).to_have_attribute('href','./game.html?level=91')
         elif level==100:
           expect(page.locator('#nextLevel')).to_have_attribute('href','./game.html?level=101')
-        elif level==131:
-          expect(page.locator('#successChapter')).to_be_visible();expect(page.locator('#successChapter')).to_contain_text({'ru':'Опытный','en':'Experienced','az':'Təcrübəli'}[language]);expect(page.locator('#nextLevel')).to_have_attribute('href','./game.html?level=132')
+        elif level==130:
+          expect(page.locator('#successChapter')).to_be_visible();expect(page.locator('#successChapter')).to_contain_text({'ru':'Опытный','en':'Experienced','az':'Təcrübəli'}[language]);expect(page.locator('#nextLevel')).to_have_attribute('href','./game.html?level=131')
         elif level==180:
           expect(page.locator('#successChapter')).to_be_visible();expect(page.locator('#successChapter')).to_contain_text({'ru':'Эксперт','en':'Expert','az':'Ekspert'}[language]);expect(page.locator('#nextLevel')).to_have_attribute('href','./game.html?level=181')
         elif level==230:
@@ -1327,7 +1327,7 @@ with sync_playwright() as pw:
       assert account['completed_levels']==len(sample_levels) and account['xp']==15*len(sample_levels)
       page.screenshot(path=str(OUT/f'{engine}-{language}-level380.png'),full_page=True)
       assert not relevant_errors(errors),errors
-      report={'engine':engine,'language':language,'levels':'1-380 validated / boundary samples played','checks':['runtime validation of all 380 answer pools','chapter 1 sample','chapter 2 boundaries 21 and 50','completed chapter 3 through 90','chapter 4 complete 91-131','chapter 5 complete 132-180','chapter 6 complete 181-230','chapter 7 complete 231-280','chapter 8 complete 281-330','chapter 9 complete 331-380','transitions at 20, 50, 90, 131, 180, 230, 280, 330 and completion at 380','localized text hint','letter hint','remove hint','level 100 continues to 101, 131 opens 132, 180 opens 181, 230 opens 231, 280 opens 281, 330 opens 331, and 380 returns home'],'result':'PASS'}
+      report={'engine':engine,'language':language,'levels':'1-380 validated / boundary samples played','checks':['runtime validation of all 380 answer pools','chapter 1 sample','chapter 2 boundaries 21 and 50','completed chapter 3 through 90','chapter 4 complete 91-130','chapter 5 complete 131-180','chapter 6 complete 181-230','chapter 7 complete 231-280','chapter 8 complete 281-330','chapter 9 complete 331-380','transitions at 20, 50, 90, 130, 180, 230, 280, 330 and completion at 380','localized text hint','letter hint','remove hint','level 100 continues to 101, 130 opens 131, 180 opens 181, 230 opens 231, 280 opens 281, 330 opens 331, and 380 returns home'],'result':'PASS'}
       reports.append(report);print(json.dumps(report,ensure_ascii=False),flush=True);ctx.close()
     # Narrow-screen long-answer smoke: no horizontal overflow at 320px.
     ctx=browser.new_context(viewport={'width':320,'height':720},has_touch=True,is_mobile=True)
