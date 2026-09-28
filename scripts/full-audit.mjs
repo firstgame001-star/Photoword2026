@@ -147,6 +147,9 @@ for(const lang of ['ru','en','az']){
  }
 }
 if(release.verification?.thematic_answers_unique_across_ready_categories!==true)throw Error('Cross-theme uniqueness manifest flag missing');
+if(release.verification?.thematic_progress_server_sync!==true||release.thematic_mode?.progress_sync?.server_authoritative!==true||release.thematic_mode?.progress_sync?.cross_device!==true)throw Error('Thematic progress sync manifest is incomplete');
+if(!home.includes('syncThemeProgress')||!home.includes("actionRequest('theme_progress')"))throw Error('Home thematic progress sync missing');
+if(!theme.includes('syncServerThemeProgress')||!theme.includes("actionRequest('theme_progress')"))throw Error('Thematic game progress sync missing');
 const completeThemes=release.thematic_mode.categories.filter(x=>x.status==='complete');
 if(completeThemes.length!==6)throw Error('Expected 6 complete thematic categories, got '+completeThemes.length);
 if(release.verification?.main_levels_available_through!==380)throw Error('Main game manifest is not at 380');
