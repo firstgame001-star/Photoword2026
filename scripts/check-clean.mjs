@@ -27,7 +27,7 @@ for(const file of ['core.js','home.js','game.js','main-levels-8-9.js','theme-gam
 }
 
 const release=JSON.parse(readFileSync(resolve(base,'release.json'),'utf8'));
-if(release.release!=='20260928-r79')throw Error('Unexpected release: '+release.release);
+if(release.release!=='20260928-r80')throw Error('Unexpected release: '+release.release);
 if(!Array.isArray(release.levels)||!release.levels.includes(380))throw Error('Main levels are not published through 380');
 if(release.chapters?.length!==12)throw Error('Main chapter navigation must contain 12 chapters');
 if(release.chapters.find(x=>x.id===3)?.status!=='live')throw Error('Chapter 3 must be complete');
@@ -43,6 +43,7 @@ if(release.thematic_mode?.economy?.first_completion?.coins!==15||release.themati
 if(release.thematic_mode?.economy?.hints?.letter!==50||release.thematic_mode?.economy?.hints?.remove!==100||release.thematic_mode?.economy?.hints?.text!==150||release.thematic_mode?.economy?.hints?.shuffle!==0)throw Error('Thematic hint prices are incorrect');
 if(release.thematic_mode?.economy?.server_authoritative!==true||release.verification?.thematic_economy_server_authoritative!==true)throw Error('Thematic economy must be server-authoritative');
 if(release.verification?.thematic_win_reward_coins!==15)throw Error('Thematic win reward verification is incorrect');
+if(release.verification?.thematic_progress_server_sync!==true||release.thematic_mode?.progress_sync?.server_authoritative!==true||release.thematic_mode?.progress_sync?.cross_device!==true)throw Error('Thematic progress sync manifest is incomplete');
 const sport=release.thematic_mode.categories.find(x=>x.id==='sport');
 if(!sport||sport.available_through!==100||sport.status!=='complete')throw Error('Sport theme must be playable through level 100');
 const art=release.thematic_mode.categories.find(x=>x.id==='art');
@@ -124,6 +125,8 @@ if(!index.includes('id="chapter9Progress"')||!index.includes('id="homeChapter9Pr
 if(!index.includes('id="challengeModes"')||!index.includes('data-challenge="limited"')||!index.includes('data-challenge="nohint"')||!index.includes('data-challenge="blitz"'))throw Error('Challenge mode cards are missing');
 if(!index.includes('id="challengeScreen"'))throw Error('Playable challenge screen is missing');
 if(!index.includes('./challenge.js'))throw Error('Challenge game module is missing');
+if(!homeJs.includes('syncThemeProgress')||!homeJs.includes("actionRequest('theme_progress')"))throw Error('Home thematic server sync is missing');
+if(!themeGameJs.includes('syncServerThemeProgress')||!themeGameJs.includes("actionRequest('theme_progress')"))throw Error('Thematic game server sync is missing');
 if(!homeJs.includes('const CHALLENGE_MODE='))throw Error('Challenge localization is missing');
 if(release.challenge_modes?.status!=='playable_test'||release.challenge_modes?.modes?.length!==3)throw Error('Challenge mode manifest is incomplete');
 if(release.verification?.challenge_rewards_live!==true||release.challenge_modes?.rewards?.server_authoritative!==true||release.challenge_modes?.rewards?.rewarded_runs_per_mode_per_day!==3)throw Error('Challenge reward economy is incomplete');
