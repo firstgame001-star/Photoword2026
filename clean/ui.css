@@ -421,3 +421,14 @@ html[data-theme="light"] .shop-status-grid>div,html[data-theme="light"] .shop-hi
 html[data-theme="light"] .shop-status-grid b,html[data-theme="light"] .shop-history-item b{color:#163747}
 html[data-theme="light"] .shop-history-item>span{background:#dbeaf0}
 @media(max-width:355px){.shop-status-grid{grid-template-columns:1fr}.shop-history{max-height:180px}}
+
+/* r83: notification preferences */
+.notification-card{width:min(420px,100%)}
+.notification-bell{font-size:38px;margin:2px 0 4px}
+.notification-preferences{margin:12px 0}
+.notification-preferences .settingrow{margin:7px 0}
+.notification-preferences .settingrow input{width:23px;height:23px}
+.notification-preferences .notification-master{border-color:#45c8ef;background:#0a3549}
+.notification-note{margin:10px 4px 14px;color:#8fb2c1;font-size:10px;line-height:1.4}
+.notification-card #testNotification{margin-top:8px}
+html[data-theme="light"] .notification-preferences .notification-master{background:#e6f4f9;border-color:#64bad7}
