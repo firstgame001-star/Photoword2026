@@ -27,7 +27,7 @@ for(const file of ['core.js','home.js','game.js','main-levels-8-9.js','theme-gam
 }
 
 const release=JSON.parse(readFileSync(resolve(base,'release.json'),'utf8'));
-if(release.release!=='20260929-r85')throw Error('Unexpected release: '+release.release);
+if(release.release!=='20260929-r86')throw Error('Unexpected release: '+release.release);
 if(!Array.isArray(release.levels)||!release.levels.includes(380))throw Error('Main levels are not published through 380');
 if(release.chapters?.length!==12)throw Error('Main chapter navigation must contain 12 chapters');
 if(release.chapters.find(x=>x.id===3)?.status!=='live')throw Error('Chapter 3 must be complete');
@@ -104,6 +104,7 @@ for(let n=1;n<=12;n++){
  if(!hasHome||!uiCss.includes(listNeed))throw Error('Missing chapter background '+n);
 }
 if(release.ui?.chapter_progress_mode!=='absolute_range')throw Error('Release must declare absolute chapter ranges');
+if(release.verification?.chapter_start_values_absolute!==true)throw Error('Absolute chapter start values are not declared');
 if(release.ui?.chapter_titles!==true)throw Error('Release must declare chapter title system');
 const gameJs=readFileSync(resolve(base,'game.js'),'utf8');
 const mainExtraJs=readFileSync(resolve(base,'main-levels-8-9.js'),'utf8');
@@ -183,4 +184,4 @@ if(release.ui?.language_gate_fix!=='first_launch_unset_then_persist_choice')thro
 if(!homeJs.includes("sessionStorage.getItem('pw.profileSyncedShown')")||!homeJs.includes("setTimeout(()=>{const e=$('status')"))throw Error('One-time profile sync notice is missing');
 if(release.ui?.profile_synced_notice?.show!=='once_per_session'||release.ui?.profile_synced_notice?.auto_hide_ms!==1800)throw Error('Profile sync notice manifest is incorrect');
 if(!homeJs.includes("applyLanguage('ru',false)")||!homeJs.includes("function applyLanguage(l,persist=true)"))throw Error('First-launch language selection flow is incorrect');
-console.log('PASS: r85 entrypoints, Chapters 1-12, backgrounds, absolute progress, chapter titles and JavaScript syntax.');
+console.log('PASS: r86 entrypoints, Chapters 1-12, backgrounds, absolute progress, chapter titles and JavaScript syntax.');
