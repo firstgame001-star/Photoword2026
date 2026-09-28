@@ -380,3 +380,22 @@ html[data-theme="light"] .challenge-energy-shop button{background:#f7fbfd;color:
 .challenge-result-reward.earned{background:#124c36;color:#8ff0b5;box-shadow:0 0 18px #24d06a22}
 html[data-theme="light"] .challenge-result-reward{background:#e8f2f6;color:#17303c}
 html[data-theme="light"] .challenge-result-reward.earned{background:#e5f8ec;color:#146438}
+
+/* r81: richer profile + leaderboard */
+.profile-card{width:min(430px,100%)}
+.profile-section{margin:14px 0;padding:12px;border:1px solid #315d73;border-radius:15px;background:#06283a99;text-align:left}
+.profile-section h3{margin:0 0 10px;font-size:14px;color:#d8edf6;text-align:left}
+.profile-progress-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+.profile-progress-grid>div,.profile-challenge-grid>div{min-width:0;padding:10px 6px;border:1px solid #31596d;border-radius:11px;background:#0a3346;text-align:center}
+.profile-progress-grid b,.profile-challenge-grid b{display:block;font-size:17px;color:#fff}
+.profile-progress-grid small,.profile-challenge-grid small{display:block;margin-top:3px;color:#9ebbc8;font-size:9px;line-height:1.25}
+.profile-challenge-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+.profile-stats-status{display:block;margin-top:9px;color:#9ebbc8;font-size:10px;line-height:1.35;text-align:center}
+.rankrow .rank-place{font-size:18px;text-align:center}
+.rankrow .rank-score{font-size:13px;white-space:nowrap}
+.rankrow.me{box-shadow:inset 0 0 0 1px #4ed8ff55}
+html[data-theme="light"] .profile-section{background:#f1f8fb;border-color:#bdd4df}
+html[data-theme="light"] .profile-progress-grid>div,html[data-theme="light"] .profile-challenge-grid>div{background:#e8f2f6;border-color:#c2d7df}
+html[data-theme="light"] .profile-progress-grid b,html[data-theme="light"] .profile-challenge-grid b{color:#163747}
+html[data-theme="light"] .profile-section h3{color:#163747}
+@media(max-width:360px){.profile-progress-grid{grid-template-columns:1fr}.profile-challenge-grid{grid-template-columns:1fr 1fr}}
