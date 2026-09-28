@@ -113,7 +113,7 @@ if(!ruleBlock.includes('Глава 8 «Человек» — уровни 281–3
 if(!ruleBlock.includes('Chapter 8 “Human” contains levels 281–330')||!ruleBlock.includes('Chapter 9 “Universe” contains levels 331–380'))throw Error('EN Chapters 8-9 rules are stale');
 if(!ruleBlock.includes('8-ci fəsil “İnsan” — 281–330-cu səviyyələr')||!ruleBlock.includes('9-cu fəsil “Kainat” — 331–380-ci səviyyələr'))throw Error('AZ Chapters 8-9 rules are stale');
 if(ruleBlock.includes('5–12-ci fəsillər artıq naviqasiyaya əlavə edilib'))throw Error('Stale Azerbaijani chapter rules remain');
-if(!home.includes("track('app_open',{metadata:{version:'r80'}})"))throw Error('App-open analytics version is stale');
+if(!home.includes("track('app_open',{metadata:{version:'r81'}})"))throw Error('App-open analytics version is stale');
 if(!home.includes('function chapterIdForLevel(level)'))throw Error('Chapter analytics helper is missing');
 if(!home.includes("n<=280?7:n<=330?8:n<=380?9:10"))throw Error('Chapter analytics mapping is incomplete');
 
@@ -149,6 +149,8 @@ for(const lang of ['ru','en','az']){
 if(release.verification?.thematic_answers_unique_across_ready_categories!==true)throw Error('Cross-theme uniqueness manifest flag missing');
 if(release.verification?.thematic_progress_server_sync!==true||release.thematic_mode?.progress_sync?.server_authoritative!==true||release.thematic_mode?.progress_sync?.cross_device!==true)throw Error('Thematic progress sync manifest is incomplete');
 if(!home.includes('syncThemeProgress')||!home.includes("actionRequest('theme_progress')"))throw Error('Home thematic progress sync missing');
+if(!home.includes("actionRequest('profile_stats')")||!home.includes("profileBlitzStreak")||!home.includes("rank.className='rank-place'"))throw Error('Profile/rating refresh missing');
+if(release.verification?.profile_stats_server!==true||release.verification?.profile_thematic_totals!==true||release.verification?.leaderboard_titles_and_progress!==true)throw Error('Profile/rating release flags missing');
 if(!theme.includes('syncServerThemeProgress')||!theme.includes("actionRequest('theme_progress')"))throw Error('Thematic game progress sync missing');
 const completeThemes=release.thematic_mode.categories.filter(x=>x.status==='complete');
 if(completeThemes.length!==6)throw Error('Expected 6 complete thematic categories, got '+completeThemes.length);
