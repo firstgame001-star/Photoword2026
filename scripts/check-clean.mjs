@@ -27,7 +27,7 @@ for(const file of ['core.js','home.js','game.js','main-levels-8-9.js','theme-gam
 }
 
 const release=JSON.parse(readFileSync(resolve(base,'release.json'),'utf8'));
-if(release.release!=='20260928-r80')throw Error('Unexpected release: '+release.release);
+if(release.release!=='20260928-r81')throw Error('Unexpected release: '+release.release);
 if(!Array.isArray(release.levels)||!release.levels.includes(380))throw Error('Main levels are not published through 380');
 if(release.chapters?.length!==12)throw Error('Main chapter navigation must contain 12 chapters');
 if(release.chapters.find(x=>x.id===3)?.status!=='live')throw Error('Chapter 3 must be complete');
@@ -87,6 +87,9 @@ const homeJs=readFileSync(resolve(base,'home.js'),'utf8');
 if(!homeJs.includes("const READY_THEME_IDS=['sport','art','professions','travel','science','technology']")||!homeJs.includes("READY_THEME_IDS.includes(id)"))throw Error('Technology theme must be enabled in the category hub');
 const uiCss=readFileSync(resolve(base,'ui.css'),'utf8');
 if(!index.includes('id="profileTitle"'))throw Error('Chapter-earned profile title surface is missing');
+if(!index.includes('id="profileThemeDone"')||!index.includes('id="profileLimitedBest"')||!index.includes('id="profileBlitzStreak"'))throw Error('Detailed profile statistics UI is missing');
+if(!homeJs.includes("actionRequest('profile_stats')")||!homeJs.includes("rank.className='rank-place'"))throw Error('Profile stats or enriched leaderboard client is missing');
+if(release.verification?.profile_stats_server!==true||release.verification?.profile_challenge_records!==true||release.verification?.leaderboard_titles_and_progress!==true)throw Error('Profile/leaderboard manifest is incomplete');
 if(!homeJs.includes("chapter_progress_mode") && !homeJs.includes('shownChapterLevel'))throw Error('Absolute chapter progress helper is missing');
 if(homeJs.includes('requestAnimationFrame(()=>showHomeChapter'))throw Error('Initial carousel must not auto-scroll after profile sync');
 for(let n=1;n<=12;n++){
@@ -173,4 +176,4 @@ if(release.ui?.language_gate_fix!=='first_launch_unset_then_persist_choice')thro
 if(!homeJs.includes("sessionStorage.getItem('pw.profileSyncedShown')")||!homeJs.includes("setTimeout(()=>{const e=$('status')"))throw Error('One-time profile sync notice is missing');
 if(release.ui?.profile_synced_notice?.show!=='once_per_session'||release.ui?.profile_synced_notice?.auto_hide_ms!==1800)throw Error('Profile sync notice manifest is incorrect');
 if(!homeJs.includes("applyLanguage('ru',false)")||!homeJs.includes("function applyLanguage(l,persist=true)"))throw Error('First-launch language selection flow is incorrect');
-console.log('PASS: r80 entrypoints, Chapters 1-12, backgrounds, absolute progress, chapter titles and JavaScript syntax.');
+console.log('PASS: r81 entrypoints, Chapters 1-12, backgrounds, absolute progress, chapter titles and JavaScript syntax.');
