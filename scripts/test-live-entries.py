@@ -4,7 +4,7 @@ from pathlib import Path
 from playwright.sync_api import sync_playwright, expect
 
 BASE='https://firstgame001-star.github.io/Photoword2026/'
-RELEASE='20260928-r80'
+RELEASE='20260928-r81'
 OUT=Path('test-results'); OUT.mkdir(exist_ok=True)
 
 for attempt in range(48):
@@ -937,6 +937,9 @@ def install_mock(ctx,account,completed,lang):
             level=int(body['levelId']);assert body.get('answer')==ANSWERS[lang][level-1],(lang,level,body.get('answer'))
             if level not in completed:
                 completed.add(level);account['coins']+=20;account['xp']+=15;account['completed_levels']+=1;account['current_level']=max(account['current_level'],level+1);account['rank']=1
+        elif action=='profile_stats':
+            stats=account.get('_profile_stats') or {'theme_levels_completed':0,'themes_completed':0,'themes_total':6,'theme_counts':{'sport':0,'art':0,'professions':0,'travel':0,'science':0,'technology':0},'challenge':{'limited_best_score':7,'nohint_best_streak':4,'blitz_best_score':9,'blitz_best_streak':5,'runs_total':12,'reward_coins':35,'reward_xp':22}}
+            route.fulfill(status=200,content_type='application/json',body=json.dumps({'stats':stats}),headers={'Access-Control-Allow-Origin':'*'});return
         elif action=='theme_progress':
             theme_map={k:[] for k in ['sport','art','professions','travel','science','technology']}
             for item in account.setdefault('_theme_completed',[]):
@@ -1094,7 +1097,7 @@ with sync_playwright() as pw:
       # Chapter-earned title appears after completing Chapter 1.
       expected_title={'ru':'Новичок','en':'Novice','az':'Yeni başlayan'}[language]
       expect(page.locator('#rankLabel')).to_contain_text(expected_title)
-      page.locator('#profileBtn').tap();expect(page.locator('#profileTitle')).to_have_text(expected_title);page.locator('[data-close="profileModal"]').tap()
+      page.locator('#profileBtn').tap();expect(page.locator('#profileTitle')).to_have_text(expected_title);expect(page.locator('#profileChapters')).to_have_text('1/9');expect(page.locator('#profileThemeDone')).to_have_text('0/600');expect(page.locator('#profileThemesComplete')).to_have_text('0/6');expect(page.locator('#profileLimitedBest')).to_have_text('7/10');expect(page.locator('#profileNoHintBest')).to_have_text('4');expect(page.locator('#profileBlitzBest')).to_have_text('9');expect(page.locator('#profileBlitzStreak')).to_have_text('5');expect(page.locator('#profileStatsStatus')).to_contain_text('12');page.locator('[data-close="profileModal"]').tap()
       # Nickname is one-time UI and becomes the displayed name.
       page.locator('#profileBtn').tap();page.locator('#nicknameBtn').tap();page.locator('#nicknameInput').fill('Player_77');page.locator('#saveNickname').tap();expect(page.locator('#name')).to_have_text('Player_77');page.locator('#profileBtn').tap();expect(page.locator('#nicknameBtn')).to_be_disabled()
       # Share-game control opens Telegram share URL.
@@ -1112,7 +1115,7 @@ with sync_playwright() as pw:
       # Friends use nickname and progress.
       page.locator('#friendsNav').tap();expect(page.locator('#friendsList')).to_contain_text('FriendOne');expect(page.locator('#friendsList')).to_contain_text('7 / 10');page.locator('[data-close="friendsModal"]').tap()
       # Rating, Stars invoices, energy purchase route and rewarded-ad claim are reachable.
-      page.locator('#ratingNav').tap();expect(page.locator('#leaderboard')).to_contain_text('Player_77');page.locator('#ratingBack').tap();page.locator('#shopNav').tap();expect(page.locator('#shopModal')).to_be_visible();expect(page.locator('[data-pack="c10"]')).to_be_enabled();expect(page.locator('[data-energy-store-pack]')).to_have_count(2)
+      page.locator('#ratingNav').tap();expect(page.locator('#leaderboard')).to_contain_text('Player_77');expect(page.locator('#leaderboard')).to_contain_text(expected_title);expect(page.locator('#leaderboard')).to_contain_text('20');page.locator('#ratingBack').tap();page.locator('#shopNav').tap();expect(page.locator('#shopModal')).to_be_visible();expect(page.locator('[data-pack="c10"]')).to_be_enabled();expect(page.locator('[data-energy-store-pack]')).to_have_count(2)
       page.locator('[data-pack="c10"]').tap();expect(page.locator('[data-pack="c10"]')).to_be_enabled();assert '$test' in page.evaluate("window.__pwNative.invoices.at(-1)")
       page.locator('[data-energy-store-pack="e1"]').tap();expect(page.locator('[data-energy-store-pack="e1"]')).to_be_enabled();assert '$energy' in page.evaluate("window.__pwNative.invoices.at(-1)")
       page.evaluate("""() => { window.Adsgram={init:()=>({show:async()=>({done:true})})}; document.getElementById('watchAd').disabled=false }""")
