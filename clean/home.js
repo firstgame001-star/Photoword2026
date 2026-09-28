@@ -10,7 +10,7 @@ const getTheme=()=>{try{return localStorage.getItem('pw.theme')||'game'}catch{re
 const lang=()=>getLang()||'ru';
 const today=()=>new Date().toISOString().slice(0,10);
 const track=(event,data={})=>pw.actionRequest('track_event',{event,language:lang(),...data}).catch(()=>{});
-let publicConfig={},adController=null;
+let publicConfig={},adController=null,shopStatus=null,shopTimer=null;
 window.addEventListener('pw:error',e=>track('server_error',{metadata:{code:String(e.detail?.code||'error'),status:Number(e.detail?.status||0)}}));
 window.addEventListener('error',e=>track('client_error',{metadata:{message:String(e.message||'error').slice(0,120)}}));
 window.addEventListener('unhandledrejection',e=>track('client_error',{metadata:{message:String(e.reason?.message||e.reason||'rejection').slice(0,120)}}));
@@ -28,7 +28,7 @@ nicknameSet:'Установить игровой ник',nicknameDone:'Игро�
 dailyCopy:'Заходи каждый день и забирай награду.',streak:'Серия',claim:'ПОЛУЧИТЬ',claimed:'Награда получена ✓',alreadyDaily:'Сегодня награда уже получена.',
 taskTitle:'🎯 Задания дня',task1:'Пройди 1 уровень',task2:'Пройди 2 уровня',reward:'Награда',take:'ЗАБРАТЬ',tasksFoot:'Задания обновляются каждый день.',taskClaimed:'ПОЛУЧЕНО',
 invite:'ПРИГЛАСИТЬ ДРУГА',invited:'Приглашено',earned:'Получено',inviteCondition:'Друг проходит 10 уровней — вы оба получаете +20 🪙.',invitedList:'Приглашённые',none:'Пока никого нет.',rewardReceived:'Награда получена',
-coinShop:'Магазин',coinSection:'Монеты',energySection:'Энергия',energyMax:'Максимум 5/5 ⚡',energyFull:'До 5/5 ⚡',payStars:'Оплата через Telegram Stars ⭐',best:'ВЫГОДНО',adTitle:'Получить бесплатно',adText:'Посмотри рекламу и получи +5 🪙',soon:'СКОРО',adWatch:'СМОТРЕТЬ',adSetup:'НАСТРОЙКА',adRewarded:'+5 🪙 начислено за просмотр рекламы.',adError:'Рекламу не удалось показать. Попробуй позже.',chapter2Lock:'🔒 Пройди 20-й уровень',shopFoot:'Покупки начисляются после подтверждения платежа Telegram.',offerTitle:'Больше монет — больше возможностей!',offerText:'Открывай буквы, получай подсказки и проходи уровни',
+coinShop:'Магазин',coinSection:'Монеты',energySection:'Энергия',energyMax:'Максимум 5/5 ⚡',energyFull:'До 5/5 ⚡',payStars:'Оплата через Telegram Stars ⭐',best:'ВЫГОДНО',shopBalanceLabel:'Баланс',shopEnergyLabel:'Энергия',shopAdsLabel:'Реклама',shopHistory:'История',shopHistoryEmpty:'Покупок и наград пока нет.',shopLoading:'Обновляю магазин…',shopAdsReady:'Доступно',shopAdsUnavailable:'Не подключено',shopAdsLimit:'Лимит на сегодня',shopEnergyFullShort:'Полная',shopEnergyNext:'Следующая через',historyCoins:'Монеты',historyEnergy:'Энергия',historyAd:'Реклама',historyFree:'Бесплатно',adLimitReached:'ЛИМИТ',adTitle:'Получить бесплатно',adText:'Посмотри рекламу и получи +5 🪙',soon:'СКОРО',adWatch:'СМОТРЕТЬ',adSetup:'НАСТРОЙКА',adRewarded:'+5 🪙 начислено за просмотр рекламы.',adError:'Рекламу не удалось показать. Попробуй позже.',chapter2Lock:'🔒 Пройди 20-й уровень',shopFoot:'Покупки начисляются после подтверждения платежа Telegram.',offerTitle:'Больше монет — больше возможностей!',offerText:'Открывай буквы, получай подсказки и проходи уровни',
 themeTitle:'Тема',themeSubtitle:'Выберите оформление игры',themeNames:{game:'🎮 Игровая',night:'🌙 Ночная',light:'☀️ Светлая',neon:'⚡ Неон',gold:'👑 Золотая'},themeDesc:{game:'Текущая классическая тема',night:'Графит и приглушённые цвета',light:'Светлый фон и тёмный текст',neon:'Яркое свечение и контраст',gold:'Тёмный фон и золотые акценты'},
 rulesTitle:'Правила игры',resetTitle:'Сбросить прогресс?',cancel:'Отмена',resetButton:'СБРОСИТЬ ПРОГРЕСС',confirmReset:'НАЖМИ ЕЩЁ РАЗ ДЛЯ ПОДТВЕРЖДЕНИЯ',eraseLabel:'Удалить аккаунт',eraseDesc:'Полное удаление профиля и игровых данных',eraseTitle:'Удалить аккаунт?',eraseText:'Будут безвозвратно удалены профиль, прогресс, монеты, XP, история покупок и наград. Это действие нельзя отменить.',eraseButton:'УДАЛИТЬ АККАУНТ',eraseConfirm:'НАЖМИ ЕЩЁ РАЗ ДЛЯ УДАЛЕНИЯ',eraseDone:'Аккаунт удалён.',
 profileSynced:'Профиль синхронизирован',loading:'Загрузка…',noPlayers:'Пока нет игроков',notifyNeedTelegram:'Открой игру внутри Telegram, чтобы разрешить уведомления.',notifyGranted:'Уведомления разрешены.',notifyDenied:'Разрешение не предоставлено.',notifyTestSent:'Готово. Тестовое сообщение отправлено в Telegram.',paymentProcessing:'Платёж подтверждён. Начисляю монеты…',paymentCredited:'Монеты начислены ✓',energyCredited:'Энергия начислена ✓',energyFullError:'Энергия уже 5/5.',shopNeedTelegram:'Открой игру внутри Telegram, чтобы совершить покупку.',paymentPending:'Платёж обрабатывается. Монеты начислятся после подтверждения Telegram.',paymentFailed:'Оплата не прошла.',paymentCancelled:'Оплата отменена.',resetDone:'Прогресс сброшен. Выберите язык игры.'
@@ -45,7 +45,7 @@ nicknameSet:'Set game nickname',nicknameDone:'Game nickname set',nicknameTitle:'
 dailyCopy:'Come back every day and claim your reward.',streak:'Streak',claim:'CLAIM',claimed:'Reward claimed ✓',alreadyDaily:'Today’s reward has already been claimed.',
 taskTitle:'🎯 Daily tasks',task1:'Complete 1 level',task2:'Complete 2 levels',reward:'Reward',take:'CLAIM',tasksFoot:'Tasks refresh every day.',taskClaimed:'CLAIMED',
 invite:'INVITE A FRIEND',invited:'Invited',earned:'Earned',inviteCondition:'Your friend completes 10 levels — both of you get +20 🪙.',invitedList:'Invited friends',none:'No invited friends yet.',rewardReceived:'Reward received',
-coinShop:'Shop',coinSection:'Coins',energySection:'Energy',energyMax:'Maximum 5/5 ⚡',energyFull:'Restore to 5/5 ⚡',payStars:'Payment via Telegram Stars ⭐',best:'BEST VALUE',adTitle:'Get for free',adText:'Watch an ad and get +5 🪙',soon:'SOON',adWatch:'WATCH',adSetup:'SETUP',adRewarded:'+5 🪙 credited for watching the ad.',adError:'The ad could not be shown. Try again later.',chapter2Lock:'🔒 Complete level 20',shopFoot:'Purchases are credited after Telegram confirms the payment.',offerTitle:'More coins — more possibilities!',offerText:'Reveal letters, use hints and complete levels',
+coinShop:'Shop',coinSection:'Coins',energySection:'Energy',energyMax:'Maximum 5/5 ⚡',energyFull:'Restore to 5/5 ⚡',payStars:'Payment via Telegram Stars ⭐',best:'BEST VALUE',shopBalanceLabel:'Balance',shopEnergyLabel:'Energy',shopAdsLabel:'Ads',shopHistory:'History',shopHistoryEmpty:'No purchases or rewards yet.',shopLoading:'Refreshing shop…',shopAdsReady:'Available',shopAdsUnavailable:'Not connected',shopAdsLimit:'Daily limit reached',shopEnergyFullShort:'Full',shopEnergyNext:'Next in',historyCoins:'Coins',historyEnergy:'Energy',historyAd:'Ad reward',historyFree:'Free',adLimitReached:'LIMIT',adTitle:'Get for free',adText:'Watch an ad and get +5 🪙',soon:'SOON',adWatch:'WATCH',adSetup:'SETUP',adRewarded:'+5 🪙 credited for watching the ad.',adError:'The ad could not be shown. Try again later.',chapter2Lock:'🔒 Complete level 20',shopFoot:'Purchases are credited after Telegram confirms the payment.',offerTitle:'More coins — more possibilities!',offerText:'Reveal letters, use hints and complete levels',
 themeTitle:'Theme',themeSubtitle:'Choose the game appearance',themeNames:{game:'🎮 Game',night:'🌙 Night',light:'☀️ Light',neon:'⚡ Neon',gold:'👑 Gold'},themeDesc:{game:'Current classic theme',night:'Graphite and muted colors',light:'Light background and dark text',neon:'Bright glow and contrast',gold:'Dark background with gold accents'},
 rulesTitle:'Game rules',resetTitle:'Reset progress?',cancel:'Cancel',resetButton:'RESET PROGRESS',confirmReset:'TAP AGAIN TO CONFIRM',eraseLabel:'Delete account',eraseDesc:'Permanently delete profile and game data',eraseTitle:'Delete account?',eraseText:'Your profile, progress, coins, XP, purchase history and rewards will be permanently deleted. This cannot be undone.',eraseButton:'DELETE ACCOUNT',eraseConfirm:'TAP AGAIN TO DELETE',eraseDone:'Account deleted.',
 profileSynced:'Profile synced',loading:'Loading…',noPlayers:'No players yet',notifyNeedTelegram:'Open the game inside Telegram to enable notifications.',notifyGranted:'Notifications allowed.',notifyDenied:'Permission was not granted.',notifyTestSent:'Done. A test message was sent in Telegram.',paymentProcessing:'Payment confirmed. Crediting coins…',paymentCredited:'Coins credited ✓',energyCredited:'Energy credited ✓',energyFullError:'Energy is already 5/5.',shopNeedTelegram:'Open the game inside Telegram to make a purchase.',paymentPending:'Payment is processing. Coins will be credited after Telegram confirms it.',paymentFailed:'Payment failed.',paymentCancelled:'Payment cancelled.',resetDone:'Progress reset. Choose your game language.'
@@ -62,7 +62,7 @@ nicknameSet:'Oyun niki təyin et',nicknameDone:'Oyun niki təyin edilib',nicknam
 dailyCopy:'Hər gün daxil ol və mükafatını götür.',streak:'Seriya',claim:'GÖTÜR',claimed:'Mükafat alındı ✓',alreadyDaily:'Bugünkü mükafat artıq alınıb.',
 taskTitle:'🎯 Günün tapşırıqları',task1:'1 səviyyə keç',task2:'2 səviyyə keç',reward:'Mükafat',take:'GÖTÜR',tasksFoot:'Tapşırıqlar hər gün yenilənir.',taskClaimed:'ALINDI',
 invite:'DOSTU DƏVƏT ET',invited:'Dəvət edilib',earned:'Qazanılıb',inviteCondition:'Dostun 10 səviyyə keçir — hər ikiniz +20 🪙 alırsınız.',invitedList:'Dəvət olunanlar',none:'Hələ dəvət olunan yoxdur.',rewardReceived:'Mükafat alındı',
-coinShop:'Mağaza',coinSection:'Sikkələr',energySection:'Enerji',energyMax:'Maksimum 5/5 ⚡',energyFull:'5/5-ə qədər bərpa et ⚡',payStars:'Ödəniş Telegram Stars ilə ⭐',best:'SƏRFƏLİ',adTitle:'Pulsuz əldə et',adText:'Reklama bax və +5 🪙 qazan',soon:'TEZLİKLƏ',adWatch:'BAX',adSetup:'QURULUR',adRewarded:'Reklama baxdığın üçün +5 🪙 əlavə olundu.',adError:'Reklamı göstərmək mümkün olmadı. Sonra yenidən cəhd et.',chapter2Lock:'🔒 20-ci səviyyəni keç',shopFoot:'Alışlar Telegram ödənişi təsdiqlədikdən sonra əlavə olunur.',offerTitle:'Daha çox sikkə — daha çox imkan!',offerText:'Hərfləri aç, ipuclarından istifadə et və səviyyələri keç',
+coinShop:'Mağaza',coinSection:'Sikkələr',energySection:'Enerji',energyMax:'Maksimum 5/5 ⚡',energyFull:'5/5-ə qədər bərpa et ⚡',payStars:'Ödəniş Telegram Stars ilə ⭐',best:'SƏRFƏLİ',shopBalanceLabel:'Balans',shopEnergyLabel:'Enerji',shopAdsLabel:'Reklam',shopHistory:'Tarixçə',shopHistoryEmpty:'Hələ alış və mükafat yoxdur.',shopLoading:'Mağaza yenilənir…',shopAdsReady:'Mövcuddur',shopAdsUnavailable:'Qoşulmayıb',shopAdsLimit:'Günlük limit bitib',shopEnergyFullShort:'Doludur',shopEnergyNext:'Növbəti',historyCoins:'Sikkələr',historyEnergy:'Enerji',historyAd:'Reklam mükafatı',historyFree:'Pulsuz',adLimitReached:'LİMİT',adTitle:'Pulsuz əldə et',adText:'Reklama bax və +5 🪙 qazan',soon:'TEZLİKLƏ',adWatch:'BAX',adSetup:'QURULUR',adRewarded:'Reklama baxdığın üçün +5 🪙 əlavə olundu.',adError:'Reklamı göstərmək mümkün olmadı. Sonra yenidən cəhd et.',chapter2Lock:'🔒 20-ci səviyyəni keç',shopFoot:'Alışlar Telegram ödənişi təsdiqlədikdən sonra əlavə olunur.',offerTitle:'Daha çox sikkə — daha çox imkan!',offerText:'Hərfləri aç, ipuclarından istifadə et və səviyyələri keç',
 themeTitle:'Tema',themeSubtitle:'Oyunun görünüşünü seç',themeNames:{game:'🎮 Oyun',night:'🌙 Gecə',light:'☀️ İşıqlı',neon:'⚡ Neon',gold:'👑 Qızılı'},themeDesc:{game:'Klassik oyun mövzusu',night:'Qrafit və sakit rənglər',light:'Açıq fon və tünd mətn',neon:'Parlaq işıq və kontrast',gold:'Tünd fon və qızılı vurğular'},
 rulesTitle:'Oyun qaydaları',resetTitle:'Tərəqqi sıfırlansın?',cancel:'Ləğv et',resetButton:'TƏRƏQQİNİ SIFIRLA',confirmReset:'TƏSDİQ ÜÇÜN YENƏ TOXUN',eraseLabel:'Hesabı sil',eraseDesc:'Profili və oyun məlumatlarını tam sil',eraseTitle:'Hesab silinsin?',eraseText:'Profil, tərəqqi, sikkələr, XP, alış tarixçəsi və mükafatlar birdəfəlik silinəcək. Bu əməliyyatı geri qaytarmaq olmaz.',eraseButton:'HESABI SİL',eraseConfirm:'SİLMƏK ÜÇÜN YENƏ TOXUN',eraseDone:'Hesab silindi.',
 profileSynced:'Profil sinxronlaşdırıldı',loading:'Yüklənir…',noPlayers:'Hələ oyunçu yoxdur',notifyNeedTelegram:'Bildirişləri aktivləşdirmək üçün oyunu Telegram daxilində açın.',notifyGranted:'Bildirişlərə icazə verildi.',notifyDenied:'İcazə verilmədi.',notifyTestSent:'Hazırdır. Telegram-da test mesajı göndərildi.',paymentProcessing:'Ödəniş təsdiqləndi. Sikkələr əlavə olunur…',paymentCredited:'Sikkələr əlavə olundu ✓',energyCredited:'Enerji əlavə olundu ✓',energyFullError:'Enerji artıq 5/5-dir.',shopNeedTelegram:'Alış etmək üçün oyunu Telegram daxilində aç.',paymentPending:'Ödəniş emal olunur. Telegram təsdiqlədikdən sonra sikkələr əlavə olunacaq.',paymentFailed:'Ödəniş uğursuz oldu.',paymentCancelled:'Ödəniş ləğv edildi.',resetDone:'Tərəqqi sıfırlandı. Oyun dilini seçin.'
@@ -267,6 +267,7 @@ async function openProfile(){
 }
 function update(p){
  const x=t(),name=pw.name(p),rank=p.rank>0?'#'+p.rank:'—';
+ text('shopBalance',p.coins??0);
  const chapterTitle=earnedChapterTitle(p);
  text('name',name);text('profileName',name);text('rankLabel',(chapterTitle?chapterTitle+' · ':'')+(p.rank>0?x.place+' #'+p.rank:x.unranked));text('profileRank',rank);
  text('profileTitle',chapterTitle);if($('profileTitle'))$('profileTitle').hidden=!chapterTitle;
@@ -285,7 +286,7 @@ function applyLanguage(l,persist=true){
  $('rulesBtn').querySelector('b').textContent=x.rules;$('rulesBtn').querySelector('small').textContent=x.rulesDesc;text('supportTitle',x.support);text('supportDesc',x.supportDesc);text('supportText',x.supportText);text('openSupportChat',x.supportOpen);$('privacyLink').querySelector('b').textContent=x.privacy;$('privacyLink').querySelector('small').textContent=x.privacyDesc;$('termsLink').querySelector('b').textContent=x.terms;$('resetProgressBtn').querySelector('b').textContent=x.reset;$('resetProgressBtn').querySelector('small').textContent=x.resetDesc;text('eraseAccountLabel',x.eraseLabel);text('eraseAccountDesc',x.eraseDesc);
  text('profileRankLabel',x.profileRank);text('profileDoneLabel',x.profileLevels);text('profilePrivacyNote',x.profilePrivacy);text('profileProgressTitle',x.profileProgressTitle);text('profileChallengesTitle',x.profileChallenges);text('profileChaptersLabel',x.profileChapters);text('profileThemeDoneLabel',x.profileThemeLevels);text('profileThemesCompleteLabel',x.profileThemesDone);text('profileLimitedLabel',x.profileLimited);text('profileNoHintLabel',x.profileNoHint);text('profileBlitzLabel',x.profileBlitz);text('profileBlitzStreakLabel',x.profileBlitzStreak);text('nicknameTitle',x.nicknameTitle);text('nicknameText',x.nicknameText);text('saveNickname',x.save);text('shareGameBtn',x.share);
  text('friendsInvited',document.getElementById('friendsInvited')?.textContent||'0');const fs=document.querySelectorAll('.friendstats small');if(fs[0])fs[0].textContent=x.invited;if(fs[1])fs[1].textContent=x.earned;text('friendsCondition',x.inviteCondition);text('inviteFriend',x.invite);$('friendsModal').querySelector('h2').textContent=x.friends;$('friendsModal').querySelector('h3').textContent=x.invitedList;if($('friendsEmpty'))text('friendsEmpty',x.none);
- text('shopTitle',x.coinShop);text('coinShopSectionTitle',x.coinSection);text('energyShopSectionTitle',x.energySection);text('energyShopNote',x.energyMax);text('energyFullLabel',x.energyFull);text('shopPayNote',x.payStars);const best=$('shopModal').querySelector('.best i');if(best)best.textContent=x.best;text('adTitle',x.adTitle);text('adText',x.adText);text('watchAd',publicConfig.adsgram_reward_block_id?x.adWatch:x.adSetup);text('shopFootnote',x.shopFoot);const offer=$('shopOffer');if(offer){offer.querySelector('b').textContent=x.offerTitle;offer.querySelector('small').textContent=x.offerText;}
+ text('shopTitle',x.coinShop);text('coinShopSectionTitle',x.coinSection);text('energyShopSectionTitle',x.energySection);text('energyShopNote',x.energyMax);text('energyFullLabel',x.energyFull);text('shopPayNote',x.payStars);text('shopBalanceLabel',x.shopBalanceLabel);text('shopEnergyLabel',x.shopEnergyLabel);text('shopAdsLabel',x.shopAdsLabel);text('shopHistoryTitle',x.shopHistory);const best=$('shopModal').querySelector('.best i');if(best)best.textContent=x.best;text('adTitle',x.adTitle);text('adText',x.adText);text('watchAd',publicConfig.adsgram_reward_block_id?x.adWatch:x.adSetup);text('shopFootnote',x.shopFoot);const offer=$('shopOffer');if(offer){offer.querySelector('b').textContent=x.offerTitle;offer.querySelector('small').textContent=x.offerText;}if(shopStatus)renderShopStatus(shopStatus);
  $('dailyModal').querySelector('h2').textContent=x.daily;text('dailyCopy',x.dailyCopy);
  const shortcuts=document.querySelectorAll('.shortcuts button b');if(shortcuts[0])shortcuts[0].textContent=x.daily;if(shortcuts[1])shortcuts[1].textContent=x.rating;
  text('rulesTitle',x.rulesTitle);$('rulesBody').innerHTML=RULES[l]||RULES.ru;text('resetTitle',x.resetTitle);text('resetBody',RESET[l]||RESET.ru);text('cancelReset',x.cancel);text('confirmReset',x.resetButton);text('eraseAccountTitle',x.eraseTitle);text('eraseAccountText',x.eraseText);text('confirmEraseAccount',x.eraseButton);text('cancelEraseAccount',x.cancel);
@@ -315,7 +316,7 @@ $('languageBtn').onclick=()=>{close('settingsModal');const c=$('languageClose');
 $('themeBtn').onclick=()=>{close('settingsModal');setTimeout(()=>open('themeModal'),0)};
 document.querySelectorAll('[data-theme]').forEach(b=>b.onclick=()=>{applyTheme(b.dataset.theme);track('theme_change',{metadata:{theme:b.dataset.theme}});close('themeModal')});
 document.querySelectorAll('[data-language]').forEach(b=>b.onclick=()=>{applyLanguage(b.dataset.language);track('language_change',{metadata:{language:b.dataset.language}});close('languageModal');pw.status(b.dataset.language==='ru'?'Язык игры: Русский':b.dataset.language==='en'?'Game language: English':'Oyun dili: Azərbaycan dili')});
-$('profileBtn').onclick=openProfile;$('dailyRewardBtn').onclick=()=>open('dailyModal');$('shopOffer').onclick=()=>{track('shop_open');open('shopModal')};$('shopNav').onclick=()=>{track('shop_open');open('shopModal')};$('themesEntry').onclick=()=>{renderThemeHub(pw.player);screen('themesScreen');track('themes_open')};$('themesBack').onclick=()=>screen('home');$('themeDetailBack').onclick=()=>screen('themesScreen');document.querySelectorAll('[data-challenge]').forEach(b=>b.onclick=()=>openChallengeMode(b.dataset.challenge));
+$('profileBtn').onclick=openProfile;$('dailyRewardBtn').onclick=()=>open('dailyModal');$('shopOffer').onclick=openShop;$('shopNav').onclick=openShop;$('themesEntry').onclick=()=>{renderThemeHub(pw.player);screen('themesScreen');track('themes_open')};$('themesBack').onclick=()=>screen('home');$('themeDetailBack').onclick=()=>screen('themesScreen');document.querySelectorAll('[data-challenge]').forEach(b=>b.onclick=()=>openChallengeMode(b.dataset.challenge));
 function chapterIdForLevel(level){
  const n=Number(level||1);
  return n<=20?1:n<=50?2:n<=90?3:n<=131?4:n<=180?5:n<=230?6:n<=280?7:n<=330?8:n<=380?9:10;
@@ -343,18 +344,66 @@ async function loadFriends(){const x=t();open('friendsModal');const list=$('frie
 $('friendsNav').onclick=loadFriends;
 $('inviteFriend').onclick=async()=>{try{const p=await pw.login(),link='https://t.me/PhotoWordBot?startapp='+encodeURIComponent('ref_'+p.photoword_id),share='https://t.me/share/url?url='+encodeURIComponent(link)+'&text='+encodeURIComponent(t().shareText);window.Telegram?.WebApp?.openTelegramLink?.(share)}catch(e){pw.status(e.message)}};
 
-async function waitForStarCredit(before,coins){const x=t(),target=before+coins,delays=[700,1200,1800,2600,3600,5000];pw.status(x.paymentProcessing);for(const ms of delays){await new Promise(r=>setTimeout(r,ms));try{const p=await pw.login(true);if((p.coins||0)>=target){pw.sfx('coin');pw.status(x.paymentCredited);return true}}catch{}}pw.status(x.paymentPending);return false}
+function shopCountdown(ms){
+ const total=Math.max(0,Math.ceil(ms/1000)),m=Math.floor(total/60),s=total%60;
+ return m+':'+String(s).padStart(2,'0');
+}
+function shopDate(raw){
+ try{return new Intl.DateTimeFormat(lang()==='ru'?'ru-RU':lang()==='az'?'az-AZ':'en-GB',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'}).format(new Date(raw))}catch{return''}
+}
+function renderShopHistory(items){
+ const x=t(),box=$('shopHistory');if(!box)return;box.replaceChildren();
+ if(!Array.isArray(items)||!items.length){const p=document.createElement('p');p.className='muted';p.id='shopHistoryEmpty';p.textContent=x.shopHistoryEmpty;box.append(p);return}
+ for(const item of items){
+  const row=document.createElement('div');row.className='shop-history-item';
+  const icon=document.createElement('span'),copy=document.createElement('div'),title=document.createElement('b'),date=document.createElement('small'),value=document.createElement('strong');
+  if(item.type==='coins'){icon.textContent='🪙';title.textContent=x.historyCoins;value.textContent='+'+Number(item.coins||0)+' 🪙 · '+Number(item.stars||0)+' ⭐'}
+  else if(item.type==='energy'){icon.textContent='⚡';title.textContent=x.historyEnergy;value.textContent='+'+Number(item.energy||0)+' ⚡ · '+Number(item.stars||0)+' ⭐'}
+  else{icon.textContent='▶️';title.textContent=x.historyAd;value.textContent='+'+Number(item.coins||0)+' 🪙 · '+x.historyFree}
+  date.textContent=shopDate(item.at);copy.append(title,date);row.append(icon,copy,value);box.append(row);
+ }
+}
+function renderShopStatus(s){
+ if(!s)return;shopStatus=s;const x=t(),energy=Number(s.energy||0),max=Number(s.energy_max||5),ads=s.ads||{},claimed=Number(ads.claimed_today||0),limit=Number(ads.daily_limit||10),configured=Boolean(ads.configured),limited=claimed>=limit;
+ text('shopBalance',Number(s.coins??pw.player?.coins??0));text('shopEnergyValue',energy+'/'+max+' ⚡');text('shopAdsValue',claimed+'/'+limit);
+ text('shopAdsState',limited?x.shopAdsLimit:configured?x.shopAdsReady:x.shopAdsUnavailable);
+ text('adLimitText',claimed+'/'+limit+' · +'+Number(ads.reward_coins||5)+' 🪙');
+ document.querySelectorAll('[data-energy-store-pack]').forEach(b=>b.disabled=energy>=max);
+ const adButton=$('watchAd');if(adButton){adButton.disabled=!configured||limited;adButton.textContent=limited?x.adLimitReached:configured?x.adWatch:x.adSetup}
+ renderShopHistory(s.history||[]);
+ clearInterval(shopTimer);shopTimer=null;
+ const energyTimer=$('shopEnergyTimer');
+ const tick=()=>{if(!energyTimer)return;if(energy>=max||!s.next_energy_at){energyTimer.textContent=x.shopEnergyFullShort;return}const left=Date.parse(s.next_energy_at)-Date.now();energyTimer.textContent=x.shopEnergyNext+' '+shopCountdown(left);if(left<=0){clearInterval(shopTimer);shopTimer=null;loadShopStatus().catch(()=>{})}};
+ tick();if(energy<max&&s.next_energy_at)shopTimer=setInterval(tick,1000);
+}
+async function loadShopStatus(){
+ const card=$('shopModal')?.querySelector('.shopcard');card?.classList.add('shop-status-loading');
+ try{const data=await pw.actionRequest('shop_status');renderShopStatus(data?.shop||{});return data?.shop||{}}
+ finally{card?.classList.remove('shop-status-loading')}
+}
+function openShop(){track('shop_open');open('shopModal');text('shopHistoryEmpty',t().shopLoading);loadShopStatus().catch(e=>pw.status(e.message))}
+$('refreshShopHistory').onclick=()=>loadShopStatus().catch(e=>pw.status(e.message));
+async function waitForEnergyCredit(before){
+ const x=t();pw.status(x.paymentProcessing);
+ for(const ms of [700,1200,1800,2600,3600,5000]){
+  await new Promise(r=>setTimeout(r,ms));
+  try{const s=await loadShopStatus();if(Number(s?.energy||0)>before){pw.sfx('coin');pw.status(x.energyCredited);return true}}catch{}
+ }
+ pw.status(x.paymentPending);return false;
+}
+async function waitForStarCredit(before,coins){const x=t(),target=before+coins,delays=[700,1200,1800,2600,3600,5000];pw.status(x.paymentProcessing);for(const ms of delays){await new Promise(r=>setTimeout(r,ms));try{const p=await pw.login(true);if((p.coins||0)>=target){pw.sfx('coin');pw.status(x.paymentCredited);await loadShopStatus().catch(()=>{});return true}}catch{}}pw.status(x.paymentPending);return false}
 document.querySelectorAll('[data-pack]').forEach(b=>b.onclick=async()=>{if(b.disabled)return;b.disabled=true;try{const base=(pw.player||await pw.login()).coins||0;track('invoice_open',{metadata:{pack:b.dataset.pack}});const result=await pw.actionRequest('create_invoice',{pack:b.dataset.pack}),tg=window.Telegram?.WebApp;if(!tg?.openInvoice)throw new Error(t().notifyNeedTelegram);tg.openInvoice(result.invoice_url,status=>{b.disabled=false;track('payment_status',{metadata:{status,pack:b.dataset.pack}});if(status==='paid')waitForStarCredit(base,result.coins);else if(status==='pending'){pw.status(t().paymentPending);setTimeout(()=>pw.login(true).catch(()=>{}),2500)}else if(status==='failed')pw.status(t().paymentFailed);else if(status==='cancelled')pw.status(t().paymentCancelled)})}catch(e){pw.status(e.message);b.disabled=false}});
 
 document.querySelectorAll('[data-energy-store-pack]').forEach(b=>b.onclick=async()=>{
- if(b.disabled)return;b.disabled=true;
+ if(b.disabled)return;
+ const before=Number(shopStatus?.energy||0);b.disabled=true;
  try{
   track('invoice_open',{metadata:{pack:b.dataset.energyStorePack,type:'energy'}});
   const result=await pw.actionRequest('create_energy_invoice',{pack:b.dataset.energyStorePack}),tg=window.Telegram?.WebApp;
   if(!tg?.openInvoice)throw new Error(t().shopNeedTelegram);
   tg.openInvoice(result.invoice_url,status=>{
     b.disabled=false;track('payment_status',{metadata:{status,pack:b.dataset.energyStorePack,type:'energy'}});
-    if(status==='paid'){pw.sfx('coin');pw.status(t().energyCredited)}
+    if(status==='paid'){waitForEnergyCredit(before)}
     else if(status==='pending')pw.status(t().paymentPending);
     else if(status==='failed')pw.status(t().paymentFailed);
     else if(status==='cancelled')pw.status(t().paymentCancelled);
@@ -368,7 +417,7 @@ document.querySelectorAll('[data-energy-store-pack]').forEach(b=>b.onclick=async
 
 async function configureAds(){try{const r=await pw.actionRequest('public_config');publicConfig=r.config||{};const id=String(publicConfig.adsgram_reward_block_id||'').trim();if(id&&window.Adsgram&&!adController)adController=window.Adsgram.init({blockId:id,debug:false});text('watchAd',id?t().adWatch:t().adSetup);$('watchAd').disabled=!id}catch{$('watchAd').disabled=true}}
 async function claimConfirmedAd(nonce){for(const delay of [300,700,1200,1800,2600,3600]){if(delay)await new Promise(r=>setTimeout(r,delay));try{return await pw.api('ad_claim',{nonce})}catch{}}throw new Error(t().adError)}
-$('watchAd').onclick=async()=>{const b=$('watchAd'),x=t();if(b.disabled)return;b.disabled=true;try{const prep=await pw.actionRequest('ad_prepare');track('ad_open');if(!window.Adsgram)throw new Error(x.adError);if(!adController)adController=window.Adsgram.init({blockId:String(prep.block_id),debug:false});const result=await adController.show();if(!result?.done)throw new Error(x.adError);const p=await claimConfirmedAd(prep.nonce);track('ad_complete');update(p);pw.sfx('coin');pw.status(x.adRewarded)}catch(e){track('ad_error',{metadata:{message:String(e?.message||'ad').slice(0,80)}});pw.status(e?.message||x.adError)}finally{b.disabled=!publicConfig.adsgram_reward_block_id}};
+$('watchAd').onclick=async()=>{const b=$('watchAd'),x=t();if(b.disabled)return;b.disabled=true;try{const prep=await pw.actionRequest('ad_prepare');track('ad_open');if(!window.Adsgram)throw new Error(x.adError);if(!adController)adController=window.Adsgram.init({blockId:String(prep.block_id),debug:false});const result=await adController.show();if(!result?.done)throw new Error(x.adError);const p=await claimConfirmedAd(prep.nonce);track('ad_complete');update(p);pw.sfx('coin');pw.status(x.adRewarded);loadShopStatus().catch(()=>{})}catch(e){track('ad_error',{metadata:{message:String(e?.message||'ad').slice(0,80)}});pw.status(e?.message||x.adError)}finally{const configured=Boolean(shopStatus?.ads?.configured||publicConfig.adsgram_reward_block_id),limited=Number(shopStatus?.ads?.claimed_today||0)>=Number(shopStatus?.ads?.daily_limit||10);b.disabled=!configured||limited}};
 $('claimDaily').onclick=async()=>{const x=t();try{const p=await pw.api('claim_daily');track('daily_claim');update(p);pw.sfx('coin');text('claimDaily',x.claimed);$('claimDaily').disabled=true;pw.status('+5 🪙');setTimeout(()=>close('dailyModal'),900)}catch(e){if(String(e.message)===x.alreadyDaily||String(e.message).toLowerCase().includes('already')||String(e.message).includes('уже')||String(e.message).includes('artıq')){text('claimDaily',x.claimed);$('claimDaily').disabled=true;pw.status(x.alreadyDaily)}else pw.status(e.message)}};
 
 document.querySelectorAll('[data-close]').forEach(b=>b.onclick=()=>close(b.dataset.close));
@@ -386,5 +435,5 @@ function showProfileSyncedOnce(){
  const msg=t().profileSynced;pw.status(msg);
  setTimeout(()=>{const e=$('status');if(e&&!e.hidden&&e.textContent===msg){e.hidden=true;e.textContent=''}},1800);
 }
-pw.login().then(async()=>{showProfileSyncedOnce();track('app_open',{metadata:{version:'r81'}});configureAds();try{await syncThemeProgress()}catch(e){track('server_error',{metadata:{code:'theme_progress_sync',status:0}})}try{const start=window.Telegram?.WebApp?.initDataUnsafe?.start_param||'';if(start.startsWith('ref_PW-'))await pw.api('register_referral',{referrer:start.slice(4)})}catch{}}).catch(e=>pw.status(e.message));
+pw.login().then(async()=>{showProfileSyncedOnce();track('app_open',{metadata:{version:'r82'}});configureAds();try{await syncThemeProgress()}catch(e){track('server_error',{metadata:{code:'theme_progress_sync',status:0}})}try{const start=window.Telegram?.WebApp?.initDataUnsafe?.start_param||'';if(start.startsWith('ref_PW-'))await pw.api('register_referral',{referrer:start.slice(4)})}catch{}}).catch(e=>pw.status(e.message));
 })();
