@@ -4,7 +4,7 @@ from pathlib import Path
 from playwright.sync_api import sync_playwright, expect
 
 BASE='https://firstgame001-star.github.io/Photoword2026/'
-RELEASE='20260929-r93'
+RELEASE='20260929-r94'
 OUT=Path('test-results'); OUT.mkdir(exist_ok=True)
 
 for attempt in range(48):
@@ -1066,6 +1066,7 @@ with sync_playwright() as pw:
     page.goto(BASE+'clean/#'+fragment,wait_until='domcontentloaded',timeout=45000)
     expect(page.locator('#languageModal')).to_be_visible();expect(page.locator('#languageTitle')).to_contain_text('Choose language');expect(page.locator('#languageTitle')).to_contain_text('Dil seçin');expect(page.locator('#languageClose')).to_be_hidden()
     page.locator('[data-language="az"]').tap();expect(page.locator('#languageModal')).to_be_hidden()
+    page.locator('#settingsBtn').tap();expect(page.locator('#supportBtn b')).to_have_text('Dəstək');page.locator('[data-close="settingsModal"]').tap()
     expect(page.locator('#homeChapter1Title')).to_have_text('İsinmə');expect(page.locator('#homeChapter2Title')).to_have_text('Assosiasiyalar');expect(page.locator('[data-home-chapter="3"]')).to_be_visible();expect(page.locator('[data-home-chapter="4"]')).to_be_visible();expect(page.locator('[data-home-chapter="12"]')).to_be_attached();expect(page.locator('#homeChapterDots button')).to_have_count(12);expect(page.locator('#shopOffer')).to_contain_text('Daha çox sikkə');expect(page.locator('#logoWord')).to_have_text('1 SÖZ');page.locator('#chaptersNav').tap();expect(page.locator('#chapter1Label')).to_contain_text('0–20');expect(page.locator('#chapter2Label')).to_contain_text('21–50');expect(page.locator('#chapter2Select .chapter-cover-mark')).to_have_text('II');expect(page.locator('#chapter2Play')).to_have_class(re.compile('locked'));expect(page.locator('#chapter8Label')).to_contain_text('281–330');expect(page.locator('#chapter9Label')).to_contain_text('331–380');expect(page.locator('#chapter12Select')).to_be_attached();page.locator('#chaptersBack').tap()
     body=page.locator('body').inner_text()
     for leak in ['Больше монет','Главная','Задания','Рейтинг','Сегодня награда']: assert leak not in body,('AZ leak',leak)
