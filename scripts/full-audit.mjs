@@ -113,7 +113,7 @@ if(!ruleBlock.includes('Глава 8 «Человек» — уровни 281–3
 if(!ruleBlock.includes('Chapter 8 “Human” contains levels 281–330')||!ruleBlock.includes('Chapter 9 “Universe” contains levels 331–380'))throw Error('EN Chapters 8-9 rules are stale');
 if(!ruleBlock.includes('8-ci fəsil “İnsan” — 281–330-cu səviyyələr')||!ruleBlock.includes('9-cu fəsil “Kainat” — 331–380-ci səviyyələr'))throw Error('AZ Chapters 8-9 rules are stale');
 if(ruleBlock.includes('5–12-ci fəsillər artıq naviqasiyaya əlavə edilib'))throw Error('Stale Azerbaijani chapter rules remain');
-if(!home.includes("track('app_open',{metadata:{version:'r85'}})"))throw Error('App-open analytics version is stale');
+if(!home.includes("track('app_open',{metadata:{version:'r86'}})"))throw Error('App-open analytics version is stale');
 if(!home.includes('function chapterIdForLevel(level)'))throw Error('Chapter analytics helper is missing');
 if(!home.includes("n<=280?7:n<=330?8:n<=380?9:10"))throw Error('Chapter analytics mapping is incomplete');
 
@@ -148,6 +148,7 @@ for(const lang of ['ru','en','az']){
 }
 if(release.verification?.thematic_answers_unique_across_ready_categories!==true)throw Error('Cross-theme uniqueness manifest flag missing');
 if(release.verification?.thematic_progress_server_sync!==true||release.thematic_mode?.progress_sync?.server_authoritative!==true||release.thematic_mode?.progress_sync?.cross_device!==true)throw Error('Thematic progress sync manifest is incomplete');
+if(release.verification?.chapter_start_values_absolute!==true||!home.includes("start===1&&Number(p?.completed_levels||0)===0"))throw Error('Absolute chapter start display missing');
 if(release.verification?.chapter_range_labels_absolute!==true||!home.includes("text(base+'Done',shownChapterLevel")||!home.includes("flashStatus('+5 🪙')"))throw Error('Chapter progress/toast fixes missing');
 if(!home.includes('syncThemeProgress')||!home.includes("actionRequest('theme_progress')"))throw Error('Home thematic progress sync missing');
 if(!home.includes("actionRequest('profile_stats')")||!home.includes("profileBlitzStreak")||!home.includes("rank.className='rank-place'"))throw Error('Profile/rating refresh missing');
