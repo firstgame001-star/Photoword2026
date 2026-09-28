@@ -4,7 +4,7 @@ from pathlib import Path
 from playwright.sync_api import sync_playwright, expect
 
 BASE='https://firstgame001-star.github.io/Photoword2026/'
-RELEASE='20260929-r91'
+RELEASE='20260929-r92'
 OUT=Path('test-results'); OUT.mkdir(exist_ok=True)
 
 for attempt in range(48):
@@ -1070,6 +1070,22 @@ with sync_playwright() as pw:
     body=page.locator('body').inner_text()
     for leak in ['Больше монет','Главная','Задания','Рейтинг','Сегодня награда']: assert leak not in body,('AZ leak',leak)
     assert not relevant_errors(errors),errors;ctx.close()
+
+    # Guest mode must localize every chapter before a Telegram profile is loaded.
+    ctx=browser.new_context(viewport={'width':390,'height':800},has_touch=True,is_mobile=True)
+    ctx.add_init_script("localStorage.setItem('pw.language','az');")
+    page=ctx.new_page();page.goto(BASE+'clean/',wait_until='domcontentloaded',timeout=45000)
+    for n in range(1,10):
+      expect(page.locator(f'#homeChapter{n}Label')).to_contain_text(f'Fəsil {n}')
+      expect(page.locator(f'#homeChapter{n}Count')).to_have_text('səviyyə')
+      if n>1: expect(page.locator(f'#homeChapter{n}LockNote')).to_contain_text('səviyyəni keç')
+    page.locator('#chaptersNav').tap()
+    for n in range(1,10): expect(page.locator(f'#chapter{n}Count')).to_have_text('səviyyə')
+    page.locator('#chaptersBack').tap();page.locator('#settingsBtn').tap();page.locator('#languageBtn').tap();page.locator('[data-language="en"]').tap()
+    for n in range(1,10):
+      expect(page.locator(f'#homeChapter{n}Label')).to_contain_text(f'Chapter {n}')
+      expect(page.locator(f'#homeChapter{n}Count')).to_have_text('levels')
+    ctx.close()
 
     # Settings, full localization, themes, nickname, daily, friends, reset language gate.
     for language in ['ru','en','az']:
