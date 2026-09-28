@@ -148,7 +148,7 @@ for(const lang of ['ru','en','az']){
 }
 if(release.verification?.thematic_answers_unique_across_ready_categories!==true)throw Error('Cross-theme uniqueness manifest flag missing');
 if(release.verification?.thematic_progress_server_sync!==true||release.thematic_mode?.progress_sync?.server_authoritative!==true||release.thematic_mode?.progress_sync?.cross_device!==true)throw Error('Thematic progress sync manifest is incomplete');
-if(release.verification?.chapter_range_labels_absolute!==true||!home.includes("text(base+'Done',done)")||!home.includes("flashStatus('+5 🪙')"))throw Error('Chapter progress/toast fixes missing');
+if(release.verification?.chapter_range_labels_absolute!==true||!home.includes("text(base+'Done',shownChapterLevel")||!home.includes("flashStatus('+5 🪙')"))throw Error('Chapter progress/toast fixes missing');
 if(!home.includes('syncThemeProgress')||!home.includes("actionRequest('theme_progress')"))throw Error('Home thematic progress sync missing');
 if(!home.includes("actionRequest('profile_stats')")||!home.includes("profileBlitzStreak")||!home.includes("rank.className='rank-place'"))throw Error('Profile/rating refresh missing');
 if(!home.includes("actionRequest('shop_status')")||!home.includes('renderShopHistory')||!home.includes('shopAdsValue'))throw Error('Shop dashboard/history flow missing');
