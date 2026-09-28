@@ -375,7 +375,6 @@ html[data-theme="light"] .challenge-energy-shop button{background:#f7fbfd;color:
  linear-gradient(145deg,#070b22 0%,#15164a 48%,#30145b 100%)!important}
 .universe-hero:after{content:"";position:absolute;inset:-20%;background:radial-gradient(ellipse at center,#7c3aed24 0 22%,transparent 48%);z-index:-1;transform:rotate(-12deg)}
 
-.challenge-reward-note{display:block;margin:10px auto 0;color:#b9d8e5;text-align:center;font-size:12px;line-height:1.35}
 .challenge-result-reward{display:block;margin-top:10px;padding:9px 12px;border-radius:11px;background:#123b4d;color:#dceef5;font-size:14px}
 .challenge-result-reward.earned{background:#124c36;color:#8ff0b5;box-shadow:0 0 18px #24d06a22}
 html[data-theme="light"] .challenge-result-reward{background:#e8f2f6;color:#17303c}
