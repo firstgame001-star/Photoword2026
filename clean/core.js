@@ -82,6 +82,10 @@
     if(!raw) throw new Error(lang()==='en'?'Telegram did not provide login data. Open the game from the bot.':lang()==='az'?'Telegram giriş məlumatlarını ötürmədi. Oyunu botdan açın.':'Telegram не передал данные входа. Запусти игру через бота.');
     return request('/functions/v1/telegram-login',{...extra,action,initData:raw});
   }
+  async function duelRequest(action,extra={}) {
+    if(!raw) throw new Error(lang()==='en'?'Open the game from the Telegram bot.':lang()==='az'?'Oyunu Telegram botundan aç.':'Открой игру через Telegram-бота.');
+    return request('/functions/v1/duel-game',{...extra,action,initData:raw});
+  }
   async function leaderboard() {
     const rows = await request('/rest/v1/rpc/get_leaderboard', {p_limit:100}, {apikey:KEY});
     if (!Array.isArray(rows)) throw new Error(lang()==='en'?'Server returned an invalid leaderboard.':lang()==='az'?'Server səhv reytinq qaytardı.':'Сервер вернул некорректный рейтинг.');
@@ -127,6 +131,6 @@
       else tg?.HapticFeedback?.impactOccurred(kind);
     } catch { /* Haptics must never interrupt answer reset or hint application. */ }
   }
-  window.PW = {store, prefs, status, name, api, login, actionRequest, leaderboard, haptic, sfx, setMusic,
+  window.PW = {store, prefs, status, name, api, login, actionRequest, duelRequest, leaderboard, haptic, sfx, setMusic,
     get player() { return current; }, get hasAuth() { return Boolean(raw); }};
 })();
