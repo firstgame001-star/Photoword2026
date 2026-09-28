@@ -4,7 +4,7 @@ import { resolve } from 'node:path';
 const base=resolve('clean');
 const read=name=>readFileSync(resolve(base,name),'utf8');
 const index=read('index.html'),gameHtml=read('game.html'),themeHtml=read('theme-game.html');
-const home=read('home.js'),game=read('game.js'),theme=read('theme-game.js'),challenge=read('challenge.js'),challengeExtra=read('challenge-bank-extra.js'),core=read('core.js');
+const home=read('home.js'),game=read('game.js'),mainExtra=read('main-levels-8-9.js'),theme=read('theme-game.js'),challenge=read('challenge.js'),challengeExtra=read('challenge-bank-extra.js'),core=read('core.js');
 const release=JSON.parse(read('release.json'));
 if(release.thematic_mode?.economy?.first_completion?.coins!==15||release.thematic_mode?.economy?.first_completion?.xp!==10)throw Error('Thematic completion reward must be 15 coins and 10 XP');
 if(release.thematic_mode?.economy?.hints?.letter!==50||release.thematic_mode?.economy?.hints?.remove!==100||release.thematic_mode?.economy?.hints?.text!==150)throw Error('Thematic hint costs changed unexpectedly');
@@ -62,14 +62,24 @@ const coreErrors=evalConst(core,'ERR');
 assertLanguageKeys(coreErrors,'Core error translations');
 for(const lang of ['ru','en','az'])if(!coreErrors[lang]?.energy_full)throw Error('Missing '+lang+' energy_full localization');
 
-// Main content audit: 280 levels, three languages, valid pools and four clues.
+// Main content audit: 380 levels, three languages, valid pools and four clues.
 const mainLevels=evalConst(game,'LEVELS'),mainTr=evalConst(game,'TRANSLATED');
-for(const [lang,obj] of [['ru',mainLevels],['en',mainTr.en],['az',mainTr.az]]){
- if(Object.keys(obj||{}).length!==280)throw Error('Main '+lang+' must contain 280 levels');
+const mainExtraRows=Function('window={};'+mainExtra+';return window.PW_MAIN_EXTRA')();
+if(!Array.isArray(mainExtraRows)||mainExtraRows.length!==100||mainExtraRows[0].id!==281||mainExtraRows.at(-1).id!==380)throw Error('Main Chapter 8-9 extra bank must contain levels 281-380');
+const extraAlphabet={ru:'АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЫЭЮЯ',en:'ABCDEFGHJKLMNPQRSTUVWXYZ',az:'ABCÇDEƏFGĞHXIİJKLMNOÖPQRSŞTUÜVYZ'};
+function buildExtraPool(word,lang){const chars=[...word],used=new Set(chars),extras=[],want=Math.max(12,chars.length+5);for(const ch of extraAlphabet[lang]){if(!used.has(ch)){extras.push(ch);if(chars.length+extras.length>=want)break}}return chars.concat(extras).join('')}
+const combined={ru:{...mainLevels},en:{...mainTr.en},az:{...mainTr.az}};
+for(const row of mainExtraRows){
+ combined.ru[row.id]={...row.ru,pool:buildExtraPool(row.ru.answer,'ru'),photos:row.photos.map(x=>[x,x])};
+ combined.en[row.id]={...row.en,pool:buildExtraPool(row.en.answer,'en')};
+ combined.az[row.id]={...row.az,pool:buildExtraPool(row.az.answer,'az')};
+}
+for(const [lang,obj] of Object.entries(combined)){
+ if(Object.keys(obj||{}).length!==380)throw Error('Main '+lang+' must contain 380 levels');
  const words=Object.values(obj).map(x=>x.answer);
  if(words.some(x=>!x))throw Error('Main '+lang+' has empty answer');
- if(new Set(words).size!==280)throw Error('Main '+lang+' contains duplicate answers');
- for(let n=1;n<=280;n++){
+ if(new Set(words).size!==380)throw Error('Main '+lang+' contains duplicate answers');
+ for(let n=1;n<=380;n++){
   const x=obj[n];if(!x?.answer||!x?.pool||!x?.hint)throw Error('Main '+lang+' incomplete level '+n);
   if(lang==='ru'&&(!x.photos||x.photos.length!==4))throw Error('Main RU level '+n+' must have 4 clues');
   const need={};for(const ch of [...x.answer])need[ch]=(need[ch]||0)+1;
@@ -97,13 +107,13 @@ challengeAdded.forEach((x,i)=>{for(const lang of ['ru','en','az'])if(!x.h?.[lang
 if(!challenge.includes('ENERGY_MAX=5')||challenge.includes('reserve_energy'))throw Error('Challenge energy must remain strict 0-5 with no reserve');
 if(!challenge.includes("BANK_VERSION='r54-400'")||!challenge.includes('pw.challenge.deck.'))throw Error('Challenge no-repeat deck/version missing');
 const ruleBlock=home.slice(home.indexOf('const RULES='),home.indexOf('const RESET='));
-if(!ruleBlock.includes('Глава 7 «Цивилизация» — уровни 231–280'))throw Error('RU Chapter 7 rules are stale');
-if(!ruleBlock.includes('Chapter 7 “Civilization” contains levels 231–280'))throw Error('EN Chapter 7 rules are stale');
-if(!ruleBlock.includes('7-ci fəsil “Sivilizasiya” — 231–280-ci səviyyələr'))throw Error('AZ Chapter 7 rules are stale');
+if(!ruleBlock.includes('Глава 8 «Человек» — уровни 281–330')||!ruleBlock.includes('Глава 9 «Вселенная» — уровни 331–380'))throw Error('RU Chapters 8-9 rules are stale');
+if(!ruleBlock.includes('Chapter 8 “Human” contains levels 281–330')||!ruleBlock.includes('Chapter 9 “Universe” contains levels 331–380'))throw Error('EN Chapters 8-9 rules are stale');
+if(!ruleBlock.includes('8-ci fəsil “İnsan” — 281–330-cu səviyyələr')||!ruleBlock.includes('9-cu fəsil “Kainat” — 331–380-ci səviyyələr'))throw Error('AZ Chapters 8-9 rules are stale');
 if(ruleBlock.includes('5–12-ci fəsillər artıq naviqasiyaya əlavə edilib'))throw Error('Stale Azerbaijani chapter rules remain');
-if(!home.includes("track('app_open',{metadata:{version:'r72'}})"))throw Error('App-open analytics version is stale');
+if(!home.includes("track('app_open',{metadata:{version:'r78'}})"))throw Error('App-open analytics version is stale');
 if(!home.includes('function chapterIdForLevel(level)'))throw Error('Chapter analytics helper is missing');
-if(!home.includes("n<=280?7:8"))throw Error('Chapter analytics mapping is incomplete');
+if(!home.includes("n<=280?7:n<=330?8:n<=380?9:10"))throw Error('Chapter analytics mapping is incomplete');
 
 const themeBanks=[
  ['sport','LEVELS','TRANSLATED'],['art','ART_LEVELS','ART_TRANSLATED'],['professions','PROF_LEVELS','PROF_TRANSLATED'],
@@ -137,9 +147,9 @@ for(const lang of ['ru','en','az']){
 if(release.verification?.thematic_answers_unique_across_ready_categories!==true)throw Error('Cross-theme uniqueness manifest flag missing');
 const completeThemes=release.thematic_mode.categories.filter(x=>x.status==='complete');
 if(completeThemes.length!==6)throw Error('Expected 6 complete thematic categories, got '+completeThemes.length);
-if(release.verification?.main_levels_available_through!==280)throw Error('Main game manifest is not at 280');
-if(release.chapters.filter(x=>x.status==='live').length!==7)throw Error('Expected 7 live chapters');
-if(release.chapters.filter(x=>x.status==='planned').length!==5)throw Error('Expected Chapters 8-12 to remain planned');
+if(release.verification?.main_levels_available_through!==380)throw Error('Main game manifest is not at 380');
+if(release.chapters.filter(x=>x.status==='live').length!==9)throw Error('Expected 9 live chapters');
+if(release.chapters.filter(x=>x.status==='planned').length!==3)throw Error('Expected Chapters 10-12 to remain planned');
 if(!release.verification?.main_answers_unique_all_languages)throw Error('Main answer uniqueness flag missing');
 
 for(const required of ['settingsBtn','profileBtn','dailyRewardBtn','ratingNav','friendsNav','shopNav','themesEntry','challengeModes','notificationsBtn','languageBtn','themeBtn','rulesBtn','supportBtn','resetProgressBtn','eraseAccountBtn']){
@@ -147,4 +157,4 @@ for(const required of ['settingsBtn','profileBtn','dailyRewardBtn','ratingNav','
 }
 if(!theme.includes('.long-answer') && !read('ui.css').includes('.slots.long-answer'))throw Error('Long-answer mobile styling missing');
 
-console.log('PASS: full PhotoWord audit — DOM integrity, 280 main levels, 400 unique challenge words, translations, chapters, six theme banks, settings surfaces and manifest consistency.');
+console.log('PASS: full PhotoWord audit — DOM integrity, 380 main levels, 400 unique challenge words, translations, chapters, six theme banks, settings surfaces and manifest consistency.');
