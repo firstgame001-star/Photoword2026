@@ -187,14 +187,6 @@ function completedChapterCount(p){
  const done=Number(p?.completed_levels||0);return MAIN_CHAPTERS.filter(ch=>done>=ch.end).length;
 }
 function earnedChapterTitle(p){const n=completedChapterCount(p);return n?(CHAPTER_TITLES[lang()]||CHAPTER_TITLES.ru)[n]||'': ''}
-function shownChapterLevel(p,start,end,finished,unlocked){
- if(finished)return end;
- if(start===1&&Number(p?.completed_levels||0)===0)return 0;
- const current=Number(p?.current_level||1);
- if(current>=start&&current<=end)return current;
- if(current>end)return end;
- return start===1?0:start;
-}
 function persistPrefs(){try{localStorage.setItem('photoword-prefs',JSON.stringify(pw.prefs))}catch{}}
 function setLogo(x){const e=$('logoLetters');if(e)e.innerHTML=x.logo.map(v=>'<i>'+v+'</i>').join('');text('logoWord',x.one);text('logoTagline',x.tagline)}
 function chapterData(p,x){
@@ -215,9 +207,10 @@ function renderMainChapterCard(p,x,ch,prefix){
  const done=Math.min(ch.total,Math.max(0,Number(p.completed_levels||0)-(ch.start-1))),finished=done>=ch.total;
  const unlocked=ch.num===1||(p.current_level||1)>=ch.start||Number(p.completed_levels||0)>=ch.start-1;
  const base=prefix+ch.num;
- text(base+'Label',x.chapter(ch.num)+' · '+ch.start+'–'+ch.end);
+ const range=(ch.num===1?0:ch.start)+'–'+ch.end;
+ text(base+'Label',x.chapter(ch.num)+' · '+range);
  text(base+'Title',x[ch.key]);text(base+'Desc',x[ch.key+'Desc']);
- text(base+'Done',shownChapterLevel(p,ch.start,ch.end,finished,unlocked));text(base+'Count','/ '+ch.end+' '+x.levels);
+ text(base+'Done',range);text(base+'Count',x.levels);
  const progress=$(base+'Progress');if(progress)progress.style.width=(done/ch.total*100)+'%';
  const lock=$(base+'LockNote'),play=$(base+'Play');
  if(unlocked){
@@ -474,5 +467,5 @@ function showProfileSyncedOnce(){
  const msg=t().profileSynced;pw.status(msg);
  setTimeout(()=>{const e=$('status');if(e&&!e.hidden&&e.textContent===msg){e.hidden=true;e.textContent=''}},1800);
 }
-pw.login().then(async()=>{showProfileSyncedOnce();track('app_open',{metadata:{version:'r86'}});configureAds();try{await syncThemeProgress()}catch(e){track('server_error',{metadata:{code:'theme_progress_sync',status:0}})}try{const start=window.Telegram?.WebApp?.initDataUnsafe?.start_param||'';if(start.startsWith('ref_PW-'))await pw.api('register_referral',{referrer:start.slice(4)})}catch{}}).catch(e=>pw.status(e.message));
+pw.login().then(async()=>{showProfileSyncedOnce();track('app_open',{metadata:{version:'r87'}});configureAds();try{await syncThemeProgress()}catch(e){track('server_error',{metadata:{code:'theme_progress_sync',status:0}})}try{const start=window.Telegram?.WebApp?.initDataUnsafe?.start_param||'';if(start.startsWith('ref_PW-'))await pw.api('register_referral',{referrer:start.slice(4)})}catch{}}).catch(e=>pw.status(e.message));
 })();
