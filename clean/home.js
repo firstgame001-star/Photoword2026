@@ -117,7 +117,22 @@ function setThemeHubLabels(){
  const m=themeMode();
  text('themesEntryBadge',m.entryBadge);text('themesEntryTitle',m.entry);text('themesEntryDesc',m.entryDesc);text('themesTitle',m.title);text('themesSubtitle',m.subtitle);
 }
-function getThemeProgress(id){try{const raw=JSON.parse(localStorage.getItem('pw.themeProgress.'+id)||'[]');return new Set(Array.isArray(raw)?raw.map(Number).filter(Number.isInteger):[])}catch{return new Set()}}
+const READY_THEME_IDS=['sport','art','professions','travel','science','technology'];
+function getThemeProgress(id){try{const raw=JSON.parse(localStorage.getItem('pw.themeProgress.'+id)||'[]');return new Set(Array.isArray(raw)?raw.map(Number).filter(n=>Number.isInteger(n)&&n>=1&&n<=100):[])}catch{return new Set()}}
+function cacheThemeProgressMap(map){
+ for(const id of READY_THEME_IDS){
+  const levels=Array.isArray(map?.[id])?map[id].map(Number).filter(n=>Number.isInteger(n)&&n>=1&&n<=100):[];
+  try{localStorage.setItem('pw.themeProgress.'+id,JSON.stringify([...new Set(levels)].sort((a,b)=>a-b)))}catch{}
+ }
+}
+async function syncThemeProgress(){
+ if(!pw.hasAuth)return null;
+ const result=await pw.actionRequest('theme_progress');
+ cacheThemeProgressMap(result?.theme_progress||{});
+ if(pw.player)renderThemeHub(pw.player);
+ return result?.theme_progress||{};
+}
+function clearThemeProgressCache(){for(const id of READY_THEME_IDS)try{localStorage.removeItem('pw.themeProgress.'+id)}catch{}}
 function renderThemeHub(p){
  setThemeHubLabels();
  const m=themeMode(),done=Number(p?.completed_levels||0),unlocked=done>=10,wrap=$('themeCards');
@@ -136,7 +151,7 @@ function renderThemeHub(p){
 }
 function openThemeCategory(id){
  const cat=themeCategory(id);if(!cat)return;
- const m=themeMode(),copy=m.cats[id]||[id,''],progress=getThemeProgress(id),done=progress.size,isReady=['sport','art','professions','travel','science','technology'].includes(id);
+ const m=themeMode(),copy=m.cats[id]||[id,''],progress=getThemeProgress(id),done=progress.size,isReady=READY_THEME_IDS.includes(id);
  text('themeDetailTitle',cat.icon+' '+copy[0]);text('themeDetailSubtitle',done+' / 100 · '+m.detail);text('themeDetailInfo',isReady?(lang()==='ru'?'Все 100 уровней раздела готовы.':lang()==='en'?'All 100 levels in this category are ready.':'Bu bölmənin bütün 100 səviyyəsi hazırdır.'):m.preparing);
  const grid=$('themeLevelGrid');grid.replaceChildren();
  const next=Math.min(100,done+1);
@@ -295,7 +310,7 @@ $('musicToggle').checked=Boolean(pw.prefs.music);$('musicToggle').onchange=()=>p
 let resetArmed=false,resetTimer=null,eraseArmed=false,eraseTimer=null;
 $('eraseAccountBtn').onclick=()=>{close('settingsModal');eraseArmed=false;text('confirmEraseAccount',t().eraseButton);setTimeout(()=>open('eraseAccountModal'),0)};
 $('confirmEraseAccount').onclick=async()=>{const b=$('confirmEraseAccount'),x=t();if(!eraseArmed){eraseArmed=true;b.textContent=x.eraseConfirm;clearTimeout(eraseTimer);eraseTimer=setTimeout(()=>{eraseArmed=false;b.textContent=x.eraseButton},5000);return}b.disabled=true;try{await pw.actionRequest('erase_account',{confirm:'ERASE',language:lang()});try{localStorage.clear();sessionStorage.clear()}catch{};close('eraseAccountModal');pw.status(x.eraseDone);setTimeout(()=>{try{window.Telegram?.WebApp?.close?.()}catch{}},900)}catch(e){pw.status(e.message);b.disabled=false;eraseArmed=false}};
-$('confirmReset').onclick=async()=>{const b=$('confirmReset'),x=t();if(!resetArmed){resetArmed=true;b.textContent=x.confirmReset;clearTimeout(resetTimer);resetTimer=setTimeout(()=>{resetArmed=false;b.textContent=x.resetButton},5000);return}b.disabled=true;try{const p=await pw.api('reset_progress');try{for(let i=sessionStorage.length-1;i>=0;i--){const k=sessionStorage.key(i);if(k?.startsWith('pw.hints.'))sessionStorage.removeItem(k)}localStorage.removeItem('pw.language')}catch{};update(p);close('resetModal');pw.sfx('success');pw.status(x.resetDone);setTimeout(showRequiredLanguagePicker,350)}catch(e){pw.status(e.message)}finally{b.disabled=false;resetArmed=false}};
+$('confirmReset').onclick=async()=>{const b=$('confirmReset'),x=t();if(!resetArmed){resetArmed=true;b.textContent=x.confirmReset;clearTimeout(resetTimer);resetTimer=setTimeout(()=>{resetArmed=false;b.textContent=x.resetButton},5000);return}b.disabled=true;try{const p=await pw.api('reset_progress');try{for(let i=sessionStorage.length-1;i>=0;i--){const k=sessionStorage.key(i);if(k?.startsWith('pw.hints.'))sessionStorage.removeItem(k)}localStorage.removeItem('pw.language');clearThemeProgressCache()}catch{};update(p);close('resetModal');pw.sfx('success');pw.status(x.resetDone);setTimeout(showRequiredLanguagePicker,350)}catch(e){pw.status(e.message)}finally{b.disabled=false;resetArmed=false}};
 
 async function loadFriends(){const x=t();open('friendsModal');const list=$('friendsList');list.textContent=x.loading;try{const data=await pw.actionRequest('friends');text('friendsInvited',data.invited||0);text('friendsReward',(data.total_reward||0)+' 🪙');list.replaceChildren();if(!data.friends?.length){const p=document.createElement('p');p.className='muted';p.textContent=x.none;list.append(p);return}data.friends.forEach(f=>{const row=document.createElement('div');row.className='friendrow'+(f.rewarded?' rewarded':'');const who=document.createElement('div'),n=document.createElement('b'),sub=document.createElement('small');n.textContent=f.game_nickname||[f.first_name,f.last_name].filter(Boolean).join(' ')||f.photoword_id;sub.textContent=f.username?'@'+f.username:f.photoword_id;who.append(n,sub);const prog=document.createElement('div'),label=document.createElement('span'),track=document.createElement('em'),bar=document.createElement('i');prog.className='friendprogress';label.textContent=f.rewarded?x.rewardReceived:f.completed_levels+' / 10';bar.style.width=Math.min(100,(f.completed_levels||0)*10)+'%';track.append(bar);prog.append(label,track);row.append(who,prog);list.append(row)})}catch(e){list.textContent=e.message}}
 $('friendsNav').onclick=loadFriends;
@@ -344,5 +359,5 @@ function showProfileSyncedOnce(){
  const msg=t().profileSynced;pw.status(msg);
  setTimeout(()=>{const e=$('status');if(e&&!e.hidden&&e.textContent===msg){e.hidden=true;e.textContent=''}},1800);
 }
-pw.login().then(async()=>{showProfileSyncedOnce();track('app_open',{metadata:{version:'r78'}});configureAds();try{const start=window.Telegram?.WebApp?.initDataUnsafe?.start_param||'';if(start.startsWith('ref_PW-'))await pw.api('register_referral',{referrer:start.slice(4)})}catch{}}).catch(e=>pw.status(e.message));
+pw.login().then(async()=>{showProfileSyncedOnce();track('app_open',{metadata:{version:'r80'}});configureAds();try{await syncThemeProgress()}catch(e){track('server_error',{metadata:{code:'theme_progress_sync',status:0}})}try{const start=window.Telegram?.WebApp?.initDataUnsafe?.start_param||'';if(start.startsWith('ref_PW-'))await pw.api('register_referral',{referrer:start.slice(4)})}catch{}}).catch(e=>pw.status(e.message));
 })();
