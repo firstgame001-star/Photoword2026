@@ -4,7 +4,7 @@ from pathlib import Path
 from playwright.sync_api import sync_playwright, expect
 
 BASE='https://firstgame001-star.github.io/Photoword2026/'
-RELEASE='20260929-r82'
+RELEASE='20260929-r83'
 OUT=Path('test-results'); OUT.mkdir(exist_ok=True)
 
 for attempt in range(48):
@@ -966,8 +966,21 @@ def install_mock(ctx,account,completed,lang):
             account['coins']+=5;account['daily_streak']=max(1,account.get('daily_streak',0)+1);account['last_daily_reward']=time.strftime('%Y-%m-%d')
         elif action=='set_nickname':
             nick=body.get('nickname','');assert re.fullmatch(r'[A-Za-z0-9_]{3,16}',nick);account['game_nickname']=nick;account['nickname_changed']=True
+        elif action=='notification_state':
+            n=account.setdefault('_notifications',{'enabled':bool(account.get('notifications_enabled',False)),'daily_reward':True,'energy_full':True,'chapter_unlocked':True,'timezone_offset_minutes':0,'language':account.get('notification_language',lang)})
+            n['enabled']=bool(account.get('notifications_enabled',False));n['language']=account.get('notification_language',lang)
+            route.fulfill(status=200,content_type='application/json',body=json.dumps({'notifications':n}),headers={'Access-Control-Allow-Origin':'*'});return
+        elif action=='update_notifications':
+            account['notifications_enabled']=bool(body.get('enabled'));account['notification_language']=body.get('language',lang)
+            n={'enabled':account['notifications_enabled'],'daily_reward':body.get('dailyReward',True),'energy_full':body.get('energyFull',True),'chapter_unlocked':body.get('chapterUnlocked',True),'timezone_offset_minutes':body.get('timezoneOffsetMinutes',0),'language':account['notification_language']}
+            account['_notifications']=n
+            route.fulfill(status=200,content_type='application/json',body=json.dumps({'notifications':n}),headers={'Access-Control-Allow-Origin':'*'});return
+        elif action=='test_notification':
+            assert account.get('notifications_enabled') is True
+            account['_notification_tests']=account.get('_notification_tests',0)+1
+            route.fulfill(status=200,content_type='application/json',body=json.dumps({'ok':True}),headers={'Access-Control-Allow-Origin':'*'});return
         elif action=='enable_notifications':
-            account['notifications_enabled']=True;account['notification_language']=body.get('language',lang)
+            account['notifications_enabled']=True;account['notification_language']=body.get('language',lang);account['_notifications']={'enabled':True,'daily_reward':True,'energy_full':True,'chapter_unlocked':True,'timezone_offset_minutes':body.get('timezoneOffsetMinutes',0),'language':account['notification_language']}
         elif action=='friends':
             route.fulfill(status=200,content_type='application/json',body=json.dumps({'friends':[{'photoword_id':'PW-FRIEND','first_name':'Friend','last_name':'','username':'friend','game_nickname':'FriendOne','completed_levels':7,'rewarded':False}],'invited':1,'rewarded':0,'total_reward':0}),headers={'Access-Control-Allow-Origin':'*'});return
         elif action=='shop_status':
@@ -1084,8 +1097,8 @@ with sync_playwright() as pw:
       page.locator('#settingsBtn').tap();page.locator('#soundToggle').uncheck();page.locator('#hapticToggle').uncheck();page.locator('#musicToggle').check();prefs=page.evaluate("JSON.parse(localStorage.getItem('photoword-prefs'))");assert prefs['sound'] is False and prefs['haptic'] is False and prefs['music'] is True;page.locator('#musicToggle').uncheck();page.locator('[data-close="settingsModal"]').tap()
       # Language can be changed from Settings and changed back without losing the game.
       other={'ru':'en','en':'az','az':'ru'}[language];page.locator('#settingsBtn').tap();page.locator('#languageBtn').tap();page.locator(f'[data-language="{other}"]').tap();assert page.evaluate("localStorage.getItem('pw.language')")==other;page.locator('#settingsBtn').tap();page.locator('#languageBtn').tap();page.locator(f'[data-language="{language}"]').tap();assert page.evaluate("localStorage.getItem('pw.language')")==language
-      # Notification permission flow calls Telegram and persists server/local state.
-      page.locator('#settingsBtn').tap();expect(page.locator('#notificationsBtn')).to_be_visible();page.locator('#notificationsBtn').tap();expect(page.locator('#notificationsState')).to_have_text({'ru':'Разрешены','en':'Allowed','az':'İcazə verilib'}[language]);assert page.evaluate("localStorage.getItem('pw.writeAccess')")=='1';page.locator('[data-close="settingsModal"]').tap()
+      # Notification preferences: master permission, individual switches and test delivery.
+      page.locator('#settingsBtn').tap();expect(page.locator('#notificationsBtn')).to_be_visible();page.locator('#notificationsBtn').tap();expect(page.locator('#notificationsModal')).to_be_visible();expect(page.locator('#notificationDaily')).to_be_checked();expect(page.locator('#notificationEnergy')).to_be_checked();expect(page.locator('#notificationChapter')).to_be_checked();page.locator('#notificationsMaster').check();page.locator('#notificationEnergy').uncheck();page.locator('#saveNotifications').tap();expect(page.locator('#notificationsMaster')).to_be_checked();expect(page.locator('#notificationEnergy')).not_to_be_checked();expect(page.locator('#testNotification')).to_be_enabled();assert page.evaluate("localStorage.getItem('pw.writeAccess')")=='1';page.locator('#testNotification').tap();assert account.get('_notification_tests')==1;page.locator('[data-close="notificationsModal"]').tap();page.locator('#settingsBtn').tap();expect(page.locator('#notificationsState')).to_have_text({'ru':'Включены','en':'On','az':'Aktivdir'}[language]);page.locator('[data-close="settingsModal"]').tap()
       # Rules and support are localized.
       page.locator('#settingsBtn').tap();page.locator('#rulesBtn').tap();expect(page.locator('#rulesModal')).to_be_visible();assert len(page.locator('#rulesBody').inner_text())>100;rules_text=page.locator('#rulesBody').inner_text();
       if language=='az': assert '7-ci fəsil “Sivilizasiya”' in rules_text and '5–12-ci fəsillər artıq' not in rules_text
