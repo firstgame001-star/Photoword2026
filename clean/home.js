@@ -189,6 +189,7 @@ function completedChapterCount(p){
 function earnedChapterTitle(p){const n=completedChapterCount(p);return n?(CHAPTER_TITLES[lang()]||CHAPTER_TITLES.ru)[n]||'': ''}
 function shownChapterLevel(p,start,end,finished,unlocked){
  if(finished)return end;
+ if(start===1&&Number(p?.completed_levels||0)===0)return 0;
  const current=Number(p?.current_level||1);
  if(current>=start&&current<=end)return current;
  if(current>end)return end;
@@ -473,5 +474,5 @@ function showProfileSyncedOnce(){
  const msg=t().profileSynced;pw.status(msg);
  setTimeout(()=>{const e=$('status');if(e&&!e.hidden&&e.textContent===msg){e.hidden=true;e.textContent=''}},1800);
 }
-pw.login().then(async()=>{showProfileSyncedOnce();track('app_open',{metadata:{version:'r85'}});configureAds();try{await syncThemeProgress()}catch(e){track('server_error',{metadata:{code:'theme_progress_sync',status:0}})}try{const start=window.Telegram?.WebApp?.initDataUnsafe?.start_param||'';if(start.startsWith('ref_PW-'))await pw.api('register_referral',{referrer:start.slice(4)})}catch{}}).catch(e=>pw.status(e.message));
+pw.login().then(async()=>{showProfileSyncedOnce();track('app_open',{metadata:{version:'r86'}});configureAds();try{await syncThemeProgress()}catch(e){track('server_error',{metadata:{code:'theme_progress_sync',status:0}})}try{const start=window.Telegram?.WebApp?.initDataUnsafe?.start_param||'';if(start.startsWith('ref_PW-'))await pw.api('register_referral',{referrer:start.slice(4)})}catch{}}).catch(e=>pw.status(e.message));
 })();
