@@ -27,7 +27,7 @@ for(const file of ['core.js','home.js','game.js','main-levels-8-9.js','theme-gam
 }
 
 const release=JSON.parse(readFileSync(resolve(base,'release.json'),'utf8'));
-if(release.release!=='20260928-r78')throw Error('Unexpected release: '+release.release);
+if(release.release!=='20260928-r79')throw Error('Unexpected release: '+release.release);
 if(!Array.isArray(release.levels)||!release.levels.includes(380))throw Error('Main levels are not published through 380');
 if(release.chapters?.length!==12)throw Error('Main chapter navigation must contain 12 chapters');
 if(release.chapters.find(x=>x.id===3)?.status!=='live')throw Error('Chapter 3 must be complete');
@@ -126,6 +126,7 @@ if(!index.includes('id="challengeScreen"'))throw Error('Playable challenge scree
 if(!index.includes('./challenge.js'))throw Error('Challenge game module is missing');
 if(!homeJs.includes('const CHALLENGE_MODE='))throw Error('Challenge localization is missing');
 if(release.challenge_modes?.status!=='playable_test'||release.challenge_modes?.modes?.length!==3)throw Error('Challenge mode manifest is incomplete');
+if(release.verification?.challenge_rewards_live!==true||release.challenge_modes?.rewards?.server_authoritative!==true||release.challenge_modes?.rewards?.rewarded_runs_per_mode_per_day!==3)throw Error('Challenge reward economy is incomplete');
 const challengeJs=readFileSync(resolve(base,'challenge.js'),'utf8');
 if(!challengeJs.includes("correct_seconds_bonus")&&!challengeJs.includes("deadline+=3000"))throw Error('Blitz +3 second bonus is missing');
 if(!challengeJs.includes("deadline-=3000"))throw Error('Blitz wrong-word penalty is missing');
