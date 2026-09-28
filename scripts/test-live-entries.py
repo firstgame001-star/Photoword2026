@@ -4,7 +4,7 @@ from pathlib import Path
 from playwright.sync_api import sync_playwright, expect
 
 BASE='https://firstgame001-star.github.io/Photoword2026/'
-RELEASE='20260928-r81'
+RELEASE='20260929-r82'
 OUT=Path('test-results'); OUT.mkdir(exist_ok=True)
 
 for attempt in range(48):
@@ -970,6 +970,10 @@ def install_mock(ctx,account,completed,lang):
             account['notifications_enabled']=True;account['notification_language']=body.get('language',lang)
         elif action=='friends':
             route.fulfill(status=200,content_type='application/json',body=json.dumps({'friends':[{'photoword_id':'PW-FRIEND','first_name':'Friend','last_name':'','username':'friend','game_nickname':'FriendOne','completed_levels':7,'rewarded':False}],'invited':1,'rewarded':0,'total_reward':0}),headers={'Access-Control-Allow-Origin':'*'});return
+        elif action=='shop_status':
+            history=account.setdefault('_shop_history',[])
+            shop={'coins':account['coins'],'energy':account.get('_challenge_energy',5),'energy_max':5,'next_energy_at':None,'ads':{'configured':False,'reward_coins':5,'claimed_today':0,'daily_limit':10},'history':history}
+            route.fulfill(status=200,content_type='application/json',body=json.dumps({'shop':shop}),headers={'Access-Control-Allow-Origin':'*'});return
         elif action=='public_config':
             route.fulfill(status=200,content_type='application/json',body=json.dumps({'config':{'ads_provider':'adsgram','adsgram_reward_block_id':None,'support_contact':'@PhotoWordBot'}}),headers={'Access-Control-Allow-Origin':'*'});return
         elif action=='track_event':
@@ -977,7 +981,7 @@ def install_mock(ctx,account,completed,lang):
         elif action=='ad_prepare':
             route.fulfill(status=200,content_type='application/json',body=json.dumps({'nonce':'00000000-0000-0000-0000-000000000070','block_id':'audit-block','reward':5}),headers={'Access-Control-Allow-Origin':'*'});return
         elif action=='ad_claim':
-            account['coins']+=5
+            account['coins']+=5;account.setdefault('_shop_history',[]).insert(0,{'type':'ad','coins':5,'stars':0,'at':time.strftime('%Y-%m-%dT%H:%M:%SZ',time.gmtime())})
         elif action=='erase_account':
             account['_erased']=True;route.fulfill(status=200,content_type='application/json',body=json.dumps({'erased':True}),headers={'Access-Control-Allow-Origin':'*'});return
         elif action=='create_invoice':
@@ -1115,11 +1119,11 @@ with sync_playwright() as pw:
       # Friends use nickname and progress.
       page.locator('#friendsNav').tap();expect(page.locator('#friendsList')).to_contain_text('FriendOne');expect(page.locator('#friendsList')).to_contain_text('7 / 10');page.locator('[data-close="friendsModal"]').tap()
       # Rating, Stars invoices, energy purchase route and rewarded-ad claim are reachable.
-      page.locator('#ratingNav').tap();expect(page.locator('#leaderboard')).to_contain_text('Player_77');expect(page.locator('#leaderboard')).to_contain_text(expected_title);expect(page.locator('#leaderboard')).to_contain_text('20');page.locator('#ratingBack').tap();page.locator('#shopNav').tap();expect(page.locator('#shopModal')).to_be_visible();expect(page.locator('[data-pack="c10"]')).to_be_enabled();expect(page.locator('[data-energy-store-pack]')).to_have_count(2)
+      page.locator('#ratingNav').tap();expect(page.locator('#leaderboard')).to_contain_text('Player_77');expect(page.locator('#leaderboard')).to_contain_text(expected_title);expect(page.locator('#leaderboard')).to_contain_text('20');page.locator('#ratingBack').tap();page.locator('#shopNav').tap();expect(page.locator('#shopModal')).to_be_visible();expect(page.locator('#shopBalance')).to_have_text(str(account['coins']));expect(page.locator('#shopEnergyValue')).to_contain_text('5/5');expect(page.locator('#shopAdsValue')).to_contain_text('0/10');expect(page.locator('#shopHistoryTitle')).to_be_visible();expect(page.locator('[data-pack="c10"]')).to_be_enabled();expect(page.locator('[data-energy-store-pack]')).to_have_count(2);expect(page.locator('[data-energy-store-pack="e1"]')).to_be_disabled()
       page.locator('[data-pack="c10"]').tap();expect(page.locator('[data-pack="c10"]')).to_be_enabled();assert '$test' in page.evaluate("window.__pwNative.invoices.at(-1)")
       page.locator('[data-energy-store-pack="e1"]').tap();expect(page.locator('[data-energy-store-pack="e1"]')).to_be_enabled();assert '$energy' in page.evaluate("window.__pwNative.invoices.at(-1)")
       page.evaluate("""() => { window.Adsgram={init:()=>({show:async()=>({done:true})})}; document.getElementById('watchAd').disabled=false }""")
-      ad_before=int(page.locator('[data-coins]').first.inner_text());page.locator('#watchAd').tap();expect(page.locator('[data-coins]').first).to_have_text(str(ad_before+5))
+      ad_before=int(page.locator('[data-coins]').first.inner_text());page.locator('#watchAd').tap();expect(page.locator('[data-coins]').first).to_have_text(str(ad_before+5));expect(page.locator('#shopHistory')).to_contain_text('+5')
       page.locator('[data-close="shopModal"]').tap()
       # Reset requires double confirmation and then requires language again.
       page.locator('#settingsBtn').tap();page.locator('#resetProgressBtn').tap();page.locator('#confirmReset').tap();page.locator('#confirmReset').tap();expect(page.locator('#languageModal')).to_be_visible(timeout=3000);expect(page.locator('#languageClose')).to_be_hidden()
