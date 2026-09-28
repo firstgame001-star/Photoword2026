@@ -354,7 +354,7 @@ $('saveNotifications').onclick=async()=>{
    const tz=-new Date().getTimezoneOffset();
    const r=await pw.actionRequest('update_notifications',{enabled,dailyReward:$('notificationDaily').checked,energyFull:$('notificationEnergy').checked,chapterUnlocked:$('notificationChapter').checked,timezoneOffsetMinutes:tz,language:lang()});
    notificationState=r.notifications||{};paintNotificationState(notificationState);
-   if(enabled)try{localStorage.setItem('pw.writeAccess','1')}catch{};else try{localStorage.removeItem('pw.writeAccess')}catch{}
+   if(enabled){try{localStorage.setItem('pw.writeAccess','1')}catch{}}else{try{localStorage.removeItem('pw.writeAccess')}catch{}}
    const p=await pw.login(true);update(p);pw.status(x.notificationSaved);
   }catch(e){pw.status(e.message)}finally{b.disabled=false}
  };
