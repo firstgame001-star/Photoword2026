@@ -356,3 +356,21 @@ html[data-theme="light"] .challenge-energy-shop button{background:#f7fbfd;color:
   .tools{margin-top:5px}
   .textHint{margin-top:5px}
 }
+
+
+/* r78: Chapter 8 — Human */
+.human-hero{overflow:hidden;isolation:isolate;background:
+ radial-gradient(circle at 20% 24%,#ff7f7f44 0 10%,transparent 11%),
+ radial-gradient(circle at 78% 30%,#f9c74f33 0 8%,transparent 9%),
+ radial-gradient(circle at 62% 78%,#43aa8b44 0 9%,transparent 10%),
+ linear-gradient(140deg,#351b35 0%,#5b2f4d 48%,#1d5a59 100%)!important}
+.human-hero:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#160d2111 0%,#0a172bc7 90%);z-index:-1}
+
+/* r78: Chapter 9 — Universe */
+.universe-hero{overflow:hidden;isolation:isolate;background:
+ radial-gradient(circle at 18% 22%,#ffffffbb 0 1px,transparent 2px),
+ radial-gradient(circle at 74% 18%,#8be9fdcc 0 1px,transparent 2px),
+ radial-gradient(circle at 62% 60%,#bd93f9aa 0 2px,transparent 3px),
+ radial-gradient(circle at 28% 72%,#f1fa8caa 0 1px,transparent 2px),
+ linear-gradient(145deg,#070b22 0%,#15164a 48%,#30145b 100%)!important}
+.universe-hero:after{content:"";position:absolute;inset:-20%;background:radial-gradient(ellipse at center,#7c3aed24 0 22%,transparent 48%);z-index:-1;transform:rotate(-12deg)}
