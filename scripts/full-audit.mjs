@@ -106,6 +106,8 @@ challengeAll.forEach((x,i)=>{if(!Array.isArray(x.p)||x.p.length!==4)throw Error(
 challengeAdded.forEach((x,i)=>{for(const lang of ['ru','en','az'])if(!x.h?.[lang])throw Error('Challenge extra hint missing '+lang+' at '+(i+201))});
 if(!challenge.includes('ENERGY_MAX=5')||challenge.includes('reserve_energy'))throw Error('Challenge energy must remain strict 0-5 with no reserve');
 if(!challenge.includes("BANK_VERSION='r54-400'")||!challenge.includes('pw.challenge.deck.'))throw Error('Challenge no-repeat deck/version missing');
+if(release.verification?.challenge_rewards_live!==true||release.challenge_modes?.rewards?.server_authoritative!==true||release.challenge_modes?.rewards?.max_per_run?.coins!==15||release.challenge_modes?.rewards?.max_per_run?.xp!==10)throw Error('Challenge reward manifest is incomplete');
+if(!challenge.includes('challengeResultReward')||!challenge.includes('rewarded_runs_today')||!challenge.includes('runId=state?.run_id'))throw Error('Challenge reward client flow is incomplete');
 const ruleBlock=home.slice(home.indexOf('const RULES='),home.indexOf('const RESET='));
 if(!ruleBlock.includes('Глава 8 «Человек» — уровни 281–330')||!ruleBlock.includes('Глава 9 «Вселенная» — уровни 331–380'))throw Error('RU Chapters 8-9 rules are stale');
 if(!ruleBlock.includes('Chapter 8 “Human” contains levels 281–330')||!ruleBlock.includes('Chapter 9 “Universe” contains levels 331–380'))throw Error('EN Chapters 8-9 rules are stale');
