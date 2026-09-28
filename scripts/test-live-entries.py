@@ -4,7 +4,7 @@ from pathlib import Path
 from playwright.sync_api import sync_playwright, expect
 
 BASE='https://firstgame001-star.github.io/Photoword2026/'
-RELEASE='20260928-r77'
+RELEASE='20260928-r78'
 OUT=Path('test-results'); OUT.mkdir(exist_ok=True)
 
 for attempt in range(48):
@@ -16,7 +16,7 @@ for attempt in range(48):
     time.sleep(5)
 else: raise AssertionError('Public Pages never reached '+RELEASE)
 
-for path in ['clean/','clean/game.html','clean/theme-game.html','clean/core.js','clean/home.js','clean/game.js','clean/theme-game.js','clean/challenge-bank-extra.js','clean/challenge.js','clean/ui.css','clean/privacy.html','clean/terms.html']:
+for path in ['clean/','clean/game.html','clean/theme-game.html','clean/core.js','clean/home.js','clean/game.js','clean/main-levels-8-9.js','clean/theme-game.js','clean/challenge-bank-extra.js','clean/challenge.js','clean/ui.css','clean/privacy.html','clean/terms.html']:
     with urllib.request.urlopen(BASE+path+'?r='+RELEASE,timeout=20) as r: assert r.status==200,path
     print('LIVE HTTP 200:',path,flush=True)
 
@@ -868,9 +868,14 @@ ANSWERS={
   "SİVİLİZASİYA"
  ]
 }
+extra_main_source=Path('clean/main-levels-8-9.js').read_text(encoding='utf-8')
+extra_start=extra_main_source.index('[')
+EXTRA_MAIN=json.JSONDecoder().raw_decode(extra_main_source[extra_start:])[0]
+assert len(EXTRA_MAIN)==100 and EXTRA_MAIN[0]['id']==281 and EXTRA_MAIN[-1]['id']==380
 for _lang,_answers in ANSWERS.items():
-    assert len(_answers)==280,(_lang,len(_answers))
-    assert len(set(_answers))==280,('duplicate-main-answer',_lang)
+    _answers.extend([row[_lang]['answer'] for row in EXTRA_MAIN])
+    assert len(_answers)==380,(_lang,len(_answers))
+    assert len(set(_answers))==380,('duplicate-main-answer',_lang)
 
 HINTS={
 'ru':{1:'Домашнее животное',11:'Она появляется рядом',21:'Соединяет два берега',31:'Её ставят на документ',41:'Направленная величина',51:'Повторяющийся рисунок'},
@@ -1014,7 +1019,7 @@ with sync_playwright() as pw:
     page.goto(BASE+'clean/#'+fragment,wait_until='domcontentloaded',timeout=45000)
     expect(page.locator('#languageModal')).to_be_visible();expect(page.locator('#languageTitle')).to_contain_text('Choose language');expect(page.locator('#languageTitle')).to_contain_text('Dil seçin');expect(page.locator('#languageClose')).to_be_hidden()
     page.locator('[data-language="az"]').tap();expect(page.locator('#languageModal')).to_be_hidden()
-    expect(page.locator('#homeChapter1Title')).to_have_text('İsinmə');expect(page.locator('#homeChapter2Title')).to_have_text('Assosiasiyalar');expect(page.locator('[data-home-chapter="3"]')).to_be_visible();expect(page.locator('[data-home-chapter="4"]')).to_be_visible();expect(page.locator('[data-home-chapter="12"]')).to_be_attached();expect(page.locator('#homeChapterDots button')).to_have_count(12);expect(page.locator('#shopOffer')).to_contain_text('Daha çox sikkə');expect(page.locator('#logoWord')).to_have_text('1 SÖZ');page.locator('#chaptersNav').tap();expect(page.locator('#chapter1Label')).to_contain_text('1–20');expect(page.locator('#chapter2Label')).to_contain_text('21–50');expect(page.locator('#chapter2Select .chapter-cover-mark')).to_have_text('II');expect(page.locator('#chapter2Play')).to_have_class(re.compile('locked'));expect(page.locator('#chapter12Select')).to_be_attached();page.locator('#chaptersBack').tap()
+    expect(page.locator('#homeChapter1Title')).to_have_text('İsinmə');expect(page.locator('#homeChapter2Title')).to_have_text('Assosiasiyalar');expect(page.locator('[data-home-chapter="3"]')).to_be_visible();expect(page.locator('[data-home-chapter="4"]')).to_be_visible();expect(page.locator('[data-home-chapter="12"]')).to_be_attached();expect(page.locator('#homeChapterDots button')).to_have_count(12);expect(page.locator('#shopOffer')).to_contain_text('Daha çox sikkə');expect(page.locator('#logoWord')).to_have_text('1 SÖZ');page.locator('#chaptersNav').tap();expect(page.locator('#chapter1Label')).to_contain_text('1–20');expect(page.locator('#chapter2Label')).to_contain_text('21–50');expect(page.locator('#chapter2Select .chapter-cover-mark')).to_have_text('II');expect(page.locator('#chapter2Play')).to_have_class(re.compile('locked'));expect(page.locator('#chapter8Label')).to_contain_text('281–330');expect(page.locator('#chapter9Label')).to_contain_text('331–380');expect(page.locator('#chapter12Select')).to_be_attached();page.locator('#chaptersBack').tap()
     body=page.locator('body').inner_text()
     for leak in ['Больше монет','Главная','Задания','Рейтинг','Сегодня награда']: assert leak not in body,('AZ leak',leak)
     assert not relevant_errors(errors),errors;ctx.close()
@@ -1223,11 +1228,11 @@ with sync_playwright() as pw:
       assert not relevant_errors(errors),errors;ctx.close()
 
     # Representative main-game browser checks. Loading game.js also validates every published answer/pool in RU/EN/AZ.
-    sample_levels=[1,20,21,50,51,60,61,90,91,100,101,131,132,150,180,181,200,230,231,250,280]
+    sample_levels=[1,20,21,50,51,60,61,90,91,100,101,131,132,150,180,181,200,230,231,250,280,281,300,330,331,350,380]
     for language in ['ru','en','az']:
       ctx=browser.new_context(viewport={'width':390,'height':800},has_touch=True,is_mobile=True)
       ctx.add_init_script(f"localStorage.setItem('pw.language','{language}'); localStorage.setItem('pw.theme','game');")
-      account={'photoword_id':'PW-TESTONLY','first_name':'Test','last_name':'','username':None,'game_nickname':None,'nickname_changed':False,'coins':10000,'xp':0,'completed_levels':0,'current_level':281,'rank':1,'daily_streak':0,'last_daily_reward':None}
+      account={'photoword_id':'PW-TESTONLY','first_name':'Test','last_name':'','username':None,'game_nickname':None,'nickname_changed':False,'coins':10000,'xp':0,'completed_levels':0,'current_level':381,'rank':1,'daily_streak':0,'last_daily_reward':None}
       completed=set();install_mock(ctx,account,completed,language);page=ctx.new_page();errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
       for level in sample_levels:
         page.goto(BASE+f'clean/game.html?level={level}#'+fragment,wait_until='domcontentloaded',timeout=45000)
@@ -1257,16 +1262,20 @@ with sync_playwright() as pw:
         elif level==230:
           expect(page.locator('#successChapter')).to_be_visible();expect(page.locator('#successChapter')).to_contain_text({'ru':'Профессионал','en':'Professional','az':'Peşəkar'}[language]);expect(page.locator('#nextLevel')).to_have_attribute('href','./game.html?level=231')
         elif level==280:
-          expect(page.locator('#successChapter')).to_be_visible();expect(page.locator('#successChapter')).to_contain_text({'ru':'Мастер','en':'Master','az':'Usta'}[language]);expect(page.locator('#nextLevel')).to_have_attribute('href','./index.html')
+          expect(page.locator('#successChapter')).to_be_visible();expect(page.locator('#successChapter')).to_contain_text({'ru':'Мастер','en':'Master','az':'Usta'}[language]);expect(page.locator('#nextLevel')).to_have_attribute('href','./game.html?level=281')
+        elif level==330:
+          expect(page.locator('#successChapter')).to_be_visible();expect(page.locator('#successChapter')).to_contain_text({'ru':'Виртуоз','en':'Virtuoso','az':'Virtuoz'}[language]);expect(page.locator('#nextLevel')).to_have_attribute('href','./game.html?level=331')
+        elif level==380:
+          expect(page.locator('#successChapter')).to_be_visible();expect(page.locator('#successChapter')).to_contain_text({'ru':'Легенда','en':'Legend','az':'Əfsanə'}[language]);expect(page.locator('#nextLevel')).to_have_attribute('href','./index.html')
       assert account['completed_levels']==len(sample_levels) and account['xp']==15*len(sample_levels)
-      page.screenshot(path=str(OUT/f'{engine}-{language}-level280.png'),full_page=True)
+      page.screenshot(path=str(OUT/f'{engine}-{language}-level380.png'),full_page=True)
       assert not relevant_errors(errors),errors
-      report={'engine':engine,'language':language,'levels':'1-280 validated / boundary samples played','checks':['runtime validation of all 280 answer pools','chapter 1 sample','chapter 2 boundaries 21 and 50','completed chapter 3 through 90','chapter 4 complete 91-131','chapter 5 complete 132-180','chapter 6 complete 181-230','chapter 7 complete 231-280','transitions at 20, 50, 90, 131, 180, 230 and completion at 280','localized text hint','letter hint','remove hint','level 100 continues to 101, level 131 opens 132, level 180 opens 181, level 230 opens 231, and level 280 returns home'],'result':'PASS'}
+      report={'engine':engine,'language':language,'levels':'1-380 validated / boundary samples played','checks':['runtime validation of all 380 answer pools','chapter 1 sample','chapter 2 boundaries 21 and 50','completed chapter 3 through 90','chapter 4 complete 91-131','chapter 5 complete 132-180','chapter 6 complete 181-230','chapter 7 complete 231-280','chapter 8 complete 281-330','chapter 9 complete 331-380','transitions at 20, 50, 90, 131, 180, 230, 280, 330 and completion at 380','localized text hint','letter hint','remove hint','level 100 continues to 101, 131 opens 132, 180 opens 181, 230 opens 231, 280 opens 281, 330 opens 331, and 380 returns home'],'result':'PASS'}
       reports.append(report);print(json.dumps(report,ensure_ascii=False),flush=True);ctx.close()
     # Narrow-screen long-answer smoke: no horizontal overflow at 320px.
     ctx=browser.new_context(viewport={'width':320,'height':720},has_touch=True,is_mobile=True)
     ctx.add_init_script("localStorage.setItem('pw.language','en'); localStorage.setItem('pw.theme','game');")
-    narrow_account={'photoword_id':'PW-NARROW','first_name':'Narrow','last_name':'','username':None,'game_nickname':None,'nickname_changed':False,'coins':5000,'xp':0,'completed_levels':280,'current_level':281,'rank':1,'daily_streak':0,'last_daily_reward':None}
+    narrow_account={'photoword_id':'PW-NARROW','first_name':'Narrow','last_name':'','username':None,'game_nickname':None,'nickname_changed':False,'coins':5000,'xp':0,'completed_levels':380,'current_level':381,'rank':1,'daily_streak':0,'last_daily_reward':None}
     install_mock(ctx,narrow_account,set(),'en');page=ctx.new_page();errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
     page.goto(BASE+'clean/game.html?level=103#'+fragment,wait_until='domcontentloaded',timeout=45000)
     assert page.evaluate("document.documentElement.scrollWidth<=window.innerWidth+1"),page.evaluate("({w:innerWidth,sw:document.documentElement.scrollWidth})")
