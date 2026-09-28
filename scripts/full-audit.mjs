@@ -113,7 +113,7 @@ if(!ruleBlock.includes('Глава 8 «Человек» — уровни 281–3
 if(!ruleBlock.includes('Chapter 8 “Human” contains levels 281–330')||!ruleBlock.includes('Chapter 9 “Universe” contains levels 331–380'))throw Error('EN Chapters 8-9 rules are stale');
 if(!ruleBlock.includes('8-ci fəsil “İnsan” — 281–330-cu səviyyələr')||!ruleBlock.includes('9-cu fəsil “Kainat” — 331–380-ci səviyyələr'))throw Error('AZ Chapters 8-9 rules are stale');
 if(ruleBlock.includes('5–12-ci fəsillər artıq naviqasiyaya əlavə edilib'))throw Error('Stale Azerbaijani chapter rules remain');
-if(!home.includes("track('app_open',{metadata:{version:'r92'}})"))throw Error('App-open analytics version is stale');
+if(!home.includes("track('app_open',{metadata:{version:'r93'}})"))throw Error('App-open analytics version is stale');
 if(!home.includes('function chapterIdForLevel(level)'))throw Error('Chapter analytics helper is missing');
 if(!home.includes("n<=280?7:n<=330?8:n<=380?9:10"))throw Error('Chapter analytics mapping is incomplete');
 

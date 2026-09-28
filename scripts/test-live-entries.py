@@ -4,7 +4,7 @@ from pathlib import Path
 from playwright.sync_api import sync_playwright, expect
 
 BASE='https://firstgame001-star.github.io/Photoword2026/'
-RELEASE='20260929-r92'
+RELEASE='20260929-r93'
 OUT=Path('test-results'); OUT.mkdir(exist_ok=True)
 
 for attempt in range(48):
@@ -1078,6 +1078,7 @@ with sync_playwright() as pw:
     for n in range(1,10):
       expect(page.locator(f'#homeChapter{n}Label')).to_contain_text(f'Fəsil {n}')
       expect(page.locator(f'#homeChapter{n}Count')).to_have_text('səviyyə')
+      expect(page.locator(f'#homeChapterDots button[data-dot="{n}"]')).to_have_attribute('aria-label',f'Fəsil {n}')
       if n>1: expect(page.locator(f'#homeChapter{n}LockNote')).to_contain_text('səviyyəni keç')
     page.locator('#chaptersNav').tap()
     for n in range(1,10): expect(page.locator(f'#chapter{n}Count')).to_have_text('səviyyə')
