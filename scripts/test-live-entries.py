@@ -4,7 +4,7 @@ from pathlib import Path
 from playwright.sync_api import sync_playwright, expect
 
 BASE='https://firstgame001-star.github.io/Photoword2026/'
-RELEASE='20260929-r85'
+RELEASE='20260929-r86'
 OUT=Path('test-results'); OUT.mkdir(exist_ok=True)
 
 for attempt in range(48):
@@ -1089,7 +1089,7 @@ with sync_playwright() as pw:
       }""")
       # Chapters: chapter 2 is unlocked after level 20 and uses a 30-level counter; chapter 3 is present.
       expect(page.locator('#homeChapter1')).to_be_visible();expect(page.locator('#homeChapter2')).to_be_visible();page.locator('#homeChapter1').scroll_into_view_if_needed();expect(page.locator('#homeChapter1Title')).to_be_visible();page.locator('#homeChapter2').scroll_into_view_if_needed();expect(page.locator('#homeChapter2Title')).to_be_visible();page.locator('#homeChapter1').scroll_into_view_if_needed();expect(page.locator('#homeChapter1Title')).to_be_visible()
-      page.locator('#chaptersNav').tap();expect(page.locator('#chaptersScreen')).to_be_visible();expect(page.locator('#chapter1Label')).to_contain_text('1–20');expect(page.locator('#chapter2Label')).to_contain_text('21–50');expect(page.locator('#chapter2Done')).to_have_text('21');expect(page.locator('#chapter2Count')).to_contain_text('50');expect(page.locator('#chapter2Play')).not_to_have_class(re.compile('locked'));expect(page.locator('#chapter2Play')).to_have_attribute('href','./game.html?level=21');expect(page.locator('#chapter3Done')).to_have_text('51');expect(page.locator('#chapter3Count')).to_contain_text('90');page.locator('#chaptersBack').tap()
+      page.locator('#chaptersNav').tap();expect(page.locator('#chaptersScreen')).to_be_visible();expect(page.locator('#chapter1Done')).to_have_text('20');expect(page.locator('#chapter2Done')).to_have_text('21');expect(page.locator('#chapter3Done')).to_have_text('51');expect(page.locator('#chapter4Done')).to_have_text('91');expect(page.locator('#chapter5Done')).to_have_text('131');expect(page.locator('#chapter1Label')).to_contain_text('1–20');expect(page.locator('#chapter2Label')).to_contain_text('21–50');expect(page.locator('#chapter2Done')).to_have_text('21');expect(page.locator('#chapter2Count')).to_contain_text('50');expect(page.locator('#chapter2Play')).not_to_have_class(re.compile('locked'));expect(page.locator('#chapter2Play')).to_have_attribute('href','./game.html?level=21');expect(page.locator('#chapter3Done')).to_have_text('51');expect(page.locator('#chapter3Count')).to_contain_text('90');page.locator('#chaptersBack').tap()
       # Every visual theme must apply and persist.
       for theme in ['game','night','light','neon','gold']:
         page.locator('#settingsBtn').tap();page.locator('#themeBtn').tap();expect(page.locator('#themeModal')).to_be_visible();page.locator(f'button[data-theme="{theme}"]').tap();assert page.evaluate("document.documentElement.dataset.theme")==theme;assert page.evaluate("localStorage.getItem('pw.theme')")==theme
