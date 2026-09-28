@@ -84,7 +84,7 @@ if(!scienceBank||(scienceBank[1].match(/^\s*"?(?:\d+)"?:\s*\{/gm)||[]).length!==
 const technologyBank=themeGameJs.match(/const TECHNOLOGY_LEVELS=\{\n([\s\S]*?)\n\};\nconst TECHNOLOGY_TRANSLATED=/);
 if(!technologyBank||(technologyBank[1].match(/^\s*"?(?:\d+)"?:\s*\{/gm)||[]).length!==100)throw Error('Technology theme must contain 100 levels');
 const homeJs=readFileSync(resolve(base,'home.js'),'utf8');
-if(!homeJs.includes("['sport','art','professions','travel','science','technology'].includes(id)"))throw Error('Technology theme must be enabled in the category hub');
+if(!homeJs.includes("const READY_THEME_IDS=['sport','art','professions','travel','science','technology']")||!homeJs.includes("READY_THEME_IDS.includes(id)"))throw Error('Technology theme must be enabled in the category hub');
 const uiCss=readFileSync(resolve(base,'ui.css'),'utf8');
 if(!index.includes('id="profileTitle"'))throw Error('Chapter-earned profile title surface is missing');
 if(!homeJs.includes("chapter_progress_mode") && !homeJs.includes('shownChapterLevel'))throw Error('Absolute chapter progress helper is missing');
