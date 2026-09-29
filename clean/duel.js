@@ -12,6 +12,7 @@ Object.assign(copy.az,{rematch:'TƏKRAR OYNA',rematchTitle:'Eyni dostla yenidən
 Object.assign(copy.ru,{rooms:'Открытые комнаты',roomsEmpty:'Пока нет открытых комнат',refreshRooms:'Обновить комнаты',joinRoom:'ВОЙТИ',roomTime:n=>'ещё '+n+' мин',openRoom:'СОЗДАТЬ ОТКРЫТУЮ КОМНАТУ',privateRoom:'СОЗДАТЬ ПО ССЫЛКЕ',openInfo:s=>'Открытая комната · взнос '+s+' 🪙 удержан. Ожидаем соперника до 5 минут.'});
 Object.assign(copy.en,{rooms:'Open rooms',roomsEmpty:'No open rooms yet',refreshRooms:'Refresh rooms',joinRoom:'JOIN',roomTime:n=>n+' min left',openRoom:'CREATE OPEN ROOM',privateRoom:'CREATE BY LINK',openInfo:s=>'Open room · '+s+' 🪙 held. Waiting up to 5 minutes for an opponent.'});
 Object.assign(copy.az,{rooms:'Açıq otaqlar',roomsEmpty:'Hələ açıq otaq yoxdur',refreshRooms:'Otaqları yenilə',joinRoom:'QOŞUL',roomTime:n=>n+' dəq qalıb',openRoom:'AÇIQ OTAQ YARAT',privateRoom:'LİNKLƏ YARAT',openInfo:s=>'Açıq otaq · '+s+' 🪙 saxlanılır. Rəqib 5 dəqiqəyə qədər gözlənilir.'});
+copy.ru.reconnecting='Восстанавливаем соединение…';copy.en.reconnecting='Reconnecting…';copy.az.reconnecting='Bağlantı bərpa olunur…';
 const friendCopy={
 ru:{pick:'Выбрать друга',add:'ДОБАВИТЬ',hint:'Добавь игрока по PhotoWord ID. Он подтвердит заявку.',section:'Игровые друзья',referral:'Приглашения по ссылке',none:'Пока нет друзей. Узнай PhotoWord ID игрока в его профиле.',incoming:'Хочет дружить',outgoing:'Заявка отправлена',accept:'ПРИНЯТЬ',remove:'УДАЛИТЬ',challenge:'ВЫЗВАТЬ',selected:'ВЫЗВАТЬ ДРУГА',addAfter:'ДОБАВИТЬ В ДРУЗЬЯ',sent:'Заявка отправлена',accepted:'Теперь вы друзья',invite:'Вызов от ',pickHint:'Выбери друга и взнос либо создай ссылку ниже.',noFriend:'Выбери друга',notFound:'Игрок или заявка не найдены.',self:'Нельзя добавить себя.',locked:'Друг ещё не принял заявку.',sentTo:(name,stake)=>'Вызов отправлен: '+name+'. Взнос '+stake+' 🪙 удержан на 5 минут.'},
 en:{pick:'Choose a friend',add:'ADD',hint:'Add a player by PhotoWord ID. They will confirm your request.',section:'Game friends',referral:'Link invitations',none:'No friends yet. Find their PhotoWord ID in their profile.',incoming:'Wants to be friends',outgoing:'Request sent',accept:'ACCEPT',remove:'REMOVE',challenge:'CHALLENGE',selected:'CHALLENGE FRIEND',addAfter:'ADD FRIEND',sent:'Request sent',accepted:'You are now friends',invite:'Challenge from ',pickHint:'Choose a friend and entry, or create a link below.',noFriend:'Choose a friend',notFound:'Player or request not found.',self:'You cannot add yourself.',locked:'Friend has not accepted yet.',sentTo:(name,stake)=>'Challenge sent to '+name+'. '+stake+' 🪙 held for 5 minutes.'},
@@ -30,7 +31,11 @@ const chapterTitles={
 };
 function playerTitle(levels){const finished=[20,50,90,130,180,230,280,330,380].filter(end=>Number(levels||0)>=end).length;return(chapterTitles[language()]||chapterTitles.ru)[Math.max(1,finished)]}
 function paintRoomHost(d){$('duelRoomHost').hidden=!d?.creator;if(!d?.creator)return;$('duelRoomHostName').textContent=d.my_name||t().you;$('duelRoomHostTitle').textContent=playerTitle(d.my_completed_levels)}
-let wrongTimer=null,submitTimer=null,code='',duel=null,preview=null,incomingOffer=null,requesting=false,offerRequesting=false,answering=false,poll=null,tick=null,offerPoll=null,offset=0,questionId=null,chosen=[],disabled=false,lastStatus='',answerEpoch=0;
+let wrongTimer=null,submitTimer=null,code='',duel=null,preview=null,incomingOffer=null,requesting=false,offerRequesting=false,answering=false,poll=null,tick=null,offerPoll=null,offset=0,questionId=null,chosen=[],disabled=false,lastStatus='',answerEpoch=0,stateSeq=0,stateStarted=0,lastSyncAt=0;
+const matchKey='pw.duel.current';
+function savedMatch(){try{const d=JSON.parse(localStorage.getItem(matchKey));if(d&&/^[A-F0-9]{16}$/.test(d.code)&&Date.now()-d.at<86400000)return d.code;localStorage.removeItem(matchKey)}catch{}return''}
+function rememberMatch(matchCode){try{localStorage.setItem(matchKey,JSON.stringify({code:matchCode,at:Date.now()}))}catch{}}
+function forgetMatch(){try{localStorage.removeItem(matchKey)}catch{}}
 const reactions={laugh:'😂',cool:'😎',fire:'🔥',clap:'👏',wow:'😮',heart:'❤️',thinking:'🤔',strong:'💪'};
 let reactionMatch='',reactionSeen={my:null,their:null},reactionTimers={my:null,their:null},reacting=false,pendingReaction='';
 function closeReactions(){$('duelReactionPicker').hidden=true;$('duelYouLabel').setAttribute('aria-expanded','false')}
@@ -53,7 +58,7 @@ for(const [key,emoji] of Object.entries(reactions)){const button=document.create
 $('duelYouLabel').onclick=()=>{if(duel?.status!=='active')return;reactionPicker.hidden=!reactionPicker.hidden;$('duelYouLabel').setAttribute('aria-expanded',String(!reactionPicker.hidden))};
 const panels=['duelSetup','duelRematchSetup','duelInvite','duelJoin','duelGame','duelResult'];
 function show(id){const changed=$(id).hidden||!$('duelScreen').classList.contains('active');for(const p of panels)$(p).hidden=p!==id;document.querySelectorAll('.screen').forEach(e=>e.classList.toggle('active',e.id==='duelScreen'));if(changed){pw.status('');window.scrollTo(0,0)}}
-function home(){closeReactions();clearInterval(poll);clearInterval(tick);clearInterval(offerPoll);clearInterval(roomPoll);poll=tick=offerPoll=roomPoll=null;document.querySelectorAll('.screen').forEach(e=>e.classList.toggle('active',e.id==='home'));window.scrollTo(0,0);checkHomeOffer()}
+function home(){if(duel&&['finished','cancelled'].includes(duel.status))forgetMatch();stateSeq++;requesting=false;closeReactions();clearInterval(poll);clearInterval(tick);clearInterval(offerPoll);clearInterval(roomPoll);poll=tick=offerPoll=roomPoll=null;document.querySelectorAll('.screen').forEach(e=>e.classList.toggle('active',e.id==='home'));window.scrollTo(0,0);checkHomeOffer()}
 function labels(){
 const x=t(),ids={duelEntryTitle:x.entry,duelEntryDesc:x.desc,duelTitle:x.title,duelSubtitle:x.subtitle,duelSetupTitle:x.setup,duelRules:x.rules,duelRoomsTitle:x.rooms,duelStakeLabel:x.stake,duelCreate:x.privateRoom,duelCreatePublic:x.openRoom,duelInviteTitle:x.waiting,duelShare:x.share,duelCancel:x.cancel,duelJoinTitle:x.join,duelAccept:x.accept,duelDecline:x.back,duelYouLabel:x.you,duelFriendLabel:x.friend,duelClear:x.clear,duelDone:x.back,duelRematch:x.rematch,duelRematchTitle:x.rematchTitle,duelRematchInfo:x.rematchInfo,duelRematchStakeLabel:x.stake,duelRematchConfirm:x.rematchConfirm,duelRematchBack:x.resultBack};
 for(const [id,value] of Object.entries(ids))$(id).textContent=value;
@@ -86,16 +91,23 @@ if(duel.status==='active'){
  $('duelTimer').textContent=now<begin?Math.max(1,Math.ceil((begin-now)/1000)):Math.max(0,Math.ceil((end-now)/1000));
  disabled=now<begin||now>=end||!duel.question||Boolean(duel.next_guess_at&&now<Date.parse(duel.next_guess_at));
  $('duelSkip').disabled=disabled||(duel.skips_left??0)<=0||answering;
- $('duelGameStatus').textContent=now<begin?t().soon+Math.max(1,Math.ceil((begin-now)/1000)):now>=end||!duel.question?t().wait:lastStatus||t().ready;
+ $('duelGameStatus').textContent=now<begin?t().soon+Math.max(1,Math.ceil((begin-now)/1000)):now>=end?t().wait:!document.hidden&&lastSyncAt&&Date.now()-lastSyncAt>3500?t().reconnecting:!duel.question?t().wait:lastStatus||t().ready;
 }
 }
 async function call(action,body={}){const r=await pw.duelRequest(action,body);if(r.server_now)offset=Date.parse(r.server_now)-Date.now();return r}
 async function state(){
-if(requesting||answering||!code)return;requesting=true;const epoch=answerEpoch;
-try{const r=await call('state',{code,questionId});if(!r.duel||epoch!==answerEpoch)return;if(r.duel.status==='active'&&!r.duel.question&&duel?.question&&r.duel.question_id===duel.question_id)r.duel.question=duel.question;duel=r.duel;render()}finally{requesting=false}
+if(answering||!code||!$('duelScreen').classList.contains('active')||(requesting&&Date.now()-stateStarted<3000))return;
+requesting=true;stateStarted=Date.now();const seq=++stateSeq,epoch=answerEpoch,matchCode=code;
+try{const r=await call('state',{code:matchCode,questionId});if(seq!==stateSeq||epoch!==answerEpoch||matchCode!==code||!$('duelScreen').classList.contains('active'))return;
+ if(!r.duel){forgetMatch();home();return}
+ if(r.duel.status==='active'&&!r.duel.question&&duel?.question&&r.duel.question_id===duel.question_id)r.duel.question=duel.question;
+ duel=r.duel;render();
+}catch(e){if(seq===stateSeq&&duel?.status==='active')updateClock();else if(seq===stateSeq)throw e}
+finally{if(seq===stateSeq)requesting=false}
 }
 function render(){
 const d=duel;if(!d)return;
+lastSyncAt=Date.now();if(d.status==='active'||d.status==='waiting')rememberMatch(d.code);
 if(d.status==='waiting'){
  if(d.creator){show('duelInvite');paintRoomHost(d);$('duelShare').hidden=Boolean(d.invitee_name);$('duelInviteInfo').textContent=d.invitee_name?ft().sentTo(d.invitee_name,d.stake):d.public_room?t().openInfo(d.stake):t().invite(d.stake)}
  else show('duelJoin');
@@ -131,13 +143,14 @@ duel=r.duel;lastStatus=r.correct?t().correct:t().wrong;
 pw.haptic(r.correct?'success':'error');pw.sfx(r.correct?'success':'error');
 if(!r.correct){const submittedId=questionId;$('duelSlots').classList.add('wrong');wrongTimer=setTimeout(()=>{if(duel?.question_id===submittedId)clearLetters()},450)}
 render();
-}catch(e){error(e);clearLetters()}finally{answering=false;if(duel?.question)paint(duel.question)}
+}catch(e){error(e);clearLetters()}finally{answering=false;if(duel?.question)paint(duel.question);state().catch(()=>{})}
 }
 async function open(){
 clearInterval(offerPoll);offerPoll=null;incomingOffer=null;labels();questionId=null;code='';duel=null;preview=null;show('duelSetup');
 try{
- await pw.login();const r=await call('state');
- if(r.duel&&['waiting','active'].includes(r.duel.status)){code=r.duel.code;duel=r.duel;render();startPolling();return}
+ await pw.login();let r=await call('state');
+ if(!r.duel&&savedMatch()){r=await call('state',{code:savedMatch()});if(!r.duel)forgetMatch()}
+ if(r.duel){code=r.duel.code;duel=r.duel;render();if(['waiting','active'].includes(duel.status))startPolling();return}
  refreshRooms().catch(error);if(!roomPoll)roomPoll=setInterval(()=>{if($('duelScreen').classList.contains('active')&&!$('duelSetup').hidden&&!document.hidden)refreshRooms().catch(()=>{})},5000);
  await refreshFriends();const offer=await call('offer');if(offer.offer)showIncoming(offer.offer);
 }catch(e){error(e)}
@@ -241,7 +254,7 @@ $('duelAcceptRematch').onclick=acceptIncoming;
 function clearLetters(){clearTimeout(wrongTimer);clearTimeout(submitTimer);wrongTimer=submitTimer=null;chosen=[];$('duelSlots').classList.remove('wrong');if(duel?.question)paint(duel.question)}
 async function skip(){if(answering||disabled||!duel?.question||duel.skips_left<=0)return;const button=$('duelSkip');button.disabled=true;answering=true;answerEpoch++;
  try{clearLetters();const r=await call('skip',{code});duel=r.duel;lastStatus=t().skipped;render();pw.haptic('selection')}
- catch(e){error(e)}finally{answering=false;if(duel?.status==='active'){$('duelSkip').disabled=duel.skips_left<=0;if(duel.question)paint(duel.question)}}
+ catch(e){error(e)}finally{answering=false;if(duel?.status==='active'){$('duelSkip').disabled=duel.skips_left<=0;if(duel.question)paint(duel.question)}state().catch(()=>{})}
 }
 $('duelClear').onclick=clearLetters;$('duelSkip').onclick=skip;
 $('duelShare').onclick=()=>{
@@ -283,12 +296,21 @@ $('duelOfferOpen').onclick=async()=>{
  }catch(e){closeOfferPopup();pendingHomeOffer=null;error(e)}finally{button.disabled=false}
 };
 window.addEventListener('pw:player',()=>checkHomeOffer());
-window.addEventListener('focus',()=>checkHomeOffer());
-document.addEventListener('visibilitychange',()=>{if(!document.hidden)checkHomeOffer()});
+function resumeVisible(){if($('duelScreen').classList.contains('active')&&code&&duel&&['waiting','active'].includes(duel.status))state().catch(()=>{});else checkHomeOffer()}
+window.addEventListener('focus',resumeVisible);
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)resumeVisible()});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('duelOfferModal').hidden){dismissedOfferCode=pendingHomeOffer?.code||'';closeOfferPopup()}});
 setTimeout(checkHomeOffer,1200);setInterval(checkHomeOffer,4000);
 
 labels();
 const start=String(window.Telegram?.WebApp?.initDataUnsafe?.start_param||new URLSearchParams(location.search).get('startapp')||'');
 if(/^duel_[A-Fa-f0-9]{16}$/.test(start))invited(start.slice(5).toUpperCase());
+else if(savedMatch())pw.login().then(async()=>{
+ if(!$('home').classList.contains('active')||document.querySelector('.modal:not([hidden])'))return;
+ const matchCode=savedMatch();if(!matchCode)return;
+ try{const r=await call('state',{code:matchCode});if(!$('home').classList.contains('active')||document.querySelector('.modal:not([hidden])'))return;
+  if(!r.duel){forgetMatch();return}
+  code=matchCode;duel=r.duel;questionId=null;render();if(['waiting','active'].includes(duel.status))startPolling();
+ }catch{/* A saved duel stays available from the Duels entry when connection returns. */}
+}).catch(()=>{});
 })();
