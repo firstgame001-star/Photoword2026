@@ -52,6 +52,22 @@ Deno.serve(async req=>{
       if(!Number.isInteger(stake)||stake<25||stake>500||stake%25!==0||!['ru','en','az'].includes(language))return reply({error:'duel_bad_stake'},400);
       const r=await db.rpc('duel_create',{p_telegram_id:user.id,p_stake:stake,p_language:language});
       if(r.error)throw r.error;result=r.data;
+    }else if(action==='create_friend'){
+      const stake=Number(body.stake),language=String(body.language||''),friendCode=String(body.friendCode||'');
+      if(!Number.isInteger(stake)||stake<25||stake>500||stake%25!==0||!['ru','en','az'].includes(language))return reply({error:'duel_bad_stake'},400);
+      const r=await db.rpc('duel_create_friend',{p_telegram_id:user.id,p_friend_code:friendCode,p_stake:stake,p_language:language});
+      if(r.error)throw r.error;result=r.data;
+    }else if(action==='friend_list'){
+      const r=await db.rpc('duel_friend_list',{p_telegram_id:user.id});
+      if(r.error)throw r.error;return reply({friends:r.data});
+    }else if(action==='friend_request'){
+      const r=await db.rpc('duel_friend_request',{p_telegram_id:user.id,p_friend_code:String(body.friendCode||''),p_duel_code:code||null});
+      if(r.error)throw r.error;return reply({status:r.data});
+    }else if(action==='friend_change'){
+      const requestId=Number(body.requestId),change=String(body.change||'');
+      if(!Number.isSafeInteger(requestId)||requestId<1||!['accept','remove'].includes(change))return reply({error:'friend_invalid_action'},400);
+      const r=await db.rpc('duel_friend_change',{p_telegram_id:user.id,p_request_id:requestId,p_action:change});
+      if(r.error)throw r.error;return reply({ok:true});
     }else if(action==='rematch'){
       const stake=Number(body.stake);
       if(!Number.isInteger(stake)||stake<25||stake>500||stake%25!==0)return reply({error:'duel_bad_stake'},400);
@@ -86,7 +102,7 @@ Deno.serve(async req=>{
     return reply({duel,correct,server_now:new Date().toISOString()});
   }catch(e){
     const message=String((e as Error)?.message||'duel_error');
-    const known=['duel_bad_stake','duel_bad_language','duel_already_open','insufficient_coins','duel_not_found','duel_not_waiting','duel_own_invite','duel_invitee_only','duel_not_finished','duel_cannot_cancel','duel_not_active','duel_no_questions','duel_wait','duel_bad_answer'];
+    const known=['duel_bad_stake','duel_bad_language','duel_already_open','insufficient_coins','duel_not_found','duel_not_waiting','duel_own_invite','duel_invitee_only','duel_not_finished','duel_cannot_cancel','duel_not_active','duel_no_questions','duel_wait','duel_bad_answer','friend_not_found','friend_self','friend_unavailable','friend_already_requested','friend_invalid_action','friend_not_accepted'];
     const code=known.find(x=>message.includes(x));
     return reply({error:code||'duel_error'},code?409:500);
   }
