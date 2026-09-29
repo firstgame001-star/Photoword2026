@@ -13,6 +13,9 @@ Object.assign(copy.ru,{rooms:'Открытые комнаты',roomsEmpty:'По�
 Object.assign(copy.en,{rooms:'Open rooms',roomsEmpty:'No open rooms yet',refreshRooms:'Refresh rooms',joinRoom:'JOIN',roomTime:n=>n+' min left',openRoom:'CREATE OPEN ROOM',privateRoom:'CREATE BY LINK',openInfo:s=>'Open room · '+s+' 🪙 held. Waiting up to 5 minutes for an opponent.'});
 Object.assign(copy.az,{rooms:'Açıq otaqlar',roomsEmpty:'Hələ açıq otaq yoxdur',refreshRooms:'Otaqları yenilə',joinRoom:'QOŞUL',roomTime:n=>n+' dəq qalıb',openRoom:'AÇIQ OTAQ YARAT',privateRoom:'LİNKLƏ YARAT',openInfo:s=>'Açıq otaq · '+s+' 🪙 saxlanılır. Rəqib 5 dəqiqəyə qədər gözlənilir.'});
 copy.ru.reconnecting='Восстанавливаем соединение…';copy.en.reconnecting='Reconnecting…';copy.az.reconnecting='Bağlantı bərpa olunur…';
+Object.assign(copy.ru,{stats:'СТАТИСТИКА',statsTitle:'Статистика дуэлей',statsPlayed:'Матчи',statsWins:'Победы',statsLosses:'Поражения',statsDraws:'Ничьи',statsBest:'Лучший счёт',statsNet:'Итог по монетам',statsRecent:'Последние матчи',statsBack:'НАЗАД К ДУЭЛЯМ',statsLoading:'Загружаю статистику…',statsEmpty:'Дуэлей пока нет',statsOpponent:'Без соперника',statsRefund:'Возврат взноса',statsStake:'Взнос',statsScore:'Счёт'});
+Object.assign(copy.en,{stats:'STATISTICS',statsTitle:'Duel statistics',statsPlayed:'Matches',statsWins:'Wins',statsLosses:'Losses',statsDraws:'Draws',statsBest:'Best score',statsNet:'Coin balance',statsRecent:'Recent matches',statsBack:'BACK TO DUELS',statsLoading:'Loading statistics…',statsEmpty:'No duels yet',statsOpponent:'No opponent',statsRefund:'Entry refunded',statsStake:'Entry',statsScore:'Score'});
+Object.assign(copy.az,{stats:'STATİSTİKA',statsTitle:'Duel statistikası',statsPlayed:'Oyunlar',statsWins:'Qələbələr',statsLosses:'Məğlubiyyətlər',statsDraws:'Bərabərliklər',statsBest:'Ən yaxşı nəticə',statsNet:'Sikkə balansı',statsRecent:'Son oyunlar',statsBack:'DUELLƏRƏ QAYIT',statsLoading:'Statistika yüklənir…',statsEmpty:'Hələ duel yoxdur',statsOpponent:'Rəqib yoxdur',statsRefund:'Giriş qaytarıldı',statsStake:'Giriş',statsScore:'Hesab'});
 const friendCopy={
 ru:{pick:'Выбрать друга',add:'ДОБАВИТЬ',hint:'Добавь игрока по PhotoWord ID. Он подтвердит заявку.',section:'Игровые друзья',referral:'Приглашения по ссылке',none:'Пока нет друзей. Узнай PhotoWord ID игрока в его профиле.',incoming:'Хочет дружить',outgoing:'Заявка отправлена',accept:'ПРИНЯТЬ',remove:'УДАЛИТЬ',challenge:'ВЫЗВАТЬ',selected:'ВЫЗВАТЬ ДРУГА',addAfter:'ДОБАВИТЬ В ДРУЗЬЯ',sent:'Заявка отправлена',accepted:'Теперь вы друзья',invite:'Вызов от ',pickHint:'Выбери друга и взнос либо создай ссылку ниже.',noFriend:'Выбери друга',notFound:'Игрок или заявка не найдены.',self:'Нельзя добавить себя.',locked:'Друг ещё не принял заявку.',sentTo:(name,stake)=>'Вызов отправлен: '+name+'. Взнос '+stake+' 🪙 удержан на 5 минут.'},
 en:{pick:'Choose a friend',add:'ADD',hint:'Add a player by PhotoWord ID. They will confirm your request.',section:'Game friends',referral:'Link invitations',none:'No friends yet. Find their PhotoWord ID in their profile.',incoming:'Wants to be friends',outgoing:'Request sent',accept:'ACCEPT',remove:'REMOVE',challenge:'CHALLENGE',selected:'CHALLENGE FRIEND',addAfter:'ADD FRIEND',sent:'Request sent',accepted:'You are now friends',invite:'Challenge from ',pickHint:'Choose a friend and entry, or create a link below.',noFriend:'Choose a friend',notFound:'Player or request not found.',self:'You cannot add yourself.',locked:'Friend has not accepted yet.',sentTo:(name,stake)=>'Challenge sent to '+name+'. '+stake+' 🪙 held for 5 minutes.'},
@@ -21,7 +24,7 @@ Object.assign(friendCopy.ru,{popupTitle:'Друг вызывает на дуэл
 Object.assign(friendCopy.en,{popupTitle:'A friend challenges you!',popupText:(name,stake)=>name+' invites you to play. Entry: '+stake+' 🪙 each.',popupExpiry:'You have 5 minutes to accept.',popupOpen:'OPEN CHALLENGE',popupLater:'LATER'});
 Object.assign(friendCopy.az,{popupTitle:'Dostun səni duelə çağırır!',popupText:(name,stake)=>name+' səni oyuna dəvət edir. Giriş: hərəyə '+stake+' 🪙.',popupExpiry:'Qəbul etmək üçün 5 dəqiqən var.',popupOpen:'ÇAĞIRIŞI AÇ',popupLater:'SONRA'});
 const ft=()=>friendCopy[language()]||friendCopy.ru;
-let friends=[],selectedFriend='',pendingHomeOffer=null,dismissedOfferCode='',homeOfferRequesting=false,rooms=[],roomPoll=null,roomsRequesting=false;
+let friends=[],selectedFriend='',pendingHomeOffer=null,dismissedOfferCode='',homeOfferRequesting=false,rooms=[],roomPoll=null,roomsRequesting=false,statsReturn='duelSetup',statsReq=0,statsData=null;
 const language=()=>{try{return localStorage.getItem('pw.language')||'ru'}catch{return'ru'}};
 const t=()=>copy[language()]||copy.ru;
 const chapterTitles={
@@ -56,18 +59,40 @@ function paintReactions(d){
 const reactionPicker=$('duelReactionPicker');
 for(const [key,emoji] of Object.entries(reactions)){const button=document.createElement('button');button.type='button';button.textContent=emoji;button.setAttribute('aria-label',key);button.onclick=async()=>{if(reacting||duel?.status!=='active')return;closeReactions();reacting=true;pendingReaction=key;const match=code;const node=$('duelYouReaction');clearTimeout(reactionTimers.my);node.textContent=emoji;node.classList.remove('pop');void node.offsetWidth;node.classList.add('pop');reactionTimers.my=setTimeout(()=>{node.textContent='';node.classList.remove('pop')},2600);try{await call('react',{code:match,emoji:key})}catch(e){if(code===match){pendingReaction='';error(e)}}finally{reacting=false}};reactionPicker.append(button)}
 $('duelYouLabel').onclick=()=>{if(duel?.status!=='active')return;reactionPicker.hidden=!reactionPicker.hidden;$('duelYouLabel').setAttribute('aria-expanded',String(!reactionPicker.hidden))};
-const panels=['duelSetup','duelRematchSetup','duelInvite','duelJoin','duelGame','duelResult'];
+const panels=['duelSetup','duelStats','duelRematchSetup','duelInvite','duelJoin','duelGame','duelResult'];
 function show(id){const changed=$(id).hidden||!$('duelScreen').classList.contains('active');for(const p of panels)$(p).hidden=p!==id;document.querySelectorAll('.screen').forEach(e=>e.classList.toggle('active',e.id==='duelScreen'));if(changed){pw.status('');window.scrollTo(0,0)}}
 function home(){if(duel&&['finished','cancelled'].includes(duel.status))forgetMatch();stateSeq++;requesting=false;closeReactions();clearInterval(poll);clearInterval(tick);clearInterval(offerPoll);clearInterval(roomPoll);poll=tick=offerPoll=roomPoll=null;document.querySelectorAll('.screen').forEach(e=>e.classList.toggle('active',e.id==='home'));window.scrollTo(0,0);checkHomeOffer()}
 function labels(){
-const x=t(),ids={duelEntryTitle:x.entry,duelEntryDesc:x.desc,duelTitle:x.title,duelSubtitle:x.subtitle,duelSetupTitle:x.setup,duelRules:x.rules,duelRoomsTitle:x.rooms,duelStakeLabel:x.stake,duelCreate:x.privateRoom,duelCreatePublic:x.openRoom,duelInviteTitle:x.waiting,duelShare:x.share,duelCancel:x.cancel,duelJoinTitle:x.join,duelAccept:x.accept,duelDecline:x.back,duelYouLabel:x.you,duelFriendLabel:x.friend,duelClear:x.clear,duelDone:x.back,duelRematch:x.rematch,duelRematchTitle:x.rematchTitle,duelRematchInfo:x.rematchInfo,duelRematchStakeLabel:x.stake,duelRematchConfirm:x.rematchConfirm,duelRematchBack:x.resultBack};
+const x=t(),ids={duelEntryTitle:x.entry,duelEntryDesc:x.desc,duelTitle:x.title,duelSubtitle:x.subtitle,duelSetupTitle:x.setup,duelRules:x.rules,duelStatsOpen:'📊 '+x.stats,duelStatsFromResult:'📊 '+x.stats,duelStatsTitle:x.statsTitle,duelStatsPlayedLabel:x.statsPlayed,duelStatsWinsLabel:x.statsWins,duelStatsLossesLabel:x.statsLosses,duelStatsDrawsLabel:x.statsDraws,duelStatsBestLabel:x.statsBest,duelStatsNetLabel:x.statsNet,duelStatsRecentTitle:x.statsRecent,duelStatsBack:x.statsBack,duelRoomsTitle:x.rooms,duelStakeLabel:x.stake,duelCreate:x.privateRoom,duelCreatePublic:x.openRoom,duelInviteTitle:x.waiting,duelShare:x.share,duelCancel:x.cancel,duelJoinTitle:x.join,duelAccept:x.accept,duelDecline:x.back,duelYouLabel:x.you,duelFriendLabel:x.friend,duelClear:x.clear,duelDone:x.back,duelRematch:x.rematch,duelRematchTitle:x.rematchTitle,duelRematchInfo:x.rematchInfo,duelRematchStakeLabel:x.stake,duelRematchConfirm:x.rematchConfirm,duelRematchBack:x.resultBack};
 for(const [id,value] of Object.entries(ids))$(id).textContent=value;
 if(duel?.status==='active')paintNames(duel);
 if(duel?.status==='waiting')paintRoomHost(duel);
+if(statsData&&!$('duelStats').hidden)paintStats(statsData);
+if(!$('duelStats').hidden){$('duelTitle').textContent=x.statsTitle;$('duelSubtitle').textContent=''}
 stakeLabel();friendLabels();drawRooms();$('duelRoomsRefresh').setAttribute('aria-label',x.refreshRooms);paintOfferPopup();if(incomingOffer){$('duelAcceptRematch').textContent=x.acceptOffer(incomingOffer.stake);$('duelJoinTitle').textContent=incomingOffer.kind==='friend'?ft().invite+(incomingOffer.from||''):x.offerTitle;$('duelJoinInfo').textContent=x.offerInfo(incomingOffer.stake)}
 }
 function stakeLabel(){for(const prefix of ['duel','duelRematch']){const n=Number($(prefix+'Stake').value);$(prefix+'StakeValue').textContent=n+' 🪙';$(prefix+'Payout').textContent=t().pot(n*2,n*9/5)}}
 function error(e){const key=String(e?.message||'');const x=t();pw.status(({duel_not_found:x.notFound,duel_not_waiting:x.notFound,duel_own_invite:x.own,duel_invitee_only:x.privateInvite,duel_not_finished:x.notFinished,duel_already_open:x.busy,duel_wait:x.waitError,duel_reaction_wait:x.waitError,duel_skips_exhausted:x.skip(0),insufficient_coins:x.needCoins,friend_not_found:ft().notFound,friend_self:ft().self,friend_not_accepted:ft().locked})[key]||key)}
+function paintStats(data){
+ const x=t();for(const [id,key] of [['duelStatsPlayed','played'],['duelStatsWins','wins'],['duelStatsLosses','losses'],['duelStatsDraws','draws'],['duelStatsBest','best_score']])$(id).textContent=Number(data[key]||0);
+ const net=Number(data.net_coins||0);$('duelStatsNet').textContent=(net>0?'+':'')+net+' 🪙';
+ const list=$('duelStatsList');list.replaceChildren();if(!data.history?.length){const p=document.createElement('p');p.textContent=x.statsEmpty;list.append(p);return}
+ const locale=language()==='az'?'az-AZ':language()==='en'?'en-GB':'ru-RU';
+ for(const match of data.history){const row=document.createElement('div'),info=document.createElement('div'),name=document.createElement('b'),detail=document.createElement('small'),amount=document.createElement('strong');row.className='duel-history-row';
+  const icon={won:'🏆',lost:'⚔️',draw:'🤝',cancelled:'↩️'}[match.outcome]||'⚔️';name.textContent=icon+' '+(match.opponent_name||x.statsOpponent);
+  const when=match.settled_at?new Intl.DateTimeFormat(locale,{day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit'}).format(new Date(match.settled_at)):'';
+  detail.textContent=when+' · '+(match.outcome==='cancelled'?x.statsRefund:x.statsScore+' '+match.my_score+':'+match.their_score)+' · '+x.statsStake+' '+match.stake+' 🪙';
+  const value=Number(match.net_coins||0);amount.textContent=(value>0?'+':'')+value+' 🪙';amount.className=value>0?'gain':value<0?'loss':'';
+  info.append(name,detail);row.append(info,amount);list.append(row)
+ }
+}
+async function openStats(fromStatsScreen=false){statsReturn=fromStatsScreen?'statsScreen':$('duelResult').hidden?'duelSetup':'duelResult';show('duelStats');$('duelTitle').textContent=t().statsTitle;$('duelSubtitle').textContent='';const request=++statsReq;$('duelStatsList').textContent=t().statsLoading;
+ try{const r=await call('statistics');if(request!==statsReq||$('duelStats').hidden)return;statsData=r.stats;paintStats(statsData)}
+ catch(e){if(request===statsReq&&!$('duelStats').hidden)$('duelStatsList').textContent=e.message}
+}
+function backStats(){statsReq++;$('duelTitle').textContent=t().title;$('duelSubtitle').textContent=t().subtitle;if(statsReturn==='statsScreen'){window.PWStats?.show();return}show(statsReturn);if(statsReturn==='duelSetup')refreshRooms().catch(()=>{});else checkOffer().catch(()=>{})}
+window.PWDuelStats={openFromStats:()=>openStats(true)};
+$('duelStatsOpen').onclick=()=>openStats();$('duelStatsFromResult').onclick=()=>openStats();$('duelStatsBack').onclick=backStats;
 function refreshCoins(){pw.login(true).catch(()=>{})}
 function startPolling(){if(!poll)poll=setInterval(()=>{if($('duelScreen').classList.contains('active'))state().catch(error)},700);if(!tick)tick=setInterval(updateClock,150)}
 function startOfferPolling(){if(!offerPoll)offerPoll=setInterval(()=>{if(!$('duelResult').hidden)checkOffer().catch(error)},1800);checkOffer().catch(error)}
@@ -245,7 +270,7 @@ async function addOpponent(){const button=$('duelAddFriend');button.disabled=tru
 window.PWDuelFriends={refresh:refreshFriends,labels};
 $('friendAdd').onclick=addFriend;$('friendCode').onkeydown=e=>{if(e.key==='Enter')addFriend()};
 $('duelCreateFriend').onclick=createForFriend;$('duelAddFriend').onclick=addOpponent;
-$('duelEntry').onclick=open;$('duelBack').onclick=home;$('duelDecline').onclick=home;$('duelDone').onclick=home;
+$('duelEntry').onclick=open;$('duelBack').onclick=()=>{if(!$('duelStats').hidden)backStats();else home()};$('duelDecline').onclick=home;$('duelDone').onclick=home;
 $('duelStake').oninput=stakeLabel;$('duelRematchStake').oninput=stakeLabel;
 $('duelCreate').onclick=create;$('duelCreatePublic').onclick=createPublic;$('duelRoomsRefresh').onclick=()=>refreshRooms().catch(error);$('duelAccept').onclick=()=>join();$('duelCancel').onclick=cancel;
 $('duelRematch').onclick=rematchSetup;$('duelRematchConfirm').onclick=rematchCreate;

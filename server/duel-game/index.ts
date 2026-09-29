@@ -96,6 +96,9 @@ Deno.serve(async req=>{
     }else if(action==='friend_list'){
       const r=await db.rpc('duel_friend_list',{p_telegram_id:user.id});
       if(r.error)throw r.error;return reply({friends:r.data});
+    }else if(action==='statistics'){
+      const r=await db.rpc('duel_statistics',{p_telegram_id:user.id});
+      if(r.error)throw r.error;return reply({stats:r.data,server_now:new Date().toISOString()});
     }else if(action==='friend_request'){
       const r=await db.rpc('duel_friend_request',{p_telegram_id:user.id,p_friend_code:String(body.friendCode||''),p_duel_code:code||null});
       if(r.error)throw r.error;return reply({status:r.data});
