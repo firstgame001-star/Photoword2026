@@ -151,12 +151,12 @@ async function createPublic(){
 }
 async function joinPublic(roomCode,button){
  button.disabled=true;
- try{const r=await call('join_public',{code:roomCode});code=r.duel.code;duel=r.duel;questionId=null;render();refreshCoins();startPolling()}
+ try{const r=await call('join_public',{code:roomCode,language:language()});code=r.duel.code;duel=r.duel;questionId=null;render();refreshCoins();startPolling()}
  catch(e){error(e);refreshRooms().catch(()=>{})}finally{button.disabled=false}
 }
 async function join(button=$('duelAccept')){
 button.disabled=true;const oldCode=duel?.code;
-try{const r=await call('join',{code});clearInterval(offerPoll);offerPoll=null;incomingOffer=null;duel=r.duel;questionId=null;render();refreshCoins();startPolling()}catch(e){if(oldCode)code=oldCode;error(e)}finally{button.disabled=false}
+try{const r=await call('join',{code,language:language()});clearInterval(offerPoll);offerPoll=null;incomingOffer=null;duel=r.duel;questionId=null;render();refreshCoins();startPolling()}catch(e){if(oldCode)code=oldCode;error(e)}finally{button.disabled=false}
 }
 function rematchSetup(){
 if(duel?.status!=='finished')return;
@@ -165,7 +165,7 @@ $('duelRematchStake').value=String(duel.stake);stakeLabel();show('duelRematchSet
 async function rematchCreate(){
 const button=$('duelRematchConfirm');button.disabled=true;
 try{
- const r=await call('rematch',{code:duel.code,stake:Number($('duelRematchStake').value)});
+ const r=await call('rematch',{code:duel.code,stake:Number($('duelRematchStake').value),language:language()});
  clearInterval(offerPoll);offerPoll=null;incomingOffer=null;
  code=r.duel.code;duel=r.duel;questionId=null;render();refreshCoins();startPolling();
 }catch(e){error(e);show('duelResult');checkOffer().catch(()=>{})}finally{button.disabled=false}

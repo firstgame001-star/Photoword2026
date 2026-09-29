@@ -105,9 +105,10 @@ Deno.serve(async req=>{
       const r=await db.rpc('duel_friend_change',{p_telegram_id:user.id,p_request_id:requestId,p_action:change});
       if(r.error)throw r.error;return reply({ok:true});
     }else if(action==='rematch'){
-      const stake=Number(body.stake);
+      const stake=Number(body.stake),language=String(body.language||'');
       if(!Number.isInteger(stake)||stake<25||stake>500||stake%25!==0)return reply({error:'duel_bad_stake'},400);
-      const r=await db.rpc('duel_rematch',{p_telegram_id:user.id,p_previous_code:code,p_stake:stake});
+      if(!['ru','en','az'].includes(language))return reply({error:'duel_bad_language'},400);
+      const r=await db.rpc('duel_rematch_localized',{p_telegram_id:user.id,p_previous_code:code,p_stake:stake,p_language:language});
       if(r.error)throw r.error;result=r.data;
     }else if(action==='offer'){
       const r=await db.rpc('duel_offer',{p_telegram_id:user.id,p_previous_code:code||null});
@@ -118,7 +119,10 @@ Deno.serve(async req=>{
       if(r.error)throw r.error;
       return r.data?reply({duel:r.data,server_now:new Date().toISOString()}):reply({error:'duel_not_found'},404);
     }else if(action==='join'||action==='join_public'||action==='cancel'){
-      const r=await db.rpc(action==='join_public'?'duel_join_public':action==='join'?'duel_join':'duel_cancel',{p_telegram_id:user.id,p_code:code});
+      const language=String(body.language||'');
+      if(action!=='cancel'&&!['ru','en','az'].includes(language))return reply({error:'duel_bad_language'},400);
+      const r=await db.rpc(action==='join_public'?'duel_join_public_localized':action==='join'?'duel_join_localized':'duel_cancel',
+        action==='cancel'?{p_telegram_id:user.id,p_code:code}:{p_telegram_id:user.id,p_code:code,p_language:language});
       if(r.error)throw r.error;result=code;
     }else if(action==='skip'){
       const r=await db.rpc('duel_skip',{p_telegram_id:user.id,p_code:code});
