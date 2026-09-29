@@ -9,6 +9,9 @@ az:{entry:'Duellər',desc:'60 saniyə · 25–500 🪙 giriş',title:'Duel',subt
 Object.assign(copy.ru,{rematch:'РЕВАНШ',rematchTitle:'Реванш с тем же другом',rematchInfo:'Выбери взнос. Монеты спишутся после подтверждения вызова; друг оплатит свой взнос при принятии.',rematchConfirm:'ПРЕДЛОЖИТЬ РЕВАНШ',resultBack:'НАЗАД К ИТОГУ',offerTitle:'Друг зовёт на реванш',offerInfo:s=>'Взнос '+s+' 🪙 с каждого. Прими вызов, чтобы начать новый матч.',acceptOffer:s=>'ПРИНЯТЬ РЕВАНШ · '+s+' 🪙',privateInvite:'Это приглашение для другого игрока.',notFinished:'Сначала дождись завершения дуэли.'});
 Object.assign(copy.en,{rematch:'REMATCH',rematchTitle:'Play the same friend again',rematchInfo:'Choose an entry. Your coins are held when you confirm; your friend pays on acceptance.',rematchConfirm:'OFFER REMATCH',resultBack:'BACK TO RESULT',offerTitle:'Your friend wants a rematch',offerInfo:s=>'Each player enters for '+s+' 🪙. Accept to start another match.',acceptOffer:s=>'ACCEPT REMATCH · '+s+' 🪙',privateInvite:'This invitation is for another player.',notFinished:'Wait for the duel to finish first.'});
 Object.assign(copy.az,{rematch:'TƏKRAR OYNA',rematchTitle:'Eyni dostla yenidən oyna',rematchInfo:'Giriş haqqını seç. Təsdiqdən sonra sikkələrin saxlanılır; dostun qəbul edəndə öz payını ödəyir.',rematchConfirm:'TƏKRAR OYUN TƏKLİF ET',resultBack:'NƏTİCƏYƏ QAYIT',offerTitle:'Dostun yenidən oynamaq istəyir',offerInfo:s=>'Hər oyunçu '+s+' 🪙 ödəyir. Yeni oyun üçün dəvəti qəbul et.',acceptOffer:s=>'QƏBUL ET · '+s+' 🪙',privateInvite:'Bu dəvət başqa oyunçu üçündür.',notFinished:'Əvvəlcə duelin bitməsini gözlə.'});
+Object.assign(copy.ru,{rooms:'Открытые комнаты',roomsEmpty:'Пока нет открытых комнат',refreshRooms:'Обновить комнаты',joinRoom:'ВОЙТИ',roomTime:n=>'ещё '+n+' мин',openRoom:'СОЗДАТЬ ОТКРЫТУЮ КОМНАТУ',privateRoom:'СОЗДАТЬ ПО ССЫЛКЕ',openInfo:s=>'Открытая комната · взнос '+s+' 🪙 удержан. Ожидаем соперника до 5 минут.'});
+Object.assign(copy.en,{rooms:'Open rooms',roomsEmpty:'No open rooms yet',refreshRooms:'Refresh rooms',joinRoom:'JOIN',roomTime:n=>n+' min left',openRoom:'CREATE OPEN ROOM',privateRoom:'CREATE BY LINK',openInfo:s=>'Open room · '+s+' 🪙 held. Waiting up to 5 minutes for an opponent.'});
+Object.assign(copy.az,{rooms:'Açıq otaqlar',roomsEmpty:'Hələ açıq otaq yoxdur',refreshRooms:'Otaqları yenilə',joinRoom:'QOŞUL',roomTime:n=>n+' dəq qalıb',openRoom:'AÇIQ OTAQ YARAT',privateRoom:'LİNKLƏ YARAT',openInfo:s=>'Açıq otaq · '+s+' 🪙 saxlanılır. Rəqib 5 dəqiqəyə qədər gözlənilir.'});
 const friendCopy={
 ru:{pick:'Выбрать друга',add:'ДОБАВИТЬ',hint:'Добавь игрока по PhotoWord ID. Он подтвердит заявку.',section:'Игровые друзья',referral:'Приглашения по ссылке',none:'Пока нет друзей. Узнай PhotoWord ID игрока в его профиле.',incoming:'Хочет дружить',outgoing:'Заявка отправлена',accept:'ПРИНЯТЬ',remove:'УДАЛИТЬ',challenge:'ВЫЗВАТЬ',selected:'ВЫЗВАТЬ ДРУГА',addAfter:'ДОБАВИТЬ В ДРУЗЬЯ',sent:'Заявка отправлена',accepted:'Теперь вы друзья',invite:'Вызов от ',pickHint:'Выбери друга и взнос либо создай ссылку ниже.',noFriend:'Выбери друга',notFound:'Игрок или заявка не найдены.',self:'Нельзя добавить себя.',locked:'Друг ещё не принял заявку.',sentTo:(name,stake)=>'Вызов отправлен: '+name+'. Взнос '+stake+' 🪙 удержан на 5 минут.'},
 en:{pick:'Choose a friend',add:'ADD',hint:'Add a player by PhotoWord ID. They will confirm your request.',section:'Game friends',referral:'Link invitations',none:'No friends yet. Find their PhotoWord ID in their profile.',incoming:'Wants to be friends',outgoing:'Request sent',accept:'ACCEPT',remove:'REMOVE',challenge:'CHALLENGE',selected:'CHALLENGE FRIEND',addAfter:'ADD FRIEND',sent:'Request sent',accepted:'You are now friends',invite:'Challenge from ',pickHint:'Choose a friend and entry, or create a link below.',noFriend:'Choose a friend',notFound:'Player or request not found.',self:'You cannot add yourself.',locked:'Friend has not accepted yet.',sentTo:(name,stake)=>'Challenge sent to '+name+'. '+stake+' 🪙 held for 5 minutes.'},
@@ -17,7 +20,7 @@ Object.assign(friendCopy.ru,{popupTitle:'Друг вызывает на дуэл
 Object.assign(friendCopy.en,{popupTitle:'A friend challenges you!',popupText:(name,stake)=>name+' invites you to play. Entry: '+stake+' 🪙 each.',popupExpiry:'You have 5 minutes to accept.',popupOpen:'OPEN CHALLENGE',popupLater:'LATER'});
 Object.assign(friendCopy.az,{popupTitle:'Dostun səni duelə çağırır!',popupText:(name,stake)=>name+' səni oyuna dəvət edir. Giriş: hərəyə '+stake+' 🪙.',popupExpiry:'Qəbul etmək üçün 5 dəqiqən var.',popupOpen:'ÇAĞIRIŞI AÇ',popupLater:'SONRA'});
 const ft=()=>friendCopy[language()]||friendCopy.ru;
-let friends=[],selectedFriend='',pendingHomeOffer=null,dismissedOfferCode='',homeOfferRequesting=false;
+let friends=[],selectedFriend='',pendingHomeOffer=null,dismissedOfferCode='',homeOfferRequesting=false,rooms=[],roomPoll=null,roomsRequesting=false;
 const language=()=>{try{return localStorage.getItem('pw.language')||'ru'}catch{return'ru'}};
 const t=()=>copy[language()]||copy.ru;
 let wrongTimer=null,code='',duel=null,preview=null,incomingOffer=null,requesting=false,offerRequesting=false,answering=false,poll=null,tick=null,offerPoll=null,offset=0,questionId=null,chosen=[],disabled=false,lastStatus='',answerEpoch=0;
@@ -42,12 +45,12 @@ for(const [key,emoji] of Object.entries(reactions)){const button=document.create
 $('duelYouLabel').onclick=()=>{if(duel?.status!=='active')return;reactionPicker.hidden=!reactionPicker.hidden;$('duelYouLabel').setAttribute('aria-expanded',String(!reactionPicker.hidden))};
 const panels=['duelSetup','duelRematchSetup','duelInvite','duelJoin','duelGame','duelResult'];
 function show(id){const changed=$(id).hidden||!$('duelScreen').classList.contains('active');for(const p of panels)$(p).hidden=p!==id;document.querySelectorAll('.screen').forEach(e=>e.classList.toggle('active',e.id==='duelScreen'));if(changed)window.scrollTo(0,0)}
-function home(){closeReactions();clearInterval(poll);clearInterval(tick);clearInterval(offerPoll);poll=tick=offerPoll=null;document.querySelectorAll('.screen').forEach(e=>e.classList.toggle('active',e.id==='home'));window.scrollTo(0,0);checkHomeOffer()}
+function home(){closeReactions();clearInterval(poll);clearInterval(tick);clearInterval(offerPoll);clearInterval(roomPoll);poll=tick=offerPoll=roomPoll=null;document.querySelectorAll('.screen').forEach(e=>e.classList.toggle('active',e.id==='home'));window.scrollTo(0,0);checkHomeOffer()}
 function labels(){
-const x=t(),ids={duelEntryTitle:x.entry,duelEntryDesc:x.desc,duelTitle:x.title,duelSubtitle:x.subtitle,duelSetupTitle:x.setup,duelRules:x.rules,duelStakeLabel:x.stake,duelCreate:x.create,duelInviteTitle:x.waiting,duelShare:x.share,duelCancel:x.cancel,duelJoinTitle:x.join,duelAccept:x.accept,duelDecline:x.back,duelYouLabel:x.you,duelFriendLabel:x.friend,duelClear:x.clear,duelDone:x.back,duelRematch:x.rematch,duelRematchTitle:x.rematchTitle,duelRematchInfo:x.rematchInfo,duelRematchStakeLabel:x.stake,duelRematchConfirm:x.rematchConfirm,duelRematchBack:x.resultBack};
+const x=t(),ids={duelEntryTitle:x.entry,duelEntryDesc:x.desc,duelTitle:x.title,duelSubtitle:x.subtitle,duelSetupTitle:x.setup,duelRules:x.rules,duelRoomsTitle:x.rooms,duelStakeLabel:x.stake,duelCreate:x.privateRoom,duelCreatePublic:x.openRoom,duelInviteTitle:x.waiting,duelShare:x.share,duelCancel:x.cancel,duelJoinTitle:x.join,duelAccept:x.accept,duelDecline:x.back,duelYouLabel:x.you,duelFriendLabel:x.friend,duelClear:x.clear,duelDone:x.back,duelRematch:x.rematch,duelRematchTitle:x.rematchTitle,duelRematchInfo:x.rematchInfo,duelRematchStakeLabel:x.stake,duelRematchConfirm:x.rematchConfirm,duelRematchBack:x.resultBack};
 for(const [id,value] of Object.entries(ids))$(id).textContent=value;
 if(duel?.status==='active')paintNames(duel);
-stakeLabel();friendLabels();paintOfferPopup();if(incomingOffer){$('duelAcceptRematch').textContent=x.acceptOffer(incomingOffer.stake);$('duelJoinTitle').textContent=incomingOffer.kind==='friend'?ft().invite+(incomingOffer.from||''):x.offerTitle;$('duelJoinInfo').textContent=x.offerInfo(incomingOffer.stake)}
+stakeLabel();friendLabels();drawRooms();$('duelRoomsRefresh').setAttribute('aria-label',x.refreshRooms);paintOfferPopup();if(incomingOffer){$('duelAcceptRematch').textContent=x.acceptOffer(incomingOffer.stake);$('duelJoinTitle').textContent=incomingOffer.kind==='friend'?ft().invite+(incomingOffer.from||''):x.offerTitle;$('duelJoinInfo').textContent=x.offerInfo(incomingOffer.stake)}
 }
 function stakeLabel(){for(const prefix of ['duel','duelRematch']){const n=Number($(prefix+'Stake').value);$(prefix+'StakeValue').textContent=n+' 🪙';$(prefix+'Payout').textContent=t().pot(n*2,n*9/5)}}
 function error(e){const key=String(e?.message||'');const x=t();pw.status(({duel_not_found:x.notFound,duel_not_waiting:x.notFound,duel_own_invite:x.own,duel_invitee_only:x.privateInvite,duel_not_finished:x.notFinished,duel_already_open:x.busy,duel_wait:x.waitError,duel_reaction_wait:x.waitError,duel_skips_exhausted:x.skip(0),insufficient_coins:x.needCoins,friend_not_found:ft().notFound,friend_self:ft().self,friend_not_accepted:ft().locked})[key]||key)}
@@ -85,7 +88,7 @@ try{const r=await call('state',{code});if(!r.duel||epoch!==answerEpoch)return;du
 function render(){
 const d=duel;if(!d)return;
 if(d.status==='waiting'){
- if(d.creator){show('duelInvite');$('duelShare').hidden=Boolean(d.invitee_name);$('duelInviteInfo').textContent=d.invitee_name?ft().sentTo(d.invitee_name,d.stake):t().invite(d.stake)}
+ if(d.creator){show('duelInvite');$('duelShare').hidden=Boolean(d.invitee_name);$('duelInviteInfo').textContent=d.invitee_name?ft().sentTo(d.invitee_name,d.stake):d.public_room?t().openInfo(d.stake):t().invite(d.stake)}
  else show('duelJoin');
 }else if(d.status==='active'){
  show('duelGame');paintNames(d);paintReactions(d);$('duelYouScore').textContent=d.my_score;$('duelFriendScore').textContent=d.their_score;$('duelSkip').textContent=t().skip(d.skips_left??3);$('duelSkip').disabled=(d.skips_left??0)<=0||!d.question_id;
@@ -126,6 +129,7 @@ clearInterval(offerPoll);offerPoll=null;incomingOffer=null;labels();questionId=n
 try{
  await pw.login();const r=await call('state');
  if(r.duel&&['waiting','active'].includes(r.duel.status)){code=r.duel.code;duel=r.duel;render();startPolling();return}
+ refreshRooms().catch(error);if(!roomPoll)roomPoll=setInterval(()=>{if($('duelScreen').classList.contains('active')&&!$('duelSetup').hidden&&!document.hidden)refreshRooms().catch(()=>{})},5000);
  await refreshFriends();const offer=await call('offer');if(offer.offer)showIncoming(offer.offer);
 }catch(e){error(e)}
 }
@@ -140,6 +144,15 @@ try{await pw.login();const r=await call('preview',{code});preview=r.duel;if(!pre
 async function create(){
 const button=$('duelCreate');button.disabled=true;
 try{await pw.login();const r=await call('create',{stake:Number($('duelStake').value),language:language()});code=r.duel.code;duel=r.duel;questionId=null;render();refreshCoins();startPolling()}catch(e){error(e)}finally{button.disabled=false}
+}
+async function createPublic(){
+ const button=$('duelCreatePublic');button.disabled=true;
+ try{await pw.login();const r=await call('create_public',{stake:Number($('duelStake').value),language:language()});code=r.duel.code;duel=r.duel;questionId=null;render();refreshCoins();startPolling()}catch(e){error(e)}finally{button.disabled=false}
+}
+async function joinPublic(roomCode,button){
+ button.disabled=true;
+ try{const r=await call('join_public',{code:roomCode});code=r.duel.code;duel=r.duel;questionId=null;render();refreshCoins();startPolling()}
+ catch(e){error(e);refreshRooms().catch(()=>{})}finally{button.disabled=false}
 }
 async function join(button=$('duelAccept')){
 button.disabled=true;const oldCode=duel?.code;
@@ -169,6 +182,21 @@ function friendLabels(){
  $('friendCode').placeholder='PhotoWord ID';drawFriends();
 }
 function makeButton(label,handler){const b=document.createElement('button');b.type='button';b.textContent=label;b.onclick=handler;return b}
+function drawRooms(){
+ const list=$('duelRoomsList');list.replaceChildren();
+ if(!rooms.length){const p=document.createElement('p');p.id='duelRoomsEmpty';p.textContent=t().roomsEmpty;list.append(p);return}
+ for(const room of rooms){
+  const row=document.createElement('div');row.className='duel-room-row';
+  const info=document.createElement('div'),name=document.createElement('b'),detail=document.createElement('small');
+  name.textContent=room.name;detail.textContent=room.stake+' 🪙 · '+t().roomTime(Math.max(1,Math.ceil((Date.parse(room.expires_at)-Date.now()-offset)/60000)));
+  info.append(name,detail);const button=makeButton(t().joinRoom,()=>joinPublic(room.code,button));row.append(info,button);list.append(row);
+ }
+}
+async function refreshRooms(){
+ if(roomsRequesting)return;roomsRequesting=true;
+ try{const r=await call('public_rooms',{language:language()});if(!$('duelSetup').hidden&&$('duelScreen').classList.contains('active')){rooms=r.rooms||[];drawRooms()}}
+ finally{roomsRequesting=false}
+}
 function drawFriends(){
  const x=ft(),list=$('gameFriendsList'),picker=$('duelFriendChoices');list.replaceChildren();picker.replaceChildren();
  if(!friends.length){const p=document.createElement('p');p.className='muted';p.textContent=x.none;list.append(p)}
@@ -196,7 +224,7 @@ $('friendAdd').onclick=addFriend;$('friendCode').onkeydown=e=>{if(e.key==='Enter
 $('duelCreateFriend').onclick=createForFriend;$('duelAddFriend').onclick=addOpponent;
 $('duelEntry').onclick=open;$('duelBack').onclick=home;$('duelDecline').onclick=home;$('duelDone').onclick=home;
 $('duelStake').oninput=stakeLabel;$('duelRematchStake').oninput=stakeLabel;
-$('duelCreate').onclick=create;$('duelAccept').onclick=()=>join();$('duelCancel').onclick=cancel;
+$('duelCreate').onclick=create;$('duelCreatePublic').onclick=createPublic;$('duelRoomsRefresh').onclick=()=>refreshRooms().catch(error);$('duelAccept').onclick=()=>join();$('duelCancel').onclick=cancel;
 $('duelRematch').onclick=rematchSetup;$('duelRematchConfirm').onclick=rematchCreate;
 $('duelRematchBack').onclick=()=>{show('duelResult');checkOffer().catch(error)};
 $('duelAcceptRematch').onclick=acceptIncoming;
@@ -211,7 +239,7 @@ const link='https://t.me/PhotoWordBot?startapp=duel_'+code;
 const url='https://t.me/share/url?url='+encodeURIComponent(link)+'&text='+encodeURIComponent(t().shareText(duel.stake));
 if(window.Telegram?.WebApp?.openTelegramLink)Telegram.WebApp.openTelegramLink(url);else location.href=url;
 };
-window.addEventListener('storage',e=>{if(e.key==='pw.language')labels()});
+window.addEventListener('storage',e=>{if(e.key==='pw.language'){rooms=[];labels();if(!$('duelSetup').hidden)refreshRooms().catch(error)}});
 function closeOfferPopup(){ $('duelOfferModal').hidden=true; }
 function paintOfferPopup(){
  const x=ft(),o=pendingHomeOffer;

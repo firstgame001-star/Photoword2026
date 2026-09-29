@@ -77,6 +77,17 @@ Deno.serve(async req=>{
       if(!Number.isInteger(stake)||stake<25||stake>500||stake%25!==0||!['ru','en','az'].includes(language))return reply({error:'duel_bad_stake'},400);
       const r=await db.rpc('duel_create',{p_telegram_id:user.id,p_stake:stake,p_language:language});
       if(r.error)throw r.error;result=r.data;
+    }else if(action==='create_public'){
+      const stake=Number(body.stake),language=String(body.language||'');
+      if(!Number.isInteger(stake)||stake<25||stake>500||stake%25!==0)return reply({error:'duel_bad_stake'},400);
+      if(!['ru','en','az'].includes(language))return reply({error:'duel_bad_language'},400);
+      const r=await db.rpc('duel_create_public',{p_telegram_id:user.id,p_stake:stake,p_language:language});
+      if(r.error)throw r.error;result=r.data;
+    }else if(action==='public_rooms'){
+      const language=String(body.language||'');
+      if(!['ru','en','az'].includes(language))return reply({error:'duel_bad_language'},400);
+      const r=await db.rpc('duel_public_rooms',{p_telegram_id:user.id,p_language:language});
+      if(r.error)throw r.error;return reply({rooms:r.data,server_now:new Date().toISOString()});
     }else if(action==='create_friend'){
       const stake=Number(body.stake),language=String(body.language||''),friendCode=String(body.friendCode||'');
       if(!Number.isInteger(stake)||stake<25||stake>500||stake%25!==0||!['ru','en','az'].includes(language))return reply({error:'duel_bad_stake'},400);
@@ -106,8 +117,8 @@ Deno.serve(async req=>{
       const r=await db.from('duel_matches').select('code,stake,status,language,expires_at').eq('code',code).maybeSingle();
       if(r.error)throw r.error;
       return r.data?reply({duel:r.data,server_now:new Date().toISOString()}):reply({error:'duel_not_found'},404);
-    }else if(action==='join'||action==='cancel'){
-      const r=await db.rpc(action==='join'?'duel_join':'duel_cancel',{p_telegram_id:user.id,p_code:code});
+    }else if(action==='join'||action==='join_public'||action==='cancel'){
+      const r=await db.rpc(action==='join_public'?'duel_join_public':action==='join'?'duel_join':'duel_cancel',{p_telegram_id:user.id,p_code:code});
       if(r.error)throw r.error;result=code;
     }else if(action==='skip'){
       const r=await db.rpc('duel_skip',{p_telegram_id:user.id,p_code:code});
