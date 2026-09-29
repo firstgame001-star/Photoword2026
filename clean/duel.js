@@ -23,6 +23,13 @@ const ft=()=>friendCopy[language()]||friendCopy.ru;
 let friends=[],selectedFriend='',pendingHomeOffer=null,dismissedOfferCode='',homeOfferRequesting=false,rooms=[],roomPoll=null,roomsRequesting=false;
 const language=()=>{try{return localStorage.getItem('pw.language')||'ru'}catch{return'ru'}};
 const t=()=>copy[language()]||copy.ru;
+const chapterTitles={
+ ru:['','Новичок','Любитель','Знаток','Опытный','Эксперт','Профессионал','Мастер','Виртуоз','Легенда'],
+ en:['','Novice','Amateur','Adept','Experienced','Expert','Professional','Master','Virtuoso','Legend'],
+ az:['','Yeni başlayan','Həvəskar','Bilici','Təcrübəli','Ekspert','Peşəkar','Usta','Virtuoz','Əfsanə']
+};
+function playerTitle(levels){const finished=[20,50,90,130,180,230,280,330,380].filter(end=>Number(levels||0)>=end).length;return(chapterTitles[language()]||chapterTitles.ru)[Math.max(1,finished)]}
+function paintRoomHost(d){$('duelRoomHost').hidden=!d?.creator;if(!d?.creator)return;$('duelRoomHostName').textContent=d.my_name||t().you;$('duelRoomHostTitle').textContent=playerTitle(d.my_completed_levels)}
 let wrongTimer=null,code='',duel=null,preview=null,incomingOffer=null,requesting=false,offerRequesting=false,answering=false,poll=null,tick=null,offerPoll=null,offset=0,questionId=null,chosen=[],disabled=false,lastStatus='',answerEpoch=0;
 const reactions={laugh:'😂',cool:'😎',fire:'🔥',clap:'👏',wow:'😮',heart:'❤️',thinking:'🤔',strong:'💪'};
 let reactionMatch='',reactionSeen={my:null,their:null},reactionTimers={my:null,their:null},reacting=false;
@@ -50,6 +57,7 @@ function labels(){
 const x=t(),ids={duelEntryTitle:x.entry,duelEntryDesc:x.desc,duelTitle:x.title,duelSubtitle:x.subtitle,duelSetupTitle:x.setup,duelRules:x.rules,duelRoomsTitle:x.rooms,duelStakeLabel:x.stake,duelCreate:x.privateRoom,duelCreatePublic:x.openRoom,duelInviteTitle:x.waiting,duelShare:x.share,duelCancel:x.cancel,duelJoinTitle:x.join,duelAccept:x.accept,duelDecline:x.back,duelYouLabel:x.you,duelFriendLabel:x.friend,duelClear:x.clear,duelDone:x.back,duelRematch:x.rematch,duelRematchTitle:x.rematchTitle,duelRematchInfo:x.rematchInfo,duelRematchStakeLabel:x.stake,duelRematchConfirm:x.rematchConfirm,duelRematchBack:x.resultBack};
 for(const [id,value] of Object.entries(ids))$(id).textContent=value;
 if(duel?.status==='active')paintNames(duel);
+if(duel?.status==='waiting')paintRoomHost(duel);
 stakeLabel();friendLabels();drawRooms();$('duelRoomsRefresh').setAttribute('aria-label',x.refreshRooms);paintOfferPopup();if(incomingOffer){$('duelAcceptRematch').textContent=x.acceptOffer(incomingOffer.stake);$('duelJoinTitle').textContent=incomingOffer.kind==='friend'?ft().invite+(incomingOffer.from||''):x.offerTitle;$('duelJoinInfo').textContent=x.offerInfo(incomingOffer.stake)}
 }
 function stakeLabel(){for(const prefix of ['duel','duelRematch']){const n=Number($(prefix+'Stake').value);$(prefix+'StakeValue').textContent=n+' 🪙';$(prefix+'Payout').textContent=t().pot(n*2,n*9/5)}}
@@ -88,7 +96,7 @@ try{const r=await call('state',{code});if(!r.duel||epoch!==answerEpoch)return;du
 function render(){
 const d=duel;if(!d)return;
 if(d.status==='waiting'){
- if(d.creator){show('duelInvite');$('duelShare').hidden=Boolean(d.invitee_name);$('duelInviteInfo').textContent=d.invitee_name?ft().sentTo(d.invitee_name,d.stake):d.public_room?t().openInfo(d.stake):t().invite(d.stake)}
+ if(d.creator){show('duelInvite');paintRoomHost(d);$('duelShare').hidden=Boolean(d.invitee_name);$('duelInviteInfo').textContent=d.invitee_name?ft().sentTo(d.invitee_name,d.stake):d.public_room?t().openInfo(d.stake):t().invite(d.stake)}
  else show('duelJoin');
 }else if(d.status==='active'){
  show('duelGame');paintNames(d);paintReactions(d);$('duelYouScore').textContent=d.my_score;$('duelFriendScore').textContent=d.their_score;$('duelSkip').textContent=t().skip(d.skips_left??3);$('duelSkip').disabled=(d.skips_left??0)<=0||!d.question_id;
@@ -187,9 +195,10 @@ function drawRooms(){
  if(!rooms.length){const p=document.createElement('p');p.id='duelRoomsEmpty';p.textContent=t().roomsEmpty;list.append(p);return}
  for(const room of rooms){
   const row=document.createElement('div');row.className='duel-room-row';
-  const info=document.createElement('div'),name=document.createElement('b'),detail=document.createElement('small');
-  name.textContent=room.name;detail.textContent=room.stake+' 🪙 · '+t().roomTime(Math.max(1,Math.ceil((Date.parse(room.expires_at)-Date.now()-offset)/60000)));
-  info.append(name,detail);const button=makeButton(t().joinRoom,()=>joinPublic(room.code,button));row.append(info,button);list.append(row);
+  const info=document.createElement('div'),identity=document.createElement('div'),name=document.createElement('b'),title=document.createElement('span'),detail=document.createElement('small');
+  identity.className='duel-room-identity';title.className='duel-room-title';name.textContent=room.name;title.textContent=playerTitle(room.completed_levels);identity.append(name,title);
+  detail.textContent=room.stake+' 🪙 · '+t().roomTime(Math.max(1,Math.ceil((Date.parse(room.expires_at)-Date.now()-offset)/60000)));
+  info.append(identity,detail);const button=makeButton(t().joinRoom,()=>joinPublic(room.code,button));row.append(info,button);list.append(row);
  }
 }
 async function refreshRooms(){
