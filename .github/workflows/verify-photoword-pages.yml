@@ -25,12 +25,12 @@ jobs:
         run: |
           node scripts/check-clean.mjs
           node scripts/full-audit.mjs
-      - name: Wait for r101 and verify published files
+      - name: Wait for r102 and verify published files
         shell: bash
         run: |
           set -euo pipefail
           base='https://firstgame001-star.github.io/Photoword2026/clean'
-          release='20260930-r101'
+          release='20260930-r102'
           ok=0
           for i in $(seq 1 48); do
             if curl --fail --silent --show-error --location --max-time 20 "$base/release.json?check=$i" -o "$RUNNER_TEMP/release.json" && grep -q "$release" "$RUNNER_TEMP/release.json"; then
@@ -195,4 +195,4 @@ jobs:
           node --check "$RUNNER_TEMP/theme-game.js"
           node --check "$RUNNER_TEMP/challenge.js"
           node --check "$RUNNER_TEMP/duel.js"
-          printf '### PhotoWord r101 publication check\n\nMain levels 1–380, Chapters 1–12, Chapters 8–9 live through level 380, server-authoritative challenge rewards, synced thematic progress, richer profile and leaderboard, finished shop dashboard and purchase history, configurable Telegram notifications and cross-device thematic progress, full DOM/localization/theme audit, server-authoritative thematic +15 coin rewards and paid hints, unique main answers in RU/EN/AZ, unique backgrounds, absolute chapter ranges and earned titles, featured thematic mode, Sport 1–100, Art 1–100, Professions 1–100, Travel 1–100, Science 1–100 and Technology 1–100, three playable challenge modes with server-authoritative time and paid Blitz hints, explicit next-step feedback, 400 challenge words with no repeats until the bank is exhausted, and fixed language selection, legal/settings surfaces and JavaScript all verified.\n' >> "$GITHUB_STEP_SUMMARY"
+          printf '### PhotoWord r102 publication check\n\nMain levels 1–380, Chapters 1–12, Chapters 8–9 live through level 380, server-authoritative challenge rewards, synced thematic progress, richer profile and leaderboard, finished shop dashboard and purchase history, configurable Telegram notifications and cross-device thematic progress, full DOM/localization/theme audit, server-authoritative thematic +15 coin rewards and paid hints, unique main answers in RU/EN/AZ, unique backgrounds, absolute chapter ranges and earned titles, featured thematic mode, Sport 1–100, Art 1–100, Professions 1–100, Travel 1–100, Science 1–100 and Technology 1–100, three playable challenge modes with server-authoritative time and paid Blitz hints, explicit next-step feedback, 400 challenge words with no repeats until the bank is exhausted, and fixed language selection, legal/settings surfaces and JavaScript all verified.\n' >> "$GITHUB_STEP_SUMMARY"
