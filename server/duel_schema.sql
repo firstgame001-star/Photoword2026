@@ -9,6 +9,9 @@ create table if not exists public.duel_questions (
 alter table public.duel_questions enable row level security;
 revoke all on public.duel_questions from public, anon, authenticated;
 grant select on public.duel_questions to service_role;
+create unique index if not exists duel_question_ru_unique on public.duel_questions(answer_ru);
+create unique index if not exists duel_question_en_unique on public.duel_questions(answer_en);
+create unique index if not exists duel_question_az_unique on public.duel_questions(answer_az);
 
 create table if not exists public.duel_matches (
   id uuid primary key default gen_random_uuid(),
