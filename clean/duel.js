@@ -30,14 +30,15 @@ const chapterTitles={
 };
 function playerTitle(levels){const finished=[20,50,90,130,180,230,280,330,380].filter(end=>Number(levels||0)>=end).length;return(chapterTitles[language()]||chapterTitles.ru)[Math.max(1,finished)]}
 function paintRoomHost(d){$('duelRoomHost').hidden=!d?.creator;if(!d?.creator)return;$('duelRoomHostName').textContent=d.my_name||t().you;$('duelRoomHostTitle').textContent=playerTitle(d.my_completed_levels)}
-let wrongTimer=null,code='',duel=null,preview=null,incomingOffer=null,requesting=false,offerRequesting=false,answering=false,poll=null,tick=null,offerPoll=null,offset=0,questionId=null,chosen=[],disabled=false,lastStatus='',answerEpoch=0;
+let wrongTimer=null,submitTimer=null,code='',duel=null,preview=null,incomingOffer=null,requesting=false,offerRequesting=false,answering=false,poll=null,tick=null,offerPoll=null,offset=0,questionId=null,chosen=[],disabled=false,lastStatus='',answerEpoch=0;
 const reactions={laugh:'😂',cool:'😎',fire:'🔥',clap:'👏',wow:'😮',heart:'❤️',thinking:'🤔',strong:'💪'};
-let reactionMatch='',reactionSeen={my:null,their:null},reactionTimers={my:null,their:null},reacting=false;
+let reactionMatch='',reactionSeen={my:null,their:null},reactionTimers={my:null,their:null},reacting=false,pendingReaction='';
 function closeReactions(){$('duelReactionPicker').hidden=true;$('duelYouLabel').setAttribute('aria-expanded','false')}
 function paintNames(d){$('duelYouLabel').textContent=d?.my_name||t().you;$('duelFriendLabel').textContent=d?.their_name||t().friend;$('duelYouLabel').setAttribute('aria-label',$('duelYouLabel').textContent+' · '+({ru:'выбрать реакцию',en:'choose a reaction',az:'reaksiya seç'}[language()]||'выбрать реакцию'))}
 function paintReaction(side,key,at){
  const node=$(side==='my'?'duelYouReaction':'duelFriendReaction');
  if(!at||reactionSeen[side]===at)return;
+ if(side==='my'&&pendingReaction===key){pendingReaction='';reactionSeen.my=at;return}
  reactionSeen[side]=at;clearTimeout(reactionTimers[side]);node.textContent='';
  if(!Object.hasOwn(reactions,key)||Date.now()+offset-Date.parse(at)>4000)return;
  node.textContent=reactions[key];node.classList.remove('pop');void node.offsetWidth;node.classList.add('pop');
@@ -48,10 +49,10 @@ function paintReactions(d){
  paintReaction('my',d.my_reaction,d.my_reaction_at);paintReaction('their',d.their_reaction,d.their_reaction_at);
 }
 const reactionPicker=$('duelReactionPicker');
-for(const [key,emoji] of Object.entries(reactions)){const button=document.createElement('button');button.type='button';button.textContent=emoji;button.setAttribute('aria-label',key);button.onclick=async()=>{if(reacting||answering||duel?.status!=='active')return;closeReactions();reacting=true;answerEpoch++;try{const r=await call('react',{code,emoji:key});if(r.duel?.code===code){duel=r.duel;render()}}catch(e){error(e)}finally{reacting=false}};reactionPicker.append(button)}
+for(const [key,emoji] of Object.entries(reactions)){const button=document.createElement('button');button.type='button';button.textContent=emoji;button.setAttribute('aria-label',key);button.onclick=async()=>{if(reacting||duel?.status!=='active')return;closeReactions();reacting=true;pendingReaction=key;const match=code;const node=$('duelYouReaction');clearTimeout(reactionTimers.my);node.textContent=emoji;node.classList.remove('pop');void node.offsetWidth;node.classList.add('pop');reactionTimers.my=setTimeout(()=>{node.textContent='';node.classList.remove('pop')},2600);try{await call('react',{code:match,emoji:key})}catch(e){if(code===match){pendingReaction='';error(e)}}finally{reacting=false}};reactionPicker.append(button)}
 $('duelYouLabel').onclick=()=>{if(duel?.status!=='active')return;reactionPicker.hidden=!reactionPicker.hidden;$('duelYouLabel').setAttribute('aria-expanded',String(!reactionPicker.hidden))};
 const panels=['duelSetup','duelRematchSetup','duelInvite','duelJoin','duelGame','duelResult'];
-function show(id){const changed=$(id).hidden||!$('duelScreen').classList.contains('active');for(const p of panels)$(p).hidden=p!==id;document.querySelectorAll('.screen').forEach(e=>e.classList.toggle('active',e.id==='duelScreen'));if(changed)window.scrollTo(0,0)}
+function show(id){const changed=$(id).hidden||!$('duelScreen').classList.contains('active');for(const p of panels)$(p).hidden=p!==id;document.querySelectorAll('.screen').forEach(e=>e.classList.toggle('active',e.id==='duelScreen'));if(changed){pw.status('');window.scrollTo(0,0)}}
 function home(){closeReactions();clearInterval(poll);clearInterval(tick);clearInterval(offerPoll);clearInterval(roomPoll);poll=tick=offerPoll=roomPoll=null;document.querySelectorAll('.screen').forEach(e=>e.classList.toggle('active',e.id==='home'));window.scrollTo(0,0);checkHomeOffer()}
 function labels(){
 const x=t(),ids={duelEntryTitle:x.entry,duelEntryDesc:x.desc,duelTitle:x.title,duelSubtitle:x.subtitle,duelSetupTitle:x.setup,duelRules:x.rules,duelRoomsTitle:x.rooms,duelStakeLabel:x.stake,duelCreate:x.privateRoom,duelCreatePublic:x.openRoom,duelInviteTitle:x.waiting,duelShare:x.share,duelCancel:x.cancel,duelJoinTitle:x.join,duelAccept:x.accept,duelDecline:x.back,duelYouLabel:x.you,duelFriendLabel:x.friend,duelClear:x.clear,duelDone:x.back,duelRematch:x.rematch,duelRematchTitle:x.rematchTitle,duelRematchInfo:x.rematchInfo,duelRematchStakeLabel:x.stake,duelRematchConfirm:x.rematchConfirm,duelRematchBack:x.resultBack};
@@ -63,7 +64,7 @@ stakeLabel();friendLabels();drawRooms();$('duelRoomsRefresh').setAttribute('aria
 function stakeLabel(){for(const prefix of ['duel','duelRematch']){const n=Number($(prefix+'Stake').value);$(prefix+'StakeValue').textContent=n+' 🪙';$(prefix+'Payout').textContent=t().pot(n*2,n*9/5)}}
 function error(e){const key=String(e?.message||'');const x=t();pw.status(({duel_not_found:x.notFound,duel_not_waiting:x.notFound,duel_own_invite:x.own,duel_invitee_only:x.privateInvite,duel_not_finished:x.notFinished,duel_already_open:x.busy,duel_wait:x.waitError,duel_reaction_wait:x.waitError,duel_skips_exhausted:x.skip(0),insufficient_coins:x.needCoins,friend_not_found:ft().notFound,friend_self:ft().self,friend_not_accepted:ft().locked})[key]||key)}
 function refreshCoins(){pw.login(true).catch(()=>{})}
-function startPolling(){if(!poll)poll=setInterval(()=>{if($('duelScreen').classList.contains('active'))state().catch(error)},1100);if(!tick)tick=setInterval(updateClock,150)}
+function startPolling(){if(!poll)poll=setInterval(()=>{if($('duelScreen').classList.contains('active'))state().catch(error)},700);if(!tick)tick=setInterval(updateClock,150)}
 function startOfferPolling(){if(!offerPoll)offerPoll=setInterval(()=>{if(!$('duelResult').hidden)checkOffer().catch(error)},1800);checkOffer().catch(error)}
 async function checkOffer(){
 if(offerRequesting||!duel||duel.status!=='finished'||$('duelResult').hidden)return;
@@ -91,7 +92,7 @@ if(duel.status==='active'){
 async function call(action,body={}){const r=await pw.duelRequest(action,body);if(r.server_now)offset=Date.parse(r.server_now)-Date.now();return r}
 async function state(){
 if(requesting||answering||!code)return;requesting=true;const epoch=answerEpoch;
-try{const r=await call('state',{code});if(!r.duel||epoch!==answerEpoch)return;duel=r.duel;render()}finally{requesting=false}
+try{const r=await call('state',{code,questionId});if(!r.duel||epoch!==answerEpoch)return;if(r.duel.status==='active'&&!r.duel.question&&duel?.question&&r.duel.question_id===duel.question_id)r.duel.question=duel.question;duel=r.duel;render()}finally{requesting=false}
 }
 function render(){
 const d=duel;if(!d)return;
@@ -114,16 +115,16 @@ if(d.status==='waiting'){
 }
 }
 function drawQuestion(q){
-clearTimeout(wrongTimer);wrongTimer=null;$('duelClear').disabled=true;const photos=$('duelPhotos'),slots=$('duelSlots'),letters=$('duelLetters');photos.replaceChildren();slots.replaceChildren();letters.replaceChildren();
+clearTimeout(wrongTimer);clearTimeout(submitTimer);wrongTimer=submitTimer=null;$('duelClear').disabled=true;const photos=$('duelPhotos'),slots=$('duelSlots'),letters=$('duelLetters');photos.replaceChildren();slots.replaceChildren();letters.replaceChildren();
 for(const emoji of q.photos){const div=document.createElement('div');div.className='photo';div.textContent=emoji;photos.append(div)}
 slots.style.gridTemplateColumns='repeat('+Math.min(q.length,8)+',minmax(0,1fr))';
-for(let i=0;i<q.length;i++){const b=document.createElement('button');b.className='slot';b.type='button';b.onclick=()=>{if(chosen.length){chosen.pop();paint(q)}};slots.append(b)}
+for(let i=0;i<q.length;i++){const b=document.createElement('button');b.className='slot';b.type='button';b.onclick=()=>{if(chosen.length){clearTimeout(submitTimer);submitTimer=null;chosen.pop();paint(q)}};slots.append(b)}
 letters.style.gridTemplateColumns='repeat('+Math.min(q.letters.length,7)+',minmax(0,1fr))';
-q.letters.forEach((ch,i)=>{const b=document.createElement('button');b.className='letter';b.type='button';b.textContent=ch;b.onclick=()=>{if(disabled||answering||chosen.includes(i)||chosen.length>=q.length)return;chosen.push(i);paint(q);if(chosen.length===q.length)submit(q)};letters.append(b)});
+q.letters.forEach((ch,i)=>{const b=document.createElement('button');b.className='letter';b.type='button';b.textContent=ch;b.onclick=()=>{if(disabled||answering||chosen.includes(i)||chosen.length>=q.length)return;chosen.push(i);paint(q);if(chosen.length===q.length){submitTimer=setTimeout(()=>{submitTimer=null;if(chosen.length===q.length&&duel?.question_id===questionId)submit(q)},400)}};letters.append(b)});
 }
-function paint(q){$('duelClear').disabled=!chosen.length||answering;[...$('duelSlots').children].forEach((e,i)=>e.textContent=chosen[i]===undefined?'':q.letters[chosen[i]]);[...$('duelLetters').children].forEach((e,i)=>e.classList.toggle('used',chosen.includes(i)))}
+function paint(q){$('duelClear').disabled=!chosen.length;[...$('duelSlots').children].forEach((e,i)=>e.textContent=chosen[i]===undefined?'':q.letters[chosen[i]]);[...$('duelLetters').children].forEach((e,i)=>e.classList.toggle('used',chosen.includes(i)))}
 async function submit(q){
-if(answering||disabled)return;answering=true;answerEpoch++;$('duelClear').disabled=true;
+if(answering||disabled)return;answering=true;answerEpoch++;
 try{
 const answer=chosen.map(i=>q.letters[i]).join('');const r=await call('answer',{code,answer});
 duel=r.duel;lastStatus=r.correct?t().correct:t().wrong;
@@ -237,12 +238,12 @@ $('duelCreate').onclick=create;$('duelCreatePublic').onclick=createPublic;$('due
 $('duelRematch').onclick=rematchSetup;$('duelRematchConfirm').onclick=rematchCreate;
 $('duelRematchBack').onclick=()=>{show('duelResult');checkOffer().catch(error)};
 $('duelAcceptRematch').onclick=acceptIncoming;
-function clearLetters(){clearTimeout(wrongTimer);wrongTimer=null;chosen=[];$('duelSlots').classList.remove('wrong');if(duel?.question)paint(duel.question)}
+function clearLetters(){clearTimeout(wrongTimer);clearTimeout(submitTimer);wrongTimer=submitTimer=null;chosen=[];$('duelSlots').classList.remove('wrong');if(duel?.question)paint(duel.question)}
 async function skip(){if(answering||disabled||!duel?.question||duel.skips_left<=0)return;const button=$('duelSkip');button.disabled=true;answering=true;answerEpoch++;
  try{clearLetters();const r=await call('skip',{code});duel=r.duel;lastStatus=t().skipped;render();pw.haptic('selection')}
  catch(e){error(e)}finally{answering=false;if(duel?.status==='active'){$('duelSkip').disabled=duel.skips_left<=0;if(duel.question)paint(duel.question)}}
 }
-$('duelClear').onclick=()=>{if(!answering)clearLetters()};$('duelSkip').onclick=skip;
+$('duelClear').onclick=clearLetters;$('duelSkip').onclick=skip;
 $('duelShare').onclick=()=>{
 const link='https://t.me/PhotoWordBot?startapp=duel_'+code;
 const url='https://t.me/share/url?url='+encodeURIComponent(link)+'&text='+encodeURIComponent(t().shareText(duel.stake));

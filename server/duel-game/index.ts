@@ -131,7 +131,8 @@ Deno.serve(async req=>{
       const emoji=String(body.emoji||'');
       if(!['laugh','cool','fire','clap','wow','heart','thinking','strong'].includes(emoji))return reply({error:'duel_bad_reaction'},400);
       const r=await db.rpc('duel_react',{p_telegram_id:user.id,p_code:code,p_reaction:emoji});
-      if(r.error)throw r.error;result=code;
+      if(r.error)throw r.error;
+      return reply({ok:true,server_now:new Date().toISOString()});
     }else if(action==='answer'){
       const answer=String(body.answer||'');if(!answer||answer.length>80)return reply({error:'duel_bad_answer'},400);
       const r=await db.rpc('duel_submit',{p_telegram_id:user.id,p_code:code,p_answer:answer});
@@ -141,7 +142,7 @@ Deno.serve(async req=>{
     if(r.error)throw r.error;
     const duel=r.data;
     if(!duel)return reply({duel:null,server_now:new Date().toISOString()});
-    if(duel.status==='active'&&duel.question_id){
+    if(duel.status==='active'&&duel.question_id&&!(action==='state'&&Number(body.questionId)===Number(duel.question_id))){
       const q=await db.from('duel_questions').select('id,photos,answer_ru,answer_en,answer_az').eq('id',duel.question_id).single();
       if(q.error)throw q.error;
       const answer=q.data['answer_'+duel.language];
