@@ -33,6 +33,31 @@ function letters(answer:string,code:string,id:number,language:string){
   for(let i=pool.length-1;i>0;i--){const j=Math.floor(rand()*(i+1));[pool[i],pool[j]]=[pool[j],pool[i]]}
   return pool;
 }
+type DuelDb=ReturnType<typeof createClient>;
+async function notifyDuelInvite(db:DuelDb,token:string,telegramId:number,duel:any){
+  if(duel?.status!=='waiting'||!duel.creator||!duel.invitee_name)return false;
+  try{
+    const claim=await db.rpc('duel_notification_claim',{p_telegram_id:telegramId,p_code:duel.code});
+    if(claim.error||!claim.data)return false;
+    const invite=claim.data;
+    const l=['ru','en','az'].includes(invite.language)?invite.language:'ru';
+    const copy:any={
+      ru:{friend:'⚔️ '+invite.from+' вызывает тебя на дуэль PhotoWord!',rematch:'🔁 '+invite.from+' предлагает реванш в PhotoWord!',entry:'Взнос каждого: ',time:'Прими вызов в течение 5 минут.',button:'🎮 Открыть дуэль'},
+      en:{friend:'⚔️ '+invite.from+' challenges you to a PhotoWord duel!',rematch:'🔁 '+invite.from+' wants a PhotoWord rematch!',entry:'Entry per player: ',time:'Accept within 5 minutes.',button:'🎮 Open duel'},
+      az:{friend:'⚔️ '+invite.from+' səni PhotoWord duelinə çağırır!',rematch:'🔁 '+invite.from+' PhotoWord-da təkrar oyun təklif edir!',entry:'Hər oyunçunun girişi: ',time:'5 dəqiqə ərzində qəbul et.',button:'🎮 Dueli aç'}
+    }[l];
+    const link='https://t.me/PhotoWordBot?startapp=duel_'+invite.code;
+    const response=await fetch('https://api.telegram.org/bot'+token+'/sendMessage',{
+      method:'POST',headers:{'Content-Type':'application/json'},signal:AbortSignal.timeout(5000),
+      body:JSON.stringify({chat_id:invite.telegram_id,text:(invite.kind==='rematch'?copy.rematch:copy.friend)+'\n'+copy.entry+invite.stake+' 🪙. '+copy.time,
+        reply_markup:{inline_keyboard:[[{text:copy.button,url:link}]]}})
+    });
+    const result=await response.json().catch(()=>null);
+    const sent=Boolean(response.ok&&result?.ok);
+    if(sent)await db.rpc('duel_notification_finish',{p_telegram_id:telegramId,p_code:duel.code,p_sent:true});
+    return sent;
+  }catch{return false}
+}
 Deno.serve(async req=>{
   if(req.method==='OPTIONS')return new Response(null,{status:204,headers});
   if(req.method!=='POST')return reply({error:'method'},405);
@@ -102,7 +127,8 @@ Deno.serve(async req=>{
       const answer=q.data['answer_'+duel.language];
       duel.question={photos:q.data.photos,length:Array.from(answer).length,letters:letters(answer,duel.code,q.data.id,duel.language)};
     }
-    return reply({duel,correct,server_now:new Date().toISOString()});
+    const notification_sent=await notifyDuelInvite(db,token,user.id,duel);
+    return reply({duel,correct,notification_sent,server_now:new Date().toISOString()});
   }catch(e){
     const message=String((e as Error)?.message||'duel_error');
     const known=['duel_bad_stake','duel_bad_language','duel_already_open','insufficient_coins','duel_not_found','duel_not_waiting','duel_own_invite','duel_invitee_only','duel_not_finished','duel_cannot_cancel','duel_not_active','duel_no_questions','duel_wait','duel_bad_answer','duel_skips_exhausted','friend_not_found','friend_self','friend_unavailable','friend_already_requested','friend_invalid_action','friend_not_accepted'];
