@@ -13,18 +13,21 @@ const friendCopy={
 ru:{pick:'Выбрать друга',add:'ДОБАВИТЬ',hint:'Добавь игрока по PhotoWord ID. Он подтвердит заявку.',section:'Игровые друзья',referral:'Приглашения по ссылке',none:'Пока нет друзей. Узнай PhotoWord ID игрока в его профиле.',incoming:'Хочет дружить',outgoing:'Заявка отправлена',accept:'ПРИНЯТЬ',remove:'УДАЛИТЬ',challenge:'ВЫЗВАТЬ',selected:'ВЫЗВАТЬ ДРУГА',addAfter:'ДОБАВИТЬ В ДРУЗЬЯ',sent:'Заявка отправлена',accepted:'Теперь вы друзья',invite:'Вызов от ',pickHint:'Выбери друга и взнос либо создай ссылку ниже.',noFriend:'Выбери друга',notFound:'Игрок или заявка не найдены.',self:'Нельзя добавить себя.',locked:'Друг ещё не принял заявку.',sentTo:(name,stake)=>'Вызов отправлен: '+name+'. Взнос '+stake+' 🪙 удержан на 5 минут.'},
 en:{pick:'Choose a friend',add:'ADD',hint:'Add a player by PhotoWord ID. They will confirm your request.',section:'Game friends',referral:'Link invitations',none:'No friends yet. Find their PhotoWord ID in their profile.',incoming:'Wants to be friends',outgoing:'Request sent',accept:'ACCEPT',remove:'REMOVE',challenge:'CHALLENGE',selected:'CHALLENGE FRIEND',addAfter:'ADD FRIEND',sent:'Request sent',accepted:'You are now friends',invite:'Challenge from ',pickHint:'Choose a friend and entry, or create a link below.',noFriend:'Choose a friend',notFound:'Player or request not found.',self:'You cannot add yourself.',locked:'Friend has not accepted yet.',sentTo:(name,stake)=>'Challenge sent to '+name+'. '+stake+' 🪙 held for 5 minutes.'},
 az:{pick:'Dost seç',add:'ƏLAVƏ ET',hint:'Oyunçunu PhotoWord ID ilə əlavə et. O, sorğunu təsdiqləyəcək.',section:'Oyun dostları',referral:'Linklə dəvətlər',none:'Hələ dost yoxdur. Oyunçunun PhotoWord ID-sini profilindən öyrən.',incoming:'Dost olmaq istəyir',outgoing:'Sorğu göndərilib',accept:'QƏBUL ET',remove:'SİL',challenge:'DUELƏ ÇAĞIR',selected:'DOSTU ÇAĞIR',addAfter:'DOST ƏLAVƏ ET',sent:'Sorğu göndərildi',accepted:'İndi dostsunuz',invite:'Çağırış: ',pickHint:'Dostu və giriş haqqını seç və ya link yarat.',noFriend:'Dost seç',notFound:'Oyunçu və ya sorğu tapılmadı.',self:'Özünü əlavə edə bilməzsən.',locked:'Dostun hələ sorğunu qəbul etməyib.',sentTo:(name,stake)=>'Çağırış göndərildi: '+name+'. '+stake+' 🪙 5 dəqiqə saxlanılır.'}}
+Object.assign(friendCopy.ru,{popupTitle:'Друг вызывает на дуэль!',popupText:(name,stake)=>name+' приглашает тебя сыграть. Взнос: '+stake+' 🪙 с каждого.',popupExpiry:'У тебя есть 5 минут, чтобы принять вызов.',popupOpen:'ОТКРЫТЬ ВЫЗОВ',popupLater:'ПОЗЖЕ'});
+Object.assign(friendCopy.en,{popupTitle:'A friend challenges you!',popupText:(name,stake)=>name+' invites you to play. Entry: '+stake+' 🪙 each.',popupExpiry:'You have 5 minutes to accept.',popupOpen:'OPEN CHALLENGE',popupLater:'LATER'});
+Object.assign(friendCopy.az,{popupTitle:'Dostun səni duelə çağırır!',popupText:(name,stake)=>name+' səni oyuna dəvət edir. Giriş: hərəyə '+stake+' 🪙.',popupExpiry:'Qəbul etmək üçün 5 dəqiqən var.',popupOpen:'ÇAĞIRIŞI AÇ',popupLater:'SONRA'});
 const ft=()=>friendCopy[language()]||friendCopy.ru;
-let friends=[],selectedFriend='';
+let friends=[],selectedFriend='',pendingHomeOffer=null,dismissedOfferCode='',homeOfferRequesting=false;
 const language=()=>{try{return localStorage.getItem('pw.language')||'ru'}catch{return'ru'}};
 const t=()=>copy[language()]||copy.ru;
 let wrongTimer=null,code='',duel=null,preview=null,incomingOffer=null,requesting=false,offerRequesting=false,answering=false,poll=null,tick=null,offerPoll=null,offset=0,questionId=null,chosen=[],disabled=false,lastStatus='',answerEpoch=0;
 const panels=['duelSetup','duelRematchSetup','duelInvite','duelJoin','duelGame','duelResult'];
 function show(id){const changed=$(id).hidden||!$('duelScreen').classList.contains('active');for(const p of panels)$(p).hidden=p!==id;document.querySelectorAll('.screen').forEach(e=>e.classList.toggle('active',e.id==='duelScreen'));if(changed)window.scrollTo(0,0)}
-function home(){clearInterval(poll);clearInterval(tick);clearInterval(offerPoll);poll=tick=offerPoll=null;document.querySelectorAll('.screen').forEach(e=>e.classList.toggle('active',e.id==='home'));window.scrollTo(0,0)}
+function home(){clearInterval(poll);clearInterval(tick);clearInterval(offerPoll);poll=tick=offerPoll=null;document.querySelectorAll('.screen').forEach(e=>e.classList.toggle('active',e.id==='home'));window.scrollTo(0,0);checkHomeOffer()}
 function labels(){
 const x=t(),ids={duelEntryTitle:x.entry,duelEntryDesc:x.desc,duelTitle:x.title,duelSubtitle:x.subtitle,duelSetupTitle:x.setup,duelRules:x.rules,duelStakeLabel:x.stake,duelCreate:x.create,duelInviteTitle:x.waiting,duelShare:x.share,duelCancel:x.cancel,duelJoinTitle:x.join,duelAccept:x.accept,duelDecline:x.back,duelYouLabel:x.you,duelFriendLabel:x.friend,duelClear:x.clear,duelDone:x.back,duelRematch:x.rematch,duelRematchTitle:x.rematchTitle,duelRematchInfo:x.rematchInfo,duelRematchStakeLabel:x.stake,duelRematchConfirm:x.rematchConfirm,duelRematchBack:x.resultBack};
 for(const [id,value] of Object.entries(ids))$(id).textContent=value;
-stakeLabel();friendLabels();if(incomingOffer){$('duelAcceptRematch').textContent=x.acceptOffer(incomingOffer.stake);$('duelJoinTitle').textContent=incomingOffer.kind==='friend'?ft().invite+(incomingOffer.from||''):x.offerTitle;$('duelJoinInfo').textContent=x.offerInfo(incomingOffer.stake)}
+stakeLabel();friendLabels();paintOfferPopup();if(incomingOffer){$('duelAcceptRematch').textContent=x.acceptOffer(incomingOffer.stake);$('duelJoinTitle').textContent=incomingOffer.kind==='friend'?ft().invite+(incomingOffer.from||''):x.offerTitle;$('duelJoinInfo').textContent=x.offerInfo(incomingOffer.stake)}
 }
 function stakeLabel(){for(const prefix of ['duel','duelRematch']){const n=Number($(prefix+'Stake').value);$(prefix+'StakeValue').textContent=n+' 🪙';$(prefix+'Payout').textContent=t().pot(n*2,n*9/5)}}
 function error(e){const key=String(e?.message||'');const x=t();pw.status(({duel_not_found:x.notFound,duel_not_waiting:x.notFound,duel_own_invite:x.own,duel_invitee_only:x.privateInvite,duel_not_finished:x.notFinished,duel_already_open:x.busy,duel_wait:x.waitError,duel_skips_exhausted:x.skip(0),insufficient_coins:x.needCoins,friend_not_found:ft().notFound,friend_self:ft().self,friend_not_accepted:ft().locked})[key]||key)}
@@ -107,7 +110,7 @@ try{
 }catch(e){error(e)}
 }
 function showIncoming(offer){
-incomingOffer=offer;preview=offer;code=offer.code;
+dismissedOfferCode=offer.code;closeOfferPopup();incomingOffer=offer;preview=offer;code=offer.code;
 $('duelJoinTitle').textContent=offer.kind==='friend'?ft().invite+(offer.from||''):t().offerTitle;$('duelJoinInfo').textContent=t().offerInfo(offer.stake);show('duelJoin');
 }
 async function invited(c){
@@ -189,11 +192,43 @@ const url='https://t.me/share/url?url='+encodeURIComponent(link)+'&text='+encode
 if(window.Telegram?.WebApp?.openTelegramLink)Telegram.WebApp.openTelegramLink(url);else location.href=url;
 };
 window.addEventListener('storage',e=>{if(e.key==='pw.language')labels()});
-async function checkHomeOffer(){
- if(!pw.hasAuth||!$('home').classList.contains('active'))return;
- try{const r=await call('offer');$('duelEntryDesc').textContent=r.offer?ft().invite+(r.offer.from||'')+' · '+r.offer.stake+' 🪙':t().desc}catch{/* Keep the entry usable when offline. */}
+function closeOfferPopup(){ $('duelOfferModal').hidden=true; }
+function paintOfferPopup(){
+ const x=ft(),o=pendingHomeOffer;
+ $('duelOfferHeading').textContent=x.popupTitle;
+ $('duelOfferText').textContent=o?x.popupText(o.from||t().friend,o.stake):'';
+ $('duelOfferExpiry').textContent=x.popupExpiry;
+ $('duelOfferOpen').textContent=x.popupOpen;
+ $('duelOfferLater').textContent=x.popupLater;
 }
-setTimeout(checkHomeOffer,1800);setInterval(checkHomeOffer,12000);
+function canShowOfferPopup(){return ![...document.querySelectorAll('.modal:not([hidden])')].some(m=>m.id!=='duelOfferModal')}
+function showOfferPopup(){
+ if(!pendingHomeOffer||pendingHomeOffer.code===dismissedOfferCode||!$('home').classList.contains('active')||!canShowOfferPopup())return;
+ paintOfferPopup();$('duelOfferModal').hidden=false;
+}
+async function checkHomeOffer(){
+ if(homeOfferRequesting||!pw.hasAuth||!$('home').classList.contains('active')||document.hidden)return;
+ homeOfferRequesting=true;
+ try{
+  const r=await call('offer');pendingHomeOffer=r.offer||null;
+  $('duelEntryDesc').textContent=pendingHomeOffer?ft().invite+(pendingHomeOffer.from||'')+' · '+pendingHomeOffer.stake+' 🪙':t().desc;
+  if(!pendingHomeOffer||Date.parse(pendingHomeOffer.expires_at)<=Date.now()+offset){pendingHomeOffer=null;closeOfferPopup();return}
+  if(pendingHomeOffer.code!==dismissedOfferCode)showOfferPopup();
+ }catch{/* Keep the entry usable when offline. */}finally{homeOfferRequesting=false}
+}
+$('duelOfferLater').onclick=()=>{dismissedOfferCode=pendingHomeOffer?.code||'';closeOfferPopup()};
+$('duelOfferOpen').onclick=async()=>{
+ const button=$('duelOfferOpen');button.disabled=true;
+ try{
+  const latest=await call('offer');if(!latest.offer||latest.offer.code!==pendingHomeOffer?.code)throw new Error('duel_not_found');
+  dismissedOfferCode=latest.offer.code;closeOfferPopup();await open();
+ }catch(e){closeOfferPopup();pendingHomeOffer=null;error(e)}finally{button.disabled=false}
+};
+window.addEventListener('pw:player',()=>checkHomeOffer());
+window.addEventListener('focus',()=>checkHomeOffer());
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)checkHomeOffer()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('duelOfferModal').hidden){dismissedOfferCode=pendingHomeOffer?.code||'';closeOfferPopup()}});
+setTimeout(checkHomeOffer,1200);setInterval(checkHomeOffer,4000);
 
 labels();
 const start=String(window.Telegram?.WebApp?.initDataUnsafe?.start_param||new URLSearchParams(location.search).get('startapp')||'');
