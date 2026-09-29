@@ -112,6 +112,11 @@ Deno.serve(async req=>{
     }else if(action==='skip'){
       const r=await db.rpc('duel_skip',{p_telegram_id:user.id,p_code:code});
       if(r.error)throw r.error;result=code;
+    }else if(action==='react'){
+      const emoji=String(body.emoji||'');
+      if(!['laugh','cool','fire','clap','wow','heart','thinking','strong'].includes(emoji))return reply({error:'duel_bad_reaction'},400);
+      const r=await db.rpc('duel_react',{p_telegram_id:user.id,p_code:code,p_reaction:emoji});
+      if(r.error)throw r.error;result=code;
     }else if(action==='answer'){
       const answer=String(body.answer||'');if(!answer||answer.length>80)return reply({error:'duel_bad_answer'},400);
       const r=await db.rpc('duel_submit',{p_telegram_id:user.id,p_code:code,p_answer:answer});
@@ -131,7 +136,7 @@ Deno.serve(async req=>{
     return reply({duel,correct,notification_sent,server_now:new Date().toISOString()});
   }catch(e){
     const message=String((e as Error)?.message||'duel_error');
-    const known=['duel_bad_stake','duel_bad_language','duel_already_open','insufficient_coins','duel_not_found','duel_not_waiting','duel_own_invite','duel_invitee_only','duel_not_finished','duel_cannot_cancel','duel_not_active','duel_no_questions','duel_wait','duel_bad_answer','duel_skips_exhausted','friend_not_found','friend_self','friend_unavailable','friend_already_requested','friend_invalid_action','friend_not_accepted'];
+    const known=['duel_bad_stake','duel_bad_language','duel_already_open','insufficient_coins','duel_not_found','duel_not_waiting','duel_own_invite','duel_invitee_only','duel_not_finished','duel_cannot_cancel','duel_not_active','duel_no_questions','duel_wait','duel_bad_answer','duel_skips_exhausted','duel_bad_reaction','duel_reaction_wait','friend_not_found','friend_self','friend_unavailable','friend_already_requested','friend_invalid_action','friend_not_accepted'];
     const code=known.find(x=>message.includes(x));
     return reply({error:code||'duel_error'},code?409:500);
   }

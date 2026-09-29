@@ -21,16 +21,36 @@ let friends=[],selectedFriend='',pendingHomeOffer=null,dismissedOfferCode='',hom
 const language=()=>{try{return localStorage.getItem('pw.language')||'ru'}catch{return'ru'}};
 const t=()=>copy[language()]||copy.ru;
 let wrongTimer=null,code='',duel=null,preview=null,incomingOffer=null,requesting=false,offerRequesting=false,answering=false,poll=null,tick=null,offerPoll=null,offset=0,questionId=null,chosen=[],disabled=false,lastStatus='',answerEpoch=0;
+const reactions={laugh:'😂',cool:'😎',fire:'🔥',clap:'👏',wow:'😮',heart:'❤️',thinking:'🤔',strong:'💪'};
+let reactionMatch='',reactionSeen={my:null,their:null},reactionTimers={my:null,their:null},reacting=false;
+function closeReactions(){$('duelReactionPicker').hidden=true;$('duelYouLabel').setAttribute('aria-expanded','false')}
+function paintNames(d){$('duelYouLabel').textContent=d?.my_name||t().you;$('duelFriendLabel').textContent=d?.their_name||t().friend;$('duelYouLabel').setAttribute('aria-label',$('duelYouLabel').textContent+' · '+({ru:'выбрать реакцию',en:'choose a reaction',az:'reaksiya seç'}[language()]||'выбрать реакцию'))}
+function paintReaction(side,key,at){
+ const node=$(side==='my'?'duelYouReaction':'duelFriendReaction');
+ if(!at||reactionSeen[side]===at)return;
+ reactionSeen[side]=at;clearTimeout(reactionTimers[side]);node.textContent='';
+ if(!Object.hasOwn(reactions,key)||Date.now()+offset-Date.parse(at)>4000)return;
+ node.textContent=reactions[key];node.classList.remove('pop');void node.offsetWidth;node.classList.add('pop');
+ reactionTimers[side]=setTimeout(()=>{node.textContent='';node.classList.remove('pop')},2600);
+}
+function paintReactions(d){
+ if(reactionMatch!==d.code){reactionMatch=d.code;reactionSeen={my:null,their:null};for(const side of ['my','their']){clearTimeout(reactionTimers[side]);$(side==='my'?'duelYouReaction':'duelFriendReaction').textContent=''}}
+ paintReaction('my',d.my_reaction,d.my_reaction_at);paintReaction('their',d.their_reaction,d.their_reaction_at);
+}
+const reactionPicker=$('duelReactionPicker');
+for(const [key,emoji] of Object.entries(reactions)){const button=document.createElement('button');button.type='button';button.textContent=emoji;button.setAttribute('aria-label',key);button.onclick=async()=>{if(reacting||answering||duel?.status!=='active')return;closeReactions();reacting=true;answerEpoch++;try{const r=await call('react',{code,emoji:key});if(r.duel?.code===code){duel=r.duel;render()}}catch(e){error(e)}finally{reacting=false}};reactionPicker.append(button)}
+$('duelYouLabel').onclick=()=>{if(duel?.status!=='active')return;reactionPicker.hidden=!reactionPicker.hidden;$('duelYouLabel').setAttribute('aria-expanded',String(!reactionPicker.hidden))};
 const panels=['duelSetup','duelRematchSetup','duelInvite','duelJoin','duelGame','duelResult'];
 function show(id){const changed=$(id).hidden||!$('duelScreen').classList.contains('active');for(const p of panels)$(p).hidden=p!==id;document.querySelectorAll('.screen').forEach(e=>e.classList.toggle('active',e.id==='duelScreen'));if(changed)window.scrollTo(0,0)}
-function home(){clearInterval(poll);clearInterval(tick);clearInterval(offerPoll);poll=tick=offerPoll=null;document.querySelectorAll('.screen').forEach(e=>e.classList.toggle('active',e.id==='home'));window.scrollTo(0,0);checkHomeOffer()}
+function home(){closeReactions();clearInterval(poll);clearInterval(tick);clearInterval(offerPoll);poll=tick=offerPoll=null;document.querySelectorAll('.screen').forEach(e=>e.classList.toggle('active',e.id==='home'));window.scrollTo(0,0);checkHomeOffer()}
 function labels(){
 const x=t(),ids={duelEntryTitle:x.entry,duelEntryDesc:x.desc,duelTitle:x.title,duelSubtitle:x.subtitle,duelSetupTitle:x.setup,duelRules:x.rules,duelStakeLabel:x.stake,duelCreate:x.create,duelInviteTitle:x.waiting,duelShare:x.share,duelCancel:x.cancel,duelJoinTitle:x.join,duelAccept:x.accept,duelDecline:x.back,duelYouLabel:x.you,duelFriendLabel:x.friend,duelClear:x.clear,duelDone:x.back,duelRematch:x.rematch,duelRematchTitle:x.rematchTitle,duelRematchInfo:x.rematchInfo,duelRematchStakeLabel:x.stake,duelRematchConfirm:x.rematchConfirm,duelRematchBack:x.resultBack};
 for(const [id,value] of Object.entries(ids))$(id).textContent=value;
+if(duel?.status==='active')paintNames(duel);
 stakeLabel();friendLabels();paintOfferPopup();if(incomingOffer){$('duelAcceptRematch').textContent=x.acceptOffer(incomingOffer.stake);$('duelJoinTitle').textContent=incomingOffer.kind==='friend'?ft().invite+(incomingOffer.from||''):x.offerTitle;$('duelJoinInfo').textContent=x.offerInfo(incomingOffer.stake)}
 }
 function stakeLabel(){for(const prefix of ['duel','duelRematch']){const n=Number($(prefix+'Stake').value);$(prefix+'StakeValue').textContent=n+' 🪙';$(prefix+'Payout').textContent=t().pot(n*2,n*9/5)}}
-function error(e){const key=String(e?.message||'');const x=t();pw.status(({duel_not_found:x.notFound,duel_not_waiting:x.notFound,duel_own_invite:x.own,duel_invitee_only:x.privateInvite,duel_not_finished:x.notFinished,duel_already_open:x.busy,duel_wait:x.waitError,duel_skips_exhausted:x.skip(0),insufficient_coins:x.needCoins,friend_not_found:ft().notFound,friend_self:ft().self,friend_not_accepted:ft().locked})[key]||key)}
+function error(e){const key=String(e?.message||'');const x=t();pw.status(({duel_not_found:x.notFound,duel_not_waiting:x.notFound,duel_own_invite:x.own,duel_invitee_only:x.privateInvite,duel_not_finished:x.notFinished,duel_already_open:x.busy,duel_wait:x.waitError,duel_reaction_wait:x.waitError,duel_skips_exhausted:x.skip(0),insufficient_coins:x.needCoins,friend_not_found:ft().notFound,friend_self:ft().self,friend_not_accepted:ft().locked})[key]||key)}
 function refreshCoins(){pw.login(true).catch(()=>{})}
 function startPolling(){if(!poll)poll=setInterval(()=>{if($('duelScreen').classList.contains('active'))state().catch(error)},1100);if(!tick)tick=setInterval(updateClock,150)}
 function startOfferPolling(){if(!offerPoll)offerPoll=setInterval(()=>{if(!$('duelResult').hidden)checkOffer().catch(error)},1800);checkOffer().catch(error)}
@@ -68,12 +88,12 @@ if(d.status==='waiting'){
  if(d.creator){show('duelInvite');$('duelShare').hidden=Boolean(d.invitee_name);$('duelInviteInfo').textContent=d.invitee_name?ft().sentTo(d.invitee_name,d.stake):t().invite(d.stake)}
  else show('duelJoin');
 }else if(d.status==='active'){
- show('duelGame');$('duelYouScore').textContent=d.my_score;$('duelFriendScore').textContent=d.their_score;$('duelSkip').textContent=t().skip(d.skips_left??3);$('duelSkip').disabled=(d.skips_left??0)<=0||!d.question_id;
+ show('duelGame');paintNames(d);paintReactions(d);$('duelYouScore').textContent=d.my_score;$('duelFriendScore').textContent=d.their_score;$('duelSkip').textContent=t().skip(d.skips_left??3);$('duelSkip').disabled=(d.skips_left??0)<=0||!d.question_id;
  const q=d.question;
  if(q&&questionId!==d.question_id){questionId=d.question_id;chosen=[];lastStatus='';drawQuestion(q)}
  updateClock();
 }else{
- clearInterval(poll);clearInterval(tick);poll=tick=null;show('duelResult');
+ closeReactions();clearInterval(poll);clearInterval(tick);poll=tick=null;show('duelResult');
  $('duelResultIcon').textContent=d.status==='cancelled'?'↩️':d.draw?'🤝':d.won?'🏆':'⚔️';
  $('duelResultTitle').textContent=d.status==='cancelled'?t().cancelled:d.draw?t().draw:d.won?t().won:t().lost;
  $('duelResultText').textContent=d.status==='cancelled'?t().drawResult(d.stake):d.draw?t().drawResult(d.stake):t().result(d.my_score,d.their_score,d.payout||0);
