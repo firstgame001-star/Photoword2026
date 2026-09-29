@@ -52,6 +52,15 @@ Deno.serve(async req=>{
       if(!Number.isInteger(stake)||stake<25||stake>500||stake%25!==0||!['ru','en','az'].includes(language))return reply({error:'duel_bad_stake'},400);
       const r=await db.rpc('duel_create',{p_telegram_id:user.id,p_stake:stake,p_language:language});
       if(r.error)throw r.error;result=r.data;
+    }else if(action==='rematch'){
+      const stake=Number(body.stake);
+      if(!Number.isInteger(stake)||stake<25||stake>500||stake%25!==0)return reply({error:'duel_bad_stake'},400);
+      const r=await db.rpc('duel_rematch',{p_telegram_id:user.id,p_previous_code:code,p_stake:stake});
+      if(r.error)throw r.error;result=r.data;
+    }else if(action==='offer'){
+      const r=await db.rpc('duel_offer',{p_telegram_id:user.id,p_previous_code:code||null});
+      if(r.error)throw r.error;
+      return reply({offer:r.data,server_now:new Date().toISOString()});
     }else if(action==='preview'){
       const r=await db.from('duel_matches').select('code,stake,status,language,expires_at').eq('code',code).maybeSingle();
       if(r.error)throw r.error;
@@ -77,7 +86,7 @@ Deno.serve(async req=>{
     return reply({duel,correct,server_now:new Date().toISOString()});
   }catch(e){
     const message=String((e as Error)?.message||'duel_error');
-    const known=['duel_bad_stake','duel_bad_language','duel_already_open','insufficient_coins','duel_not_found','duel_not_waiting','duel_own_invite','duel_cannot_cancel','duel_not_active','duel_no_questions','duel_wait','duel_bad_answer'];
+    const known=['duel_bad_stake','duel_bad_language','duel_already_open','insufficient_coins','duel_not_found','duel_not_waiting','duel_own_invite','duel_invitee_only','duel_not_finished','duel_cannot_cancel','duel_not_active','duel_no_questions','duel_wait','duel_bad_answer'];
     const code=known.find(x=>message.includes(x));
     return reply({error:code||'duel_error'},code?409:500);
   }
