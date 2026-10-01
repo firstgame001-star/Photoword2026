@@ -83,17 +83,17 @@ const THEME_CATEGORIES=[
 const THEME_MODE={
  ru:{title:'Темы',subtitle:'Выбери сферу и проходи отдельные уровни',entry:'Тематические уровни',entryBadge:'НОВЫЙ РЕЖИМ',entryDesc:'12 тем · 1200 уровней',unlock:'Тематические уровни откроются после 10-го уровня основной игры.',separate:'Прогресс тематических разделов будет считаться отдельно от основной игры.',detail:'Отдельный режим · 100 уровней',preparing:'Раздел создан на 100 уровней. Контент уровней будем добавлять постепенно.',levels:'уровней',cats:{
   sport:['Спорт','Игры, соревнования, инвентарь и достижения'],art:['Искусство','Живопись, музыка, сцена и творчество'],professions:['Профессии','Работа, специальности и инструменты'],travel:['Путешествия','Страны, дороги, отдых и приключения'],
-  science:['Наука','Открытия, эксперименты и знания'],technology:['Технологии','Гаджеты, интернет и цифровой мир'],cinema:['Кино и развлечения','Фильмы, сцена, игры и шоу'],food:['Еда','Продукты, блюда, кухня и вкусы'],
+  science:['Наука','Открытия, эксперименты и знания'],technology:['Технологии','Гаджеты, интернет и цифровой мир'],cinema:['Кино','Фильмы, съёмки, жанры и кинозалы'],food:['Еда','Продукты, блюда, кухня и вкусы'],
   animals:['Животные','Дикие и домашние животные'],transport:['Транспорт','Машины, поезда, самолёты и дороги'],home:['Дом и быт','Предметы, комнаты и повседневная жизнь'],nature:['Природа','Растения, погода, ландшафты и стихии']
  }},
  en:{title:'Themes',subtitle:'Choose a category and play separate levels',entry:'Themed levels',entryBadge:'NEW MODE',entryDesc:'12 themes · 1200 levels',unlock:'Themed levels unlock after level 10 of the main game.',separate:'Theme progress will be tracked separately from the main game.',detail:'Separate mode · 100 levels',preparing:'This category is structured for 100 levels. Level content will be added gradually.',levels:'levels',cats:{
   sport:['Sport','Games, competitions, gear and achievements'],art:['Art','Painting, music, stage and creativity'],professions:['Professions','Jobs, specialties and tools'],travel:['Travel','Countries, roads, holidays and adventures'],
-  science:['Science','Discoveries, experiments and knowledge'],technology:['Technology','Gadgets, internet and the digital world'],cinema:['Cinema & entertainment','Movies, stage, games and shows'],food:['Food','Products, dishes, cooking and flavors'],
+  science:['Science','Discoveries, experiments and knowledge'],technology:['Technology','Gadgets, internet and the digital world'],cinema:['Cinema','Films, production, genres and screenings'],food:['Food','Products, dishes, cooking and flavors'],
   animals:['Animals','Wild and domestic animals'],transport:['Transport','Cars, trains, planes and roads'],home:['Home & everyday life','Rooms, objects and daily routines'],nature:['Nature','Plants, weather, landscapes and elements']
  }},
  az:{title:'Mövzular',subtitle:'Sahəni seç və ayrıca səviyyələri keç',entry:'Mövzu səviyyələri',entryBadge:'YENİ REJİM',entryDesc:'12 mövzu · 1200 səviyyə',unlock:'Mövzu səviyyələri əsas oyunun 10-cu səviyyəsindən sonra açılır.',separate:'Mövzu bölmələrinin tərəqqisi əsas oyundan ayrıca hesablanacaq.',detail:'Ayrı rejim · 100 səviyyə',preparing:'Bu bölmə 100 səviyyə üçün yaradılıb. Səviyyə məzmunu mərhələli əlavə olunacaq.',levels:'səviyyə',cats:{
   sport:['İdman','Oyunlar, yarışlar, inventar və nailiyyətlər'],art:['İncəsənət','Rəsm, musiqi, səhnə və yaradıcılıq'],professions:['Peşələr','İş, ixtisaslar və alətlər'],travel:['Səyahət','Ölkələr, yollar, istirahət və macəralar'],
-  science:['Elm','Kəşflər, təcrübələr və biliklər'],technology:['Texnologiya','Qadcetlər, internet və rəqəmsal dünya'],cinema:['Kino və əyləncə','Filmlər, səhnə, oyunlar və şoular'],food:['Yemək','Məhsullar, yeməklər, mətbəx və dadlar'],
+  science:['Elm','Kəşflər, təcrübələr və biliklər'],technology:['Texnologiya','Qadcetlər, internet və rəqəmsal dünya'],cinema:['Kino','Filmlər, çəkilişlər, janrlar və kinozallar'],food:['Yemək','Məhsullar, yeməklər, mətbəx və dadlar'],
   animals:['Heyvanlar','Vəhşi və ev heyvanları'],transport:['Nəqliyyat','Maşınlar, qatarlar, təyyarələr və yollar'],home:['Ev və məişət','Əşyalar, otaqlar və gündəlik həyat'],nature:['Təbiət','Bitkilər, hava, landşaft və təbiət hadisələri']
  }}
 };
@@ -123,7 +123,7 @@ function setThemeHubLabels(){
  const m=themeMode();
  text('themesEntryBadge',m.entryBadge);text('themesEntryTitle',m.entry);text('themesEntryDesc',m.entryDesc);text('themesTitle',m.title);text('themesSubtitle',m.subtitle);
 }
-const READY_THEME_IDS=['sport','art','professions','travel','science','technology'];
+const READY_THEME_IDS=['sport','art','professions','travel','science','technology','cinema','food'];
 function getThemeProgress(id){try{const raw=JSON.parse(localStorage.getItem('pw.themeProgress.'+id)||'[]');return new Set(Array.isArray(raw)?raw.map(Number).filter(n=>Number.isInteger(n)&&n>=1&&n<=100):[])}catch{return new Set()}}
 function cacheThemeProgressMap(map){
  for(const id of READY_THEME_IDS){
@@ -250,8 +250,8 @@ function resetProfileStats(){
 function renderProfileStats(stats){
  const x=t(),challenge=stats?.challenge||{};
  text('profileChapters',completedChapterCount(pw.player||{})+'/12');
- text('profileThemeDone',Number(stats?.theme_levels_completed||0)+'/600');
- text('profileThemesComplete',Number(stats?.themes_completed||0)+'/'+Number(stats?.themes_total||6));
+ text('profileThemeDone',Number(stats?.theme_levels_completed||0)+'/800');
+ text('profileThemesComplete',Number(stats?.themes_completed||0)+'/'+Number(stats?.themes_total||8));
  text('profileLimitedBest',Number(challenge.limited_best_score||0)+'/10');
  text('profileNoHintBest',Number(challenge.nohint_best_streak||0));
  text('profileBlitzBest',Number(challenge.blitz_best_score||0));
@@ -267,7 +267,7 @@ async function openStatsScreen(){screen('statsScreen');applyStatsLabels();const 
  try{const current=await pw.login();if(request!==statsRequestId||!$('statsScreen').classList.contains('active'))return;text('statsMainLevels',Number(current.completed_levels||0)+'/530');text('statsChapters',completedChapterCount(current)+'/12');text('statsXp',Number(current.xp||0));text('statsRank',current.rank>0?'#'+current.rank:'—')}catch(e){if(request===statsRequestId)text('statsStatus',e.message);return}
  const [profile,duels]=await Promise.allSettled([pw.actionRequest('profile_stats'),pw.duelRequest('statistics')]);
  if(request!==statsRequestId||!$('statsScreen').classList.contains('active'))return;
- if(profile.status==='fulfilled'){const s=profile.value.stats||{},c=s.challenge||{};text('statsThemeLevels',Number(s.theme_levels_completed||0)+'/600');text('statsThemes',Number(s.themes_completed||0)+'/'+Number(s.themes_total||6));text('statsLimited',Number(c.limited_best_score||0)+'/10');text('statsNoHint',Number(c.nohint_best_streak||0));text('statsBlitz',Number(c.blitz_best_score||0));text('statsRuns',Number(c.runs_total||0))}
+ if(profile.status==='fulfilled'){const s=profile.value.stats||{},c=s.challenge||{};text('statsThemeLevels',Number(s.theme_levels_completed||0)+'/800');text('statsThemes',Number(s.themes_completed||0)+'/'+Number(s.themes_total||8));text('statsLimited',Number(c.limited_best_score||0)+'/10');text('statsNoHint',Number(c.nohint_best_streak||0));text('statsBlitz',Number(c.blitz_best_score||0));text('statsRuns',Number(c.runs_total||0))}
  if(duels.status==='fulfilled'){const s=duels.value.stats||{},net=Number(s.net_coins||0);text('statsDuelPlayed',Number(s.played||0));text('statsDuelWins',Number(s.wins||0));text('statsDuelLosses',Number(s.losses||0));text('statsDuelNet',(net>0?'+':'')+net+' 🪙')}
  text('statsStatus',profile.status==='rejected'||duels.status==='rejected'?t().statsPartial:'');
 }

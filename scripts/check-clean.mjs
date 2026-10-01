@@ -22,12 +22,12 @@ for(const [page,module] of Object.entries(pages)){
  }
 }
 
-for(const file of ['core.js','home.js','game.js','main-levels-8-9.js','main-levels-10-12.js','theme-game.js','challenge.js','challenge-bank-extra.js','duel.js']){
+for(const file of ['core.js','home.js','game.js','main-levels-8-9.js','main-levels-10-12.js','theme-game.js','theme-levels-cinema-food.js','challenge.js','challenge-bank-extra.js','duel.js']){
  execFileSync(process.execPath,['--check',resolve(base,file)]);
 }
 
 const release=JSON.parse(readFileSync(resolve(base,'release.json'),'utf8'));
-if(release.release!=='20261001-r110')throw Error('Unexpected release: '+release.release);
+if(release.release!=='20261001-r111')throw Error('Unexpected release: '+release.release);
 if(release.duel_mode?.entry_min_coins!==25||release.duel_mode?.entry_max_coins!==500||release.duel_mode?.winner_payout_percent_of_pot!==90)throw Error('Duel configuration mismatch');
 if(release.duel_mode?.question_pool!==150||release.duel_mode?.recent_matches_excluded_per_player!==2||release.duel_mode?.rematch!==true)throw Error('Rematch and question pool manifest mismatch');
 const duelHtml=readFileSync(resolve(base,'index.html'),'utf8');
@@ -60,12 +60,15 @@ const travel=release.thematic_mode.categories.find(x=>x.id==='travel');
 if(!travel||travel.available_through!==100||travel.status!=='complete')throw Error('Travel theme must be playable through level 100');
 const science=release.thematic_mode.categories.find(x=>x.id==='science');
 if(!science||science.available_through!==100||science.status!=='complete')throw Error('Science theme must be playable through level 100');
+for(const id of ['cinema','food']){const category=release.thematic_mode.categories.find(x=>x.id===id);if(category?.available_through!==100||category.status!=='complete')throw Error(id+' theme must have 100 completed levels');}
 const technology=release.thematic_mode.categories.find(x=>x.id==='technology');
 if(!technology||technology.available_through!==100||technology.status!=='complete')throw Error('Technology theme must be playable through level 100');
 
 const index=readFileSync(resolve(base,'index.html'),'utf8');
 const themeGame=readFileSync(resolve(base,'theme-game.html'),'utf8');
 const themeGameJs=readFileSync(resolve(base,'theme-game.js'),'utf8');
+const addedThemes=Function('window={};'+readFileSync(resolve(base,'theme-levels-cinema-food.js'),'utf8')+';return window.PW_THEME_EXTRA')();
+for(const id of ['cinema','food'])if(!Array.isArray(addedThemes[id])||addedThemes[id].length!==100)throw Error(id+' must have 100 levels');
 if(index.includes('id="tasksBtn"')||index.includes('id="tasksModal"'))throw Error('Daily tasks must stay removed');
 if(!index.includes('themes-entry-featured'))throw Error('Featured thematic mode card is missing');
 if(!index.includes('12 тем · 1200 уровней'))throw Error('Thematic mode headline is missing');
@@ -78,7 +81,7 @@ if(!themeGameJs.includes('const PROF_LEVELS=')||!themeGameJs.includes('const PRO
 if(!themeGameJs.includes('const TRAVEL_LEVELS=')||!themeGameJs.includes('const TRAVEL_TRANSLATED='))throw Error('Travel theme bank is missing');
 if(!themeGameJs.includes('const SCIENCE_LEVELS=')||!themeGameJs.includes('const SCIENCE_TRANSLATED='))throw Error('Science theme bank is missing');
 if(!themeGameJs.includes('const TECHNOLOGY_LEVELS=')||!themeGameJs.includes('const TECHNOLOGY_TRANSLATED='))throw Error('Technology theme bank is missing');
-if(!themeGameJs.includes("['sport','art','professions','travel','science','technology'].includes(themeParam)")||!themeGameJs.includes("return 'pw.themeProgress.'+themeId")||!themeGameJs.includes("theme='+themeId+'&level="))throw Error('Thematic routing/progress is not category-specific');
+if(!themeGameJs.includes("['sport','art','professions','travel','science','technology','cinema','food'].includes(themeParam)")||!themeGameJs.includes("return 'pw.themeProgress.'+themeId")||!themeGameJs.includes("theme='+themeId+'&level="))throw Error('Thematic routing/progress is not category-specific');
 const artBank=themeGameJs.match(/const ART_LEVELS=\{\n([\s\S]*?)\n\};\nconst ART_TRANSLATED=/);
 if(!artBank||(artBank[1].match(/^\s*\d+:\{/gm)||[]).length!==100)throw Error('Art theme must contain 100 levels');
 const profBank=themeGameJs.match(/const PROF_LEVELS=\{\n([\s\S]*?)\n\};\nconst PROF_TRANSLATED=/);
@@ -90,7 +93,7 @@ if(!scienceBank||(scienceBank[1].match(/^\s*"?(?:\d+)"?:\s*\{/gm)||[]).length!==
 const technologyBank=themeGameJs.match(/const TECHNOLOGY_LEVELS=\{\n([\s\S]*?)\n\};\nconst TECHNOLOGY_TRANSLATED=/);
 if(!technologyBank||(technologyBank[1].match(/^\s*"?(?:\d+)"?:\s*\{/gm)||[]).length!==100)throw Error('Technology theme must contain 100 levels');
 const homeJs=readFileSync(resolve(base,'home.js'),'utf8');
-if(!homeJs.includes("const READY_THEME_IDS=['sport','art','professions','travel','science','technology']")||!homeJs.includes("READY_THEME_IDS.includes(id)"))throw Error('Technology theme must be enabled in the category hub');
+if(!homeJs.includes("const READY_THEME_IDS=['sport','art','professions','travel','science','technology','cinema','food']")||!homeJs.includes("READY_THEME_IDS.includes(id)"))throw Error('Cinema/Food themes must be enabled in the category hub');
 const uiCss=readFileSync(resolve(base,'ui.css'),'utf8');
 if(!index.includes('id="profileTitle"'))throw Error('Chapter-earned profile title surface is missing');
 if(!index.includes('id="profileThemeDone"')||!index.includes('id="profileLimitedBest"')||!index.includes('id="profileBlitzStreak"'))throw Error('Detailed profile statistics UI is missing');
@@ -193,4 +196,4 @@ if(release.ui?.language_gate_fix!=='first_launch_unset_then_persist_choice')thro
 if(!homeJs.includes("sessionStorage.getItem('pw.profileSyncedShown')")||!homeJs.includes("setTimeout(()=>{const e=$('status')"))throw Error('One-time profile sync notice is missing');
 if(release.ui?.profile_synced_notice?.show!=='once_per_session'||release.ui?.profile_synced_notice?.auto_hide_ms!==1800)throw Error('Profile sync notice manifest is incorrect');
 if(!homeJs.includes("applyLanguage('ru',false)")||!homeJs.includes("function applyLanguage(l,persist=true)"))throw Error('First-launch language selection flow is incorrect');
-console.log('PASS: r110 entrypoints, Chapters 1-12, backgrounds, absolute progress, chapter titles and JavaScript syntax.');
+console.log('PASS: r111 entrypoints, Chapters 1-12, backgrounds, absolute progress, chapter titles and JavaScript syntax.');
