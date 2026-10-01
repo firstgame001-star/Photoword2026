@@ -35,3 +35,7 @@ context.window.PW.player.photoword_id='PLAYER_B';server={...initial,attempts:2,a
 server={...initial,day:'2026-10-03',question_id:2,server_now:'2026-10-02T20:00:00Z',reset_at:'2026-10-03T20:00:00Z'};
 perf=86400001;test.clock();await new Promise(resolve=>setImmediate(resolve));assert.equal(test.current().day,'2026-10-03');assert.equal(test.current().attempts_left,3);assert(!test.current().closed);
 console.log('PASS: lost-response retry after reload, same request ID, win closure, third-failure closure, and server midnight refresh.');
+
+context.fetch=async()=>({ok:false,json:async()=>({error:'daily_closed',daily:{...server,attempts:3,attempts_left:0,closed:true}})});
+fill();await test.submit();assert(test.current().closed);assert(get('dailyPuzzleBoard').hidden);assert.equal(get('dailyPuzzleStatus').textContent,'','Other-device closure incorrectly announced a new day');
+console.log('PASS: another device exhausting the attempts closes the current puzzle without a false day-change message.');

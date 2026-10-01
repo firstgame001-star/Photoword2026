@@ -53,7 +53,7 @@ async function submit(){
  const token=epoch,key=pendingKey(),payload={day:daily.day,language:daily.language,answer:chosen.map(i=>letters[i]).join(''),requestId:crypto.randomUUID()};
  memoryPending={key,payload};try{localStorage.setItem(key,JSON.stringify(payload))}catch{}
  busy=true;paint();
- try{const j=await deliver(payload,key);if(token!==epoch||!active())return;chosen=[];apply(j.daily);$('dailyPuzzleStatus').textContent=j.result?(j.result.correct?'':t().wrong):t().changed;$('dailyPuzzleRetry').hidden=true;if(j.result?.correct){pw?.sfx?.('coin');pw?.haptic?.('success');pw.login(true).catch(()=>{})}else pw?.haptic?.('error')}
+ try{const j=await deliver(payload,key);if(token!==epoch||!active())return;chosen=[];apply(j.daily);$('dailyPuzzleStatus').textContent=j.result?(j.result.correct?'':t().wrong):j.error==='daily_changed'?t().changed:'';$('dailyPuzzleRetry').hidden=true;if(j.result?.correct){pw?.sfx?.('coin');pw?.haptic?.('success');pw.login(true).catch(()=>{})}else pw?.haptic?.('error')}
  catch{if(token===epoch&&active()){$('dailyPuzzleStatus').textContent=t().network;$('dailyPuzzleRetry').hidden=false}}
  finally{if(token===epoch){busy=false;paint()}}
 }
