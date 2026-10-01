@@ -10,7 +10,7 @@ const storage=new Map();let timerId=0;const timers=new Map(),calls=[];let respon
 const context={document:{getElementById:get,createElement:()=>new Element(),querySelectorAll:()=>[],addEventListener(){},hidden:false},location:{search:'',href:'https://test.invalid/'},URL,URLSearchParams,Date,Math,console,localStorage:{getItem:k=>storage.get(k)??null,setItem:(k,v)=>storage.set(k,v),removeItem:k=>storage.delete(k)},sessionStorage:{getItem:()=>null,setItem(){},removeItem(){}},setTimeout:fn=>{timers.set(++timerId,fn);return timerId},clearTimeout:id=>timers.delete(id),setInterval:()=>++timerId,clearInterval(){},navigator:{},window:{addEventListener(){},scrollTo(){},PW:{status(){},haptic(){},sfx(){},player:{},login:async()=>({}),duelRequest:async(action,body)=>{calls.push(action);return respond(action,body)}}}};
 context.window.document=context.document;
 let source=readFileSync('clean/duel.js','utf8');
-source=source.replace(/\}\)\(\);\s*$/,`window.testDuel={set(d){duel=d;code=d.code;questionId=d.question_id;chosen=[];disabled=false;answering=false;drawQuestion(d.question);$('duelScreen').classList.add('active')},chosen:()=>[...chosen],drawQuestion,clearLetters,submit,state,syncReactions,playerTitle,setAnswering(v){answering=v}};})();`);
+source=source.replace(/\}\)\(\);\s*$/,`window.testDuel={set(d){duel=d;code=d.code;questionId=d.question_id;chosen=[];disabled=false;answering=false;drawQuestion(d.question);$('duelScreen').classList.add('active')},snapshot:()=>duel,isRequesting:()=>requesting,isAnswering:()=>answering,chosen:()=>[...chosen],drawQuestion,clearLetters,submit,state,syncReactions,playerTitle,setAnswering(v){answering=v}};})();`);
 vm.createContext(context);vm.runInContext(source,context);
 const test=context.window.testDuel,q={length:3,letters:['A','B','C','X'],photos:['🐈','🐾','🧶','🥛']};
 const match={code:'ABCDEF0123456789',status:'active',question_id:1,question:q,my_score:0,their_score:0,skips_left:3,starts_at:new Date(Date.now()-1000).toISOString(),ends_at:new Date(Date.now()+60000).toISOString()};
@@ -20,3 +20,20 @@ get('duelLetters').children[0].onclick();for(const [id,fn]of [...timers]){if(id=
 test.setAnswering(true);respond=async()=>({reactions:{their_reaction:'fire',their_reaction_at:new Date().toISOString()}});await test.syncReactions();assert(calls.includes('reactions'));assert.equal(get('duelFriendReaction').textContent,'🔥');
 for(const lang of ['ru','en','az']){storage.set('pw.language',lang);assert(test.playerTitle(530));assert.notEqual(test.playerTitle(530),test.playerTitle(380))}
 console.log('PASS: clicked-slot removal, clear during pending answer, wrong-answer input race, reactions during submission, and twelve localized ranks.');
+
+// Disconnect during polling, then reconnect with an unchanged question.
+test.set(match);respond=async()=>{throw new Error('network disconnected')};await test.state();
+assert.equal(test.isRequesting(),false);assert.equal(test.snapshot().question_id,1);
+respond=async()=>({duel:{...match,their_score:2,question:undefined}});await test.state();
+assert.equal(test.snapshot().their_score,2);assert(test.snapshot().question,'Reconnect lost unchanged puzzle');
+// Server accepted the answer, but its response was lost: state must recover
+// the next puzzle without resending or counting the answer on the client.
+test.set(match);respond=async action=>{if(action==='answer')throw new Error('response lost');return {duel:{...match,my_score:1,question_id:2,question:q}}};
+get('duelLetters').children[0].onclick();get('duelLetters').children[1].onclick();get('duelLetters').children[2].onclick();
+await test.submit(q);await new Promise(resolve=>setImmediate(resolve));
+assert.equal(test.isAnswering(),false);assert.equal(test.snapshot().my_score,1);assert.equal(test.snapshot().question_id,2);assert.equal(test.chosen().length,0);
+// A delayed state response from an old room cannot overwrite the new room.
+test.set(match);let oldResponse;respond=()=>new Promise(resolve=>oldResponse=resolve);const oldPoll=test.state();
+const nextMatch={...match,code:'FFFFFFFFFFFFFFFF'};test.set(nextMatch);oldResponse({duel:{...match,their_score:9}});await oldPoll;
+assert.equal(test.snapshot().code,nextMatch.code);assert.equal(test.snapshot().their_score,0);
+console.log('PASS: disconnect/reconnect, unchanged puzzle recovery, lost accepted-answer response, and stale room response isolation.');
