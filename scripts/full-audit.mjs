@@ -199,3 +199,4 @@ assertUniqueContent(Object.keys(combined.ru).map(n=>({ru:combined.ru[n].answer,e
 assertUniqueContent(themeBanks.flatMap(([id,bn,tn])=>{const[b,t]=themeBank(id,bn,tn);return Object.keys(b).map(n=>({ru:b[n].answer,en:t.en[n].answer,az:t.az[n].answer,photos:b[n].photos.map(p=>p[0])}))}), 'Themes');
 assertUniqueContent(challengeAll.map(r=>({ru:r.ru,en:r.en,az:r.az,photos:r.p})), 'Challenges');
 console.log('PASS: normalized words and unordered clue sets are unique within main, thematic and challenge modes.');
+export {combined, themeBanks, themeBank, challengeAll};

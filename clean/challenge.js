@@ -2875,8 +2875,40 @@ function loadDeck(){
  return deck;
 }
 function resetOrder(){const deck=loadDeck();try{localStorage.setItem(deckKey(),JSON.stringify(deck))}catch{}}
+const repeatAccount=()=>pw?.player?.photoword_id||'local';
+const sharedSeenKey=()=> 'pw.challenge.seen.r114.'+repeatAccount(),sharedLastKey=()=> 'pw.challenge.last.r114.'+repeatAccount();
+let startPending=false;
+let repeatProgress={main:0,themes:{}};
+function cachedRepeatProgress(){
+ const themes={};
+ for(const row of window.PW_CHALLENGE_REPEAT_INDEX||[])for(const id of Object.keys(row.themes))if(!themes[id]){
+  try{const levels=JSON.parse(localStorage.getItem('pw.themeProgress.'+id)||'[]');themes[id]=Array.isArray(levels)?levels:[]}catch{themes[id]=[]}
+ }
+ return {main:Number(pw?.player?.completed_levels||0),themes};
+}
+async function syncRepeatProgress(){
+ repeatProgress=cachedRepeatProgress();
+ if(!pw?.hasAuth)return;
+ try{
+  const result=await Promise.race([
+   Promise.all([pw.login(),pw.actionRequest('theme_progress')]),
+   new Promise(resolve=>setTimeout(()=>resolve(null),2500))
+  ]);
+  if(result)repeatProgress={main:Number(pw.player?.completed_levels||result[0]?.completed_levels||0),themes:result[1]?.theme_progress||repeatProgress.themes};
+ }catch{}
+}
+function excludedQuestions(){
+ const excluded=new Set(),progress=repeatProgress;
+ (window.PW_CHALLENGE_REPEAT_INDEX||[]).forEach((row,i)=>{
+  if(row.main.some(n=>n<=progress.main)||Object.entries(row.themes).some(([id,levels])=>levels.some(n=>(progress.themes[id]||[]).includes(n))))excluded.add(i);
+ });
+ return excluded;
+}
 function nextQ(){
- const deck=loadDeck(),idx=deck.shift();
+ let seen=[],last=null;try{seen=JSON.parse(localStorage.getItem(sharedSeenKey())||'[]');last=Number(localStorage.getItem(sharedLastKey()))}catch{}
+ const result=window.PW_CHALLENGE_REPEAT_POLICY({deck:loadDeck(),count:Q.length,seen:new Set(Array.isArray(seen)?seen:[]),excluded:excludedQuestions(),last});
+ const deck=result.deck,idx=result.index;
+ try{localStorage.setItem(sharedSeenKey(),JSON.stringify(result.seen));localStorage.setItem(sharedLastKey(),String(idx))}catch{}
  try{localStorage.setItem(deckKey(),JSON.stringify(deck));localStorage.setItem(lastKey(),String(idx))}catch{}
  question=Q[idx];answer=question[lang()]||question.ru;buildPuzzle();
 }
@@ -2960,12 +2992,17 @@ function renderIntro(){
 }
 async function loadState(){try{state=await api('state');renderIntro()}catch{if(rawInit()){state={energy:5,energy_max:ENERGY_MAX,next_energy_at:null,limited_best_score:0,nohint_best_streak:0,blitz_best_score:0,blitz_best_streak:0};serverMode=true;renderIntro();$('challengeStart').disabled=true;pw?.status?.(lang()==='en'?'Could not load the mode. Try again.':lang()==='az'?'Rejimi yükləmək olmadı. Yenidən cəhd et.':'Не удалось загрузить режим. Попробуй ещё раз.')}else{state=localRead();serverMode=false;renderIntro()}}}
 async function startRun(){
- cancelPending();
+ if(startPending)return;startPending=true;
+ try{
+ cancelPending();const startingEpoch=runEpoch;
+ await syncRepeatProgress();
+ if(startingEpoch!==runEpoch)return;
  try{state=await api('start',{mode,language:lang()})}catch(e){if(e?.data?.challenge)state=e.data.challenge;if(String(e?.message)==='challenge_no_energy'){renderIntro();pw?.status?.(tr().energyEmpty);return}if(rawInit()){pw?.status?.(lang()==='en'?'Could not start the mode. Try again.':lang()==='az'?'Rejimi başlatmaq olmadı. Yenidən cəhd et.':'Не удалось запустить режим. Попробуй ещё раз.');return}state=localRead()}
  running=true;hearts=3;correct=0;streak=0;bestRunStreak=0;score=0;resetOrder();clearInterval(timer);clearInterval(energyTimer);
  $('challengeIntro').hidden=true;$('challengeResult').hidden=true;$('challengeCorrectPanel').hidden=true;$('challengeHud').hidden=false;$('challengePuzzle').hidden=false;
  if(mode==='blitz'){deadline=performance.now()+60000;timer=setInterval(()=>{updateHud();if(running&&performance.now()>=deadline)finish('time')},150)}
  updateHud();nextQ();
+ }finally{startPending=false}
 }
 async function finish(reason){
  if(!running)return;cancelPending();running=false;clearInterval(timer);$('challengeCorrectPanel').hidden=true;renderInput();$('challengePuzzle').hidden=true;$('challengeHud').hidden=true;
