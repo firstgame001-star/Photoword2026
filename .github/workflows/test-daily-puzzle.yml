@@ -1,0 +1,36 @@
+name: Test daily PhotoWord puzzle
+on:
+  push:
+    branches: [main]
+    paths: ['clean/daily-puzzle.js', 'scripts/test-daily-browser.py', '.github/workflows/test-daily-puzzle.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  mobile-daily-puzzle:
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - name: Install browsers
+        run: |
+          python -m pip install playwright==1.63.0
+          python -m playwright install --with-deps chromium webkit
+      - name: Wait for daily release
+        run: |
+          for i in $(seq 1 36); do
+            if curl -fsSL 'https://firstgame001-star.github.io/Photoword2026/clean/release.json?daily=r118' | grep -q '20261002-r118'; then exit 0; fi
+            sleep 5
+          done
+          exit 1
+      - name: Check daily puzzle on mobile browsers
+        run: python scripts/test-daily-browser.py
+      - name: Save screenshots
+        if: always()
+        uses: actions/upload-artifact@v5
+        with:
+          name: photoword-daily-puzzle
+          path: test-results/daily/
+          retention-days: 7

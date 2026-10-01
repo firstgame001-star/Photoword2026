@@ -1,0 +1,4747 @@
+[
+  {
+    "source": "art:44",
+    "ru": "ОПЕРА",
+    "en": "OPERA",
+    "az": "OPERA",
+    "photos": [
+      "🎭",
+      "🎶",
+      "🎤",
+      "🏛️"
+    ],
+    "id": 1
+  },
+  {
+    "source": "professions:54",
+    "ru": "МЕДСЕСТРА",
+    "en": "NURSE",
+    "az": "TİBBBACISI",
+    "photos": [
+      "🏥",
+      "💉",
+      "🩹",
+      "🩺"
+    ],
+    "id": 2
+  },
+  {
+    "source": "travel:28",
+    "ru": "ПАЛАТКА",
+    "en": "TENT",
+    "az": "ÇADIR",
+    "photos": [
+      "⛺",
+      "🏕️",
+      "🌲",
+      "🌙"
+    ],
+    "id": 3
+  },
+  {
+    "source": "science:71",
+    "ru": "МИНЕРАЛ",
+    "en": "MINERAL",
+    "az": "MİNERAL",
+    "photos": [
+      "💎",
+      "🪨",
+      "⛏️",
+      "🔬"
+    ],
+    "id": 4
+  },
+  {
+    "source": "technology:100",
+    "ru": "ИННОВАЦИЯ",
+    "en": "INNOVATION",
+    "az": "İNNOVASİYA",
+    "photos": [
+      "💡",
+      "🚀",
+      "⚙️",
+      "✨"
+    ],
+    "id": 5
+  },
+  {
+    "source": "cinema:9",
+    "ru": "БОЕВИК",
+    "en": "ACTION",
+    "az": "DÖYÜŞFİLMİ",
+    "photos": [
+      "💥",
+      "🥊",
+      "🚗",
+      "🎬"
+    ],
+    "id": 6
+  },
+  {
+    "source": "food:59",
+    "ru": "КОТЛЕТА",
+    "en": "PATTY",
+    "az": "KOTLET",
+    "photos": [
+      "🥩",
+      "🍳",
+      "🍽️",
+      "🥔"
+    ],
+    "id": 7
+  },
+  {
+    "source": "animals:76",
+    "ru": "НАУТИЛУС",
+    "en": "NAUTILUS",
+    "az": "NAUTİLUS",
+    "photos": [
+      "🐚",
+      "🌊",
+      "🌀",
+      "🐙"
+    ],
+    "id": 8
+  },
+  {
+    "source": "transport:74",
+    "ru": "АВТОЖИР",
+    "en": "GYROCOPTER",
+    "az": "AVTOJİR",
+    "photos": [
+      "🛩️",
+      "🌀",
+      "🌬️",
+      "⚙️"
+    ],
+    "id": 9
+  },
+  {
+    "source": "home:69",
+    "ru": "ХАЛАТ",
+    "en": "BATHROBE",
+    "az": "XALAT",
+    "photos": [
+      "👘",
+      "🛁",
+      "🧵",
+      "🏠"
+    ],
+    "id": 10
+  },
+  {
+    "source": "nature:72",
+    "ru": "МЫС",
+    "en": "CAPE",
+    "az": "BURUN",
+    "photos": [
+      "🏝️",
+      "🌊",
+      "➡️",
+      "🪨"
+    ],
+    "id": 11
+  },
+  {
+    "source": "art:46",
+    "ru": "ЗАНАВЕС",
+    "en": "CURTAIN",
+    "az": "PƏRDƏ",
+    "photos": [
+      "🎭",
+      "🟥",
+      "↔️",
+      "💡"
+    ],
+    "id": 12
+  },
+  {
+    "source": "professions:46",
+    "ru": "СПАСАТЕЛЬ",
+    "en": "RESCUER",
+    "az": "XİLASEDİCİ",
+    "photos": [
+      "🛟",
+      "🚨",
+      "⛑️",
+      "🤝"
+    ],
+    "id": 13
+  },
+  {
+    "source": "travel:92",
+    "ru": "СНОУБОРД",
+    "en": "SNOWBOARD",
+    "az": "SNOUBORD",
+    "photos": [
+      "🏂",
+      "❄️",
+      "🏔️",
+      "🚠"
+    ],
+    "id": 14
+  },
+  {
+    "source": "science:57",
+    "ru": "БЕЛОК",
+    "en": "PROTEIN",
+    "az": "ZÜLAL",
+    "photos": [
+      "🥚",
+      "🧬",
+      "🔬",
+      "💪"
+    ],
+    "id": 15
+  },
+  {
+    "source": "technology:58",
+    "ru": "МАССИВ",
+    "en": "ARRAY",
+    "az": "MASSİV",
+    "photos": [
+      "📚",
+      "🔢",
+      "🧩",
+      "💻"
+    ],
+    "id": 16
+  },
+  {
+    "source": "cinema:36",
+    "ru": "ОЗВУЧКА",
+    "en": "VOICEOVER",
+    "az": "SƏSLƏNDİRMƏ",
+    "photos": [
+      "🎙️",
+      "🗣️",
+      "🎬",
+      "🔊"
+    ],
+    "id": 17
+  },
+  {
+    "source": "food:25",
+    "ru": "ПЕРЕЦ",
+    "en": "PEPPER",
+    "az": "BİBƏR",
+    "photos": [
+      "🫑",
+      "🌶️",
+      "🥗",
+      "🌱"
+    ],
+    "id": 18
+  },
+  {
+    "source": "animals:87",
+    "ru": "ПИНГВИН",
+    "en": "PENGUIN",
+    "az": "PİNQVİN",
+    "photos": [
+      "🐧",
+      "❄️",
+      "🌊",
+      "🐟"
+    ],
+    "id": 19
+  },
+  {
+    "source": "transport:36",
+    "ru": "АЭРОСАНИ",
+    "en": "AEROSLED",
+    "az": "AEROXİZƏK",
+    "photos": [
+      "🛷",
+      "❄️",
+      "🌀",
+      "💨"
+    ],
+    "id": 20
+  },
+  {
+    "source": "home:51",
+    "ru": "ПЛИНТУС",
+    "en": "SKIRTINGBOARD",
+    "az": "PLİNTUS",
+    "photos": [
+      "🧱",
+      "🪵",
+      "🦶",
+      "🏠"
+    ],
+    "id": 21
+  },
+  {
+    "source": "nature:15",
+    "ru": "ЭВКАЛИПТ",
+    "en": "EUCALYPTUS",
+    "az": "EVKALİPT",
+    "photos": [
+      "🌳",
+      "🐨",
+      "🌿",
+      "🇦🇺"
+    ],
+    "id": 22
+  },
+  {
+    "source": "art:49",
+    "ru": "РЕПЕТИЦИЯ",
+    "en": "REHEARSAL",
+    "az": "REPETİSİYA",
+    "photos": [
+      "🎭",
+      "🔁",
+      "📝",
+      "👥"
+    ],
+    "id": 23
+  },
+  {
+    "source": "professions:74",
+    "ru": "ЛАБОРАНТ",
+    "en": "LABTECHNICIAN",
+    "az": "LABORANT",
+    "photos": [
+      "🔬",
+      "🧪",
+      "🥼",
+      "🧫"
+    ],
+    "id": 24
+  },
+  {
+    "source": "travel:44",
+    "ru": "ОКЕАН",
+    "en": "OCEAN",
+    "az": "OKEAN",
+    "photos": [
+      "🌊",
+      "🐋",
+      "🚢",
+      "🌍"
+    ],
+    "id": 25
+  },
+  {
+    "source": "science:25",
+    "ru": "ВЕЩЕСТВО",
+    "en": "MATTER",
+    "az": "MADDƏ",
+    "photos": [
+      "🧪",
+      "⚛️",
+      "🧊",
+      "💨"
+    ],
+    "id": 26
+  },
+  {
+    "source": "technology:88",
+    "ru": "КИБЕРБЕЗОПАСНОСТЬ",
+    "en": "CYBERSECURITY",
+    "az": "KİBERTƏHLÜKƏSİZLİK",
+    "photos": [
+      "🛡️",
+      "💻",
+      "🔐",
+      "🌐"
+    ],
+    "id": 27
+  },
+  {
+    "source": "cinema:91",
+    "ru": "АПЛОДИСМЕНТЫ",
+    "en": "APPLAUSE",
+    "az": "ALQIŞ",
+    "photos": [
+      "👏",
+      "👥",
+      "🎬",
+      "🎉"
+    ],
+    "id": 28
+  },
+  {
+    "source": "food:77",
+    "ru": "ПЕЧЕНЬЕ",
+    "en": "COOKIE",
+    "az": "PEÇENYE",
+    "photos": [
+      "🍪",
+      "☕",
+      "🍫",
+      "🧈"
+    ],
+    "id": 29
+  },
+  {
+    "source": "animals:94",
+    "ru": "СТРАУС",
+    "en": "OSTRICH",
+    "az": "DƏVƏQUŞU",
+    "photos": [
+      "🐦",
+      "🥚",
+      "🏃",
+      "🌍"
+    ],
+    "id": 30
+  },
+  {
+    "source": "transport:22",
+    "ru": "ЭЛЕКТРОМОБИЛЬ",
+    "en": "ELECTRICCAR",
+    "az": "ELEKTROMOBİL",
+    "photos": [
+      "🚗",
+      "⚡",
+      "🔋",
+      "🔌"
+    ],
+    "id": 31
+  },
+  {
+    "source": "home:75",
+    "ru": "СКАТЕРТЬ",
+    "en": "TABLECLOTH",
+    "az": "SÜFRƏ",
+    "photos": [
+      "🍽️",
+      "🧵",
+      "🪵",
+      "🏠"
+    ],
+    "id": 32
+  },
+  {
+    "source": "nature:86",
+    "ru": "ГРАД",
+    "en": "HAIL",
+    "az": "DOLU",
+    "photos": [
+      "🧊",
+      "☁️",
+      "⬇️",
+      "🌧️"
+    ],
+    "id": 33
+  },
+  {
+    "source": "art:29",
+    "ru": "НОТА",
+    "en": "NOTE",
+    "az": "NOT",
+    "photos": [
+      "🎵",
+      "📄",
+      "🎼",
+      "🔤"
+    ],
+    "id": 34
+  },
+  {
+    "source": "professions:18",
+    "ru": "БАРМЕН",
+    "en": "BARTENDER",
+    "az": "BARMEN",
+    "photos": [
+      "🍹",
+      "🥃",
+      "🍸",
+      "🧊"
+    ],
+    "id": 35
+  },
+  {
+    "source": "travel:80",
+    "ru": "ХОСТЕЛ",
+    "en": "HOSTEL",
+    "az": "HOSTEL",
+    "photos": [
+      "🛏️",
+      "🎒",
+      "👥",
+      "🏠"
+    ],
+    "id": 36
+  },
+  {
+    "source": "science:2",
+    "ru": "ИССЛЕДОВАТЕЛЬ",
+    "en": "RESEARCHER",
+    "az": "TƏDQİQATÇI",
+    "photos": [
+      "🧑‍🔬",
+      "🔍",
+      "📋",
+      "🧪"
+    ],
+    "id": 37
+  },
+  {
+    "source": "technology:28",
+    "ru": "ЭКРАН",
+    "en": "SCREEN",
+    "az": "EKRAN",
+    "photos": [
+      "🖥️",
+      "📱",
+      "👀",
+      "✨"
+    ],
+    "id": 38
+  },
+  {
+    "source": "cinema:41",
+    "ru": "ПОСТАНОВЩИК",
+    "en": "FILMMAKER",
+    "az": "QURULUŞÇU",
+    "photos": [
+      "🎬",
+      "📣",
+      "🎥",
+      "👤"
+    ],
+    "id": 39
+  },
+  {
+    "source": "food:53",
+    "ru": "ПЛОВ",
+    "en": "PILAF",
+    "az": "PLOV",
+    "photos": [
+      "🍚",
+      "🥕",
+      "🍖",
+      "🍽️"
+    ],
+    "id": 40
+  },
+  {
+    "source": "animals:42",
+    "ru": "БУРУНДУК",
+    "en": "CHIPMUNK",
+    "az": "BURUNDUK",
+    "photos": [
+      "🐿️",
+      "🌰",
+      "🟤",
+      "🌲"
+    ],
+    "id": 41
+  },
+  {
+    "source": "transport:27",
+    "ru": "КВАДРОЦИКЛ",
+    "en": "QUADBIKE",
+    "az": "KVADROSİKL",
+    "photos": [
+      "🏍️",
+      "4️⃣",
+      "🌲",
+      "🪨"
+    ],
+    "id": 42
+  },
+  {
+    "source": "home:34",
+    "ru": "СУНДУК",
+    "en": "CHEST",
+    "az": "SANDIQ",
+    "photos": [
+      "📦",
+      "🔒",
+      "🪵",
+      "🏠"
+    ],
+    "id": 43
+  },
+  {
+    "source": "nature:9",
+    "ru": "ИВА",
+    "en": "WILLOW",
+    "az": "SÖYÜD",
+    "photos": [
+      "🌳",
+      "💧",
+      "🍃",
+      "⬇️"
+    ],
+    "id": 44
+  },
+  {
+    "source": "art:57",
+    "ru": "ОРНАМЕНТ",
+    "en": "ORNAMENT",
+    "az": "ORNAMENT",
+    "photos": [
+      "🌿",
+      "🔁",
+      "🎨",
+      "🏺"
+    ],
+    "id": 45
+  },
+  {
+    "source": "professions:90",
+    "ru": "МОДЕЛЬЕР",
+    "en": "FASHIONDESIGNER",
+    "az": "MODELYER",
+    "photos": [
+      "👗",
+      "✏️",
+      "🧵",
+      "🎨"
+    ],
+    "id": 46
+  },
+  {
+    "source": "travel:74",
+    "ru": "ПРИЛЕТ",
+    "en": "ARRIVAL",
+    "az": "GƏLİŞ",
+    "photos": [
+      "🛬",
+      "✈️",
+      "🛄",
+      "👋"
+    ],
+    "id": 47
+  },
+  {
+    "source": "science:94",
+    "ru": "УРАВНЕНИЕ",
+    "en": "EQUATION",
+    "az": "TƏNLİK",
+    "photos": [
+      "🧮",
+      "=",
+      "✏️",
+      "📐"
+    ],
+    "id": 48
+  },
+  {
+    "source": "technology:83",
+    "ru": "АВТОМАТИКА",
+    "en": "AUTOMATION",
+    "az": "AVTOMATLAŞMA",
+    "photos": [
+      "⚙️",
+      "🤖",
+      "🔄",
+      "🏭"
+    ],
+    "id": 49
+  },
+  {
+    "source": "cinema:72",
+    "ru": "НОМИНАЦИЯ",
+    "en": "NOMINATION",
+    "az": "NOMİNASİYA",
+    "photos": [
+      "🏆",
+      "📋",
+      "🎬",
+      "👤"
+    ],
+    "id": 50
+  },
+  {
+    "source": "food:90",
+    "ru": "МАЙОНЕЗ",
+    "en": "MAYONNAISE",
+    "az": "MAYONEZ",
+    "photos": [
+      "🥚",
+      "🥗",
+      "🥫",
+      "🥄"
+    ],
+    "id": 51
+  },
+  {
+    "source": "animals:43",
+    "ru": "БОБЁР",
+    "en": "BEAVER",
+    "az": "QUNDUZ",
+    "photos": [
+      "🦫",
+      "🪵",
+      "💧",
+      "🦷"
+    ],
+    "id": 52
+  },
+  {
+    "source": "transport:45",
+    "ru": "ЭВАКУАТОР",
+    "en": "TOWTRUCK",
+    "az": "EVAKUATOR",
+    "photos": [
+      "🚛",
+      "🚗",
+      "🪝",
+      "🛣️"
+    ],
+    "id": 53
+  },
+  {
+    "source": "home:27",
+    "ru": "ВАЗА",
+    "en": "VASE",
+    "az": "GÜLDAN",
+    "photos": [
+      "💐",
+      "🏺",
+      "💧",
+      "🏠"
+    ],
+    "id": 54
+  },
+  {
+    "source": "nature:32",
+    "ru": "ЛАВАНДА",
+    "en": "LAVENDER",
+    "az": "LAVANDA",
+    "photos": [
+      "🟣",
+      "🌿",
+      "👃",
+      "🐝"
+    ],
+    "id": 55
+  },
+  {
+    "source": "art:95",
+    "ru": "КУБИЗМ",
+    "en": "CUBISM",
+    "az": "KUBİZM",
+    "photos": [
+      "🔷",
+      "🔶",
+      "🟥",
+      "🟦"
+    ],
+    "id": 56
+  },
+  {
+    "source": "professions:57",
+    "ru": "ПСИХОЛОГ",
+    "en": "PSYCHOLOGIST",
+    "az": "PSİXOLOQ",
+    "photos": [
+      "🧠",
+      "💬",
+      "🛋️",
+      "❤️"
+    ],
+    "id": 57
+  },
+  {
+    "source": "travel:33",
+    "ru": "КУРОРТ",
+    "en": "RESORT",
+    "az": "KURORT",
+    "photos": [
+      "🏨",
+      "🏖️",
+      "🌴",
+      "😎"
+    ],
+    "id": 58
+  },
+  {
+    "source": "science:28",
+    "ru": "УСКОРЕНИЕ",
+    "en": "ACCELERATION",
+    "az": "SÜRƏTLƏNMƏ",
+    "photos": [
+      "🏎️",
+      "💨",
+      "📈",
+      "⏱️"
+    ],
+    "id": 59
+  },
+  {
+    "source": "technology:63",
+    "ru": "ОБНОВЛЕНИЕ",
+    "en": "UPDATE",
+    "az": "YENİLƏMƏ",
+    "photos": [
+      "🔄",
+      "⬆️",
+      "📱",
+      "💻"
+    ],
+    "id": 60
+  },
+  {
+    "source": "cinema:84",
+    "ru": "КИНОСТУДИЯ",
+    "en": "FILMSTUDIO",
+    "az": "KİNOSTUDİYA",
+    "photos": [
+      "🏢",
+      "🎬",
+      "🏭",
+      "🎞️"
+    ],
+    "id": 61
+  },
+  {
+    "source": "food:27",
+    "ru": "ФАСОЛЬ",
+    "en": "BEANS",
+    "az": "LOBYA",
+    "photos": [
+      "🫘",
+      "🍲",
+      "🌱",
+      "🥣"
+    ],
+    "id": 62
+  },
+  {
+    "source": "animals:13",
+    "ru": "ПАНДА",
+    "en": "PANDA",
+    "az": "PANDA",
+    "photos": [
+      "🐼",
+      "🎋",
+      "⚪",
+      "⚫"
+    ],
+    "id": 63
+  },
+  {
+    "source": "transport:16",
+    "ru": "ХЭТЧБЕК",
+    "en": "HATCHBACK",
+    "az": "HETÇBEK",
+    "photos": [
+      "🚗",
+      "🚪",
+      "⬆️",
+      "🧳"
+    ],
+    "id": 64
+  },
+  {
+    "source": "home:47",
+    "ru": "ПРАЧЕЧНАЯ",
+    "en": "LAUNDRYROOM",
+    "az": "CAMAŞIRXANA",
+    "photos": [
+      "🧺",
+      "💧",
+      "👕",
+      "🫧"
+    ],
+    "id": 65
+  },
+  {
+    "source": "nature:56",
+    "ru": "ОВРАГ",
+    "en": "RAVINE",
+    "az": "YARĞAN",
+    "photos": [
+      "🌧️",
+      "⬇️",
+      "🪨",
+      "🌾"
+    ],
+    "id": 66
+  },
+  {
+    "source": "art:48",
+    "ru": "КОСТЮМ",
+    "en": "COSTUME",
+    "az": "KOSTYUM",
+    "photos": [
+      "👗",
+      "🎭",
+      "🧵",
+      "🎬"
+    ],
+    "id": 67
+  },
+  {
+    "source": "professions:60",
+    "ru": "ПРОФЕССОР",
+    "en": "PROFESSOR",
+    "az": "PROFESSOR",
+    "photos": [
+      "🎓",
+      "🏫",
+      "📚",
+      "🔬"
+    ],
+    "id": 68
+  },
+  {
+    "source": "travel:23",
+    "ru": "ЭКСКУРСИЯ",
+    "en": "EXCURSION",
+    "az": "EKSKURSİYA",
+    "photos": [
+      "🚌",
+      "🏛️",
+      "👥",
+      "🎧"
+    ],
+    "id": 69
+  },
+  {
+    "source": "science:64",
+    "ru": "МУТАЦИЯ",
+    "en": "MUTATION",
+    "az": "MUTASİYA",
+    "photos": [
+      "🧬",
+      "⚡",
+      "🔬",
+      "🔄"
+    ],
+    "id": 70
+  },
+  {
+    "source": "technology:94",
+    "ru": "КРИПТОГРАФИЯ",
+    "en": "CRYPTOGRAPHY",
+    "az": "KRİPTOQRAFİYA",
+    "photos": [
+      "🔐",
+      "🔣",
+      "📜",
+      "💻"
+    ],
+    "id": 71
+  },
+  {
+    "source": "cinema:30",
+    "ru": "МОНОЛОГ",
+    "en": "MONOLOGUE",
+    "az": "MONOLOQ",
+    "photos": [
+      "🗣️",
+      "👤",
+      "🎬",
+      "🎭"
+    ],
+    "id": 72
+  },
+  {
+    "source": "food:94",
+    "ru": "КОМПОТ",
+    "en": "COMPOTE",
+    "az": "KOMPOT",
+    "photos": [
+      "🍎",
+      "🍒",
+      "🫗",
+      "🍶"
+    ],
+    "id": 73
+  },
+  {
+    "source": "animals:75",
+    "ru": "ОМАР",
+    "en": "LOBSTER",
+    "az": "OMAR",
+    "photos": [
+      "🦞",
+      "🌊",
+      "🪨",
+      "🦀"
+    ],
+    "id": 74
+  },
+  {
+    "source": "transport:87",
+    "ru": "СЦЕПЛЕНИЕ",
+    "en": "CLUTCH",
+    "az": "İLİŞMƏ",
+    "photos": [
+      "🚗",
+      "🦶",
+      "⚙️",
+      "🔗"
+    ],
+    "id": 75
+  },
+  {
+    "source": "home:18",
+    "ru": "ПОКРЫВАЛО",
+    "en": "BEDSPREAD",
+    "az": "YATAQÖRTÜYÜ",
+    "photos": [
+      "🛏️",
+      "🎨",
+      "🧵",
+      "☀️"
+    ],
+    "id": 76
+  },
+  {
+    "source": "nature:35",
+    "ru": "ПИОН",
+    "en": "PEONY",
+    "az": "PİON",
+    "photos": [
+      "🌸",
+      "🌿",
+      "🩷",
+      "💐"
+    ],
+    "id": 77
+  },
+  {
+    "source": "art:64",
+    "ru": "ВСПЫШКА",
+    "en": "FLASH",
+    "az": "FLAŞ",
+    "photos": [
+      "📸",
+      "⚡",
+      "🌙",
+      "✨"
+    ],
+    "id": 78
+  },
+  {
+    "source": "professions:15",
+    "ru": "ПЕКАРЬ",
+    "en": "BAKER",
+    "az": "ÇÖRƏKÇİ",
+    "photos": [
+      "🍞",
+      "🥖",
+      "🔥",
+      "👨‍🍳"
+    ],
+    "id": 79
+  },
+  {
+    "source": "travel:90",
+    "ru": "РАФТИНГ",
+    "en": "RAFTING",
+    "az": "RAFTİNQ",
+    "photos": [
+      "🛶",
+      "🌊",
+      "🦺",
+      "🏞️"
+    ],
+    "id": 80
+  },
+  {
+    "source": "science:65",
+    "ru": "ВИД",
+    "en": "SPECIES",
+    "az": "NÖV",
+    "photos": [
+      "🐾",
+      "🌱",
+      "🧬",
+      "📚"
+    ],
+    "id": 81
+  },
+  {
+    "source": "technology:32",
+    "ru": "САЙТ",
+    "en": "WEBSITE",
+    "az": "SAYT",
+    "photos": [
+      "🌐",
+      "🖥️",
+      "🔗",
+      "📄"
+    ],
+    "id": 82
+  },
+  {
+    "source": "cinema:90",
+    "ru": "АНШЛАГ",
+    "en": "SELLOUT",
+    "az": "ANŞLAQ",
+    "photos": [
+      "🎟️",
+      "🚫",
+      "👥",
+      "🎬"
+    ],
+    "id": 83
+  },
+  {
+    "source": "food:22",
+    "ru": "ТЫКВА",
+    "en": "PUMPKIN",
+    "az": "BALQABAQ",
+    "photos": [
+      "🎃",
+      "🍲",
+      "🟠",
+      "🌱"
+    ],
+    "id": 84
+  },
+  {
+    "source": "animals:10",
+    "ru": "ШАКАЛ",
+    "en": "JACKAL",
+    "az": "ÇAQQAL",
+    "photos": [
+      "🐺",
+      "🌵",
+      "🌙",
+      "🦴"
+    ],
+    "id": 85
+  },
+  {
+    "source": "transport:85",
+    "ru": "ШИНА",
+    "en": "TYRE",
+    "az": "ŞİN",
+    "photos": [
+      "🛞",
+      "⚫",
+      "🛣️",
+      "💨"
+    ],
+    "id": 86
+  },
+  {
+    "source": "home:50",
+    "ru": "ПОРОГ",
+    "en": "THRESHOLD",
+    "az": "ASTANA",
+    "photos": [
+      "🚪",
+      "🦶",
+      "🪵",
+      "🏠"
+    ],
+    "id": 87
+  },
+  {
+    "source": "nature:2",
+    "ru": "ДУБ",
+    "en": "OAK",
+    "az": "PALID",
+    "photos": [
+      "🌳",
+      "🌰",
+      "🍂",
+      "🪵"
+    ],
+    "id": 88
+  },
+  {
+    "source": "art:82",
+    "ru": "ЭМАЛЬ",
+    "en": "ENAMEL",
+    "az": "MİNA",
+    "photos": [
+      "🔥",
+      "🎨",
+      "💍",
+      "🏺"
+    ],
+    "id": 89
+  },
+  {
+    "source": "professions:71",
+    "ru": "МЕТЕОРОЛОГ",
+    "en": "METEOROLOGIST",
+    "az": "METEOROLOQ",
+    "photos": [
+      "🌦️",
+      "🌡️",
+      "☁️",
+      "📡"
+    ],
+    "id": 90
+  },
+  {
+    "source": "travel:53",
+    "ru": "ОТКРЫТКА",
+    "en": "POSTCARD",
+    "az": "AÇIQCA",
+    "photos": [
+      "💌",
+      "📮",
+      "🏞️",
+      "✍️"
+    ],
+    "id": 91
+  },
+  {
+    "source": "science:8",
+    "ru": "КОЛБА",
+    "en": "FLASK",
+    "az": "KOLBA",
+    "photos": [
+      "⚗️",
+      "🧪",
+      "🔥",
+      "💧"
+    ],
+    "id": 92
+  },
+  {
+    "source": "technology:50",
+    "ru": "БЭКАП",
+    "en": "BACKUP",
+    "az": "EHTİYATNÜSXƏ",
+    "photos": [
+      "💾",
+      "☁️",
+      "🔄",
+      "🛡️"
+    ],
+    "id": 93
+  },
+  {
+    "source": "cinema:63",
+    "ru": "ПРОЕКТОР",
+    "en": "PROJECTOR",
+    "az": "PROYEKTOR",
+    "photos": [
+      "📽️",
+      "💡",
+      "🎞️",
+      "🖼️"
+    ],
+    "id": 94
+  },
+  {
+    "source": "food:71",
+    "ru": "СОУС",
+    "en": "SAUCE",
+    "az": "SOUS",
+    "photos": [
+      "🍅",
+      "🥫",
+      "🍝",
+      "🥄"
+    ],
+    "id": 95
+  },
+  {
+    "source": "animals:52",
+    "ru": "ЛЕНИВЕЦ",
+    "en": "SLOTH",
+    "az": "TƏNBƏL",
+    "photos": [
+      "🌳",
+      "💤",
+      "🐾",
+      "🐌"
+    ],
+    "id": 96
+  },
+  {
+    "source": "transport:65",
+    "ru": "АВТОВОЗ",
+    "en": "CARTRANSPORTER",
+    "az": "AVTODAŞIYICI",
+    "photos": [
+      "🚛",
+      "🚗",
+      "🚗",
+      "🛣️"
+    ],
+    "id": 97
+  },
+  {
+    "source": "home:44",
+    "ru": "ЧЕРДАК",
+    "en": "ATTIC",
+    "az": "ÇARDAQ",
+    "photos": [
+      "🏠",
+      "⬆️",
+      "📦",
+      "🪵"
+    ],
+    "id": 98
+  },
+  {
+    "source": "nature:26",
+    "ru": "ПОДСНЕЖНИК",
+    "en": "SNOWDROP",
+    "az": "NOVRUZGÜLÜ",
+    "photos": [
+      "🌼",
+      "❄️",
+      "⚪",
+      "🌱"
+    ],
+    "id": 99
+  },
+  {
+    "source": "art:60",
+    "ru": "КОМПОЗИЦИЯ",
+    "en": "COMPOSITION",
+    "az": "KOMPOZİSİYA",
+    "photos": [
+      "🖼️",
+      "📐",
+      "🎨",
+      "👀"
+    ],
+    "id": 100
+  },
+  {
+    "source": "professions:39",
+    "ru": "ДИСПЕТЧЕР",
+    "en": "DISPATCHER",
+    "az": "DİSPETÇER",
+    "photos": [
+      "🎧",
+      "📞",
+      "🗺️",
+      "🚦"
+    ],
+    "id": 101
+  },
+  {
+    "source": "travel:81",
+    "ru": "ТРАНСФЕР",
+    "en": "TRANSFER",
+    "az": "TRANSFER",
+    "photos": [
+      "🚐",
+      "✈️",
+      "🏨",
+      "📍"
+    ],
+    "id": 102
+  },
+  {
+    "source": "science:96",
+    "ru": "СТАТИСТИКА",
+    "en": "STATISTICS",
+    "az": "STATİSTİKA",
+    "photos": [
+      "📊",
+      "📈",
+      "🔢",
+      "🧮"
+    ],
+    "id": 103
+  },
+  {
+    "source": "technology:45",
+    "ru": "АККАУНТ",
+    "en": "ACCOUNT",
+    "az": "AKKAUNT",
+    "photos": [
+      "👤",
+      "🔐",
+      "📱",
+      "🌐"
+    ],
+    "id": 104
+  },
+  {
+    "source": "cinema:86",
+    "ru": "ЗАКУЛИСЬЕ",
+    "en": "BACKSTAGE",
+    "az": "PƏRDƏARXASI",
+    "photos": [
+      "🎭",
+      "🚪",
+      "🎬",
+      "👀"
+    ],
+    "id": 105
+  },
+  {
+    "source": "food:42",
+    "ru": "ЙОГУРТ",
+    "en": "YOGURT",
+    "az": "YOQURT",
+    "photos": [
+      "🥛",
+      "🥣",
+      "🍓",
+      "🥄"
+    ],
+    "id": 106
+  },
+  {
+    "source": "animals:40",
+    "ru": "МОРСКАЯСВИНКА",
+    "en": "GUINEAPIG",
+    "az": "DƏNİZDONUZU",
+    "photos": [
+      "🐹",
+      "🥬",
+      "🏠",
+      "🥕"
+    ],
+    "id": 107
+  },
+  {
+    "source": "transport:53",
+    "ru": "КАТЕР",
+    "en": "MOTORBOAT",
+    "az": "KATER",
+    "photos": [
+      "🚤",
+      "🌊",
+      "⚙️",
+      "💨"
+    ],
+    "id": 108
+  },
+  {
+    "source": "home:76",
+    "ru": "САЛФЕТКА",
+    "en": "NAPKIN",
+    "az": "SALFET",
+    "photos": [
+      "🍽️",
+      "🖐️",
+      "📄",
+      "🧵"
+    ],
+    "id": 109
+  },
+  {
+    "source": "nature:3",
+    "ru": "КЛЁН",
+    "en": "MAPLE",
+    "az": "AĞCAQAYIN",
+    "photos": [
+      "🍁",
+      "🌳",
+      "🍂",
+      "🇨🇦"
+    ],
+    "id": 110
+  },
+  {
+    "source": "art:5",
+    "ru": "КАРТИНА",
+    "en": "PAINTING",
+    "az": "RƏSM",
+    "photos": [
+      "🖼️",
+      "🎨",
+      "👀",
+      "🖌️"
+    ],
+    "id": 111
+  },
+  {
+    "source": "professions:94",
+    "ru": "ЛЕСНИК",
+    "en": "FORESTER",
+    "az": "MEŞƏÇİ",
+    "photos": [
+      "🌲",
+      "🦌",
+      "🔥",
+      "🥾"
+    ],
+    "id": 112
+  },
+  {
+    "source": "travel:96",
+    "ru": "ЛАГУНА",
+    "en": "LAGOON",
+    "az": "LAQUN",
+    "photos": [
+      "🏝️",
+      "🌊",
+      "🐠",
+      "☀️"
+    ],
+    "id": 113
+  },
+  {
+    "source": "science:79",
+    "ru": "АТМОСФЕРА",
+    "en": "ATMOSPHERE",
+    "az": "ATMOSFER",
+    "photos": [
+      "🌍",
+      "☁️",
+      "🌬️",
+      "🌌"
+    ],
+    "id": 114
+  },
+  {
+    "source": "technology:15",
+    "ru": "РОУТЕР",
+    "en": "ROUTER",
+    "az": "ROUTER",
+    "photos": [
+      "📶",
+      "🌐",
+      "💻",
+      "📱"
+    ],
+    "id": 115
+  },
+  {
+    "source": "cinema:32",
+    "ru": "ДУБЛЬ",
+    "en": "TAKE",
+    "az": "DUBL",
+    "photos": [
+      "🎬",
+      "🔁",
+      "📹",
+      "2️⃣"
+    ],
+    "id": 116
+  },
+  {
+    "source": "food:44",
+    "ru": "ГОВЯДИНА",
+    "en": "BEEF",
+    "az": "MALƏTİ",
+    "photos": [
+      "🐄",
+      "🥩",
+      "🍳",
+      "🍲"
+    ],
+    "id": 117
+  },
+  {
+    "source": "animals:90",
+    "ru": "АИСТ",
+    "en": "STORK",
+    "az": "LEYLƏK",
+    "photos": [
+      "🐦",
+      "🪺",
+      "🏠",
+      "🦵"
+    ],
+    "id": 118
+  },
+  {
+    "source": "transport:26",
+    "ru": "МОТОРОЛЛЕР",
+    "en": "MOTORSCOOTER",
+    "az": "MOTOROLLER",
+    "photos": [
+      "🛵",
+      "👞",
+      "⚙️",
+      "🏙️"
+    ],
+    "id": 119
+  },
+  {
+    "source": "home:78",
+    "ru": "ШВАБРА",
+    "en": "MOP",
+    "az": "DÖŞƏMƏSİLƏN",
+    "photos": [
+      "🧹",
+      "💧",
+      "🪣",
+      "🦶"
+    ],
+    "id": 120
+  },
+  {
+    "source": "nature:28",
+    "ru": "НАРЦИСС",
+    "en": "DAFFODIL",
+    "az": "NƏRGİZ",
+    "photos": [
+      "🌼",
+      "🟡",
+      "🌱",
+      "🎺"
+    ],
+    "id": 121
+  },
+  {
+    "source": "art:38",
+    "ru": "КОНЦЕРТ",
+    "en": "CONCERT",
+    "az": "KONSERT",
+    "photos": [
+      "🎤",
+      "🎟️",
+      "🎶",
+      "👥"
+    ],
+    "id": 122
+  },
+  {
+    "source": "professions:86",
+    "ru": "СКУЛЬПТОР",
+    "en": "SCULPTOR",
+    "az": "HEYKƏLTƏRAŞ",
+    "photos": [
+      "🗿",
+      "🔨",
+      "🪨",
+      "🎨"
+    ],
+    "id": 123
+  },
+  {
+    "source": "travel:84",
+    "ru": "ОБМЕН",
+    "en": "EXCHANGE",
+    "az": "MÜBADİLƏ",
+    "photos": [
+      "💱",
+      "🔄",
+      "💵",
+      "💶"
+    ],
+    "id": 124
+  },
+  {
+    "source": "science:54",
+    "ru": "ГЕН",
+    "en": "GENE",
+    "az": "GEN",
+    "photos": [
+      "🧬",
+      "👨‍👩‍👧",
+      "🔬",
+      "📘"
+    ],
+    "id": 125
+  },
+  {
+    "source": "technology:79",
+    "ru": "БАЗОВАЯСТАНЦИЯ",
+    "en": "BASESTATION",
+    "az": "BAZASTANSİYASI",
+    "photos": [
+      "📡",
+      "🏙️",
+      "📶",
+      "📱"
+    ],
+    "id": 126
+  },
+  {
+    "source": "cinema:17",
+    "ru": "ПРИКВЕЛ",
+    "en": "PREQUEL",
+    "az": "ÖNHEKAYƏ",
+    "photos": [
+      "⏪",
+      "🎬",
+      "📖",
+      "🕰️"
+    ],
+    "id": 127
+  },
+  {
+    "source": "food:80",
+    "ru": "МЁД",
+    "en": "HONEY",
+    "az": "BAL",
+    "photos": [
+      "🍯",
+      "🐝",
+      "🌼",
+      "🍵"
+    ],
+    "id": 128
+  },
+  {
+    "source": "animals:30",
+    "ru": "ЛАМА",
+    "en": "LLAMA",
+    "az": "LAMA",
+    "photos": [
+      "🦙",
+      "🏔️",
+      "🧶",
+      "🌿"
+    ],
+    "id": 129
+  },
+  {
+    "source": "transport:46",
+    "ru": "ФУРА",
+    "en": "SEMITRUCK",
+    "az": "TIR",
+    "photos": [
+      "🚛",
+      "📦",
+      "🛣️",
+      "📏"
+    ],
+    "id": 130
+  },
+  {
+    "source": "home:6",
+    "ru": "КОМОД",
+    "en": "CHESTOFDRAWERS",
+    "az": "KOMOD",
+    "photos": [
+      "🗄️",
+      "👕",
+      "🏠",
+      "🪵"
+    ],
+    "id": 131
+  },
+  {
+    "source": "nature:54",
+    "ru": "ПЛАТО",
+    "en": "PLATEAU",
+    "az": "YAYLA",
+    "photos": [
+      "⛰️",
+      "➖",
+      "🌾",
+      "☁️"
+    ],
+    "id": 132
+  },
+  {
+    "source": "art:7",
+    "ru": "ПЕЙЗАЖ",
+    "en": "LANDSCAPE",
+    "az": "MƏNZƏRƏ",
+    "photos": [
+      "🏞️",
+      "🌄",
+      "🖼️",
+      "🎨"
+    ],
+    "id": 133
+  },
+  {
+    "source": "professions:77",
+    "ru": "РЕЖИССЕР",
+    "en": "DIRECTOR",
+    "az": "REJİSSOR",
+    "photos": [
+      "🎬",
+      "🎥",
+      "📣",
+      "🎭"
+    ],
+    "id": 134
+  },
+  {
+    "source": "travel:89",
+    "ru": "ДАЙВИНГ",
+    "en": "DIVING",
+    "az": "DAYVİNQ",
+    "photos": [
+      "🤿",
+      "🐠",
+      "🌊",
+      "🪸"
+    ],
+    "id": 135
+  },
+  {
+    "source": "science:61",
+    "ru": "МИКРОБ",
+    "en": "MICROBE",
+    "az": "MİKROB",
+    "photos": [
+      "🦠",
+      "🔬",
+      "🧫",
+      "👀"
+    ],
+    "id": 136
+  },
+  {
+    "source": "technology:53",
+    "ru": "ПРИЛОЖЕНИЕ",
+    "en": "APP",
+    "az": "TƏTBİQ",
+    "photos": [
+      "📱",
+      "🧩",
+      "👆",
+      "⚙️"
+    ],
+    "id": 137
+  },
+  {
+    "source": "cinema:66",
+    "ru": "КИНОКРЕСЛО",
+    "en": "CINEMASEAT",
+    "az": "KİNOTOXTU",
+    "photos": [
+      "💺",
+      "🎬",
+      "🪑",
+      "👀"
+    ],
+    "id": 138
+  },
+  {
+    "source": "food:57",
+    "ru": "ПЕЛЬМЕНИ",
+    "en": "DUMPLINGS",
+    "az": "DÜŞBƏRƏ",
+    "photos": [
+      "🥟",
+      "🍖",
+      "🥣",
+      "♨️"
+    ],
+    "id": 139
+  },
+  {
+    "source": "animals:57",
+    "ru": "ГОРИЛЛА",
+    "en": "GORILLA",
+    "az": "QORİLLA",
+    "photos": [
+      "🦍",
+      "🌳",
+      "💪",
+      "🌍"
+    ],
+    "id": 140
+  },
+  {
+    "source": "transport:43",
+    "ru": "БЕТОНОМЕШАЛКА",
+    "en": "CEMENTMIXER",
+    "az": "BETONQARIŞDIRAN",
+    "photos": [
+      "🚚",
+      "🌀",
+      "🏗️",
+      "🧱"
+    ],
+    "id": 141
+  },
+  {
+    "source": "home:99",
+    "ru": "ОБУВНИЦА",
+    "en": "SHOERACK",
+    "az": "AYAQQABIRƏFİ",
+    "photos": [
+      "👟",
+      "🥿",
+      "🚪",
+      "🪵"
+    ],
+    "id": 142
+  },
+  {
+    "source": "nature:47",
+    "ru": "ЛОТОС",
+    "en": "LOTUS",
+    "az": "LOTOS",
+    "photos": [
+      "🪷",
+      "💧",
+      "🌸",
+      "🌿"
+    ],
+    "id": 143
+  },
+  {
+    "source": "art:55",
+    "ru": "ВИТРАЖ",
+    "en": "STAINEDGLASS",
+    "az": "VİTRAJ",
+    "photos": [
+      "🪟",
+      "🌈",
+      "⛪",
+      "🎨"
+    ],
+    "id": 144
+  },
+  {
+    "source": "professions:50",
+    "ru": "ДЕТЕКТИВ",
+    "en": "DETECTIVE",
+    "az": "DETEKTİV",
+    "photos": [
+      "🕵️",
+      "🔎",
+      "🧩",
+      "📸"
+    ],
+    "id": 145
+  },
+  {
+    "source": "travel:72",
+    "ru": "РЕЙС",
+    "en": "FLIGHT",
+    "az": "REYS",
+    "photos": [
+      "✈️",
+      "🕒",
+      "🎫",
+      "🛫"
+    ],
+    "id": 146
+  },
+  {
+    "source": "science:24",
+    "ru": "ЖИДКОСТЬ",
+    "en": "LIQUID",
+    "az": "MAYE",
+    "photos": [
+      "💧",
+      "🧪",
+      "🥤",
+      "🌊"
+    ],
+    "id": 147
+  },
+  {
+    "source": "technology:18",
+    "ru": "ДИСК",
+    "en": "DRIVE",
+    "az": "DİSK",
+    "photos": [
+      "💽",
+      "💾",
+      "🖥️",
+      "📁"
+    ],
+    "id": 148
+  },
+  {
+    "source": "cinema:79",
+    "ru": "ЗАМЕДЛЕНИЕ",
+    "en": "SLOWMOTION",
+    "az": "YAVAŞHƏRƏKƏT",
+    "photos": [
+      "🐢",
+      "⏱️",
+      "🎥",
+      "🎬"
+    ],
+    "id": 149
+  },
+  {
+    "source": "food:74",
+    "ru": "КРУАССАН",
+    "en": "CROISSANT",
+    "az": "KRUASAN",
+    "photos": [
+      "🥐",
+      "🧈",
+      "☕",
+      "🌅"
+    ],
+    "id": 150
+  },
+  {
+    "source": "animals:99",
+    "ru": "БАБОЧКА",
+    "en": "BUTTERFLY",
+    "az": "KƏPƏNƏK",
+    "photos": [
+      "🦋",
+      "🌸",
+      "🐛",
+      "🌈"
+    ],
+    "id": 151
+  },
+  {
+    "source": "transport:80",
+    "ru": "ПЕШЕХОДНЫЙПЕРЕХОД",
+    "en": "CROSSWALK",
+    "az": "PİYADAKEÇİDİ",
+    "photos": [
+      "🚶",
+      "⚪",
+      "⚫",
+      "🚦"
+    ],
+    "id": 152
+  },
+  {
+    "source": "home:24",
+    "ru": "ТОРШЕР",
+    "en": "FLOORLAMP",
+    "az": "TORŞER",
+    "photos": [
+      "💡",
+      "🦵",
+      "📖",
+      "🛋️"
+    ],
+    "id": 153
+  },
+  {
+    "source": "nature:63",
+    "ru": "ТАЙГА",
+    "en": "TAIGA",
+    "az": "TAYQA",
+    "photos": [
+      "🌲",
+      "❄️",
+      "🐻",
+      "🌲"
+    ],
+    "id": 154
+  },
+  {
+    "source": "art:23",
+    "ru": "МРАМОР",
+    "en": "MARBLE",
+    "az": "MƏRMƏR",
+    "photos": [
+      "🪨",
+      "⚪",
+      "🏛️",
+      "🗿"
+    ],
+    "id": 155
+  },
+  {
+    "source": "professions:17",
+    "ru": "ОФИЦИАНТ",
+    "en": "WAITER",
+    "az": "OFİSİANT",
+    "photos": [
+      "🍽️",
+      "📝",
+      "☕",
+      "🍴"
+    ],
+    "id": 156
+  },
+  {
+    "source": "travel:22",
+    "ru": "ГИД",
+    "en": "GUIDE",
+    "az": "BƏLƏDÇİ",
+    "photos": [
+      "🗣️",
+      "🗺️",
+      "👥",
+      "📍"
+    ],
+    "id": 157
+  },
+  {
+    "source": "science:69",
+    "ru": "ФОТОСИНТЕЗ",
+    "en": "PHOTOSYNTHESIS",
+    "az": "FOTOSİNTEZ",
+    "photos": [
+      "🌿",
+      "☀️",
+      "💧",
+      "🌬️"
+    ],
+    "id": 158
+  },
+  {
+    "source": "technology:43",
+    "ru": "ЛОГИН",
+    "en": "LOGIN",
+    "az": "LOQİN",
+    "photos": [
+      "👤",
+      "⌨️",
+      "🔐",
+      "🌐"
+    ],
+    "id": 159
+  },
+  {
+    "source": "cinema:65",
+    "ru": "КИНОБИЛЕТ",
+    "en": "MOVIETICKET",
+    "az": "KİNOBİLET",
+    "photos": [
+      "🎟️",
+      "🎬",
+      "💺",
+      "📅"
+    ],
+    "id": 160
+  },
+  {
+    "source": "food:28",
+    "ru": "КУКУРУЗА",
+    "en": "CORN",
+    "az": "QARĞIDALI",
+    "photos": [
+      "🌽",
+      "🍿",
+      "🌾",
+      "🧈"
+    ],
+    "id": 161
+  },
+  {
+    "source": "animals:70",
+    "ru": "СКАТ",
+    "en": "STINGRAY",
+    "az": "SKAT",
+    "photos": [
+      "🌊",
+      "🪽",
+      "🐟",
+      "🏖️"
+    ],
+    "id": 162
+  },
+  {
+    "source": "transport:19",
+    "ru": "ЛИМУЗИН",
+    "en": "LIMOUSINE",
+    "az": "LİMUZİN",
+    "photos": [
+      "🚘",
+      "📏",
+      "🎩",
+      "🥂"
+    ],
+    "id": 163
+  },
+  {
+    "source": "home:63",
+    "ru": "МЫЛО",
+    "en": "SOAP",
+    "az": "SABUN",
+    "photos": [
+      "🧼",
+      "🫧",
+      "🖐️",
+      "💧"
+    ],
+    "id": 164
+  },
+  {
+    "source": "nature:82",
+    "ru": "СУГРОБ",
+    "en": "SNOWDRIFT",
+    "az": "QARYIĞINI",
+    "photos": [
+      "❄️",
+      "🌬️",
+      "⛰️",
+      "🏠"
+    ],
+    "id": 165
+  },
+  {
+    "source": "art:73",
+    "ru": "ЛОГОТИП",
+    "en": "LOGO",
+    "az": "LOQO",
+    "photos": [
+      "🔵",
+      "🔺",
+      "🔤",
+      "🏷️"
+    ],
+    "id": 166
+  },
+  {
+    "source": "professions:36",
+    "ru": "ТЕСТИРОВЩИК",
+    "en": "TESTER",
+    "az": "TESTÇİ",
+    "photos": [
+      "🧪",
+      "💻",
+      "🐞",
+      "✅"
+    ],
+    "id": 167
+  },
+  {
+    "source": "travel:73",
+    "ru": "ВЗЛЕТ",
+    "en": "TAKEOFF",
+    "az": "UÇUŞ",
+    "photos": [
+      "🛫",
+      "✈️",
+      "☁️",
+      "⬆️"
+    ],
+    "id": 168
+  },
+  {
+    "source": "science:100",
+    "ru": "ОТКРЫТИЕ",
+    "en": "DISCOVERY",
+    "az": "KƏŞF",
+    "photos": [
+      "💡",
+      "🔬",
+      "🎉",
+      "📚"
+    ],
+    "id": 169
+  },
+  {
+    "source": "technology:38",
+    "ru": "БЛЮТУЗ",
+    "en": "BLUETOOTH",
+    "az": "BLUTUZ",
+    "photos": [
+      "🟦",
+      "📱",
+      "🎧",
+      "📶"
+    ],
+    "id": 170
+  },
+  {
+    "source": "cinema:27",
+    "ru": "ЗЛОДЕЙ",
+    "en": "VILLAIN",
+    "az": "MƏNFİOBRAZ",
+    "photos": [
+      "😈",
+      "🎬",
+      "⚔️",
+      "🦸"
+    ],
+    "id": 171
+  },
+  {
+    "source": "food:87",
+    "ru": "УКСУС",
+    "en": "VINEGAR",
+    "az": "SİRKƏ",
+    "photos": [
+      "🍶",
+      "🥗",
+      "😖",
+      "🧪"
+    ],
+    "id": 172
+  },
+  {
+    "source": "animals:78",
+    "ru": "КРОКОДИЛ",
+    "en": "CROCODILE",
+    "az": "TİMSAH",
+    "photos": [
+      "🐊",
+      "💧",
+      "🦷",
+      "🌴"
+    ],
+    "id": 173
+  },
+  {
+    "source": "transport:83",
+    "ru": "АВТОЗАПРАВКА",
+    "en": "PETROLSTATION",
+    "az": "YANACAQDOLDURMA",
+    "photos": [
+      "⛽",
+      "🚗",
+      "🛢️",
+      "💳"
+    ],
+    "id": 174
+  },
+  {
+    "source": "home:96",
+    "ru": "ДОМОФОН",
+    "en": "INTERCOM",
+    "az": "DOMOFON",
+    "photos": [
+      "🏢",
+      "🚪",
+      "🔊",
+      "🖐️"
+    ],
+    "id": 175
+  },
+  {
+    "source": "nature:6",
+    "ru": "ЛИСТВЕННИЦА",
+    "en": "LARCH",
+    "az": "QARAŞAM",
+    "photos": [
+      "🌲",
+      "🍂",
+      "🟡",
+      "❄️"
+    ],
+    "id": 176
+  },
+  {
+    "source": "art:89",
+    "ru": "РИФМА",
+    "en": "RHYME",
+    "az": "QAFİYƏ",
+    "photos": [
+      "🎵",
+      "🔤",
+      "📝",
+      "🔁"
+    ],
+    "id": 177
+  },
+  {
+    "source": "professions:85",
+    "ru": "ИЛЛЮСТРАТОР",
+    "en": "ILLUSTRATOR",
+    "az": "İLLÜSTRATOR",
+    "photos": [
+      "✏️",
+      "🎨",
+      "📖",
+      "🖥️"
+    ],
+    "id": 178
+  },
+  {
+    "source": "travel:32",
+    "ru": "ПЛЯЖ",
+    "en": "BEACH",
+    "az": "ÇİMƏRLİK",
+    "photos": [
+      "🏖️",
+      "🌊",
+      "☀️",
+      "⛱️"
+    ],
+    "id": 179
+  },
+  {
+    "source": "science:76",
+    "ru": "ЗЕМЛЕТРЯСЕНИЕ",
+    "en": "EARTHQUAKE",
+    "az": "ZƏLZƏLƏ",
+    "photos": [
+      "🌍",
+      "🏚️",
+      "💥",
+      "🪨"
+    ],
+    "id": 180
+  },
+  {
+    "source": "technology:40",
+    "ru": "ДОМЕН",
+    "en": "DOMAIN",
+    "az": "DOMEN",
+    "photos": [
+      "🌐",
+      "🔤",
+      "🖥️",
+      "🔗"
+    ],
+    "id": 181
+  },
+  {
+    "source": "cinema:2",
+    "ru": "КОМЕДИЯ",
+    "en": "COMEDY",
+    "az": "KOMEDİYA",
+    "photos": [
+      "😂",
+      "🎬",
+      "😄",
+      "🍿"
+    ],
+    "id": 182
+  },
+  {
+    "source": "food:6",
+    "ru": "ПЕРСИК",
+    "en": "PEACH",
+    "az": "ŞAFTALI",
+    "photos": [
+      "🍑",
+      "🌳",
+      "☀️",
+      "🧃"
+    ],
+    "id": 183
+  },
+  {
+    "source": "animals:64",
+    "ru": "МОРЖ",
+    "en": "WALRUS",
+    "az": "MORJ",
+    "photos": [
+      "🦭",
+      "🦷",
+      "❄️",
+      "🌊"
+    ],
+    "id": 184
+  },
+  {
+    "source": "transport:61",
+    "ru": "ПЛОТ",
+    "en": "RAFT",
+    "az": "SAL",
+    "photos": [
+      "🪵",
+      "🌊",
+      "🪢",
+      "🧍"
+    ],
+    "id": 185
+  },
+  {
+    "source": "home:48",
+    "ru": "ЛЕСТНИЦА",
+    "en": "STAIRCASE",
+    "az": "PİLLƏKƏN",
+    "photos": [
+      "🏠",
+      "⬆️",
+      "🦶",
+      "🪵"
+    ],
+    "id": 186
+  },
+  {
+    "source": "nature:46",
+    "ru": "КУВШИНКА",
+    "en": "WATERLILY",
+    "az": "SUZANBAĞI",
+    "photos": [
+      "🌸",
+      "💧",
+      "🍃",
+      "🐸"
+    ],
+    "id": 187
+  },
+  {
+    "source": "art:75",
+    "ru": "КОЛЛАЖ",
+    "en": "COLLAGE",
+    "az": "KOLLAJ",
+    "photos": [
+      "✂️",
+      "📰",
+      "🧩",
+      "🎨"
+    ],
+    "id": 188
+  },
+  {
+    "source": "professions:16",
+    "ru": "КОНДИТЕР",
+    "en": "PASTRYCHEF",
+    "az": "ŞİRNİYYATÇI",
+    "photos": [
+      "🎂",
+      "🧁",
+      "🍰",
+      "🍫"
+    ],
+    "id": 189
+  },
+  {
+    "source": "travel:71",
+    "ru": "КРУИЗ",
+    "en": "CRUISE",
+    "az": "KRUIZ",
+    "photos": [
+      "🛳️",
+      "🌊",
+      "🏝️",
+      "🍹"
+    ],
+    "id": 190
+  },
+  {
+    "source": "science:3",
+    "ru": "ЛАБОРАТОРИЯ",
+    "en": "LABORATORY",
+    "az": "LABORATORİYA",
+    "photos": [
+      "🧪",
+      "🏢",
+      "🥼",
+      "🧫"
+    ],
+    "id": 191
+  },
+  {
+    "source": "technology:22",
+    "ru": "ВИДЕОКАРТА",
+    "en": "GRAPHICSCARD",
+    "az": "VİDEOKART",
+    "photos": [
+      "🎮",
+      "🖥️",
+      "⚙️",
+      "🧊"
+    ],
+    "id": 192
+  },
+  {
+    "source": "cinema:88",
+    "ru": "КИНОМАН",
+    "en": "CINEPHILE",
+    "az": "KİNOMAN",
+    "photos": [
+      "😍",
+      "⭐",
+      "🎬",
+      "👏"
+    ],
+    "id": 193
+  },
+  {
+    "source": "food:24",
+    "ru": "ЧЕСНОК",
+    "en": "GARLIC",
+    "az": "SARIMSAQ",
+    "photos": [
+      "🧄",
+      "🍲",
+      "👃",
+      "🌱"
+    ],
+    "id": 194
+  },
+  {
+    "source": "animals:23",
+    "ru": "ГАЗЕЛЬ",
+    "en": "GAZELLE",
+    "az": "CEYRAN",
+    "photos": [
+      "🦌",
+      "🌾",
+      "💨",
+      "🦵"
+    ],
+    "id": 195
+  },
+  {
+    "source": "transport:60",
+    "ru": "ПОДВОДНАЯЛОДКА",
+    "en": "SUBMARINE",
+    "az": "SUALTIQAYIQ",
+    "photos": [
+      "🌊",
+      "⬇️",
+      "🔭",
+      "⚙️"
+    ],
+    "id": 196
+  },
+  {
+    "source": "home:62",
+    "ru": "МОЧАЛКА",
+    "en": "BATHSPONGE",
+    "az": "HAMAMSÜNGƏRİ",
+    "photos": [
+      "🧽",
+      "🛁",
+      "🫧",
+      "🧼"
+    ],
+    "id": 197
+  },
+  {
+    "source": "nature:37",
+    "ru": "ХРИЗАНТЕМА",
+    "en": "CHRYSANTHEMUM",
+    "az": "XRİZANTEMA",
+    "photos": [
+      "🌼",
+      "🍂",
+      "🌿",
+      "🌈"
+    ],
+    "id": 198
+  },
+  {
+    "source": "art:96",
+    "ru": "СЮРРЕАЛИЗМ",
+    "en": "SURREALISM",
+    "az": "SÜRREALİZM",
+    "photos": [
+      "🌀",
+      "🌙",
+      "🧠",
+      "🎨"
+    ],
+    "id": 199
+  },
+  {
+    "source": "professions:55",
+    "ru": "ХИРУРГ",
+    "en": "SURGEON",
+    "az": "CƏRRAH",
+    "photos": [
+      "🏥",
+      "🩺",
+      "🔪",
+      "🧤"
+    ],
+    "id": 200
+  },
+  {
+    "source": "travel:82",
+    "ru": "СТРАХОВКА",
+    "en": "INSURANCE",
+    "az": "SIĞORTA",
+    "photos": [
+      "🛡️",
+      "📄",
+      "✈️",
+      "✅"
+    ],
+    "id": 201
+  },
+  {
+    "source": "science:93",
+    "ru": "ГРАФИК",
+    "en": "GRAPH",
+    "az": "QRAFİK",
+    "photos": [
+      "📈",
+      "📊",
+      "📉",
+      "🧮"
+    ],
+    "id": 202
+  },
+  {
+    "source": "technology:86",
+    "ru": "МЕТАДАННЫЕ",
+    "en": "METADATA",
+    "az": "METAMƏLUMAT",
+    "photos": [
+      "💾",
+      "🏷️",
+      "📊",
+      "🔍"
+    ],
+    "id": 203
+  },
+  {
+    "source": "cinema:100",
+    "ru": "КИНОКЛУБ",
+    "en": "FILMCLUB",
+    "az": "KİNOKLUB",
+    "photos": [
+      "🎬",
+      "👥",
+      "💬",
+      "🏠"
+    ],
+    "id": 204
+  },
+  {
+    "source": "food:39",
+    "ru": "СЛИВКИ",
+    "en": "CREAM",
+    "az": "QAYMAQ",
+    "photos": [
+      "🥛",
+      "🍰",
+      "☕",
+      "🐄"
+    ],
+    "id": 205
+  },
+  {
+    "source": "animals:49",
+    "ru": "ДИКОБРАЗ",
+    "en": "PORCUPINE",
+    "az": "OXATANKİRPİ",
+    "photos": [
+      "🦔",
+      "📏",
+      "🌿",
+      "🦷"
+    ],
+    "id": 206
+  },
+  {
+    "source": "transport:54",
+    "ru": "ПОНТОН",
+    "en": "PONTOON",
+    "az": "PONTON",
+    "photos": [
+      "🌊",
+      "🛢️",
+      "🪵",
+      "🛟"
+    ],
+    "id": 207
+  },
+  {
+    "source": "home:35",
+    "ru": "ПУФ",
+    "en": "OTTOMAN",
+    "az": "PUF",
+    "photos": [
+      "🛋️",
+      "🦶",
+      "🧽",
+      "🏠"
+    ],
+    "id": 208
+  },
+  {
+    "source": "nature:1",
+    "ru": "БЕРЁЗА",
+    "en": "BIRCH",
+    "az": "TOZAĞACI",
+    "photos": [
+      "🌳",
+      "⚪",
+      "⚫",
+      "🍃"
+    ],
+    "id": 209
+  },
+  {
+    "source": "art:91",
+    "ru": "МИНИАТЮРА",
+    "en": "MINIATURE",
+    "az": "MİNİATÜR",
+    "photos": [
+      "🖼️",
+      "🔍",
+      "🎨",
+      "📜"
+    ],
+    "id": 210
+  },
+  {
+    "source": "professions:12",
+    "ru": "ЭЛЕКТРИК",
+    "en": "ELECTRICIAN",
+    "az": "ELEKTRİK",
+    "photos": [
+      "⚡",
+      "🔌",
+      "💡",
+      "🪛"
+    ],
+    "id": 211
+  },
+  {
+    "source": "travel:59",
+    "ru": "СОБОР",
+    "en": "CATHEDRAL",
+    "az": "KAFEDRAL",
+    "photos": [
+      "⛪",
+      "🔔",
+      "🏛️",
+      "✨"
+    ],
+    "id": 212
+  },
+  {
+    "source": "science:73",
+    "ru": "МАГМА",
+    "en": "MAGMA",
+    "az": "MAQMA",
+    "photos": [
+      "🌋",
+      "🔥",
+      "🪨",
+      "🌍"
+    ],
+    "id": 213
+  },
+  {
+    "source": "technology:49",
+    "ru": "БАЗАДАННЫХ",
+    "en": "DATABASE",
+    "az": "VERİLƏNLƏRBAZASI",
+    "photos": [
+      "🗄️",
+      "📊",
+      "💾",
+      "🖥️"
+    ],
+    "id": 214
+  },
+  {
+    "source": "cinema:67",
+    "ru": "РЯД",
+    "en": "ROW",
+    "az": "CƏRGƏ",
+    "photos": [
+      "🔢",
+      "💺",
+      "💺",
+      "🎟️"
+    ],
+    "id": 215
+  },
+  {
+    "source": "food:70",
+    "ru": "ПЮРЕ",
+    "en": "MASH",
+    "az": "PÜRE",
+    "photos": [
+      "🥔",
+      "🥣",
+      "🧈",
+      "🥄"
+    ],
+    "id": 216
+  },
+  {
+    "source": "animals:26",
+    "ru": "КАБАН",
+    "en": "BOAR",
+    "az": "QABAN",
+    "photos": [
+      "🐗",
+      "🌲",
+      "🦷",
+      "🌰"
+    ],
+    "id": 217
+  },
+  {
+    "source": "transport:4",
+    "ru": "МАГЛЕВ",
+    "en": "MAGLEV",
+    "az": "MAQLEV",
+    "photos": [
+      "🚆",
+      "🧲",
+      "💨",
+      "🛤️"
+    ],
+    "id": 218
+  },
+  {
+    "source": "home:46",
+    "ru": "ГАРДЕРОБНАЯ",
+    "en": "DRESSINGROOM",
+    "az": "QARDEROBOTAĞI",
+    "photos": [
+      "👗",
+      "👔",
+      "👟",
+      "🚪"
+    ],
+    "id": 219
+  },
+  {
+    "source": "nature:78",
+    "ru": "ГЕЙЗЕР",
+    "en": "GEYSER",
+    "az": "QEYZER",
+    "photos": [
+      "💧",
+      "♨️",
+      "⬆️",
+      "🪨"
+    ],
+    "id": 220
+  },
+  {
+    "source": "art:20",
+    "ru": "ГРАВЮРА",
+    "en": "ENGRAVING",
+    "az": "QRAVÜRA",
+    "photos": [
+      "🪵",
+      "🖋️",
+      "📄",
+      "🖼️"
+    ],
+    "id": 221
+  },
+  {
+    "source": "professions:68",
+    "ru": "АСТРОНОМ",
+    "en": "ASTRONOMER",
+    "az": "ASTRONOM",
+    "photos": [
+      "🔭",
+      "🌌",
+      "⭐",
+      "🪐"
+    ],
+    "id": 222
+  },
+  {
+    "source": "travel:94",
+    "ru": "ТРОПА",
+    "en": "TRAIL",
+    "az": "CIĞIR",
+    "photos": [
+      "🥾",
+      "🌲",
+      "🗺️",
+      "⛰️"
+    ],
+    "id": 223
+  },
+  {
+    "source": "science:41",
+    "ru": "ПРЕЛОМЛЕНИЕ",
+    "en": "REFRACTION",
+    "az": "SINMA",
+    "photos": [
+      "🌈",
+      "💧",
+      "🔍",
+      "➡️"
+    ],
+    "id": 224
+  },
+  {
+    "source": "technology:56",
+    "ru": "ФУНКЦИЯ",
+    "en": "FUNCTION",
+    "az": "FUNKSİYA",
+    "photos": [
+      "🔣",
+      "💻",
+      "➡️",
+      "⚙️"
+    ],
+    "id": 225
+  },
+  {
+    "source": "cinema:77",
+    "ru": "ХРОМАКЕЙ",
+    "en": "GREENSCREEN",
+    "az": "XRAMAKEY",
+    "photos": [
+      "🟩",
+      "🎥",
+      "💻",
+      "🌍"
+    ],
+    "id": 226
+  },
+  {
+    "source": "food:32",
+    "ru": "МУКА",
+    "en": "FLOUR",
+    "az": "UN",
+    "photos": [
+      "🌾",
+      "🥖",
+      "🍞",
+      "🧑‍🍳"
+    ],
+    "id": 227
+  },
+  {
+    "source": "animals:88",
+    "ru": "ФЛАМИНГО",
+    "en": "FLAMINGO",
+    "az": "FLAMİNQO",
+    "photos": [
+      "🦩",
+      "🌸",
+      "💧",
+      "🦵"
+    ],
+    "id": 228
+  },
+  {
+    "source": "transport:21",
+    "ru": "КРОССОВЕР",
+    "en": "CROSSOVER",
+    "az": "KROSSOVER",
+    "photos": [
+      "🚙",
+      "🏙️",
+      "🌲",
+      "🛣️"
+    ],
+    "id": 229
+  },
+  {
+    "source": "home:61",
+    "ru": "ПОЛОТЕНЦЕ",
+    "en": "TOWEL",
+    "az": "DƏSMAL",
+    "photos": [
+      "🧺",
+      "💧",
+      "🖐️",
+      "🧵"
+    ],
+    "id": 230
+  },
+  {
+    "source": "nature:79",
+    "ru": "ПОРОГИ",
+    "en": "RAPIDS",
+    "az": "ÇAYASTANALARI",
+    "photos": [
+      "💧",
+      "🪨",
+      "🌊",
+      "🛶"
+    ],
+    "id": 231
+  },
+  {
+    "source": "art:87",
+    "ru": "РОМАН",
+    "en": "NOVEL",
+    "az": "ROMAN",
+    "photos": [
+      "📚",
+      "📖",
+      "🧑‍💻",
+      "☕"
+    ],
+    "id": 232
+  },
+  {
+    "source": "professions:92",
+    "ru": "САДОВНИК",
+    "en": "GARDENER",
+    "az": "BAĞBAN",
+    "photos": [
+      "🌱",
+      "🌳",
+      "🪴",
+      "💧"
+    ],
+    "id": 233
+  },
+  {
+    "source": "travel:38",
+    "ru": "ДОЛИНА",
+    "en": "VALLEY",
+    "az": "VADİ",
+    "photos": [
+      "🏞️",
+      "⛰️",
+      "🌿",
+      "🌊"
+    ],
+    "id": 234
+  },
+  {
+    "source": "science:49",
+    "ru": "ЧАСТИЦА",
+    "en": "PARTICLE",
+    "az": "ZƏRRƏCİK",
+    "photos": [
+      "⚛️",
+      "🔵",
+      "💨",
+      "🧲"
+    ],
+    "id": 235
+  },
+  {
+    "source": "technology:84",
+    "ru": "НЕЙРОСЕТЬ",
+    "en": "NEURALNET",
+    "az": "NEYRONŞƏBƏKƏ",
+    "photos": [
+      "🧠",
+      "🔗",
+      "💻",
+      "✨"
+    ],
+    "id": 236
+  },
+  {
+    "source": "cinema:93",
+    "ru": "КИНОПРОКАТ",
+    "en": "DISTRIBUTION",
+    "az": "KİNOPROKAT",
+    "photos": [
+      "🎬",
+      "🚚",
+      "🎟️",
+      "🌍"
+    ],
+    "id": 237
+  },
+  {
+    "source": "food:47",
+    "ru": "ИНДЕЙКА",
+    "en": "TURKEY",
+    "az": "HİNDQUŞU",
+    "photos": [
+      "🦃",
+      "🍗",
+      "🎉",
+      "🍽️"
+    ],
+    "id": 238
+  },
+  {
+    "source": "animals:95",
+    "ru": "КОЛИБРИ",
+    "en": "HUMMINGBIRD",
+    "az": "KOLİBRİ",
+    "photos": [
+      "🐦",
+      "🌺",
+      "🍯",
+      "🪽"
+    ],
+    "id": 239
+  },
+  {
+    "source": "transport:52",
+    "ru": "ПАТРУЛЬНАЯМАШИНА",
+    "en": "POLICECAR",
+    "az": "POLİSMAŞINI",
+    "photos": [
+      "🚓",
+      "👮",
+      "🚨",
+      "🛣️"
+    ],
+    "id": 240
+  },
+  {
+    "source": "home:16",
+    "ru": "ПРОСТЫНЯ",
+    "en": "BEDSHEET",
+    "az": "DÖŞƏKAĞI",
+    "photos": [
+      "🛏️",
+      "⚪",
+      "🧺",
+      "💤"
+    ],
+    "id": 241
+  },
+  {
+    "source": "nature:33",
+    "ru": "СИРЕНЬ",
+    "en": "LILAC",
+    "az": "YASƏMƏN",
+    "photos": [
+      "🟣",
+      "🌸",
+      "🌳",
+      "👃"
+    ],
+    "id": 242
+  },
+  {
+    "source": "art:80",
+    "ru": "ФАРФОР",
+    "en": "PORCELAIN",
+    "az": "FARFOR",
+    "photos": [
+      "🍽️",
+      "⚪",
+      "🏺",
+      "✨"
+    ],
+    "id": 243
+  },
+  {
+    "source": "professions:99",
+    "ru": "ПЛОТНИК",
+    "en": "CARPENTER",
+    "az": "DÜLGƏR",
+    "photos": [
+      "🪚",
+      "🪵",
+      "🔨",
+      "📐"
+    ],
+    "id": 244
+  },
+  {
+    "source": "travel:37",
+    "ru": "ВЕРШИНА",
+    "en": "SUMMIT",
+    "az": "ZİRVƏ",
+    "photos": [
+      "🏔️",
+      "🚩",
+      "🥾",
+      "☁️"
+    ],
+    "id": 245
+  },
+  {
+    "source": "science:29",
+    "ru": "СИЛА",
+    "en": "FORCE",
+    "az": "QÜVVƏ",
+    "photos": [
+      "💪",
+      "➡️",
+      "⚙️",
+      "📐"
+    ],
+    "id": 246
+  },
+  {
+    "source": "technology:64",
+    "ru": "УСТАНОВКА",
+    "en": "INSTALL",
+    "az": "QURAŞDIRMA",
+    "photos": [
+      "⬇️",
+      "📦",
+      "💻",
+      "✅"
+    ],
+    "id": 247
+  },
+  {
+    "source": "cinema:57",
+    "ru": "ПРОСЛУШИВАНИЕ",
+    "en": "CALLBACK",
+    "az": "TƏKRARSINAQ",
+    "photos": [
+      "🎭",
+      "👥",
+      "🎬",
+      "✅"
+    ],
+    "id": 248
+  },
+  {
+    "source": "food:97",
+    "ru": "ВАРКА",
+    "en": "BOILING",
+    "az": "QAYNATMA",
+    "photos": [
+      "💧",
+      "♨️",
+      "🍲",
+      "⏱️"
+    ],
+    "id": 249
+  },
+  {
+    "source": "animals:72",
+    "ru": "КАРАКАТИЦА",
+    "en": "CUTTLEFISH",
+    "az": "MÜRƏKKƏBBALIĞI",
+    "photos": [
+      "🦑",
+      "🌊",
+      "🎨",
+      "🖋️"
+    ],
+    "id": 250
+  },
+  {
+    "source": "transport:48",
+    "ru": "ФУРГОН",
+    "en": "VAN",
+    "az": "FURQON",
+    "photos": [
+      "🚐",
+      "📦",
+      "🚪",
+      "🏙️"
+    ],
+    "id": 251
+  },
+  {
+    "source": "home:22",
+    "ru": "КАРНИЗ",
+    "en": "CURTAINROD",
+    "az": "KARNİZ",
+    "photos": [
+      "🪟",
+      "🧵",
+      "🪵",
+      "🏠"
+    ],
+    "id": 252
+  },
+  {
+    "source": "nature:18",
+    "ru": "МОХ",
+    "en": "MOSS",
+    "az": "MAMIR",
+    "photos": [
+      "🌿",
+      "🪨",
+      "💧",
+      "🌲"
+    ],
+    "id": 253
+  },
+  {
+    "source": "art:72",
+    "ru": "ШРИФТ",
+    "en": "FONT",
+    "az": "ŞRİFT",
+    "photos": [
+      "🔤",
+      "🅰️",
+      "✒️",
+      "📄"
+    ],
+    "id": 254
+  },
+  {
+    "source": "professions:95",
+    "ru": "ШАХТЕР",
+    "en": "MINER",
+    "az": "MƏDƏNÇİ",
+    "photos": [
+      "⛏️",
+      "🪨",
+      "🪖",
+      "⬇️"
+    ],
+    "id": 255
+  },
+  {
+    "source": "travel:78",
+    "ru": "НОМЕР",
+    "en": "ROOM",
+    "az": "OTAQ",
+    "photos": [
+      "🛏️",
+      "🏨",
+      "🔑",
+      "🚪"
+    ],
+    "id": 256
+  },
+  {
+    "source": "science:52",
+    "ru": "ТКАНЬ",
+    "en": "TISSUE",
+    "az": "TOXUMA",
+    "photos": [
+      "🧬",
+      "🔬",
+      "🫀",
+      "🧫"
+    ],
+    "id": 257
+  },
+  {
+    "source": "technology:52",
+    "ru": "ПРОГРАММА",
+    "en": "PROGRAM",
+    "az": "PROQRAM",
+    "photos": [
+      "💻",
+      "⚙️",
+      "📄",
+      "▶️"
+    ],
+    "id": 258
+  },
+  {
+    "source": "cinema:75",
+    "ru": "ХЛОПУШКА",
+    "en": "CLAPPERBOARD",
+    "az": "KLAPET",
+    "photos": [
+      "🎬",
+      "🎥",
+      "👏",
+      "🔢"
+    ],
+    "id": 259
+  },
+  {
+    "source": "food:67",
+    "ru": "ЛАЗАНЬЯ",
+    "en": "LASAGNA",
+    "az": "LAZANYA",
+    "photos": [
+      "🍝",
+      "🧀",
+      "🍅",
+      "🔥"
+    ],
+    "id": 260
+  },
+  {
+    "source": "animals:46",
+    "ru": "ЕНОТ",
+    "en": "RACCOON",
+    "az": "YENOT",
+    "photos": [
+      "🦝",
+      "🗑️",
+      "🌙",
+      "🐾"
+    ],
+    "id": 261
+  },
+  {
+    "source": "transport:37",
+    "ru": "ТРАКТОР",
+    "en": "TRACTOR",
+    "az": "TRAKTOR",
+    "photos": [
+      "🚜",
+      "🌾",
+      "⚙️",
+      "🌱"
+    ],
+    "id": 262
+  },
+  {
+    "source": "home:83",
+    "ru": "ПРИЩЕПКА",
+    "en": "CLOTHESPEG",
+    "az": "PALTARSANCAĞI",
+    "photos": [
+      "👕",
+      "🪢",
+      "☀️",
+      "🖐️"
+    ],
+    "id": 263
+  },
+  {
+    "source": "nature:94",
+    "ru": "БРИЗ",
+    "en": "BREEZE",
+    "az": "BRİZ",
+    "photos": [
+      "🌬️",
+      "🌊",
+      "🏖️",
+      "☀️"
+    ],
+    "id": 264
+  },
+  {
+    "source": "art:30",
+    "ru": "АККОРД",
+    "en": "CHORD",
+    "az": "AKKORD",
+    "photos": [
+      "🎹",
+      "🎸",
+      "🎼",
+      "🤝"
+    ],
+    "id": 265
+  },
+  {
+    "source": "professions:13",
+    "ru": "САНТЕХНИК",
+    "en": "PLUMBER",
+    "az": "SANTEXNİK",
+    "photos": [
+      "🚰",
+      "🔧",
+      "🚿",
+      "💧"
+    ],
+    "id": 266
+  },
+  {
+    "source": "travel:67",
+    "ru": "ПРОГУЛКА",
+    "en": "WALK",
+    "az": "GƏZİNTİ",
+    "photos": [
+      "🚶",
+      "🌳",
+      "📷",
+      "☀️"
+    ],
+    "id": 267
+  },
+  {
+    "source": "science:7",
+    "ru": "ПРОБИРКА",
+    "en": "TESTTUBE",
+    "az": "SINAQŞÜŞƏSİ",
+    "photos": [
+      "🧪",
+      "⚗️",
+      "💧",
+      "🥼"
+    ],
+    "id": 268
+  },
+  {
+    "source": "technology:93",
+    "ru": "БЛОКЧЕЙН",
+    "en": "BLOCKCHAIN",
+    "az": "BLOKÇEYN",
+    "photos": [
+      "⛓️",
+      "🔗",
+      "💻",
+      "🔐"
+    ],
+    "id": 269
+  },
+  {
+    "source": "cinema:14",
+    "ru": "ЭПИЗОД",
+    "en": "EPISODE",
+    "az": "EPİZOD",
+    "photos": [
+      "📺",
+      "1️⃣",
+      "🎬",
+      "⏭️"
+    ],
+    "id": 270
+  },
+  {
+    "source": "food:31",
+    "ru": "ОВСЯНКА",
+    "en": "OATMEAL",
+    "az": "YULAF",
+    "photos": [
+      "🥣",
+      "🌾",
+      "🥛",
+      "🌅"
+    ],
+    "id": 271
+  },
+  {
+    "source": "animals:53",
+    "ru": "МУРАВЬЕД",
+    "en": "ANTEATER",
+    "az": "QARIŞQAYEYƏN",
+    "photos": [
+      "🐜",
+      "👅",
+      "🌿",
+      "🐾"
+    ],
+    "id": 272
+  },
+  {
+    "source": "transport:90",
+    "ru": "СПИДОМЕТР",
+    "en": "SPEEDOMETER",
+    "az": "SPİDOMETR",
+    "photos": [
+      "🚗",
+      "⏱️",
+      "📏",
+      "💨"
+    ],
+    "id": 273
+  },
+  {
+    "source": "home:59",
+    "ru": "ВАННА",
+    "en": "BATHTUB",
+    "az": "VANNA",
+    "photos": [
+      "🛁",
+      "💧",
+      "🫧",
+      "🧼"
+    ],
+    "id": 274
+  },
+  {
+    "source": "nature:90",
+    "ru": "ЗАСУХА",
+    "en": "DROUGHT",
+    "az": "QURAQLIQ",
+    "photos": [
+      "☀️",
+      "🏜️",
+      "🌱",
+      "🚫"
+    ],
+    "id": 275
+  },
+  {
+    "source": "art:36",
+    "ru": "ОРКЕСТР",
+    "en": "ORCHESTRA",
+    "az": "ORKESTR",
+    "photos": [
+      "🎻",
+      "🎺",
+      "🥁",
+      "🎼"
+    ],
+    "id": 276
+  },
+  {
+    "source": "professions:45",
+    "ru": "МОРЯК",
+    "en": "SAILOR",
+    "az": "DƏNİZÇİ",
+    "photos": [
+      "⚓",
+      "🚢",
+      "🌊",
+      "🪢"
+    ],
+    "id": 277
+  },
+  {
+    "source": "travel:99",
+    "ru": "ЛЕДНИК",
+    "en": "GLACIER",
+    "az": "BUZLAQ",
+    "photos": [
+      "🧊",
+      "🏔️",
+      "❄️",
+      "💧"
+    ],
+    "id": 278
+  },
+  {
+    "source": "science:56",
+    "ru": "ХРОМОСОМА",
+    "en": "CHROMOSOME",
+    "az": "XROMOSOM",
+    "photos": [
+      "🧬",
+      "🔬",
+      "🧪",
+      "📊"
+    ],
+    "id": 279
+  },
+  {
+    "source": "technology:90",
+    "ru": "ФАЕРВОЛ",
+    "en": "FIREWALL",
+    "az": "FAYRVOL",
+    "photos": [
+      "🧱",
+      "🔥",
+      "🛡️",
+      "🌐"
+    ],
+    "id": 280
+  },
+  {
+    "source": "cinema:61",
+    "ru": "КИНОЗАЛ",
+    "en": "AUDITORIUM",
+    "az": "KİNOZAL",
+    "photos": [
+      "🎟️",
+      "🪑",
+      "📽️",
+      "🍿"
+    ],
+    "id": 281
+  },
+  {
+    "source": "food:65",
+    "ru": "РОЛЛ",
+    "en": "ROLL",
+    "az": "ROLL",
+    "photos": [
+      "🍣",
+      "🥢",
+      "🥬",
+      "🍚"
+    ],
+    "id": 282
+  },
+  {
+    "source": "animals:81",
+    "ru": "ГЕККОН",
+    "en": "GECKO",
+    "az": "GEKKON",
+    "photos": [
+      "🦎",
+      "🧱",
+      "🌙",
+      "🐾"
+    ],
+    "id": 283
+  },
+  {
+    "source": "transport:97",
+    "ru": "ДВОРНИКИ",
+    "en": "WINDSCREENWIPERS",
+    "az": "ŞÜŞƏSİLƏNLƏR",
+    "photos": [
+      "🚗",
+      "🌧️",
+      "🪟",
+      "🧹"
+    ],
+    "id": 284
+  },
+  {
+    "source": "home:87",
+    "ru": "ЩЁТКА",
+    "en": "SCRUBBINGBRUSH",
+    "az": "TƏMİZLİKFIRÇASI",
+    "photos": [
+      "🖐️",
+      "🧹",
+      "🫧",
+      "🧽"
+    ],
+    "id": 285
+  },
+  {
+    "source": "nature:52",
+    "ru": "БАРХАН",
+    "en": "CRESCENTDUNE",
+    "az": "BARXAN",
+    "photos": [
+      "🏜️",
+      "🌙",
+      "🌬️",
+      "☀️"
+    ],
+    "id": 286
+  },
+  {
+    "source": "art:25",
+    "ru": "РЕЗЕЦ",
+    "en": "CHISEL",
+    "az": "KƏSKİ",
+    "photos": [
+      "🔨",
+      "🗿",
+      "🪨",
+      "✋"
+    ],
+    "id": 287
+  },
+  {
+    "source": "professions:84",
+    "ru": "ХОРЕОГРАФ",
+    "en": "CHOREOGRAPHER",
+    "az": "XOREOQRAF",
+    "photos": [
+      "💃",
+      "📝",
+      "🎵",
+      "👥"
+    ],
+    "id": 288
+  },
+  {
+    "source": "travel:30",
+    "ru": "ПОХОД",
+    "en": "HIKE",
+    "az": "YÜRÜŞ",
+    "photos": [
+      "🥾",
+      "🎒",
+      "⛰️",
+      "🗺️"
+    ],
+    "id": 289
+  },
+  {
+    "source": "science:77",
+    "ru": "ЭРОЗИЯ",
+    "en": "EROSION",
+    "az": "EROZİYA",
+    "photos": [
+      "🌊",
+      "🪨",
+      "💨",
+      "⏳"
+    ],
+    "id": 290
+  },
+  {
+    "source": "technology:27",
+    "ru": "РАЗЪЕМ",
+    "en": "CONNECTOR",
+    "az": "KONNEKTOR",
+    "photos": [
+      "🔌",
+      "🧩",
+      "💻",
+      "📱"
+    ],
+    "id": 291
+  },
+  {
+    "source": "cinema:23",
+    "ru": "ЗАВЯЗКА",
+    "en": "SETUP",
+    "az": "GİRİŞ",
+    "photos": [
+      "🎬",
+      "1️⃣",
+      "❓",
+      "➡️"
+    ],
+    "id": 292
+  },
+  {
+    "source": "food:69",
+    "ru": "ЗАПЕКАНКА",
+    "en": "CASSEROLE",
+    "az": "SOBAYEMƏYİ",
+    "photos": [
+      "🍲",
+      "🧀",
+      "🔥",
+      "🍽️"
+    ],
+    "id": 293
+  },
+  {
+    "source": "animals:63",
+    "ru": "ТЮЛЕНЬ",
+    "en": "SEAL",
+    "az": "SUİTİ",
+    "photos": [
+      "🦭",
+      "🌊",
+      "🐟",
+      "❄️"
+    ],
+    "id": 294
+  },
+  {
+    "source": "transport:10",
+    "ru": "КАНАТКА",
+    "en": "CABLECAR",
+    "az": "KANATYOLU",
+    "photos": [
+      "🚠",
+      "🏔️",
+      "🪢",
+      "🏞️"
+    ],
+    "id": 295
+  },
+  {
+    "source": "home:33",
+    "ru": "КОРЗИНА",
+    "en": "BASKET",
+    "az": "SƏBƏT",
+    "photos": [
+      "🧺",
+      "🪵",
+      "📦",
+      "🏠"
+    ],
+    "id": 296
+  },
+  {
+    "source": "nature:34",
+    "ru": "ЖАСМИН",
+    "en": "JASMINE",
+    "az": "JASMİN",
+    "photos": [
+      "⚪",
+      "🌸",
+      "👃",
+      "🌿"
+    ],
+    "id": 297
+  },
+  {
+    "source": "art:19",
+    "ru": "ГРАФИКА",
+    "en": "GRAPHICS",
+    "az": "QRAFİKA",
+    "photos": [
+      "✒️",
+      "📐",
+      "⚫",
+      "⚪"
+    ],
+    "id": 298
+  },
+  {
+    "source": "professions:63",
+    "ru": "АРХЕОЛОГ",
+    "en": "ARCHAEOLOGIST",
+    "az": "ARXEOLOQ",
+    "photos": [
+      "🏺",
+      "⛏️",
+      "🗿",
+      "📜"
+    ],
+    "id": 299
+  },
+  {
+    "source": "travel:100",
+    "ru": "ПУТЕШЕСТВИЕ",
+    "en": "TRAVEL",
+    "az": "SƏYAHƏT",
+    "photos": [
+      "🌍",
+      "✈️",
+      "🧳",
+      "🗺️"
+    ],
+    "id": 300
+  },
+  {
+    "source": "science:80",
+    "ru": "ОЗОН",
+    "en": "OZONE",
+    "az": "OZON",
+    "photos": [
+      "🌍",
+      "☀️",
+      "🛡️",
+      "🌤️"
+    ],
+    "id": 301
+  },
+  {
+    "source": "technology:60",
+    "ru": "ОШИБКА",
+    "en": "BUG",
+    "az": "SƏHV",
+    "photos": [
+      "🐞",
+      "💻",
+      "⚠️",
+      "🔧"
+    ],
+    "id": 302
+  },
+  {
+    "source": "cinema:12",
+    "ru": "ДОКУМЕНТАЛКА",
+    "en": "DOCUMENTARY",
+    "az": "SƏNƏDLİFİLM",
+    "photos": [
+      "📹",
+      "🌍",
+      "📰",
+      "🎬"
+    ],
+    "id": 303
+  },
+  {
+    "source": "food:7",
+    "ru": "СЛИВА",
+    "en": "PLUM",
+    "az": "GAVALI",
+    "photos": [
+      "🟣",
+      "🌳",
+      "🧺",
+      "🍰"
+    ],
+    "id": 304
+  },
+  {
+    "source": "animals:29",
+    "ru": "ВЕРБЛЮД",
+    "en": "CAMEL",
+    "az": "DƏVƏ",
+    "photos": [
+      "🐪",
+      "🏜️",
+      "💧",
+      "☀️"
+    ],
+    "id": 305
+  },
+  {
+    "source": "transport:92",
+    "ru": "БАМПЕР",
+    "en": "BUMPER",
+    "az": "BAMPER",
+    "photos": [
+      "🚗",
+      "🛡️",
+      "🛠️",
+      "💥"
+    ],
+    "id": 306
+  },
+  {
+    "source": "home:41",
+    "ru": "КЛАДОВКА",
+    "en": "PANTRY",
+    "az": "ANBAROTAĞI",
+    "photos": [
+      "📦",
+      "🫙",
+      "🚪",
+      "🏠"
+    ],
+    "id": 307
+  },
+  {
+    "source": "nature:41",
+    "ru": "ВЬЮНОК",
+    "en": "BINDWEED",
+    "az": "SARMAŞIQOTU",
+    "photos": [
+      "🌿",
+      "🌀",
+      "⚪",
+      "🌼"
+    ],
+    "id": 308
+  },
+  {
+    "source": "art:78",
+    "ru": "АНИМАЦИЯ",
+    "en": "ANIMATION",
+    "az": "ANİMASİYA",
+    "photos": [
+      "🎞️",
+      "🖥️",
+      "🏃",
+      "✨"
+    ],
+    "id": 309
+  },
+  {
+    "source": "professions:88",
+    "ru": "ПОРТНОЙ",
+    "en": "TAILOR",
+    "az": "DƏRZİ",
+    "photos": [
+      "🧵",
+      "✂️",
+      "👔",
+      "📏"
+    ],
+    "id": 310
+  },
+  {
+    "source": "travel:31",
+    "ru": "ПИКНИК",
+    "en": "PICNIC",
+    "az": "PİKNİK",
+    "photos": [
+      "🧺",
+      "🥪",
+      "🌳",
+      "☀️"
+    ],
+    "id": 311
+  },
+  {
+    "source": "science:47",
+    "ru": "ЗАРЯД",
+    "en": "CHARGE",
+    "az": "YÜK",
+    "photos": [
+      "⚡",
+      "➕",
+      "➖",
+      "🔋"
+    ],
+    "id": 312
+  },
+  {
+    "source": "technology:89",
+    "ru": "ШИФРОВАНИЕ",
+    "en": "ENCRYPTION",
+    "az": "ŞİFRLƏMƏ",
+    "photos": [
+      "🔐",
+      "🔣",
+      "💻",
+      "🛡️"
+    ],
+    "id": 313
+  },
+  {
+    "source": "cinema:80",
+    "ru": "СПЕЦЭФФЕКТ",
+    "en": "SPECIALEFFECT",
+    "az": "XÜSUSİEFFEKT",
+    "photos": [
+      "💥",
+      "🪄",
+      "🎬",
+      "💻"
+    ],
+    "id": 314
+  },
+  {
+    "source": "food:30",
+    "ru": "ГРЕЧКА",
+    "en": "BUCKWHEAT",
+    "az": "QARABAŞAQ",
+    "photos": [
+      "🥣",
+      "🌾",
+      "🍚",
+      "🥄"
+    ],
+    "id": 315
+  },
+  {
+    "source": "animals:56",
+    "ru": "МАНГУСТ",
+    "en": "MONGOOSE",
+    "az": "MANQUST",
+    "photos": [
+      "🐾",
+      "🐍",
+      "🌿",
+      "⚔️"
+    ],
+    "id": 316
+  },
+  {
+    "source": "transport:33",
+    "ru": "РИКША",
+    "en": "RICKSHAW",
+    "az": "RİKŞA",
+    "photos": [
+      "🚲",
+      "👥",
+      "🌏",
+      "🛞"
+    ],
+    "id": 317
+  },
+  {
+    "source": "home:21",
+    "ru": "ЖАЛЮЗИ",
+    "en": "BLINDS",
+    "az": "JALÜZ",
+    "photos": [
+      "🪟",
+      "☀️",
+      "↕️",
+      "🏠"
+    ],
+    "id": 318
+  },
+  {
+    "source": "nature:84",
+    "ru": "РОСА",
+    "en": "DEW",
+    "az": "ŞEH",
+    "photos": [
+      "💧",
+      "🌿",
+      "🌅",
+      "☀️"
+    ],
+    "id": 319
+  },
+  {
+    "source": "art:54",
+    "ru": "ФАСАД",
+    "en": "FACADE",
+    "az": "FASAD",
+    "photos": [
+      "🏢",
+      "🎨",
+      "🚪",
+      "🪟"
+    ],
+    "id": 320
+  },
+  {
+    "source": "professions:23",
+    "ru": "ПЕРЕВОДЧИК",
+    "en": "TRANSLATOR",
+    "az": "TƏRCÜMƏÇİ",
+    "photos": [
+      "🌐",
+      "🗣️",
+      "📖",
+      "🔤"
+    ],
+    "id": 321
+  },
+  {
+    "source": "travel:91",
+    "ru": "СНЕГОХОД",
+    "en": "SNOWMOBILE",
+    "az": "QARMAŞINI",
+    "photos": [
+      "🏔️",
+      "❄️",
+      "🛷",
+      "⚙️"
+    ],
+    "id": 322
+  },
+  {
+    "source": "science:30",
+    "ru": "РАБОТА",
+    "en": "WORK",
+    "az": "İŞ",
+    "photos": [
+      "⚙️",
+      "📐",
+      "➡️",
+      "🔋"
+    ],
+    "id": 323
+  },
+  {
+    "source": "technology:73",
+    "ru": "ПОДКАСТ",
+    "en": "PODCAST",
+    "az": "PODKAST",
+    "photos": [
+      "🎙️",
+      "🎧",
+      "📱",
+      "🔊"
+    ],
+    "id": 324
+  },
+  {
+    "source": "cinema:70",
+    "ru": "КИНОФЕСТИВАЛЬ",
+    "en": "FILMFESTIVAL",
+    "az": "KİNOFESTİVAL",
+    "photos": [
+      "🎬",
+      "🏆",
+      "🌍",
+      "🎟️"
+    ],
+    "id": 325
+  },
+  {
+    "source": "food:15",
+    "ru": "МАНГО",
+    "en": "MANGO",
+    "az": "MANQO",
+    "photos": [
+      "🥭",
+      "🌴",
+      "🧃",
+      "🟠"
+    ],
+    "id": 326
+  },
+  {
+    "source": "animals:4",
+    "ru": "ГЕПАРД",
+    "en": "CHEETAH",
+    "az": "HEPARD",
+    "photos": [
+      "🐆",
+      "💨",
+      "🏃",
+      "🌾"
+    ],
+    "id": 327
+  },
+  {
+    "source": "transport:82",
+    "ru": "ПАРКОВКА",
+    "en": "PARKING",
+    "az": "PARKİNQ",
+    "photos": [
+      "🅿️",
+      "🚗",
+      "⏱️",
+      "🏙️"
+    ],
+    "id": 328
+  },
+  {
+    "source": "home:42",
+    "ru": "БАЛКОН",
+    "en": "BALCONY",
+    "az": "BALKON",
+    "photos": [
+      "🏢",
+      "🌤️",
+      "🪴",
+      "🚪"
+    ],
+    "id": 329
+  },
+  {
+    "source": "nature:21",
+    "ru": "ПЛЮЩ",
+    "en": "IVY",
+    "az": "SARMAŞIQ",
+    "photos": [
+      "🌿",
+      "🧱",
+      "🏠",
+      "⬆️"
+    ],
+    "id": 330
+  },
+  {
+    "source": "art:21",
+    "ru": "СКУЛЬПТУРА",
+    "en": "SCULPTURE",
+    "az": "HEYKƏLTƏRAŞLIQ",
+    "photos": [
+      "🗿",
+      "👐",
+      "🪨",
+      "🎨"
+    ],
+    "id": 331
+  },
+  {
+    "source": "professions:75",
+    "ru": "УЧЕНЫЙ",
+    "en": "SCIENTIST",
+    "az": "ALİM",
+    "photos": [
+      "🔬",
+      "📚",
+      "🧪",
+      "💡"
+    ],
+    "id": 332
+  },
+  {
+    "source": "travel:77",
+    "ru": "БРОНЬ",
+    "en": "BOOKING",
+    "az": "REZERV",
+    "photos": [
+      "📱",
+      "🏨",
+      "✅",
+      "📅"
+    ],
+    "id": 333
+  },
+  {
+    "source": "science:70",
+    "ru": "ХЛОРОФИЛЛ",
+    "en": "CHLOROPHYLL",
+    "az": "XLOROFİL",
+    "photos": [
+      "🌿",
+      "🟢",
+      "☀️",
+      "🔬"
+    ],
+    "id": 334
+  },
+  {
+    "source": "technology:11",
+    "ru": "ВЕБКАМЕРА",
+    "en": "WEBCAM",
+    "az": "VEBKAMERA",
+    "photos": [
+      "📹",
+      "💻",
+      "🎥",
+      "🌐"
+    ],
+    "id": 335
+  },
+  {
+    "source": "cinema:87",
+    "ru": "СПОЙЛЕР",
+    "en": "SPOILER",
+    "az": "SPOYLER",
+    "photos": [
+      "🤫",
+      "📖",
+      "🎬",
+      "😮"
+    ],
+    "id": 336
+  },
+  {
+    "source": "food:8",
+    "ru": "ВИШНЯ",
+    "en": "CHERRY",
+    "az": "GİLAS",
+    "photos": [
+      "🍒",
+      "🌳",
+      "🧁",
+      "❤️"
+    ],
+    "id": 337
+  },
+  {
+    "source": "animals:32",
+    "ru": "ОСЁЛ",
+    "en": "DONKEY",
+    "az": "UZUNQULAQ",
+    "photos": [
+      "🫏",
+      "👂",
+      "🧺",
+      "🌾"
+    ],
+    "id": 338
+  },
+  {
+    "source": "transport:28",
+    "ru": "РАТРАК",
+    "en": "SNOWCAT",
+    "az": "RATRAK",
+    "photos": [
+      "❄️",
+      "🚜",
+      "🏔️",
+      "⚙️"
+    ],
+    "id": 339
+  },
+  {
+    "source": "home:70",
+    "ru": "ТАПОЧКИ",
+    "en": "SLIPPERS",
+    "az": "BAŞMAQ",
+    "photos": [
+      "🥿",
+      "🦶",
+      "🏠",
+      "🧶"
+    ],
+    "id": 340
+  },
+  {
+    "source": "nature:98",
+    "ru": "ОТЛИВ",
+    "en": "LOWTIDE",
+    "az": "ÇƏKİLMƏ",
+    "photos": [
+      "🌊",
+      "🌕",
+      "⬇️",
+      "🏖️"
+    ],
+    "id": 341
+  },
+  {
+    "source": "art:24",
+    "ru": "ГЛИНА",
+    "en": "CLAY",
+    "az": "GİL",
+    "photos": [
+      "🏺",
+      "👐",
+      "🟤",
+      "🔥"
+    ],
+    "id": 342
+  },
+  {
+    "source": "professions:26",
+    "ru": "ПРОКУРОР",
+    "en": "PROSECUTOR",
+    "az": "PROKUROR",
+    "photos": [
+      "⚖️",
+      "🏛️",
+      "📁",
+      "🔍"
+    ],
+    "id": 343
+  },
+  {
+    "source": "travel:56",
+    "ru": "ДВОРЕЦ",
+    "en": "PALACE",
+    "az": "SARAY",
+    "photos": [
+      "🏛️",
+      "👑",
+      "✨",
+      "📷"
+    ],
+    "id": 344
+  },
+  {
+    "source": "science:23",
+    "ru": "ГАЗ",
+    "en": "GAS",
+    "az": "QAZ",
+    "photos": [
+      "💨",
+      "🧪",
+      "☁️",
+      "🎈"
+    ],
+    "id": 345
+  },
+  {
+    "source": "technology:17",
+    "ru": "СЕРВЕР",
+    "en": "SERVER",
+    "az": "SERVER",
+    "photos": [
+      "🖥️",
+      "🌐",
+      "🗄️",
+      "⚙️"
+    ],
+    "id": 346
+  },
+  {
+    "source": "cinema:64",
+    "ru": "ПОПКОРН",
+    "en": "POPCORN",
+    "az": "POPKORN",
+    "photos": [
+      "🍿",
+      "🌽",
+      "🧈",
+      "🎬"
+    ],
+    "id": 347
+  },
+  {
+    "source": "food:5",
+    "ru": "ГРУША",
+    "en": "PEAR",
+    "az": "ARMUD",
+    "photos": [
+      "🍐",
+      "🌳",
+      "🧺",
+      "🍰"
+    ],
+    "id": 348
+  },
+  {
+    "source": "animals:48",
+    "ru": "ЁЖ",
+    "en": "HEDGEHOG",
+    "az": "KİRPİ",
+    "photos": [
+      "🦔",
+      "🍂",
+      "🌲",
+      "🦀"
+    ],
+    "id": 349
+  },
+  {
+    "source": "transport:12",
+    "ru": "МИНИВЭН",
+    "en": "MINIVAN",
+    "az": "MİNİVEN",
+    "photos": [
+      "🚐",
+      "👨‍👩‍👧‍👦",
+      "🧳",
+      "🛣️"
+    ],
+    "id": 350
+  },
+  {
+    "source": "home:3",
+    "ru": "ТАБУРЕТ",
+    "en": "STOOL",
+    "az": "KƏTİL",
+    "photos": [
+      "🪑",
+      "🪵",
+      "🦵",
+      "🏠"
+    ],
+    "id": 351
+  },
+  {
+    "source": "nature:69",
+    "ru": "ПРОЛИВ",
+    "en": "STRAIT",
+    "az": "BOĞAZ",
+    "photos": [
+      "🌊",
+      "🏝️",
+      "🏝️",
+      "🚢"
+    ],
+    "id": 352
+  },
+  {
+    "source": "art:14",
+    "ru": "МОЛЬБЕРТ",
+    "en": "EASEL",
+    "az": "MOLBERT",
+    "photos": [
+      "🪜",
+      "🖼️",
+      "🎨",
+      "🖌️"
+    ],
+    "id": 353
+  },
+  {
+    "source": "professions:61",
+    "ru": "ВОСПИТАТЕЛЬ",
+    "en": "EDUCATOR",
+    "az": "TƏRBİYƏÇİ",
+    "photos": [
+      "🧸",
+      "👧",
+      "📚",
+      "🏫"
+    ],
+    "id": 354
+  },
+  {
+    "source": "travel:27",
+    "ru": "КЕМПИНГ",
+    "en": "CAMPING",
+    "az": "KEMPİNQ",
+    "photos": [
+      "🏕️",
+      "⛺",
+      "🔥",
+      "🌲"
+    ],
+    "id": 355
+  },
+  {
+    "source": "science:95",
+    "ru": "ВЕРОЯТНОСТЬ",
+    "en": "PROBABILITY",
+    "az": "EHTİMAL",
+    "photos": [
+      "🎲",
+      "📊",
+      "❓",
+      "🧮"
+    ],
+    "id": 356
+  },
+  {
+    "source": "technology:14",
+    "ru": "КОЛОНКА",
+    "en": "SPEAKER",
+    "az": "DİNAMİK",
+    "photos": [
+      "🔊",
+      "🎵",
+      "📱",
+      "📶"
+    ],
+    "id": 357
+  },
+  {
+    "source": "cinema:60",
+    "ru": "ИНТЕРВЬЮ",
+    "en": "INTERVIEW",
+    "az": "MÜSAHİBƏ",
+    "photos": [
+      "🎙️",
+      "👥",
+      "❓",
+      "🎬"
+    ],
+    "id": 358
+  },
+  {
+    "source": "food:64",
+    "ru": "СУШИ",
+    "en": "SUSHI",
+    "az": "SUŞİ",
+    "photos": [
+      "🍣",
+      "🍚",
+      "🐟",
+      "🥢"
+    ],
+    "id": 359
+  },
+  {
+    "source": "animals:39",
+    "ru": "ХОМЯК",
+    "en": "HAMSTER",
+    "az": "DAĞSİÇANI",
+    "photos": [
+      "🐹",
+      "🌻",
+      "🛞",
+      "🏠"
+    ],
+    "id": 360
+  },
+  {
+    "source": "transport:25",
+    "ru": "МОПЕД",
+    "en": "MOPED",
+    "az": "MOPED",
+    "photos": [
+      "🛵",
+      "⚙️",
+      "🛣️",
+      "🪖"
+    ],
+    "id": 361
+  },
+  {
+    "source": "home:68",
+    "ru": "РАСЧЁСКА",
+    "en": "COMB",
+    "az": "DARAQ",
+    "photos": [
+      "💇",
+      "🦷",
+      "🖐️",
+      "🪞"
+    ],
+    "id": 362
+  },
+  {
+    "source": "nature:55",
+    "ru": "УЩЕЛЬЕ",
+    "en": "GORGE",
+    "az": "DƏRƏ",
+    "photos": [
+      "🏔️",
+      "💧",
+      "⬇️",
+      "🪨"
+    ],
+    "id": 363
+  },
+  {
+    "source": "art:4",
+    "ru": "ПАЛИТРА",
+    "en": "PALETTE",
+    "az": "PALETRA",
+    "photos": [
+      "🎨",
+      "🌈",
+      "🟣",
+      "🟡"
+    ],
+    "id": 364
+  },
+  {
+    "source": "professions:43",
+    "ru": "МАШИНИСТ",
+    "en": "TRAINDRIVER",
+    "az": "MAŞİNİST",
+    "photos": [
+      "🚆",
+      "🛤️",
+      "🚦",
+      "👨‍✈️"
+    ],
+    "id": 365
+  }
+]

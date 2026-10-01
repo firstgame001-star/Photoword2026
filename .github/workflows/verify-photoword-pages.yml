@@ -28,12 +28,13 @@ jobs:
           node scripts/test-repeat-policy.mjs
           node scripts/test-duel-input.mjs
           node scripts/test-challenge-server-input.mjs
-      - name: Wait for r117 and verify published files
+          node scripts/test-daily-input.mjs
+      - name: Wait for r118 and verify published files
         shell: bash
         run: |
           set -euo pipefail
           base='https://firstgame001-star.github.io/Photoword2026/clean'
-          release='20261002-r117'
+          release='20261002-r118'
           ok=0
           for i in $(seq 1 48); do
             if curl --fail --silent --show-error --location --max-time 20 "$base/release.json?check=$i" -o "$RUNNER_TEMP/release.json" && grep -q "$release" "$RUNNER_TEMP/release.json"; then
@@ -43,7 +44,7 @@ jobs:
             sleep 5
           done
           test "$ok" = 1
-          for file in index.html game.html theme-game.html core.js home.js duel.js game.js main-levels-8-9.js main-levels-10-12.js theme-game.js theme-levels-cinema-food.js theme-levels-expansion.js challenge-bank-extra.js challenge-repeat-index.js challenge-repeat-policy.js challenge.js ui.css privacy.html terms.html release.json; do
+          for file in index.html game.html theme-game.html core.js home.js duel.js game.js main-levels-8-9.js main-levels-10-12.js theme-game.js theme-levels-cinema-food.js theme-levels-expansion.js challenge-bank-extra.js challenge-repeat-index.js challenge-repeat-policy.js challenge.js daily-puzzle.js ui.css privacy.html terms.html release.json; do
             curl --fail --silent --show-error --location --retry 4 --retry-all-errors --retry-delay 3 --max-time 30 "$base/$file?r=$release" -o "$RUNNER_TEMP/$file"
             echo "HTTP 200: $file"
           done
