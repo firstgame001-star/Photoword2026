@@ -72,6 +72,15 @@ Deno.serve(async req=>{
     const db=createClient(Deno.env.get('SUPABASE_URL')!,Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!,
       {auth:{persistSession:false,autoRefreshToken:false}});
     let result:any=null,correct:boolean|undefined;
+    if(action==='reactions'){
+      if(!code)return reply({error:'duel_not_found'},404);
+      const actor=await db.from('players').select('id').eq('telegram_id',user.id).maybeSingle();
+      if(actor.error)throw actor.error;if(!actor.data)return reply({error:'duel_not_found'},404);
+      const match=await db.from('duel_matches').select('creator,opponent,creator_reaction,creator_reaction_at,opponent_reaction,opponent_reaction_at').eq('code',code).or('creator.eq.'+actor.data.id+',opponent.eq.'+actor.data.id).maybeSingle();
+      if(match.error)throw match.error;if(!match.data)return reply({error:'duel_not_found'},404);
+      const m=match.data,mine=m.creator===actor.data.id;
+      return reply({reactions:{my_reaction:mine?m.creator_reaction:m.opponent_reaction,my_reaction_at:mine?m.creator_reaction_at:m.opponent_reaction_at,their_reaction:mine?m.opponent_reaction:m.creator_reaction,their_reaction_at:mine?m.opponent_reaction_at:m.creator_reaction_at},server_now:new Date().toISOString()});
+    }
     if(action==='create'){
       const stake=Number(body.stake),language=String(body.language||'');
       if(!Number.isInteger(stake)||stake<25||stake>500||stake%25!==0||!['ru','en','az'].includes(language))return reply({error:'duel_bad_stake'},400);

@@ -28,11 +28,11 @@ let friends=[],selectedFriend='',pendingHomeOffer=null,dismissedOfferCode='',hom
 const language=()=>{try{return localStorage.getItem('pw.language')||'ru'}catch{return'ru'}};
 const t=()=>copy[language()]||copy.ru;
 const chapterTitles={
- ru:['','Новичок','Любитель','Знаток','Опытный','Эксперт','Профессионал','Мастер','Виртуоз','Легенда'],
- en:['','Novice','Amateur','Adept','Experienced','Expert','Professional','Master','Virtuoso','Legend'],
- az:['','Yeni başlayan','Həvəskar','Bilici','Təcrübəli','Ekspert','Peşəkar','Usta','Virtuoz','Əfsanə']
+ ru:['','Новичок','Любитель','Знаток','Опытный','Эксперт','Профессионал','Мастер','Виртуоз','Легенда','Мастер слов','Исследователь','Хранитель знаний'],
+ en:['','Novice','Amateur','Adept','Experienced','Expert','Professional','Master','Virtuoso','Legend','Word Master','Explorer','Keeper of Knowledge'],
+ az:['','Yeni başlayan','Həvəskar','Bilici','Təcrübəli','Ekspert','Peşəkar','Usta','Virtuoz','Əfsanə','Söz ustası','Tədqiqatçı','Bilik qoruyucusu']
 };
-function playerTitle(levels){const finished=[20,50,90,130,180,230,280,330,380].filter(end=>Number(levels||0)>=end).length;return(chapterTitles[language()]||chapterTitles.ru)[Math.max(1,finished)]}
+function playerTitle(levels){const finished=[20,50,90,130,180,230,280,330,380,430,480,530].filter(end=>Number(levels||0)>=end).length;return(chapterTitles[language()]||chapterTitles.ru)[Math.max(1,finished)]}
 function paintRoomHost(d){$('duelRoomHost').hidden=!d?.creator;if(!d?.creator)return;$('duelRoomHostName').textContent=d.my_name||t().you;$('duelRoomHostTitle').textContent=playerTitle(d.my_completed_levels)}
 let wrongTimer=null,submitTimer=null,code='',duel=null,preview=null,incomingOffer=null,requesting=false,offerRequesting=false,answering=false,poll=null,tick=null,offerPoll=null,offset=0,questionId=null,chosen=[],disabled=false,lastStatus='',answerEpoch=0,stateSeq=0,stateStarted=0,lastSyncAt=0;
 const matchKey='pw.duel.current';
@@ -40,7 +40,7 @@ function savedMatch(){try{const d=JSON.parse(localStorage.getItem(matchKey));if(
 function rememberMatch(matchCode){try{localStorage.setItem(matchKey,JSON.stringify({code:matchCode,at:Date.now()}))}catch{}}
 function forgetMatch(){try{localStorage.removeItem(matchKey)}catch{}}
 const reactions={laugh:'😂',cool:'😎',fire:'🔥',clap:'👏',wow:'😮',heart:'❤️',thinking:'🤔',strong:'💪'};
-let reactionMatch='',reactionSeen={my:null,their:null},reactionTimers={my:null,their:null},reacting=false,pendingReaction='';
+let reactionMatch='',reactionSeen={my:null,their:null},reactionTimers={my:null,their:null},reacting=false,pendingReaction='',reactionPoll=null,reactionRequesting=false;
 function closeReactions(){$('duelReactionPicker').hidden=true;$('duelYouLabel').setAttribute('aria-expanded','false')}
 function paintNames(d){$('duelYouLabel').textContent=d?.my_name||t().you;$('duelFriendLabel').textContent=d?.their_name||t().friend;$('duelYouLabel').setAttribute('aria-label',$('duelYouLabel').textContent+' · '+({ru:'выбрать реакцию',en:'choose a reaction',az:'reaksiya seç'}[language()]||'выбрать реакцию'))}
 function paintReaction(side,key,at){
@@ -48,7 +48,7 @@ function paintReaction(side,key,at){
  if(!at||reactionSeen[side]===at)return;
  if(side==='my'&&pendingReaction===key){pendingReaction='';reactionSeen.my=at;return}
  reactionSeen[side]=at;clearTimeout(reactionTimers[side]);node.textContent='';
- if(!Object.hasOwn(reactions,key)||Date.now()+offset-Date.parse(at)>4000)return;
+ if(!Object.hasOwn(reactions,key)||Date.now()+offset-Date.parse(at)>8000)return;
  node.textContent=reactions[key];node.classList.remove('pop');void node.offsetWidth;node.classList.add('pop');
  reactionTimers[side]=setTimeout(()=>{node.textContent='';node.classList.remove('pop')},2600);
 }
@@ -61,7 +61,7 @@ for(const [key,emoji] of Object.entries(reactions)){const button=document.create
 $('duelYouLabel').onclick=()=>{if(duel?.status!=='active')return;reactionPicker.hidden=!reactionPicker.hidden;$('duelYouLabel').setAttribute('aria-expanded',String(!reactionPicker.hidden))};
 const panels=['duelSetup','duelStats','duelRematchSetup','duelInvite','duelJoin','duelGame','duelResult'];
 function show(id){const changed=$(id).hidden||!$('duelScreen').classList.contains('active');for(const p of panels)$(p).hidden=p!==id;document.querySelectorAll('.screen').forEach(e=>e.classList.toggle('active',e.id==='duelScreen'));if(changed){pw.status('');window.scrollTo(0,0)}}
-function home(){if(duel&&['finished','cancelled'].includes(duel.status))forgetMatch();stateSeq++;requesting=false;closeReactions();clearInterval(poll);clearInterval(tick);clearInterval(offerPoll);clearInterval(roomPoll);poll=tick=offerPoll=roomPoll=null;document.querySelectorAll('.screen').forEach(e=>e.classList.toggle('active',e.id==='home'));window.scrollTo(0,0);checkHomeOffer()}
+function home(){if(duel&&['finished','cancelled'].includes(duel.status))forgetMatch();stateSeq++;requesting=false;closeReactions();clearInterval(poll);clearInterval(tick);clearInterval(offerPoll);clearInterval(roomPoll);clearInterval(reactionPoll);poll=tick=offerPoll=roomPoll=reactionPoll=null;document.querySelectorAll('.screen').forEach(e=>e.classList.toggle('active',e.id==='home'));window.scrollTo(0,0);checkHomeOffer()}
 function labels(){
 const x=t(),ids={duelEntryTitle:x.entry,duelEntryDesc:x.desc,duelTitle:x.title,duelSubtitle:x.subtitle,duelSetupTitle:x.setup,duelRules:x.rules,duelStatsOpen:'📊 '+x.stats,duelStatsFromResult:'📊 '+x.stats,duelStatsTitle:x.statsTitle,duelStatsPlayedLabel:x.statsPlayed,duelStatsWinsLabel:x.statsWins,duelStatsLossesLabel:x.statsLosses,duelStatsDrawsLabel:x.statsDraws,duelStatsBestLabel:x.statsBest,duelStatsNetLabel:x.statsNet,duelStatsRecentTitle:x.statsRecent,duelStatsBack:x.statsBack,duelRoomsTitle:x.rooms,duelStakeLabel:x.stake,duelCreate:x.privateRoom,duelCreatePublic:x.openRoom,duelInviteTitle:x.waiting,duelShare:x.share,duelCancel:x.cancel,duelJoinTitle:x.join,duelAccept:x.accept,duelDecline:x.back,duelYouLabel:x.you,duelFriendLabel:x.friend,duelClear:x.clear,duelDone:x.back,duelRematch:x.rematch,duelRematchTitle:x.rematchTitle,duelRematchInfo:x.rematchInfo,duelRematchStakeLabel:x.stake,duelRematchConfirm:x.rematchConfirm,duelRematchBack:x.resultBack};
 for(const [id,value] of Object.entries(ids))$(id).textContent=value;
@@ -94,7 +94,12 @@ function backStats(){statsReq++;$('duelTitle').textContent=t().title;$('duelSubt
 window.PWDuelStats={openFromStats:()=>openStats(true)};
 $('duelStatsOpen').onclick=()=>openStats();$('duelStatsFromResult').onclick=()=>openStats();$('duelStatsBack').onclick=backStats;
 function refreshCoins(){pw.login(true).catch(()=>{})}
-function startPolling(){if(!poll)poll=setInterval(()=>{if($('duelScreen').classList.contains('active'))state().catch(error)},700);if(!tick)tick=setInterval(updateClock,150)}
+function startPolling(){if(!poll)poll=setInterval(()=>{if($('duelScreen').classList.contains('active'))state().catch(error)},700);if(!tick)tick=setInterval(updateClock,150);if(!reactionPoll)reactionPoll=setInterval(syncReactions,600)}
+async function syncReactions(){
+ if(reactionRequesting||document.hidden||!code||duel?.status!=='active'||!$('duelScreen').classList.contains('active'))return;
+ reactionRequesting=true;const matchCode=code;
+ try{const r=await call('reactions',{code:matchCode});if(code===matchCode&&duel?.status==='active'&&r.reactions)paintReactions({...r.reactions,code:matchCode})}catch{}finally{reactionRequesting=false}
+}
 function startOfferPolling(){if(!offerPoll)offerPoll=setInterval(()=>{if(!$('duelResult').hidden)checkOffer().catch(error)},1800);checkOffer().catch(error)}
 async function checkOffer(){
 if(offerRequesting||!duel||duel.status!=='finished'||$('duelResult').hidden)return;
@@ -121,7 +126,7 @@ if(duel.status==='active'){
 }
 async function call(action,body={}){const r=await pw.duelRequest(action,body);if(r.server_now)offset=Date.parse(r.server_now)-Date.now();return r}
 async function state(){
-if(answering||!code||!$('duelScreen').classList.contains('active')||(requesting&&Date.now()-stateStarted<3000))return;
+if(answering||document.hidden||!code||!$('duelScreen').classList.contains('active')||requesting)return;
 requesting=true;stateStarted=Date.now();const seq=++stateSeq,epoch=answerEpoch,matchCode=code;
 try{const r=await call('state',{code:matchCode,questionId});if(seq!==stateSeq||epoch!==answerEpoch||matchCode!==code||!$('duelScreen').classList.contains('active'))return;
  if(!r.duel){forgetMatch();home();return}
@@ -142,7 +147,7 @@ if(d.status==='waiting'){
  if(q&&questionId!==d.question_id){questionId=d.question_id;chosen=[];lastStatus='';drawQuestion(q)}
  updateClock();
 }else{
- closeReactions();clearInterval(poll);clearInterval(tick);poll=tick=null;show('duelResult');
+ closeReactions();clearInterval(poll);clearInterval(tick);clearInterval(reactionPoll);poll=tick=reactionPoll=null;show('duelResult');
  $('duelResultIcon').textContent=d.status==='cancelled'?'↩️':d.draw?'🤝':d.won?'🏆':'⚔️';
  $('duelResultTitle').textContent=d.status==='cancelled'?t().cancelled:d.draw?t().draw:d.won?t().won:t().lost;
  $('duelResultText').textContent=d.status==='cancelled'?t().drawResult(d.stake):d.draw?t().drawResult(d.stake):t().result(d.my_score,d.their_score,d.payout||0);
@@ -155,18 +160,19 @@ function drawQuestion(q){
 clearTimeout(wrongTimer);clearTimeout(submitTimer);wrongTimer=submitTimer=null;$('duelClear').disabled=true;const photos=$('duelPhotos'),slots=$('duelSlots'),letters=$('duelLetters');photos.replaceChildren();slots.replaceChildren();letters.replaceChildren();
 for(const emoji of q.photos){const div=document.createElement('div');div.className='photo';div.textContent=emoji;photos.append(div)}
 slots.style.gridTemplateColumns='repeat('+Math.min(q.length,8)+',minmax(0,1fr))';
-for(let i=0;i<q.length;i++){const b=document.createElement('button');b.className='slot';b.type='button';b.onclick=()=>{if(chosen.length){clearTimeout(submitTimer);submitTimer=null;chosen.pop();paint(q)}};slots.append(b)}
+for(let i=0;i<q.length;i++){const b=document.createElement('button');b.className='slot';b.type='button';b.onclick=()=>{if(!answering&&chosen[i]!==undefined){clearTimeout(submitTimer);submitTimer=null;chosen.splice(i,1);paint(q)}};slots.append(b)}
 letters.style.gridTemplateColumns='repeat('+Math.min(q.letters.length,7)+',minmax(0,1fr))';
 q.letters.forEach((ch,i)=>{const b=document.createElement('button');b.className='letter';b.type='button';b.textContent=ch;b.onclick=()=>{if(disabled||answering||chosen.includes(i)||chosen.length>=q.length)return;chosen.push(i);paint(q);if(chosen.length===q.length){submitTimer=setTimeout(()=>{submitTimer=null;if(chosen.length===q.length&&duel?.question_id===questionId)submit(q)},400)}};letters.append(b)});
 }
-function paint(q){$('duelClear').disabled=!chosen.length;[...$('duelSlots').children].forEach((e,i)=>e.textContent=chosen[i]===undefined?'':q.letters[chosen[i]]);[...$('duelLetters').children].forEach((e,i)=>e.classList.toggle('used',chosen.includes(i)))}
+function paint(q){$('duelClear').disabled=!chosen.length;[...$('duelSlots').children].forEach((e,i)=>e.textContent=chosen[i]===undefined?'':q.letters[chosen[i]]);[...$('duelLetters').children].forEach((e,i)=>{e.classList.toggle('used',chosen.includes(i));e.disabled=answering||chosen.includes(i)})}
 async function submit(q){
-if(answering||disabled)return;answering=true;answerEpoch++;
+if(answering||disabled)return;answering=true;answerEpoch++;const submittedCode=code,submittedQuestionId=questionId;
 try{
-const answer=chosen.map(i=>q.letters[i]).join('');const r=await call('answer',{code,answer});
+const answer=chosen.map(i=>q.letters[i]).join('');const r=await call('answer',{code:submittedCode,answer});
+if(code!==submittedCode||questionId!==submittedQuestionId||!$('duelScreen').classList.contains('active'))return;
 duel=r.duel;lastStatus=r.correct?t().correct:t().wrong;
 pw.haptic(r.correct?'success':'error');pw.sfx(r.correct?'success':'error');
-if(!r.correct){const submittedId=questionId;$('duelSlots').classList.add('wrong');wrongTimer=setTimeout(()=>{if(duel?.question_id===submittedId)clearLetters()},450)}
+if(!r.correct){clearLetters();$('duelSlots').classList.add('wrong');wrongTimer=setTimeout(()=>{$('duelSlots').classList.remove('wrong')},450)}
 render();
 }catch(e){error(e);clearLetters()}finally{answering=false;if(duel?.question)paint(duel.question);state().catch(()=>{})}
 }

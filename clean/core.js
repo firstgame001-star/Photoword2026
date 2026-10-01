@@ -46,9 +46,9 @@
     const value=[p?.first_name,p?.last_name].filter(Boolean).join(' ').trim();
     return /[\p{L}\p{N}]/u.test(value)?value:(p?.photoword_id||'Player');
   }
-  async function request(path, body, headers = {}) {
+  async function request(path, body, headers = {}, timeoutMs = 12000) {
     const controller = new AbortController();
-    const timer = setTimeout(() => controller.abort(), 12000);
+    const timer = setTimeout(() => controller.abort(), timeoutMs);
     try {
       const response = await fetch(URL + path, {method:'POST', headers:{'Content-Type':'application/json', ...headers},
         body:JSON.stringify(body), signal:controller.signal, cache:'no-store'});
@@ -84,7 +84,8 @@
   }
   async function duelRequest(action,extra={}) {
     if(!raw) throw new Error(lang()==='en'?'Open the game from the Telegram bot.':lang()==='az'?'Oyunu Telegram botundan aç.':'Открой игру через Telegram-бота.');
-    return request('/functions/v1/duel-game',{...extra,action,initData:raw});
+    const timeoutMs=action==='reactions'?3000:['state','react'].includes(action)?4500:12000;
+    return request('/functions/v1/duel-game',{...extra,action,initData:raw},{},timeoutMs);
   }
   async function leaderboard() {
     const rows = await request('/rest/v1/rpc/get_leaderboard', {p_limit:100}, {apikey:KEY});
