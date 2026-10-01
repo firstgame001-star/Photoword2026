@@ -22,19 +22,19 @@ for(const [page,module] of Object.entries(pages)){
  }
 }
 
-for(const file of ['core.js','home.js','game.js','main-levels-8-9.js','theme-game.js','challenge.js','challenge-bank-extra.js','duel.js']){
+for(const file of ['core.js','home.js','game.js','main-levels-8-9.js','main-levels-10-12.js','theme-game.js','challenge.js','challenge-bank-extra.js','duel.js']){
  execFileSync(process.execPath,['--check',resolve(base,file)]);
 }
 
 const release=JSON.parse(readFileSync(resolve(base,'release.json'),'utf8'));
-if(release.release!=='20260930-r109')throw Error('Unexpected release: '+release.release);
+if(release.release!=='20261001-r110')throw Error('Unexpected release: '+release.release);
 if(release.duel_mode?.entry_min_coins!==25||release.duel_mode?.entry_max_coins!==500||release.duel_mode?.winner_payout_percent_of_pot!==90)throw Error('Duel configuration mismatch');
 if(release.duel_mode?.question_pool!==150||release.duel_mode?.recent_matches_excluded_per_player!==2||release.duel_mode?.rematch!==true)throw Error('Rematch and question pool manifest mismatch');
 const duelHtml=readFileSync(resolve(base,'index.html'),'utf8');
 for(const id of ['duelRematch','duelRematchSetup','duelRematchStake','duelRematchConfirm','duelAcceptRematch']){
  if(!duelHtml.includes('id="'+id+'"'))throw Error('Missing duel control: '+id);
 }
-if(!Array.isArray(release.levels)||!release.levels.includes(380))throw Error('Main levels are not published through 380');
+if(!Array.isArray(release.levels)||!release.levels.includes(530))throw Error('Main levels are not published through 530');
 if(release.chapters?.length!==12)throw Error('Main chapter navigation must contain 12 chapters');
 if(release.chapters.find(x=>x.id===3)?.status!=='live')throw Error('Chapter 3 must be complete');
 if(release.chapters.find(x=>x.id===4)?.available_through!==130||release.chapters.find(x=>x.id===4)?.status!=='live')throw Error('Chapter 4 must be complete through 130');
@@ -115,7 +115,8 @@ if(release.verification?.chapter_start_values_absolute!==true)throw Error('Absol
 if(release.ui?.chapter_titles!==true)throw Error('Release must declare chapter title system');
 const gameJs=readFileSync(resolve(base,'game.js'),'utf8');
 const mainExtraJs=readFileSync(resolve(base,'main-levels-8-9.js'),'utf8');
-if(!gameJs.includes('for(let n=1;n<=380;n++){')||!gameJs.includes('levelId===280')||!gameJs.includes('levelId===330')||!gameJs.includes('levelId===380')||!mainExtraJs.includes('"id": 281')||!mainExtraJs.includes('"id": 380'))throw Error('Main levels through Chapter 9 are incomplete');
+const mainMoreJs=readFileSync(resolve(base,'main-levels-10-12.js'),'utf8');
+if(!gameJs.includes('for(let n=1;n<=530;n++){')||!gameJs.includes('levelId===280')||!gameJs.includes('levelId===330')||!gameJs.includes('levelId===380')||!mainExtraJs.includes('"id": 281')||!mainExtraJs.includes('"id": 380'))throw Error('Main levels through Chapter 9 are incomplete');
 
 const mainBase=gameJs.slice(gameJs.indexOf('const LEVELS'),gameJs.indexOf('const TRANSLATED='));
 const mainTranslated=gameJs.slice(gameJs.indexOf('const TRANSLATED='));
@@ -125,10 +126,10 @@ const mainAz=mainTranslated.slice(mainAzStart,mainTranslated.indexOf('\n  };',ma
 function extractMainAnswers(section){
  return [...section.matchAll(/\b\d+:\{[^}]*["']?answer["']?\s*:\s*["']([^"']+)["']/g)].map(m=>m[1]);
 }
-const extraRows=Function('window={};'+mainExtraJs+';return window.PW_MAIN_EXTRA')();
+const extraRows=[...Function('window={};'+mainExtraJs+';return window.PW_MAIN_EXTRA')(),...Function('window={};'+mainMoreJs+';return window.PW_MAIN_MORE')()];
 for(const [langCode,section] of [['ru',mainBase],['en',mainEn],['az',mainAz]]){
  const answers=extractMainAnswers(section).concat(extraRows.map(row=>row[langCode].answer));
- if(answers.length!==380)throw Error('Expected 380 main answers for '+langCode+', got '+answers.length);
+ if(answers.length!==530)throw Error('Expected 530 main answers for '+langCode+', got '+answers.length);
  const seen=new Set();
  for(const answer of answers){if(seen.has(answer))throw Error('Duplicate main answer in '+langCode+': '+answer);seen.add(answer);}
 }
@@ -140,6 +141,7 @@ if(!index.includes('id="chapter6Progress"')||!index.includes('id="homeChapter6Pr
 if(!index.includes('id="chapter7Progress"')||!index.includes('id="homeChapter7Progress"')||!index.includes('231–280'))throw Error('Chapter 7 UI is incomplete');
 if(!index.includes('id="chapter8Progress"')||!index.includes('id="homeChapter8Progress"')||!index.includes('281–330'))throw Error('Chapter 8 UI is incomplete');
 if(!index.includes('id="chapter9Progress"')||!index.includes('id="homeChapter9Progress"')||!index.includes('331–380'))throw Error('Chapter 9 UI is incomplete');
+for(const [n,range] of [[10,'381–430'],[11,'431–480'],[12,'481–530']])if(!index.includes('id="chapter'+n+'Progress"')||!index.includes('id="homeChapter'+n+'Progress"')||!index.includes(range))throw Error('Chapter '+n+' UI is incomplete');
 if(!index.includes('id="challengeModes"')||!index.includes('data-challenge="limited"')||!index.includes('data-challenge="nohint"')||!index.includes('data-challenge="blitz"'))throw Error('Challenge mode cards are missing');
 if(!index.includes('id="challengeScreen"'))throw Error('Playable challenge screen is missing');
 if(!index.includes('./challenge.js'))throw Error('Challenge game module is missing');
@@ -191,4 +193,4 @@ if(release.ui?.language_gate_fix!=='first_launch_unset_then_persist_choice')thro
 if(!homeJs.includes("sessionStorage.getItem('pw.profileSyncedShown')")||!homeJs.includes("setTimeout(()=>{const e=$('status')"))throw Error('One-time profile sync notice is missing');
 if(release.ui?.profile_synced_notice?.show!=='once_per_session'||release.ui?.profile_synced_notice?.auto_hide_ms!==1800)throw Error('Profile sync notice manifest is incorrect');
 if(!homeJs.includes("applyLanguage('ru',false)")||!homeJs.includes("function applyLanguage(l,persist=true)"))throw Error('First-launch language selection flow is incorrect');
-console.log('PASS: r109 entrypoints, Chapters 1-12, backgrounds, absolute progress, chapter titles and JavaScript syntax.');
+console.log('PASS: r110 entrypoints, Chapters 1-12, backgrounds, absolute progress, chapter titles and JavaScript syntax.');

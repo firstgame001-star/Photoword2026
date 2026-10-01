@@ -859,7 +859,7 @@
     for(const ch of EXTRA_MAIN_ALPHABET[language]){if(!used.has(ch)){extras.push(ch);if(chars.length+extras.length>=want)break}}
     return chars.concat(extras).join('');
   }
-  for(const row of EXTRA_MAIN_LEVELS){
+  for(const row of [...EXTRA_MAIN_LEVELS,...(Array.isArray(window.PW_MAIN_MORE)?window.PW_MAIN_MORE:[])]){
     const photos=(row.photos||[]).map(e=>[e,e]);
     LEVELS[row.id]={answer:row.ru.answer,pool:extraMainPool(row.ru.answer,'ru'),hint:row.ru.hint,photos};
     TRANSLATED.en[row.id]={answer:row.en.answer,pool:extraMainPool(row.en.answer,'en'),hint:row.en.hint};
@@ -874,7 +874,7 @@
   function validateLanguageLevels(){
     const supported=['ru','en','az'];
     for(const lang of supported){
-      for(let n=1;n<=380;n++){
+      for(let n=1;n<=530;n++){
         const item=lang==='ru'?LEVELS[n]:TRANSLATED[lang][n];
         if(!item||!item.answer||!item.pool||!item.hint)throw new Error('Incomplete language level '+lang+' '+n);
         const need=[...item.answer].reduce((m,ch)=>(m[ch]=(m[ch]||0)+1,m),{});
@@ -885,14 +885,14 @@
   }
   validateLanguageLevels();
   const GAME_UI={
-    ru:{chapter:n=>'Глава '+n,warm:'Разминка',assoc:'Ассоциации',chapter3:'Связи',chapter4:'Глубина',chapter5:'Мастерство',chapter6:'Исследование',chapter7:'Цивилизация',chapter8:'Человек',chapter9:'Вселенная',level:n=>'Уровень '+n,textHint:'Текстовая подсказка',tap:'Нажми, чтобы открыть',wrong:'Неверное слово. Попробуй ещё раз.',checking:'Проверяю и сохраняю ответ…',passed:n=>'Уровень '+n+' пройден!',reward:'+20 монет · +15 XP',already:'Награда за этот уровень уже получена',next:'СЛЕДУЮЩИЙ УРОВЕНЬ',sync:'Профиль синхронизирован.',shuffle:'Буквы перемешаны. Бесплатно.',letter:'Буква открыта. −50 монет.',remove:'Лишние буквы убраны. −100 монет.',text:'Подсказка открыта. −150 монет.',textOpened:'Подсказка уже открыта.',allLetters:'Все буквы уже открыты.',noExtra:'Лишних букв не осталось.',hintWait:'Подсказка: ожидаю ответ сервера…',locked:n=>'Сначала пройди уровень '+n+'.',home:'НА ГЛАВНУЮ',nextChapter:'СЛЕДУЮЩАЯ ГЛАВА',chapterPassed:n=>'Глава '+n+' пройдена!',chapterUnlocked:n=>'Глава '+n+' открыта',newTitle:title=>'Новый титул: '+title,slot:n=>'Буква '+n,image:n=>'Изображение '+n,placeFail:'Не удалось разместить букву.'},
-    en:{chapter:n=>'Chapter '+n,warm:'Warm-up',assoc:'Associations',chapter3:'Connections',chapter4:'Depth',chapter5:'Mastery',chapter6:'Exploration',chapter7:'Civilization',chapter8:'Human',chapter9:'Universe',level:n=>'Level '+n,textHint:'Text hint',tap:'Tap to reveal',wrong:'Wrong word. Try again.',checking:'Checking and saving your answer…',passed:n=>'Level '+n+' completed!',reward:'+20 coins · +15 XP',already:'Reward for this level has already been claimed',next:'NEXT LEVEL',sync:'Profile synced.',shuffle:'Letters shuffled. Free.',letter:'Letter revealed. −50 coins.',remove:'Extra letters removed. −100 coins.',text:'Hint revealed. −150 coins.',textOpened:'Hint already revealed.',allLetters:'All letters are already revealed.',noExtra:'No extra letters remain.',hintWait:'Getting hint from the server…',locked:n=>'Complete level '+n+' first.',home:'HOME',nextChapter:'NEXT CHAPTER',chapterPassed:n=>'Chapter '+n+' completed!',chapterUnlocked:n=>'Chapter '+n+' unlocked',newTitle:title=>'New title: '+title,slot:n=>'Letter '+n,image:n=>'Image '+n,placeFail:'Could not place the letter.'},
-    az:{chapter:n=>'Fəsil '+n,warm:'İsinmə',assoc:'Assosiasiyalar',chapter3:'Əlaqələr',chapter4:'Dərinlik',chapter5:'Ustalıq',chapter6:'Araşdırma',chapter7:'Sivilizasiya',chapter8:'İnsan',chapter9:'Kainat',level:n=>n+'-ci səviyyə',textHint:'Mətn ipucu',tap:'Açmaq üçün toxun',wrong:'Söz yanlışdır. Yenidən cəhd et.',checking:'Cavab yoxlanılır və yadda saxlanılır…',passed:n=>n+'-ci səviyyə keçildi!',reward:'+20 sikkə · +15 XP',already:'Bu səviyyənin mükafatı artıq alınıb',next:'NÖVBƏTİ SƏVİYYƏ',sync:'Profil sinxronlaşdırıldı.',shuffle:'Hərflər qarışdırıldı. Pulsuz.',letter:'Hərf açıldı. −50 sikkə.',remove:'Artıq hərflər silindi. −100 sikkə.',text:'İpucu açıldı. −150 sikkə.',textOpened:'İpucu artıq açılıb.',allLetters:'Bütün hərflər artıq açılıb.',noExtra:'Artıq hərf qalmayıb.',hintWait:'İpucu serverdən alınır…',locked:n=>'Əvvəlcə '+n+'-ci səviyyəni keç.',home:'ANA SƏHİFƏ',nextChapter:'NÖVBƏTİ FƏSİL',chapterPassed:n=>n+'-ci fəsil tamamlandı!',chapterUnlocked:n=>n+'-ci fəsil açıldı',newTitle:title=>'Yeni titul: '+title,slot:n=>n+'-ci hərf',image:n=>n+'-ci şəkil',placeFail:'Hərfi yerləşdirmək mümkün olmadı.'}
+    ru:{chapter:n=>'Глава '+n,warm:'Разминка',assoc:'Ассоциации',chapter3:'Связи',chapter4:'Глубина',chapter5:'Мастерство',chapter6:'Исследование',chapter7:'Цивилизация',chapter8:'Человек',chapter9:'Вселенная',chapter10:'Повседневность',chapter11:'Природа',chapter12:'Современный мир',level:n=>'Уровень '+n,textHint:'Текстовая подсказка',tap:'Нажми, чтобы открыть',wrong:'Неверное слово. Попробуй ещё раз.',checking:'Проверяю и сохраняю ответ…',passed:n=>'Уровень '+n+' пройден!',reward:'+20 монет · +15 XP',already:'Награда за этот уровень уже получена',next:'СЛЕДУЮЩИЙ УРОВЕНЬ',sync:'Профиль синхронизирован.',shuffle:'Буквы перемешаны. Бесплатно.',letter:'Буква открыта. −50 монет.',remove:'Лишние буквы убраны. −100 монет.',text:'Подсказка открыта. −150 монет.',textOpened:'Подсказка уже открыта.',allLetters:'Все буквы уже открыты.',noExtra:'Лишних букв не осталось.',hintWait:'Подсказка: ожидаю ответ сервера…',locked:n=>'Сначала пройди уровень '+n+'.',home:'НА ГЛАВНУЮ',nextChapter:'СЛЕДУЮЩАЯ ГЛАВА',chapterPassed:n=>'Глава '+n+' пройдена!',chapterUnlocked:n=>'Глава '+n+' открыта',newTitle:title=>'Новый титул: '+title,slot:n=>'Буква '+n,image:n=>'Изображение '+n,placeFail:'Не удалось разместить букву.'},
+    en:{chapter:n=>'Chapter '+n,warm:'Warm-up',assoc:'Associations',chapter3:'Connections',chapter4:'Depth',chapter5:'Mastery',chapter6:'Exploration',chapter7:'Civilization',chapter8:'Human',chapter9:'Universe',chapter10:'Everyday Life',chapter11:'Nature',chapter12:'Modern World',level:n=>'Level '+n,textHint:'Text hint',tap:'Tap to reveal',wrong:'Wrong word. Try again.',checking:'Checking and saving your answer…',passed:n=>'Level '+n+' completed!',reward:'+20 coins · +15 XP',already:'Reward for this level has already been claimed',next:'NEXT LEVEL',sync:'Profile synced.',shuffle:'Letters shuffled. Free.',letter:'Letter revealed. −50 coins.',remove:'Extra letters removed. −100 coins.',text:'Hint revealed. −150 coins.',textOpened:'Hint already revealed.',allLetters:'All letters are already revealed.',noExtra:'No extra letters remain.',hintWait:'Getting hint from the server…',locked:n=>'Complete level '+n+' first.',home:'HOME',nextChapter:'NEXT CHAPTER',chapterPassed:n=>'Chapter '+n+' completed!',chapterUnlocked:n=>'Chapter '+n+' unlocked',newTitle:title=>'New title: '+title,slot:n=>'Letter '+n,image:n=>'Image '+n,placeFail:'Could not place the letter.'},
+    az:{chapter:n=>'Fəsil '+n,warm:'İsinmə',assoc:'Assosiasiyalar',chapter3:'Əlaqələr',chapter4:'Dərinlik',chapter5:'Ustalıq',chapter6:'Araşdırma',chapter7:'Sivilizasiya',chapter8:'İnsan',chapter9:'Kainat',chapter10:'Gündəlik həyat',chapter11:'Təbiət',chapter12:'Müasir dünya',level:n=>n+'-ci səviyyə',textHint:'Mətn ipucu',tap:'Açmaq üçün toxun',wrong:'Söz yanlışdır. Yenidən cəhd et.',checking:'Cavab yoxlanılır və yadda saxlanılır…',passed:n=>n+'-ci səviyyə keçildi!',reward:'+20 sikkə · +15 XP',already:'Bu səviyyənin mükafatı artıq alınıb',next:'NÖVBƏTİ SƏVİYYƏ',sync:'Profil sinxronlaşdırıldı.',shuffle:'Hərflər qarışdırıldı. Pulsuz.',letter:'Hərf açıldı. −50 sikkə.',remove:'Artıq hərflər silindi. −100 sikkə.',text:'İpucu açıldı. −150 sikkə.',textOpened:'İpucu artıq açılıb.',allLetters:'Bütün hərflər artıq açılıb.',noExtra:'Artıq hərf qalmayıb.',hintWait:'İpucu serverdən alınır…',locked:n=>'Əvvəlcə '+n+'-ci səviyyəni keç.',home:'ANA SƏHİFƏ',nextChapter:'NÖVBƏTİ FƏSİL',chapterPassed:n=>n+'-ci fəsil tamamlandı!',chapterUnlocked:n=>n+'-ci fəsil açıldı',newTitle:title=>'Yeni titul: '+title,slot:n=>n+'-ci hərf',image:n=>n+'-ci şəkil',placeFail:'Hərfi yerləşdirmək mümkün olmadı.'}
   };
   const CHAPTER_TITLES={
-    ru:{1:'Новичок',2:'Любитель',3:'Знаток',4:'Опытный',5:'Эксперт',6:'Профессионал',7:'Мастер',8:'Виртуоз',9:'Легенда',10:'Мастер слов'},
-    en:{1:'Novice',2:'Amateur',3:'Adept',4:'Experienced',5:'Expert',6:'Professional',7:'Master',8:'Virtuoso',9:'Legend',10:'Word Master'},
-    az:{1:'Yeni başlayan',2:'Həvəskar',3:'Bilici',4:'Təcrübəli',5:'Ekspert',6:'Peşəkar',7:'Usta',8:'Virtuoz',9:'Əfsanə',10:'Söz ustası'}
+    ru:{1:'Новичок',2:'Любитель',3:'Знаток',4:'Опытный',5:'Эксперт',6:'Профессионал',7:'Мастер',8:'Виртуоз',9:'Легенда',10:'Мастер слов',11:'Исследователь',12:'Хранитель знаний'},
+    en:{1:'Novice',2:'Amateur',3:'Adept',4:'Experienced',5:'Expert',6:'Professional',7:'Master',8:'Virtuoso',9:'Legend',10:'Word Master',11:'Explorer',12:'Keeper of Knowledge'},
+    az:{1:'Yeni başlayan',2:'Həvəskar',3:'Bilici',4:'Təcrübəli',5:'Ekspert',6:'Peşəkar',7:'Usta',8:'Virtuoz',9:'Əfsanə',10:'Söz ustası',11:'Kəşfiyyatçı',12:'Bilik qoruyucusu'}
   };
   const chapterEarnedTitle=n=>(CHAPTER_TITLES[gameLang]||CHAPTER_TITLES.ru)[n]||'';
   const requested = Number(new URLSearchParams(location.search).get('level') || 1);
@@ -903,9 +903,9 @@
 
   const ui=GAME_UI[gameLang]||GAME_UI.ru;
   document.documentElement.lang=gameLang;
-  const chapterNum=levelId<=20?1:levelId<=50?2:levelId<=90?3:levelId<=130?4:levelId<=180?5:levelId<=230?6:levelId<=280?7:levelId<=330?8:9;
+  const chapterNum=levelId<=20?1:levelId<=50?2:levelId<=90?3:levelId<=130?4:levelId<=180?5:levelId<=230?6:levelId<=280?7:levelId<=330?8:levelId<=380?9:levelId<=430?10:levelId<=480?11:12;
   document.querySelector('.game-head>div b').textContent=ui.chapter(chapterNum);
-  const chapterName={1:ui.warm,2:ui.assoc,3:ui.chapter3,4:ui.chapter4,5:ui.chapter5,6:ui.chapter6,7:ui.chapter7,8:ui.chapter8,9:ui.chapter9}[chapterNum]||ui.chapter9;
+  const chapterName={1:ui.warm,2:ui.assoc,3:ui.chapter3,4:ui.chapter4,5:ui.chapter5,6:ui.chapter6,7:ui.chapter7,8:ui.chapter8,9:ui.chapter9,10:ui.chapter10,11:ui.chapter11,12:ui.chapter12}[chapterNum]||ui.chapter12;
   $('levelTitle').textContent=chapterName+' · '+ui.level(levelId);
   $('textHint').querySelector('b').textContent=ui.textHint;$('hintValue').textContent=ui.tap;
   $('slots').style.gridTemplateColumns='repeat('+answer.length+',1fr)';$('slots').classList.toggle('long-answer',answer.length>=9);$('letters').classList.toggle('dense',tiles.length>=19);
@@ -958,8 +958,9 @@
     else if(levelId===230){if(chapterNote){chapterNote.hidden=false;chapterNote.textContent=ui.chapterPassed(6)+' '+ui.newTitle(chapterEarnedTitle(6))+'. '+ui.chapterUnlocked(7)+'.';}next.href='./game.html?level=231';next.innerHTML=ui.nextChapter+' <span>▶</span>';}
     else if(levelId===280){if(chapterNote){chapterNote.hidden=false;chapterNote.textContent=ui.chapterPassed(7)+' '+ui.newTitle(chapterEarnedTitle(7))+'. '+ui.chapterUnlocked(8)+'.';}next.href='./game.html?level=281';next.innerHTML=ui.nextChapter+' <span>▶</span>';}
     else if(levelId===330){if(chapterNote){chapterNote.hidden=false;chapterNote.textContent=ui.chapterPassed(8)+' '+ui.newTitle(chapterEarnedTitle(8))+'. '+ui.chapterUnlocked(9)+'.';}next.href='./game.html?level=331';next.innerHTML=ui.nextChapter+' <span>▶</span>';}
-    else if(levelId===380){if(chapterNote){chapterNote.hidden=false;chapterNote.textContent=ui.chapterPassed(9)+' '+ui.newTitle(chapterEarnedTitle(9))+'.';}next.href='./index.html';next.innerHTML=ui.home+' <span>✓</span>';}
-    else if(levelId<380){next.href='./game.html?level='+(levelId+1);next.innerHTML=ui.next+' <span>▶</span>';}
+    else if(levelId===380||levelId===430||levelId===480){const n=levelId===380?9:levelId===430?10:11;if(chapterNote){chapterNote.hidden=false;chapterNote.textContent=ui.chapterPassed(n)+' '+ui.newTitle(chapterEarnedTitle(n))+'. '+ui.chapterUnlocked(n+1)+'.';}next.href='./game.html?level='+(levelId+1);next.innerHTML=ui.nextChapter+' <span>▶</span>';}
+    else if(levelId===530){if(chapterNote){chapterNote.hidden=false;chapterNote.textContent=ui.chapterPassed(12)+' '+ui.newTitle(chapterEarnedTitle(12))+'.';}next.href='./index.html';next.innerHTML=ui.home+' <span>✓</span>';}
+    else if(levelId<530){next.href='./game.html?level='+(levelId+1);next.innerHTML=ui.next+' <span>▶</span>';}
     else{next.href='./index.html';next.innerHTML=ui.home+' <span>✓</span>';}
   }
   async function check(){
