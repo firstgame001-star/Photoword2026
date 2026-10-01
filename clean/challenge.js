@@ -2877,6 +2877,17 @@ function loadDeck(){
 function resetOrder(){const deck=loadDeck();try{localStorage.setItem(deckKey(),JSON.stringify(deck))}catch{}}
 const repeatAccount=()=>pw?.player?.photoword_id||'local';
 const sharedSeenKey=()=> 'pw.challenge.seen.r114.'+repeatAccount(),sharedLastKey=()=> 'pw.challenge.last.r114.'+repeatAccount();
+const pendingFinishKey=()=> 'pw.challenge.pendingFinish.r117.'+repeatAccount();
+function pendingFinishes(){try{const rows=JSON.parse(localStorage.getItem(pendingFinishKey())||'[]');return Array.isArray(rows)?rows.filter(r=>r&&typeof r.runId==='string'&&['limited','nohint','blitz'].includes(r.mode)):[]}catch{return[]}}
+function savePendingFinish(payload){try{const rows=pendingFinishes().filter(r=>r.runId!==payload.runId);rows.push(payload);localStorage.setItem(pendingFinishKey(),JSON.stringify(rows))}catch{}}
+async function settleFinish(payload){const result=await api('finish',payload);try{localStorage.setItem(pendingFinishKey(),JSON.stringify(pendingFinishes().filter(r=>r.runId!==payload.runId)))}catch{}return result}
+let pendingFinishSync=null;
+function retryPendingFinishes(){
+ if(!rawInit())return Promise.resolve();if(pendingFinishSync)return pendingFinishSync;
+ const task=(async()=>{for(const payload of pendingFinishes())await settleFinish(payload)})().finally(()=>{if(pendingFinishSync===task)pendingFinishSync=null});
+ pendingFinishSync=task;return task;
+}
+const pendingRewardText=()=>lang()==='en'?'Reward pending. Will retry when you reopen the mode.':lang()==='az'?'Mükafat gözləyir. Rejimi açanda yenidən yoxlanacaq.':'Награда ожидает сохранения. Повторю запрос при открытии режима.';
 let startPending=false,serverQuestions=[],questionFetch=null,questionLoading=false;
 const validQuestions=ids=>Array.isArray(ids)?ids.filter(i=>Number.isInteger(i)&&i>=0&&i<Q.length):[];
 function refillQuestions(){
@@ -3011,12 +3022,13 @@ function renderIntro(){
  const used=Number(state?.rewarded_runs_today?.[mode]||0),limit=Number(state?.reward_limit||3);add(x.rewardToday,Math.min(used,limit)+'/'+limit);add(x.rewardMax,x.rewardMaxValue);
  if(!serverMode){const note=document.createElement('small');note.className='challenge-local-note';note.textContent=x.serverFallback;stats.append(note)}
 }
-async function loadState(){try{state=await api('state');renderIntro()}catch{if(rawInit()){state={energy:5,energy_max:ENERGY_MAX,next_energy_at:null,limited_best_score:0,nohint_best_streak:0,blitz_best_score:0,blitz_best_streak:0};serverMode=true;renderIntro();$('challengeStart').disabled=true;pw?.status?.(lang()==='en'?'Could not load the mode. Try again.':lang()==='az'?'Rejimi yükləmək olmadı. Yenidən cəhd et.':'Не удалось загрузить режим. Попробуй ещё раз.')}else{state=localRead();serverMode=false;renderIntro()}}}
+async function loadState(){try{if(rawInit()){await pw?.login?.();await retryPendingFinishes()}state=await api('state');renderIntro()}catch{if(rawInit()){state={energy:5,energy_max:ENERGY_MAX,next_energy_at:null,limited_best_score:0,nohint_best_streak:0,blitz_best_score:0,blitz_best_streak:0};serverMode=true;renderIntro();$('challengeStart').disabled=true;pw?.status?.(lang()==='en'?'Could not load the mode. Try again.':lang()==='az'?'Rejimi yükləmək olmadı. Yenidən cəhd et.':'Не удалось загрузить режим. Попробуй ещё раз.')}else{state=localRead();serverMode=false;renderIntro()}}}
 async function startRun(){
  if(startPending)return;startPending=true;
  try{
  cancelPending();const startingEpoch=runEpoch;
  await syncRepeatProgress();
+ try{await retryPendingFinishes()}catch{pw?.status?.(pendingRewardText());return}
  if(startingEpoch!==runEpoch)return;
  let initialSeen=[];try{initialSeen=JSON.parse(localStorage.getItem(sharedSeenKey())||'[]')}catch{}
  try{state=await api('start',{mode,language:lang(),initialSeen})}catch(e){if(e?.data?.challenge)state=e.data.challenge;if(String(e?.message)==='challenge_no_energy'){renderIntro();pw?.status?.(tr().energyEmpty);return}if(rawInit()){pw?.status?.(lang()==='en'?'Could not start the mode. Try again.':lang()==='az'?'Rejimi başlatmaq olmadı. Yenidən cəhd et.':'Не удалось запустить режим. Попробуй ещё раз.');return}state=localRead()}
@@ -3030,17 +3042,19 @@ async function startRun(){
 }
 async function finish(reason){
  if(!running)return;cancelPending();running=false;clearInterval(timer);$('challengeCorrectPanel').hidden=true;renderInput();$('challengePuzzle').hidden=true;$('challengeHud').hidden=true;
- const x=tr(),finishScore=mode==='blitz'?score:correct,finishStreak=bestRunStreak,runId=state?.run_id;let reward={reward_coins:0,reward_xp:0,rewarded_runs_today:0,reward_limit:3};
+ const x=tr(),finishScore=mode==='blitz'?score:correct,finishStreak=bestRunStreak,runId=state?.run_id;let reward={reward_coins:0,reward_xp:0,rewarded_runs_today:0,reward_limit:3},rewardPending=false;
+ const finishPayload={mode,score:finishScore,streak:finishStreak,runId,language:lang()};
+ if(rawInit()&&runId)savePendingFinish(finishPayload);
  try{
-   const result=await api('finish',{mode,score:finishScore,streak:finishStreak,runId,language:lang()});
+   const result=rawInit()?await settleFinish(finishPayload):await api('finish',finishPayload);
    if(result?.challenge)state=result.challenge;if(result?.reward)reward=result.reward;
    if((reward.reward_coins||0)>0||(reward.reward_xp||0)>0){pw?.sfx?.('coin');pw?.login?.(true).catch(()=>{})}
- }catch{}
+ }catch{rewardPending=true;pw?.status?.(pendingRewardText())}
  $('challengeResult').hidden=false;$('challengeResultTitle').textContent=reason==='time'?x.timeDone:x.done;
  if(mode==='limited'){$('challengeResultMain').textContent=x.passed+': '+correct+' / 10';$('challengeResultSub').textContent=x.record+': '+Math.max(state?.limited_best_score||0,correct)+' / 10'}
  else if(mode==='nohint'){$('challengeResultMain').textContent=x.passed+': '+correct+' · '+x.series+': '+bestRunStreak;$('challengeResultSub').textContent=x.record+': '+Math.max(state?.nohint_best_streak||0,bestRunStreak)}
  else{$('challengeResultMain').textContent=x.points+': '+score+' · '+x.series+': '+bestRunStreak;$('challengeResultSub').textContent=x.record+': '+Math.max(state?.blitz_best_score||0,score)}
- const rewardBox=$('challengeResultReward');if(rewardBox){const coins=Number(reward.reward_coins||0),xp=Number(reward.reward_xp||0),used=Number(reward.rewarded_runs_today||0),limit=Number(reward.reward_limit||3);rewardBox.textContent=coins||xp?x.rewardEarned(coins,xp):(used>=limit?x.rewardLimit:x.rewardNone);rewardBox.classList.toggle('earned',Boolean(coins||xp));}
+ const rewardBox=$('challengeResultReward');if(rewardBox){const coins=Number(reward.reward_coins||0),xp=Number(reward.reward_xp||0),used=Number(reward.rewarded_runs_today||0),limit=Number(reward.reward_limit||3);rewardBox.textContent=rewardPending?pendingRewardText():coins||xp?x.rewardEarned(coins,xp):(used>=limit?x.rewardLimit:x.rewardNone);rewardBox.classList.toggle('earned',Boolean(coins||xp));}
  $('challengeAgain').textContent=(mode==='nohint'?x.restart:x.again)+' ▶';
 }
 function openMode(m){
