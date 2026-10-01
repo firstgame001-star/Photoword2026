@@ -1,0 +1,404 @@
+[animals]
+ЛЕВ|LION|ŞİR|🦁 👑 🌍 🐾|Грива и саванна.|A mane and the savanna.|Yal və savanna.
+ТИГР|TIGER|PƏLƏNG|🐯 🟠 ⚫ 🌳|Полосатый хищник.|A striped predator.|Zolaqlı yırtıcı.
+ЛЕОПАРД|LEOPARD|BƏBİR|🐆 🌳 🟡 🐾|Пятнистая большая кошка.|A spotted big cat.|Xallı iri pişik.
+ГЕПАРД|CHEETAH|HEPARD|🐆 💨 🏃 🌾|Самый быстрый наземный зверь.|The fastest land animal.|Ən sürətli quru heyvanı.
+ЯГУАР|JAGUAR|YAQUAR|🐆 🌴 🌎 💧|Большая кошка Америки.|A big cat of the Americas.|Amerikada yaşayan iri pişik.
+ПУМА|COUGAR|PUMA|🐈 🏔️ 🌎 🐾|Горная кошка без пятен.|A plain-coated mountain cat.|Xalsız dağ pişiyi.
+РЫСЬ|LYNX|VAŞAQ|🐈 🌲 👂 ❄️|Кисточки на ушах.|Tufts on its ears.|Qulaqlarında qotazlar var.
+ВОЛК|WOLF|CANAVAR|🐺 🌕 🌲 🐾|Воет и охотится стаей.|Howls and hunts in packs.|Ulayır və sürü ilə ov edir.
+ЛИСА|FOX|TÜLKÜ|🦊 🟠 🌲 🐾|Рыжая лесная хитрица.|A red woodland trickster.|Meşənin kürən hiyləgəri.
+ШАКАЛ|JACKAL|ÇAQQAL|🐺 🌵 🌙 🦴|Похож на небольшого волка.|Resembles a small wolf.|Kiçik canavara bənzəyir.
+ГИЕНА|HYENA|KAFTAR|🐺 🦴 🌍 😂|Её голос напоминает смех.|Its call sounds like laughter.|Səsi gülüşə bənzəyir.
+МЕДВЕДЬ|BEAR|AYI|🐻 🍯 🌲 💤|Косолапый любитель мёда.|A shaggy honey lover.|Bal sevən iri heyvan.
+ПАНДА|PANDA|PANDA|🐼 🎋 ⚪ ⚫|Чёрно-белый едок бамбука.|A black-and-white bamboo eater.|Bambuk yeyən ağ-qara heyvan.
+КОАЛА|KOALA|KOALA|🐨 🌿 🌳 😴|Живёт на эвкалиптах.|Lives in eucalyptus trees.|Evkalipt ağaclarında yaşayır.
+КЕНГУРУ|KANGAROO|KENQURU|🦘 🇦🇺 👝 🦵|Прыгает с сумкой на животе.|Jumps with a belly pouch.|Qarnında kisə ilə tullanır.
+ВОМБАТ|WOMBAT|VOMBAT|🐾 🇦🇺 🕳️ 🌿|Австралийский норный сумчатый.|An Australian burrowing marsupial.|Avstraliyada yuva qazan kisəli.
+СЛОН|ELEPHANT|FİL|🐘 👂 🌿 💧|Огромный зверь с хоботом.|A huge animal with a trunk.|Xortumlu nəhəng heyvan.
+НОСОРОГ|RHINOCEROS|KƏRGƏDAN|🦏 🌾 🦴 🌍|Рог на носу.|A horn on its nose.|Burnunda buynuz var.
+БЕГЕМОТ|HIPPOPOTAMUS|BEHEMOT|🦛 💧 🌍 🌿|Массивный обитатель рек.|A bulky river dweller.|Çaylarda yaşayan iri heyvan.
+ЖИРАФ|GIRAFFE|ZÜRAFƏ|🦒 🌳 🍃 📏|Длинная шея для верхних листьев.|A long neck for high leaves.|Hündür yarpaqlar üçün uzun boyun.
+ЗЕБРА|ZEBRA|ZEBR|🦓 ⚪ ⚫ 🌾|Полосатый родственник лошади.|A striped relative of the horse.|Atın zolaqlı qohumu.
+АНТИЛОПА|ANTELOPE|ANTİLOP|🦌 🌍 🌾 🏃|Быстрое копытное саванны.|A swift hoofed savanna animal.|Savannada yaşayan sürətli dırnaqlı.
+ГАЗЕЛЬ|GAZELLE|CEYRAN|🦌 🌾 💨 🦵|Стройное копытное с тонкими ногами.|A slender hoofed animal.|İncə ayaqlı dırnaqlı heyvan.
+ОЛЕНЬ|DEER|MARAL|🦌 🌲 ❄️ 🌿|Ветвистые рога.|Branching antlers.|Budaqlı buynuzlar.
+ЛОСЬ|MOOSE|SIĞIN|🦌 🌲 🏞️ 📏|Крупный олень с лопатами рогов.|A large deer with broad antlers.|Enli buynuzlu iri maral növü.
+КАБАН|BOAR|QABAN|🐗 🌲 🦷 🌰|Дикая свинья с клыками.|A wild pig with tusks.|Dişli vəhşi donuz.
+БИЗОН|BISON|BİZON|🦬 🌾 🇺🇸 🐾|Могучий бык прерий.|A mighty prairie bovine.|Preriyalarda yaşayan iri öküz.
+БУЙВОЛ|BUFFALO|CAMIŞ|🐃 💧 🌾 🦴|Крупное животное с изогнутыми рогами.|A large animal with curved horns.|Əyri buynuzlu iri heyvan.
+ВЕРБЛЮД|CAMEL|DƏVƏ|🐪 🏜️ 💧 ☀️|Горбы и жизнь в пустыне.|Humps and desert life.|Hörgüc və səhra həyatı.
+ЛАМА|LLAMA|LAMA|🦙 🏔️ 🧶 🌿|Вьючное животное Анд.|A pack animal of the Andes.|And dağlarının yük heyvanı.
+АЛЬПАКА|ALPACA|ALPAKA|🦙 🧶 🏔️ ✂️|Мягкая шерсть из Южной Америки.|Soft wool from South America.|Cənubi Amerikadan yumşaq yun.
+ОСЁЛ|DONKEY|UZUNQULAQ|🫏 👂 🧺 🌾|Длинные уши и упрямство.|Long ears and stubbornness.|Uzun qulaqlar və inadkarlıq.
+ЛОШАДЬ|HORSE|AT|🐎 🧲 🌾 🏇|Копыта и грива.|Hooves and a mane.|Dırnaqlar və yal.
+КОРОВА|COW|İNƏK|🐄 🥛 🌾 🔔|Даёт молоко на ферме.|Gives milk on a farm.|Fermada süd verir.
+КОЗА|GOAT|KEÇİ|🐐 🏔️ 🥛 🌿|Борода и ловкость на скалах.|A beard and skill on rocks.|Saqqal və qayalarda çeviklik.
+ОВЦА|SHEEP|QOYUN|🐑 🧶 🌾 ✂️|Шерсть и стадо.|Wool and a flock.|Yun və sürü.
+СВИНЬЯ|PIG|DONUZ|🐖 🌾 🐽 🧑‍🌾|Розовый пятачок.|A pink snout.|Çəhrayı burun.
+КРОЛИК|RABBIT|DOVŞAN|🐇 🥕 👂 🕳️|Длинные уши и мягкая шерсть.|Long ears and soft fur.|Uzun qulaqlar və yumşaq tük.
+ХОМЯК|HAMSTER|DAĞSİÇANI|🐹 🌻 🛞 🏠|Запасает еду за щеками.|Stores food in its cheeks.|Yanaqlarında yem saxlayır.
+МОРСКАЯСВИНКА|GUINEAPIG|DƏNİZDONUZU|🐹 🥬 🏠 🥕|Домашний грызун из Южной Америки.|A South American pet rodent.|Cənubi Amerikadan ev gəmiricisi.
+БЕЛКА|SQUIRREL|DƏLƏ|🐿️ 🌰 🌳 🐾|Пушистый хвост и орехи.|A bushy tail and nuts.|Tüklü quyruq və qozlar.
+БУРУНДУК|CHIPMUNK|BURUNDUK|🐿️ 🌰 🟤 🌲|Полосатый маленький грызун.|A small striped rodent.|Kiçik zolaqlı gəmirici.
+БОБЁР|BEAVER|QUNDUZ|🦫 🪵 💧 🦷|Строит плотины.|Builds dams.|Bəndlər tikir.
+ВЫДРА|OTTER|SUSAMURU|🦦 🐟 💧 🐾|Ловко плавает и ловит рыбу.|Swims well and catches fish.|Yaxşı üzür və balıq tutur.
+БАРСУК|BADGER|PORSUQ|🐾 ⚫ ⚪ 🕳️|Полосатая морда и глубокая нора.|A striped face and deep burrow.|Zolaqlı sifət və dərin yuva.
+ЕНОТ|RACCOON|YENOT|🦝 🗑️ 🌙 🐾|Маска вокруг глаз.|A mask around its eyes.|Gözlərinin ətrafında maska.
+СКУНС|SKUNK|SKUNS|🦨 💨 ⚪ ⚫|Защищается резким запахом.|Defends itself with a strong smell.|Kəskin qoxu ilə müdafiə olunur.
+ЁЖ|HEDGEHOG|KİRPİ|🦔 🍂 🌲 🦀|Колючий маленький зверёк.|A small spiny mammal.|Kiçik tikanlı məməli.
+ДИКОБРАЗ|PORCUPINE|OXATANKİRPİ|🦔 📏 🌿 🦷|Грызун с длинными иглами.|A rodent with long quills.|Uzun tikanlı gəmirici.
+КРОТ|MOLE|KÖSTƏBƏK|🕳️ 🌱 🐾 🌑|Роет ходы под землёй.|Digs tunnels underground.|Yer altında tunellər qazır.
+ЛЕТУЧАЯМЫШЬ|BAT|YARASA|🦇 🌙 🕳️ 🔊|Летает ночью и слушает эхо.|Flies at night using echoes.|Gecə uçur və əks-sədanı dinləyir.
+ЛЕНИВЕЦ|SLOTH|TƏNBƏL|🌳 💤 🐾 🐌|Очень медленный житель деревьев.|A very slow tree dweller.|Ağaclarda yaşayan çox yavaş heyvan.
+МУРАВЬЕД|ANTEATER|QARIŞQAYEYƏN|🐜 👅 🌿 🐾|Длинным языком ловит насекомых.|Catches insects with a long tongue.|Uzun dili ilə həşərat tutur.
+БРОНЕНОСЕЦ|ARMADILLO|ZİREHLİ|🛡️ 🐾 🌎 🕳️|Тело покрыто костяным панцирем.|Its body wears bony armour.|Bədəni sümük zirehlə örtülüdür.
+СУРИКАТ|MEERKAT|SURİKAT|🐾 🏜️ 👀 🧍|Стоит столбиком на страже.|Stands upright on lookout.|Keşikdə dik dayanır.
+МАНГУСТ|MONGOOSE|MANQUST|🐾 🐍 🌿 ⚔️|Небольшой ловкий враг змей.|A small agile enemy of snakes.|İlanların kiçik çevik düşməni.
+ГОРИЛЛА|GORILLA|QORİLLA|🦍 🌳 💪 🌍|Крупнейшая человекообразная обезьяна.|The largest great ape.|Ən iri insanabənzər meymun.
+ШИМПАНЗЕ|CHIMPANZEE|ŞİMPANZE|🐒 🌳 🧠 🪵|Умная обезьяна использует инструменты.|A clever ape that uses tools.|Alətlərdən istifadə edən ağıllı meymun.
+ОРАНГУТАН|ORANGUTAN|ORANQUTAN|🦧 🌳 🟠 🌴|Рыжая обезьяна тропических островов.|A red ape of tropical islands.|Tropik adaların kürən meymunu.
+ЛЕМУР|LEMUR|LEMUR|🐒 ⚪ ⚫ 🏝️|Полосатый хвост и Мадагаскар.|A ringed tail and Madagascar.|Zolaqlı quyruq və Madaqaskar.
+УТКОНОС|PLATYPUS|ÖRDƏKBURUN|🦆 🦫 🥚 🇦🇺|Млекопитающее с клювом несёт яйца.|An egg-laying mammal with a bill.|Dimdikli yumurtlayan məməli.
+ЕХИДНА|ECHIDNA|YEXİDNA|🦔 🥚 🇦🇺 🐜|Колючее яйцекладущее млекопитающее.|A spiny egg-laying mammal.|Tikanlı yumurtlayan məməli.
+ТЮЛЕНЬ|SEAL|SUİTİ|🦭 🌊 🐟 ❄️|Ласты вместо ног.|Flippers instead of legs.|Ayaqların yerində üzgəclər.
+МОРЖ|WALRUS|MORJ|🦭 🦷 ❄️ 🌊|Два длинных клыка.|Two long tusks.|İki uzun diş.
+ДЕЛЬФИН|DOLPHIN|DELFİN|🐬 🌊 🐟 🔊|Умный морской пловец.|A clever marine swimmer.|Ağıllı dəniz üzgüçüsü.
+КОСАТКА|ORCA|QATİLBALİNA|🐋 ⚫ ⚪ 🐟|Чёрно-белый морской хищник.|A black-and-white marine predator.|Ağ-qara dəniz yırtıcısı.
+НАРВАЛ|NARWHAL|NARVAL|🐋 🦄 ❄️ 🌊|Арктический кит с длинным бивнем.|An Arctic whale with a long tusk.|Uzun dişli Arktika balinası.
+КАШАЛОТ|SPERMWHALE|KAŞALOT|🐋 🦑 🌊 ⬇️|Ныряет глубоко за кальмарами.|Dives deep for squid.|Kalmar üçün dərinə dalır.
+АКУЛА|SHARK|AKULA|🦈 🌊 🦷 🐟|Морской хищник с плавником.|A marine predator with a dorsal fin.|Bel üzgəcli dəniz yırtıcısı.
+СКАТ|STINGRAY|SKAT|🌊 🪽 🐟 🏖️|Плоская рыба с широкими плавниками.|A flat fish with broad fins.|Enli üzgəcli yastı balıq.
+ОСЬМИНОГ|OCTOPUS|SƏKKİZAYAQLI|🐙 🌊 🖐️ 🫙|Восемь гибких рук.|Eight flexible arms.|Səkkiz çevik qol.
+КАРАКАТИЦА|CUTTLEFISH|MÜRƏKKƏBBALIĞI|🦑 🌊 🎨 🖋️|Меняет цвет и выпускает чернила.|Changes colour and releases ink.|Rəngini dəyişir və mürəkkəb buraxır.
+МЕДУЗА|JELLYFISH|MEDUZA|🪼 🌊 ☂️ 🫧|Прозрачный плывущий зонтик.|A transparent floating umbrella.|Şəffaf üzən çətir.
+КРАБ|CRAB|YENGƏC|🦀 🌊 🦞 🏖️|Ходит боком и щёлкает клешнями.|Walks sideways with pincers.|Yan gedir və qısqacları var.
+ОМАР|LOBSTER|OMAR|🦞 🌊 🪨 🦀|Морской рак с большими клешнями.|A sea crustacean with large claws.|İri qısqaclı dəniz xərçəngi.
+НАУТИЛУС|NAUTILUS|NAUTİLUS|🐚 🌊 🌀 🐙|Морской моллюск в спиральной раковине.|A marine mollusc in a spiral shell.|Spiral qabıqlı dəniz molyusku.
+ЧЕРЕПАХА|TURTLE|TISBAĞA|🐢 🛡️ 🌿 🐾|Носит дом на спине.|Carries a home on its back.|Evini belində daşıyır.
+КРОКОДИЛ|CROCODILE|TİMSAH|🐊 💧 🦷 🌴|Длинная пасть и бронированная кожа.|A long jaw and armoured skin.|Uzun çənə və zirehli dəri.
+ИГУАНА|IGUANA|İQUANA|🦎 🌴 🌿 ☀️|Крупная тропическая ящерица.|A large tropical lizard.|İri tropik kərtənkələ.
+ХАМЕЛЕОН|CHAMELEON|BUQƏLƏMUN|🦎 🌈 👅 🌿|Меняет окраску и ловит языком.|Changes colour and catches with its tongue.|Rəngini dəyişir və dili ilə tutur.
+ГЕККОН|GECKO|GEKKON|🦎 🧱 🌙 🐾|Маленькая ящерица бегает по стенам.|A small lizard that climbs walls.|Divara dırmaşan kiçik kərtənkələ.
+КОБРА|COBRA|KOBRA|🐍 👑 🟤 ⚠️|Раздувает капюшон.|Spreads a hood.|Başlıq açır.
+ПИТОН|PYTHON|PİTON|🐍 🌴 📏 🐾|Душит добычу кольцами тела.|Squeezes prey in its coils.|Ovunu bədən halqaları ilə sıxır.
+ЛЯГУШКА|FROG|QURBAĞA|🐸 💧 🦟 🦵|Прыгает у пруда.|Jumps beside a pond.|Gölməçənin yanında tullanır.
+САЛАМАНДРА|SALAMANDER|SALAMANDRA|🦎 💧 ⚫ 🟡|Хвостатое земноводное.|A tailed amphibian.|Quyruqlu suda-quruda yaşayan.
+АКСОЛОТЛЬ|AXOLOTL|AKSOLOTL|🦎 🌸 💧 🫧|Водное земноводное с наружными жабрами.|An aquatic amphibian with external gills.|Xarici qəlsəməli su amfibiyası.
+ПИНГВИН|PENGUIN|PİNQVİN|🐧 ❄️ 🌊 🐟|Птица в чёрно-белом фраке.|A bird in a black-and-white suit.|Ağ-qara geyimli quş.
+ФЛАМИНГО|FLAMINGO|FLAMİNQO|🦩 🌸 💧 🦵|Розовая птица на длинных ногах.|A pink bird on long legs.|Uzun ayaqlı çəhrayı quş.
+ПЕЛИКАН|PELICAN|QUTAN|🐦 🐟 💧 👝|Клюв с мешком для рыбы.|A bill with a fish pouch.|Balıq üçün kisəli dimdik.
+АИСТ|STORK|LEYLƏK|🐦 🪺 🏠 🦵|Длинноногая птица гнездится на крышах.|A long-legged bird nesting on roofs.|Damlarda yuva quran uzunayaqlı quş.
+ЖУРАВЛЬ|CRANE|DURNA|🐦 🦵 🌾 🍂|Длинношеяя птица летит клином.|A long-necked bird flying in a wedge.|Dəstə ilə uçan uzunboyunlu quş.
+ЛЕБЕДЬ|SWAN|QUQUŞU|🦢 💧 🤍 🪽|Белая птица с изогнутой шеей.|A white bird with a curved neck.|Əyri boyunlu ağ quş.
+ПАВЛИН|PEACOCK|TOVUZQUŞU|🦚 🌈 👁️ 🪶|Раскрывает роскошный хвост.|Spreads a magnificent tail.|Möhtəşəm quyruğunu açır.
+СТРАУС|OSTRICH|DƏVƏQUŞU|🐦 🥚 🏃 🌍|Большая птица бегает вместо полёта.|A huge bird that runs instead of flying.|Uçmaq əvəzinə qaçan iri quş.
+КОЛИБРИ|HUMMINGBIRD|KOLİBRİ|🐦 🌺 🍯 🪽|Крошечная птица пьёт нектар.|A tiny nectar-drinking bird.|Nektar içən kiçik quş.
+ДЯТЕЛ|WOODPECKER|AĞACDƏLƏN|🐦 🌳 🔨 🪵|Стучит клювом по дереву.|Taps trees with its beak.|Dimdiyi ilə ağacı döyür.
+СОВА|OWL|BAYQUŞ|🦉 🌙 👀 🌲|Ночной охотник с большими глазами.|A night hunter with large eyes.|İri gözlü gecə ovçusu.
+ПОПУГАЙ|PARROT|TUTUQUŞU|🦜 🌈 🗣️ 🌴|Яркая птица повторяет звуки.|A bright bird that mimics sounds.|Səsləri təkrarlayan parlaq quş.
+БАБОЧКА|BUTTERFLY|KƏPƏNƏK|🦋 🌸 🐛 🌈|Цветные крылья после гусеницы.|Colourful wings after a caterpillar.|Tırtıldan sonra rəngli qanadlar.
+СТРЕКОЗА|DRAGONFLY|İYNƏCƏ|🪽 💧 🦟 👀|Четыре прозрачных крыла над водой.|Four clear wings above water.|Su üzərində dörd şəffaf qanad.
+[transport]
+ДВУХЭТАЖНЫЙАВТОБУС|DOUBLEDECKER|İKİMƏRTƏBƏLİAVTOBUS|🚌 2️⃣ 👥 🇬🇧|Пассажирский транспорт с двумя этажами.|Passenger transport with two decks.|İki mərtəbəli sərnişin nəqliyyatı.
+ТРОЛЛЕЙБУС|TROLLEYBUS|TROLLEYBUS|🚎 ⚡ 🔌 🛣️|Городской транспорт с проводами сверху.|City transport with overhead wires.|Üstdə naqilli şəhər nəqliyyatı.
+ТРАМВАЙ|TRAM|TRAMVAY|🚋 🛤️ ⚡ 🏙️|Городской вагон на рельсах.|A city carriage on rails.|Relslərdə şəhər vaqonu.
+МАГЛЕВ|MAGLEV|MAQLEV|🚆 🧲 💨 🛤️|Поезд удерживается магнитным полем.|A train supported by a magnetic field.|Maqnit sahəsi ilə saxlanan qatar.
+ЭЛЕКТРИЧКА|COMMUTERTRAIN|ELEKTRİKQATARI|🚆 ⚡ 🏘️ 🚉|Пригородный поезд.|A suburban train.|Şəhərətrafı qatar.
+ЛОКОМОТИВ|LOCOMOTIVE|LOKOMOTİV|🚂 🛤️ 💨 ⚙️|Тянет железнодорожные вагоны.|Pulls railway carriages.|Dəmir yolu vaqonlarını çəkir.
+ВАГОН|CARRIAGE|VAQON|🚃 🛤️ 👥 🚂|Часть поезда для людей или грузов.|A train section for passengers or cargo.|Qatarın sərnişin və ya yük hissəsi.
+МОНОРЕЛЬС|MONORAIL|MONORELS|🚝 🛤️ 1️⃣ 🏙️|Поезд на одной направляющей.|A train on one guiding rail.|Bir rels üzərində qatar.
+ЗУБЧАТАЯДОРОГА|RACKRAILWAY|DİŞLİDƏMİRYOLU|🚞 ⚙️ 🏔️ 🛤️|Зубчатый рельс помогает подниматься в гору.|A toothed rail helps climb mountains.|Dişli rels dağa qalxmağa kömək edir.
+КАНАТКА|CABLECAR|KANATYOLU|🚠 🏔️ 🪢 🏞️|Кабина висит над землёй.|A cabin suspended above the ground.|Yerdən yuxarı asılmış kabinə.
+МАРШРУТКА|SHAREDTAXI|MARŞRUTTAKSİSİ|🚐 👥 🛑 💰|Небольшой транспорт следует общему маршруту.|A small vehicle follows a shared route.|Kiçik nəqliyyat ümumi marşrutla gedir.
+МИНИВЭН|MINIVAN|MİNİVEN|🚐 👨‍👩‍👧‍👦 🧳 🛣️|Вместительная семейная машина.|A spacious family vehicle.|Geniş ailə avtomobili.
+МИКРОАВТОБУС|MINIBUS|MİKROAVTOBUS|🚐 👥 🛑 🎫|Небольшой автобус.|A small bus.|Kiçik avtobus.
+ПИКАП|PICKUP|PİKAP|🛻 📦 🌾 🛣️|Автомобиль с открытым грузовым кузовом.|A vehicle with an open cargo bed.|Açıq yük banlı avtomobil.
+СЕДАН|SEDAN|SEDAN|🚘 🚪 🧳 🛣️|Отдельный багажник легковой машины.|A passenger car with a separate boot.|Ayrı baqajlı minik avtomobili.
+ХЭТЧБЕК|HATCHBACK|HETÇBEK|🚗 🚪 ⬆️ 🧳|Задняя дверь открывается с окном.|Its rear door lifts with the window.|Arxa qapısı pəncərə ilə qalxır.
+УНИВЕРСАЛ|STATIONWAGON|UNİVERSAL|🚙 🧳 📦 👨‍👩‍👧‍👦|Легковая машина с длинным багажным отсеком.|A car with a long cargo area.|Uzun baqaj bölməli avtomobil.
+КАБРИОЛЕТ|CONVERTIBLE|KABRİOLET|🚘 ☀️ 🕶️ ⬇️|Машина со складывающейся крышей.|A car with a folding roof.|Qatlanan damlı avtomobil.
+ЛИМУЗИН|LIMOUSINE|LİMUZİN|🚘 📏 🎩 🥂|Очень длинная представительская машина.|A very long luxury car.|Çox uzun dəbdəbəli avtomobil.
+ВНЕДОРОЖНИК|OFFROADER|YOLSÜZLÜKAVTOMOBİLİ|🚙 🏔️ 🪨 🌧️|Проезжает там где нет асфальта.|Drives where there is no tarmac.|Asfalt olmayan yerdən keçir.
+КРОССОВЕР|CROSSOVER|KROSSOVER|🚙 🏙️ 🌲 🛣️|Городская машина с высоким кузовом.|A tall-bodied urban car.|Hündür banlı şəhər avtomobili.
+ЭЛЕКТРОМОБИЛЬ|ELECTRICCAR|ELEKTROMOBİL|🚗 ⚡ 🔋 🔌|Заряжается вместо заправки бензином.|Charges instead of filling with petrol.|Benzin əvəzinə enerji ilə doldurulur.
+ГИБРИД|HYBRIDCAR|HİBRİDAVTOMOBİL|🚗 🔋 ⛽ ⚙️|Два типа силовой установки.|Two types of power source.|İki növ güc qurğusu.
+МОТОЦИКЛ|MOTORCYCLE|MOTOSİKLET|🏍️ 🪖 💨 🛣️|Два колеса и мотор.|Two wheels and an engine.|İki təkər və mühərrik.
+МОПЕД|MOPED|MOPED|🛵 ⚙️ 🛣️ 🪖|Небольшой двухколёсный моторный транспорт.|A small motorised two-wheeler.|Kiçik motorlu ikitəkərli nəqliyyat.
+МОТОРОЛЛЕР|MOTORSCOOTER|MOTOROLLER|🛵 👞 ⚙️ 🏙️|Моторный транспорт с площадкой для ног.|A motor vehicle with a footboard.|Ayaq platformalı motorlu nəqliyyat.
+КВАДРОЦИКЛ|QUADBIKE|KVADROSİKL|🏍️ 4️⃣ 🌲 🪨|Четыре колеса для бездорожья.|Four wheels for rough terrain.|Yolsuzluq üçün dörd təkər.
+РАТРАК|SNOWCAT|RATRAK|❄️ 🚜 🏔️ ⚙️|Гусеничная машина готовит снежные склоны.|A tracked vehicle prepares snowy slopes.|Tırtıllı maşın qarlı yamacları hazırlayır.
+БАГГИ|BUGGY|BAQQİ|🚙 🏜️ 🛞 🪖|Лёгкая машина для песка и грунта.|A light vehicle for sand and dirt.|Qum və torpaq üçün yüngül maşın.
+МОНОЦИКЛ|UNICYCLE|MONOSİKL|🛞 1️⃣ 🦵 🤹|Педальный транспорт на одном колесе.|A pedal vehicle with one wheel.|Birtəkərli pedallı nəqliyyat.
+ГИРОСКУТЕР|HOVERBOARD|GİROSKUTER|🛞 2️⃣ 🔋 🧍|Двухколёсная платформа держит равновесие.|A two-wheeled platform balances itself.|İkitəkərli platforma tarazlığını saxlayır.
+ЭЛЕКТРОСАМОКАТ|ESCOOTER|ELEKTROSAMOKAT|🛴 🔋 ⚡ 📱|Платформа с рулём и батареей.|A handlebar platform with a battery.|Sükanlı və batareyalı platforma.
+РИКША|RICKSHAW|RİKŞA|🚲 👥 🌏 🛞|Лёгкая пассажирская повозка.|A light passenger carriage.|Yüngül sərnişin arabası.
+ДИЛИЖАНС|STAGECOACH|DİLİJANS|🐎 🧳 ✉️ 🛞|Старинный пассажирский экипаж между городами.|An old passenger carriage between towns.|Şəhərlərarası qədim sərnişin arabası.
+ПОВОЗКА|WAGON|ARABA|🐎 📦 🛞 🌾|Колёсный транспорт с тягловым животным.|Wheeled transport pulled by an animal.|Heyvanla çəkilən təkərli nəqliyyat.
+АЭРОСАНИ|AEROSLED|AEROXİZƏK|🛷 ❄️ 🌀 💨|Сани движутся благодаря воздушному винту.|A sled propelled by an air propeller.|Hava pəri ilə hərəkət edən xizək.
+ТРАКТОР|TRACTOR|TRAKTOR|🚜 🌾 ⚙️ 🌱|Тянет сельскохозяйственные машины.|Pulls agricultural equipment.|Kənd təsərrüfatı avadanlığını çəkir.
+КОМБАЙН|HARVESTER|KOMBAYN|🚜 🌾 ✂️ 🧺|Собирает урожай зерна.|Collects the grain harvest.|Taxıl məhsulunu yığır.
+ЭКСКАВАТОР|EXCAVATOR|EKSKAVATOR|🏗️ 🕳️ 🪣 🟡|Копает большим ковшом.|Digs with a large bucket.|İri çalovla qazır.
+БУЛЬДОЗЕР|BULLDOZER|BULDOZER|🚜 🟡 🪨 ➡️|Толкает грунт широким отвалом.|Pushes earth with a broad blade.|Enli bıçaqla torpağı itələyir.
+ПОГРУЗЧИК|FORKLIFT|YÜKLƏYİCİ|📦 🏭 ⬆️ 🛞|Поднимает палеты на вилах.|Lifts pallets on forks.|Altlıqları çəngəllərlə qaldırır.
+САМОСВАЛ|DUMPTRUCK|ÖZÜBOŞALDAN|🚚 🪨 ⬆️ 🏗️|Кузов наклоняется для выгрузки.|Its bed tilts to unload.|Boşaltmaq üçün banı qalxır.
+БЕТОНОМЕШАЛКА|CEMENTMIXER|BETONQARIŞDIRAN|🚚 🌀 🏗️ 🧱|Вращающийся барабан с раствором.|A rotating drum of building mix.|Tikinti məhlullu fırlanan baraban.
+АВТОКРАН|MOBILECRANE|AVTOKRAN|🏗️ 🚚 🪝 ⬆️|Подъёмная стрела на колёсах.|A lifting boom on wheels.|Təkərlər üzərində qaldırıcı qol.
+ЭВАКУАТОР|TOWTRUCK|EVAKUATOR|🚛 🚗 🪝 🛣️|Увозит сломанную машину.|Carries away a broken car.|Xarab maşını aparır.
+ФУРА|SEMITRUCK|TIR|🚛 📦 🛣️ 📏|Тягач с длинным полуприцепом.|A tractor with a long semitrailer.|Uzun yarımqoşqulu dartıcı.
+ГРУЗОВИК|TRUCK|YÜKMAŞINI|🚚 📦 🛣️ 🏭|Перевозит тяжёлые грузы.|Carries heavy cargo.|Ağır yüklər daşıyır.
+ФУРГОН|VAN|FURQON|🚐 📦 🚪 🏙️|Закрытый кузов для доставки.|An enclosed delivery body.|Çatdırılma üçün qapalı ban.
+ЦИСТЕРНА|TANKERTRUCK|SİSTERNMAŞINI|🚚 🛢️ 💧 ⛽|Перевозит жидкость в большом баке.|Carries liquid in a large tank.|İri çəndə maye daşıyır.
+ПОЖАРНАЯМАШИНА|FIREENGINE|YANĞINSÖNDÜRƏNMAŞIN|🚒 🔥 💧 🧯|Красная машина с рукавами и водой.|A red vehicle with hoses and water.|Şlanq və su ilə qırmızı maşın.
+СКОРАЯПОМОЩЬ|AMBULANCE|TƏCİLİYARDIM|🚑 🏥 🚨 🩺|Везёт пациента к врачам.|Takes a patient to doctors.|Xəstəni həkimlərə aparır.
+ПАТРУЛЬНАЯМАШИНА|POLICECAR|POLİSMAŞINI|🚓 👮 🚨 🛣️|Служебный автомобиль правоохранителей.|A law-enforcement vehicle.|Hüquq-mühafizə avtomobili.
+КАТЕР|MOTORBOAT|KATER|🚤 🌊 ⚙️ 💨|Небольшое быстрое моторное судно.|A small fast powered boat.|Kiçik sürətli motorlu gəmi.
+ПОНТОН|PONTOON|PONTON|🌊 🛢️ 🪵 🛟|Плавучая конструкция поддерживает площадку.|A floating structure supports a platform.|Üzən qurğu platformanı saxlayır.
+ПАРОХОД|STEAMSHIP|BUXARGƏMİSİ|🚢 💨 ⚙️ 🌊|Судно с паровым двигателем.|A ship powered by steam.|Buxarla işləyən gəmi.
+ЛЕДОКОЛ|ICEBREAKER|BUZQIRAN|🚢 ❄️ 🧊 🌊|Прокладывает путь среди льдин.|Clears a route through ice.|Buz arasında yol açır.
+ТАНКЕР|TANKER|TANKER|🚢 🛢️ 🌊 ⛽|Большое судно для жидких грузов.|A large ship for liquid cargo.|Maye yüklər üçün iri gəmi.
+КОНТЕЙНЕРОВОЗ|CONTAINERSHIP|KONTEYNERGƏMİSİ|🚢 📦 🏗️ 🌊|Судно с рядами грузовых ящиков.|A ship with rows of cargo boxes.|Yük qutuları sıralanan gəmi.
+СУХОГРУЗ|CARGOSHIP|QURUYÜKGƏMİSİ|🚢 🌾 📦 🌊|Перевозит твёрдые грузы морем.|Carries solid cargo by sea.|Dənizlə bərk yük daşıyır.
+ПОДВОДНАЯЛОДКА|SUBMARINE|SUALTIQAYIQ|🌊 ⬇️ 🔭 ⚙️|Судно скрывается под водой.|A vessel that travels underwater.|Sualtında hərəkət edən gəmi.
+ПЛОТ|RAFT|SAL|🪵 🌊 🪢 🧍|Связанные брёвна на воде.|Tied logs floating on water.|Suda üzən bağlanmış tirlər.
+КАНОЭ|CANOE|KANOE|🛶 💧 🪵 🏞️|Узкая лодка с однолопастным веслом.|A narrow boat with a single-bladed paddle.|Birpərli avarlı dar qayıq.
+ГОНОЧНЫЙБОЛИД|RACECAR|YARIŞAVTOMOBİLİ|🏎️ 🏁 🛞 💨|Машина для скоростной трассы.|A car for a racing circuit.|Yarış trası üçün maşın.
+АВТОДОМ|MOTORHOME|AVTOEV|🚐 🛏️ 🍳 🛣️|Жильё внутри автомобиля.|A home inside a vehicle.|Avtomobilin içində yaşayış yeri.
+АВТОВОЗ|CARTRANSPORTER|AVTODAŞIYICI|🚛 🚗 🚗 🛣️|Грузовик перевозит несколько автомобилей.|A truck carries several cars.|Bir neçə avtomobil daşıyan yük maşını.
+ПОЛУПРИЦЕП|SEMITRAILER|YARIMQOŞQU|🚛 🔗 📦 ⚙️|Передней частью опирается на тягач.|Its front rests on a tractor unit.|Ön hissəsi dartıcıya söykənir.
+ДИРИЖАБЛЬ|AIRSHIP|DİRİJABL|🎈 ✈️ ☁️ ⚙️|Управляемый летательный аппарат с газом.|A steerable gas-filled aircraft.|Qazla dolu idarə olunan uçuş aparatı.
+АЭРОСТАТ|HOTAIRBALLOON|AEROSTAT|🎈 🔥 🧺 ☁️|Корзина под воздушным шаром.|A basket beneath a balloon.|Hava şarının altında səbət.
+ПЛАНЕР|GLIDER|PLANER|🛩️ 🪽 🌬️ 🤫|Летит без двигателя.|Flies without an engine.|Mühərriksiz uçur.
+ГИДРОСАМОЛЁТ|SEAPLANE|HİDROTƏYYARƏ|🛩️ 🌊 🛬 🪽|Садится на воду.|Lands on water.|Suya enir.
+АВИАЛАЙНЕР|AIRLINER|AVİALAYNER|✈️ 👥 🧳 🌍|Большой пассажирский самолёт.|A large passenger aircraft.|İri sərnişin təyyarəsi.
+ИСТРЕБИТЕЛЬ|FIGHTERJET|QIRICITƏYYARƏ|🛩️ ⚔️ 💨 🪖|Быстрый боевой самолёт.|A fast combat aircraft.|Sürətli döyüş təyyarəsi.
+ГРУЗОВОЙСАМОЛЁТ|CARGOPLANE|YÜKTƏYYARƏSİ|✈️ 📦 🏭 🌍|Перевозит товары по воздуху.|Carries goods by air.|Malları hava ilə daşıyır.
+АВТОЖИР|GYROCOPTER|AVTOJİR|🛩️ 🌀 🌬️ ⚙️|Ротор вращается от встречного воздуха.|Its rotor spins in the airflow.|Rotoru hava axını ilə fırlanır.
+АВТОМАГИСТРАЛЬ|MOTORWAY|AVTOMAGİSTRAL|🛣️ 🚗 💨 🚧|Скоростная дорога без перекрёстков.|A fast road without level junctions.|Kəsişməsiz sürətli yol.
+ПЕРЕКРЁСТОК|INTERSECTION|YOLAYRICI|🛣️ ✖️ 🚦 🚗|Место встречи нескольких дорог.|Where several roads meet.|Bir neçə yolun birləşdiyi yer.
+ЭСТАКАДА|OVERPASS|ESTAKADA|🛣️ ⬆️ 🚗 🏙️|Дорога на опорах над землёй.|A road raised on supports.|Dayaqlar üzərində qaldırılmış yol.
+СЕРПАНТИН|HAIRPINROAD|SERPANTİN|🛣️ 🏔️ 🌀 🚗|Извилистая дорога в горах.|A winding mountain road.|Dağlarda dolama yol.
+ТРОТУАР|SIDEWALK|SƏKİ|🚶 🏙️ 🛣️ 👟|Часть улицы для пешеходов.|The street area for pedestrians.|Küçənin piyadalar üçün hissəsi.
+ПЕШЕХОДНЫЙПЕРЕХОД|CROSSWALK|PİYADAKEÇİDİ|🚶 ⚪ ⚫ 🚦|Полосы для безопасного пересечения улицы.|Stripes for crossing the street.|Küçəni keçmək üçün zolaqlar.
+СВЕТОФОР|TRAFFICLIGHT|İŞIQFOR|🚦 🔴 🟡 🟢|Три цвета регулируют движение.|Three colours control traffic.|Üç rəng hərəkəti tənzimləyir.
+ПАРКОВКА|PARKING|PARKİNQ|🅿️ 🚗 ⏱️ 🏙️|Место временной стоянки машин.|A place to leave vehicles temporarily.|Maşınların müvəqqəti dayanma yeri.
+АВТОЗАПРАВКА|PETROLSTATION|YANACAQDOLDURMA|⛽ 🚗 🛢️ 💳|Пополняют запас топлива.|Where fuel is replenished.|Yanacaq ehtiyatı doldurulur.
+ШЛАГБАУМ|BARRIERGATE|ŞLAQBAUM|🚧 🛑 🚗 ⬆️|Поднимающаяся перекладина закрывает проезд.|A lifting bar blocks vehicle access.|Qalxan tir keçidi bağlayır.
+ШИНА|TYRE|ŞİN|🛞 ⚫ 🛣️ 💨|Резиновая оболочка колеса.|The rubber covering of a wheel.|Təkərin rezin örtüyü.
+РУЛЬ|STEERINGWHEEL|SÜKAN|🚗 🔄 🖐️ 🛣️|Поворачивают для изменения направления.|Turn it to change direction.|İstiqaməti dəyişmək üçün çevrilir.
+СЦЕПЛЕНИЕ|CLUTCH|İLİŞMƏ|🚗 🦶 ⚙️ 🔗|Соединяет двигатель с коробкой передач.|Connects the engine to the gearbox.|Mühərriki sürətlər qutusuna bağlayır.
+ТОРМОЗ|BRAKE|ƏYLƏC|🚗 🦶 🛑 🛞|Замедляет движение.|Slows movement.|Hərəkəti yavaşıdır.
+АКСЕЛЕРАТОР|ACCELERATOR|AKSELERATOR|🚗 🦶 💨 📈|Педаль увеличивает тягу.|A pedal that increases power.|Gücü artıran pedal.
+СПИДОМЕТР|SPEEDOMETER|SPİDOMETR|🚗 ⏱️ 📏 💨|Показывает скорость движения.|Shows travelling speed.|Hərəkət sürətini göstərir.
+ОДОМЕТР|ODOMETER|ODOMETR|🚗 📏 🔢 🛣️|Считает пройденное расстояние.|Counts distance travelled.|Gedilən məsafəni hesablayır.
+БАМПЕР|BUMPER|BAMPER|🚗 🛡️ 🛠️ 💥|Защитная деталь спереди и сзади.|A protective part at the front and rear.|Öndə və arxada qoruyucu hissə.
+КАПОТ|BONNET|KAPOT|🚗 ⬆️ ⚙️ 🛠️|Крышка над двигателем.|A cover above the engine.|Mühərrikin üstündə qapaq.
+БАГАЖНИК|CARBOOT|BAQAJBÖLMƏSİ|🚗 🧳 📦 🚪|Отсек для вещей.|A compartment for luggage.|Əşyalar üçün bölmə.
+ФАРА|HEADLIGHT|FARA|🚗 💡 🌙 🛣️|Освещает дорогу впереди.|Lights the road ahead.|Qabaqdakı yolu işıqlandırır.
+ПОВОРОТНИК|INDICATOR|DÖNMƏGÖSTƏRİCİSİ|🚗 🟠 ↪️ 💡|Мигает перед изменением направления.|Flashes before changing direction.|İstiqamət dəyişməzdən əvvəl yanıb-sönür.
+ДВОРНИКИ|WINDSCREENWIPERS|ŞÜŞƏSİLƏNLƏR|🚗 🌧️ 🪟 🧹|Очищают лобовое стекло от воды.|Clear water from the windscreen.|Ön şüşədəki suyu silir.
+РЕМЕНЬБЕЗОПАСНОСТИ|SEATBELT|TƏHLÜKƏSİZLİKKƏMƏRİ|🚗 🪢 🛡️ 🧍|Удерживает пассажира в кресле.|Holds a passenger in their seat.|Sərnişini oturacaqda saxlayır.
+ПОДУШКАБЕЗОПАСНОСТИ|AIRBAG|TƏHLÜKƏSİZLİKYASTIĞI|🚗 💨 🛡️ 💥|Раскрывается при столкновении.|Inflates in a collision.|Toqquşmada açılır.
+АВТОМОЙКА|CARWASH|AVTOYUMA|🚗 💧 🧽 ✨|Место очистки кузова.|A place to clean vehicle bodywork.|Avtomobil banının təmizləndiyi yer.
+[home]
+ДИВАН|SOFA|DİVAN|🛋️ 🏠 📺 💤|Мягкое место для нескольких человек.|A soft seat for several people.|Bir neçə nəfər üçün yumşaq oturacaq.
+КРЕСЛО|ARMCHAIR|KRESLO|🛋️ 🧍 📖 🏠|Мягкое сиденье с подлокотниками.|A padded seat with armrests.|Qol dayaqlı yumşaq oturacaq.
+ТАБУРЕТ|STOOL|KƏTİL|🪑 🪵 🦵 🏠|Сиденье без спинки.|A seat without a backrest.|Arxalığı olmayan oturacaq.
+СТУЛ|CHAIR|STUL|🪑 🪵 🏠 🍽️|Сиденье со спинкой.|A seat with a backrest.|Arxalıqlı oturacaq.
+СТОЛ|TABLE|MASA|🍽️ 🪵 🏠 ✍️|Горизонтальная поверхность на ножках.|A flat surface on legs.|Ayaqlar üzərində düz səth.
+КОМОД|CHESTOFDRAWERS|KOMOD|🗄️ 👕 🏠 🪵|Мебель с выдвижными ящиками.|Furniture with sliding drawers.|Çəkilən siyirməli mebel.
+ШКАФ|WARDROBE|ŞKAF|🚪 👔 👗 🏠|Высокая мебель для одежды.|Tall furniture for clothes.|Paltar üçün hündür mebel.
+СЕРВАНТ|SIDEBOARD|SERVANT|🍽️ 🥂 🪟 🏠|Шкаф для посуды в гостиной.|A dining-room cupboard for dishes.|Qablar üçün qonaq otağı dolabı.
+СТЕЛЛАЖ|SHELVINGUNIT|RƏFQURĞUSU|📚 📦 🪵 🏠|Открытые полки в несколько ярусов.|Open shelves on several levels.|Bir neçə mərtəbəli açıq rəflər.
+ПОЛКА|SHELF|RƏF|📚 🧱 🪵 🏠|Доска на стене для вещей.|A board on the wall for objects.|Əşyalar üçün divarda taxta.
+ТУМБОЧКА|NIGHTSTAND|TUMBA|🛏️ 💡 📖 🏠|Небольшая мебель рядом с кроватью.|Small furniture beside a bed.|Çarpayının yanında kiçik mebel.
+КРОВАТЬ|BED|ÇARPAYI|🛏️ 🌙 💤 🏠|Место ночного сна.|A place for sleeping at night.|Gecə yatmaq üçün yer.
+МАТРАС|MATTRESS|DÖŞƏK|🛏️ 🧽 💤 🏠|Мягкая основа спального места.|The padded base of a bed.|Yatağın yumşaq əsası.
+ПОДУШКА|PILLOW|YASTIQ|🛏️ ☁️ 💤 🪶|Мягкая опора под голову.|A soft support for the head.|Baş üçün yumşaq dayaq.
+ОДЕЯЛО|BLANKET|YORĞAN|🛏️ 🧶 ❄️ 💤|Укрывает во время сна.|Covers you while sleeping.|Yatarkən üstünü örtür.
+ПРОСТЫНЯ|BEDSHEET|DÖŞƏKAĞI|🛏️ ⚪ 🧺 💤|Ткань поверх матраса.|Fabric laid over a mattress.|Döşəyin üzərinə çəkilən parça.
+НАВОЛОЧКА|PILLOWCASE|YASTIQÜZÜ|🛏️ 🪶 🧺 🧵|Тканевый чехол для подушки.|A fabric cover for a pillow.|Yastıq üçün parça örtük.
+ПОКРЫВАЛО|BEDSPREAD|YATAQÖRTÜYÜ|🛏️ 🎨 🧵 ☀️|Дневное декоративное покрытие кровати.|A decorative daytime bed cover.|Yatağın gündüz dekorativ örtüyü.
+КОВЁР|CARPET|XALÇA|🏠 🧶 🦶 🎨|Тканое покрытие пола.|A woven floor covering.|Toxunmuş döşəmə örtüyü.
+ТЮЛЬ|TULLE|TÜL|🪟 🧵 ☀️ ⚪|Лёгкая прозрачная ткань на окне.|Light transparent fabric at a window.|Pəncərədə yüngül şəffaf parça.
+ЖАЛЮЗИ|BLINDS|JALÜZ|🪟 ☀️ ↕️ 🏠|Поворотные планки закрывают свет.|Adjustable slats block light.|Tənzimlənən lövhələr işığı kəsir.
+КАРНИЗ|CURTAINROD|KARNİZ|🪟 🧵 🪵 🏠|Держатель над окном для штор.|A holder above a window for curtains.|Pərdə üçün pəncərə üstündə tutacaq.
+ЛЮСТРА|CHANDELIER|ÇİLÇIRAQ|💡 ✨ ⬆️ 🏠|Подвесной светильник с несколькими лампами.|A hanging light with several lamps.|Bir neçə lampalı asma işıq.
+ТОРШЕР|FLOORLAMP|TORŞER|💡 🦵 📖 🛋️|Высокая лампа стоит на полу.|A tall lamp standing on the floor.|Döşəmədə duran hündür lampa.
+АБАЖУР|LAMPSHADE|ABAJUR|💡 ☂️ 🧵 🌙|Рассеивает свет вокруг лампы.|Diffuses light around a lamp.|Lampanın işığını yayır.
+ПОДСВЕЧНИК|CANDLEHOLDER|ŞAMDAN|🕯️ 🏠 ✨ 🪵|Подставка для свечей.|A stand for candles.|Şam üçün dayaq.
+ВАЗА|VASE|GÜLDAN|💐 🏺 💧 🏠|Сосуд для букета.|A container for a bouquet.|Gül dəstəsi üçün qab.
+КАШПО|PLANTER|GÜLQABI|🪴 🏠 🌿 🏺|Декоративный сосуд для растения.|A decorative container for a plant.|Bitki üçün dekorativ qab.
+ЧАСЫ|CLOCK|SAAT|🕰️ ⏰ 🏠 🔢|Показывают время дома.|Show the time at home.|Evdə vaxtı göstərir.
+БУДИЛЬНИК|ALARMCLOCK|ZƏNGLİSAAT|⏰ 🌅 🛏️ 🔊|Звонит чтобы разбудить.|Rings to wake you up.|Oyandırmaq üçün zəng çalır.
+ПЛЕД|THROW|YUNÖRTÜK|🛋️ 🧶 ☕ ❄️|Лёгкое тёплое покрывало для отдыха.|A light warm cover for relaxing.|İstirahət üçün yüngül isti örtük.
+ВЕШАЛКА|HANGER|ASILQAN|👔 🪝 👗 🏠|Держит одежду на плечиках.|Holds clothing by its shoulders.|Paltarı çiyinlərindən saxlayır.
+КОРЗИНА|BASKET|SƏBƏT|🧺 🪵 📦 🏠|Плетёная ёмкость для вещей.|A woven container for objects.|Əşyalar üçün hörülmüş qab.
+СУНДУК|CHEST|SANDIQ|📦 🔒 🪵 🏠|Большой ящик с крышкой.|A large box with a lid.|Qapaqlı iri qutu.
+ПУФ|OTTOMAN|PUF|🛋️ 🦶 🧽 🏠|Низкое мягкое сиденье без спинки.|A low padded backless seat.|Alçaq yumşaq arxalıqsız oturacaq.
+ПРИХОЖАЯ|HALLWAY|DƏHLİZ|🚪 👟 🧥 🏠|Первая комната после входа.|The first area after the entrance.|Girişdən sonrakı ilk sahə.
+ГОСТИНАЯ|LIVINGROOM|QONAQOTAĞI|🛋️ 📺 👥 🏠|Комната для отдыха и гостей.|A room for relaxing and guests.|İstirahət və qonaqlar üçün otaq.
+СПАЛЬНЯ|BEDROOM|YATAQOTAĞI|🛏️ 🌙 💤 🏠|Комната для сна.|A room for sleeping.|Yatmaq üçün otaq.
+КУХНЯ|KITCHEN|MƏTBƏX|🍳 🍽️ 🧑‍🍳 🏠|Комната приготовления еды.|A room for preparing food.|Yemək hazırlanan otaq.
+ВАННАЯ|BATHROOM|HAMAMOTAĞI|🛁 🚿 🧼 🏠|Комната водных процедур.|A room for washing.|Yuyunmaq üçün otaq.
+КЛАДОВКА|PANTRY|ANBAROTAĞI|📦 🫙 🚪 🏠|Маленькое помещение для запасов.|A small room for stored supplies.|Ehtiyatlar üçün kiçik otaq.
+БАЛКОН|BALCONY|BALKON|🏢 🌤️ 🪴 🚪|Открытая площадка за окном.|An outdoor platform beyond the window.|Pəncərədən kənar açıq platforma.
+ЛОДЖИЯ|LOGGIA|LOJİYA|🏢 🪟 🧱 🪴|Площадка встроена в объём здания.|A recessed outdoor space in a building.|Binanın daxilinə çəkilmiş açıq sahə.
+ЧЕРДАК|ATTIC|ÇARDAQ|🏠 ⬆️ 📦 🪵|Помещение под крышей.|A space beneath the roof.|Damın altındakı sahə.
+ПОДВАЛ|CELLAR|ZİRZƏMİ|🏠 ⬇️ 🫙 🧱|Помещение ниже уровня земли.|A space below ground level.|Yer səviyyəsindən aşağı sahə.
+ГАРДЕРОБНАЯ|DRESSINGROOM|QARDEROBOTAĞI|👗 👔 👟 🚪|Отдельная комната для одежды.|A separate room for clothes.|Paltar üçün ayrıca otaq.
+ПРАЧЕЧНАЯ|LAUNDRYROOM|CAMAŞIRXANA|🧺 💧 👕 🫧|Помещение для стирки.|A room for washing clothes.|Paltar yumaq üçün otaq.
+ЛЕСТНИЦА|STAIRCASE|PİLLƏKƏN|🏠 ⬆️ 🦶 🪵|Ступени соединяют этажи.|Steps connect floors.|Pillələr mərtəbələri birləşdirir.
+ПЕРИЛА|BANISTER|MƏHƏCCƏR|🪜 🖐️ 🏠 🛡️|Держатся рукой у лестницы.|A hand support beside stairs.|Pilləkən yanında əl dayağı.
+ПОРОГ|THRESHOLD|ASTANA|🚪 🦶 🪵 🏠|Нижняя граница дверного проёма.|The bottom edge of a doorway.|Qapı keçidinin aşağı sərhədi.
+ПЛИНТУС|SKIRTINGBOARD|PLİNTUS|🧱 🪵 🦶 🏠|Планка между полом и стеной.|A strip where floor meets wall.|Döşəmə ilə divar arasındakı zolaq.
+ПАРКЕТ|PARQUET|PARKET|🪵 🦶 🏠 🟫|Деревянные планки на полу.|Wooden blocks forming a floor.|Döşəmədə taxta lövhələr.
+ЛАМИНАТ|LAMINATE|LAMİNAT|🪵 🏠 🧩 🦶|Слоистые панели для пола.|Layered panels for flooring.|Döşəmə üçün laylı panellər.
+ОБОИ|WALLPAPER|DİVARKAĞIZI|🧱 🎨 📜 🏠|Рулонное покрытие стен.|A rolled covering for walls.|Divar üçün rulon örtük.
+ПЛИТКА|TILE|KAFEL|🧱 🟦 🛁 🏠|Твёрдые пластины для облицовки.|Hard plates for covering surfaces.|Səth örtmək üçün bərk lövhələr.
+СМЕСИТЕЛЬ|MIXERTAP|QARIŞDIRICIKRAN|🚰 🔴 🔵 💧|Объединяет горячую и холодную воду.|Combines hot and cold water.|İsti və soyuq suyu birləşdirir.
+РАКОВИНА|WASHBASIN|ƏLYUYAN|🚰 🧼 🖐️ 💧|Чаша для мытья рук.|A bowl for washing hands.|Əl yumaq üçün çanaq.
+УНИТАЗ|TOILET|UNITAZ|🚽 💧 🧻 🏠|Сантехническое устройство со смывом.|A sanitary fixture with a flush.|Su ilə yuyulan sanitar qurğu.
+ВАННА|BATHTUB|VANNA|🛁 💧 🫧 🧼|Большая ёмкость для купания.|A large container for bathing.|Çimmək üçün iri qab.
+ДУШ|SHOWER|DUŞ|🚿 💧 🧼 🧍|Струи воды сверху.|Water sprays from above.|Yuxarıdan su şırnaqları.
+ПОЛОТЕНЦЕ|TOWEL|DƏSMAL|🧺 💧 🖐️ 🧵|Вытирают после мытья.|Used to dry after washing.|Yuyunduqdan sonra qurulamaq üçün.
+МОЧАЛКА|BATHSPONGE|HAMAMSÜNGƏRİ|🧽 🛁 🫧 🧼|Намыливают и трут кожу.|Used to lather and scrub skin.|Dərini sabunlamaq və sürtmək üçün.
+МЫЛО|SOAP|SABUN|🧼 🫧 🖐️ 💧|Пенится при мытье.|Lathers when washing.|Yuyarkən köpüklənir.
+ШАМПУНЬ|SHAMPOO|ŞAMPUN|🧴 🫧 💇 🚿|Средство для мытья волос.|A product for washing hair.|Saç yumaq üçün vasitə.
+ЗУБНАЯЩЁТКА|TOOTHBRUSH|DİŞFIRÇASI|🪥 🦷 🫧 🖐️|Чистит зубы щетинками.|Cleans teeth with bristles.|Tükləri ilə dişləri təmizləyir.
+ЗУБНАЯПАСТА|TOOTHPASTE|DİŞMƏCUNU|🪥 🦷 🧴 ✨|Выдавливают на щётку.|Squeezed onto a toothbrush.|Diş fırçasına sıxılır.
+БРИТВА|RAZOR|ÜLGÜC|🪒 🧔 🫧 🖐️|Удаляет волосы лезвием.|Removes hair with a blade.|Tükləri tiyə ilə götürür.
+РАСЧЁСКА|COMB|DARAQ|💇 🦷 🖐️ 🪞|Зубчики приводят волосы в порядок.|Teeth arrange the hair.|Dişləri saçı səliqəyə salır.
+ХАЛАТ|BATHROBE|XALAT|👘 🛁 🧵 🏠|Домашняя одежда с поясом.|Home clothing with a belt.|Kəmərli ev geyimi.
+ТАПОЧКИ|SLIPPERS|BAŞMAQ|🥿 🦶 🏠 🧶|Обувь для дома.|Footwear for indoors.|Ev üçün ayaqqabı.
+ПИЖАМА|PYJAMAS|PİJAMA|👕 🛏️ 🌙 💤|Одежда для сна.|Clothing for sleep.|Yatmaq üçün geyim.
+ФАРТУК|APRON|ÖNLÜK|🍳 👕 🧑‍🍳 🧵|Защищает одежду при готовке.|Protects clothes when cooking.|Yemək bişirərkən paltarı qoruyur.
+ПРИХВАТКА|OVENMITT|SOBAƏLCƏYİ|🧤 🔥 🍲 🖐️|Берут горячую посуду.|Used to hold hot cookware.|İsti qab tutmaq üçün.
+ПОДНОС|TRAY|SİNİ|🍽️ ☕ 🖐️ 🏠|Переносят сразу несколько чашек.|Carries several cups at once.|Bir neçə fincanı birlikdə daşıyır.
+СКАТЕРТЬ|TABLECLOTH|SÜFRƏ|🍽️ 🧵 🪵 🏠|Ткань покрывает обеденный стол.|Fabric covering a dining table.|Yemək masasını örtən parça.
+САЛФЕТКА|NAPKIN|SALFET|🍽️ 🖐️ 📄 🧵|Вытирают руки и губы за столом.|Wipes hands and lips at the table.|Masada əl və dodaqları silir.
+ГУБКА|SPONGE|SÜNGƏR|🧽 🍽️ 💧 🫧|Пористый помощник при мытье посуды.|A porous tool for washing dishes.|Qab yumaq üçün məsaməli vasitə.
+ШВАБРА|MOP|DÖŞƏMƏSİLƏN|🧹 💧 🪣 🦶|Моют пол длинной ручкой.|Washes floors with a long handle.|Uzun sapla döşəməni yuyur.
+ВЕНИК|BROOM|SÜPÜRGƏ|🧹 🍂 🦶 🏠|Сметает мелкий мусор.|Sweeps small debris.|Kiçik zibilləri süpürür.
+СОВОК|DUSTPAN|ZİBİLKÜRƏYİ|🧹 🗑️ 🖐️ 🦶|Собирает сметённый мусор.|Collects swept debris.|Süpürülmüş zibilləri toplayır.
+ВЕДРО|BUCKET|VEDRƏ|🪣 💧 🖐️ 🏠|Ёмкость с дужкой.|A container with a carrying handle.|Daşıma tutacaqlı qab.
+ТАЗ|WASHBOWL|LƏYƏN|🧺 💧 👕 🫧|Широкая ёмкость для ручной стирки.|A broad bowl for hand washing.|Əl ilə yumaq üçün enli qab.
+ПРИЩЕПКА|CLOTHESPEG|PALTARSANCAĞI|👕 🪢 ☀️ 🖐️|Закрепляет бельё на верёвке.|Secures laundry on a line.|Paltarı ipdə saxlayır.
+СУШИЛКА|DRYINGRACK|QURUDUCURƏF|👕 🧺 🌬️ 🏠|Раскладывающаяся опора для белья.|A folding support for laundry.|Paltar üçün qatlanan dayaq.
+ГЛАДИЛЬНАЯДОСКА|IRONINGBOARD|ÜTÜMASASI|👕 ♨️ 🪵 🏠|На ней разглаживают одежду.|Clothes are pressed on it.|Üstündə paltar ütülənir.
+МУСОРНОЕВЕДРО|RUBBISHBIN|ZİBİLQABI|🗑️ 🏠 📦 🧹|Домашняя ёмкость для отходов.|A household container for waste.|Ev tullantıları üçün qab.
+ЩЁТКА|SCRUBBINGBRUSH|TƏMİZLİKFIRÇASI|🖐️ 🧹 🫧 🧽|Жёсткая щетина оттирает грязь.|Stiff bristles scrub dirt.|Sərt tüklər kiri sürtüb çıxarır.
+ТРЯПКА|CLEANINGCLOTH|ƏSKİ|🧵 💧 🖐️ ✨|Кусок ткани для уборки.|A piece of fabric for cleaning.|Təmizlik üçün parça hissəsi.
+МОЮЩЕЕСРЕДСТВО|DETERGENT|YUYUCUVASİTƏ|🧴 🫧 🍽️ 👕|Растворяет загрязнения при мытье.|Removes dirt during washing.|Yuma zamanı çirki çıxarır.
+УДЛИНИТЕЛЬ|EXTENSIONLEAD|UZADICIKABEL|🔌 📏 ⚡ 🏠|Позволяет подключиться дальше от розетки.|Connects devices farther from a socket.|Rozetkadan uzaqda qoşulmağa imkan verir.
+ВЫКЛЮЧАТЕЛЬ|LIGHTSWITCH|İŞIQAÇARI|💡 🖐️ 🧱 ⚡|Клавиша включает свет.|A button that turns on a light.|İşığı yandıran düymə.
+РОЗЕТКА|SOCKET|ROZETKA|🔌 🧱 ⚡ 🏠|В неё вставляют вилку.|A plug is inserted into it.|Fiş ona taxılır.
+ДВЕРНОЙЗВОНОК|DOORBELL|QAPIZƏNGİ|🚪 🔔 🖐️ 👥|Сообщает о госте у входа.|Announces a visitor at the entrance.|Girişdə qonaq olduğunu bildirir.
+ДВЕРНАЯРУЧКА|DOORHANDLE|QAPIDƏSTƏYİ|🚪 🖐️ 🔄 🏠|Берутся рукой чтобы открыть дверь.|Held by hand to open a door.|Qapını açmaq üçün əllə tutulur.
+ЩЕКОЛДА|LATCH|CƏFTƏ|🚪 🔒 🖐️ 🪵|Простой засов на двери.|A simple door fastening.|Sadə qapı bağlayıcısı.
+ДОМОФОН|INTERCOM|DOMOFON|🏢 🚪 🔊 🖐️|Разговор с гостем у подъезда.|Talks to visitors at the building entrance.|Bina girişindəki qonaqla danışır.
+ПОЧТОВЫЙЯЩИК|LETTERBOX|POÇTQUTUSU|📬 ✉️ 🏠 🔑|Место для доставленных писем.|A place for delivered letters.|Gətirilmiş məktublar üçün yer.
+КЛЮЧНИЦА|KEYHOLDER|AÇARLIQ|🔑 🪝 🏠 🧱|Хранят ключи у входа.|Stores keys near the entrance.|Girişdə açarları saxlayır.
+ОБУВНИЦА|SHOERACK|AYAQQABIRƏFİ|👟 🥿 🚪 🪵|Полки для обуви.|Shelves for shoes.|Ayaqqabı üçün rəflər.
+ЗОНТОВНИЦА|UMBRELLASTAND|ÇƏTİRDAYAĞI|☂️ 🌧️ 🚪 🏠|Подставка для мокрых зонтов.|A stand for wet umbrellas.|Yaş çətirlər üçün dayaq.
+[nature]
+БЕРЁЗА|BIRCH|TOZAĞACI|🌳 ⚪ ⚫ 🍃|Белая кора с тёмными отметинами.|White bark with dark marks.|Tünd izli ağ qabıq.
+ДУБ|OAK|PALID|🌳 🌰 🍂 🪵|Могучее дерево с желудями.|A mighty tree with acorns.|Palıd qozası verən güclü ağac.
+КЛЁН|MAPLE|AĞCAQAYIN|🍁 🌳 🍂 🇨🇦|Резной лист на канадском флаге.|Its shaped leaf is on Canada's flag.|Yarpağı Kanada bayrağındadır.
+СОСНА|PINE|ŞAM|🌲 🪵 🌰 🌿|Длинные иглы и шишки.|Long needles and cones.|Uzun iynələr və qozalar.
+ЕЛЬ|SPRUCE|KÜKNAR|🌲 🎄 ❄️ 🌿|Хвойное дерево новогодних праздников.|A conifer used at winter celebrations.|Qış bayramlarında istifadə edilən iynəyarpaqlı.
+ЛИСТВЕННИЦА|LARCH|QARAŞAM|🌲 🍂 🟡 ❄️|Хвойное дерево сбрасывает иглы осенью.|A conifer that sheds needles in autumn.|Payızda iynələrini tökən iynəyarpaqlı.
+КЕДР|CEDAR|SİDR|🌲 🏔️ 🪵 🌿|Ароматное хвойное дерево.|An aromatic conifer.|Ətirli iynəyarpaqlı ağac.
+КИПАРИС|CYPRESS|SƏRV|🌲 📏 ☀️ 🌿|Стройное вечнозелёное дерево.|A slender evergreen tree.|İncə həmişəyaşıl ağac.
+ИВА|WILLOW|SÖYÜD|🌳 💧 🍃 ⬇️|Ветви свисают к воде.|Branches droop towards water.|Budaqları suya sallanır.
+ТОПОЛЬ|POPLAR|QOVAQ|🌳 ☁️ 🌬️ 🌱|Высокое дерево выпускает пух.|A tall tree that releases fluff.|Pambıq kimi toxum saçan hündür ağac.
+ОСИНА|ASPEN|AĞCAQOVAQ|🌳 🍃 🌬️ 🟡|Листья дрожат от слабого ветра.|Leaves tremble in a light wind.|Yarpaqları zəif küləkdə titrəyir.
+ЛИПА|LINDEN|CÖKƏ|🌳 🌼 🍯 ☕|Душистые цветки заваривают в чай.|Fragrant flowers are brewed as tea.|Ətirli çiçəkləri çay kimi dəmlənir.
+КАШТАН|CHESTNUTTREE|ŞABALIDAĞACI|🌳 🌰 🍂 🟤|Дерево с орехами в колючей оболочке.|A tree with nuts in spiny husks.|Tikanlı qabıqda qoz verən ağac.
+АКАЦИЯ|ACACIA|AKASİYA|🌳 🌼 🌍 🦒|Дерево часто встречается в саванне.|A tree common in the savanna.|Savannada çox rast gəlinən ağac.
+ЭВКАЛИПТ|EUCALYPTUS|EVKALİPT|🌳 🐨 🌿 🇦🇺|Ароматные листья любит коала.|Koalas eat its aromatic leaves.|Koala onun ətirli yarpaqlarını yeyir.
+БАМБУК|BAMBOO|BAMBUK|🎋 🐼 🌱 📏|Быстрорастущая трава с полыми стеблями.|Fast-growing grass with hollow stems.|İçi boş gövdəli sürətlə böyüyən ot.
+ПАПОРОТНИК|FERN|QIJİ|🌿 🌳 💧 🌀|Ажурные листья без цветков.|Lacy leaves without flowers.|Çiçəksiz naxışlı yarpaqlar.
+МОХ|MOSS|MAMIR|🌿 🪨 💧 🌲|Мягкий зелёный ковёр на камнях.|A soft green carpet on rocks.|Daşlarda yumşaq yaşıl örtük.
+ЛИШАЙНИК|LICHEN|ŞİBYƏ|🪨 🌿 🌲 ❄️|Гриб и водоросль живут вместе.|A fungus and alga living together.|Göbələk və yosun birlikdə yaşayır.
+ВОДОРОСЛИ|ALGAE|YOSUN|🌊 🌿 💧 🫧|Растущие в воде простые организмы.|Simple organisms growing in water.|Suda böyüyən sadə orqanizmlər.
+ПЛЮЩ|IVY|SARMAŞIQ|🌿 🧱 🏠 ⬆️|Вьётся по стенам.|Climbs along walls.|Divarlara sarılır.
+КРАПИВА|NETTLE|GİCİTKƏN|🌿 🖐️ 🔥 🌱|Листья обжигают при касании.|Leaves sting when touched.|Yarpağı toxunanda yandırır.
+ОДУВАНЧИК|DANDELION|ZƏNCİROTU|🌼 ⚪ 🌬️ 🌱|Жёлтый цветок становится пушистым шаром.|A yellow flower becomes a fluffy ball.|Sarı çiçək tüklü kürəyə çevrilir.
+РОМАШКА|DAISY|ÇOBANYASTIĞI|🌼 ⚪ 🟡 🌿|Белые лепестки вокруг жёлтой серединки.|White petals around a yellow centre.|Sarı mərkəz ətrafında ağ ləçəklər.
+ВАСИЛЁК|CORNFLOWER|GÜLƏVƏR|🌼 🔵 🌾 🌿|Синий цветок среди колосьев.|A blue flower among grain stalks.|Sünbüllər arasında mavi çiçək.
+ПОДСНЕЖНИК|SNOWDROP|NOVRUZGÜLÜ|🌼 ❄️ ⚪ 🌱|Первый белый цветок после зимы.|An early white flower after winter.|Qışdan sonra ilk ağ çiçəklərdən biri.
+ТЮЛЬПАН|TULIP|LALƏ|🌷 🌱 🌈 ☀️|Весенний цветок с чашевидным бутоном.|A spring flower with a cup-shaped bloom.|Qədəhvari çiçəkli yaz bitkisi.
+НАРЦИСС|DAFFODIL|NƏRGİZ|🌼 🟡 🌱 🎺|Весенний цветок с трубчатой серединой.|A spring flower with a trumpet centre.|Boruşəkilli mərkəzi olan yaz çiçəyi.
+РОЗА|ROSE|QIZILGÜL|🌹 ❤️ 🌿 🪡|Душистый цветок с шипами.|A fragrant flower with thorns.|Tikanlı ətirli çiçək.
+ЛИЛИЯ|LILY|ZANBAQ|🌸 ⚪ 🌿 🏺|Крупный цветок с шестью долями.|A large flower with six segments.|Altı hissəli iri çiçək.
+ОРХИДЕЯ|ORCHID|SƏHLƏB|🌸 🌴 🪴 💧|Необычный цветок с губой.|An unusual flower with a lip.|Dodaqşəkilli hissəsi olan qeyri-adi çiçək.
+ЛАВАНДА|LAVENDER|LAVANDA|🟣 🌿 👃 🐝|Фиолетовые душистые соцветия.|Purple fragrant flower spikes.|Bənövşəyi ətirli çiçək salxımları.
+СИРЕНЬ|LILAC|YASƏMƏN|🟣 🌸 🌳 👃|Куст с душистыми весенними кистями.|A shrub with fragrant spring clusters.|Ətirli yaz salxımları olan kol.
+ЖАСМИН|JASMINE|JASMİN|⚪ 🌸 👃 🌿|Куст с ароматными белыми цветками.|A shrub with fragrant white flowers.|Ətirli ağ çiçəkli kol.
+ПИОН|PEONY|PİON|🌸 🌿 🩷 💐|Пышный цветок с множеством лепестков.|A full flower with many petals.|Çoxləçəkli gur çiçək.
+ГЕОРГИН|DAHLIA|GEORGİN|🌸 🌈 🌿 🍂|Пышный садовый цветок конца лета.|A full garden flower of late summer.|Yayın sonunda açan gur bağ çiçəyi.
+ХРИЗАНТЕМА|CHRYSANTHEMUM|XRİZANTEMA|🌼 🍂 🌿 🌈|Садовый цветок осени.|An autumn garden flower.|Payız bağ çiçəyi.
+ИРИС|IRIS|SÜSƏN|🟣 🌸 🌿 💧|Цветок с похожими на меч листьями.|A flower with sword-like leaves.|Qılıncvari yarpaqlı çiçək.
+ГЛАДИОЛУС|GLADIOLUS|QLADİOLUS|🌸 📏 🌿 💐|Цветки на высоком вертикальном колосе.|Flowers on a tall upright spike.|Hündür dik sünbüldə çiçəklər.
+КОЛОКОЛЬЧИК|BELLFLOWER|ZƏNGÇİÇƏYİ|🔔 🟣 🌼 🌿|Цветок напоминает маленький звонок.|A flower shaped like a small bell.|Kiçik zəngə bənzəyən çiçək.
+ВЬЮНОК|BINDWEED|SARMAŞIQOTU|🌿 🌀 ⚪ 🌼|Вьющийся стебель с воронкой цветка.|A climbing stem with funnel flowers.|Qıfvari çiçəkli sarılan gövdə.
+ПОДОРОЖНИК|PLANTAIN|BAĞAYARPAĞI|🌿 🛣️ 🦶 🌱|Широкие листья часто растут у троп.|Broad leaves often grow by paths.|Enli yarpaqları cığır yanında bitir.
+КЛЕВЕР|CLOVER|YONCA|☘️ 🐝 🌸 🌾|Лист обычно состоит из трёх частей.|Its leaf usually has three parts.|Yarpağı adətən üç hissəlidir.
+КАМЫШ|BULRUSH|QAMIŞ|🌾 💧 🦆 🌿|Высокое растение у воды.|A tall plant beside water.|Su yanında hündür bitki.
+РОГОЗ|CATTAIL|CİL|🌾 💧 🟤 📏|Болотное растение с коричневым початком.|A marsh plant with a brown spike.|Qəhvəyi sünbüllü bataqlıq bitkisi.
+КУВШИНКА|WATERLILY|SUZANBAĞI|🌸 💧 🍃 🐸|Цветок плавает среди круглых листьев.|A flower among round floating leaves.|Yumru üzən yarpaqlar arasında çiçək.
+ЛОТОС|LOTUS|LOTOS|🪷 💧 🌸 🌿|Водный цветок поднимается над поверхностью.|A water flower rising above the surface.|Su səthindən yuxarı qalxan çiçək.
+АЛОЭ|ALOE|ALOE|🪴 🌵 💧 🌿|Мясистые листья содержат прозрачный гель.|Fleshy leaves contain clear gel.|Ətli yarpaqlarda şəffaf gel var.
+АГАВА|AGAVE|AQAVA|🌵 🌿 ☀️ 🏜️|Розетка жёстких колючих листьев.|A rosette of stiff spiny leaves.|Sərt tikanlı yarpaq rozeti.
+СУККУЛЕНТ|SUCCULENT|SUKKULENT|🪴 💧 🌵 ☀️|Запасает воду в листьях или стеблях.|Stores water in leaves or stems.|Yarpaq və ya gövdədə su saxlayır.
+ДЮНА|DUNE|QUMTƏPƏSİ|🏜️ 🌬️ ⛰️ ☀️|Песчаный холм создан ветром.|A sand hill formed by wind.|Küləklə yaranmış qum təpəsi.
+БАРХАН|CRESCENTDUNE|BARXAN|🏜️ 🌙 🌬️ ☀️|Песчаная дюна формы полумесяца.|A crescent-shaped sand dune.|Ayparaşəkilli qum təpəsi.
+ОАЗИС|OASIS|VAHƏ|🏜️ 🌴 💧 🌿|Зелёный уголок с водой среди песков.|A green water source amid desert sand.|Səhra qumları arasında yaşıl su məkanı.
+ПЛАТО|PLATEAU|YAYLA|⛰️ ➖ 🌾 ☁️|Возвышенная равнинная поверхность.|An elevated flat surface.|Hündür düz səth.
+УЩЕЛЬЕ|GORGE|DƏRƏ|🏔️ 💧 ⬇️ 🪨|Узкая глубокая долина со склонами.|A narrow deep valley with steep sides.|Dik yamaclı dar dərin vadi.
+ОВРАГ|RAVINE|YARĞAN|🌧️ ⬇️ 🪨 🌾|Глубокая промоина в земле.|A deep eroded cut in the ground.|Torpaqda dərin yuyulma yarığı.
+КАРСТ|KARST|KARST|🪨 💧 🕳️ ⛰️|Вода растворяет породы создавая полости.|Water dissolves rock into cavities.|Su süxuru həll edərək boşluqlar yaradır.
+СТАЛАКТИТ|STALACTITE|STALAKTİT|🕳️ ⬇️ 💧 🪨|Каменная сосулька свисает в пещере.|A stone icicle hanging in a cave.|Mağarada sallanan daş buzlaq.
+СТАЛАГМИТ|STALAGMITE|STALAQMİT|🕳️ ⬆️ 💧 🪨|Каменный столб растёт снизу в пещере.|A stone column growing from a cave floor.|Mağara döşəməsindən böyüyən daş sütun.
+БОЛОТО|SWAMP|BATAQLIQ|💧 🌿 🐸 🌫️|Переувлажнённый участок земли.|Waterlogged land.|Həddən artıq sulu torpaq sahəsi.
+ТОРФЯНИК|PEATBOG|TORFLUQ|🌿 💧 🟤 🌫️|Болото с накопившимися остатками растений.|A bog with accumulated plant remains.|Bitki qalıqları toplanmış bataqlıq.
+ТУНДРА|TUNDRA|TUNDRA|❄️ 🌿 🦌 🌬️|Безлесная холодная природная зона.|A cold treeless natural region.|Soyuq ağacsız təbii zona.
+ТАЙГА|TAIGA|TAYQA|🌲 ❄️ 🐻 🌲|Большой пояс северных хвойных лесов.|A vast belt of northern conifer forests.|Şimal iynəyarpaqlı meşələrinin geniş qurşağı.
+СТЕПЬ|STEPPE|ÇÖL|🌾 🌬️ 🐎 ☀️|Безлесная равнина с травами.|A treeless grassy plain.|Ağacsız otlu düzənlik.
+САВАННА|SAVANNA|SAVANNA|🌾 🦁 🌳 ☀️|Тропические травы с редкими деревьями.|Tropical grassland with scattered trees.|Seyrək ağaclı tropik otluq.
+МАНГРЫ|MANGROVES|MANQR|🌳 🌊 🪵 🦀|Деревья с корнями в приливной воде.|Trees rooted in tidal water.|Qabarma sularında köklənmiş ağaclar.
+ОТМЕЛЬ|SHOAL|DAYAZLIQ|🌊 🏖️ 🪨 🚢|Участок дна близко к поверхности воды.|A bed area close to the water surface.|Suyun səthinə yaxın dib sahəsi.
+ЗАВОДЬ|BACKWATER|DURĞUNSU|💧 🌿 🦆 🏞️|Тихий участок водоёма со слабым течением.|A quiet water area with little current.|Zəif axınlı sakit su sahəsi.
+ПРОЛИВ|STRAIT|BOĞAZ|🌊 🏝️ 🏝️ 🚢|Водный проход между участками суши.|A water passage between land areas.|Quru sahələri arasındakı su keçidi.
+ПЕРЕШЕЕК|ISTHMUS|BƏRZƏX|🌊 🏝️ 🛣️ 🌊|Узкая суша соединяет большие земли.|Narrow land connecting larger land areas.|Böyük quru sahələrini birləşdirən dar torpaq.
+АРХИПЕЛАГ|ARCHIPELAGO|ARXİPELAQ|🏝️ 🏝️ 🌊 🏝️|Группа островов.|A group of islands.|Adalar qrupu.
+МЫС|CAPE|BURUN|🏝️ 🌊 ➡️ 🪨|Выступ суши в воду.|A point of land extending into water.|Suyun içinə uzanan quru çıxıntısı.
+ФЬОРД|FJORD|FYORD|🏔️ 🌊 🪨 ❄️|Длинный узкий морской залив в скалах.|A long narrow sea inlet among cliffs.|Qayalar arasında uzun dar dəniz körfəzi.
+ЭСТУАРИЙ|ESTUARY|ESTUARİ|💧 🌊 🐟 🌾|Расширенное устье реки с приливами.|A widened river mouth affected by tides.|Qabarma təsirli geniş çay mənsəbi.
+ДЕЛЬТА|RIVERDELTA|ÇAYDELTASI|💧 🔱 🌊 🌾|Река разветвляется перед морем.|A river branches before the sea.|Çay dənizdən əvvəl şaxələnir.
+ПРИТОК|TRIBUTARY|ÇAYQOLU|💧 ↪️ 🏞️ 🌊|Меньшая река впадает в большую.|A smaller river joins a larger one.|Kiçik çay böyük çaya tökülür.
+РУСЛО|RIVERBED|ÇAYYATAĞI|💧 🪨 🏞️ ➡️|Углубление по которому течёт река.|The channel through which a river flows.|Çayın axdığı kanal.
+ГЕЙЗЕР|GEYSER|QEYZER|💧 ♨️ ⬆️ 🪨|Горячая вода периодически бьёт из земли.|Hot water periodically erupts from the ground.|İsti su dövri olaraq yerdən püskürür.
+ПОРОГИ|RAPIDS|ÇAYASTANALARI|💧 🪨 🌊 🛶|Бурный участок реки над камнями.|A turbulent river section over rocks.|Daşlar üzərində çayın coşqun hissəsi.
+МОРЕНА|MORAINE|MOREN|🪨 🧊 🏔️ 📦|Обломки пород принесённые движущимся льдом.|Rock debris carried by moving ice.|Hərəkət edən buzun gətirdiyi süxur qırıntıları.
+АЙСБЕРГ|ICEBERG|AYSBERQ|🧊 🌊 ❄️ 🚢|Большая плавающая ледяная глыба.|A large floating mass of ice.|İri üzən buz kütləsi.
+СУГРОБ|SNOWDRIFT|QARYIĞINI|❄️ 🌬️ ⛰️ 🏠|Снег накопился холмом.|Snow piled into a mound.|Təpə kimi yığılmış qar.
+ИНЕЙ|FROST|QIROV|❄️ 🌿 🪟 🌅|Белые кристаллы на холодных поверхностях.|White crystals on cold surfaces.|Soyuq səthlərdə ağ kristallar.
+РОСА|DEW|ŞEH|💧 🌿 🌅 ☀️|Утренние капли на траве.|Morning drops on grass.|Otda səhər damcıları.
+ТУМАН|FOG|DUMAN|🌫️ 🌁 💧 👀|Капли в воздухе ухудшают видимость.|Airborne droplets reduce visibility.|Havadakı damcılar görünüşü azaldır.
+ГРАД|HAIL|DOLU|🧊 ☁️ ⬇️ 🌧️|Ледяные шарики падают с неба.|Ice pellets falling from the sky.|Göydən düşən buz dənələri.
+МЕТЕЛЬ|BLIZZARD|ÇOVĞUN|❄️ 🌬️ 🌫️ 🏠|Ветер несёт снег.|Wind carries snow.|Külək qar aparır.
+ЛИВЕНЬ|DOWNPOUR|LEYSAN|🌧️ 💧 ☁️ ☔|Очень сильный дождь.|Very heavy rain.|Çox güclü yağış.
+МОРОСЬ|DRIZZLE|ÇİSKİN|🌧️ 💧 🌫️ ☂️|Мелкие частые капли осадков.|Fine frequent rain droplets.|Xırda sıx yağış damcıları.
+ЗАСУХА|DROUGHT|QURAQLIQ|☀️ 🏜️ 🌱 🚫|Долгое отсутствие дождей.|A long absence of rain.|Yağışın uzun müddət olmaması.
+НАВОДНЕНИЕ|FLOOD|DAŞQIN|🌊 🏠 🌧️ 💧|Вода покрывает обычно сухую землю.|Water covers normally dry land.|Su adətən quru torpağı örtür.
+СМЕРЧ|TORNADO|QASIRĞASÜTUNU|🌪️ 🌬️ ☁️ 🏠|Вращающийся воздушный столб.|A rotating column of air.|Fırlanan hava sütunu.
+УРАГАН|HURRICANE|URAQAN|🌀 🌬️ 🌊 🌧️|Мощная тропическая буря.|A powerful tropical storm.|Güclü tropik fırtına.
+БРИЗ|BREEZE|BRİZ|🌬️ 🌊 🏖️ ☀️|Прибрежный ветер меняет направление.|A coastal wind that changes direction.|İstiqamət dəyişən sahil küləyi.
+МУССОН|MONSOON|MUSSON|🌬️ 🌧️ 🌏 ☀️|Сезонный ветер приносит дожди.|A seasonal wind bringing rain.|Yağış gətirən mövsümi külək.
+ПАССАТ|TRADEWIND|PASSAT|🌬️ 🌍 ⛵ ☀️|Устойчивый ветер тропических широт.|A steady wind of tropical latitudes.|Tropik enliklərin sabit küləyi.
+ПРИЛИВ|HIGHTIDE|QABARMA|🌊 🌕 ⬆️ 🏖️|Морской уровень периодически поднимается.|The sea level rises periodically.|Dəniz səviyyəsi dövri qalxır.
+ОТЛИВ|LOWTIDE|ÇƏKİLMƏ|🌊 🌕 ⬇️ 🏖️|Морская вода отступает от берега.|Seawater retreats from shore.|Dəniz suyu sahildən geri çəkilir.
+ПОЛЯРНОЕСИЯНИЕ|AURORA|QÜTBİŞIQLARI|🌌 🟢 ❄️ 🌍|Цветные огни в полярном небе.|Coloured lights in polar skies.|Qütb səmasında rəngli işıqlar.
+ЛИСТОПАД|LEAFFALL|YARPAQTÖKÜLMƏSİ|🍂 🌳 🌬️ 🟡|Осеннее опадание листвы.|Autumn shedding of leaves.|Payızda yarpaqların tökülməsi.

@@ -4,7 +4,7 @@ from pathlib import Path
 from playwright.sync_api import sync_playwright, expect
 
 BASE='https://firstgame001-star.github.io/Photoword2026/'
-RELEASE='20261001-r111'
+RELEASE='20261001-r112'
 OUT=Path('test-results'); OUT.mkdir(exist_ok=True)
 
 for attempt in range(48):
@@ -941,10 +941,10 @@ def install_mock(ctx,account,completed,lang):
             if level not in completed:
                 completed.add(level);account['coins']+=20;account['xp']+=15;account['completed_levels']+=1;account['current_level']=max(account['current_level'],level+1);account['rank']=1
         elif action=='profile_stats':
-            stats=account.get('_profile_stats') or {'theme_levels_completed':0,'themes_completed':0,'themes_total':8,'theme_counts':{'sport':0,'art':0,'professions':0,'travel':0,'science':0,'technology':0,'cinema':0,'food':0},'challenge':{'limited_best_score':7,'nohint_best_streak':4,'blitz_best_score':9,'blitz_best_streak':5,'runs_total':12,'reward_coins':35,'reward_xp':22}}
+            stats=account.get('_profile_stats') or {'theme_levels_completed':0,'themes_completed':0,'themes_total':12,'theme_counts':{'sport':0,'art':0,'professions':0,'travel':0,'science':0,'technology':0,'cinema':0,'food':0,'animals':0,'transport':0,'home':0,'nature':0},'challenge':{'limited_best_score':7,'nohint_best_streak':4,'blitz_best_score':9,'blitz_best_streak':5,'runs_total':12,'reward_coins':35,'reward_xp':22}}
             route.fulfill(status=200,content_type='application/json',body=json.dumps({'stats':stats}),headers={'Access-Control-Allow-Origin':'*'});return
         elif action=='theme_progress':
-            theme_map={k:[] for k in ['sport','art','professions','travel','science','technology','cinema','food']}
+            theme_map={k:[] for k in ['sport','art','professions','travel','science','technology','cinema','food','animals','transport','home','nature']}
             for item in account.setdefault('_theme_completed',[]):
                 try:
                     theme,level=item.split(':',1);level=int(level)
@@ -1135,7 +1135,7 @@ with sync_playwright() as pw:
       # Chapter-earned title appears after completing Chapter 1.
       expected_title={'ru':'Новичок','en':'Novice','az':'Yeni başlayan'}[language]
       expect(page.locator('#rankLabel')).to_contain_text(expected_title)
-      page.locator('#profileBtn').tap();expect(page.locator('#profileTitle')).to_have_text(expected_title);expect(page.locator('#profileChapters')).to_have_text('1/12');expect(page.locator('#profileThemeDone')).to_have_text('0/800');expect(page.locator('#profileThemesComplete')).to_have_text('0/8');expect(page.locator('#profileLimitedBest')).to_have_text('7/10');expect(page.locator('#profileNoHintBest')).to_have_text('4');expect(page.locator('#profileBlitzBest')).to_have_text('9');expect(page.locator('#profileBlitzStreak')).to_have_text('5');expect(page.locator('#profileStatsStatus')).to_contain_text('12');page.locator('[data-close="profileModal"]').tap()
+      page.locator('#profileBtn').tap();expect(page.locator('#profileTitle')).to_have_text(expected_title);expect(page.locator('#profileChapters')).to_have_text('1/12');expect(page.locator('#profileThemeDone')).to_have_text('0/1200');expect(page.locator('#profileThemesComplete')).to_have_text('0/12');expect(page.locator('#profileLimitedBest')).to_have_text('7/10');expect(page.locator('#profileNoHintBest')).to_have_text('4');expect(page.locator('#profileBlitzBest')).to_have_text('9');expect(page.locator('#profileBlitzStreak')).to_have_text('5');expect(page.locator('#profileStatsStatus')).to_contain_text('12');page.locator('[data-close="profileModal"]').tap()
       # Nickname is one-time UI and becomes the displayed name.
       page.locator('#profileBtn').tap();page.locator('#nicknameBtn').tap();page.locator('#nicknameInput').fill('Player_77');page.locator('#saveNickname').tap();expect(page.locator('#name')).to_have_text('Player_77');page.locator('#profileBtn').tap();expect(page.locator('#nicknameBtn')).to_be_disabled()
       # Share-game control opens Telegram share URL.
@@ -1308,14 +1308,16 @@ with sync_playwright() as pw:
     # Newly playable Cinema and Food banks, including first and final levels in each language.
     added_source=Path('clean/theme-levels-cinema-food.js').read_text(encoding='utf-8')
     added_banks=json.JSONDecoder().raw_decode(added_source[added_source.index('{'):])[0]
-    for theme_id in ('cinema','food'):
+    added_source=Path('clean/theme-levels-expansion.js').read_text(encoding='utf-8')
+    added_banks.update(json.JSONDecoder().raw_decode(added_source[added_source.index('{'):])[0])
+    for theme_id in ('cinema','food','animals','transport','home','nature'):
       for language in ('ru','en','az'):
         ctx=browser.new_context(viewport={'width':390,'height':800},has_touch=True,is_mobile=True)
         ctx.add_init_script(f"localStorage.setItem('pw.language','{language}'); localStorage.setItem('pw.theme','game');")
         account={'photoword_id':'PW-THEME-TEST','first_name':'Test','last_name':'','username':None,'game_nickname':None,'nickname_changed':False,'coins':4321,'xp':300,'completed_levels':20,'current_level':21,'rank':1,'daily_streak':0,'last_daily_reward':None}
         completed=set(range(1,21));install_mock(ctx,account,completed,language);page=ctx.new_page();errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
         page.goto(BASE+f'clean/theme-game.html?theme={theme_id}&level=1#'+fragment,wait_until='domcontentloaded',timeout=45000)
-        expect(page.locator('#themeGameTitle')).to_contain_text({'cinema':{'ru':'Кино','en':'Cinema','az':'Kino'},'food':{'ru':'Еда','en':'Food','az':'Yemək'}}[theme_id][language])
+        expect(page.locator('#themeGameTitle')).to_contain_text({'cinema':{'ru':'Кино','en':'Cinema','az':'Kino'},'food':{'ru':'Еда','en':'Food','az':'Yemək'},'animals':{'ru':'Животные','en':'Animals','az':'Heyvanlar'},'transport':{'ru':'Транспорт','en':'Transport','az':'Nəqliyyat'},'home':{'ru':'Дом','en':'Home','az':'Ev'},'nature':{'ru':'Природа','en':'Nature','az':'Təbiət'}}[theme_id][language])
         tap_word(page,added_banks[theme_id][0][language]['answer']);expect(page.locator('#successPanel')).to_be_visible()
         assert page.evaluate(f"JSON.parse(localStorage.getItem('pw.themeProgress.{theme_id}')).includes(1)")
         account['_theme_completed']=[f'{theme_id}:{i}' for i in range(1,100)]

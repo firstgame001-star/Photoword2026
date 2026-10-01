@@ -25,12 +25,12 @@ jobs:
         run: |
           node scripts/check-clean.mjs
           node scripts/full-audit.mjs
-      - name: Wait for r111 and verify published files
+      - name: Wait for r112 and verify published files
         shell: bash
         run: |
           set -euo pipefail
           base='https://firstgame001-star.github.io/Photoword2026/clean'
-          release='20261001-r111'
+          release='20261001-r112'
           ok=0
           for i in $(seq 1 48); do
             if curl --fail --silent --show-error --location --max-time 20 "$base/release.json?check=$i" -o "$RUNNER_TEMP/release.json" && grep -q "$release" "$RUNNER_TEMP/release.json"; then
@@ -40,7 +40,7 @@ jobs:
             sleep 5
           done
           test "$ok" = 1
-          for file in index.html game.html theme-game.html core.js home.js duel.js game.js main-levels-8-9.js main-levels-10-12.js theme-game.js theme-levels-cinema-food.js challenge-bank-extra.js challenge.js ui.css privacy.html terms.html release.json; do
+          for file in index.html game.html theme-game.html core.js home.js duel.js game.js main-levels-8-9.js main-levels-10-12.js theme-game.js theme-levels-cinema-food.js theme-levels-expansion.js challenge-bank-extra.js challenge.js ui.css privacy.html terms.html release.json; do
             curl --fail --silent --show-error --location --retry 4 --retry-all-errors --retry-delay 3 --max-time 30 "$base/$file?r=$release" -o "$RUNNER_TEMP/$file"
             echo "HTTP 200: $file"
           done
@@ -84,7 +84,7 @@ jobs:
           grep -q '381–430' "$RUNNER_TEMP/index.html"
           grep -q '431–480' "$RUNNER_TEMP/index.html"
           grep -q '481–530' "$RUNNER_TEMP/index.html"
-          curl -fsSL "$SITE/clean/main-levels-10-12.js" -o "$RUNNER_TEMP/main-levels-10-12.js"
+          curl -fsSL "$base/main-levels-10-12.js" -o "$RUNNER_TEMP/main-levels-10-12.js"
           grep -q '"id": 530' "$RUNNER_TEMP/main-levels-10-12.js"
           grep -q '"main_answers_unique_all_languages":true' "$RUNNER_TEMP/release.json"
           grep -q 'chapter12Select' "$RUNNER_TEMP/index.html"
@@ -174,7 +174,7 @@ jobs:
           grep -q 'const SCIENCE_TRANSLATED=' "$RUNNER_TEMP/theme-game.js"
           grep -q 'const TECHNOLOGY_LEVELS=' "$RUNNER_TEMP/theme-game.js"
           grep -q 'const TECHNOLOGY_TRANSLATED=' "$RUNNER_TEMP/theme-game.js"
-          grep -Fq "['sport','art','professions','travel','science','technology','cinema','food'].includes(themeParam)" "$RUNNER_TEMP/theme-game.js"
+          grep -Fq "['sport','art','professions','travel','science','technology','cinema','food','animals','transport','home','nature'].includes(themeParam)" "$RUNNER_TEMP/theme-game.js"
           grep -q "pw.themeProgress.'+themeId" "$RUNNER_TEMP/theme-game.js"
           grep -q '"id":"art","levels":100,"available_through":100,"status":"complete"' "$RUNNER_TEMP/release.json"
           grep -q '"id":"professions","levels":100,"available_through":100,"status":"complete"' "$RUNNER_TEMP/release.json"
@@ -184,6 +184,7 @@ jobs:
           grep -q '"id":"cinema","levels":100,"available_through":100,"status":"complete"' "$RUNNER_TEMP/release.json"
           grep -q '"id":"food","levels":100,"available_through":100,"status":"complete"' "$RUNNER_TEMP/release.json"
           grep -q '"id": 100' "$RUNNER_TEMP/theme-levels-cinema-food.js"
+          grep -q '"id": 100' "$RUNNER_TEMP/theme-levels-expansion.js"
           grep -q '"thematic_answers_unique_across_ready_categories":true' "$RUNNER_TEMP/release.json"
           grep -q '"server_authoritative":true' "$RUNNER_TEMP/release.json"
           grep -q '"first_completion":{"coins":15,"xp":10}' "$RUNNER_TEMP/release.json"
@@ -203,4 +204,4 @@ jobs:
           node --check "$RUNNER_TEMP/theme-game.js"
           node --check "$RUNNER_TEMP/challenge.js"
           node --check "$RUNNER_TEMP/duel.js"
-          printf '### PhotoWord r111 publication check\n\nMain levels 1–530, Chapters 1–12 live through level 530, server-authoritative challenge rewards, synced thematic progress, richer profile and leaderboard, finished shop dashboard and purchase history, configurable Telegram notifications and cross-device thematic progress, full DOM/localization/theme audit, server-authoritative thematic +15 coin rewards and paid hints, unique main answers in RU/EN/AZ, Cinema and Food themes 1–100, unique backgrounds, absolute chapter ranges and earned titles, featured thematic mode, Sport 1–100, Art 1–100, Professions 1–100, Travel 1–100, Science 1–100 and Technology 1–100, three playable challenge modes with server-authoritative time and paid Blitz hints, explicit next-step feedback, 400 challenge words with no repeats until the bank is exhausted, and fixed language selection, legal/settings surfaces and JavaScript all verified.\n' >> "$GITHUB_STEP_SUMMARY"
+          printf '### PhotoWord r112 publication check\n\nMain levels 1–530, Chapters 1–12 live through level 530, server-authoritative challenge rewards, synced thematic progress, richer profile and leaderboard, finished shop dashboard and purchase history, configurable Telegram notifications and cross-device thematic progress, full DOM/localization/theme audit, server-authoritative thematic +15 coin rewards and paid hints, unique main answers in RU/EN/AZ, Cinema and Food themes 1–100, unique backgrounds, absolute chapter ranges and earned titles, featured thematic mode, Sport 1–100, Art 1–100, Professions 1–100, Travel 1–100, Science 1–100 and Technology 1–100, three playable challenge modes with server-authoritative time and paid Blitz hints, explicit next-step feedback, 400 challenge words with no repeats until the bank is exhausted, and fixed language selection, legal/settings surfaces and JavaScript all verified.\n' >> "$GITHUB_STEP_SUMMARY"

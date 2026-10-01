@@ -123,7 +123,7 @@ function setThemeHubLabels(){
  const m=themeMode();
  text('themesEntryBadge',m.entryBadge);text('themesEntryTitle',m.entry);text('themesEntryDesc',m.entryDesc);text('themesTitle',m.title);text('themesSubtitle',m.subtitle);
 }
-const READY_THEME_IDS=['sport','art','professions','travel','science','technology','cinema','food'];
+const READY_THEME_IDS=['sport','art','professions','travel','science','technology','cinema','food','animals','transport','home','nature'];
 function getThemeProgress(id){try{const raw=JSON.parse(localStorage.getItem('pw.themeProgress.'+id)||'[]');return new Set(Array.isArray(raw)?raw.map(Number).filter(n=>Number.isInteger(n)&&n>=1&&n<=100):[])}catch{return new Set()}}
 function cacheThemeProgressMap(map){
  for(const id of READY_THEME_IDS){
@@ -250,8 +250,8 @@ function resetProfileStats(){
 function renderProfileStats(stats){
  const x=t(),challenge=stats?.challenge||{};
  text('profileChapters',completedChapterCount(pw.player||{})+'/12');
- text('profileThemeDone',Number(stats?.theme_levels_completed||0)+'/800');
- text('profileThemesComplete',Number(stats?.themes_completed||0)+'/'+Number(stats?.themes_total||8));
+ text('profileThemeDone',Number(stats?.theme_levels_completed||0)+'/1200');
+ text('profileThemesComplete',Number(stats?.themes_completed||0)+'/'+Number(stats?.themes_total||12));
  text('profileLimitedBest',Number(challenge.limited_best_score||0)+'/10');
  text('profileNoHintBest',Number(challenge.nohint_best_streak||0));
  text('profileBlitzBest',Number(challenge.blitz_best_score||0));
@@ -267,7 +267,7 @@ async function openStatsScreen(){screen('statsScreen');applyStatsLabels();const 
  try{const current=await pw.login();if(request!==statsRequestId||!$('statsScreen').classList.contains('active'))return;text('statsMainLevels',Number(current.completed_levels||0)+'/530');text('statsChapters',completedChapterCount(current)+'/12');text('statsXp',Number(current.xp||0));text('statsRank',current.rank>0?'#'+current.rank:'—')}catch(e){if(request===statsRequestId)text('statsStatus',e.message);return}
  const [profile,duels]=await Promise.allSettled([pw.actionRequest('profile_stats'),pw.duelRequest('statistics')]);
  if(request!==statsRequestId||!$('statsScreen').classList.contains('active'))return;
- if(profile.status==='fulfilled'){const s=profile.value.stats||{},c=s.challenge||{};text('statsThemeLevels',Number(s.theme_levels_completed||0)+'/800');text('statsThemes',Number(s.themes_completed||0)+'/'+Number(s.themes_total||8));text('statsLimited',Number(c.limited_best_score||0)+'/10');text('statsNoHint',Number(c.nohint_best_streak||0));text('statsBlitz',Number(c.blitz_best_score||0));text('statsRuns',Number(c.runs_total||0))}
+ if(profile.status==='fulfilled'){const s=profile.value.stats||{},c=s.challenge||{};text('statsThemeLevels',Number(s.theme_levels_completed||0)+'/1200');text('statsThemes',Number(s.themes_completed||0)+'/'+Number(s.themes_total||12));text('statsLimited',Number(c.limited_best_score||0)+'/10');text('statsNoHint',Number(c.nohint_best_streak||0));text('statsBlitz',Number(c.blitz_best_score||0));text('statsRuns',Number(c.runs_total||0))}
  if(duels.status==='fulfilled'){const s=duels.value.stats||{},net=Number(s.net_coins||0);text('statsDuelPlayed',Number(s.played||0));text('statsDuelWins',Number(s.wins||0));text('statsDuelLosses',Number(s.losses||0));text('statsDuelNet',(net>0?'+':'')+net+' 🪙')}
  text('statsStatus',profile.status==='rejected'||duels.status==='rejected'?t().statsPartial:'');
 }

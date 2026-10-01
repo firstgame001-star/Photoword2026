@@ -4,7 +4,7 @@ import { resolve } from 'node:path';
 const base=resolve('clean');
 const read=name=>readFileSync(resolve(base,name),'utf8');
 const index=read('index.html'),gameHtml=read('game.html'),themeHtml=read('theme-game.html');
-const home=read('home.js'),game=read('game.js'),mainExtra=read('main-levels-8-9.js'),mainMore=read('main-levels-10-12.js'),theme=read('theme-game.js'),themeExtra=read('theme-levels-cinema-food.js'),challenge=read('challenge.js'),challengeExtra=read('challenge-bank-extra.js'),core=read('core.js');
+const home=read('home.js'),game=read('game.js'),mainExtra=read('main-levels-8-9.js'),mainMore=read('main-levels-10-12.js'),theme=read('theme-game.js'),themeExtra=read('theme-levels-cinema-food.js')+read('theme-levels-expansion.js'),challenge=read('challenge.js'),challengeExtra=read('challenge-bank-extra.js'),core=read('core.js');
 const release=JSON.parse(read('release.json'));
 if(release.thematic_mode?.economy?.first_completion?.coins!==15||release.thematic_mode?.economy?.first_completion?.xp!==10)throw Error('Thematic completion reward must be 15 coins and 10 XP');
 if(release.thematic_mode?.economy?.hints?.letter!==50||release.thematic_mode?.economy?.hints?.remove!==100||release.thematic_mode?.economy?.hints?.text!==150)throw Error('Thematic hint costs changed unexpectedly');
@@ -121,7 +121,7 @@ if(!home.includes('function chapterIdForLevel(level)'))throw Error('Chapter anal
 if(!home.includes("n<=280?7:n<=330?8:n<=380?9:n<=430?10:n<=480?11:12"))throw Error('Chapter analytics mapping is incomplete');
 
 const addedThemes=Function('window={};'+themeExtra+';return window.PW_THEME_EXTRA')();
-for(const id of ['cinema','food']){
+for(const id of ['cinema','food','animals','transport','home','nature']){
  const rows=addedThemes[id];if(!Array.isArray(rows)||rows.length!==100)throw Error('Missing 100 '+id+' levels');
  for(let i=0;i<100;i++){const row=rows[i];if(row.id!==i+1||!Array.isArray(row.photos)||row.photos.length!==4||row.photos.some(p=>!p))throw Error(id+' invalid clues at '+(i+1));for(const lang of ['ru','en','az'])if(!row[lang]?.answer||!row[lang]?.hint||row[lang].answer.includes(' '))throw Error(id+' incomplete '+lang+' level '+(i+1))}
 }
@@ -129,7 +129,7 @@ const themeBank=(id,bn,tn)=>{if(bn)return [evalConst(theme,bn),evalConst(theme,t
 const themeBanks=[
  ['sport','LEVELS','TRANSLATED'],['art','ART_LEVELS','ART_TRANSLATED'],['professions','PROF_LEVELS','PROF_TRANSLATED'],
  ['travel','TRAVEL_LEVELS','TRAVEL_TRANSLATED'],['science','SCIENCE_LEVELS','SCIENCE_TRANSLATED'],['technology','TECHNOLOGY_LEVELS','TECHNOLOGY_TRANSLATED'],
- ['cinema',null,null],['food',null,null]
+ ['cinema',null,null],['food',null,null],['animals',null,null],['transport',null,null],['home',null,null],['nature',null,null]
 ];
 for(const [id,bn,tn] of themeBanks){
  const [bank,tr]=themeBank(id,bn,tn);
@@ -169,8 +169,8 @@ if(release.verification?.shop_status_server!==true||release.verification?.shop_p
 if(release.verification?.profile_stats_server!==true||release.verification?.profile_thematic_totals!==true||release.verification?.leaderboard_titles_and_progress!==true)throw Error('Profile/rating release flags missing');
 if(!theme.includes('syncServerThemeProgress')||!theme.includes("actionRequest('theme_progress')"))throw Error('Thematic game progress sync missing');
 const completeThemes=release.thematic_mode.categories.filter(x=>x.status==='complete');
-if(completeThemes.length!==8)throw Error('Expected 8 complete thematic categories, got '+completeThemes.length);
-if(!home.includes("const READY_THEME_IDS=['sport','art','professions','travel','science','technology','cinema','food']"))throw Error('Cinema/Food not enabled in thematic hub');
+if(completeThemes.length!==12)throw Error('Expected 12 complete thematic categories, got '+completeThemes.length);
+if(!home.includes("const READY_THEME_IDS=['sport','art','professions','travel','science','technology','cinema','food','animals','transport','home','nature']"))throw Error('Cinema/Food not enabled in thematic hub');
 if(!theme.includes("cinema:addedThemeBank(addedThemeRows.cinema||[])")||!theme.includes("food:addedThemeBank(addedThemeRows.food||[])"))throw Error('Cinema/Food banks not wired');
 if(release.verification?.main_levels_available_through!==530)throw Error('Main game manifest is not at 530');
 if(release.chapters.filter(x=>x.status==='live').length!==12)throw Error('Expected 12 live chapters');
@@ -182,4 +182,4 @@ for(const required of ['settingsBtn','profileBtn','dailyRewardBtn','ratingNav','
 }
 if(!theme.includes('.long-answer') && !read('ui.css').includes('.slots.long-answer'))throw Error('Long-answer mobile styling missing');
 
-console.log('PASS: full PhotoWord audit — DOM integrity, 530 main levels, 400 unique challenge words, translations, chapters, eight theme banks, settings surfaces and manifest consistency.');
+console.log('PASS: full PhotoWord audit — DOM integrity, 530 main levels, 400 unique challenge words, translations, chapters, twelve theme banks, settings surfaces and manifest consistency.');
