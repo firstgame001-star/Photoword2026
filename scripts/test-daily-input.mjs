@@ -39,3 +39,15 @@ console.log('PASS: lost-response retry after reload, same request ID, win closur
 context.fetch=async()=>({ok:false,json:async()=>({error:'daily_closed',daily:{...server,attempts:3,attempts_left:0,closed:true}})});
 fill();await test.submit();assert(test.current().closed);assert(get('dailyPuzzleBoard').hidden);assert.equal(get('dailyPuzzleStatus').textContent,'','Other-device closure incorrectly announced a new day');
 console.log('PASS: another device exhausting the attempts closes the current puzzle without a false day-change message.');
+
+server={...initial};context.fetch=async()=>({ok:true,json:async()=>({daily:server})});test.apply(server);
+const before=get('dailyPuzzleLetters').children[0];before.onclick();
+let finishState;context.fetch=()=>new Promise(resolve=>finishState=resolve);
+const refreshing=test.load(true);await new Promise(resolve=>setImmediate(resolve));
+assert(!get('dailyPuzzleLetters').children[1].disabled,'Background refresh blocked typing');
+get('dailyPuzzleLetters').children[1].onclick();
+assert.equal(get('dailyPuzzleLetters').children[0],before,'Typing replaced the touched keyboard button');
+finishState({ok:true,json:async()=>({daily:{...server,server_now:'2026-10-01T20:00:05Z'}})});await refreshing;
+assert.equal(get('dailyPuzzleSlots').children[0].textContent,'А');
+assert.equal(get('dailyPuzzleSlots').children[1].textContent,'Б');
+console.log('PASS: background sync leaves typing enabled and preserves selected letters and keyboard elements.');
