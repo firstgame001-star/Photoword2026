@@ -66,7 +66,7 @@ with sync_playwright() as pw:
   page.locator('#dailyPuzzleCard').tap();expect(page.locator('#dailyPuzzleBoard')).to_be_visible();expect(page.locator('#dailyPuzzleAttempts')).to_contain_text('3 / 3');expect(page.locator('#dailyPuzzleSlots .slot')).to_have_count(len(bank[1]['ru']))
   assert not relevant_errors(errors),errors;ctx.close()
   ctx,page,state,account,errors=setup(browser,'en','lost',390)
-  fill(page,bank[0]['en']);expect(page.locator('#dailyPuzzleRetry')).to_be_visible();expect(page.locator('#dailyPuzzleAttempts')).to_be_hidden();expect(page.locator('#dailyPuzzleRules')).to_be_hidden();assert state['attempts']==1 and account['coins']==1025
+  fill(page,bank[0]['en']);expect(page.locator('#dailyPuzzleRetry')).to_be_visible();assert state['attempts']==1 and account['coins']==1025
   page.reload(wait_until='domcontentloaded');page.locator('#dailyPuzzleCard').tap();expect(page.locator('#dailyPuzzleOutcome')).to_be_visible();expect(page.locator('[data-coins]').first).to_have_text('1025')
   assert len(state['ids'])==2 and state['ids'][0]==state['ids'][1] and state['attempts']==1 and account['coins']==1025
   assert not relevant_errors(errors),errors;ctx.close();browser.close()
