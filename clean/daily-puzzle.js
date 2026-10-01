@@ -44,7 +44,7 @@ async function load(background=false){
  try{
   if(!initData())throw new Error('open_bot');await pw.login();
   const payload=pending(),recovered=payload?await deliver(payload,pendingKey()):null;const j=recovered?.daily?.language===language()?recovered:await api('state');
-  if(token!==epoch||!active())return;if(payload)chosen=[];if(!background||['day','language','attempts','closed','solved'].some(k=>j.daily[k]!==daily?.[k])){apply(j.daily)}else{serverAt=Date.parse(j.daily.server_now);perfAt=performance.now()}$('dailyPuzzleStatus').textContent=recovered?.result&&!recovered.result.correct?t().wrong:'';$('dailyPuzzleRetry').hidden=true;
+  if(token!==epoch||!active()||(background&&(busy||pending())))return;if(payload)chosen=[];if(!background||['day','language','attempts','closed','solved'].some(k=>j.daily[k]!==daily?.[k])){apply(j.daily)}else{serverAt=Date.parse(j.daily.server_now);perfAt=performance.now()}$('dailyPuzzleStatus').textContent=recovered?.result&&!recovered.result.correct?t().wrong:'';$('dailyPuzzleRetry').hidden=true;
  }catch(e){if(token===epoch&&active()){$('dailyPuzzleStatus').textContent=e.message==='open_bot'?t().bot:t().network;$('dailyPuzzleRetry').hidden=false}}
  finally{syncing=false;if(token===epoch&&!background){busy=false;paint()}else if(token!==epoch&&active())load()}
 }
