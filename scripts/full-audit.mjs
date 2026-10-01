@@ -111,11 +111,11 @@ if(!challenge.includes("BANK_VERSION='r54-400'")||!challenge.includes('pw.challe
 if(release.verification?.challenge_rewards_live!==true||release.challenge_modes?.rewards?.server_authoritative!==true||release.challenge_modes?.rewards?.max_per_run?.coins!==15||release.challenge_modes?.rewards?.max_per_run?.xp!==10)throw Error('Challenge reward manifest is incomplete');
 if(!challenge.includes('challengeResultReward')||!challenge.includes('rewarded_runs_today')||!challenge.includes('runId=state?.run_id'))throw Error('Challenge reward client flow is incomplete');
 const ruleBlock=home.slice(home.indexOf('const RULES='),home.indexOf('const RESET='));
-if(!ruleBlock.includes('Глава 8 «Человек» — уровни 281–330')||!ruleBlock.includes('Глава 9 «Вселенная» — уровни 331–380'))throw Error('RU Chapters 8-9 rules are stale');
-if(!ruleBlock.includes('Chapter 8 “Human” contains levels 281–330')||!ruleBlock.includes('Chapter 9 “Universe” contains levels 331–380'))throw Error('EN Chapters 8-9 rules are stale');
-if(!ruleBlock.includes('8-ci fəsil “İnsan” — 281–330-cu səviyyələr')||!ruleBlock.includes('9-cu fəsil “Kainat” — 331–380-ci səviyyələr'))throw Error('AZ Chapters 8-9 rules are stale');
-if(!ruleBlock.includes('Глава 12 «Современный мир» — уровни 481–530')||!ruleBlock.includes('Chapter 12 “Modern World” contains levels 481–530')||!ruleBlock.includes('12-ci fəsil “Müasir dünya” — 481–530-cu səviyyələr'))throw Error('Chapter 10-12 rules are stale');
-if(ruleBlock.includes('5–12-ci fəsillər artıq naviqasiyaya əlavə edilib'))throw Error('Stale Azerbaijani chapter rules remain');
+const rules=JSON.parse(ruleBlock.slice('const RULES='.length).trim().replace(/;$/, ''));
+for(const [l,need] of Object.entries({ru:['12 глав','530 уровней','Загадка дня','365','3 попытки','25 монет','Дуэли'],en:['12 chapters','530 levels','Daily puzzle','365','3 attempts','25 coins','Duels'],az:['12 fəsil','530 səviyyə','Günün tapmacası','365','3 cəhd','25 sikkə','Duellər']})){
+ for(const value of need)if(!rules[l]?.includes(value))throw Error('Rules missing '+l+': '+value);
+ if((rules[l].match(/class="rule-section"/g)||[]).length!==7)throw Error('Rules sections missing '+l);
+}
 if(!home.includes("track('app_open',{metadata:{version:'r101'}})"))throw Error('App-open analytics version is stale');
 if(!home.includes('function chapterIdForLevel(level)'))throw Error('Chapter analytics helper is missing');
 if(!home.includes("n<=280?7:n<=330?8:n<=380?9:n<=430?10:n<=480?11:12"))throw Error('Chapter analytics mapping is incomplete');

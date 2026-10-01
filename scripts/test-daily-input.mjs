@@ -30,7 +30,7 @@ const fill=()=>{for(const i of [0,1,2])get('dailyPuzzleLetters').children[i].onc
 fill();await test.submit();assert(test.pending());assert.equal(server.attempts,1);assert(get('dailyPuzzleLetters').children.every(e=>e.disabled));
 vm.runInContext(source,context);test=context.window.testDaily;await test.load();
 assert.equal(requestIds.length,2);assert.equal(requestIds[0],requestIds[1]);assert.equal(server.attempts,1);assert.equal(test.current().attempts_left,2);assert.equal(test.pending(),null);
-correct=true;fill();await test.submit();assert.equal(coins,1025);assert(get('dailyPuzzleBoard').hidden);assert(!get('dailyPuzzleOutcome').hidden);assert(test.current().solved);
+correct=true;fill();await test.submit();assert.equal(coins,1025);assert(get('dailyPuzzleBoard').hidden);assert(!get('dailyPuzzleOutcome').hidden);assert(test.current().solved);assert(get('dailyPuzzleAttempts').hidden);assert(get('dailyPuzzleRules').hidden);
 context.window.PW.player.photoword_id='PLAYER_B';server={...initial,attempts:2,attempts_left:1};correct=false;accepted=new Map();test.apply(server);fill();await test.submit();assert.equal(test.current().attempts_left,0);assert(test.current().closed);assert(get('dailyPuzzleSubmit').disabled);
 server={...initial,day:'2026-10-03',question_id:2,server_now:'2026-10-02T20:00:00Z',reset_at:'2026-10-03T20:00:00Z'};
 perf=86400001;test.clock();await new Promise(resolve=>setImmediate(resolve));assert.equal(test.current().day,'2026-10-03');assert.equal(test.current().attempts_left,3);assert(!test.current().closed);
