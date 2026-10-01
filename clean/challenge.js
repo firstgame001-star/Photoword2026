@@ -2877,7 +2877,14 @@ function loadDeck(){
 function resetOrder(){const deck=loadDeck();try{localStorage.setItem(deckKey(),JSON.stringify(deck))}catch{}}
 const repeatAccount=()=>pw?.player?.photoword_id||'local';
 const sharedSeenKey=()=> 'pw.challenge.seen.r114.'+repeatAccount(),sharedLastKey=()=> 'pw.challenge.last.r114.'+repeatAccount();
-let startPending=false;
+let startPending=false,serverQuestions=[],questionFetch=null,questionLoading=false;
+const validQuestions=ids=>Array.isArray(ids)?ids.filter(i=>Number.isInteger(i)&&i>=0&&i<Q.length):[];
+function refillQuestions(){
+ if(questionFetch)return questionFetch;
+ const epoch=runEpoch,runId=state?.run_id;
+ const task=api('questions',{mode,runId}).then(result=>{if(epoch===runEpoch&&running&&state?.run_id===runId)serverQuestions.push(...validQuestions(result.question_ids))}).finally(()=>{if(questionFetch===task)questionFetch=null});
+ questionFetch=task;return task;
+}
 let repeatProgress={main:0,themes:{}};
 function cachedRepeatProgress(){
  const themes={};
@@ -2904,7 +2911,21 @@ function excludedQuestions(){
  });
  return excluded;
 }
-function nextQ(){
+async function nextQ(){
+ if(serverMode&&rawInit()){
+  const epoch=runEpoch;
+  questionLoading=true;renderInput();
+  try{
+   if(!serverQuestions.length)await refillQuestions();
+   if(epoch!==runEpoch||!running)return;
+   const idx=serverQuestions.shift();if(!Number.isInteger(idx))throw new Error('questions_missing');
+   questionLoading=false;question=Q[idx];answer=question[lang()]||question.ru;buildPuzzle();
+   if(serverQuestions.length<=3)refillQuestions().catch(()=>{});
+  }catch{if(epoch===runEpoch&&running){pw?.status?.(lang()==='en'?'Connection lost. Try again.':lang()==='az'?'Bağlantı kəsildi. Yenidən cəhd et.':'Связь потеряна. Попробуй ещё раз.');finish('connection')}}
+  finally{if(epoch===runEpoch){questionLoading=false;renderInput()}}
+  return;
+ }
+
  let seen=[],last=null;try{seen=JSON.parse(localStorage.getItem(sharedSeenKey())||'[]');last=Number(localStorage.getItem(sharedLastKey()))}catch{}
  const result=window.PW_CHALLENGE_REPEAT_POLICY({deck:loadDeck(),count:Q.length,seen:new Set(Array.isArray(seen)?seen:[]),excluded:excludedQuestions(),last});
  const deck=result.deck,idx=result.index;
@@ -2921,11 +2942,11 @@ function buildPuzzle(){
 }
 function renderInput(){
  const slots=$('challengeSlots'),letters=$('challengeLetters');slots.replaceChildren();letters.replaceChildren();
- selected.forEach((idx,i)=>{const b=document.createElement('button');b.className='slot'+(fixed.has(i)?' fixed':'');b.textContent=idx===null?'':tiles[idx];b.disabled=fixed.has(i)||hintBusy||!running;b.onclick=()=>{if(!running||idx===null||fixed.has(i))return;used.delete(idx);selected[i]=null;renderInput()};slots.append(b)});
- letterOrder.forEach(i=>{const ch=tiles[i],b=document.createElement('button');b.className='letter'+(used.has(i)?' used':'')+(removed.has(i)?' removed':'');b.textContent=ch;b.disabled=used.has(i)||removed.has(i)||!running||hintBusy;b.onclick=()=>choose(i);letters.append(b)});
- ['blitzLetterHint','blitzRemoveHint','blitzTextHint','challengeShuffle'].forEach(id=>{const e=$(id);if(e)e.disabled=!running||hintBusy});
+ selected.forEach((idx,i)=>{const b=document.createElement('button');b.className='slot'+(fixed.has(i)?' fixed':'');b.textContent=idx===null?'':tiles[idx];b.disabled=fixed.has(i)||questionLoading||hintBusy||!running;b.onclick=()=>{if(!running||idx===null||fixed.has(i))return;used.delete(idx);selected[i]=null;renderInput()};slots.append(b)});
+ letterOrder.forEach(i=>{const ch=tiles[i],b=document.createElement('button');b.className='letter'+(used.has(i)?' used':'')+(removed.has(i)?' removed':'');b.textContent=ch;b.disabled=used.has(i)||removed.has(i)||!running||questionLoading||hintBusy;b.onclick=()=>choose(i);letters.append(b)});
+ ['blitzLetterHint','blitzRemoveHint','blitzTextHint','challengeShuffle'].forEach(id=>{const e=$(id);if(e)e.disabled=!running||questionLoading||hintBusy});
 }
-function choose(i){if(!running||hintBusy||used.has(i)||removed.has(i))return;const s=selected.indexOf(null);if(s<0)return;selected[s]=i;used.add(i);renderInput();if(!selected.includes(null))later(checkWord,70)}
+function choose(i){if(!running||questionLoading||hintBusy||used.has(i)||removed.has(i))return;const s=selected.indexOf(null);if(s<0)return;selected[s]=i;used.add(i);renderInput();if(!selected.includes(null))later(checkWord,70)}
 function clearWord(){selected=Array([...answer].length).fill(null);used.clear();for(const [pos,id] of fixed){selected[pos]=id;used.add(id)}renderInput()}
 function heartsText(){return '🛡️'.repeat(Math.max(0,hearts))+'💥'.repeat(Math.max(0,3-hearts))}
 function setHud(labels,values){for(let i=0;i<4;i++){const n=i+1;$('hudLabel'+n).textContent=labels[i]||'';$('hudValue'+n).textContent=values[i]??''}}
@@ -2937,7 +2958,7 @@ function updateHud(){
 }
 function flash(msg,good=false){const e=$('challengeStatus');e.textContent=msg;e.classList.toggle('challenge-good',good)}
 async function blitzHint(type){
- if(mode!=='blitz'||!running||hintBusy)return;
+ if(mode!=='blitz'||!running||questionLoading||hintBusy)return;
  const x=tr();
  if(type==='text'&&textHintOpen){flash(x.hintAgain);return}
  const available=[...answer].map((_,i)=>i).filter(i=>!fixed.has(i));
@@ -2997,7 +3018,10 @@ async function startRun(){
  cancelPending();const startingEpoch=runEpoch;
  await syncRepeatProgress();
  if(startingEpoch!==runEpoch)return;
- try{state=await api('start',{mode,language:lang()})}catch(e){if(e?.data?.challenge)state=e.data.challenge;if(String(e?.message)==='challenge_no_energy'){renderIntro();pw?.status?.(tr().energyEmpty);return}if(rawInit()){pw?.status?.(lang()==='en'?'Could not start the mode. Try again.':lang()==='az'?'Rejimi başlatmaq olmadı. Yenidən cəhd et.':'Не удалось запустить режим. Попробуй ещё раз.');return}state=localRead()}
+ let initialSeen=[];try{initialSeen=JSON.parse(localStorage.getItem(sharedSeenKey())||'[]')}catch{}
+ try{state=await api('start',{mode,language:lang(),initialSeen})}catch(e){if(e?.data?.challenge)state=e.data.challenge;if(String(e?.message)==='challenge_no_energy'){renderIntro();pw?.status?.(tr().energyEmpty);return}if(rawInit()){pw?.status?.(lang()==='en'?'Could not start the mode. Try again.':lang()==='az'?'Rejimi başlatmaq olmadı. Yenidən cəhd et.':'Не удалось запустить режим. Попробуй ещё раз.');return}state=localRead()}
+ if(startingEpoch!==runEpoch)return;
+ serverQuestions=validQuestions(state?.question_ids);questionFetch=null;questionLoading=false;
  running=true;hearts=3;correct=0;streak=0;bestRunStreak=0;score=0;resetOrder();clearInterval(timer);clearInterval(energyTimer);
  $('challengeIntro').hidden=true;$('challengeResult').hidden=true;$('challengeCorrectPanel').hidden=true;$('challengeHud').hidden=false;$('challengePuzzle').hidden=false;
  if(mode==='blitz'){deadline=performance.now()+60000;timer=setInterval(()=>{updateHud();if(running&&performance.now()>=deadline)finish('time')},150)}
@@ -3025,7 +3049,7 @@ function openMode(m){
  $('challengeHome').textContent=tr().home;$('challengeIntro').hidden=false;$('challengeHud').hidden=true;$('challengePuzzle').hidden=true;$('challengeCorrectPanel').hidden=true;$('challengeResult').hidden=true;loadState();
 }
 function closeMode(){cancelPending();running=false;clearInterval(timer);clearInterval(energyTimer);document.querySelectorAll('.screen').forEach(e=>e.classList.toggle('active',e.id==='home'));window.scrollTo(0,0)}
-$('challengeStart')?.addEventListener('click',startRun);$('challengeAgain')?.addEventListener('click',startRun);$('challengeCorrectNext')?.addEventListener('click',()=>{if(mode==='blitz')return;$('challengeCorrectPanel').hidden=true;hintBusy=false;if(mode==='limited'&&correct>=10)finish('complete');else nextQ()});$('challengeShuffle')?.addEventListener('click',()=>{if(!running||hintBusy)return;letterOrder=shuffle([...letterOrder]);renderInput();pw?.sfx?.('tap');pw?.haptic?.()});$('blitzLetterHint')?.addEventListener('click',()=>blitzHint('letter'));$('blitzRemoveHint')?.addEventListener('click',()=>blitzHint('remove'));$('blitzTextHint')?.addEventListener('click',()=>blitzHint('text'));$('challengeBack')?.addEventListener('click',closeMode);$('challengeHome')?.addEventListener('click',closeMode);
+$('challengeStart')?.addEventListener('click',startRun);$('challengeAgain')?.addEventListener('click',startRun);$('challengeCorrectNext')?.addEventListener('click',()=>{if(mode==='blitz')return;$('challengeCorrectPanel').hidden=true;hintBusy=false;if(mode==='limited'&&correct>=10)finish('complete');else nextQ()});$('challengeShuffle')?.addEventListener('click',()=>{if(!running||questionLoading||hintBusy)return;letterOrder=shuffle([...letterOrder]);renderInput();pw?.sfx?.('tap');pw?.haptic?.()});$('blitzLetterHint')?.addEventListener('click',()=>blitzHint('letter'));$('blitzRemoveHint')?.addEventListener('click',()=>blitzHint('remove'));$('blitzTextHint')?.addEventListener('click',()=>blitzHint('text'));$('challengeBack')?.addEventListener('click',closeMode);$('challengeHome')?.addEventListener('click',closeMode);
 $('energyRefill')?.addEventListener('click',()=>{const shop=$('energyShop');shop.hidden=!shop.hidden;$('energyRefillNote').hidden=shop.hidden;$('energyRefillNote').textContent=tr().refillNote});
 document.querySelectorAll('[data-energy-pack]').forEach(b=>b.addEventListener('click',async()=>{
  if(b.disabled)return;b.disabled=true;

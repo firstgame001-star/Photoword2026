@@ -4,7 +4,7 @@ from pathlib import Path
 from playwright.sync_api import sync_playwright, expect
 
 BASE='https://firstgame001-star.github.io/Photoword2026/'
-RELEASE='20261002-r115'
+RELEASE='20261002-r116'
 OUT=Path('test-results'); OUT.mkdir(exist_ok=True)
 
 for attempt in range(48):
@@ -904,7 +904,12 @@ def install_mock(ctx,account,completed,lang):
                 if mode=='limited' and energy>0: account['_challenge_energy']=energy-1
                 account['_challenge_run_id']='00000000-0000-0000-0000-000000000099'
             ch={'energy':account['_challenge_energy'],'energy_max':5,'next_energy_at':None,'limited_best_score':0,'nohint_best_streak':0,'blitz_best_score':0,'blitz_best_streak':0,'server_now':time.strftime('%Y-%m-%dT%H:%M:%SZ',time.gmtime()),'rewarded_runs_today':rewards.copy(),'reward_limit':3}
-            if action=='start': ch['run_id']=account['_challenge_run_id']
+            if action in ('start','questions'):
+                ch['run_id']=account['_challenge_run_id']
+                seen=account.setdefault('_challenge_seen',[])
+                fresh=[i for i in range(400) if i not in seen]
+                if not fresh: seen.clear();fresh=list(range(400))
+                ch['question_ids']=fresh[:10];seen.extend(ch['question_ids'])
             if action=='hint':
                 cost={'letter':75,'remove':125,'text':200}[body['hintType']]
                 if account['coins']<cost:
