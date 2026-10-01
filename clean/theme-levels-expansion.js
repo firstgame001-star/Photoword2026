@@ -4985,9 +4985,9 @@ Object.assign(window.PW_THEME_EXTRA, {
       "id": 38,
       "photos": [
         "🛏️",
+        "🚪",
         "🌙",
-        "💤",
-        "🏠"
+        "🪟"
       ],
       "ru": {
         "answer": "СПАЛЬНЯ",
@@ -5908,10 +5908,10 @@ Object.assign(window.PW_THEME_EXTRA, {
     {
       "id": 82,
       "photos": [
-        "🧺",
+        "🪣",
         "💧",
         "👕",
-        "🫧"
+        "🖐️"
       ],
       "ru": {
         "answer": "ТАЗ",
@@ -7992,7 +7992,7 @@ Object.assign(window.PW_THEME_EXTRA, {
         "🧊",
         "🌊",
         "❄️",
-        "🚢"
+        "🏔️"
       ],
       "ru": {
         "answer": "АЙСБЕРГ",

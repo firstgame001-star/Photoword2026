@@ -183,3 +183,19 @@ for(const required of ['settingsBtn','profileBtn','dailyRewardBtn','ratingNav','
 if(!theme.includes('.long-answer') && !read('ui.css').includes('.slots.long-answer'))throw Error('Long-answer mobile styling missing');
 
 console.log('PASS: full PhotoWord audit — DOM integrity, 530 main levels, 400 unique challenge words, translations, chapters, twelve theme banks, settings surfaces and manifest consistency.');
+
+
+// Canonical spelling and unordered clue sets must be unique within each mode.
+function assertUniqueContent(rows, label) {
+ const normalize = word => word.normalize('NFC').toLocaleUpperCase('az').replace(/Ё/g,'Е').replace(/[\s\p{P}\p{S}]/gu,'');
+ for (const lang of ['ru','en','az']) {
+  const seen = new Set();
+  for (const row of rows) {const key=normalize(row[lang]);if(seen.has(key))throw Error(label+' normalized duplicate '+lang+' '+key);seen.add(key)}
+ }
+ const seen = new Set();
+ for (const row of rows) {const key=row.photos.map(p=>String(p).normalize('NFC')).sort().join('|');if(seen.has(key))throw Error(label+' duplicate unordered clue set '+key);seen.add(key)}
+}
+assertUniqueContent(Object.keys(combined.ru).map(n=>({ru:combined.ru[n].answer,en:combined.en[n].answer,az:combined.az[n].answer,photos:combined.ru[n].photos.map(p=>p[0])})), 'Main');
+assertUniqueContent(themeBanks.flatMap(([id,bn,tn])=>{const[b,t]=themeBank(id,bn,tn);return Object.keys(b).map(n=>({ru:b[n].answer,en:t.en[n].answer,az:t.az[n].answer,photos:b[n].photos.map(p=>p[0])}))}), 'Themes');
+assertUniqueContent(challengeAll.map(r=>({ru:r.ru,en:r.en,az:r.az,photos:r.p})), 'Challenges');
+console.log('PASS: normalized words and unordered clue sets are unique within main, thematic and challenge modes.');

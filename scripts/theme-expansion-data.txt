@@ -238,7 +238,7 @@
 ПУФ|OTTOMAN|PUF|🛋️ 🦶 🧽 🏠|Низкое мягкое сиденье без спинки.|A low padded backless seat.|Alçaq yumşaq arxalıqsız oturacaq.
 ПРИХОЖАЯ|HALLWAY|DƏHLİZ|🚪 👟 🧥 🏠|Первая комната после входа.|The first area after the entrance.|Girişdən sonrakı ilk sahə.
 ГОСТИНАЯ|LIVINGROOM|QONAQOTAĞI|🛋️ 📺 👥 🏠|Комната для отдыха и гостей.|A room for relaxing and guests.|İstirahət və qonaqlar üçün otaq.
-СПАЛЬНЯ|BEDROOM|YATAQOTAĞI|🛏️ 🌙 💤 🏠|Комната для сна.|A room for sleeping.|Yatmaq üçün otaq.
+СПАЛЬНЯ|BEDROOM|YATAQOTAĞI|🛏️ 🚪 🌙 🪟|Комната для сна.|A room for sleeping.|Yatmaq üçün otaq.
 КУХНЯ|KITCHEN|MƏTBƏX|🍳 🍽️ 🧑‍🍳 🏠|Комната приготовления еды.|A room for preparing food.|Yemək hazırlanan otaq.
 ВАННАЯ|BATHROOM|HAMAMOTAĞI|🛁 🚿 🧼 🏠|Комната водных процедур.|A room for washing.|Yuyunmaq üçün otaq.
 КЛАДОВКА|PANTRY|ANBAROTAĞI|📦 🫙 🚪 🏠|Маленькое помещение для запасов.|A small room for stored supplies.|Ehtiyatlar üçün kiçik otaq.
@@ -282,7 +282,7 @@
 ВЕНИК|BROOM|SÜPÜRGƏ|🧹 🍂 🦶 🏠|Сметает мелкий мусор.|Sweeps small debris.|Kiçik zibilləri süpürür.
 СОВОК|DUSTPAN|ZİBİLKÜRƏYİ|🧹 🗑️ 🖐️ 🦶|Собирает сметённый мусор.|Collects swept debris.|Süpürülmüş zibilləri toplayır.
 ВЕДРО|BUCKET|VEDRƏ|🪣 💧 🖐️ 🏠|Ёмкость с дужкой.|A container with a carrying handle.|Daşıma tutacaqlı qab.
-ТАЗ|WASHBOWL|LƏYƏN|🧺 💧 👕 🫧|Широкая ёмкость для ручной стирки.|A broad bowl for hand washing.|Əl ilə yumaq üçün enli qab.
+ТАЗ|WASHBOWL|LƏYƏN|🪣 💧 👕 🖐️|Широкая ёмкость для ручной стирки.|A broad bowl for hand washing.|Əl ilə yumaq üçün enli qab.
 ПРИЩЕПКА|CLOTHESPEG|PALTARSANCAĞI|👕 🪢 ☀️ 🖐️|Закрепляет бельё на верёвке.|Secures laundry on a line.|Paltarı ipdə saxlayır.
 СУШИЛКА|DRYINGRACK|QURUDUCURƏF|👕 🧺 🌬️ 🏠|Раскладывающаяся опора для белья.|A folding support for laundry.|Paltar üçün qatlanan dayaq.
 ГЛАДИЛЬНАЯДОСКА|IRONINGBOARD|ÜTÜMASASI|👕 ♨️ 🪵 🏠|На ней разглаживают одежду.|Clothes are pressed on it.|Üstündə paltar ütülənir.
@@ -382,7 +382,7 @@
 ГЕЙЗЕР|GEYSER|QEYZER|💧 ♨️ ⬆️ 🪨|Горячая вода периодически бьёт из земли.|Hot water periodically erupts from the ground.|İsti su dövri olaraq yerdən püskürür.
 ПОРОГИ|RAPIDS|ÇAYASTANALARI|💧 🪨 🌊 🛶|Бурный участок реки над камнями.|A turbulent river section over rocks.|Daşlar üzərində çayın coşqun hissəsi.
 МОРЕНА|MORAINE|MOREN|🪨 🧊 🏔️ 📦|Обломки пород принесённые движущимся льдом.|Rock debris carried by moving ice.|Hərəkət edən buzun gətirdiyi süxur qırıntıları.
-АЙСБЕРГ|ICEBERG|AYSBERQ|🧊 🌊 ❄️ 🚢|Большая плавающая ледяная глыба.|A large floating mass of ice.|İri üzən buz kütləsi.
+АЙСБЕРГ|ICEBERG|AYSBERQ|🧊 🌊 ❄️ 🏔️|Большая плавающая ледяная глыба.|A large floating mass of ice.|İri üzən buz kütləsi.
 СУГРОБ|SNOWDRIFT|QARYIĞINI|❄️ 🌬️ ⛰️ 🏠|Снег накопился холмом.|Snow piled into a mound.|Təpə kimi yığılmış qar.
 ИНЕЙ|FROST|QIROV|❄️ 🌿 🪟 🌅|Белые кристаллы на холодных поверхностях.|White crystals on cold surfaces.|Soyuq səthlərdə ağ kristallar.
 РОСА|DEW|ŞEH|💧 🌿 🌅 ☀️|Утренние капли на траве.|Morning drops on grass.|Otda səhər damcıları.
