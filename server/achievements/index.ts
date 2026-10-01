@@ -31,6 +31,7 @@ Deno.serve(async(req)=>{
   if(!["state","claim"].includes(action))return reply({error:"unknown_action"},400);
   if(action==="claim"&&(typeof body.achievement!=="string"||!/^[a-z0-9_]{1,60}$/.test(body.achievement)))return reply({error:"bad_achievement"},400);
   const db=createClient(Deno.env.get("SUPABASE_URL")!,Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,{auth:{persistSession:false,autoRefreshToken:false}});
+  const settled=await db.rpc("duel_statistics",{p_telegram_id:user.id});if(settled.error)return reply({error:"server_error"},500);
   const args:any={p_telegram_id:user.id,p_language:language};if(action==="claim")args.p_achievement=body.achievement;
   const result=await db.rpc(action==="claim"?"achievement_claim":"achievement_state",args);
   if(result.error){const msg=String(result.error.message);const code=["achievement_locked","bad_achievement","player_not_found"].find(x=>msg.includes(x))||"server_error";return reply({error:code},code==="server_error"?500:400)}
