@@ -1,5 +1,5 @@
 """Published achievements UI with mocked signed Telegram and server replies."""
-import ast,json,re,time
+import ast,json,re,time,urllib.parse
 from pathlib import Path
 from playwright.sync_api import sync_playwright,expect
 BASE='https://firstgame001-star.github.io/Photoword2026/'
