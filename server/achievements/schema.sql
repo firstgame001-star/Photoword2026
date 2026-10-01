@@ -1,0 +1,153 @@
+-- Service-only catalog, lifetime completions and one reward receipt per achievement.
+create table public.achievement_catalog(id text primary key,category text not null,metric text not null,target integer not null check(target>0),reward_coins integer not null check(reward_coins between 1 and 200),icon text not null,title jsonb not null,description jsonb not null,position integer not null);
+create table public.achievement_levels(player_id uuid references public.players(id) on delete cascade,mode text not null check(mode in('main','theme')),theme_id text not null default '',level_id integer not null,no_hint boolean not null default false,completed_at timestamptz not null default now(),primary key(player_id,mode,theme_id,level_id));
+create table public.player_achievements(player_id uuid references public.players(id) on delete cascade,achievement_id text references public.achievement_catalog(id),unlocked_at timestamptz not null default now(),claimed_at timestamptz,primary key(player_id,achievement_id));
+alter table public.achievement_catalog enable row level security;
+alter table public.achievement_levels enable row level security;
+alter table public.player_achievements enable row level security;
+revoke all on public.achievement_catalog,public.achievement_levels,public.player_achievements from public,anon,authenticated;
+grant select on public.achievement_catalog to service_role;
+grant select,insert,update,delete on public.achievement_levels,public.player_achievements to service_role;
+
+create function public.achievement_capture_level() returns trigger language plpgsql set search_path='' as $$
+begin
+ if tg_table_name='level_progress' then
+  if new.completed then
+   insert into public.achievement_levels(player_id,mode,level_id,no_hint,completed_at) values(new.player_id,'main',new.level_id,coalesce(new.hints_used,0)=0,coalesce(new.completed_at,now())) on conflict do nothing;
+  end if;
+ else
+  insert into public.achievement_levels(player_id,mode,theme_id,level_id,completed_at) values(new.player_id,'theme',new.theme_id,new.level_id,new.completed_at) on conflict do nothing;
+ end if;
+ return new;
+end $$;
+revoke all on function public.achievement_capture_level() from public,anon,authenticated;
+create trigger achievement_main_completion after insert or update on public.level_progress for each row execute function public.achievement_capture_level();
+create trigger achievement_theme_completion after insert on public.theme_progress for each row execute function public.achievement_capture_level();
+
+-- Recover the first reward from durable history, including progress reset before release.
+with firsts as (select player_id,substring(description from '^Level ([0-9]+)$')::integer level_id,min(created_at) completed_at from public.coin_transactions where transaction_type='level_reward' and description ~ '^Level [0-9]+$' group by player_id,description)
+insert into public.achievement_levels(player_id,mode,level_id,no_hint,completed_at)
+select f.player_id,'main',f.level_id,not exists(select 1 from public.coin_transactions h where h.player_id=f.player_id and h.transaction_type='hint' and h.description ~ ('^(letter|remove|text) level '||f.level_id||'$') and h.created_at<=f.completed_at),f.completed_at from firsts f where f.level_id between 1 and 530 on conflict do nothing;
+insert into public.achievement_levels(player_id,mode,level_id,no_hint,completed_at) select player_id,'main',level_id,coalesce(hints_used,0)=0,coalesce(completed_at,now()) from public.level_progress where completed on conflict do nothing;
+insert into public.achievement_levels(player_id,mode,theme_id,level_id,completed_at) select player_id,'theme',substring(description from '^Theme ([a-z]+) level'),substring(description from 'level ([0-9]+)$')::integer,min(created_at) from public.coin_transactions where transaction_type='theme_level_reward' and description ~ '^Theme [a-z]+ level [0-9]+$' group by player_id,description on conflict do nothing;
+insert into public.achievement_levels(player_id,mode,theme_id,level_id,completed_at) select player_id,'theme',theme_id,level_id,completed_at from public.theme_progress on conflict do nothing;
+
+create function public.achievement_metrics(p_player uuid) returns jsonb language plpgsql set search_path='' as $$
+declare m jsonb;themes jsonb;chapters jsonb;daily_best_streak integer;ds jsonb;duels jsonb;challenges jsonb;
+begin
+ select jsonb_build_object('main',count(*) filter(where mode='main'),'nohint',count(*) filter(where mode='main' and no_hint)) into m from public.achievement_levels where player_id=p_player;
+ select coalesce(jsonb_object_agg('theme_'||theme_id,n),'{}'::jsonb)||jsonb_build_object('themes_complete',count(*) filter(where n>=100)) into themes from (select theme_id,count(*) n from public.achievement_levels where player_id=p_player and mode='theme' group by theme_id) t;
+ select jsonb_object_agg('chapter_'||i,case when n=last_level-first_level+1 then 1 else 0 end) into chapters from (select b.i,b.first_level,b.last_level,count(l.level_id) n from (values(1,1,20),(2,21,50),(3,51,90),(4,91,130),(5,131,180),(6,181,230),(7,231,280),(8,281,330),(9,331,380),(10,381,430),(11,431,480),(12,481,530)) b(i,first_level,last_level) left join public.achievement_levels l on l.player_id=p_player and l.mode='main' and l.level_id between b.first_level and b.last_level group by b.i,b.first_level,b.last_level) c;
+ select coalesce(max(n),0) into daily_best_streak from (select count(*) n from (select puzzle_day-(row_number() over(order by puzzle_day))::integer grp from public.daily_puzzle_progress where player_id=p_player and solved) d group by grp) series;
+ select jsonb_build_object('daily_total',count(*),'daily_first',count(*) filter(where attempts=1),'daily_streak',daily_best_streak) into ds from public.daily_puzzle_progress where player_id=p_player and solved;
+ select jsonb_build_object('duel_played',count(*),'duel_wins',count(*) filter(where winner=p_player),'duel_draws',count(*) filter(where winner is null),'duel_best',coalesce(max(case when creator=p_player then creator_score else opponent_score end),0)) into duels from public.duel_matches where status='finished' and (creator=p_player or opponent=p_player);
+ select jsonb_build_object('challenge_runs',count(*) filter(where reward_coins>0),'challenge_streak',coalesce(max(streak),0),'blitz_best',coalesce(max(score) filter(where mode='blitz'),0)) into challenges from public.challenge_runs where player_id=p_player and finished_at is not null;
+ return m||themes||chapters||ds||duels||challenges;
+end $$;
+revoke all on function public.achievement_metrics(uuid) from public,anon,authenticated;
+grant execute on function public.achievement_metrics(uuid) to service_role;
+
+create function public.achievement_state(p_telegram_id bigint,p_language text) returns jsonb language plpgsql set search_path='' as $$
+declare actor uuid;m jsonb;items jsonb;
+begin
+ if p_language is null or p_language not in('ru','en','az') then raise exception 'bad_language';end if;
+ select id into actor from public.players where telegram_id=p_telegram_id for update;
+ if actor is null then raise exception 'player_not_found';end if;
+ -- Settle elapsed matches before reading duel achievements.
+ perform public.duel_statistics(p_telegram_id);
+ m:=public.achievement_metrics(actor);
+ insert into public.player_achievements(player_id,achievement_id) select actor,c.id from public.achievement_catalog c where coalesce((m->>c.metric)::integer,0)>=c.target on conflict do nothing;
+ select jsonb_agg(jsonb_build_object('id',c.id,'category',c.category,'target',c.target,'progress',least(c.target,case when a.achievement_id is not null then c.target else coalesce((m->>c.metric)::integer,0) end),'reward_coins',c.reward_coins,'icon',c.icon,'title',c.title->>p_language,'description',c.description->>p_language,'unlocked',a.achievement_id is not null,'claimed',a.claimed_at is not null,'unlocked_at',a.unlocked_at) order by c.position) into items from public.achievement_catalog c left join public.player_achievements a on a.player_id=actor and a.achievement_id=c.id;
+ return jsonb_build_object('items',coalesce(items,'[]'::jsonb),'coins',(select coins from public.players where id=actor));
+end $$;
+revoke all on function public.achievement_state(bigint,text) from public,anon,authenticated;
+grant execute on function public.achievement_state(bigint,text) to service_role;
+
+create function public.achievement_claim(p_telegram_id bigint,p_achievement text,p_language text) returns jsonb language plpgsql set search_path='' as $$
+declare actor uuid;reward integer;claimed timestamptz;result jsonb;paid boolean:=false;
+begin
+ select id into actor from public.players where telegram_id=p_telegram_id for update;
+ if actor is null then raise exception 'player_not_found';end if;
+ select reward_coins into reward from public.achievement_catalog where id=p_achievement;
+ if reward is null then raise exception 'bad_achievement';end if;
+ result:=public.achievement_state(p_telegram_id,p_language);
+ select claimed_at into claimed from public.player_achievements where player_id=actor and achievement_id=p_achievement;
+ if not found then raise exception 'achievement_locked';end if;
+ if claimed is null then
+  update public.player_achievements set claimed_at=clock_timestamp() where player_id=actor and achievement_id=p_achievement;
+  update public.players set coins=coins+reward where id=actor;
+  insert into public.coin_transactions(player_id,amount,transaction_type,description) values(actor,reward,'achievement_reward',p_achievement);
+  paid:=true;
+ end if;
+ return public.achievement_state(p_telegram_id,p_language)||jsonb_build_object('reward_coins',case when paid then reward else 0 end,'duplicate',not paid);
+end $$;
+revoke all on function public.achievement_claim(bigint,text,text) from public,anon,authenticated;
+grant execute on function public.achievement_claim(bigint,text,text) to service_role;
+
+insert into public.achievement_catalog(id,category,metric,target,reward_coins,icon,title,description,position) values
+('main_10','main','main',10,15,'🧩','{"ru": "10 уровней позади", "en": "10 levels completed", "az": "10 səviyyə tamamlandı"}'::jsonb,'{"ru": "Впервые пройди 10 разных основных уровней.", "en": "Complete 10 different main levels for the first time.", "az": "10 fərqli əsas səviyyəni ilk dəfə keç."}'::jsonb,0),
+('main_50','main','main',50,25,'🧩','{"ru": "50 уровней позади", "en": "50 levels completed", "az": "50 səviyyə tamamlandı"}'::jsonb,'{"ru": "Впервые пройди 50 разных основных уровней.", "en": "Complete 50 different main levels for the first time.", "az": "50 fərqli əsas səviyyəni ilk dəfə keç."}'::jsonb,1),
+('main_150','main','main',150,50,'🧩','{"ru": "150 уровней позади", "en": "150 levels completed", "az": "150 səviyyə tamamlandı"}'::jsonb,'{"ru": "Впервые пройди 150 разных основных уровней.", "en": "Complete 150 different main levels for the first time.", "az": "150 fərqli əsas səviyyəni ilk dəfə keç."}'::jsonb,2),
+('main_500','main','main',500,150,'🧩','{"ru": "500 уровней позади", "en": "500 levels completed", "az": "500 səviyyə tamamlandı"}'::jsonb,'{"ru": "Впервые пройди 500 разных основных уровней.", "en": "Complete 500 different main levels for the first time.", "az": "500 fərqli əsas səviyyəni ilk dəfə keç."}'::jsonb,3),
+('nohint_5','main','nohint',5,10,'💡','{"ru": "Без помощи · 5", "en": "Without hints · 5", "az": "İpucusuz · 5"}'::jsonb,'{"ru": "Впервые пройди 5 основных уровней без платных подсказок. Перемешивание разрешено.", "en": "First-complete 5 main levels without paid hints. Shuffling is allowed.", "az": "5 əsas səviyyəni ilk dəfə ödənişli ipucusuz keç. Qarışdırmaq olar."}'::jsonb,4),
+('nohint_20','main','nohint',20,20,'💡','{"ru": "Без помощи · 20", "en": "Without hints · 20", "az": "İpucusuz · 20"}'::jsonb,'{"ru": "Впервые пройди 20 основных уровней без платных подсказок. Перемешивание разрешено.", "en": "First-complete 20 main levels without paid hints. Shuffling is allowed.", "az": "20 əsas səviyyəni ilk dəfə ödənişli ipucusuz keç. Qarışdırmaq olar."}'::jsonb,5),
+('nohint_40','main','nohint',40,30,'💡','{"ru": "Без помощи · 40", "en": "Without hints · 40", "az": "İpucusuz · 40"}'::jsonb,'{"ru": "Впервые пройди 40 основных уровней без платных подсказок. Перемешивание разрешено.", "en": "First-complete 40 main levels without paid hints. Shuffling is allowed.", "az": "40 əsas səviyyəni ilk dəfə ödənişli ipucusuz keç. Qarışdırmaq olar."}'::jsonb,6),
+('nohint_50','main','nohint',50,40,'💡','{"ru": "Без помощи · 50", "en": "Without hints · 50", "az": "İpucusuz · 50"}'::jsonb,'{"ru": "Впервые пройди 50 основных уровней без платных подсказок. Перемешивание разрешено.", "en": "First-complete 50 main levels without paid hints. Shuffling is allowed.", "az": "50 əsas səviyyəni ilk dəfə ödənişli ipucusuz keç. Qarışdırmaq olar."}'::jsonb,7),
+('chapter_1','main','chapter_1',1,10,'📚','{"ru": "Глава 1 завершена", "en": "Chapter 1 completed", "az": "1-ci fəsil tamamlandı"}'::jsonb,'{"ru": "Пройди все уровни главы 1.", "en": "Complete every level in chapter 1.", "az": "1-ci fəslin bütün səviyyələrini keç."}'::jsonb,8),
+('chapter_2','main','chapter_2',1,10,'📚','{"ru": "Глава 2 завершена", "en": "Chapter 2 completed", "az": "2-ci fəsil tamamlandı"}'::jsonb,'{"ru": "Пройди все уровни главы 2.", "en": "Complete every level in chapter 2.", "az": "2-ci fəslin bütün səviyyələrini keç."}'::jsonb,9),
+('chapter_3','main','chapter_3',1,10,'📚','{"ru": "Глава 3 завершена", "en": "Chapter 3 completed", "az": "3-ci fəsil tamamlandı"}'::jsonb,'{"ru": "Пройди все уровни главы 3.", "en": "Complete every level in chapter 3.", "az": "3-ci fəslin bütün səviyyələrini keç."}'::jsonb,10),
+('chapter_4','main','chapter_4',1,10,'📚','{"ru": "Глава 4 завершена", "en": "Chapter 4 completed", "az": "4-ci fəsil tamamlandı"}'::jsonb,'{"ru": "Пройди все уровни главы 4.", "en": "Complete every level in chapter 4.", "az": "4-ci fəslin bütün səviyyələrini keç."}'::jsonb,11),
+('chapter_5','main','chapter_5',1,20,'📚','{"ru": "Глава 5 завершена", "en": "Chapter 5 completed", "az": "5-ci fəsil tamamlandı"}'::jsonb,'{"ru": "Пройди все уровни главы 5.", "en": "Complete every level in chapter 5.", "az": "5-ci fəslin bütün səviyyələrini keç."}'::jsonb,12),
+('chapter_6','main','chapter_6',1,20,'📚','{"ru": "Глава 6 завершена", "en": "Chapter 6 completed", "az": "6-ci fəsil tamamlandı"}'::jsonb,'{"ru": "Пройди все уровни главы 6.", "en": "Complete every level in chapter 6.", "az": "6-ci fəslin bütün səviyyələrini keç."}'::jsonb,13),
+('chapter_7','main','chapter_7',1,20,'📚','{"ru": "Глава 7 завершена", "en": "Chapter 7 completed", "az": "7-ci fəsil tamamlandı"}'::jsonb,'{"ru": "Пройди все уровни главы 7.", "en": "Complete every level in chapter 7.", "az": "7-ci fəslin bütün səviyyələrini keç."}'::jsonb,14),
+('chapter_8','main','chapter_8',1,20,'📚','{"ru": "Глава 8 завершена", "en": "Chapter 8 completed", "az": "8-ci fəsil tamamlandı"}'::jsonb,'{"ru": "Пройди все уровни главы 8.", "en": "Complete every level in chapter 8.", "az": "8-ci fəslin bütün səviyyələrini keç."}'::jsonb,15),
+('chapter_9','main','chapter_9',1,20,'📚','{"ru": "Глава 9 завершена", "en": "Chapter 9 completed", "az": "9-ci fəsil tamamlandı"}'::jsonb,'{"ru": "Пройди все уровни главы 9.", "en": "Complete every level in chapter 9.", "az": "9-ci fəslin bütün səviyyələrini keç."}'::jsonb,16),
+('chapter_10','main','chapter_10',1,20,'📚','{"ru": "Глава 10 завершена", "en": "Chapter 10 completed", "az": "10-ci fəsil tamamlandı"}'::jsonb,'{"ru": "Пройди все уровни главы 10.", "en": "Complete every level in chapter 10.", "az": "10-ci fəslin bütün səviyyələrini keç."}'::jsonb,17),
+('chapter_11','main','chapter_11',1,20,'📚','{"ru": "Глава 11 завершена", "en": "Chapter 11 completed", "az": "11-ci fəsil tamamlandı"}'::jsonb,'{"ru": "Пройди все уровни главы 11.", "en": "Complete every level in chapter 11.", "az": "11-ci fəslin bütün səviyyələrini keç."}'::jsonb,18),
+('chapter_12','main','chapter_12',1,20,'📚','{"ru": "Глава 12 завершена", "en": "Chapter 12 completed", "az": "12-ci fəsil tamamlandı"}'::jsonb,'{"ru": "Пройди все уровни главы 12.", "en": "Complete every level in chapter 12.", "az": "12-ci fəslin bütün səviyyələrini keç."}'::jsonb,19),
+('duel_win_1','duels','duel_wins',1,10,'⚔️','{"ru": "Первая победа", "en": "First victory", "az": "İlk qələbə"}'::jsonb,'{"ru": "Выиграй 1 завершённых дуэлей.", "en": "Win 1 settled duels.", "az": "1 tamamlanmış dueldə qalib gəl."}'::jsonb,20),
+('duel_win_5','duels','duel_wins',5,15,'⚔️','{"ru": "5 побед в дуэлях", "en": "5 duel wins", "az": "5 duel qələbəsi"}'::jsonb,'{"ru": "Выиграй 5 завершённых дуэлей.", "en": "Win 5 settled duels.", "az": "5 tamamlanmış dueldə qalib gəl."}'::jsonb,21),
+('duel_win_10','duels','duel_wins',10,25,'⚔️','{"ru": "10 побед в дуэлях", "en": "10 duel wins", "az": "10 duel qələbəsi"}'::jsonb,'{"ru": "Выиграй 10 завершённых дуэлей.", "en": "Win 10 settled duels.", "az": "10 tamamlanmış dueldə qalib gəl."}'::jsonb,22),
+('duel_win_25','duels','duel_wins',25,40,'⚔️','{"ru": "25 побед в дуэлях", "en": "25 duel wins", "az": "25 duel qələbəsi"}'::jsonb,'{"ru": "Выиграй 25 завершённых дуэлей.", "en": "Win 25 settled duels.", "az": "25 tamamlanmış dueldə qalib gəl."}'::jsonb,23),
+('duel_win_50','duels','duel_wins',50,75,'⚔️','{"ru": "50 побед в дуэлях", "en": "50 duel wins", "az": "50 duel qələbəsi"}'::jsonb,'{"ru": "Выиграй 50 завершённых дуэлей.", "en": "Win 50 settled duels.", "az": "50 tamamlanmış dueldə qalib gəl."}'::jsonb,24),
+('duel_draw','duels','duel_draws',1,10,'🤝','{"ru": "Достойный соперник", "en": "Worthy opponent", "az": "Layiqli rəqib"}'::jsonb,'{"ru": "Заверши дуэль вничью. Отменённые комнаты не считаются.", "en": "Finish a duel in a draw. Cancelled rooms do not count.", "az": "Dueli heç-heçə bitir. Ləğv edilən otaqlar sayılmır."}'::jsonb,25),
+('duel_play_10','duels','duel_played',10,15,'🎮','{"ru": "10 дуэлей", "en": "10 duels", "az": "10 duel"}'::jsonb,'{"ru": "Сыграй 10 дуэлей до завершения.", "en": "Finish 10 duels.", "az": "10 dueli sona çatdır."}'::jsonb,26),
+('duel_play_50','duels','duel_played',50,40,'🎮','{"ru": "50 дуэлей", "en": "50 duels", "az": "50 duel"}'::jsonb,'{"ru": "Сыграй 50 дуэлей до завершения.", "en": "Finish 50 duels.", "az": "50 dueli sona çatdır."}'::jsonb,27),
+('duel_score_5','duels','duel_best',5,15,'🎯','{"ru": "Точный ответ · 5", "en": "Sharp mind · 5", "az": "Dəqiq cavab · 5"}'::jsonb,'{"ru": "Набери 5 очков в одной завершённой дуэли.", "en": "Score 5 points in one settled duel.", "az": "Bir tamamlanmış dueldə 5 xal topla."}'::jsonb,28),
+('duel_score_10','duels','duel_best',10,30,'🎯','{"ru": "Точный ответ · 10", "en": "Sharp mind · 10", "az": "Dəqiq cavab · 10"}'::jsonb,'{"ru": "Набери 10 очков в одной завершённой дуэли.", "en": "Score 10 points in one settled duel.", "az": "Bir tamamlanmış dueldə 10 xal topla."}'::jsonb,29),
+('daily_streak_5','daily','daily_streak',5,15,'☀️','{"ru": "5 дней подряд", "en": "5 days in a row", "az": "5 gün ardıcıl"}'::jsonb,'{"ru": "Решай загадку дня 5 дней подряд. Учитывается лучшая серия.", "en": "Solve the daily puzzle 5 consecutive days. Your best streak counts.", "az": "Günün tapmacasını 5 gün ardıcıl həll et. Ən yaxşı seriya sayılır."}'::jsonb,30),
+('daily_streak_10','daily','daily_streak',10,25,'☀️','{"ru": "10 дней подряд", "en": "10 days in a row", "az": "10 gün ardıcıl"}'::jsonb,'{"ru": "Решай загадку дня 10 дней подряд. Учитывается лучшая серия.", "en": "Solve the daily puzzle 10 consecutive days. Your best streak counts.", "az": "Günün tapmacasını 10 gün ardıcıl həll et. Ən yaxşı seriya sayılır."}'::jsonb,31),
+('daily_streak_20','daily','daily_streak',20,40,'☀️','{"ru": "20 дней подряд", "en": "20 days in a row", "az": "20 gün ardıcıl"}'::jsonb,'{"ru": "Решай загадку дня 20 дней подряд. Учитывается лучшая серия.", "en": "Solve the daily puzzle 20 consecutive days. Your best streak counts.", "az": "Günün tapmacasını 20 gün ardıcıl həll et. Ən yaxşı seriya sayılır."}'::jsonb,32),
+('daily_streak_30','daily','daily_streak',30,60,'☀️','{"ru": "30 дней подряд", "en": "30 days in a row", "az": "30 gün ardıcıl"}'::jsonb,'{"ru": "Решай загадку дня 30 дней подряд. Учитывается лучшая серия.", "en": "Solve the daily puzzle 30 consecutive days. Your best streak counts.", "az": "Günün tapmacasını 30 gün ardıcıl həll et. Ən yaxşı seriya sayılır."}'::jsonb,33),
+('daily_streak_45','daily','daily_streak',45,80,'☀️','{"ru": "45 дней подряд", "en": "45 days in a row", "az": "45 gün ardıcıl"}'::jsonb,'{"ru": "Решай загадку дня 45 дней подряд. Учитывается лучшая серия.", "en": "Solve the daily puzzle 45 consecutive days. Your best streak counts.", "az": "Günün tapmacasını 45 gün ardıcıl həll et. Ən yaxşı seriya sayılır."}'::jsonb,34),
+('daily_streak_60','daily','daily_streak',60,100,'☀️','{"ru": "60 дней подряд", "en": "60 days in a row", "az": "60 gün ardıcıl"}'::jsonb,'{"ru": "Решай загадку дня 60 дней подряд. Учитывается лучшая серия.", "en": "Solve the daily puzzle 60 consecutive days. Your best streak counts.", "az": "Günün tapmacasını 60 gün ardıcıl həll et. Ən yaxşı seriya sayılır."}'::jsonb,35),
+('daily_streak_75','daily','daily_streak',75,125,'☀️','{"ru": "75 дней подряд", "en": "75 days in a row", "az": "75 gün ardıcıl"}'::jsonb,'{"ru": "Решай загадку дня 75 дней подряд. Учитывается лучшая серия.", "en": "Solve the daily puzzle 75 consecutive days. Your best streak counts.", "az": "Günün tapmacasını 75 gün ardıcıl həll et. Ən yaxşı seriya sayılır."}'::jsonb,36),
+('daily_streak_90','daily','daily_streak',90,150,'☀️','{"ru": "90 дней подряд", "en": "90 days in a row", "az": "90 gün ardıcıl"}'::jsonb,'{"ru": "Решай загадку дня 90 дней подряд. Учитывается лучшая серия.", "en": "Solve the daily puzzle 90 consecutive days. Your best streak counts.", "az": "Günün tapmacasını 90 gün ardıcıl həll et. Ən yaxşı seriya sayılır."}'::jsonb,37),
+('daily_total_1','daily','daily_total',1,10,'📅','{"ru": "Загадки дня · 1", "en": "Daily puzzles · 1", "az": "Günün tapmacaları · 1"}'::jsonb,'{"ru": "Реши загадку дня в 1 разных днях.", "en": "Solve the daily puzzle on 1 different days.", "az": "1 fərqli gündə günün tapmacasını həll et."}'::jsonb,38),
+('daily_total_30','daily','daily_total',30,30,'📅','{"ru": "Загадки дня · 30", "en": "Daily puzzles · 30", "az": "Günün tapmacaları · 30"}'::jsonb,'{"ru": "Реши загадку дня в 30 разных днях.", "en": "Solve the daily puzzle on 30 different days.", "az": "30 fərqli gündə günün tapmacasını həll et."}'::jsonb,39),
+('daily_total_100','daily','daily_total',100,75,'📅','{"ru": "Загадки дня · 100", "en": "Daily puzzles · 100", "az": "Günün tapmacaları · 100"}'::jsonb,'{"ru": "Реши загадку дня в 100 разных днях.", "en": "Solve the daily puzzle on 100 different days.", "az": "100 fərqli gündə günün tapmacasını həll et."}'::jsonb,40),
+('daily_first_1','daily','daily_first',1,10,'✨','{"ru": "С первой попытки · 1", "en": "First try · 1", "az": "İlk cəhddən · 1"}'::jsonb,'{"ru": "В 1 разных днях реши загадку с первой попытки.", "en": "Solve the daily puzzle on the first attempt on 1 different days.", "az": "1 fərqli gündə tapmacanı ilk cəhddən həll et."}'::jsonb,41),
+('daily_first_10','daily','daily_first',10,25,'✨','{"ru": "С первой попытки · 10", "en": "First try · 10", "az": "İlk cəhddən · 10"}'::jsonb,'{"ru": "В 10 разных днях реши загадку с первой попытки.", "en": "Solve the daily puzzle on the first attempt on 10 different days.", "az": "10 fərqli gündə tapmacanı ilk cəhddən həll et."}'::jsonb,42),
+('theme_sport','themes','theme_sport',100,30,'⚽','{"ru": "Знаток: Спорт", "en": "Expert: Sport", "az": "Bilici: İdman"}'::jsonb,'{"ru": "Пройди все 100 уровней раздела «Спорт».", "en": "Complete all 100 levels in Sport.", "az": "«İdman» bölməsinin 100 səviyyəsini keç."}'::jsonb,43),
+('theme_art','themes','theme_art',100,30,'🎨','{"ru": "Знаток: Искусство", "en": "Expert: Art", "az": "Bilici: İncəsənət"}'::jsonb,'{"ru": "Пройди все 100 уровней раздела «Искусство».", "en": "Complete all 100 levels in Art.", "az": "«İncəsənət» bölməsinin 100 səviyyəsini keç."}'::jsonb,44),
+('theme_professions','themes','theme_professions',100,30,'🧑‍💼','{"ru": "Знаток: Профессии", "en": "Expert: Professions", "az": "Bilici: Peşələr"}'::jsonb,'{"ru": "Пройди все 100 уровней раздела «Профессии».", "en": "Complete all 100 levels in Professions.", "az": "«Peşələr» bölməsinin 100 səviyyəsini keç."}'::jsonb,45),
+('theme_travel','themes','theme_travel',100,30,'🌍','{"ru": "Знаток: Путешествия", "en": "Expert: Travel", "az": "Bilici: Səyahət"}'::jsonb,'{"ru": "Пройди все 100 уровней раздела «Путешествия».", "en": "Complete all 100 levels in Travel.", "az": "«Səyahət» bölməsinin 100 səviyyəsini keç."}'::jsonb,46),
+('theme_science','themes','theme_science',100,30,'🔬','{"ru": "Знаток: Наука", "en": "Expert: Science", "az": "Bilici: Elm"}'::jsonb,'{"ru": "Пройди все 100 уровней раздела «Наука».", "en": "Complete all 100 levels in Science.", "az": "«Elm» bölməsinin 100 səviyyəsini keç."}'::jsonb,47),
+('theme_technology','themes','theme_technology',100,30,'💻','{"ru": "Знаток: Технологии", "en": "Expert: Technology", "az": "Bilici: Texnologiya"}'::jsonb,'{"ru": "Пройди все 100 уровней раздела «Технологии».", "en": "Complete all 100 levels in Technology.", "az": "«Texnologiya» bölməsinin 100 səviyyəsini keç."}'::jsonb,48),
+('theme_cinema','themes','theme_cinema',100,30,'🎬','{"ru": "Знаток: Кино", "en": "Expert: Cinema", "az": "Bilici: Kino"}'::jsonb,'{"ru": "Пройди все 100 уровней раздела «Кино».", "en": "Complete all 100 levels in Cinema.", "az": "«Kino» bölməsinin 100 səviyyəsini keç."}'::jsonb,49),
+('theme_food','themes','theme_food',100,30,'🍽️','{"ru": "Знаток: Еда", "en": "Expert: Food", "az": "Bilici: Yemək"}'::jsonb,'{"ru": "Пройди все 100 уровней раздела «Еда».", "en": "Complete all 100 levels in Food.", "az": "«Yemək» bölməsinin 100 səviyyəsini keç."}'::jsonb,50),
+('theme_animals','themes','theme_animals',100,30,'🐾','{"ru": "Знаток: Животные", "en": "Expert: Animals", "az": "Bilici: Heyvanlar"}'::jsonb,'{"ru": "Пройди все 100 уровней раздела «Животные».", "en": "Complete all 100 levels in Animals.", "az": "«Heyvanlar» bölməsinin 100 səviyyəsini keç."}'::jsonb,51),
+('theme_transport','themes','theme_transport',100,30,'🚗','{"ru": "Знаток: Транспорт", "en": "Expert: Transport", "az": "Bilici: Nəqliyyat"}'::jsonb,'{"ru": "Пройди все 100 уровней раздела «Транспорт».", "en": "Complete all 100 levels in Transport.", "az": "«Nəqliyyat» bölməsinin 100 səviyyəsini keç."}'::jsonb,52),
+('theme_home','themes','theme_home',100,30,'🏠','{"ru": "Знаток: Дом и быт", "en": "Expert: Home", "az": "Bilici: Ev və məişət"}'::jsonb,'{"ru": "Пройди все 100 уровней раздела «Дом и быт».", "en": "Complete all 100 levels in Home.", "az": "«Ev və məişət» bölməsinin 100 səviyyəsini keç."}'::jsonb,53),
+('theme_nature','themes','theme_nature',100,30,'🌿','{"ru": "Знаток: Природа", "en": "Expert: Nature", "az": "Bilici: Təbiət"}'::jsonb,'{"ru": "Пройди все 100 уровней раздела «Природа».", "en": "Complete all 100 levels in Nature.", "az": "«Təbiət» bölməsinin 100 səviyyəsini keç."}'::jsonb,54),
+('collector_1','themes','themes_complete',1,15,'🏅','{"ru": "Коллекционер", "en": "Collector", "az": "Kolleksiyaçı"}'::jsonb,'{"ru": "Полностью заверши 1 тематических разделов.", "en": "Fully complete 1 themes.", "az": "1 mövzu bölməsini tam bitir."}'::jsonb,55),
+('collector_3','themes','themes_complete',3,30,'🏅','{"ru": "Коллекционер · 3", "en": "Collector · 3", "az": "Kolleksiyaçı · 3"}'::jsonb,'{"ru": "Полностью заверши 3 тематических разделов.", "en": "Fully complete 3 themes.", "az": "3 mövzu bölməsini tam bitir."}'::jsonb,56),
+('collector_6','themes','themes_complete',6,60,'🏅','{"ru": "Коллекционер · 6", "en": "Collector · 6", "az": "Kolleksiyaçı · 6"}'::jsonb,'{"ru": "Полностью заверши 6 тематических разделов.", "en": "Fully complete 6 themes.", "az": "6 mövzu bölməsini tam bitir."}'::jsonb,57),
+('collector_12','themes','themes_complete',12,120,'🏅','{"ru": "Коллекционер · 12", "en": "Collector · 12", "az": "Kolleksiyaçı · 12"}'::jsonb,'{"ru": "Полностью заверши 12 тематических разделов.", "en": "Fully complete 12 themes.", "az": "12 mövzu bölməsini tam bitir."}'::jsonb,58),
+('challenge_runs_1','challenges','challenge_runs',1,10,'⚡','{"ru": "Испытатель · 1", "en": "Challenger · 1", "az": "Sınaqçı · 1"}'::jsonb,'{"ru": "Заверши 1 результативных испытаний с наградой.", "en": "Finish 1 qualifying rewarded challenge runs.", "az": "1 mükafatlı nəticəli sınağı tamamla."}'::jsonb,59),
+('challenge_runs_10','challenges','challenge_runs',10,20,'⚡','{"ru": "Испытатель · 10", "en": "Challenger · 10", "az": "Sınaqçı · 10"}'::jsonb,'{"ru": "Заверши 10 результативных испытаний с наградой.", "en": "Finish 10 qualifying rewarded challenge runs.", "az": "10 mükafatlı nəticəli sınağı tamamla."}'::jsonb,60),
+('challenge_runs_50','challenges','challenge_runs',50,50,'⚡','{"ru": "Испытатель · 50", "en": "Challenger · 50", "az": "Sınaqçı · 50"}'::jsonb,'{"ru": "Заверши 50 результативных испытаний с наградой.", "en": "Finish 50 qualifying rewarded challenge runs.", "az": "50 mükafatlı nəticəli sınağı tamamla."}'::jsonb,61),
+('challenge_streak_5','challenges','challenge_streak',5,15,'🔥','{"ru": "Серия ответов · 5", "en": "Answer streak · 5", "az": "Cavab seriyası · 5"}'::jsonb,'{"ru": "Собери серию из 5 правильных ответов в одном завершённом испытании.", "en": "Reach a streak of 5 correct answers in a finished challenge.", "az": "Tamamlanmış bir sınaqda 5 düzgün cavab seriyası qur."}'::jsonb,62),
+('challenge_streak_10','challenges','challenge_streak',10,30,'🔥','{"ru": "Серия ответов · 10", "en": "Answer streak · 10", "az": "Cavab seriyası · 10"}'::jsonb,'{"ru": "Собери серию из 10 правильных ответов в одном завершённом испытании.", "en": "Reach a streak of 10 correct answers in a finished challenge.", "az": "Tamamlanmış bir sınaqda 10 düzgün cavab seriyası qur."}'::jsonb,63),
+('blitz_10','challenges','blitz_best',10,20,'⏱️','{"ru": "Мастер блица · 10", "en": "Blitz master · 10", "az": "Blits ustası · 10"}'::jsonb,'{"ru": "Набери 10 очков за один завершённый блиц.", "en": "Score 10 points in a finished Blitz run.", "az": "Tamamlanmış bir blitsdə 10 xal topla."}'::jsonb,64),
+('blitz_20','challenges','blitz_best',20,40,'⏱️','{"ru": "Мастер блица · 20", "en": "Blitz master · 20", "az": "Blits ustası · 20"}'::jsonb,'{"ru": "Набери 20 очков за один завершённый блиц.", "en": "Score 20 points in a finished Blitz run.", "az": "Tamamlanmış bir blitsdə 20 xal topla."}'::jsonb,65);
