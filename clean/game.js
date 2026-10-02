@@ -874,7 +874,7 @@
   function validateLanguageLevels(){
     const supported=['ru','en','az'];
     for(const lang of supported){
-      for(let n=1;n<=545;n++){
+      for(let n=1;n<=550;n++){
         const item=lang==='ru'?LEVELS[n]:TRANSLATED[lang][n];
         if(!item||!item.answer||!item.pool||!item.hint)throw new Error('Incomplete language level '+lang+' '+n);
         const need=[...item.answer].reduce((m,ch)=>(m[ch]=(m[ch]||0)+1,m),{});
@@ -959,8 +959,8 @@
     else if(levelId===280){if(chapterNote){chapterNote.hidden=false;chapterNote.textContent=ui.chapterPassed(7)+' '+ui.newTitle(chapterEarnedTitle(7))+'. '+ui.chapterUnlocked(8)+'.';}next.href='./game.html?level=281';next.innerHTML=ui.nextChapter+' <span>▶</span>';}
     else if(levelId===330){if(chapterNote){chapterNote.hidden=false;chapterNote.textContent=ui.chapterPassed(8)+' '+ui.newTitle(chapterEarnedTitle(8))+'. '+ui.chapterUnlocked(9)+'.';}next.href='./game.html?level=331';next.innerHTML=ui.nextChapter+' <span>▶</span>';}
     else if(levelId===380||levelId===430||levelId===480){const n=levelId===380?9:levelId===430?10:11;if(chapterNote){chapterNote.hidden=false;chapterNote.textContent=ui.chapterPassed(n)+' '+ui.newTitle(chapterEarnedTitle(n))+'. '+ui.chapterUnlocked(n+1)+'.';}next.href='./game.html?level='+(levelId+1);next.innerHTML=ui.nextChapter+' <span>▶</span>';}
-    else if(levelId===545){if(chapterNote){chapterNote.hidden=false;chapterNote.textContent=ui.chapterPassed(13)+' '+ui.newTitle(chapterEarnedTitle(13))+'.';}next.href='./index.html';next.innerHTML=ui.home+' <span>✓</span>';}
-    else if(levelId<545){next.href='./game.html?level='+(levelId+1);next.innerHTML=ui.next+' <span>▶</span>';}
+    else if(levelId===550){if(chapterNote){chapterNote.hidden=false;chapterNote.textContent=ui.chapterPassed(13)+' '+ui.newTitle(chapterEarnedTitle(13))+'.';}next.href='./index.html';next.innerHTML=ui.home+' <span>✓</span>';}
+    else if(levelId<550){next.href='./game.html?level='+(levelId+1);next.innerHTML=ui.next+' <span>▶</span>';}
     else{next.href='./index.html';next.innerHTML=ui.home+' <span>✓</span>';}
   }
   async function check(){

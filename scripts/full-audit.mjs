@@ -62,13 +62,13 @@ const coreErrors=evalConst(core,'ERR');
 assertLanguageKeys(coreErrors,'Core error translations');
 for(const lang of ['ru','en','az'])if(!coreErrors[lang]?.energy_full)throw Error('Missing '+lang+' energy_full localization');
 
-// Main content audit: 545 levels, three languages, valid pools and four clues.
+// Main content audit: 550 levels, three languages, valid pools and four clues.
 const mainLevels=evalConst(game,'LEVELS'),mainTr=evalConst(game,'TRANSLATED');
 const mainExtraRows=Function('window={};'+mainExtra+';return window.PW_MAIN_EXTRA')();
 if(!Array.isArray(mainExtraRows)||mainExtraRows.length!==100||mainExtraRows[0].id!==281||mainExtraRows.at(-1).id!==380)throw Error('Main Chapter 8-9 extra bank must contain levels 281-380');
 const mainMoreRows=Function('window={};'+mainMore+';return window.PW_MAIN_MORE')();
 const main13Rows=Function('window={};'+main13+';return window.PW_MAIN_MORE')();
-if(!Array.isArray(main13Rows)||main13Rows.length!==15||main13Rows[0].id!==531||main13Rows.at(-1).id!==545)throw Error('Main Chapter 13 bank must contain levels 531-545');
+if(!Array.isArray(main13Rows)||main13Rows.length!==20||main13Rows[0].id!==531||main13Rows.at(-1).id!==550)throw Error('Main Chapter 13 bank must contain levels 531-550');
 if(!Array.isArray(mainMoreRows)||mainMoreRows.length!==150||mainMoreRows[0].id!==381||mainMoreRows.at(-1).id!==530)throw Error('Main Chapter 10-12 bank must contain levels 381-530');
 const extraAlphabet={ru:'АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЫЭЮЯ',en:'ABCDEFGHJKLMNPQRSTUVWXYZ',az:'ABCÇDEƏFGĞHXIİJKLMNOÖPQRSŞTUÜVYZ'};
 function buildExtraPool(word,lang){const chars=[...word],used=new Set(chars),extras=[],want=Math.max(12,chars.length+5);for(const ch of extraAlphabet[lang]){if(!used.has(ch)){extras.push(ch);if(chars.length+extras.length>=want)break}}return chars.concat(extras).join('')}
@@ -79,11 +79,11 @@ for(const row of [...mainExtraRows,...mainMoreRows,...main13Rows]){
  combined.az[row.id]={...row.az,pool:buildExtraPool(row.az.answer,'az')};
 }
 for(const [lang,obj] of Object.entries(combined)){
- if(Object.keys(obj||{}).length!==545)throw Error('Main '+lang+' must contain 545 levels');
+ if(Object.keys(obj||{}).length!==550)throw Error('Main '+lang+' must contain 550 levels');
  const words=Object.values(obj).map(x=>x.answer);
  if(words.some(x=>!x))throw Error('Main '+lang+' has empty answer');
- if(new Set(words).size!==545)throw Error('Main '+lang+' contains duplicate answers');
- for(let n=1;n<=545;n++){
+ if(new Set(words).size!==550)throw Error('Main '+lang+' contains duplicate answers');
+ for(let n=1;n<=550;n++){
   const x=obj[n];if(!x?.answer||!x?.pool||!x?.hint)throw Error('Main '+lang+' incomplete level '+n);
   if(lang==='ru'&&(!x.photos||x.photos.length!==4))throw Error('Main RU level '+n+' must have 4 clues');
   const need={};for(const ch of [...x.answer])need[ch]=(need[ch]||0)+1;
@@ -114,7 +114,7 @@ if(release.verification?.challenge_rewards_live!==true||release.challenge_modes?
 if(!challenge.includes('challengeResultReward')||!challenge.includes('rewarded_runs_today')||!challenge.includes('runId=state?.run_id'))throw Error('Challenge reward client flow is incomplete');
 const ruleBlock=home.slice(home.indexOf('const RULES='),home.indexOf('const RESET='));
 const rules=JSON.parse(ruleBlock.slice('const RULES='.length).trim().replace(/;$/, ''));
-for(const [l,need] of Object.entries({ru:['13 глав','545 уровней','Загадка дня','365','3 попытки','25 монет','Дуэли'],en:['13 chapters','545 levels','Daily puzzle','365','3 attempts','25 coins','Duels'],az:['13 fəsil','545 səviyyə','Günün tapmacası','365','3 cəhd','25 sikkə','Duellər']})){
+for(const [l,need] of Object.entries({ru:['13 глав','550 уровней','Загадка дня','365','3 попытки','25 монет','Дуэли'],en:['13 chapters','550 levels','Daily puzzle','365','3 attempts','25 coins','Duels'],az:['13 fəsil','550 səviyyə','Günün tapmacası','365','3 cəhd','25 sikkə','Duellər']})){
  for(const value of need)if(!rules[l]?.includes(value))throw Error('Rules missing '+l+': '+value);
  if((rules[l].match(/class="rule-section"/g)||[]).length!==8)throw Error('Rules sections missing '+l);
 }
@@ -174,7 +174,7 @@ const completeThemes=release.thematic_mode.categories.filter(x=>x.status==='comp
 if(completeThemes.length!==12)throw Error('Expected 12 complete thematic categories, got '+completeThemes.length);
 if(!home.includes("const READY_THEME_IDS=['sport','art','professions','travel','science','technology','cinema','food','animals','transport','home','nature']"))throw Error('Cinema/Food not enabled in thematic hub');
 if(!theme.includes("cinema:addedThemeBank(addedThemeRows.cinema||[])")||!theme.includes("food:addedThemeBank(addedThemeRows.food||[])"))throw Error('Cinema/Food banks not wired');
-if(release.verification?.main_levels_available_through!==545)throw Error('Main game manifest is not at 530');
+if(release.verification?.main_levels_available_through!==550)throw Error('Main game manifest is not at 550');
 if(release.chapters.filter(x=>x.status==='live').length!==13)throw Error('Expected 13 live chapters');
 if(release.chapters.some(x=>x.status==='planned'))throw Error('Main chapters must all be live');
 if(!release.verification?.main_answers_unique_all_languages)throw Error('Main answer uniqueness flag missing');
@@ -184,7 +184,7 @@ for(const required of ['settingsBtn','profileBtn','dailyRewardBtn','ratingNav','
 }
 if(!theme.includes('.long-answer') && !read('ui.css').includes('.slots.long-answer'))throw Error('Long-answer mobile styling missing');
 
-console.log('PASS: full PhotoWord audit — DOM integrity, 545 main levels, 400 unique challenge words, translations, chapters, twelve theme banks, settings surfaces and manifest consistency.');
+console.log('PASS: full PhotoWord audit — DOM integrity, 550 main levels, 400 unique challenge words, translations, chapters, twelve theme banks, settings surfaces and manifest consistency.');
 
 
 // Canonical spelling and unordered clue sets must be unique within each mode.

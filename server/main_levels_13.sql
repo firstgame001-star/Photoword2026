@@ -9,7 +9,7 @@ declare
   already_complete boolean;
   next_chapter integer;
 begin
-  if p_level_id not between 1 and 545
+  if p_level_id not between 1 and 550
      or p_reward_coins is distinct from 20
      or p_reward_xp is distinct from 15 then
     raise exception 'invalid_level_or_reward';
@@ -88,7 +88,7 @@ begin
     else null
   end;
 
-  if p_level_id not between 1 and 545
+  if p_level_id not between 1 and 550
      or actual_cost is null
      or p_cost is distinct from actual_cost then
     raise exception 'bad_hint';
