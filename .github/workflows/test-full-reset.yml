@@ -2,7 +2,7 @@ name: Test PhotoWord full reset
 on:
   push:
     branches: [main]
-    paths: ['scripts/test-full-reset-browser.py', '.github/workflows/test-full-reset.yml']
+    paths: ['scripts/test-full-reset-browser.py', '.github/workflows/test-full-reset.yml', 'clean/core.js', 'clean/home.js']
   workflow_dispatch:
 permissions:
   contents: read
@@ -27,14 +27,14 @@ jobs:
           PYAPT
           python -m pip install playwright==1.63.0
           python -m playwright install --with-deps chromium webkit
-      - name: Wait for frame release
+      - name: Wait for reset release
         run: |
           for i in $(seq 1 36); do
-            if curl -fsSL 'https://firstgame001-star.github.io/Photoword2026/clean/core.js?release=reset1' | grep -q 'clearProgressStorage'; then exit 0; fi
+            if curl -fsSL 'https://firstgame001-star.github.io/Photoword2026/clean/core.js?release=reset1' | grep -q 'index.html?restart='; then exit 0; fi
             sleep 5
           done
           exit 1
-      - name: Check achievements on mobile browsers
+      - name: Check full reset on mobile browsers
         run: python scripts/test-full-reset-browser.py
       - name: Save screenshots
         if: always()

@@ -77,7 +77,7 @@
     if(changed){clearProgressStorage();window.dispatchEvent(new CustomEvent('pw:reset'))}
     try{localStorage.setItem(key,String(generation))}catch{}
     current = incoming;
-    if(changed&&action!=='reset_progress')setTimeout(()=>location.replace('./index.html'+location.hash),0);
+    if(changed&&action!=='reset_progress')setTimeout(()=>location.replace('./index.html?restart='+generation+location.hash),0);
     // Do not cache the complete response: it contains the private Telegram ID.
     document.querySelectorAll('[data-coins]').forEach(e => e.textContent = current.coins);
     window.dispatchEvent(new CustomEvent('pw:player', {detail:current}));
