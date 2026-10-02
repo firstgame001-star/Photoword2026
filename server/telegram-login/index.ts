@@ -48,7 +48,7 @@ async function verify(raw:unknown,token:string){
  if(!await crypto.subtle.verify("HMAC",key,signature,enc.encode(check)))return null;
  try{const u=JSON.parse(p.get("user")||"null");return u&&Number.isSafeInteger(u.id)&&u.id>0?u:null;}catch{return null;}
 }
-function profile(p:any,rank:number){return {photoword_id:p.photoword_id,first_name:p.first_name,last_name:p.last_name,username:p.username,game_nickname:p.game_nickname,nickname_changed:p.nickname_changed,notifications_enabled:p.notifications_enabled,notification_language:p.notification_language,avatar_url:p.avatar_url,coins:p.coins,xp:p.xp,current_chapter:p.current_chapter,current_level:p.current_level,completed_levels:p.completed_levels,daily_streak:p.daily_streak,last_daily_reward:p.last_daily_reward,rank};}
+function profile(p:any,rank:number){return {photoword_id:p.photoword_id,first_name:p.first_name,last_name:p.last_name,username:p.username,game_nickname:p.game_nickname,nickname_changed:p.nickname_changed,notifications_enabled:p.notifications_enabled,notification_language:p.notification_language,avatar_url:p.avatar_url,avatar_frame:p.avatar_frame,featured_achievements:p.featured_achievements,progress_generation:p.progress_generation,coins:p.coins,xp:p.xp,current_chapter:p.current_chapter,current_level:p.current_level,completed_levels:p.completed_levels,daily_streak:p.daily_streak,last_daily_reward:p.last_daily_reward,rank};}
 Deno.serve(async(req)=>{
  if(req.method==="OPTIONS")return new Response(null,{status:204,headers});
  if(req.method!=="POST")return reply({error:"method"},405);
@@ -96,7 +96,9 @@ Deno.serve(async(req)=>{
    let challengeRewardCoins=0,challengeRewardXp=0;
    for(const row of cr.data||[]){challengeRewardCoins+=Number(row.reward_coins||0);challengeRewardXp+=Number(row.reward_xp||0);}
 
+   const daily=await db.rpc("profile_daily_summary",{p_telegram_id:user.id});if(daily.error)return reply({error:"db"},500);
    return reply({stats:{
+    daily:daily.data,
     theme_levels_completed:themeLevels,
     themes_completed:themesComplete,
     themes_total:12,

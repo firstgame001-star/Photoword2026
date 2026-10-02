@@ -31,7 +31,7 @@ begin
  delete from public.notification_settings where player_id=actor;
  delete from public.notification_log where player_id=actor;
  insert into public.coin_transactions(player_id,amount,transaction_type,description) values(actor,250-v.coins,'game_reset','Full game reset '||(v.progress_generation+1));
- update public.players set coins=default,xp=default,current_chapter=default,current_level=default,completed_levels=default,daily_streak=default,last_daily_reward=default,avatar_frame=null,game_nickname=null,nickname_changed=false,notifications_enabled=false,notification_language='ru',notifications_enabled_at=null,last_notification_sent_at=null,progress_generation=progress_generation+1,progress_reset_at=clock_timestamp() where id=actor returning * into v;
+ update public.players set coins=default,xp=default,current_chapter=default,current_level=default,completed_levels=default,daily_streak=default,last_daily_reward=default,avatar_frame=null,featured_achievements=default,game_nickname=null,nickname_changed=false,notifications_enabled=false,notification_language='ru',notifications_enabled_at=null,last_notification_sent_at=null,progress_generation=progress_generation+1,progress_reset_at=clock_timestamp() where id=actor returning * into v;
  return v;
 end $$;
 create or replace function public.reset_game_progress_server(p_telegram_id bigint) returns public.players language sql set search_path='' as $$select public.reset_game_progress_server(p_telegram_id,null)$$;

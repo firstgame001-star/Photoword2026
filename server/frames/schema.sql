@@ -8,13 +8,13 @@ insert into public.avatar_frame_catalog values
  ('bronze','main_10',1),('silver','main_50',2),('gold','main_150',3),('diamond','main_500',4),('scholar','nohint_50',5),('duelist','duel_win_10',6),('champion','duel_win_100',7),('flame','daily_streak_30',8),('cosmos','daily_streak_90',9),('collector','collector_12',10)
 on conflict(id) do nothing;
 create or replace function public.avatar_frame_state(p_telegram_id bigint,p_language text) returns jsonb language plpgsql set search_path='' as $$
-declare s jsonb;frames jsonb;selected text;
+declare s jsonb;frames jsonb;selected text;featured text[];generation integer;
 begin
  s:=public.achievement_state(p_telegram_id,p_language);
- select avatar_frame into selected from public.players where telegram_id=p_telegram_id;
+ select avatar_frame,featured_achievements,progress_generation into selected,featured,generation from public.players where telegram_id=p_telegram_id;
  select jsonb_agg(jsonb_build_object('id',c.id,'unlocked',(a->>'unlocked')::boolean,'progress',(a->>'progress')::integer,'target',(a->>'target')::integer,'description',a->>'description') order by c.position) into frames
  from public.avatar_frame_catalog c join jsonb_array_elements(s->'items') a on a->>'id'=c.achievement_id;
- return s||jsonb_build_object('frames',frames,'avatar_frame',selected);
+ return s||jsonb_build_object('frames',frames,'avatar_frame',selected,'featured_achievements',to_jsonb(featured),'progress_generation',generation);
 end $$;
 create or replace function public.avatar_frame_equip(p_telegram_id bigint,p_language text,p_frame text) returns jsonb language plpgsql set search_path='' as $$
 declare s jsonb;

@@ -13,7 +13,7 @@ def setup(browser,language,lose=False):
  ctx.add_init_script('localStorage.setItem("pw.language",'+json.dumps(language)+');')
  account={'photoword_id':'ACH-TEST','first_name':'Test','last_name':'','username':None,'game_nickname':None,'nickname_changed':False,'coins':1000,'xp':150,'completed_levels':10,'current_level':11,'rank':1,'daily_streak':0,'last_daily_reward':None}
  install_mock(ctx,account,set(range(1,11)),language)
- state={'claimed':set(),'claim_calls':[],'lose':lose}
+ state={'claimed':set(),'claim_calls':[],'lose':lose,'featured':[]}
  def items(lang):
   metrics={'main':10,'nohint':9,'daily_total':1,'daily_first':1,'daily_streak':1}
   result=[]
@@ -23,13 +23,17 @@ def setup(browser,language,lose=False):
  def mock(route):
   if route.request.method=='OPTIONS':route.fulfill(status=204,headers={'Access-Control-Allow-Origin':'*','Access-Control-Allow-Headers':'content-type'});return
   b=json.loads(route.request.post_data);reward=0
+  if b['action']=='showcase':
+   assert len(b['achievements'])<=3 and all(next(i for i in items(b['language']) if i['id']==a)['unlocked'] for a in b['achievements'])
+   state['featured']=b['achievements'][:]
+   if state['lose']:state['lose']=False;route.abort('failed');return
   if b['action']=='claim':
    id=b['achievement'];state['claim_calls'].append(id)
    assert next(i for i in items(b['language']) if i['id']==id)['unlocked']
    if id not in state['claimed']:
     state['claimed'].add(id);reward=next(c['reward_coins'] for c in catalog if c['id']==id);account['coins']+=reward
    if state['lose']:state['lose']=False;route.abort('failed');return
-  route.fulfill(status=200,content_type='application/json',body=json.dumps({'items':items(b['language']),'coins':account['coins'],'reward_coins':reward,'duplicate':reward==0}),headers={'Access-Control-Allow-Origin':'*'})
+  route.fulfill(status=200,content_type='application/json',body=json.dumps({'items':items(b['language']),'coins':account['coins'],'featured_achievements':state['featured'],'frames':[],'avatar_frame':None,'progress_generation':account.get('progress_generation',0),'reward_coins':reward,'duplicate':reward==0}),headers={'Access-Control-Allow-Origin':'*'})
  ctx.route('**/functions/v1/achievements',mock)
  page=ctx.new_page();errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
  page.goto(BASE+'clean/#'+auth_fragment(),wait_until='domcontentloaded',timeout=45000)
@@ -50,7 +54,7 @@ with sync_playwright() as pw:
    page.locator('.achievement-card').first.locator('.achievement-claim').tap();expect(page.locator('[data-coins]').first).to_have_text('1015');expect(page.locator('.achievement-card').first.locator('.achievement-claim')).to_be_disabled()
    page.locator('#achievementsFilters button').nth(1).tap();expect(page.locator('.achievement-card')).to_have_count(3)
    page.locator('#achievementsFilters button').nth(3).tap();expect(page.locator('.achievement-card')).to_have_count(21)
-   page.locator('#achievementsHome').tap();page.locator('#profileBtn').tap();expect(page.locator('#profileAchievementBadges span')).to_have_count(4);page.locator('#profileAchievements').tap();expect(page.locator('#profileModal')).to_be_hidden();expect(page.locator('.achievement-card')).to_have_count(100)
+   page.locator('#achievementsHome').tap();page.locator('#profileBtn').tap();expect(page.locator('#profileAchievementBadges .profile-badge')).to_have_count(3);page.locator('#profileFeaturedBtn').tap();expect(page.locator('.featured-option')).to_have_count(10);page.locator('.featured-option').nth(0).tap();page.locator('.featured-option').nth(1).tap();page.locator('.featured-option').nth(2).tap();page.locator('#featuredSave').tap();expect(page.locator('#profileAchievementBadges .profile-badge.earned')).to_have_count(3);page.locator('#profileAchievements').tap();expect(page.locator('#profileModal')).to_be_hidden();expect(page.locator('.achievement-card')).to_have_count(100)
    assert not relevant_errors(errors),errors;ctx.close()
   ctx,page,state,account,errors=setup(browser,'en',True)
   page.locator('.achievement-card').first.locator('.achievement-claim').tap();expect(page.locator('#achievementsStatus')).to_contain_text('Could not confirm the reward.');assert account['coins']==1015
