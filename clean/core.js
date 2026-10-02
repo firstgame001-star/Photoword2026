@@ -92,6 +92,7 @@
     if (!Array.isArray(rows)) throw new Error(lang()==='en'?'Server returned an invalid leaderboard.':lang()==='az'?'Server səhv reytinq qaytardı.':'Сервер вернул некорректный рейтинг.');
     return rows;
   }
+  async function avatarFrames(codes){return request('/rest/v1/rpc/get_avatar_frames',{p_codes:codes},{apikey:KEY});}
   let audioCtx=null,musicTimer=null,musicIndex=0;
   function ensureAudio(){
     if(!audioCtx){const C=window.AudioContext||window.webkitAudioContext;if(C)audioCtx=new C();}
@@ -132,6 +133,6 @@
       else tg?.HapticFeedback?.impactOccurred(kind);
     } catch { /* Haptics must never interrupt answer reset or hint application. */ }
   }
-  window.PW = {store, prefs, status, name, api, login, actionRequest, duelRequest, leaderboard, haptic, sfx, setMusic,
+  window.PW = {store, prefs, status, name, api, login, actionRequest, duelRequest, leaderboard, avatarFrames, haptic, sfx, setMusic,
     get player() { return current; }, get hasAuth() { return Boolean(raw); }};
 })();

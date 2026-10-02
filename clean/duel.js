@@ -33,7 +33,8 @@ const chapterTitles={
  az:['','Yeni başlayan','Həvəskar','Bilici','Təcrübəli','Ekspert','Peşəkar','Usta','Virtuoz','Əfsanə','Söz ustası','Tədqiqatçı','Bilik qoruyucusu']
 };
 function playerTitle(levels){const finished=[20,50,90,130,180,230,280,330,380,430,480,530].filter(end=>Number(levels||0)>=end).length;return(chapterTitles[language()]||chapterTitles.ru)[Math.max(1,finished)]}
-function paintRoomHost(d){$('duelRoomHost').hidden=!d?.creator;if(!d?.creator)return;$('duelRoomHostName').textContent=d.my_name||t().you;$('duelRoomHostTitle').textContent=playerTitle(d.my_completed_levels)}
+function frameAvatar(parent,id,name,frame){let e=document.getElementById(id);if(!e){e=document.createElement('span');e.id=id;e.className='frame-avatar duel-frame-avatar';e.setAttribute('aria-hidden','true');parent.prepend(e)}e.textContent=(name||'P').charAt(0).toUpperCase();window.PWFrames?.decorate?.(e,frame)}
+function paintRoomHost(d){$('duelRoomHost').hidden=!d?.creator;if(!d?.creator)return;$('duelRoomHostName').textContent=d.my_name||t().you;$('duelRoomHostTitle').textContent=playerTitle(d.my_completed_levels);frameAvatar($('duelRoomHost'),'duelHostAvatar',d.my_name,d.my_frame)}
 let wrongTimer=null,submitTimer=null,code='',duel=null,preview=null,incomingOffer=null,requesting=false,offerRequesting=false,answering=false,poll=null,tick=null,offerPoll=null,offset=0,questionId=null,chosen=[],disabled=false,lastStatus='',answerEpoch=0,stateSeq=0,stateStarted=0,lastSyncAt=0;
 const matchKey='pw.duel.current';
 function savedMatch(){try{const d=JSON.parse(localStorage.getItem(matchKey));if(d&&/^[A-F0-9]{16}$/.test(d.code)&&Date.now()-d.at<86400000)return d.code;localStorage.removeItem(matchKey)}catch{}return''}
@@ -42,7 +43,7 @@ function forgetMatch(){try{localStorage.removeItem(matchKey)}catch{}}
 const reactions={laugh:'😂',cool:'😎',fire:'🔥',clap:'👏',wow:'😮',heart:'❤️',thinking:'🤔',strong:'💪'};
 let reactionMatch='',reactionSeen={my:null,their:null},reactionTimers={my:null,their:null},reacting=false,pendingReaction='',reactionPoll=null,reactionRequesting=false;
 function closeReactions(){$('duelReactionPicker').hidden=true;$('duelYouLabel').setAttribute('aria-expanded','false')}
-function paintNames(d){$('duelYouLabel').textContent=d?.my_name||t().you;$('duelFriendLabel').textContent=d?.their_name||t().friend;$('duelYouLabel').setAttribute('aria-label',$('duelYouLabel').textContent+' · '+({ru:'выбрать реакцию',en:'choose a reaction',az:'reaksiya seç'}[language()]||'выбрать реакцию'))}
+function paintNames(d){frameAvatar($('duelYouLabel').parentElement,'duelYouAvatar',d?.my_name,d?.my_frame);frameAvatar($('duelFriendLabel').parentElement,'duelTheirAvatar',d?.their_name,d?.their_frame);$('duelYouLabel').textContent=d?.my_name||t().you;$('duelFriendLabel').textContent=d?.their_name||t().friend;$('duelYouLabel').setAttribute('aria-label',$('duelYouLabel').textContent+' · '+({ru:'выбрать реакцию',en:'choose a reaction',az:'reaksiya seç'}[language()]||'выбрать реакцию'))}
 function paintReaction(side,key,at){
  const node=$(side==='my'?'duelYouReaction':'duelFriendReaction');
  if(!at||reactionSeen[side]===at)return;
