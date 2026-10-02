@@ -27,10 +27,6 @@ def setup(browser,language,lose=False):
    assert len(b['achievements'])<=3 and all(next(i for i in items(b['language']) if i['id']==a)['unlocked'] for a in b['achievements'])
    state['featured']=b['achievements'][:]
    if state['lose']:state['lose']=False;route.abort('failed');return
-  if b['action']=='showcase':
-   assert len(b['achievements'])<=3
-   state['featured']=b['achievements'][:]
-   if state['lose']:state['lose']=False;route.abort('failed');return
   if b['action']=='claim':
    id=b['achievement'];state['claim_calls'].append(id)
    assert next(i for i in items(b['language']) if i['id']==id)['unlocked']
