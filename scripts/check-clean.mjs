@@ -22,14 +22,15 @@ for(const [page,module] of Object.entries(pages)){
  }
 }
 
-for(const file of ['core.js','home.js','game.js','main-levels-8-9.js','main-levels-10-12.js','main-levels-13.js','main-levels-14-15.js','theme-game.js','theme-levels-cinema-food.js','theme-levels-expansion.js','challenge.js','challenge-repeat-index.js','challenge-repeat-policy.js','challenge-bank-extra.js','duel.js']){
+for(const file of ['core.js','home.js','game.js','achievements.js','main-levels-8-9.js','main-levels-10-12.js','main-levels-13.js','main-levels-14-15.js','theme-game.js','theme-levels-cinema-food.js','theme-levels-expansion.js','challenge.js','challenge-repeat-index.js','challenge-repeat-policy.js','challenge-bank-extra.js','duel.js']){
  execFileSync(process.execPath,['--check',resolve(base,file)]);
 }
 
 const release=JSON.parse(readFileSync(resolve(base,'release.json'),'utf8'));
-if(release.release!=='20261002-r121')throw Error('Unexpected release: '+release.release);
+if(release.release!=='20261002-r122')throw Error('Unexpected release: '+release.release);
 if(release.duel_mode?.entry_min_coins!==25||release.duel_mode?.entry_max_coins!==500||release.duel_mode?.winner_payout_percent_of_pot!==90)throw Error('Duel configuration mismatch');
 if(release.duel_mode?.question_pool!==150||release.duel_mode?.recent_matches_excluded_per_player!==2||release.duel_mode?.rematch!==true)throw Error('Rematch and question pool manifest mismatch');
+if(release.achievements?.count!==120||release.achievements?.survives_progress_reset!==false)throw Error('Achievement catalog/reset manifest mismatch');
 const duelHtml=readFileSync(resolve(base,'index.html'),'utf8');
 for(const id of ['duelRematch','duelRematchSetup','duelRematchStake','duelRematchConfirm','duelAcceptRematch']){
  if(!duelHtml.includes('id="'+id+'"'))throw Error('Missing duel control: '+id);
