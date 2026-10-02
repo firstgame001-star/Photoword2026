@@ -34,7 +34,9 @@ with sync_playwright() as pw:
    ctx.route('**/functions/v1/achievements',ach)
    def duel(route):
     if route.request.method=='OPTIONS':route.fulfill(status=204,headers={'Access-Control-Allow-Origin':'*','Access-Control-Allow-Headers':'content-type'});return
-    b=json.loads(route.request.post_data);assert b['action']=='statistics';route.fulfill(status=200,content_type='application/json',body=json.dumps({'stats':{'played':7,'wins':4,'draws':1,'losses':2,'best_score':8,'net_coins':20,'history':[]}}),headers={'Access-Control-Allow-Origin':'*'})
+    b=json.loads(route.request.post_data)
+    if b.get('action')!='statistics':route.fallback();return
+    route.fulfill(status=200,content_type='application/json',body=json.dumps({'stats':{'played':7,'wins':4,'draws':1,'losses':2,'best_score':8,'net_coins':20,'history':[]}}),headers={'Access-Control-Allow-Origin':'*'})
    ctx.route('**/functions/v1/duel-game',duel)
    page=ctx.new_page();errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
    page.goto(BASE+'clean/#'+auth_fragment(),wait_until='domcontentloaded',timeout=45000);page.locator('#profileBtn').tap()
