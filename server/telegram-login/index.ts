@@ -141,7 +141,7 @@ Deno.serve(async(req)=>{
    const prior=await db.from("level_progress").select("completed").eq("player_id",playerId).eq("level_id",level).maybeSingle();
    if(prior.error)return reply({error:"db"},500);
    const wasDone=Boolean(prior.data?.completed);
-   const r=await db.rpc("complete_level_server",{p_telegram_id:user.id,p_level_id:level,p_reward_coins:20,p_reward_xp:15});if(r.error)return reply({error:"complete_failed"},500);player=r.data;
+   const r=await db.rpc("complete_level_server",{p_telegram_id:user.id,p_level_id:level,p_reward_coins:20,p_reward_xp:15});if(r.error){const m=String(r.error.message||"");if(m.includes("level_too_fast"))return reply({error:"level_too_fast",retry_after_seconds:3},429);if(m.includes("level_locked"))return reply({error:"level_locked"},409);return reply({error:"complete_failed"},500);}player=r.data;
    const rr=await db.rpc("reward_qualified_referral_server",{p_invitee_telegram_id:user.id});if(!rr.error&&rr.data)player=rr.data;
    const nextChapter:any={20:2,50:3,90:4,130:5,180:6,230:7,280:8,330:9,380:10,430:11,480:12}[level];
    if(!wasDone&&nextChapter){
