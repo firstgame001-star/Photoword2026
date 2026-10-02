@@ -53,7 +53,7 @@ with sync_playwright() as pw:
    page.locator('#achievementsHome').tap();page.locator('#profileBtn').tap();expect(page.locator('#profileAchievementBadges span')).to_have_count(4);page.locator('#profileAchievements').tap();expect(page.locator('#profileModal')).to_be_hidden();expect(page.locator('.achievement-card')).to_have_count(100)
    assert not relevant_errors(errors),errors;ctx.close()
   ctx,page,state,account,errors=setup(browser,'en',True)
-  page.locator('.achievement-card').first.locator('.achievement-claim').tap();expect(page.locator('#achievementsStatus')).not_to_be_empty();assert account['coins']==1015
+  page.locator('.achievement-card').first.locator('.achievement-claim').tap();expect(page.locator('#achievementsStatus')).to_contain_text('Could not confirm the reward.');assert account['coins']==1015
   page.locator('.achievement-card').first.locator('.achievement-claim').tap();expect(page.locator('.achievement-card').first.locator('.achievement-claim')).to_be_disabled();expect(page.locator('[data-coins]').first).to_have_text('1015');assert state['claim_calls']==['main_10','main_10']
   page.reload(wait_until='domcontentloaded');page.locator('#achievementsEntry').tap();expect(page.locator('.achievement-card').first.locator('.achievement-claim')).to_be_disabled();assert account['coins']==1015
   assert not relevant_errors(errors),errors;ctx.close();browser.close()
