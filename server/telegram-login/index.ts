@@ -180,7 +180,7 @@ Deno.serve(async(req)=>{
     const m=String(done.error.message||"");
     if(m.includes("wrong_answer"))return reply({error:"wrong_answer"},422);
     if(m.includes("bad_theme_level"))return reply({error:"bad_level"},400);
-    if(m.includes("theme_level_locked"))return reply({error:"theme_level_locked"},409);
+    if(m.includes("theme_level_locked"))return reply({error:"theme_level_locked"},409);if(m.includes("theme_level_too_fast"))return reply({error:"level_too_fast",retry_after_seconds:3},429);
     return reply({error:"complete_failed"},500);
    }
    player=done.data;themeRewarded=!prior.data;
