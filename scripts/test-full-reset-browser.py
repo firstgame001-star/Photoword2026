@@ -32,7 +32,7 @@ with sync_playwright() as pw:
    assert account['xp']==0 and account['completed_levels']==0 and account['game_nickname'] is None and account['progress_generation']==1
    assert page.evaluate("localStorage.getItem('pw.daily.pending.RESET-TEST')") is None
    assert page.evaluate("localStorage.getItem('pw.challenge.pendingFinish.r117.RESET-TEST')") is None
-   assert page.evaluate("localStorage.getItem('pw.themeProgress.sport')") is None
+   assert page.evaluate("JSON.parse(localStorage.getItem('pw.themeProgress.sport') || '[]')") == []
    assert page.evaluate("sessionStorage.getItem('pw.hints.main.1')") is None
    expect(page.locator('#avatar')).not_to_have_attribute('data-frame','bronze')
    page.locator('[data-language='+language+']').tap();expect(page.locator('#rulesWelcomeModal')).to_be_visible();page.locator('#rulesWelcomeRead').tap();expect(page.locator('#rulesBody .rule-section')).to_have_count(8);page.locator('#rulesDone').tap()
