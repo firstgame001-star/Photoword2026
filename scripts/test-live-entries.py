@@ -980,7 +980,7 @@ def install_mock(ctx,account,completed,lang):
                 theme_done.append(key);account['coins']+=15;account['xp']+=10;account['rank']=1
             data={'player':account.copy(),'theme_rewarded':rewarded}
         elif action=='reset_progress':
-            completed.clear();account['_theme_completed']=[];account.update(xp=0,completed_levels=0,current_level=1,rank=0)
+            completed.clear();account['_theme_completed']=[];account.update(coins=250,xp=0,completed_levels=0,current_level=1,rank=0,game_nickname=None,nickname_changed=False,avatar_frame=None,daily_streak=0,last_daily_reward=None,progress_generation=account.get('progress_generation',0)+1);account['_challenge_energy']=5;account['_daily_solved']=False;account['_daily_attempts']=0
         elif action=='claim_daily':
             account['coins']+=5;account['daily_streak']=max(1,account.get('daily_streak',0)+1);account['last_daily_reward']=time.strftime('%Y-%m-%d')
         elif action=='set_nickname':
@@ -1084,7 +1084,7 @@ with sync_playwright() as pw:
     install_mock(ctx,account,set(),'az');page=ctx.new_page();errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
     page.goto(BASE+'clean/#'+fragment,wait_until='domcontentloaded',timeout=45000)
     expect(page.locator('#languageModal')).to_be_visible();expect(page.locator('#languageTitle')).to_contain_text('Choose language');expect(page.locator('#languageTitle')).to_contain_text('Dil seçin');expect(page.locator('#languageClose')).to_be_hidden()
-    page.locator('[data-language="az"]').tap();expect(page.locator('#languageModal')).to_be_hidden();expect(page.locator('#rulesWelcomeModal')).to_be_visible();page.locator('#rulesWelcomeRead').tap();expect(page.locator('#rulesModal')).to_be_visible();expect(page.locator('#rulesBody .rule-section')).to_have_count(7);page.locator('#rulesDone').tap();page.locator('#homeRulesOpen').tap();expect(page.locator('#rulesModal')).to_be_visible();page.locator('#rulesDone').tap()
+    page.locator('[data-language="az"]').tap();expect(page.locator('#languageModal')).to_be_hidden();expect(page.locator('#rulesWelcomeModal')).to_be_visible();page.locator('#rulesWelcomeRead').tap();expect(page.locator('#rulesModal')).to_be_visible();expect(page.locator('#rulesBody .rule-section')).to_have_count(8);page.locator('#rulesDone').tap();page.locator('#homeRulesOpen').tap();expect(page.locator('#rulesModal')).to_be_visible();page.locator('#rulesDone').tap()
     page.locator('#settingsBtn').tap();expect(page.locator('#supportBtn b')).to_have_text('Dəstək');page.locator('[data-close="settingsModal"]').tap()
     expect(page.locator('#homeChapter1Title')).to_have_text('İsinmə');expect(page.locator('#homeChapter2Title')).to_have_text('Assosiasiyalar');expect(page.locator('[data-home-chapter="3"]')).to_be_visible();expect(page.locator('[data-home-chapter="4"]')).to_be_visible();expect(page.locator('[data-home-chapter="12"]')).to_be_attached();expect(page.locator('#homeChapterDots button')).to_have_count(12);expect(page.locator('#shopOffer')).to_contain_text('Daha çox sikkə');expect(page.locator('#logoWord')).to_have_text('1 SÖZ');page.locator('#chaptersNav').tap();expect(page.locator('#chapter1Label')).to_contain_text('0–20');expect(page.locator('#chapter2Label')).to_contain_text('21–50');expect(page.locator('#chapter2Select .chapter-cover-mark')).to_have_text('II');expect(page.locator('#chapter2Play')).to_have_class(re.compile('locked'));expect(page.locator('#chapter8Label')).to_contain_text('281–330');expect(page.locator('#chapter9Label')).to_contain_text('331–380');expect(page.locator('#chapter12Select')).to_be_attached();page.locator('#chaptersBack').tap()
     body=page.locator('body').inner_text()
@@ -1111,7 +1111,7 @@ with sync_playwright() as pw:
     # Settings, full localization, themes, nickname, daily, friends, reset language gate.
     for language in ['ru','en','az']:
       ctx=browser.new_context(viewport={'width':390,'height':800},has_touch=True,is_mobile=True)
-      ctx.add_init_script(f"localStorage.setItem('pw.language','{language}'); localStorage.setItem('pw.theme','game');")
+      ctx.add_init_script(f"if(!sessionStorage.getItem('test.seeded')){{localStorage.setItem('pw.language','{language}'); localStorage.setItem('pw.theme','game');sessionStorage.setItem('test.seeded','1')}}")
       account={'photoword_id':'PW-TESTONLY','first_name':'Test','last_name':'','username':None,'game_nickname':None,'nickname_changed':False,'coins':5000,'xp':300,'completed_levels':20,'current_level':21,'rank':1,'daily_streak':0,'last_daily_reward':None}
       completed=set(range(1,21));install_mock(ctx,account,completed,language);page=ctx.new_page();errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
       page.goto(BASE+'clean/#'+fragment,wait_until='domcontentloaded',timeout=45000)
@@ -1195,7 +1195,7 @@ with sync_playwright() as pw:
     # Thematic Sport game keeps separate progress, shows real coins, and has no settings/progress widgets in the top-right header.
     for language in ['ru','en','az']:
       ctx=browser.new_context(viewport={'width':390,'height':800},has_touch=True,is_mobile=True)
-      ctx.add_init_script(f"localStorage.setItem('pw.language','{language}'); localStorage.setItem('pw.theme','game');")
+      ctx.add_init_script(f"if(!sessionStorage.getItem('test.seeded')){{localStorage.setItem('pw.language','{language}'); localStorage.setItem('pw.theme','game');sessionStorage.setItem('test.seeded','1')}}")
       account={'photoword_id':'PW-TESTONLY','first_name':'Test','last_name':'','username':None,'game_nickname':None,'nickname_changed':False,'coins':4321,'xp':300,'completed_levels':20,'current_level':21,'rank':1,'daily_streak':0,'last_daily_reward':None}
       completed=set(range(1,21));install_mock(ctx,account,completed,language);page=ctx.new_page();errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
       page.goto(BASE+'clean/theme-game.html?theme=sport&level=1#'+fragment,wait_until='domcontentloaded',timeout=45000)
@@ -1246,7 +1246,7 @@ with sync_playwright() as pw:
     # Thematic Art has its own 100-level bank and separate progress from Sport.
     for language in ['ru','en','az']:
       ctx=browser.new_context(viewport={'width':390,'height':800},has_touch=True,is_mobile=True)
-      ctx.add_init_script(f"localStorage.setItem('pw.language','{language}'); localStorage.setItem('pw.theme','game');")
+      ctx.add_init_script(f"if(!sessionStorage.getItem('test.seeded')){{localStorage.setItem('pw.language','{language}'); localStorage.setItem('pw.theme','game');sessionStorage.setItem('test.seeded','1')}}")
       account={'photoword_id':'PW-TESTONLY','first_name':'Test','last_name':'','username':None,'game_nickname':None,'nickname_changed':False,'coins':4321,'xp':300,'completed_levels':20,'current_level':21,'rank':1,'daily_streak':0,'last_daily_reward':None}
       completed=set(range(1,21));install_mock(ctx,account,completed,language);page=ctx.new_page();errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
       page.goto(BASE+'clean/theme-game.html?theme=art&level=1#'+fragment,wait_until='domcontentloaded',timeout=45000)
@@ -1260,7 +1260,7 @@ with sync_playwright() as pw:
     # Thematic Professions has its own 100-level bank and separate progress.
     for language in ['ru','en','az']:
       ctx=browser.new_context(viewport={'width':390,'height':800},has_touch=True,is_mobile=True)
-      ctx.add_init_script(f"localStorage.setItem('pw.language','{language}'); localStorage.setItem('pw.theme','game');")
+      ctx.add_init_script(f"if(!sessionStorage.getItem('test.seeded')){{localStorage.setItem('pw.language','{language}'); localStorage.setItem('pw.theme','game');sessionStorage.setItem('test.seeded','1')}}")
       account={'photoword_id':'PW-TESTONLY','first_name':'Test','last_name':'','username':None,'game_nickname':None,'nickname_changed':False,'coins':4321,'xp':300,'completed_levels':20,'current_level':21,'rank':1,'daily_streak':0,'last_daily_reward':None}
       completed=set(range(1,21));install_mock(ctx,account,completed,language);page=ctx.new_page();errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
       page.goto(BASE+'clean/theme-game.html?theme=professions&level=1#'+fragment,wait_until='domcontentloaded',timeout=45000)
@@ -1277,7 +1277,7 @@ with sync_playwright() as pw:
     # Thematic Travel has its own 100-level bank and separate progress.
     for language in ['ru','en','az']:
       ctx=browser.new_context(viewport={'width':390,'height':800},has_touch=True,is_mobile=True)
-      ctx.add_init_script(f"localStorage.setItem('pw.language','{language}'); localStorage.setItem('pw.theme','game');")
+      ctx.add_init_script(f"if(!sessionStorage.getItem('test.seeded')){{localStorage.setItem('pw.language','{language}'); localStorage.setItem('pw.theme','game');sessionStorage.setItem('test.seeded','1')}}")
       account={'photoword_id':'PW-TESTONLY','first_name':'Test','last_name':'','username':None,'game_nickname':None,'nickname_changed':False,'coins':4321,'xp':300,'completed_levels':20,'current_level':21,'rank':1,'daily_streak':0,'last_daily_reward':None}
       completed=set(range(1,21));install_mock(ctx,account,completed,language);page=ctx.new_page();errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
       page.goto(BASE+'clean/theme-game.html?theme=travel&level=1#'+fragment,wait_until='domcontentloaded',timeout=45000)
@@ -1292,7 +1292,7 @@ with sync_playwright() as pw:
     # Thematic Science has its own 100-level bank and separate progress.
     for language in ['ru','en','az']:
       ctx=browser.new_context(viewport={'width':390,'height':800},has_touch=True,is_mobile=True)
-      ctx.add_init_script(f"localStorage.setItem('pw.language','{language}'); localStorage.setItem('pw.theme','game');")
+      ctx.add_init_script(f"if(!sessionStorage.getItem('test.seeded')){{localStorage.setItem('pw.language','{language}'); localStorage.setItem('pw.theme','game');sessionStorage.setItem('test.seeded','1')}}")
       account={'photoword_id':'PW-TESTONLY','first_name':'Test','last_name':'','username':None,'game_nickname':None,'nickname_changed':False,'coins':4321,'xp':300,'completed_levels':20,'current_level':21,'rank':1,'daily_streak':0,'last_daily_reward':None}
       completed=set(range(1,21));install_mock(ctx,account,completed,language);page=ctx.new_page();errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
       page.goto(BASE+'clean/theme-game.html?theme=science&level=1#'+fragment,wait_until='domcontentloaded',timeout=45000)
@@ -1307,7 +1307,7 @@ with sync_playwright() as pw:
     # Thematic Technology has its own 100-level bank and separate progress.
     for language in ['ru','en','az']:
       ctx=browser.new_context(viewport={'width':390,'height':800},has_touch=True,is_mobile=True)
-      ctx.add_init_script(f"localStorage.setItem('pw.language','{language}'); localStorage.setItem('pw.theme','game');")
+      ctx.add_init_script(f"if(!sessionStorage.getItem('test.seeded')){{localStorage.setItem('pw.language','{language}'); localStorage.setItem('pw.theme','game');sessionStorage.setItem('test.seeded','1')}}")
       account={'photoword_id':'PW-TESTONLY','first_name':'Test','last_name':'','username':None,'game_nickname':None,'nickname_changed':False,'coins':4321,'xp':300,'completed_levels':20,'current_level':21,'rank':1,'daily_streak':0,'last_daily_reward':None}
       completed=set(range(1,21));install_mock(ctx,account,completed,language);page=ctx.new_page();errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
       page.goto(BASE+'clean/theme-game.html?theme=technology&level=1#'+fragment,wait_until='domcontentloaded',timeout=45000)
@@ -1332,7 +1332,7 @@ with sync_playwright() as pw:
     for theme_id in ('cinema','food','animals','transport','home','nature'):
       for language in ('ru','en','az'):
         ctx=browser.new_context(viewport={'width':390,'height':800},has_touch=True,is_mobile=True)
-        ctx.add_init_script(f"localStorage.setItem('pw.language','{language}'); localStorage.setItem('pw.theme','game');")
+        ctx.add_init_script(f"if(!sessionStorage.getItem('test.seeded')){{localStorage.setItem('pw.language','{language}'); localStorage.setItem('pw.theme','game');sessionStorage.setItem('test.seeded','1')}}")
         account={'photoword_id':'PW-THEME-TEST','first_name':'Test','last_name':'','username':None,'game_nickname':None,'nickname_changed':False,'coins':4321,'xp':300,'completed_levels':20,'current_level':21,'rank':1,'daily_streak':0,'last_daily_reward':None}
         completed=set(range(1,21));install_mock(ctx,account,completed,language);page=ctx.new_page();errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
         page.goto(BASE+f'clean/theme-game.html?theme={theme_id}&level=1#'+fragment,wait_until='domcontentloaded',timeout=45000)
@@ -1349,7 +1349,7 @@ with sync_playwright() as pw:
     sample_levels=[1,20,21,50,51,60,61,90,91,100,101,130,131,150,180,181,200,230,231,250,280,281,300,330,331,350,380,381,400,430,431,450,480,481,500,530]
     for language in ['ru','en','az']:
       ctx=browser.new_context(viewport={'width':390,'height':800},has_touch=True,is_mobile=True)
-      ctx.add_init_script(f"localStorage.setItem('pw.language','{language}'); localStorage.setItem('pw.theme','game');")
+      ctx.add_init_script(f"if(!sessionStorage.getItem('test.seeded')){{localStorage.setItem('pw.language','{language}'); localStorage.setItem('pw.theme','game');sessionStorage.setItem('test.seeded','1')}}")
       account={'photoword_id':'PW-TESTONLY','first_name':'Test','last_name':'','username':None,'game_nickname':None,'nickname_changed':False,'coins':10000,'xp':0,'completed_levels':0,'current_level':530,'rank':1,'daily_streak':0,'last_daily_reward':None}
       completed=set();install_mock(ctx,account,completed,language);page=ctx.new_page();errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
       for level in sample_levels:

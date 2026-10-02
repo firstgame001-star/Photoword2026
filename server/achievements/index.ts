@@ -32,6 +32,7 @@ Deno.serve(async(req)=>{
   if(action==="claim"&&(typeof body.achievement!=="string"||!/^[a-z0-9_]{1,60}$/.test(body.achievement)))return reply({error:"bad_achievement"},400);
   if(action==="equip"&&body.frame!==null&&(typeof body.frame!=="string"||!/^[a-z]{1,20}$/.test(body.frame)))return reply({error:"bad_frame"},400);
   const db=createClient(Deno.env.get("SUPABASE_URL")!,Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,{auth:{persistSession:false,autoRefreshToken:false}});
+  if(body.progressGeneration!==undefined){const p=await db.from("players").select("progress_generation").eq("telegram_id",user.id).single();if(p.error)return reply({error:"player_not_found"},404);if(p.data.progress_generation!==body.progressGeneration)return reply({error:"progress_reset"},409);}
   const settled=await db.rpc("duel_statistics",{p_telegram_id:user.id});if(settled.error)return reply({error:"server_error"},500);
   const args:any={p_telegram_id:user.id,p_language:language};if(action==="claim")args.p_achievement=body.achievement;
   if(action==="equip")args.p_frame=body.frame;

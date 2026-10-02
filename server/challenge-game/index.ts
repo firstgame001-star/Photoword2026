@@ -42,7 +42,8 @@ Deno.serve(async(req)=>{
  try{
   const body=await req.json(),user=await verify(body?.initData,token);if(!user)return reply({error:"invalid_telegram_auth"},401);
   const db=createClient(Deno.env.get("SUPABASE_URL")!,Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,{auth:{persistSession:false,autoRefreshToken:false}});
-  const p=(await db.from("players").select("id").eq("telegram_id",user.id).maybeSingle()).data;if(!p?.id)return reply({error:"player_not_found"},404);
+  const p=(await db.from("players").select("id,progress_generation").eq("telegram_id",user.id).maybeSingle()).data;if(!p?.id)return reply({error:"player_not_found"},404);
+  if(body.progressGeneration!==undefined&&body.progressGeneration!==p.progress_generation)return reply({error:"progress_reset"},409);
   const action=String(body.action||"state"),mode=String(body.mode||"");
   if(action==="state")return reply({challenge:await state(db,p.id)});
   if(action==="start"){

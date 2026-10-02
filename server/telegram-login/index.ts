@@ -80,6 +80,7 @@ Deno.serve(async(req)=>{
   }else if(action==="login"){
    const r=await db.from("players").update(fields).eq("id",player.id).select("*").single();if(r.error)return reply({error:"db"},500);player=r.data;
   }
+  if(action!=="login"&&action!=="reset_progress"&&body.progressGeneration!==undefined&&body.progressGeneration!==player.progress_generation)return reply({error:"progress_reset"},409);
   if(action==="profile_stats"){
    const themeRows=await db.from("theme_progress").select("theme_id,level_id").eq("player_id",player.id);
    if(themeRows.error)return reply({error:"db"},500);
@@ -325,7 +326,7 @@ Deno.serve(async(req)=>{
    await db.from("notification_log").insert({player_id:player.id,kind:"test",dedupe_key:"legacy:"+crypto.randomUUID()});
    player=u.data;
   }
-  if(action==="reset_progress"){const r=await db.rpc("reset_game_progress_server",{p_telegram_id:user.id});if(r.error)return reply({error:"reset_failed"},500);player=r.data;}
+  if(action==="reset_progress"){const r=await db.rpc("reset_game_progress_server",{p_telegram_id:user.id,p_generation:body.progressGeneration??player.progress_generation});if(r.error)return reply({error:String(r.error.message).includes("reset_duel_active")?"reset_duel_active":"reset_failed"},409);player=r.data;}
   if(action==="friends"){
    const {data:refs,error:re}=await db.from("referrals").select("invitee_id,rewarded_at,created_at").eq("inviter_id",player.id).order("created_at",{ascending:false});
    if(re)return reply({error:"friends_failed"},500);

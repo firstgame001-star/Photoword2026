@@ -2840,9 +2840,9 @@ function localWrite(d){try{localStorage.setItem(localKey,JSON.stringify(d))}catc
 async function api(action,extra={}){
  const initData=rawInit();
  if(initData){
-  const r=await fetch(ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action,initData,...extra})});
+  const r=await fetch(ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action,initData,progressGeneration:pw?.player?.progress_generation,...extra})});
   const j=await r.json();
-  if(!r.ok)throw Object.assign(new Error(j.error||'challenge_error'),{data:j});
+  if(!r.ok){if(j.error==='progress_reset')await pw.login(true);throw Object.assign(new Error(j.error||'challenge_error'),{data:j});}
   if(!j.challenge)throw new Error('challenge_state_missing');
   syncTrustedClock(j.challenge);serverMode=true;
   if(action==='hint'){if(Number.isFinite(Number(j.coins)))document.querySelectorAll('[data-coins]').forEach(e=>e.textContent=String(j.coins));return j;}

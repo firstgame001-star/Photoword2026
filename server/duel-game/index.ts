@@ -71,6 +71,7 @@ Deno.serve(async req=>{
     if(code&&!/^[A-F0-9]{16}$/.test(code))return reply({error:'duel_not_found'},404);
     const db=createClient(Deno.env.get('SUPABASE_URL')!,Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!,
       {auth:{persistSession:false,autoRefreshToken:false}});
+    if(body.progressGeneration!==undefined){const p=await db.from('players').select('progress_generation').eq('telegram_id',user.id).single();if(p.error)return reply({error:'player_not_found'},404);if(p.data.progress_generation!==body.progressGeneration)return reply({error:'progress_reset'},409);}
     let result:any=null,correct:boolean|undefined;
     if(action==='reactions'){
       if(!code)return reply({error:'duel_not_found'},404);

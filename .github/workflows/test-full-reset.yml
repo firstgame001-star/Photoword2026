@@ -1,0 +1,45 @@
+name: Test PhotoWord full reset
+on:
+  push:
+    branches: [main]
+    paths: ['scripts/test-full-reset-browser.py', '.github/workflows/test-full-reset.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  mobile-full-reset:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - name: Install browsers
+        run: |
+          sudo python - <<'PYAPT'
+          from pathlib import Path
+          for name, uri in [('apt-mirrors.txt','https://archive.ubuntu.com/ubuntu'),('apt-security-mirrors.txt','https://security.ubuntu.com/ubuntu')]:
+              path=Path('/etc/apt')/name
+              if path.exists(): path.write_text(uri+'\n')
+          paths=list(Path('/etc/apt/sources.list.d').glob('*.sources'))+list(Path('/etc/apt/sources.list.d').glob('*.list'))+[Path('/etc/apt/sources.list')]
+          for path in paths:
+              if path.exists(): path.write_text(path.read_text().replace('http://azure.archive.ubuntu.com/ubuntu','https://archive.ubuntu.com/ubuntu').replace('https://azure.archive.ubuntu.com/ubuntu','https://archive.ubuntu.com/ubuntu'))
+          PYAPT
+          python -m pip install playwright==1.63.0
+          python -m playwright install --with-deps chromium webkit
+      - name: Wait for frame release
+        run: |
+          for i in $(seq 1 36); do
+            if curl -fsSL 'https://firstgame001-star.github.io/Photoword2026/clean/core.js?release=reset1' | grep -q 'clearProgressStorage'; then exit 0; fi
+            sleep 5
+          done
+          exit 1
+      - name: Check achievements on mobile browsers
+        run: python scripts/test-full-reset-browser.py
+      - name: Save screenshots
+        if: always()
+        uses: actions/upload-artifact@v5
+        with:
+          name: photoword-full-reset
+          path: test-results/full-reset/
+          retention-days: 7

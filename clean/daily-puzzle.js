@@ -17,7 +17,7 @@ function removePending(key){if(memoryPending?.key===key)memoryPending=null;try{l
 function initData(){return window.Telegram?.WebApp?.initData||pw?.store?.get('pw.init','')||new URLSearchParams(location.hash.slice(1)).get('tgWebAppData')||new URLSearchParams(location.search).get('tgWebAppData')||''}
 async function api(action,extra={}){
  const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),12000);
- try{const r=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({initData:initData(),action,language:language(),...extra}),signal:controller.signal});const j=await r.json();if(!r.ok)throw Object.assign(new Error(j.error||'server_error'),{data:j});return j}finally{clearTimeout(timeout)}
+ try{const r=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({initData:initData(),action,language:language(),progressGeneration:pw?.player?.progress_generation,...extra}),signal:controller.signal});const j=await r.json();if(!r.ok)throw Object.assign(new Error(j.error||'server_error'),{data:j});return j}finally{clearTimeout(timeout)}
 }
 function labels(){const x=t();$('dailyPuzzleCardTitle').textContent=x.title;$('dailyPuzzleCardDesc').textContent=x.desc;$('dailyPuzzleCardBadge').textContent='25 🪙 · 3';$('dailyPuzzleTitle').textContent=x.title;$('dailyPuzzleRules').textContent=x.rules;$('dailyPuzzleSubmit').textContent=x.submit;$('dailyPuzzleClear').textContent=x.clear;$('dailyPuzzleShuffle').textContent=x.shuffle;$('dailyPuzzleRetry').textContent=x.retry;$('dailyPuzzleHome').textContent=x.home;$('dailyPuzzleBack').setAttribute('aria-label',x.home);if(daily)paint()}
 function paint(){
@@ -37,20 +37,20 @@ function apply(d){
 function applyCoins(j){if(Number.isFinite(j.coins))document.querySelectorAll('[data-coins]').forEach(e=>e.textContent=String(j.coins))}
 async function deliver(payload,key){
  try{const j=await api('answer',payload);removePending(key);applyCoins(j);return j}
- catch(e){if(['daily_changed','daily_closed'].includes(e.message)){removePending(key);return e.data}throw e}
+ catch(e){if(['daily_changed','daily_closed','daily_reset'].includes(e.message)){removePending(key);if(e.message==='daily_reset')await pw.login(true);return e.data}throw e}
 }
 async function load(background=false){
  if(syncing)return;syncing=true;if(!background){busy=true;paint()}const token=epoch;
  try{
   if(!initData())throw new Error('open_bot');await pw.login();
-  const payload=pending(),recovered=payload?await deliver(payload,pendingKey()):null;const j=recovered?.daily?.language===language()?recovered:await api('state');
+  const payload=pending(),recovered=payload?await deliver(payload,pendingKey()):null;const j=recovered?.daily?.language===language()?recovered:await api('state');if(j.daily?.progress_generation!==undefined&&j.daily.progress_generation!==Number(pw.player?.progress_generation||0)){await pw.login(true);return;}
   if(token!==epoch||!active()||(background&&(busy||pending())))return;if(payload)chosen=[];if(!background||['day','language','attempts','closed','solved'].some(k=>j.daily[k]!==daily?.[k])){apply(j.daily)}else{serverAt=Date.parse(j.daily.server_now);perfAt=performance.now()}$('dailyPuzzleStatus').textContent=recovered?.result&&!recovered.result.correct?t().wrong:'';$('dailyPuzzleRetry').hidden=true;
  }catch(e){if(token===epoch&&active()){$('dailyPuzzleStatus').textContent=e.message==='open_bot'?t().bot:t().network;$('dailyPuzzleRetry').hidden=false}}
  finally{syncing=false;if(token===epoch&&!background){busy=false;paint()}else if(token!==epoch&&active())load()}
 }
 async function submit(){
  if(busy||!daily||daily.closed||pending()||chosen.length!==daily.length)return;
- const token=epoch,key=pendingKey(),payload={day:daily.day,language:daily.language,answer:chosen.map(i=>letters[i]).join(''),requestId:crypto.randomUUID()};
+ const token=epoch,key=pendingKey(),payload={day:daily.day,language:daily.language,answer:chosen.map(i=>letters[i]).join(''),requestId:crypto.randomUUID(),progressGeneration:pw?.player?.progress_generation};
  memoryPending={key,payload};try{localStorage.setItem(key,JSON.stringify(payload))}catch{}
  busy=true;paint();
  try{const j=await deliver(payload,key);if(token!==epoch||!active())return;chosen=[];apply(j.daily);$('dailyPuzzleStatus').textContent=j.result?(j.result.correct?'':t().wrong):j.error==='daily_changed'?t().changed:'';$('dailyPuzzleRetry').hidden=true;if(j.result?.correct){pw?.sfx?.('coin');pw?.haptic?.('success');pw.login(true).catch(()=>{})}else pw?.haptic?.('error')}
@@ -71,5 +71,6 @@ setInterval(()=>{if(active())clock()},1000);
 setInterval(()=>{if(active()&&!document.hidden&&!busy&&!syncing&&!pending())load(true)},5000);
 window.addEventListener('storage',e=>{if(e.key==='pw.language'){labels();if(active())load()}});
 document.addEventListener('visibilitychange',()=>{if(!document.hidden&&active())load()});
+window.addEventListener('pw:reset',()=>{epoch++;memoryPending=null;daily=null;puzzleKey='';chosen=[];busy=false;syncing=false;});
 window.PWDaily={open,close,labels};labels();
 })();

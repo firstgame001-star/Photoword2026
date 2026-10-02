@@ -14,8 +14,7 @@ begin
  if public.get_avatar_frames(array['FRAME-TEST-A','FRAME-TEST-B'])->>'FRAME-TEST-A'<>'bronze' then raise exception 'public rendering';end if;
  if (public.avatar_frame_state(-911400002,'az')->>'avatar_frame') is not null then raise exception 'account isolation';end if;
  perform public.reset_game_progress_server(-911400001);
- s:=public.avatar_frame_state(-911400001,'az');if s->>'avatar_frame'<>'bronze' then raise exception 'reset removed selection';end if;
- perform public.avatar_frame_equip(-911400001,'az','bronze');
+ s:=public.avatar_frame_state(-911400001,'az');if s->>'avatar_frame' is not null or exists(select 1 from jsonb_array_elements(s->'frames')frame_row where (frame_row->>'unlocked')::boolean) then raise exception 'reset retained frames';end if;
  s:=public.avatar_frame_equip(-911400001,'ru',null);if s->>'avatar_frame' is not null then raise exception 'remove failed';end if;
  if public.get_avatar_frames(array['FRAME-TEST-A'])<>'{}'::jsonb then raise exception 'removed frame public';end if;
  -- All previously unlocked achievements open their frames without claiming coin rewards.

@@ -38,8 +38,8 @@ Deno.serve(async(req)=>{
   if(action==="state")return reply({daily:await snapshot(db,user.id,language)});
   if(action!=="answer")return reply({error:"unknown_action"},400);
   if(typeof body.answer!=="string"||[...body.answer].length>40||!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(String(body.requestId||""))||!/^\d{4}-\d{2}-\d{2}$/.test(String(body.day||"")))return reply({error:"bad_request"},400);
-  const r=await db.rpc("daily_puzzle_answer",{p_telegram_id:user.id,p_day:body.day,p_language:language,p_answer:body.answer,p_request_id:body.requestId});
-  if(r.error){const m=String(r.error.message||"");const error=["daily_changed","daily_closed","bad_answer","player_not_found"].find(x=>m.includes(x))||"answer_failed";return reply({error,daily:await snapshot(db,user.id,language)},error.startsWith("daily_")?409:400)}
+  const r=await db.rpc("daily_puzzle_answer_epoch",{p_telegram_id:user.id,p_day:body.day,p_language:language,p_answer:body.answer,p_request_id:body.requestId,p_generation:body.progressGeneration??0});
+  if(r.error){const m=String(r.error.message||"");const error=["daily_changed","daily_closed","daily_reset","bad_answer","player_not_found"].find(x=>m.includes(x))||"answer_failed";return reply({error,daily:await snapshot(db,user.id,language)},error.startsWith("daily_")?409:400)}
   const p=await db.from("players").select("coins").eq("telegram_id",user.id).single();if(p.error)throw p.error;
   return reply({daily:await snapshot(db,user.id,language),result:r.data,coins:p.data.coins});
  }catch{return reply({error:"server_error"},500)}
