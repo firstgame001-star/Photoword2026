@@ -1,7 +1,7 @@
 name: Test live PhotoWord entries
 on:
   push:
-    branches: [main]
+    branches: [main, audit/photoword-comprehensive-oct-2026]
     paths: ['index.html', 'app/index.html', 'game.html', 'app/game.html', '404.html', 'clean/**', 'scripts/test-live-entries.py', '.github/workflows/test-live-entries.yml']
   workflow_dispatch:
 permissions:

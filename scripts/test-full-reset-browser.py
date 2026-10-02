@@ -36,7 +36,7 @@ with sync_playwright() as pw:
    assert page.evaluate("sessionStorage.getItem('pw.hints.main.1')") is None
    expect(page.locator('#avatar')).not_to_have_attribute('data-frame','bronze')
    page.locator('[data-language='+language+']').tap();expect(page.locator('#rulesWelcomeModal')).to_be_visible();page.locator('#rulesWelcomeRead').tap();expect(page.locator('#rulesBody .rule-section')).to_have_count(8);page.locator('#rulesDone').tap()
-   page.locator('#achievementsEntry').tap();expect(page.locator('.achievement-card')).to_have_count(100);expect(page.locator('.achievement-card.unlocked')).to_have_count(0);page.locator('#achievementsHome').tap()
+   page.locator('#achievementsEntry').tap();expect(page.locator('.achievement-card')).to_have_count(120);expect(page.locator('.achievement-card.unlocked')).to_have_count(0);page.locator('#achievementsHome').tap()
    page.locator('#profileBtn').tap();page.locator('#profileFrames').tap();expect(page.locator('.frame-card')).to_have_count(10);expect(page.locator('.frame-card.unlocked')).to_have_count(0);expect(page.locator('#framesCount')).to_have_text('0 / 10');page.screenshot(path=str(OUT/(engine+'-'+language+'-frames.png')))
    # A second device detects an externally reset epoch and clears its stale cached data.
    page.locator('#framesBack').tap();page.evaluate("localStorage.setItem('pw.daily.pending.RESET-TEST','old-second-device')");account['progress_generation']=2
