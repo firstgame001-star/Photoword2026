@@ -89,8 +89,8 @@ if(!themeGameJs.includes('const SCIENCE_LEVELS=')||!themeGameJs.includes('const 
 if(!themeGameJs.includes('const TECHNOLOGY_LEVELS=')||!themeGameJs.includes('const TECHNOLOGY_TRANSLATED='))throw Error('Technology theme bank is missing');
 if(!themeGameJs.includes("['sport','art','professions','travel','science','technology','cinema','food','animals','transport','home','nature'].includes(themeParam)")||!themeGameJs.includes("return 'pw.themeProgress.'+themeId")||!themeGameJs.includes("theme='+themeId+'&level="))throw Error('Thematic routing/progress is not category-specific');
 function assertThemeBank(levelName,translationName,label){
- const bank=themeGameJs.match(new RegExp('const '+levelName+'=\\\\{([\\\\s\\\\S]*?)\\\\};\\\\s*const '+translationName+'='));
- const count=(bank?.[1].match(/"?\\\\d+"?\\\\s*:\\\\s*\\\\{/g)||[]).length;
+ const bank=themeGameJs.match(new RegExp('const '+levelName+'=\\{([\\s\\S]*?)\\};\\s*const '+translationName+'='));
+ const count=(bank?.[1].match(/"?\d+"?\s*:\s*\{/g)||[]).length;
  if(!bank||count!==100)throw Error(label+' theme must contain 100 levels');
 }
 assertThemeBank('ART_LEVELS','ART_TRANSLATED','Art');
