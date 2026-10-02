@@ -104,7 +104,7 @@ Deno.serve(async(req)=>{
    if(result.error||!result.data)return reply({error:"answer_unavailable"},500);
    const language=["ru","en","az"].includes(String(body?.language))?String(body.language):"ru";
    themeAnswer=result.data[language] as string;
-   if(action==="theme_complete"&&(typeof body.answer!=="string"||body.answer.trim().toLocaleUpperCase("az")!==themeAnswer)){
+   if(action==="theme_complete"&&(typeof body.answer!=="string"||body.answer.trim()!==themeAnswer)){
     const attempt=await db.rpc("register_wrong_theme_answer",{p_telegram_id:user.id,p_theme_id:themeId,p_level_id:level});
     if(attempt.error)return reply({error:"answer_attempt_failed"},500);
     if(attempt.data!==true)return reply({error:"answer_rate_limited"},429);
