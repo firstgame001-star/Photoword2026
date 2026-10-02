@@ -33,7 +33,7 @@ def setup(browser,language,lose=False):
  ctx.route('**/functions/v1/achievements',mock)
  page=ctx.new_page();errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
  page.goto(BASE+'clean/#'+auth_fragment(),wait_until='domcontentloaded',timeout=45000)
- page.locator('#achievementsEntry').tap();expect(page.locator('.achievement-card')).to_have_count(66)
+ page.locator('#achievementsEntry').tap();expect(page.locator('.achievement-card')).to_have_count(100)
  return ctx,page,state,account,errors
 
 with sync_playwright() as pw:
@@ -49,12 +49,12 @@ with sync_playwright() as pw:
    page.screenshot(path=str(OUT/(engine+'-'+lang+'.png')))
    page.locator('.achievement-card').first.locator('.achievement-claim').tap();expect(page.locator('[data-coins]').first).to_have_text('1015');expect(page.locator('.achievement-card').first.locator('.achievement-claim')).to_be_disabled()
    page.locator('#achievementsFilters button').nth(1).tap();expect(page.locator('.achievement-card')).to_have_count(3)
-   page.locator('#achievementsFilters button').nth(3).tap();expect(page.locator('.achievement-card')).to_have_count(16)
-   page.locator('#achievementsHome').tap();page.locator('#profileBtn').tap();expect(page.locator('#profileAchievementBadges span')).to_have_count(4);page.locator('#profileAchievements').tap();expect(page.locator('#profileModal')).to_be_hidden();expect(page.locator('.achievement-card')).to_have_count(66)
+   page.locator('#achievementsFilters button').nth(3).tap();expect(page.locator('.achievement-card')).to_have_count(21)
+   page.locator('#achievementsHome').tap();page.locator('#profileBtn').tap();expect(page.locator('#profileAchievementBadges span')).to_have_count(4);page.locator('#profileAchievements').tap();expect(page.locator('#profileModal')).to_be_hidden();expect(page.locator('.achievement-card')).to_have_count(100)
    assert not relevant_errors(errors),errors;ctx.close()
   ctx,page,state,account,errors=setup(browser,'en',True)
   page.locator('.achievement-card').first.locator('.achievement-claim').tap();expect(page.locator('#achievementsStatus')).not_to_be_empty();assert account['coins']==1015
   page.locator('.achievement-card').first.locator('.achievement-claim').tap();expect(page.locator('.achievement-card').first.locator('.achievement-claim')).to_be_disabled();expect(page.locator('[data-coins]').first).to_have_text('1015');assert state['claim_calls']==['main_10','main_10']
   page.reload(wait_until='domcontentloaded');page.locator('#achievementsEntry').tap();expect(page.locator('.achievement-card').first.locator('.achievement-claim')).to_be_disabled();assert account['coins']==1015
   assert not relevant_errors(errors),errors;ctx.close();browser.close()
-print('PASS: 66 achievements, RU/EN/AZ, narrow mobile layout, category filters, badges, reward claiming and lost-response retry in Chromium and WebKit.')
+print('PASS: 100 achievements, RU/EN/AZ, narrow mobile layout, category filters, badges, reward claiming and lost-response retry in Chromium and WebKit.')

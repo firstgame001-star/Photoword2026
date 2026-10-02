@@ -1186,5 +1186,617 @@
       "en": "Score 20 points in a finished Blitz run.",
       "az": "Tamamlanmış bir blitsdə 20 xal topla."
     }
+  },
+  {
+    "id": "main_20",
+    "category": "main",
+    "metric": "main",
+    "target": 20,
+    "reward_coins": 15,
+    "icon": "🧩",
+    "title": {
+      "ru": "20 уровней позади",
+      "en": "20 levels completed",
+      "az": "20 səviyyə tamamlandı"
+    },
+    "description": {
+      "ru": "Впервые пройди 20 разных основных уровней.",
+      "en": "Complete 20 different main levels for the first time.",
+      "az": "20 fərqli əsas səviyyəni ilk dəfə keç."
+    }
+  },
+  {
+    "id": "main_100",
+    "category": "main",
+    "metric": "main",
+    "target": 100,
+    "reward_coins": 35,
+    "icon": "🧩",
+    "title": {
+      "ru": "100 уровней позади",
+      "en": "100 levels completed",
+      "az": "100 səviyyə tamamlandı"
+    },
+    "description": {
+      "ru": "Впервые пройди 100 разных основных уровней.",
+      "en": "Complete 100 different main levels for the first time.",
+      "az": "100 fərqli əsas səviyyəni ilk dəfə keç."
+    }
+  },
+  {
+    "id": "main_250",
+    "category": "main",
+    "metric": "main",
+    "target": 250,
+    "reward_coins": 75,
+    "icon": "🧩",
+    "title": {
+      "ru": "250 уровней позади",
+      "en": "250 levels completed",
+      "az": "250 səviyyə tamamlandı"
+    },
+    "description": {
+      "ru": "Впервые пройди 250 разных основных уровней.",
+      "en": "Complete 250 different main levels for the first time.",
+      "az": "250 fərqli əsas səviyyəni ilk dəfə keç."
+    }
+  },
+  {
+    "id": "main_400",
+    "category": "main",
+    "metric": "main",
+    "target": 400,
+    "reward_coins": 100,
+    "icon": "🧩",
+    "title": {
+      "ru": "400 уровней позади",
+      "en": "400 levels completed",
+      "az": "400 səviyyə tamamlandı"
+    },
+    "description": {
+      "ru": "Впервые пройди 400 разных основных уровней.",
+      "en": "Complete 400 different main levels for the first time.",
+      "az": "400 fərqli əsas səviyyəni ilk dəfə keç."
+    }
+  },
+  {
+    "id": "nohint_100",
+    "category": "main",
+    "metric": "nohint",
+    "target": 100,
+    "reward_coins": 60,
+    "icon": "💡",
+    "title": {
+      "ru": "Без помощи · 100",
+      "en": "Without hints · 100",
+      "az": "İpucusuz · 100"
+    },
+    "description": {
+      "ru": "Впервые пройди 100 основных уровней без платных подсказок. Перемешивание разрешено.",
+      "en": "First-complete 100 main levels without paid hints. Shuffling is allowed.",
+      "az": "100 əsas səviyyəni ilk dəfə ödənişli ipucusuz keç. Qarışdırmaq olar."
+    }
+  },
+  {
+    "id": "nohint_150",
+    "category": "main",
+    "metric": "nohint",
+    "target": 150,
+    "reward_coins": 80,
+    "icon": "💡",
+    "title": {
+      "ru": "Без помощи · 150",
+      "en": "Without hints · 150",
+      "az": "İpucusuz · 150"
+    },
+    "description": {
+      "ru": "Впервые пройди 150 основных уровней без платных подсказок. Перемешивание разрешено.",
+      "en": "First-complete 150 main levels without paid hints. Shuffling is allowed.",
+      "az": "150 əsas səviyyəni ilk dəfə ödənişli ipucusuz keç. Qarışdırmaq olar."
+    }
+  },
+  {
+    "id": "nohint_200",
+    "category": "main",
+    "metric": "nohint",
+    "target": 200,
+    "reward_coins": 100,
+    "icon": "💡",
+    "title": {
+      "ru": "Без помощи · 200",
+      "en": "Without hints · 200",
+      "az": "İpucusuz · 200"
+    },
+    "description": {
+      "ru": "Впервые пройди 200 основных уровней без платных подсказок. Перемешивание разрешено.",
+      "en": "First-complete 200 main levels without paid hints. Shuffling is allowed.",
+      "az": "200 əsas səviyyəni ilk dəfə ödənişli ipucusuz keç. Qarışdırmaq olar."
+    }
+  },
+  {
+    "id": "duel_win_75",
+    "category": "duels",
+    "metric": "duel_wins",
+    "target": 75,
+    "reward_coins": 90,
+    "icon": "⚔️",
+    "title": {
+      "ru": "75 побед в дуэлях",
+      "en": "75 duel wins",
+      "az": "75 duel qələbəsi"
+    },
+    "description": {
+      "ru": "Выиграй 75 завершённых дуэлей.",
+      "en": "Win 75 settled duels.",
+      "az": "75 tamamlanmış dueldə qalib gəl."
+    }
+  },
+  {
+    "id": "duel_win_100",
+    "category": "duels",
+    "metric": "duel_wins",
+    "target": 100,
+    "reward_coins": 100,
+    "icon": "⚔️",
+    "title": {
+      "ru": "100 побед в дуэлях",
+      "en": "100 duel wins",
+      "az": "100 duel qələbəsi"
+    },
+    "description": {
+      "ru": "Выиграй 100 завершённых дуэлей.",
+      "en": "Win 100 settled duels.",
+      "az": "100 tamamlanmış dueldə qalib gəl."
+    }
+  },
+  {
+    "id": "duel_win_200",
+    "category": "duels",
+    "metric": "duel_wins",
+    "target": 200,
+    "reward_coins": 150,
+    "icon": "⚔️",
+    "title": {
+      "ru": "200 побед в дуэлях",
+      "en": "200 duel wins",
+      "az": "200 duel qələbəsi"
+    },
+    "description": {
+      "ru": "Выиграй 200 завершённых дуэлей.",
+      "en": "Win 200 settled duels.",
+      "az": "200 tamamlanmış dueldə qalib gəl."
+    }
+  },
+  {
+    "id": "duel_play_1",
+    "category": "duels",
+    "metric": "duel_played",
+    "target": 1,
+    "reward_coins": 10,
+    "icon": "🎮",
+    "title": {
+      "ru": "1 дуэлей",
+      "en": "1 duels",
+      "az": "1 duel"
+    },
+    "description": {
+      "ru": "Сыграй 1 дуэлей до завершения.",
+      "en": "Finish 1 duels.",
+      "az": "1 dueli sona çatdır."
+    }
+  },
+  {
+    "id": "duel_play_25",
+    "category": "duels",
+    "metric": "duel_played",
+    "target": 25,
+    "reward_coins": 25,
+    "icon": "🎮",
+    "title": {
+      "ru": "25 дуэлей",
+      "en": "25 duels",
+      "az": "25 duel"
+    },
+    "description": {
+      "ru": "Сыграй 25 дуэлей до завершения.",
+      "en": "Finish 25 duels.",
+      "az": "25 dueli sona çatdır."
+    }
+  },
+  {
+    "id": "duel_play_100",
+    "category": "duels",
+    "metric": "duel_played",
+    "target": 100,
+    "reward_coins": 60,
+    "icon": "🎮",
+    "title": {
+      "ru": "100 дуэлей",
+      "en": "100 duels",
+      "az": "100 duel"
+    },
+    "description": {
+      "ru": "Сыграй 100 дуэлей до завершения.",
+      "en": "Finish 100 duels.",
+      "az": "100 dueli sona çatdır."
+    }
+  },
+  {
+    "id": "duel_play_200",
+    "category": "duels",
+    "metric": "duel_played",
+    "target": 200,
+    "reward_coins": 100,
+    "icon": "🎮",
+    "title": {
+      "ru": "200 дуэлей",
+      "en": "200 duels",
+      "az": "200 duel"
+    },
+    "description": {
+      "ru": "Сыграй 200 дуэлей до завершения.",
+      "en": "Finish 200 duels.",
+      "az": "200 dueli sona çatdır."
+    }
+  },
+  {
+    "id": "duel_draw_5",
+    "category": "duels",
+    "metric": "duel_draws",
+    "target": 5,
+    "reward_coins": 15,
+    "icon": "🤝",
+    "title": {
+      "ru": "Равные силы · 5",
+      "en": "Evenly matched · 5",
+      "az": "Bərabər güc · 5"
+    },
+    "description": {
+      "ru": "Заверши 5 дуэлей вничью. Отменённые комнаты не считаются.",
+      "en": "Finish 5 duels in a draw. Cancelled rooms do not count.",
+      "az": "5 dueli heç-heçə bitir. Ləğv edilən otaqlar sayılmır."
+    }
+  },
+  {
+    "id": "duel_draw_10",
+    "category": "duels",
+    "metric": "duel_draws",
+    "target": 10,
+    "reward_coins": 20,
+    "icon": "🤝",
+    "title": {
+      "ru": "Равные силы · 10",
+      "en": "Evenly matched · 10",
+      "az": "Bərabər güc · 10"
+    },
+    "description": {
+      "ru": "Заверши 10 дуэлей вничью. Отменённые комнаты не считаются.",
+      "en": "Finish 10 duels in a draw. Cancelled rooms do not count.",
+      "az": "10 dueli heç-heçə bitir. Ləğv edilən otaqlar sayılmır."
+    }
+  },
+  {
+    "id": "duel_draw_25",
+    "category": "duels",
+    "metric": "duel_draws",
+    "target": 25,
+    "reward_coins": 35,
+    "icon": "🤝",
+    "title": {
+      "ru": "Равные силы · 25",
+      "en": "Evenly matched · 25",
+      "az": "Bərabər güc · 25"
+    },
+    "description": {
+      "ru": "Заверши 25 дуэлей вничью. Отменённые комнаты не считаются.",
+      "en": "Finish 25 duels in a draw. Cancelled rooms do not count.",
+      "az": "25 dueli heç-heçə bitir. Ləğv edilən otaqlar sayılmır."
+    }
+  },
+  {
+    "id": "duel_score_15",
+    "category": "duels",
+    "metric": "duel_best",
+    "target": 15,
+    "reward_coins": 45,
+    "icon": "🎯",
+    "title": {
+      "ru": "Точный ответ · 15",
+      "en": "Sharp mind · 15",
+      "az": "Dəqiq cavab · 15"
+    },
+    "description": {
+      "ru": "Набери 15 очков в одной завершённой дуэли.",
+      "en": "Score 15 points in one settled duel.",
+      "az": "Bir tamamlanmış dueldə 15 xal topla."
+    }
+  },
+  {
+    "id": "duel_score_20",
+    "category": "duels",
+    "metric": "duel_best",
+    "target": 20,
+    "reward_coins": 60,
+    "icon": "🎯",
+    "title": {
+      "ru": "Точный ответ · 20",
+      "en": "Sharp mind · 20",
+      "az": "Dəqiq cavab · 20"
+    },
+    "description": {
+      "ru": "Набери 20 очков в одной завершённой дуэли.",
+      "en": "Score 20 points in one settled duel.",
+      "az": "Bir tamamlanmış dueldə 20 xal topla."
+    }
+  },
+  {
+    "id": "daily_total_5",
+    "category": "daily",
+    "metric": "daily_total",
+    "target": 5,
+    "reward_coins": 15,
+    "icon": "📅",
+    "title": {
+      "ru": "Загадки дня · 5",
+      "en": "Daily puzzles · 5",
+      "az": "Günün tapmacaları · 5"
+    },
+    "description": {
+      "ru": "Реши загадку дня в 5 разных днях.",
+      "en": "Solve the daily puzzle on 5 different days.",
+      "az": "5 fərqli gündə günün tapmacasını həll et."
+    }
+  },
+  {
+    "id": "daily_total_10",
+    "category": "daily",
+    "metric": "daily_total",
+    "target": 10,
+    "reward_coins": 20,
+    "icon": "📅",
+    "title": {
+      "ru": "Загадки дня · 10",
+      "en": "Daily puzzles · 10",
+      "az": "Günün tapmacaları · 10"
+    },
+    "description": {
+      "ru": "Реши загадку дня в 10 разных днях.",
+      "en": "Solve the daily puzzle on 10 different days.",
+      "az": "10 fərqli gündə günün tapmacasını həll et."
+    }
+  },
+  {
+    "id": "daily_total_60",
+    "category": "daily",
+    "metric": "daily_total",
+    "target": 60,
+    "reward_coins": 50,
+    "icon": "📅",
+    "title": {
+      "ru": "Загадки дня · 60",
+      "en": "Daily puzzles · 60",
+      "az": "Günün tapmacaları · 60"
+    },
+    "description": {
+      "ru": "Реши загадку дня в 60 разных днях.",
+      "en": "Solve the daily puzzle on 60 different days.",
+      "az": "60 fərqli gündə günün tapmacasını həll et."
+    }
+  },
+  {
+    "id": "daily_total_150",
+    "category": "daily",
+    "metric": "daily_total",
+    "target": 150,
+    "reward_coins": 90,
+    "icon": "📅",
+    "title": {
+      "ru": "Загадки дня · 150",
+      "en": "Daily puzzles · 150",
+      "az": "Günün tapmacaları · 150"
+    },
+    "description": {
+      "ru": "Реши загадку дня в 150 разных днях.",
+      "en": "Solve the daily puzzle on 150 different days.",
+      "az": "150 fərqli gündə günün tapmacasını həll et."
+    }
+  },
+  {
+    "id": "daily_total_200",
+    "category": "daily",
+    "metric": "daily_total",
+    "target": 200,
+    "reward_coins": 110,
+    "icon": "📅",
+    "title": {
+      "ru": "Загадки дня · 200",
+      "en": "Daily puzzles · 200",
+      "az": "Günün tapmacaları · 200"
+    },
+    "description": {
+      "ru": "Реши загадку дня в 200 разных днях.",
+      "en": "Solve the daily puzzle on 200 different days.",
+      "az": "200 fərqli gündə günün tapmacasını həll et."
+    }
+  },
+  {
+    "id": "daily_total_300",
+    "category": "daily",
+    "metric": "daily_total",
+    "target": 300,
+    "reward_coins": 140,
+    "icon": "📅",
+    "title": {
+      "ru": "Загадки дня · 300",
+      "en": "Daily puzzles · 300",
+      "az": "Günün tapmacaları · 300"
+    },
+    "description": {
+      "ru": "Реши загадку дня в 300 разных днях.",
+      "en": "Solve the daily puzzle on 300 different days.",
+      "az": "300 fərqli gündə günün tapmacasını həll et."
+    }
+  },
+  {
+    "id": "daily_total_365",
+    "category": "daily",
+    "metric": "daily_total",
+    "target": 365,
+    "reward_coins": 175,
+    "icon": "📅",
+    "title": {
+      "ru": "Загадки дня · 365",
+      "en": "Daily puzzles · 365",
+      "az": "Günün tapmacaları · 365"
+    },
+    "description": {
+      "ru": "Реши загадку дня в 365 разных днях.",
+      "en": "Solve the daily puzzle on 365 different days.",
+      "az": "365 fərqli gündə günün tapmacasını həll et."
+    }
+  },
+  {
+    "id": "daily_first_25",
+    "category": "daily",
+    "metric": "daily_first",
+    "target": 25,
+    "reward_coins": 40,
+    "icon": "✨",
+    "title": {
+      "ru": "С первой попытки · 25",
+      "en": "First try · 25",
+      "az": "İlk cəhddən · 25"
+    },
+    "description": {
+      "ru": "В 25 разных днях реши загадку с первой попытки.",
+      "en": "Solve the daily puzzle on the first attempt on 25 different days.",
+      "az": "25 fərqli gündə tapmacanı ilk cəhddən həll et."
+    }
+  },
+  {
+    "id": "daily_first_50",
+    "category": "daily",
+    "metric": "daily_first",
+    "target": 50,
+    "reward_coins": 60,
+    "icon": "✨",
+    "title": {
+      "ru": "С первой попытки · 50",
+      "en": "First try · 50",
+      "az": "İlk cəhddən · 50"
+    },
+    "description": {
+      "ru": "В 50 разных днях реши загадку с первой попытки.",
+      "en": "Solve the daily puzzle on the first attempt on 50 different days.",
+      "az": "50 fərqli gündə tapmacanı ilk cəhddən həll et."
+    }
+  },
+  {
+    "id": "daily_first_100",
+    "category": "daily",
+    "metric": "daily_first",
+    "target": 100,
+    "reward_coins": 100,
+    "icon": "✨",
+    "title": {
+      "ru": "С первой попытки · 100",
+      "en": "First try · 100",
+      "az": "İlk cəhddən · 100"
+    },
+    "description": {
+      "ru": "В 100 разных днях реши загадку с первой попытки.",
+      "en": "Solve the daily puzzle on the first attempt on 100 different days.",
+      "az": "100 fərqli gündə tapmacanı ilk cəhddən həll et."
+    }
+  },
+  {
+    "id": "themes_levels_100",
+    "category": "themes",
+    "metric": "theme_total",
+    "target": 100,
+    "reward_coins": 20,
+    "icon": "🗂️",
+    "title": {
+      "ru": "Исследователь тем · 100",
+      "en": "Theme explorer · 100",
+      "az": "Mövzu araşdırıcısı · 100"
+    },
+    "description": {
+      "ru": "Впервые пройди 100 разных тематических уровней суммарно во всех разделах.",
+      "en": "First-complete 100 different themed levels across all categories.",
+      "az": "Bütün bölmələr üzrə 100 fərqli mövzu səviyyəsini ilk dəfə keç."
+    }
+  },
+  {
+    "id": "themes_levels_300",
+    "category": "themes",
+    "metric": "theme_total",
+    "target": 300,
+    "reward_coins": 40,
+    "icon": "🗂️",
+    "title": {
+      "ru": "Исследователь тем · 300",
+      "en": "Theme explorer · 300",
+      "az": "Mövzu araşdırıcısı · 300"
+    },
+    "description": {
+      "ru": "Впервые пройди 300 разных тематических уровней суммарно во всех разделах.",
+      "en": "First-complete 300 different themed levels across all categories.",
+      "az": "Bütün bölmələr üzrə 300 fərqli mövzu səviyyəsini ilk dəfə keç."
+    }
+  },
+  {
+    "id": "themes_levels_600",
+    "category": "themes",
+    "metric": "theme_total",
+    "target": 600,
+    "reward_coins": 70,
+    "icon": "🗂️",
+    "title": {
+      "ru": "Исследователь тем · 600",
+      "en": "Theme explorer · 600",
+      "az": "Mövzu araşdırıcısı · 600"
+    },
+    "description": {
+      "ru": "Впервые пройди 600 разных тематических уровней суммарно во всех разделах.",
+      "en": "First-complete 600 different themed levels across all categories.",
+      "az": "Bütün bölmələr üzrə 600 fərqli mövzu səviyyəsini ilk dəfə keç."
+    }
+  },
+  {
+    "id": "themes_levels_1000",
+    "category": "themes",
+    "metric": "theme_total",
+    "target": 1000,
+    "reward_coins": 120,
+    "icon": "🗂️",
+    "title": {
+      "ru": "Исследователь тем · 1000",
+      "en": "Theme explorer · 1000",
+      "az": "Mövzu araşdırıcısı · 1000"
+    },
+    "description": {
+      "ru": "Впервые пройди 1000 разных тематических уровней суммарно во всех разделах.",
+      "en": "First-complete 1000 different themed levels across all categories.",
+      "az": "Bütün bölmələr üzrə 1000 fərqli mövzu səviyyəsini ilk dəfə keç."
+    }
+  },
+  {
+    "id": "collector_9",
+    "category": "themes",
+    "metric": "themes_complete",
+    "target": 9,
+    "reward_coins": 90,
+    "icon": "🏅",
+    "title": {
+      "ru": "Коллекционер · 9",
+      "en": "Collector · 9",
+      "az": "Kolleksiyaçı · 9"
+    },
+    "description": {
+      "ru": "Полностью заверши 9 тематических разделов.",
+      "en": "Fully complete 9 themes.",
+      "az": "9 mövzu bölməsini tam bitir."
+    }
   }
 ]

@@ -4,7 +4,7 @@ declare actor uuid;other_player uuid;m jsonb;s jsonb;r jsonb;initial_coins integ
 begin
  insert into public.players(telegram_id,photoword_id,coins,current_level) values(-911300001,'ACH_A_'||gen_random_uuid(),1000,530) returning id into actor;
  insert into public.players(telegram_id,photoword_id,coins) values(-911300002,'ACH_B_'||gen_random_uuid(),1000) returning id into other_player;
- if (select count(*) from public.achievement_catalog)<>66 then raise exception 'catalog count';end if;
+ if (select count(*) from public.achievement_catalog)<>100 then raise exception 'catalog count';end if;
  if exists(select 1 from public.achievement_catalog where title->>'ru' is null or title->>'en' is null or title->>'az' is null or description->>'az' is null) then raise exception 'missing translations';end if;
  begin perform public.achievement_claim(-911300001,'main_10','ru');raise exception 'locked accepted';exception when others then if sqlerrm<>'achievement_locked' then raise;end if;end;
  perform public.spend_hint_server(-911300001,1,'letter',50);
@@ -23,7 +23,7 @@ begin
  m:=public.achievement_metrics(actor);if (m->>'nohint')::integer<>9 then raise exception 'replay laundered hint';end if;
  insert into public.achievement_levels(player_id,mode,level_id,no_hint) select actor,'main',i,true from generate_series(11,530) i;
  insert into public.theme_progress(player_id,theme_id,level_id) select actor,theme,i from unnest(array['sport','art','professions','travel','science','technology','cinema','food','animals','transport','home','nature']) theme cross join generate_series(1,100) i;
- m:=public.achievement_metrics(actor);if (m->>'themes_complete')::integer<>12 or (m->>'theme_food')::integer<>100 or (m->>'chapter_12')::integer<>1 then raise exception 'themes or chapters';end if;
+ m:=public.achievement_metrics(actor);if (m->>'theme_total')::integer<>1200 or (m->>'themes_complete')::integer<>12 or (m->>'theme_food')::integer<>100 or (m->>'chapter_12')::integer<>1 then raise exception 'themes or chapters';end if;
  insert into public.daily_puzzle_progress(player_id,puzzle_day,question_id,attempts,solved) select actor,d-i,1,1,true from generate_series(1,90) i;
  insert into public.daily_puzzle_progress(player_id,puzzle_day,question_id,attempts,solved) values(actor,d-92,1,3,true);
  m:=public.achievement_metrics(actor);if (m->>'daily_streak')::integer<>90 or (m->>'daily_total')::integer<>91 or (m->>'daily_first')::integer<>90 then raise exception 'daily streak';end if;
@@ -31,7 +31,7 @@ begin
  m:=public.achievement_metrics(actor);if (m->>'duel_wins')::integer<>1 or (m->>'duel_draws')::integer<>1 or (m->>'duel_played')::integer<>2 or (m->>'duel_best')::integer<>10 then raise exception 'duel counts';end if;
  insert into public.challenge_runs(player_id,mode,finished_at,score,streak,reward_coins,reward_xp) values(actor,'blitz',now(),20,10,15,10),(actor,'blitz',null,99,99,0,0);
  m:=public.achievement_metrics(actor);if (m->>'blitz_best')::integer<>20 or (m->>'challenge_runs')::integer<>1 or (m->>'challenge_streak')::integer<>10 then raise exception 'unfinished challenge counted';end if;
- s:=public.achievement_state(-911300001,'az');if jsonb_array_length(s->'items')<>66 then raise exception 'bad snapshot';end if;
+ s:=public.achievement_state(-911300001,'az');if jsonb_array_length(s->'items')<>100 then raise exception 'bad snapshot';end if;
  if not exists(select 1 from public.player_achievements where player_id=actor and achievement_id='daily_streak_90') then raise exception 'streak not unlocked';end if;
  update public.daily_puzzle_progress set solved=false where player_id=actor;
  perform public.achievement_state(-911300001,'ru');if not exists(select 1 from public.player_achievements where player_id=actor and achievement_id='daily_streak_90') then raise exception 'unlocked revoked';end if;
