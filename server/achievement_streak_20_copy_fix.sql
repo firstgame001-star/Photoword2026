@@ -1,0 +1,1 @@
+update public.achievement_catalog set description='{"ru":"Собери серию из 20 правильных ответов в одном завершённом испытании.","en":"Reach a streak of 20 correct answers in a finished challenge.","az":"Tamamlanmış bir sınaqda 20 düzgün cavab seriyası qur."}'::jsonb where id='challenge_streak_20';
