@@ -2,7 +2,7 @@ name: Verify PhotoWord Pages
 on:
   push:
     branches: [main]
-    paths: ['clean/**', 'scripts/check-clean.mjs', 'scripts/full-audit.mjs', '.github/workflows/verify-photoword-pages.yml']
+    paths: ['clean/**', 'server/achievements_120.sql', 'server/achievement_streak_20_copy_fix.sql', 'scripts/check-clean.mjs', 'scripts/full-audit.mjs', '.github/workflows/verify-photoword-pages.yml']
   workflow_run:
     workflows: ["pages build and deployment"]
     types: [completed]
@@ -29,12 +29,12 @@ jobs:
           node scripts/test-duel-input.mjs
           node scripts/test-challenge-server-input.mjs
           node scripts/test-daily-input.mjs
-      - name: Wait for r121 and verify published files
+      - name: Wait for r122 and verify published files
         shell: bash
         run: |
           set -euo pipefail
           base='https://firstgame001-star.github.io/Photoword2026/clean'
-          release='20261002-r121'
+          release='20261002-r122'
           ok=0
           for i in $(seq 1 48); do
             if curl --fail --silent --show-error --location --max-time 20 "$base/release.json?check=$i" -o "$RUNNER_TEMP/release.json" && grep -q "$release" "$RUNNER_TEMP/release.json"; then
@@ -44,7 +44,7 @@ jobs:
             sleep 5
           done
           test "$ok" = 1
-          for file in index.html game.html theme-game.html core.js home.js duel.js game.js main-levels-8-9.js main-levels-10-12.js main-levels-13.js main-levels-14-15.js theme-game.js theme-levels-cinema-food.js theme-levels-expansion.js challenge-bank-extra.js challenge-repeat-index.js challenge-repeat-policy.js challenge.js daily-puzzle.js ui.css privacy.html terms.html release.json; do
+          for file in index.html game.html theme-game.html core.js home.js duel.js game.js main-levels-8-9.js main-levels-10-12.js main-levels-13.js main-levels-14-15.js theme-game.js theme-levels-cinema-food.js theme-levels-expansion.js challenge-bank-extra.js challenge-repeat-index.js challenge-repeat-policy.js challenge.js daily-puzzle.js achievements.js ui.css privacy.html terms.html release.json; do
             curl --fail --silent --show-error --location --retry 4 --retry-all-errors --retry-delay 3 --max-time 30 "$base/$file?r=$release" -o "$RUNNER_TEMP/$file"
             echo "HTTP 200: $file"
           done
@@ -55,6 +55,9 @@ jobs:
           grep -q "call('offer'" "$RUNNER_TEMP/duel.js"
           grep -q 'duelRequest' "$RUNNER_TEMP/core.js"
           grep -q 'winner_payout_percent_of_pot' "$RUNNER_TEMP/release.json"
+          grep -q '"count":120' "$RUNNER_TEMP/release.json"
+          grep -q '120 goals' "$RUNNER_TEMP/home.js"
+          grep -q '120 целей' "$RUNNER_TEMP/home.js"
           grep -q '0–20' "$RUNNER_TEMP/index.html"
           grep -q 'chapter2Select' "$RUNNER_TEMP/index.html"
           grep -q '21–50' "$RUNNER_TEMP/index.html"
