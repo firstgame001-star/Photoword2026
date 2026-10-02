@@ -69,7 +69,7 @@ const technology=release.thematic_mode.categories.find(x=>x.id==='technology');
 if(!technology||technology.available_through!==100||technology.status!=='complete')throw Error('Technology theme must be playable through level 100');
 
 const index=readFileSync(resolve(base,'index.html'),'utf8');
-for(const [from,to] of [[13,14],[14,15]]){const start=index.indexOf(`data-home-chapter="${from}"`),next=index.indexOf(`data-home-chapter="${to}"`,start),play=index.indexOf(`id="homeChapter${from}Play"`,start),end=index.indexOf('</section>',play);if(!(start<play&&play<end&&end<next))throw Error('Chapter slides are nested instead of siblings: '+from+' → '+to);}
+for(const [from,to] of Array.from({length:14},(_,i)=>[i+1,i+2])){const start=index.indexOf(`data-home-chapter="${from}"`),next=index.indexOf(`data-home-chapter="${to}"`,start),play=index.indexOf(`id="homeChapter${from}Play"`,start),end=index.indexOf('</section>',play);if(!(start<play&&play<end&&end<next))throw Error('Chapter slides are nested instead of siblings: '+from+' → '+to);}
 if((index.match(/<section class="chapter home-chapter-slide/g)||[]).length!==15)throw Error('Home chapter carousel must contain 15 slides');
 const themeGame=readFileSync(resolve(base,'theme-game.html'),'utf8');
 const themeGameJs=readFileSync(resolve(base,'theme-game.js'),'utf8');
