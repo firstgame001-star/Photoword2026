@@ -9,16 +9,19 @@ window.PW_MAIN_EXTRA=[
       "🩺"
     ],
     "ru": {
-      "answer": "СЕРДЦЕ",
-      "hint": "Орган, который непрерывно перекачивает кровь по телу."
+      "hint": "Орган, который непрерывно перекачивает кровь по телу.",
+      "answerLength": 6,
+      "pool": "РЦЖАЕГВБЕЗСД"
     },
     "en": {
-      "answer": "HEART",
-      "hint": "The organ that continuously pumps blood through the body."
+      "hint": "The organ that continuously pumps blood through the body.",
+      "answerLength": 5,
+      "pool": "ACJKHGDFBRTE"
     },
     "az": {
-      "answer": "ÜRƏK",
-      "hint": "Qanı bədən boyunca dövr etdirən orqan."
+      "hint": "Qanı bədən boyunca dövr etdirən orqan.",
+      "answerLength": 4,
+      "pool": "ÜƏÇADCKBGEFR"
     }
   },
   {
@@ -31,16 +34,19 @@ window.PW_MAIN_EXTRA=[
       "🧩"
     ],
     "ru": {
-      "answer": "МОЗГ",
-      "hint": "Главный орган нервной системы, связанный с мышлением и памятью."
+      "hint": "Главный орган нервной системы, связанный с мышлением и памятью.",
+      "answerLength": 4,
+      "pool": "ОБВЕДМГЗЙАЖИ"
     },
     "en": {
-      "answer": "BRAIN",
-      "hint": "The main organ of the nervous system, linked to thought and memory."
+      "hint": "The main organ of the nervous system, linked to thought and memory.",
+      "answerLength": 5,
+      "pool": "CDGERHIBNJAF"
     },
     "az": {
-      "answer": "BEYİN",
-      "hint": "Düşüncə və yaddaşla bağlı sinir sisteminin əsas orqanı."
+      "hint": "Düşüncə və yaddaşla bağlı sinir sisteminin əsas orqanı.",
+      "answerLength": 5,
+      "pool": "CİNAYÇFGƏBED"
     }
   },
   {
@@ -53,16 +59,19 @@ window.PW_MAIN_EXTRA=[
       "🏃"
     ],
     "ru": {
-      "answer": "ЛЕГКИЕ",
-      "hint": "Парный орган, который обеспечивает дыхание."
+      "hint": "Парный орган, который обеспечивает дыхание.",
+      "answerLength": 6,
+      "pool": "ГИЖАВБЕДКЗЛЕ"
     },
     "en": {
-      "answer": "LUNGS",
-      "hint": "Paired organs that make breathing possible."
+      "hint": "Paired organs that make breathing possible.",
+      "answerLength": 5,
+      "pool": "LUBCNAFHDESG"
     },
     "az": {
-      "answer": "AĞCİYƏR",
-      "hint": "Nəfəs almağı təmin edən cüt orqan."
+      "hint": "Nəfəs almağı təmin edən cüt orqan.",
+      "answerLength": 7,
+      "pool": "CDAYƏBRFÇĞEİ"
     }
   },
   {
@@ -75,16 +84,19 @@ window.PW_MAIN_EXTRA=[
       "🧬"
     ],
     "ru": {
-      "answer": "КРОВЬ",
-      "hint": "Жидкость, которая переносит кислород и вещества по организму."
+      "hint": "Жидкость, которая переносит кислород и вещества по организму.",
+      "answerLength": 5,
+      "pool": "АВРДЬЖБЕГЗОК"
     },
     "en": {
-      "answer": "BLOOD",
-      "hint": "The fluid that carries oxygen and nutrients around the body."
+      "hint": "The fluid that carries oxygen and nutrients around the body.",
+      "answerLength": 5,
+      "pool": "LDGAOFOJEBCH"
     },
     "az": {
-      "answer": "QAN",
-      "hint": "Oksigen və maddələri bədəndə daşıyan maye."
+      "hint": "Oksigen və maddələri bədəndə daşıyan maye.",
+      "answerLength": 3,
+      "pool": "BQĞÇƏNCFEDAG"
     }
   },
   {
@@ -97,16 +109,19 @@ window.PW_MAIN_EXTRA=[
       "🧍"
     ],
     "ru": {
-      "answer": "СКЕЛЕТ",
-      "hint": "Система костей, которая поддерживает тело."
+      "hint": "Система костей, которая поддерживает тело.",
+      "answerLength": 6,
+      "pool": "ЕГЕЖВТДЛАКСБ"
     },
     "en": {
-      "answer": "SKELETON",
-      "hint": "The framework of bones that supports the body."
+      "hint": "The framework of bones that supports the body.",
+      "answerLength": 8,
+      "pool": "KEFCTSOBLENAD"
     },
     "az": {
-      "answer": "SKELET",
-      "hint": "Bədəni saxlayan sümüklər sistemi."
+      "hint": "Bədəni saxlayan sümüklər sistemi.",
+      "answerLength": 6,
+      "pool": "EDEÇSCTƏABLK"
     }
   },
   {
@@ -119,16 +134,19 @@ window.PW_MAIN_EXTRA=[
       "🏃"
     ],
     "ru": {
-      "answer": "МЫШЦА",
-      "hint": "Ткань, которая сокращается и создаёт движение."
+      "hint": "Ткань, которая сокращается и создаёт движение.",
+      "answerLength": 5,
+      "pool": "ГЦМЕЫАДВБЗШЖ"
     },
     "en": {
-      "answer": "MUSCLE",
-      "hint": "Tissue that contracts to produce movement."
+      "hint": "Tissue that contracts to produce movement.",
+      "answerLength": 6,
+      "pool": "UCFGMBHLESAD"
     },
     "az": {
-      "answer": "ƏZƏLƏ",
-      "hint": "Yığılaraq hərəkət yaradan toxuma."
+      "hint": "Yığılaraq hərəkət yaradan toxuma.",
+      "answerLength": 5,
+      "pool": "CDBƏEƏLƏAFZÇ"
     }
   },
   {
@@ -141,16 +159,19 @@ window.PW_MAIN_EXTRA=[
       "🩹"
     ],
     "ru": {
-      "answer": "КОЖА",
-      "hint": "Наружный покров тела, который защищает организм."
+      "hint": "Наружный покров тела, который защищает организм.",
+      "answerLength": 4,
+      "pool": "КЕГЙЖДЗОИАБВ"
     },
     "en": {
-      "answer": "SKIN",
-      "hint": "The body's outer covering that protects it."
+      "hint": "The body's outer covering that protects it.",
+      "answerLength": 4,
+      "pool": "SIGBKCHFADEN"
     },
     "az": {
-      "answer": "DƏRİ",
-      "hint": "Bədəni qoruyan xarici örtük."
+      "hint": "Bədəni qoruyan xarici örtük.",
+      "answerLength": 4,
+      "pool": "EABGRCƏÇDFĞİ"
     }
   },
   {
@@ -163,16 +184,19 @@ window.PW_MAIN_EXTRA=[
       "🌈"
     ],
     "ru": {
-      "answer": "ЗРЕНИЕ",
-      "hint": "Способность видеть окружающий мир."
+      "hint": "Способность видеть окружающий мир.",
+      "answerLength": 6,
+      "pool": "ДЕЕЖВБРГНИАЗ"
     },
     "en": {
-      "answer": "VISION",
-      "hint": "The ability to see the world around you."
+      "hint": "The ability to see the world around you.",
+      "answerLength": 6,
+      "pool": "ANDOBVISICFE"
     },
     "az": {
-      "answer": "GÖRMƏ",
-      "hint": "Ətraf aləmi görmək qabiliyyəti."
+      "hint": "Ətraf aləmi görmək qabiliyyəti.",
+      "answerLength": 5,
+      "pool": "ÖGFCMDBRÇƏAE"
     }
   },
   {
@@ -185,16 +209,19 @@ window.PW_MAIN_EXTRA=[
       "🎵"
     ],
     "ru": {
-      "answer": "СЛУХ",
-      "hint": "Способность воспринимать звуки."
+      "hint": "Способность воспринимать звуки.",
+      "answerLength": 4,
+      "pool": "ДЛСБЖХВЗУЕАГ"
     },
     "en": {
-      "answer": "HEARING",
-      "hint": "The ability to perceive sounds."
+      "hint": "The ability to perceive sounds.",
+      "answerLength": 7,
+      "pool": "FIHEBRGJADCN"
     },
     "az": {
-      "answer": "EŞİTMƏ",
-      "hint": "Səsləri qəbul etmək qabiliyyəti."
+      "hint": "Səsləri qəbul etmək qabiliyyəti.",
+      "answerLength": 6,
+      "pool": "İCEŞATMÇDFBƏ"
     }
   },
   {
@@ -207,16 +234,19 @@ window.PW_MAIN_EXTRA=[
       "🧂"
     ],
     "ru": {
-      "answer": "ВКУС",
-      "hint": "Ощущение, по которому различают свойства еды."
+      "hint": "Ощущение, по которому различают свойства еды.",
+      "answerLength": 4,
+      "pool": "СЗЕДБЖАИКВГУ"
     },
     "en": {
-      "answer": "TASTE",
-      "hint": "The sense used to distinguish flavors in food."
+      "hint": "The sense used to distinguish flavors in food.",
+      "answerLength": 5,
+      "pool": "BTFDCSEGAJHT"
     },
     "az": {
-      "answer": "DAD",
-      "hint": "Yeməyin dadlarını ayırd etməyə imkan verən hiss."
+      "hint": "Yeməyin dadlarını ayırd etməyə imkan verən hiss.",
+      "answerLength": 3,
+      "pool": "FBACĞƏDHGEÇD"
     }
   },
   {
@@ -229,16 +259,19 @@ window.PW_MAIN_EXTRA=[
       "🧴"
     ],
     "ru": {
-      "answer": "ЗАПАХ",
-      "hint": "То, что воспринимается обонянием."
+      "hint": "То, что воспринимается обонянием.",
+      "answerLength": 5,
+      "pool": "ЖАВХИГПБЗАДЕ"
     },
     "en": {
-      "answer": "SMELL",
-      "hint": "Something perceived through the sense of smell."
+      "hint": "Something perceived through the sense of smell.",
+      "answerLength": 5,
+      "pool": "LFBHSDELAGMC"
     },
     "az": {
-      "answer": "QOXU",
-      "hint": "Qoxubilmə ilə hiss olunan xüsusiyyət."
+      "hint": "Qoxubilmə ilə hiss olunan xüsusiyyət.",
+      "answerLength": 4,
+      "pool": "CAXDOEQUBƏFÇ"
     }
   },
   {
@@ -251,16 +284,19 @@ window.PW_MAIN_EXTRA=[
       "👄"
     ],
     "ru": {
-      "answer": "ГОЛОС",
-      "hint": "Звук, который человек создаёт при речи или пении."
+      "hint": "Звук, который человек создаёт при речи или пении.",
+      "answerLength": 5,
+      "pool": "ОДОЖАЕВГЗЛБС"
     },
     "en": {
-      "answer": "VOICE",
-      "hint": "The sound a person makes when speaking or singing."
+      "hint": "The sound a person makes when speaking or singing.",
+      "answerLength": 5,
+      "pool": "FDVAOJCGEBHI"
     },
     "az": {
-      "answer": "SƏS",
-      "hint": "Danışarkən və ya oxuyarkən insanın yaratdığı səs."
+      "hint": "Danışarkən və ya oxuyarkən insanın yaratdığı səs.",
+      "answerLength": 3,
+      "pool": "ƏASGDĞCÇBEFS"
     }
   },
   {
@@ -273,16 +309,19 @@ window.PW_MAIN_EXTRA=[
       "🧘"
     ],
     "ru": {
-      "answer": "ДЫХАНИЕ",
-      "hint": "Процесс вдоха и выдоха воздуха."
+      "hint": "Процесс вдоха и выдоха воздуха.",
+      "answerLength": 7,
+      "pool": "ДХЫНБЕИЖГАВЗ"
     },
     "en": {
-      "answer": "BREATH",
-      "hint": "The process of breathing air in and out."
+      "hint": "The process of breathing air in and out.",
+      "answerLength": 6,
+      "pool": "BTFHECKJADRG"
     },
     "az": {
-      "answer": "NƏFƏS",
-      "hint": "Havanın nəfəsə alınması və verilməsi prosesi."
+      "hint": "Havanın nəfəsə alınması və verilməsi prosesi.",
+      "answerLength": 5,
+      "pool": "NFSEÇABƏGƏCD"
     }
   },
   {
@@ -295,16 +334,19 @@ window.PW_MAIN_EXTRA=[
       "📸"
     ],
     "ru": {
-      "answer": "УЛЫБКА",
-      "hint": "Выражение лица, часто связанное с радостью."
+      "hint": "Выражение лица, часто связанное с радостью.",
+      "answerLength": 6,
+      "pool": "ЛУБЕАКГЗЫДЖВ"
     },
     "en": {
-      "answer": "SMILE",
-      "hint": "A facial expression often linked with happiness."
+      "hint": "A facial expression often linked with happiness.",
+      "answerLength": 5,
+      "pool": "MAFSGCBHIDLE"
     },
     "az": {
-      "answer": "TƏBƏSSÜM",
-      "hint": "Çox vaxt sevinc bildirən üz ifadəsi."
+      "hint": "Çox vaxt sevinc bildirən üz ifadəsi.",
+      "answerLength": 8,
+      "pool": "TÜAÇƏSBDECMƏS"
     }
   },
   {
@@ -317,16 +359,19 @@ window.PW_MAIN_EXTRA=[
       "🧻"
     ],
     "ru": {
-      "answer": "СЛЕЗА",
-      "hint": "Капля жидкости, которая появляется в глазу."
+      "hint": "Капля жидкости, которая появляется в глазу.",
+      "answerLength": 5,
+      "pool": "ЕЗВБСГАДИЖЙЛ"
     },
     "en": {
-      "answer": "TEAR",
-      "hint": "A drop of liquid produced by the eye."
+      "hint": "A drop of liquid produced by the eye.",
+      "answerLength": 4,
+      "pool": "AGTJDRBFEHCK"
     },
     "az": {
-      "answer": "GÖZYAŞI",
-      "hint": "Gözdə yaranan maye damcısı."
+      "hint": "Gözdə yaranan maye damcısı.",
+      "answerLength": 7,
+      "pool": "ACÇYDÖZBIŞGE"
     }
   },
   {
@@ -339,16 +384,19 @@ window.PW_MAIN_EXTRA=[
       "🎭"
     ],
     "ru": {
-      "answer": "СМЕХ",
-      "hint": "Звуковая реакция на юмор, радость или веселье."
+      "hint": "Звуковая реакция на юмор, радость или веселье.",
+      "answerLength": 4,
+      "pool": "ВХГБМИЕАЖСЗД"
     },
     "en": {
-      "answer": "LAUGHTER",
-      "hint": "A vocal reaction to humor, joy, or amusement."
+      "hint": "A vocal reaction to humor, joy, or amusement.",
+      "answerLength": 8,
+      "pool": "HBERLGUFTCJAD"
     },
     "az": {
-      "answer": "GÜLÜŞ",
-      "hint": "Yumora, sevincə və əyləncəyə səsli reaksiya."
+      "hint": "Yumora, sevincə və əyləncəyə səsli reaksiya.",
+      "answerLength": 5,
+      "pool": "ÇDÜCÜŞGEAƏLB"
     }
   },
   {
@@ -361,16 +409,19 @@ window.PW_MAIN_EXTRA=[
       "🫣"
     ],
     "ru": {
-      "answer": "СТРАХ",
-      "hint": "Эмоция, возникающая перед угрозой или опасностью."
+      "hint": "Эмоция, возникающая перед угрозой или опасностью.",
+      "answerLength": 5,
+      "pool": "ХЕВБРЗСГДЖТА"
     },
     "en": {
-      "answer": "FEAR",
-      "hint": "An emotion felt in response to danger or threat."
+      "hint": "An emotion felt in response to danger or threat.",
+      "answerLength": 4,
+      "pool": "DGABLRFJHKCE"
     },
     "az": {
-      "answer": "QORXU",
-      "hint": "Təhlükə və ya hədə qarşı yaranan hiss."
+      "hint": "Təhlükə və ya hədə qarşı yaranan hiss.",
+      "answerLength": 5,
+      "pool": "ÇBEƏRXDAUCQO"
     }
   },
   {
@@ -383,16 +434,19 @@ window.PW_MAIN_EXTRA=[
       "💛"
     ],
     "ru": {
-      "answer": "РАДОСТЬ",
-      "hint": "Сильное положительное чувство удовольствия и счастья."
+      "hint": "Сильное положительное чувство удовольствия и счастья.",
+      "answerLength": 7,
+      "pool": "СГАВЖРТДБЬОЕ"
     },
     "en": {
-      "answer": "JOY",
-      "hint": "A strong positive feeling of happiness and pleasure."
+      "hint": "A strong positive feeling of happiness and pleasure.",
+      "answerLength": 3,
+      "pool": "OBAKGYCJHDEF"
     },
     "az": {
-      "answer": "SEVİNC",
-      "hint": "Xoşbəxtlik və məmnunluq hissi."
+      "hint": "Xoşbəxtlik və məmnunluq hissi.",
+      "answerLength": 6,
+      "pool": "DNECABFSİƏVÇ"
     }
   },
   {
@@ -405,16 +459,19 @@ window.PW_MAIN_EXTRA=[
       "🥀"
     ],
     "ru": {
-      "answer": "ГРУСТЬ",
-      "hint": "Эмоция, связанная с печалью или утратой."
+      "hint": "Эмоция, связанная с печалью или утратой.",
+      "answerLength": 6,
+      "pool": "ГАВЕТДСЖУБРЬ"
     },
     "en": {
-      "answer": "SADNESS",
-      "hint": "An emotion associated with sorrow or loss."
+      "hint": "An emotion associated with sorrow or loss.",
+      "answerLength": 7,
+      "pool": "SCAESGFHDBSN"
     },
     "az": {
-      "answer": "KƏDƏR",
-      "hint": "Kədər və ya itki ilə bağlı hiss."
+      "hint": "Kədər və ya itki ilə bağlı hiss.",
+      "answerLength": 5,
+      "pool": "KBÇAFCƏEDGRƏ"
     }
   },
   {
@@ -427,16 +484,19 @@ window.PW_MAIN_EXTRA=[
       "✊"
     ],
     "ru": {
-      "answer": "ГНЕВ",
-      "hint": "Сильная эмоция раздражения и возмущения."
+      "hint": "Сильная эмоция раздражения и возмущения.",
+      "answerLength": 4,
+      "pool": "ДБЙАЖЕИКНЗВГ"
     },
     "en": {
-      "answer": "ANGER",
-      "hint": "A strong emotion of irritation or outrage."
+      "hint": "A strong emotion of irritation or outrage.",
+      "answerLength": 5,
+      "pool": "HAEBJGRKNFDC"
     },
     "az": {
-      "answer": "QƏZƏB",
-      "hint": "Güclü əsəb və narazılıq hissi."
+      "hint": "Güclü əsəb və narazılıq hissi.",
+      "answerLength": 5,
+      "pool": "DƏEAQFÇGƏBZC"
     }
   },
   {
@@ -449,16 +509,19 @@ window.PW_MAIN_EXTRA=[
       "🤗"
     ],
     "ru": {
-      "answer": "ЛЮБОВЬ",
-      "hint": "Глубокое чувство привязанности и близости."
+      "hint": "Глубокое чувство привязанности и близости.",
+      "answerLength": 6,
+      "pool": "ДБВГЮЖАЗЛЕЬО"
     },
     "en": {
-      "answer": "LOVE",
-      "hint": "A deep feeling of affection and closeness."
+      "hint": "A deep feeling of affection and closeness.",
+      "answerLength": 4,
+      "pool": "CEABFDVJLHGO"
     },
     "az": {
-      "answer": "SEVGİ",
-      "hint": "Dərin bağlılıq və yaxınlıq hissi."
+      "hint": "Dərin bağlılıq və yaxınlıq hissi.",
+      "answerLength": 5,
+      "pool": "ÇVGBCDƏFSAİE"
     }
   },
   {
@@ -471,16 +534,19 @@ window.PW_MAIN_EXTRA=[
       "🎁"
     ],
     "ru": {
-      "answer": "ДРУЖБА",
-      "hint": "Близкие отношения, основанные на доверии и взаимной поддержке."
+      "hint": "Близкие отношения, основанные на доверии и взаимной поддержке.",
+      "answerLength": 6,
+      "pool": "РЙЖАУБЗВЕДГИ"
     },
     "en": {
-      "answer": "FRIENDSHIP",
-      "hint": "A close relationship built on trust and mutual support."
+      "hint": "A close relationship built on trust and mutual support.",
+      "answerLength": 10,
+      "pool": "FSIICHNJRPADEGB"
     },
     "az": {
-      "answer": "DOSTLUQ",
-      "hint": "Etibar və qarşılıqlı dəstəyə əsaslanan yaxın münasibət."
+      "hint": "Etibar və qarşılıqlı dəstəyə əsaslanan yaxın münasibət.",
+      "answerLength": 7,
+      "pool": "OTCDSAUELÇQB"
     }
   },
   {
@@ -493,16 +559,19 @@ window.PW_MAIN_EXTRA=[
       "🫱🏻‍🫲🏽"
     ],
     "ru": {
-      "answer": "ДОВЕРИЕ",
-      "hint": "Уверенность в честности и надёжности другого."
+      "hint": "Уверенность в честности и надёжности другого.",
+      "answerLength": 7,
+      "pool": "ВРДЕЕБГОАЖЗИ"
     },
     "en": {
-      "answer": "TRUST",
-      "hint": "Confidence in another person's honesty and reliability."
+      "hint": "Confidence in another person's honesty and reliability.",
+      "answerLength": 5,
+      "pool": "TRTBUGFDCAES"
     },
     "az": {
-      "answer": "ETİBAR",
-      "hint": "Başqasının dürüstlüyünə və etibarlılığına inam."
+      "hint": "Başqasının dürüstlüyünə və etibarlılığına inam.",
+      "answerLength": 6,
+      "pool": "İREACƏFÇGTDB"
     }
   },
   {
@@ -515,16 +584,19 @@ window.PW_MAIN_EXTRA=[
       "🫶"
     ],
     "ru": {
-      "answer": "ЗАБОТА",
-      "hint": "Внимание к благополучию и потребностям другого."
+      "hint": "Внимание к благополучию и потребностям другого.",
+      "answerLength": 6,
+      "pool": "БДААЖИОТЕВГЗ"
     },
     "en": {
-      "answer": "CARE",
-      "hint": "Attention to another person's wellbeing and needs."
+      "hint": "Attention to another person's wellbeing and needs.",
+      "answerLength": 4,
+      "pool": "BDAGHLERJFCK"
     },
     "az": {
-      "answer": "QAYĞI",
-      "hint": "Başqasının rifahına və ehtiyaclarına diqqət."
+      "hint": "Başqasının rifahına və ehtiyaclarına diqqət.",
+      "answerLength": 5,
+      "pool": "ĞQFÇBIADEYCƏ"
     }
   },
   {
@@ -537,16 +609,19 @@ window.PW_MAIN_EXTRA=[
       "👉"
     ],
     "ru": {
-      "answer": "ВЫБОР",
-      "hint": "Решение между несколькими возможными вариантами."
+      "hint": "Решение между несколькими возможными вариантами.",
+      "answerLength": 5,
+      "pool": "РГБЕВОЫЗАИЖД"
     },
     "en": {
-      "answer": "CHOICE",
-      "hint": "A decision between two or more possible options."
+      "hint": "A decision between two or more possible options.",
+      "answerLength": 6,
+      "pool": "CFGACIHDJBOE"
     },
     "az": {
-      "answer": "SEÇİM",
-      "hint": "Bir neçə mümkün variant arasından qərar."
+      "hint": "Bir neçə mümkün variant arasından qərar.",
+      "answerLength": 5,
+      "pool": "MCÇFSƏBGEİDA"
     }
   },
   {
@@ -559,16 +634,19 @@ window.PW_MAIN_EXTRA=[
       "🎯"
     ],
     "ru": {
-      "answer": "РЕШЕНИЕ",
-      "hint": "Итог обдумывания, после которого выбирают действие."
+      "hint": "Итог обдумывания, после которого выбирают действие.",
+      "answerLength": 7,
+      "pool": "ВЕИГЕРЕДНБАШ"
     },
     "en": {
-      "answer": "DECISION",
-      "hint": "The result of thinking that determines what to do."
+      "hint": "The result of thinking that determines what to do.",
+      "answerLength": 8,
+      "pool": "FEOIHICBANSGD"
     },
     "az": {
-      "answer": "QƏRAR",
-      "hint": "Düşünmədən sonra görüləcək işi müəyyən edən nəticə."
+      "hint": "Düşünmədən sonra görüləcək işi müəyyən edən nəticə.",
+      "answerLength": 5,
+      "pool": "CRABƏÇEDGRFQ"
     }
   },
   {
@@ -581,16 +659,19 @@ window.PW_MAIN_EXTRA=[
       "⏰"
     ],
     "ru": {
-      "answer": "ПРИВЫЧКА",
-      "hint": "Действие, которое регулярно повторяется и становится привычным."
+      "hint": "Действие, которое регулярно повторяется и становится привычным.",
+      "answerLength": 8,
+      "pool": "ЕВДАРЫГПКИЖБЧ"
     },
     "en": {
-      "answer": "HABIT",
-      "hint": "An action repeated regularly until it becomes automatic."
+      "hint": "An action repeated regularly until it becomes automatic.",
+      "answerLength": 5,
+      "pool": "HJDKACTGFIBE"
     },
     "az": {
-      "answer": "VƏRDİŞ",
-      "hint": "Müntəzəm təkrarlanaraq adiləşən hərəkət."
+      "hint": "Müntəzəm təkrarlanaraq adiləşən hərəkət.",
+      "answerLength": 6,
+      "pool": "VİƏFAÇRDEŞCB"
     }
   },
   {
@@ -603,16 +684,19 @@ window.PW_MAIN_EXTRA=[
       "👤"
     ],
     "ru": {
-      "answer": "ХАРАКТЕР",
-      "hint": "Совокупность устойчивых черт поведения человека."
+      "hint": "Совокупность устойчивых черт поведения человека.",
+      "answerLength": 8,
+      "pool": "ХКЕВРБТРЖДГАА"
     },
     "en": {
-      "answer": "CHARACTER",
-      "hint": "The set of stable traits that shape a person's behavior."
+      "hint": "The set of stable traits that shape a person's behavior.",
+      "answerLength": 9,
+      "pool": "DFRBTECCJAHRAG"
     },
     "az": {
-      "answer": "XARAKTER",
-      "hint": "İnsanın davranışını formalaşdıran sabit xüsusiyyətlər."
+      "hint": "İnsanın davranışını formalaşdıran sabit xüsusiyyətlər.",
+      "answerLength": 8,
+      "pool": "RBÇDECATƏRXAK"
     }
   },
   {
@@ -625,16 +709,19 @@ window.PW_MAIN_EXTRA=[
       "💬"
     ],
     "ru": {
-      "answer": "ЛИЧНОСТЬ",
-      "hint": "Уникальное сочетание качеств, взглядов и поведения человека."
+      "hint": "Уникальное сочетание качеств, взглядов и поведения человека.",
+      "answerLength": 8,
+      "pool": "НЛЬГЧБИТСОАДВ"
     },
     "en": {
-      "answer": "PERSONALITY",
-      "hint": "A person's unique combination of traits, views, and behavior."
+      "hint": "A person's unique combination of traits, views, and behavior.",
+      "answerLength": 11,
+      "pool": "RDIBPEOYACGTLSFN"
     },
     "az": {
-      "answer": "ŞƏXSİYYƏT",
-      "hint": "İnsanın xüsusiyyət, baxış və davranışlarının unikal birliyi."
+      "hint": "İnsanın xüsusiyyət, baxış və davranışlarının unikal birliyi.",
+      "answerLength": 9,
+      "pool": "BXYAİƏYSTÇŞCDƏ"
     }
   },
   {
@@ -647,16 +734,19 @@ window.PW_MAIN_EXTRA=[
       "🏆"
     ],
     "ru": {
-      "answer": "ТАЛАНТ",
-      "hint": "Выраженная природная способность к определённой деятельности."
+      "hint": "Выраженная природная способность к определённой деятельности.",
+      "answerLength": 6,
+      "pool": "АГВЛЕНАДТЖТБ"
     },
     "en": {
-      "answer": "TALENT",
-      "hint": "A strong natural ability in a particular activity."
+      "hint": "A strong natural ability in a particular activity.",
+      "answerLength": 6,
+      "pool": "LEFTDCAGTBHN"
     },
     "az": {
-      "answer": "İSTEDAD",
-      "hint": "Müəyyən sahədə güclü təbii qabiliyyət."
+      "hint": "Müəyyən sahədə güclü təbii qabiliyyət.",
+      "answerLength": 7,
+      "pool": "CƏÇAİBDFSTED"
     }
   },
   {
@@ -669,16 +759,19 @@ window.PW_MAIN_EXTRA=[
       "✋"
     ],
     "ru": {
-      "answer": "НАВЫК",
-      "hint": "Умение, развитое практикой и повторением."
+      "hint": "Умение, развитое практикой и повторением.",
+      "answerLength": 5,
+      "pool": "НЫЗЕБЖГИКДВА"
     },
     "en": {
-      "answer": "SKILL",
-      "hint": "An ability developed through practice and repetition."
+      "hint": "An ability developed through practice and repetition.",
+      "answerLength": 5,
+      "pool": "DKIASLFELCBG"
     },
     "az": {
-      "answer": "BACARIQ",
-      "hint": "Təcrübə və təkrar ilə inkişaf etdirilən bacarıq."
+      "hint": "Təcrübə və təkrar ilə inkişaf etdirilən bacarıq.",
+      "answerLength": 7,
+      "pool": "CQDEIƏRÇBAAF"
     }
   },
   {
@@ -691,16 +784,19 @@ window.PW_MAIN_EXTRA=[
       "🛤️"
     ],
     "ru": {
-      "answer": "ОПЫТ",
-      "hint": "Знания и умения, полученные через события и практику."
+      "hint": "Знания и умения, полученные через события и практику.",
+      "answerLength": 4,
+      "pool": "ВЕПБЫОГЖТЗАД"
     },
     "en": {
-      "answer": "EXPERIENCE",
-      "hint": "Knowledge and skills gained through events and practice."
+      "hint": "Knowledge and skills gained through events and practice.",
+      "answerLength": 10,
+      "pool": "EDRIPNXCFBGEAEE"
     },
     "az": {
-      "answer": "TƏCRÜBƏ",
-      "hint": "Hadisə və təcrübə yolu ilə qazanılan bilik və bacarıqlar."
+      "hint": "Hadisə və təcrübə yolu ilə qazanılan bilik və bacarıqlar.",
+      "answerLength": 7,
+      "pool": "ETƏBFDACÇÜRƏ"
     }
   },
   {
@@ -713,16 +809,19 @@ window.PW_MAIN_EXTRA=[
       "🎯"
     ],
     "ru": {
-      "answer": "МЕЧТА",
-      "hint": "Желаемый образ будущего, к которому человек стремится."
+      "hint": "Желаемый образ будущего, к которому человек стремится.",
+      "answerLength": 5,
+      "pool": "МЕВАБЖДГЗИЧТ"
     },
     "en": {
-      "answer": "DREAM",
-      "hint": "A desired vision of the future that someone hopes to reach."
+      "hint": "A desired vision of the future that someone hopes to reach.",
+      "answerLength": 5,
+      "pool": "DMFKJHGBEACR"
     },
     "az": {
-      "answer": "ARZU",
-      "hint": "İnsanın çatmaq istədiyi arzulanan gələcək təsviri."
+      "hint": "İnsanın çatmaq istədiyi arzulanan gələcək təsviri.",
+      "answerLength": 4,
+      "pool": "ÇBZGEUAFDƏCR"
     }
   },
   {
@@ -735,16 +834,19 @@ window.PW_MAIN_EXTRA=[
       "🧭"
     ],
     "ru": {
-      "answer": "ЦЕЛЬ",
-      "hint": "Результат, к которому направлены действия."
+      "hint": "Результат, к которому направлены действия.",
+      "answerLength": 4,
+      "pool": "ЕЬБГЖДЦЛВИАЗ"
     },
     "en": {
-      "answer": "GOAL",
-      "hint": "A result that actions are directed toward."
+      "hint": "A result that actions are directed toward.",
+      "answerLength": 4,
+      "pool": "OHCJLAEGDBKF"
     },
     "az": {
-      "answer": "MƏQSƏD",
-      "hint": "Hərəkətlərin yönəldiyi nəticə."
+      "hint": "Hərəkətlərin yönəldiyi nəticə.",
+      "answerLength": 6,
+      "pool": "ƏQECFBDÇAMSƏ"
     }
   },
   {
@@ -757,16 +859,19 @@ window.PW_MAIN_EXTRA=[
       "💪"
     ],
     "ru": {
-      "answer": "МОТИВАЦИЯ",
-      "hint": "Внутренний или внешний стимул, побуждающий действовать."
+      "hint": "Внутренний или внешний стимул, побуждающий действовать.",
+      "answerLength": 9,
+      "pool": "ВТБДЦГМЯИОЖЕИА"
     },
     "en": {
-      "answer": "MOTIVATION",
-      "hint": "An inner or external drive that encourages action."
+      "hint": "An inner or external drive that encourages action.",
+      "answerLength": 10,
+      "pool": "ONEVAIIMDTBOFTC"
     },
     "az": {
-      "answer": "MOTİVASİYA",
-      "hint": "Hərəkət etməyə sövq edən daxili və ya xarici stimul."
+      "hint": "Hərəkət etməyə sövq edən daxili və ya xarici stimul.",
+      "answerLength": 10,
+      "pool": "BATİİVOMESADYÇC"
     }
   },
   {
@@ -779,16 +884,19 @@ window.PW_MAIN_EXTRA=[
       "⚠️"
     ],
     "ru": {
-      "answer": "ВНИМАНИЕ",
-      "hint": "Сосредоточенность на определённом объекте или задаче."
+      "hint": "Сосредоточенность на определённом объекте или задаче.",
+      "answerLength": 8,
+      "pool": "ВИАБДИЖЕГННМЗ"
     },
     "en": {
-      "answer": "ATTENTION",
-      "hint": "Focus on a particular object or task."
+      "hint": "Focus on a particular object or task.",
+      "answerLength": 9,
+      "pool": "TEITCOBDNFTGNA"
     },
     "az": {
-      "answer": "DİQQƏT",
-      "hint": "Müəyyən obyektə və ya tapşırığa yönəlmiş fokus."
+      "hint": "Müəyyən obyektə və ya tapşırığa yönəlmiş fokus.",
+      "answerLength": 6,
+      "pool": "CDQTEÇİFƏQBA"
     }
   },
   {
@@ -801,16 +909,19 @@ window.PW_MAIN_EXTRA=[
       "💡"
     ],
     "ru": {
-      "answer": "МЫШЛЕНИЕ",
-      "hint": "Процесс рассуждения, понимания и поиска решений."
+      "hint": "Процесс рассуждения, понимания и поиска решений.",
+      "answerLength": 8,
+      "pool": "ЛНЕЕЫДШБМГВИА"
     },
     "en": {
-      "answer": "THINKING",
-      "hint": "The process of reasoning, understanding, and finding solutions."
+      "hint": "The process of reasoning, understanding, and finding solutions.",
+      "answerLength": 8,
+      "pool": "BCAGNTIDHINKE"
     },
     "az": {
-      "answer": "TƏFƏKKÜR",
-      "hint": "Düşünmə, anlama və həll tapma prosesi."
+      "hint": "Düşünmə, anlama və həll tapma prosesi.",
+      "answerLength": 8,
+      "pool": "ƏÜKCDFRBƏKTAÇ"
     }
   },
   {
@@ -823,16 +934,19 @@ window.PW_MAIN_EXTRA=[
       "🎨"
     ],
     "ru": {
-      "answer": "ВООБРАЖЕНИЕ",
-      "hint": "Способность создавать в уме образы того, чего нет перед глазами."
+      "hint": "Способность создавать в уме образы того, чего нет перед глазами.",
+      "answerLength": 11,
+      "pool": "БВНЕОЗАОИГЖКЙДРЕ"
     },
     "en": {
-      "answer": "IMAGINATION",
-      "hint": "The ability to create mental images of things not present."
+      "hint": "The ability to create mental images of things not present.",
+      "answerLength": 11,
+      "pool": "MGANTNCFAIBDOIEI"
     },
     "az": {
-      "answer": "TƏXƏYYÜL",
-      "hint": "Göz önündə olmayan şeylərin obrazını zehində yaratmaq qabiliyyəti."
+      "hint": "Göz önündə olmayan şeylərin obrazını zehində yaratmaq qabiliyyəti.",
+      "answerLength": 8,
+      "pool": "TƏXYÜBAƏDCYÇL"
     }
   },
   {
@@ -845,16 +959,19 @@ window.PW_MAIN_EXTRA=[
       "👁️"
     ],
     "ru": {
-      "answer": "ИНТУИЦИЯ",
-      "hint": "Быстрое понимание без явной цепочки рассуждений."
+      "hint": "Быстрое понимание без явной цепочки рассуждений.",
+      "answerLength": 8,
+      "pool": "ЯБИЦВДНИУГТАИ"
     },
     "en": {
-      "answer": "INTUITION",
-      "hint": "Quick understanding without an explicit chain of reasoning."
+      "hint": "Quick understanding without an explicit chain of reasoning.",
+      "answerLength": 9,
+      "pool": "ITUBIIENTONDAC"
     },
     "az": {
-      "answer": "İNTUİSİYA",
-      "hint": "Açıq məntiq zənciri olmadan sürətli anlama."
+      "hint": "Açıq məntiq zənciri olmadan sürətli anlama.",
+      "answerLength": 9,
+      "pool": "İCİEİUTNAÇDBSY"
     }
   },
   {
@@ -867,16 +984,19 @@ window.PW_MAIN_EXTRA=[
       "🌌"
     ],
     "ru": {
-      "answer": "СОЗНАНИЕ",
-      "hint": "Способность осознавать себя и окружающий мир."
+      "hint": "Способность осознавать себя и окружающий мир.",
+      "answerLength": 8,
+      "pool": "ИЗОАНБГНЕЖСДВ"
     },
     "en": {
-      "answer": "CONSCIOUSNESS",
-      "hint": "The ability to be aware of yourself and the world around you."
+      "hint": "The ability to be aware of yourself and the world around you.",
+      "answerLength": 13,
+      "pool": "DNAISUGSONOSBCCFSE"
     },
     "az": {
-      "answer": "ŞÜUR",
-      "hint": "Özünü və ətraf aləmi dərk etmək qabiliyyəti."
+      "hint": "Özünü və ətraf aləmi dərk etmək qabiliyyəti.",
+      "answerLength": 4,
+      "pool": "ÜCDÇEARUBFŞƏ"
     }
   },
   {
@@ -889,16 +1009,19 @@ window.PW_MAIN_EXTRA=[
       "💬"
     ],
     "ru": {
-      "answer": "ПРИВЕТСТВИЕ",
-      "hint": "Слова или жест, которыми начинают встречу или разговор."
+      "hint": "Слова или жест, которыми начинают встречу или разговор.",
+      "answerLength": 11,
+      "pool": "ИДПЕГЕВЖСТРАБТИВ"
     },
     "en": {
-      "answer": "GREETING",
-      "hint": "Words or a gesture used to begin a meeting or conversation."
+      "hint": "Words or a gesture used to begin a meeting or conversation.",
+      "answerLength": 8,
+      "pool": "DARICGNFEGETB"
     },
     "az": {
-      "answer": "SALAMLAMA",
-      "hint": "Görüşə və ya söhbətə başlamaq üçün işlədilən söz və ya jest."
+      "hint": "Görüşə və ya söhbətə başlamaq üçün işlədilən söz və ya jest.",
+      "answerLength": 9,
+      "pool": "ALDMEÇSCAMBAAL"
     }
   },
   {
@@ -911,16 +1034,19 @@ window.PW_MAIN_EXTRA=[
       "👉"
     ],
     "ru": {
-      "answer": "ЖЕСТ",
-      "hint": "Движение руки или тела, которое передаёт смысл."
+      "hint": "Движение руки или тела, которое передаёт смысл.",
+      "answerLength": 4,
+      "pool": "АБДГЗЖИЙТВЕС"
     },
     "en": {
-      "answer": "GESTURE",
-      "hint": "A movement of the hand or body that communicates meaning."
+      "hint": "A movement of the hand or body that communicates meaning.",
+      "answerLength": 7,
+      "pool": "UBDAESECTFRG"
     },
     "az": {
-      "answer": "JEST",
-      "hint": "Məna çatdıran əl və ya bədən hərəkəti."
+      "hint": "Məna çatdıran əl və ya bədən hərəkəti.",
+      "answerLength": 4,
+      "pool": "EDABƏÇCFTSGJ"
     }
   },
   {
@@ -933,16 +1059,19 @@ window.PW_MAIN_EXTRA=[
       "😢"
     ],
     "ru": {
-      "answer": "МИМИКА",
-      "hint": "Движения мышц лица, выражающие эмоции."
+      "hint": "Движения мышц лица, выражающие эмоции.",
+      "answerLength": 6,
+      "pool": "КЕМЖГВБАМИИД"
     },
     "en": {
-      "answer": "EXPRESSION",
-      "hint": "Facial movements that express emotions."
+      "hint": "Facial movements that express emotions.",
+      "answerLength": 10,
+      "pool": "SEXBDFPNSCROEAI"
     },
     "az": {
-      "answer": "MİMİKA",
-      "hint": "Emosiyaları göstərən üz əzələlərinin hərəkətləri."
+      "hint": "Emosiyaları göstərən üz əzələlərinin hərəkətləri.",
+      "answerLength": 6,
+      "pool": "ÇİMBDAKİEƏMC"
     }
   },
   {
@@ -955,16 +1084,19 @@ window.PW_MAIN_EXTRA=[
       "👐"
     ],
     "ru": {
-      "answer": "ОБЪЯТИЕ",
-      "hint": "Жест близости, когда человека обнимают руками."
+      "hint": "Жест близости, когда человека обнимают руками.",
+      "answerLength": 7,
+      "pool": "ИЕВАЯГЖОДЪБТ"
     },
     "en": {
-      "answer": "HUG",
-      "hint": "A gesture of closeness made by wrapping arms around someone."
+      "hint": "A gesture of closeness made by wrapping arms around someone.",
+      "answerLength": 3,
+      "pool": "KEFJABHDULCG"
     },
     "az": {
-      "answer": "QUCAQ",
-      "hint": "Birini qollarla qucaqlamaqla göstərilən yaxınlıq jesti."
+      "hint": "Birini qollarla qucaqlamaqla göstərilən yaxınlıq jesti.",
+      "answerLength": 5,
+      "pool": "AQƏBFDGÇUEQC"
     }
   },
   {
@@ -977,16 +1109,19 @@ window.PW_MAIN_EXTRA=[
       "🫶"
     ],
     "ru": {
-      "answer": "ПОЦЕЛУЙ",
-      "hint": "Прикосновение губами как знак привязанности или приветствия."
+      "hint": "Прикосновение губами как знак привязанности или приветствия.",
+      "answerLength": 7,
+      "pool": "БУЙАЛОЦВПГЕД"
     },
     "en": {
-      "answer": "KISS",
-      "hint": "A touch with the lips as a sign of affection or greeting."
+      "hint": "A touch with the lips as a sign of affection or greeting.",
+      "answerLength": 4,
+      "pool": "EHSCAGBIKSDF"
     },
     "az": {
-      "answer": "ÖPÜŞ",
-      "hint": "Sevgi və ya salamlaşma əlaməti kimi dodaq toxunuşu."
+      "hint": "Sevgi və ya salamlaşma əlaməti kimi dodaq toxunuşu.",
+      "answerLength": 4,
+      "pool": "ƏŞAÇCDÖPBFÜE"
     }
   },
   {
@@ -999,16 +1134,19 @@ window.PW_MAIN_EXTRA=[
       "👶"
     ],
     "ru": {
-      "answer": "СЕМЬЯ",
-      "hint": "Близкие люди, связанные родством и общей жизнью."
+      "hint": "Близкие люди, связанные родством и общей жизнью.",
+      "answerLength": 5,
+      "pool": "ЕВЖМСДЬЗГЯАБ"
     },
     "en": {
-      "answer": "FAMILY",
-      "hint": "Close people connected by kinship and shared life."
+      "hint": "Close people connected by kinship and shared life.",
+      "answerLength": 6,
+      "pool": "AMBYFCIHGDEL"
     },
     "az": {
-      "answer": "AİLƏ",
-      "hint": "Qohumluq və ortaq həyatla bağlı yaxın insanlar."
+      "hint": "Qohumluq və ortaq həyatla bağlı yaxın insanlar.",
+      "answerLength": 4,
+      "pool": "LƏCFÇDİEGAĞB"
     }
   },
   {
@@ -1021,16 +1159,19 @@ window.PW_MAIN_EXTRA=[
       "🛝"
     ],
     "ru": {
-      "answer": "ДЕТСТВО",
-      "hint": "Период жизни от рождения до взросления."
+      "hint": "Период жизни от рождения до взросления.",
+      "answerLength": 7,
+      "pool": "ДТЖТГОБЗАВСЕ"
     },
     "en": {
-      "answer": "CHILDHOOD",
-      "hint": "The period of life from birth until growing up."
+      "hint": "The period of life from birth until growing up.",
+      "answerLength": 9,
+      "pool": "DGOHDBCFIOAHEL"
     },
     "az": {
-      "answer": "UŞAQLIQ",
-      "hint": "Doğulandan böyüməyə qədər olan həyat dövrü."
+      "hint": "Doğulandan böyüməyə qədər olan həyat dövrü.",
+      "answerLength": 7,
+      "pool": "UILCAÇDBQŞQE"
     }
   },
   {
@@ -1043,16 +1184,19 @@ window.PW_MAIN_EXTRA=[
       "🌱"
     ],
     "ru": {
-      "answer": "ЮНОСТЬ",
-      "hint": "Период между детством и зрелостью."
+      "hint": "Период между детством и зрелостью.",
+      "answerLength": 6,
+      "pool": "НБСДОГЕТАЮЬВ"
     },
     "en": {
-      "answer": "YOUTH",
-      "hint": "The stage of life between childhood and adulthood."
+      "hint": "The stage of life between childhood and adulthood.",
+      "answerLength": 5,
+      "pool": "OATHCFDUGYEB"
     },
     "az": {
-      "answer": "GƏNCLİK",
-      "hint": "Uşaqlıqla yetkinlik arasındakı həyat dövrü."
+      "hint": "Uşaqlıqla yetkinlik arasındakı həyat dövrü.",
+      "answerLength": 7,
+      "pool": "ƏÇİACGLDNEBK"
     }
   },
   {
@@ -1065,16 +1209,19 @@ window.PW_MAIN_EXTRA=[
       "🌳"
     ],
     "ru": {
-      "answer": "ЗРЕЛОСТЬ",
-      "hint": "Состояние взрослости и сформированности."
+      "hint": "Состояние взрослости и сформированности.",
+      "answerLength": 8,
+      "pool": "АЛСОВЗРЕБГЬТД"
     },
     "en": {
-      "answer": "MATURITY",
-      "hint": "The state of being fully grown and developed."
+      "hint": "The state of being fully grown and developed.",
+      "answerLength": 8,
+      "pool": "DCUIATBMFTERY"
     },
     "az": {
-      "answer": "YETKİNLİK",
-      "hint": "Tam formalaşmış və yetkin olma vəziyyəti."
+      "hint": "Tam formalaşmış və yetkin olma vəziyyəti.",
+      "answerLength": 9,
+      "pool": "YİTNEKLAÇCBDKİ"
     }
   },
   {
@@ -1087,16 +1234,19 @@ window.PW_MAIN_EXTRA=[
       "🌳"
     ],
     "ru": {
-      "answer": "ДОЛГОЛЕТИЕ",
-      "hint": "Долгая продолжительность жизни."
+      "hint": "Долгая продолжительность жизни.",
+      "answerLength": 10,
+      "pool": "ЛАЗЕОЛЕБИЖОГВТД"
     },
     "en": {
-      "answer": "LONGEVITY",
-      "hint": "A long duration of life."
+      "hint": "A long duration of life.",
+      "answerLength": 9,
+      "pool": "ODVTACENYILFGB"
     },
     "az": {
-      "answer": "UZUNÖMÜRLÜLÜK",
-      "hint": "Uzun ömür sürmək və yüksək həyat müddəti."
+      "hint": "Uzun ömür sürmək və yüksək həyat müddəti.",
+      "answerLength": 13,
+      "pool": "ZMARNUÇÜULDBÜKCÜLÖ"
     }
   },
   {
@@ -1109,16 +1259,19 @@ window.PW_MAIN_EXTRA=[
       "✨"
     ],
     "ru": {
-      "answer": "ЗВЕЗДА",
-      "hint": "Светящееся небесное тело, подобное Солнцу."
+      "hint": "Светящееся небесное тело, подобное Солнцу.",
+      "answerLength": 6,
+      "pool": "ЕИДКБЙЗАЖЗГВ"
     },
     "en": {
-      "answer": "STAR",
-      "hint": "A luminous celestial body like the Sun."
+      "hint": "A luminous celestial body like the Sun.",
+      "answerLength": 4,
+      "pool": "DTAGBCHRFESJ"
     },
     "az": {
-      "answer": "ULDUZ",
-      "hint": "Günəş kimi işıq saçan göy cismi."
+      "hint": "Günəş kimi işıq saçan göy cismi.",
+      "answerLength": 5,
+      "pool": "DZUCLBAUÇEƏF"
     }
   },
   {
@@ -1131,16 +1284,19 @@ window.PW_MAIN_EXTRA=[
       "🌍"
     ],
     "ru": {
-      "answer": "СОЛНЦЕ",
-      "hint": "Звезда в центре нашей планетной системы."
+      "hint": "Звезда в центре нашей планетной системы.",
+      "answerLength": 6,
+      "pool": "АНДЖОЛЕСБЦГВ"
     },
     "en": {
-      "answer": "SUN",
-      "hint": "The star at the center of our planetary system."
+      "hint": "The star at the center of our planetary system.",
+      "answerLength": 3,
+      "pool": "ACGHSBUJEFND"
     },
     "az": {
-      "answer": "GÜNƏŞ",
-      "hint": "Planet sistemimizin mərkəzindəki ulduz."
+      "hint": "Planet sistemimizin mərkəzindəki ulduz.",
+      "answerLength": 5,
+      "pool": "CGÜDANEFƏŞÇB"
     }
   },
   {
@@ -1153,16 +1309,19 @@ window.PW_MAIN_EXTRA=[
       "🌊"
     ],
     "ru": {
-      "answer": "ЛУНА",
-      "hint": "Естественный спутник Земли."
+      "hint": "Естественный спутник Земли.",
+      "answerLength": 4,
+      "pool": "ЗВБЕНУДИГЖЛА"
     },
     "en": {
-      "answer": "MOON",
-      "hint": "Earth's natural satellite."
+      "hint": "Earth's natural satellite.",
+      "answerLength": 4,
+      "pool": "MNOGBDEHCFAO"
     },
     "az": {
-      "answer": "AY",
-      "hint": "Yer kürəsinin təbii peyki."
+      "hint": "Yer kürəsinin təbii peyki.",
+      "answerLength": 2,
+      "pool": "AÇFECGƏHBDĞY"
     }
   },
   {
@@ -1175,16 +1334,19 @@ window.PW_MAIN_EXTRA=[
       "🛰️"
     ],
     "ru": {
-      "answer": "МЕРКУРИЙ",
-      "hint": "Ближайшая к Солнцу планета."
+      "hint": "Ближайшая к Солнцу планета.",
+      "answerLength": 8,
+      "pool": "РАВИМКГРЙЕУДБ"
     },
     "en": {
-      "answer": "MERCURY",
-      "hint": "The planet closest to the Sun."
+      "hint": "The planet closest to the Sun.",
+      "answerLength": 7,
+      "pool": "EGCDRFAURMYB"
     },
     "az": {
-      "answer": "MERKURİ",
-      "hint": "Günəşə ən yaxın planet."
+      "hint": "Günəşə ən yaxın planet.",
+      "answerLength": 7,
+      "pool": "DCRMKARUÇİEB"
     }
   },
   {
@@ -1197,16 +1359,19 @@ window.PW_MAIN_EXTRA=[
       "🔭"
     ],
     "ru": {
-      "answer": "ВЕНЕРА",
-      "hint": "Планета с плотной атмосферой, соседняя с Землёй."
+      "hint": "Планета с плотной атмосферой, соседняя с Землёй.",
+      "answerLength": 6,
+      "pool": "ЗБЕИДГНЖРЕВА"
     },
     "en": {
-      "answer": "VENUS",
-      "hint": "A planet with a dense atmosphere neighboring Earth."
+      "hint": "A planet with a dense atmosphere neighboring Earth.",
+      "answerLength": 5,
+      "pool": "VBFDAHNCGESU"
     },
     "az": {
-      "answer": "VENERA",
-      "hint": "Yerə qonşu, sıx atmosferli planet."
+      "hint": "Yerə qonşu, sıx atmosferli planet.",
+      "answerLength": 6,
+      "pool": "BNAƏREÇDVCFE"
     }
   },
   {
@@ -1219,16 +1384,19 @@ window.PW_MAIN_EXTRA=[
       "🌊"
     ],
     "ru": {
-      "answer": "ЗЕМЛЯ",
-      "hint": "Планета, на которой живут люди."
+      "hint": "Планета, на которой живут люди.",
+      "answerLength": 5,
+      "pool": "ЕГДВАБИЯЛЖМЗ"
     },
     "en": {
-      "answer": "EARTH",
-      "hint": "The planet where humans live."
+      "hint": "The planet where humans live.",
+      "answerLength": 5,
+      "pool": "ABTDHGERFKCJ"
     },
     "az": {
-      "answer": "YER",
-      "hint": "İnsanların yaşadığı planet."
+      "hint": "İnsanların yaşadığı planet.",
+      "answerLength": 3,
+      "pool": "ĞBADÇYCRFƏEG"
     }
   },
   {
@@ -1241,16 +1409,19 @@ window.PW_MAIN_EXTRA=[
       "🤖"
     ],
     "ru": {
-      "answer": "МАРС",
-      "hint": "Красная планета, четвёртая от Солнца."
+      "hint": "Красная планета, четвёртая от Солнца.",
+      "answerLength": 4,
+      "pool": "РЗМГАЖВЕИСБД"
     },
     "en": {
-      "answer": "MARS",
-      "hint": "The Red Planet, fourth from the Sun."
+      "hint": "The Red Planet, fourth from the Sun.",
+      "answerLength": 4,
+      "pool": "RSBAMDHJGEFC"
     },
     "az": {
-      "answer": "MARS",
-      "hint": "Günəşdən dördüncü olan Qırmızı planet."
+      "hint": "Günəşdən dördüncü olan Qırmızı planet.",
+      "answerLength": 4,
+      "pool": "REMBAÇƏGDFSC"
     }
   },
   {
@@ -1263,16 +1434,19 @@ window.PW_MAIN_EXTRA=[
       "🌌"
     ],
     "ru": {
-      "answer": "ЮПИТЕР",
-      "hint": "Крупнейшая планета Солнечной системы."
+      "hint": "Крупнейшая планета Солнечной системы.",
+      "answerLength": 6,
+      "pool": "ГЮПЕРБТДАВЖИ"
     },
     "en": {
-      "answer": "JUPITER",
-      "hint": "The largest planet in the Solar System."
+      "hint": "The largest planet in the Solar System.",
+      "answerLength": 7,
+      "pool": "ECTAUPIFDBRJ"
     },
     "az": {
-      "answer": "YUPİTER",
-      "hint": "Günəş sisteminin ən böyük planeti."
+      "hint": "Günəş sisteminin ən böyük planeti.",
+      "answerLength": 7,
+      "pool": "CİBÇPAUDRTEY"
     }
   },
   {
@@ -1285,16 +1459,19 @@ window.PW_MAIN_EXTRA=[
       "🌌"
     ],
     "ru": {
-      "answer": "САТУРН",
-      "hint": "Газовый гигант, известный яркими кольцами."
+      "hint": "Газовый гигант, известный яркими кольцами.",
+      "answerLength": 6,
+      "pool": "СЕТБУВАГНЖРД"
     },
     "en": {
-      "answer": "SATURN",
-      "hint": "A gas giant famous for its bright rings."
+      "hint": "A gas giant famous for its bright rings.",
+      "answerLength": 6,
+      "pool": "SBRGTFAUNEDC"
     },
     "az": {
-      "answer": "SATURN",
-      "hint": "Parlaq halqaları ilə tanınan qaz nəhəngi."
+      "hint": "Parlaq halqaları ilə tanınan qaz nəhəngi.",
+      "answerLength": 6,
+      "pool": "SATRƏÇBEDNUC"
     }
   },
   {
@@ -1307,16 +1484,19 @@ window.PW_MAIN_EXTRA=[
       "🌌"
     ],
     "ru": {
-      "answer": "УРАН",
-      "hint": "Ледяной гигант, вращающийся почти на боку."
+      "hint": "Ледяной гигант, вращающийся почти на боку.",
+      "answerLength": 4,
+      "pool": "РВНДЕАЗЖИУГБ"
     },
     "en": {
-      "answer": "URANUS",
-      "hint": "An ice giant that rotates almost on its side."
+      "hint": "An ice giant that rotates almost on its side.",
+      "answerLength": 6,
+      "pool": "RSEGNDCBUUFA"
     },
     "az": {
-      "answer": "URAN",
-      "hint": "Demək olar ki, yan üstə fırlanan buz nəhəngi."
+      "hint": "Demək olar ki, yan üstə fırlanan buz nəhəngi.",
+      "answerLength": 4,
+      "pool": "NERFDGBƏUÇCA"
     }
   },
   {
@@ -1329,16 +1509,19 @@ window.PW_MAIN_EXTRA=[
       "🔭"
     ],
     "ru": {
-      "answer": "НЕПТУН",
-      "hint": "Далёкий ледяной гигант с очень сильными ветрами."
+      "hint": "Далёкий ледяной гигант с очень сильными ветрами.",
+      "answerLength": 6,
+      "pool": "АПНБНГУДТЕВЖ"
     },
     "en": {
-      "answer": "NEPTUNE",
-      "hint": "A distant ice giant with extremely strong winds."
+      "hint": "A distant ice giant with extremely strong winds.",
+      "answerLength": 7,
+      "pool": "EPBFUANDTNEC"
     },
     "az": {
-      "answer": "NEPTUN",
-      "hint": "Çox güclü küləkləri olan uzaq buz nəhəngi."
+      "hint": "Çox güclü küləkləri olan uzaq buz nəhəngi.",
+      "answerLength": 6,
+      "pool": "UTANNƏPECDBÇ"
     }
   },
   {
@@ -1351,16 +1534,19 @@ window.PW_MAIN_EXTRA=[
       "🔭"
     ],
     "ru": {
-      "answer": "АСТЕРОИД",
-      "hint": "Небольшое каменное тело, обращающееся вокруг звезды."
+      "hint": "Небольшое каменное тело, обращающееся вокруг звезды.",
+      "answerLength": 8,
+      "pool": "БРАСДЖИОГЗТВЕ"
     },
     "en": {
-      "answer": "ASTEROID",
-      "hint": "A small rocky body orbiting a star."
+      "hint": "A small rocky body orbiting a star.",
+      "answerLength": 8,
+      "pool": "RSAGTIOEBCFHD"
     },
     "az": {
-      "answer": "ASTEROİD",
-      "hint": "Ulduz ətrafında dövr edən kiçik qayalı cisim."
+      "hint": "Ulduz ətrafında dövr edən kiçik qayalı cisim.",
+      "answerLength": 8,
+      "pool": "FTODABRÇCSEƏİ"
     }
   },
   {
@@ -1373,16 +1559,19 @@ window.PW_MAIN_EXTRA=[
       "🌌"
     ],
     "ru": {
-      "answer": "МЕТЕОР",
-      "hint": "Светящийся след частицы, сгорающей в атмосфере."
+      "hint": "Светящийся след частицы, сгорающей в атмосфере.",
+      "answerLength": 6,
+      "pool": "МОАРТГЕДЖБВЕ"
     },
     "en": {
-      "answer": "METEOR",
-      "hint": "The glowing streak of a particle burning in an atmosphere."
+      "hint": "The glowing streak of a particle burning in an atmosphere.",
+      "answerLength": 6,
+      "pool": "TOMRCAEDFBEG"
     },
     "az": {
-      "answer": "METEOR",
-      "hint": "Atmosferdə yanan hissəciyin parlaq izi."
+      "hint": "Atmosferdə yanan hissəciyin parlaq izi.",
+      "answerLength": 6,
+      "pool": "MORÇTCEDAEƏB"
     }
   },
   {
@@ -1395,16 +1584,19 @@ window.PW_MAIN_EXTRA=[
       "🌍"
     ],
     "ru": {
-      "answer": "МЕТЕОРИТ",
-      "hint": "Космический камень, достигший поверхности планеты."
+      "hint": "Космический камень, достигший поверхности планеты.",
+      "answerLength": 8,
+      "pool": "ТИМРОТАЕЕВБГД"
     },
     "en": {
-      "answer": "METEORITE",
-      "hint": "A space rock that reaches a planet's surface."
+      "hint": "A space rock that reaches a planet's surface.",
+      "answerLength": 9,
+      "pool": "TERFEDMEBCAOTI"
     },
     "az": {
-      "answer": "METEORİT",
-      "hint": "Planet səthinə çatan kosmik daş."
+      "hint": "Planet səthinə çatan kosmik daş.",
+      "answerLength": 8,
+      "pool": "MDÇARTİEOECBT"
     }
   },
   {
@@ -1417,16 +1609,19 @@ window.PW_MAIN_EXTRA=[
       "🔭"
     ],
     "ru": {
-      "answer": "ТУМАННОСТЬ",
-      "hint": "Облако газа и пыли в межзвёздном пространстве."
+      "hint": "Облако газа и пыли в межзвёздном пространстве.",
+      "answerLength": 10,
+      "pool": "МСУНГТЬВДБТНАОЕ"
     },
     "en": {
-      "answer": "NEBULA",
-      "hint": "A cloud of gas and dust in interstellar space."
+      "hint": "A cloud of gas and dust in interstellar space.",
+      "answerLength": 6,
+      "pool": "NFBHUDCALJEG"
     },
     "az": {
-      "answer": "DUMANLIQ",
-      "hint": "Ulduzlararası məkanda qaz və toz buludu."
+      "hint": "Ulduzlararası məkanda qaz və toz buludu.",
+      "answerLength": 8,
+      "pool": "IALQUCMDÇƏBNE"
     }
   },
   {
@@ -1439,16 +1634,19 @@ window.PW_MAIN_EXTRA=[
       "⚡"
     ],
     "ru": {
-      "answer": "КВАЗАР",
-      "hint": "Чрезвычайно яркое активное ядро далёкой галактики."
+      "hint": "Чрезвычайно яркое активное ядро далёкой галактики.",
+      "answerLength": 6,
+      "pool": "ДИВРЕГААЗКЖБ"
     },
     "en": {
-      "answer": "QUASAR",
-      "hint": "An extremely bright active core of a distant galaxy."
+      "hint": "An extremely bright active core of a distant galaxy.",
+      "answerLength": 6,
+      "pool": "URDCBAEQFGSA"
     },
     "az": {
-      "answer": "KVAZAR",
-      "hint": "Uzaq qalaktikanın son dərəcə parlaq aktiv nüvəsi."
+      "hint": "Uzaq qalaktikanın son dərəcə parlaq aktiv nüvəsi.",
+      "answerLength": 6,
+      "pool": "EÇVƏRCAKZBDA"
     }
   },
   {
@@ -1461,16 +1659,19 @@ window.PW_MAIN_EXTRA=[
       "🔭"
     ],
     "ru": {
-      "answer": "ПУЛЬСАР",
-      "hint": "Быстро вращающаяся нейтронная звезда с регулярными импульсами."
+      "hint": "Быстро вращающаяся нейтронная звезда с регулярными импульсами.",
+      "answerLength": 7,
+      "pool": "ПЬРСДБВГЛАЕУ"
     },
     "en": {
-      "answer": "PULSAR",
-      "hint": "A rapidly rotating neutron star that emits regular pulses."
+      "hint": "A rapidly rotating neutron star that emits regular pulses.",
+      "answerLength": 6,
+      "pool": "ABUCPEDSLFRG"
     },
     "az": {
-      "answer": "PULSAR",
-      "hint": "Müntəzəm impulslar yayan sürətlə fırlanan neytron ulduzu."
+      "hint": "Müntəzəm impulslar yayan sürətlə fırlanan neytron ulduzu.",
+      "answerLength": 6,
+      "pool": "BALÇDRESCUPƏ"
     }
   },
   {
@@ -1483,16 +1684,19 @@ window.PW_MAIN_EXTRA=[
       "🔭"
     ],
     "ru": {
-      "answer": "СВЕРХНОВАЯ",
-      "hint": "Мощный взрыв звезды в конце её эволюции."
+      "hint": "Мощный взрыв звезды в конце её эволюции.",
+      "answerLength": 10,
+      "pool": "СОЗХЖРБГЕЯДВАВН"
     },
     "en": {
-      "answer": "SUPERNOVA",
-      "hint": "A powerful stellar explosion near the end of a star's life."
+      "hint": "A powerful stellar explosion near the end of a star's life.",
+      "answerLength": 9,
+      "pool": "UNBVCGFADROSEP"
     },
     "az": {
-      "answer": "SUPERNOVA",
-      "hint": "Ulduzun həyatının sonunda baş verən güclü partlayış."
+      "hint": "Ulduzun həyatının sonunda baş verən güclü partlayış.",
+      "answerLength": 9,
+      "pool": "UNBVAPRÇCOESƏD"
     }
   },
   {
@@ -1505,16 +1709,19 @@ window.PW_MAIN_EXTRA=[
       "🔭"
     ],
     "ru": {
-      "answer": "ЧЕРНАЯДЫРА",
-      "hint": "Область пространства, откуда не может выйти даже свет."
+      "hint": "Область пространства, откуда не может выйти даже свет.",
+      "answerLength": 10,
+      "pool": "ЕЯДЖАЗНВЫБРЧАРГ"
     },
     "en": {
-      "answer": "BLACKHOLE",
-      "hint": "A region of space from which even light cannot escape."
+      "hint": "A region of space from which even light cannot escape.",
+      "answerLength": 9,
+      "pool": "BFDLOMAGKHEJCL"
     },
     "az": {
-      "answer": "QARADƏLİK",
-      "hint": "Hətta işığın da çıxa bilmədiyi kosmos sahəsi."
+      "hint": "Hətta işığın da çıxa bilmədiyi kosmos sahəsi.",
+      "answerLength": 9,
+      "pool": "QDACELBFRİƏAKÇ"
     }
   },
   {
@@ -1527,16 +1734,19 @@ window.PW_MAIN_EXTRA=[
       "🔭"
     ],
     "ru": {
-      "answer": "СИНГУЛЯРНОСТЬ",
-      "hint": "Предельное состояние, где привычные физические описания перестают работать."
+      "hint": "Предельное состояние, где привычные физические описания перестают работать.",
+      "answerLength": 13,
+      "pool": "ИДЯСНАГЕБНТУРВЛЬОС"
     },
     "en": {
-      "answer": "SINGULARITY",
-      "hint": "An extreme state where ordinary physical descriptions break down."
+      "hint": "An extreme state where ordinary physical descriptions break down.",
+      "answerLength": 11,
+      "pool": "DLTRGCEBIAIFNYUS"
     },
     "az": {
-      "answer": "SİNQULYARLIQ",
-      "hint": "Adi fiziki təsvirlərin işləmədiyi hədd vəziyyəti."
+      "hint": "Adi fiziki təsvirlərin işləmədiyi hədd vəziyyəti.",
+      "answerLength": 12,
+      "pool": "NİYIQLSCBÇUARQLED"
     }
   },
   {
@@ -1549,16 +1759,19 @@ window.PW_MAIN_EXTRA=[
       "🗺️"
     ],
     "ru": {
-      "answer": "СОЗВЕЗДИЕ",
-      "hint": "Участок неба с узнаваемым рисунком звёзд."
+      "hint": "Участок неба с узнаваемым рисунком звёзд.",
+      "answerLength": 9,
+      "pool": "БЕСИАЕЗЖЗОДГЙВ"
     },
     "en": {
-      "answer": "CONSTELLATION",
-      "hint": "A region of the sky recognized by a pattern of stars."
+      "hint": "A region of the sky recognized by a pattern of stars.",
+      "answerLength": 13,
+      "pool": "GANTOSOEDFCHILLBNT"
     },
     "az": {
-      "answer": "BÜRC",
-      "hint": "Ulduz naxışı ilə tanınan səma sahəsi."
+      "hint": "Ulduz naxışı ilə tanınan səma sahəsi.",
+      "answerLength": 4,
+      "pool": "DFGƏBÜREĞÇAC"
     }
   },
   {
@@ -1571,16 +1784,19 @@ window.PW_MAIN_EXTRA=[
       "🌌"
     ],
     "ru": {
-      "answer": "ЗОДИАК",
-      "hint": "Пояс созвездий вдоль видимого пути Солнца."
+      "hint": "Пояс созвездий вдоль видимого пути Солнца.",
+      "answerLength": 6,
+      "pool": "БЖВКОЙГЕДАИЗ"
     },
     "en": {
-      "answer": "ZODIAC",
-      "hint": "The band of constellations along the Sun's apparent path."
+      "hint": "The band of constellations along the Sun's apparent path.",
+      "answerLength": 6,
+      "pool": "IGOBCZJFDAEH"
     },
     "az": {
-      "answer": "ZODİAK",
-      "hint": "Günəşin görünən yolu boyunca yerləşən bürclər qurşağı."
+      "hint": "Günəşin görünən yolu boyunca yerləşən bürclər qurşağı.",
+      "answerLength": 6,
+      "pool": "İKACOFEÇDZBƏ"
     }
   },
   {
@@ -1593,16 +1809,19 @@ window.PW_MAIN_EXTRA=[
       "🌌"
     ],
     "ru": {
-      "answer": "ЭКЛИПТИКА",
-      "hint": "Видимый годовой путь Солнца по небесной сфере."
+      "hint": "Видимый годовой путь Солнца по небесной сфере.",
+      "answerLength": 9,
+      "pool": "ВАЛКПТЭГБИИЕДК"
     },
     "en": {
-      "answer": "ECLIPTIC",
-      "hint": "The Sun's apparent yearly path across the celestial sphere."
+      "hint": "The Sun's apparent yearly path across the celestial sphere.",
+      "answerLength": 8,
+      "pool": "GPTCIDBFCALEI"
     },
     "az": {
-      "answer": "EKLİPTİKA",
-      "hint": "Günəşin səma sferasında görünən illik yolu."
+      "hint": "Günəşin səma sferasında görünən illik yolu.",
+      "answerLength": 9,
+      "pool": "DKCPTAİBİƏLÇEK"
     }
   },
   {
@@ -1615,16 +1834,19 @@ window.PW_MAIN_EXTRA=[
       "👓"
     ],
     "ru": {
-      "answer": "ЗАТМЕНИЕ",
-      "hint": "Явление, когда одно небесное тело закрывает свет другого."
+      "hint": "Явление, когда одно небесное тело закрывает свет другого.",
+      "answerLength": 8,
+      "pool": "ЗНТИЕЖЕАБГМВД"
     },
     "en": {
-      "answer": "ECLIPSE",
-      "hint": "An event where one celestial body blocks the light of another."
+      "hint": "An event where one celestial body blocks the light of another.",
+      "answerLength": 7,
+      "pool": "CPIADLSBFEGE"
     },
     "az": {
-      "answer": "TUTULMA",
-      "hint": "Bir göy cisminin digərinin işığını örtməsi hadisəsi."
+      "hint": "Bir göy cisminin digərinin işığını örtməsi hadisəsi.",
+      "answerLength": 7,
+      "pool": "UÇLMDBUCETAT"
     }
   },
   {
@@ -1637,16 +1859,19 @@ window.PW_MAIN_EXTRA=[
       "🕊️"
     ],
     "ru": {
-      "answer": "РАССВЕТ",
-      "hint": "Время появления первого света перед восходом Солнца."
+      "hint": "Время появления первого света перед восходом Солнца.",
+      "answerLength": 7,
+      "pool": "РСТАВЖСЕГБЗД"
     },
     "en": {
-      "answer": "DAWN",
-      "hint": "The first light before sunrise."
+      "hint": "The first light before sunrise.",
+      "answerLength": 4,
+      "pool": "DJHBECKNGAWF"
     },
     "az": {
-      "answer": "SÜBH",
-      "hint": "Günəş doğmazdan əvvəl görünən ilk işıq vaxtı."
+      "hint": "Günəş doğmazdan əvvəl görünən ilk işıq vaxtı.",
+      "answerLength": 4,
+      "pool": "SBÇGFCÜƏAHED"
     }
   },
   {
@@ -1659,16 +1884,19 @@ window.PW_MAIN_EXTRA=[
       "🌄"
     ],
     "ru": {
-      "answer": "ЗАКАТ",
-      "hint": "Исчезновение Солнца за горизонтом вечером."
+      "hint": "Исчезновение Солнца за горизонтом вечером.",
+      "answerLength": 5,
+      "pool": "ВАБИЕКАЗЖДГТ"
     },
     "en": {
-      "answer": "SUNSET",
-      "hint": "The Sun disappearing below the horizon in the evening."
+      "hint": "The Sun disappearing below the horizon in the evening.",
+      "answerLength": 6,
+      "pool": "CFSDTEUABGSN"
     },
     "az": {
-      "answer": "GÜNBATIMI",
-      "hint": "Axşam Günəşin üfüqün arxasında itməsi."
+      "hint": "Axşam Günəşin üfüqün arxasında itməsi.",
+      "answerLength": 9,
+      "pool": "TCNMEÇBDGIƏIÜA"
     }
   },
   {
@@ -1681,16 +1909,19 @@ window.PW_MAIN_EXTRA=[
       "🧊"
     ],
     "ru": {
-      "answer": "ПОЛЯРНАЯЗВЕЗДА",
-      "hint": "Яркая звезда, расположенная близко к северному полюсу неба."
+      "hint": "Яркая звезда, расположенная близко к северному полюсу неба.",
+      "answerLength": 14,
+      "pool": "НЯАВЯБОГДЗЖПЕАЗРИЙЛ"
     },
     "en": {
-      "answer": "POLARSTAR",
-      "hint": "A bright star close to the north celestial pole."
+      "hint": "A bright star close to the north celestial pole.",
+      "answerLength": 9,
+      "pool": "PCLDRTRAOEBFSA"
     },
     "az": {
-      "answer": "QÜTBULDUZU",
-      "hint": "Səmanın şimal qütbünə yaxın yerləşən parlaq ulduz."
+      "hint": "Səmanın şimal qütbünə yaxın yerləşən parlaq ulduz.",
+      "answerLength": 10,
+      "pool": "ÜƏQLUZUÇUCATEDB"
     }
   },
   {
@@ -1703,16 +1934,19 @@ window.PW_MAIN_EXTRA=[
       "🧊"
     ],
     "ru": {
-      "answer": "СЕВЕРНОЕСИЯНИЕ",
-      "hint": "Свечение верхней атмосферы в полярных широтах."
+      "hint": "Свечение верхней атмосферы в полярных широтах.",
+      "answerLength": 14,
+      "pool": "ВИСЕАЕИЕСНРБЖНЯДОЕГ"
     },
     "en": {
-      "answer": "AURORA",
-      "hint": "A glow in the upper atmosphere at polar latitudes."
+      "hint": "A glow in the upper atmosphere at polar latitudes.",
+      "answerLength": 6,
+      "pool": "ROCDUBGEAFRA"
     },
     "az": {
-      "answer": "QÜTBIŞIĞI",
-      "hint": "Qütb enliklərində yuxarı atmosferin işıqlanması."
+      "hint": "Qütb enliklərində yuxarı atmosferin işıqlanması.",
+      "answerLength": 9,
+      "pool": "BQATŞIÜIĞÇIECD"
     }
   },
   {
@@ -1725,16 +1959,19 @@ window.PW_MAIN_EXTRA=[
       "🛰️"
     ],
     "ru": {
-      "answer": "КОСМОДРОМ",
-      "hint": "Комплекс для подготовки и запуска космических аппаратов."
+      "hint": "Комплекс для подготовки и запуска космических аппаратов.",
+      "answerLength": 9,
+      "pool": "КРМООЕГБСОВМАД"
     },
     "en": {
-      "answer": "SPACEPORT",
-      "hint": "A facility used to prepare and launch spacecraft."
+      "hint": "A facility used to prepare and launch spacecraft.",
+      "answerLength": 9,
+      "pool": "SEDPAROFTCBGHP"
     },
     "az": {
-      "answer": "KOSMODROM",
-      "hint": "Kosmik aparatların hazırlanıb buraxıldığı kompleks."
+      "hint": "Kosmik aparatların hazırlanıb buraxıldığı kompleks.",
+      "answerLength": 9,
+      "pool": "ÇOMOAMKESDBORC"
     }
   },
   {
@@ -1747,16 +1984,19 @@ window.PW_MAIN_EXTRA=[
       "🛰️"
     ],
     "ru": {
-      "answer": "РАКЕТА",
-      "hint": "Летательный аппарат, движущийся за счёт реактивной тяги."
+      "hint": "Летательный аппарат, движущийся за счёт реактивной тяги.",
+      "answerLength": 6,
+      "pool": "КДААВЖЕЗГБРТ"
     },
     "en": {
-      "answer": "ROCKET",
-      "hint": "A vehicle propelled by rocket thrust."
+      "hint": "A vehicle propelled by rocket thrust.",
+      "answerLength": 6,
+      "pool": "OGTBAFKHDREC"
     },
     "az": {
-      "answer": "RAKET",
-      "hint": "Reaktiv dartı ilə hərəkət edən uçuş aparatı."
+      "hint": "Reaktiv dartı ilə hərəkət edən uçuş aparatı.",
+      "answerLength": 5,
+      "pool": "EBCÇTRAƏDGFK"
     }
   },
   {
@@ -1769,16 +2009,19 @@ window.PW_MAIN_EXTRA=[
       "🔭"
     ],
     "ru": {
-      "answer": "ЗОНД",
-      "hint": "Беспилотный аппарат для исследования космоса."
+      "hint": "Беспилотный аппарат для исследования космоса.",
+      "answerLength": 4,
+      "pool": "АВИБЗДОЕЖГНЙ"
     },
     "en": {
-      "answer": "PROBE",
-      "hint": "An uncrewed craft used to explore space."
+      "hint": "An uncrewed craft used to explore space.",
+      "answerLength": 5,
+      "pool": "POBHEFJADRCG"
     },
     "az": {
-      "answer": "ZOND",
-      "hint": "Kosmosu araşdıran pilotsuz aparat."
+      "hint": "Kosmosu araşdıran pilotsuz aparat.",
+      "answerLength": 4,
+      "pool": "AENFZGCBÇDOƏ"
     }
   },
   {
@@ -1791,16 +2034,19 @@ window.PW_MAIN_EXTRA=[
       "📡"
     ],
     "ru": {
-      "answer": "РОВЕР",
-      "hint": "Самоходный аппарат для исследования поверхности другого мира."
+      "hint": "Самоходный аппарат для исследования поверхности другого мира.",
+      "answerLength": 5,
+      "pool": "ЗЕРАОГДЖИВРБ"
     },
     "en": {
-      "answer": "ROVER",
-      "hint": "A mobile robot used to explore another world's surface."
+      "hint": "A mobile robot used to explore another world's surface.",
+      "answerLength": 5,
+      "pool": "OEAHCFGRBVDR"
     },
     "az": {
-      "answer": "ROVER",
-      "hint": "Başqa göy cisminin səthini araşdıran hərəkətli robot."
+      "hint": "Başqa göy cisminin səthini araşdıran hərəkətli robot.",
+      "answerLength": 5,
+      "pool": "BAƏCODFRVÇER"
     }
   },
   {
@@ -1813,16 +2059,19 @@ window.PW_MAIN_EXTRA=[
       "🛰️"
     ],
     "ru": {
-      "answer": "АСТРОНАВТ",
-      "hint": "Человек, подготовленный для полётов и работы в космосе."
+      "hint": "Человек, подготовленный для полётов и работы в космосе.",
+      "answerLength": 9,
+      "pool": "ТБАРЕНОТВЖАДГС"
     },
     "en": {
-      "answer": "ASTRONAUT",
-      "hint": "A person trained to travel and work in space."
+      "hint": "A person trained to travel and work in space.",
+      "answerLength": 9,
+      "pool": "AFCUTSENORABTD"
     },
     "az": {
-      "answer": "ASTRONAVT",
-      "hint": "Kosmosda uçuş və iş üçün hazırlanmış insan."
+      "hint": "Kosmosda uçuş və iş üçün hazırlanmış insan.",
+      "answerLength": 9,
+      "pool": "TTASOACÇDNRBEV"
     }
   },
   {
@@ -1835,16 +2084,19 @@ window.PW_MAIN_EXTRA=[
       "🧤"
     ],
     "ru": {
-      "answer": "СКАФАНДР",
-      "hint": "Защитный костюм для работы человека в космосе."
+      "hint": "Защитный костюм для работы человека в космосе.",
+      "answerLength": 8,
+      "pool": "СГДНАФЖВАЕБРК"
     },
     "en": {
-      "answer": "SPACESUIT",
-      "hint": "A protective suit for humans working in space."
+      "hint": "A protective suit for humans working in space.",
+      "answerLength": 9,
+      "pool": "USBIHAPGCETSFD"
     },
     "az": {
-      "answer": "SKAFANDR",
-      "hint": "Kosmosda işləmək üçün qoruyucu geyim."
+      "hint": "Kosmosda işləmək üçün qoruyucu geyim.",
+      "answerLength": 8,
+      "pool": "ADƏRSKFBÇECNA"
     }
   },
   {
@@ -1857,16 +2109,19 @@ window.PW_MAIN_EXTRA=[
       "🛰️"
     ],
     "ru": {
-      "answer": "НЕВЕСОМОСТЬ",
-      "hint": "Состояние, при котором почти не ощущается собственный вес."
+      "hint": "Состояние, при котором почти не ощущается собственный вес.",
+      "answerLength": 11,
+      "pool": "ВГБССЕНЖТЬАЕМДОО"
     },
     "en": {
-      "answer": "WEIGHTLESSNESS",
-      "hint": "A condition in which body weight is barely felt."
+      "hint": "A condition in which body weight is barely felt.",
+      "answerLength": 14,
+      "pool": "GLESTCDSFESIHABNWSE"
     },
     "az": {
-      "answer": "ÇƏKİSİZLİK",
-      "hint": "Bədən çəkisinin demək olar hiss olunmadığı vəziyyət."
+      "hint": "Bədən çəkisinin demək olar hiss olunmadığı vəziyyət.",
+      "answerLength": 10,
+      "pool": "LİƏBİKEZCÇİKSAD"
     }
   },
   {
@@ -1879,16 +2134,19 @@ window.PW_MAIN_EXTRA=[
       "🧩"
     ],
     "ru": {
-      "answer": "СТЫКОВКА",
-      "hint": "Соединение двух космических аппаратов на орбите."
+      "hint": "Соединение двух космических аппаратов на орбите.",
+      "answerLength": 8,
+      "pool": "ДЫАТЖКСБЕГОВК"
     },
     "en": {
-      "answer": "DOCKING",
-      "hint": "The joining of two spacecraft in orbit."
+      "hint": "The joining of two spacecraft in orbit.",
+      "answerLength": 7,
+      "pool": "CKGNFEOIADHB"
     },
     "az": {
-      "answer": "BİRLƏŞMƏ",
-      "hint": "Orbitdə iki kosmik aparatın birləşdirilməsi."
+      "hint": "Orbitdə iki kosmik aparatın birləşdirilməsi.",
+      "answerLength": 8,
+      "pool": "RABEMİÇLƏDŞƏC"
     }
   },
   {
@@ -1901,16 +2159,19 @@ window.PW_MAIN_EXTRA=[
       "🌌"
     ],
     "ru": {
-      "answer": "МИССИЯ",
-      "hint": "Запланированный полёт или комплекс задач в космосе."
+      "hint": "Запланированный полёт или комплекс задач в космосе.",
+      "answerLength": 6,
+      "pool": "МЕСИБСВГДИАЯ"
     },
     "en": {
-      "answer": "MISSION",
-      "hint": "A planned flight or set of tasks in space."
+      "hint": "A planned flight or set of tasks in space.",
+      "answerLength": 7,
+      "pool": "ICSOMEBANIDS"
     },
     "az": {
-      "answer": "MİSSİYA",
-      "hint": "Kosmosda planlaşdırılmış uçuş və ya tapşırıqlar kompleksi."
+      "hint": "Kosmosda planlaşdırılmış uçuş və ya tapşırıqlar kompleksi.",
+      "answerLength": 7,
+      "pool": "MCSEDİİÇABYS"
     }
   },
   {
@@ -1923,16 +2184,19 @@ window.PW_MAIN_EXTRA=[
       "🌌"
     ],
     "ru": {
-      "answer": "ЭКСПЕДИЦИЯ",
-      "hint": "Организованная поездка для исследования далёкого объекта."
+      "hint": "Организованная поездка для исследования далёкого объекта.",
+      "answerLength": 10,
+      "pool": "ЕАСВЭИПБИКЦДЖГЯ"
     },
     "en": {
-      "answer": "EXPEDITION",
-      "hint": "An organized journey to study a distant destination."
+      "hint": "An organized journey to study a distant destination.",
+      "answerLength": 10,
+      "pool": "PATIOIGEENFBCXD"
     },
     "az": {
-      "answer": "EKSPEDİSİYA",
-      "hint": "Uzaq obyekti öyrənmək üçün təşkil olunan səfər."
+      "hint": "Uzaq obyekti öyrənmək üçün təşkil olunan səfər.",
+      "answerLength": 11,
+      "pool": "EƏDCİYSFKEPÇSABİ"
     }
   },
   {
@@ -1945,16 +2209,19 @@ window.PW_MAIN_EXTRA=[
       "🏛️"
     ],
     "ru": {
-      "answer": "ОБСЕРВАТОРИЯ",
-      "hint": "Место с приборами для систематических наблюдений за небом."
+      "hint": "Место с приборами для систематических наблюдений за небом.",
+      "answerLength": 12,
+      "pool": "ЕОБЙРЖГЯРОВЗТСДАИ"
     },
     "en": {
-      "answer": "OBSERVATORY",
-      "hint": "A facility with instruments for systematic observations of the sky."
+      "hint": "A facility with instruments for systematic observations of the sky.",
+      "answerLength": 11,
+      "pool": "OGOAETVBSYCFRHDR"
     },
     "az": {
-      "answer": "RƏSƏDXANA",
-      "hint": "Səmanı müntəzəm müşahidə etmək üçün cihazları olan məkan."
+      "hint": "Səmanı müntəzəm müşahidə etmək üçün cihazları olan məkan.",
+      "answerLength": 9,
+      "pool": "RFSAXƏCBANEÇDƏ"
     }
   },
   {
@@ -1967,16 +2234,19 @@ window.PW_MAIN_EXTRA=[
       "🔒"
     ],
     "ru": {
-      "answer": "ШЛЮЗ",
-      "hint": "Герметичный отсек для перехода между средами с разным давлением."
+      "hint": "Герметичный отсек для перехода между средами с разным давлением.",
+      "answerLength": 4,
+      "pool": "ЛВЖБЕГШИЗАДЮ"
     },
     "en": {
-      "answer": "AIRLOCK",
-      "hint": "A sealed chamber used between areas with different pressure."
+      "hint": "A sealed chamber used between areas with different pressure.",
+      "answerLength": 7,
+      "pool": "FOCKERBGLDIA"
     },
     "az": {
-      "answer": "ŞLYUZ",
-      "hint": "Fərqli təzyiqli mühitlər arasında keçid üçün hermetik bölmə."
+      "hint": "Fərqli təzyiqli mühitlər arasında keçid üçün hermetik bölmə.",
+      "answerLength": 5,
+      "pool": "LUBCZYADÇEƏŞ"
     }
   },
   {
@@ -1989,16 +2259,19 @@ window.PW_MAIN_EXTRA=[
       "🚀"
     ],
     "ru": {
-      "answer": "ИЛЛЮМИНАТОР",
-      "hint": "Окно в корпусе корабля или станции."
+      "hint": "Окно в корпусе корабля или станции.",
+      "answerLength": 11,
+      "pool": "НТРМБАЛЕЮЛВГДИИО"
     },
     "en": {
-      "answer": "PORTHOLE",
-      "hint": "A window in a spacecraft or station."
+      "hint": "A window in a spacecraft or station.",
+      "answerLength": 8,
+      "pool": "APOBDRELFHOCT"
     },
     "az": {
-      "answer": "İLLÜMİNATOR",
-      "hint": "Kosmik gəmi və ya stansiyanın gövdəsində pəncərə."
+      "hint": "Kosmik gəmi və ya stansiyanın gövdəsində pəncərə.",
+      "answerLength": 11,
+      "pool": "İTLNİÜMACROBÇDLE"
     }
   },
   {
@@ -2011,16 +2284,19 @@ window.PW_MAIN_EXTRA=[
       "🛰️"
     ],
     "ru": {
-      "answer": "РАДИОСВЯЗЬ",
-      "hint": "Передача сообщений с помощью радиоволн."
+      "hint": "Передача сообщений с помощью радиоволн.",
+      "answerLength": 10,
+      "pool": "РДЕСОЗВГЙИЬЖБАЯ"
     },
     "en": {
-      "answer": "RADIOCOMMS",
-      "hint": "Communication by means of radio waves."
+      "hint": "Communication by means of radio waves.",
+      "answerLength": 10,
+      "pool": "OCHBOMFESAGMRID"
     },
     "az": {
-      "answer": "RADİOƏLAQƏ",
-      "hint": "Radio dalğaları ilə məlumat ötürülməsi."
+      "hint": "Radio dalğaları ilə məlumat ötürülməsi.",
+      "answerLength": 10,
+      "pool": "ROLCÇQFAEƏDİBƏA"
     }
   },
   {
@@ -2033,16 +2309,19 @@ window.PW_MAIN_EXTRA=[
       "🖥️"
     ],
     "ru": {
-      "answer": "ТЕЛЕМЕТРИЯ",
-      "hint": "Дистанционная передача измерений и технических данных."
+      "hint": "Дистанционная передача измерений и технических данных.",
+      "answerLength": 10,
+      "pool": "ЕЯДМЕИАБРВЕТТЛГ"
     },
     "en": {
-      "answer": "TELEMETRY",
-      "hint": "Remote transmission of measurements and technical data."
+      "hint": "Remote transmission of measurements and technical data.",
+      "answerLength": 9,
+      "pool": "LABFYETEMEDRTC"
     },
     "az": {
-      "answer": "TELEMETRİYA",
-      "hint": "Ölçü və texniki məlumatların uzaqdan ötürülməsi."
+      "hint": "Ölçü və texniki məlumatların uzaqdan ötürülməsi.",
+      "answerLength": 11,
+      "pool": "TYAMBİDƏÇECELRTE"
     }
   },
   {
@@ -2055,16 +2334,19 @@ window.PW_MAIN_EXTRA=[
       "🚀"
     ],
     "ru": {
-      "answer": "НАВИГАЦИЯ",
-      "hint": "Определение положения и курса для движения к цели."
+      "hint": "Определение положения и курса для движения к цели.",
+      "answerLength": 9,
+      "pool": "ВИЯЖАЦДБАЕИЗГН"
     },
     "en": {
-      "answer": "NAVIGATION",
-      "hint": "Determining position and course in order to reach a destination."
+      "hint": "Determining position and course in order to reach a destination.",
+      "answerLength": 10,
+      "pool": "FBOGEIIDTCVAANN"
     },
     "az": {
-      "answer": "NAVİQASİYA",
-      "hint": "Məqsədə çatmaq üçün mövqe və kursun müəyyən edilməsi."
+      "hint": "Məqsədə çatmaq üçün mövqe və kursun müəyyən edilməsi.",
+      "answerLength": 10,
+      "pool": "ÇQEİİYSAABCDVAN"
     }
   },
   {
@@ -2077,16 +2359,19 @@ window.PW_MAIN_EXTRA=[
       "🧭"
     ],
     "ru": {
-      "answer": "МАНЕВР",
-      "hint": "Управляемое изменение направления или скорости аппарата."
+      "hint": "Управляемое изменение направления или скорости аппарата.",
+      "answerLength": 6,
+      "pool": "БРНГВДМАИЗЕЖ"
     },
     "en": {
-      "answer": "MANEUVER",
-      "hint": "A controlled change in a craft's direction or speed."
+      "hint": "A controlled change in a craft's direction or speed.",
+      "answerLength": 8,
+      "pool": "FEABERMCVNGDU"
     },
     "az": {
-      "answer": "MANEVR",
-      "hint": "Aparatın istiqamət və ya sürətinin idarə olunan dəyişməsi."
+      "hint": "Aparatın istiqamət və ya sürətinin idarə olunan dəyişməsi.",
+      "answerLength": 6,
+      "pool": "MAƏBVÇRFEDNC"
     }
   },
   {
@@ -2099,16 +2384,19 @@ window.PW_MAIN_EXTRA=[
       "🌍"
     ],
     "ru": {
-      "answer": "СПУСК",
-      "hint": "Движение космического аппарата к поверхности."
+      "hint": "Движение космического аппарата к поверхности.",
+      "answerLength": 5,
+      "pool": "ПГСВБСЕДУЖАК"
     },
     "en": {
-      "answer": "DESCENT",
-      "hint": "The movement of a spacecraft toward a surface."
+      "hint": "The movement of a spacecraft toward a surface.",
+      "answerLength": 7,
+      "pool": "EDCTEANGHBFS"
     },
     "az": {
-      "answer": "ENMƏ",
-      "hint": "Kosmik aparatın səthə doğru hərəkəti."
+      "hint": "Kosmik aparatın səthə doğru hərəkəti.",
+      "answerLength": 4,
+      "pool": "NCFÇBEƏDĞGAM"
     }
   },
   {
@@ -2121,16 +2409,19 @@ window.PW_MAIN_EXTRA=[
       "🌍"
     ],
     "ru": {
-      "answer": "ПОСАДКА",
-      "hint": "Завершение полёта с касанием поверхности."
+      "hint": "Завершение полёта с касанием поверхности.",
+      "answerLength": 7,
+      "pool": "ПСДКВАЕБОГАЖ"
     },
     "en": {
-      "answer": "LANDING",
-      "hint": "The end of a flight when a craft reaches the surface."
+      "hint": "The end of a flight when a craft reaches the surface.",
+      "answerLength": 7,
+      "pool": "NGICLFDNAHBE"
     },
     "az": {
-      "answer": "ENİŞ",
-      "hint": "Uçuşun səthə toxunmaqla başa çatması."
+      "hint": "Uçuşun səthə toxunmaqla başa çatması.",
+      "answerLength": 4,
+      "pool": "EİÇADŞNGFBCƏ"
     }
   },
   {
@@ -2143,16 +2434,19 @@ window.PW_MAIN_EXTRA=[
       "🔬"
     ],
     "ru": {
-      "answer": "РЕГОЛИТ",
-      "hint": "Слой рыхлого материала на поверхности безатмосферных тел."
+      "hint": "Слой рыхлого материала на поверхности безатмосферных тел.",
+      "answerLength": 7,
+      "pool": "ЖБОЛДАЕГВРИТ"
     },
     "en": {
-      "answer": "REGOLITH",
-      "hint": "A layer of loose material on the surface of airless bodies."
+      "hint": "A layer of loose material on the surface of airless bodies.",
+      "answerLength": 8,
+      "pool": "LGEDRTCHAFBOI"
     },
     "az": {
-      "answer": "REQOLİT",
-      "hint": "Atmosfersiz göy cisimlərinin səthindəki boş material qatı."
+      "hint": "Atmosfersiz göy cisimlərinin səthindəki boş material qatı.",
+      "answerLength": 7,
+      "pool": "EOÇABQCRİTDL"
     }
   },
   {
@@ -2165,16 +2459,19 @@ window.PW_MAIN_EXTRA=[
       "🪐"
     ],
     "ru": {
-      "answer": "КОСМОС",
-      "hint": "Пространство за пределами атмосферы Земли."
+      "hint": "Пространство за пределами атмосферы Земли.",
+      "answerLength": 6,
+      "pool": "СОКГМДАСВЕБО"
     },
     "en": {
-      "answer": "SPACE",
-      "hint": "The expanse beyond Earth's atmosphere."
+      "hint": "The expanse beyond Earth's atmosphere.",
+      "answerLength": 5,
+      "pool": "EBJFAHDCGPSK"
     },
     "az": {
-      "answer": "KOSMOS",
-      "hint": "Yer atmosferindən kənardakı fəza."
+      "hint": "Yer atmosferindən kənardakı fəza.",
+      "answerLength": 6,
+      "pool": "SOKDÇSCMOBAE"
     }
   },
   {
@@ -2187,16 +2484,19 @@ window.PW_MAIN_EXTRA=[
       "🔭"
     ],
     "ru": {
-      "answer": "ВСЕЛЕННАЯ",
-      "hint": "Всё пространство, время, материя и энергия как единое целое."
+      "hint": "Всё пространство, время, материя и энергия как единое целое.",
+      "answerLength": 9,
+      "pool": "ЛННАГЗЖБВДЕЕСЯ"
     },
     "en": {
-      "answer": "UNIVERSE",
-      "hint": "All space, time, matter, and energy considered as one whole."
+      "hint": "All space, time, matter, and energy considered as one whole.",
+      "answerLength": 8,
+      "pool": "SAVEFBURIEDNC"
     },
     "az": {
-      "answer": "KAİNAT",
-      "hint": "Bütün məkan, zaman, maddə və enerjinin vahid bütövü."
+      "hint": "Bütün məkan, zaman, maddə və enerjinin vahid bütövü.",
+      "answerLength": 6,
+      "pool": "DKATACİƏNEÇB"
     }
   }
 ];
