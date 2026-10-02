@@ -942,6 +942,10 @@ def install_mock(ctx,account,completed,lang):
         if '/rest/v1/rpc/get_leaderboard' in req.url:
             row=account.copy()
             route.fulfill(status=200,content_type='application/json',body=json.dumps([row] if row['xp']>0 else []),headers={'Access-Control-Allow-Origin':'*'});return
+        if '/rest/v1/rpc/get_avatar_frames' in req.url:
+            assert isinstance(body.get('p_codes'),list) and len(body['p_codes'])<=100
+            data={account['photoword_id']:account['avatar_frame']} if account.get('avatar_frame') and account['photoword_id'] in body['p_codes'] else {}
+            route.fulfill(status=200,content_type='application/json',body=json.dumps(data),headers={'Access-Control-Allow-Origin':'*'});return
         assert 'pw-ci-only' in body.get('initData',''),'Telegram launch data lost'
         action=body.get('action','login');status=200;data=None
         if action=='use_hint':
