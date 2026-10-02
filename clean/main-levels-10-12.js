@@ -9,16 +9,19 @@ window.PW_MAIN_MORE=[
       "🧾"
     ],
     "ru": {
-      "answer": "СТОЛ",
-      "hint": "Предмет дома, мебели или повседневного быта."
+      "hint": "Предмет дома, мебели или повседневного быта.",
+      "answerLength": 4,
+      "pool": "СБДЕАТОЗВЖГЛ"
     },
     "en": {
-      "answer": "TABLE",
-      "hint": "A household, furniture, or everyday object."
+      "hint": "A household, furniture, or everyday object.",
+      "answerLength": 5,
+      "pool": "JLBGEHCKDFTA"
     },
     "az": {
-      "answer": "MASA",
-      "hint": "Ev, mebel və ya gündəlik məişət əşyası."
+      "hint": "Ev, mebel və ya gündəlik məişət əşyası.",
+      "answerLength": 4,
+      "pool": "BƏECÇDMGSAFA"
     }
   },
   {
@@ -31,16 +34,19 @@ window.PW_MAIN_MORE=[
       "🪵"
     ],
     "ru": {
-      "answer": "СТУЛ",
-      "hint": "Предмет дома, мебели или повседневного быта."
+      "hint": "Предмет дома, мебели или повседневного быта.",
+      "answerLength": 4,
+      "pool": "ЗЛБУГАСВТДЕЖ"
     },
     "en": {
-      "answer": "CHAIR",
-      "hint": "A household, furniture, or everyday object."
+      "hint": "A household, furniture, or everyday object.",
+      "answerLength": 5,
+      "pool": "GJDEBCIRHKAF"
     },
     "az": {
-      "answer": "STUL",
-      "hint": "Ev, mebel və ya gündəlik məişət əşyası."
+      "hint": "Ev, mebel və ya gündəlik məişət əşyası.",
+      "answerLength": 4,
+      "pool": "CULSƏÇBETAFD"
     }
   },
   {
@@ -53,16 +59,19 @@ window.PW_MAIN_MORE=[
       "😌"
     ],
     "ru": {
-      "answer": "ДИВАН",
-      "hint": "Предмет дома, мебели или повседневного быта."
+      "hint": "Предмет дома, мебели или повседневного быта.",
+      "answerLength": 5,
+      "pool": "ЖВКНГАЕИЙЗДБ"
     },
     "en": {
-      "answer": "SOFA",
-      "hint": "A household, furniture, or everyday object."
+      "hint": "A household, furniture, or everyday object.",
+      "answerLength": 4,
+      "pool": "GFJCDKOESHBA"
     },
     "az": {
-      "answer": "DİVAN",
-      "hint": "Ev, mebel və ya gündəlik məişət əşyası."
+      "hint": "Ev, mebel və ya gündəlik məişət əşyası.",
+      "answerLength": 5,
+      "pool": "ENİƏVGCÇDBFA"
     }
   },
   {
@@ -75,16 +84,19 @@ window.PW_MAIN_MORE=[
       "🏠"
     ],
     "ru": {
-      "answer": "КРОВАТЬ",
-      "hint": "Предмет дома, мебели или повседневного быта."
+      "hint": "Предмет дома, мебели или повседневного быта.",
+      "answerLength": 7,
+      "pool": "РВБТОЕЬАГЖДК"
     },
     "en": {
-      "answer": "BED",
-      "hint": "A household, furniture, or everyday object."
+      "hint": "A household, furniture, or everyday object.",
+      "answerLength": 3,
+      "pool": "EKACFHGMJBDL"
     },
     "az": {
-      "answer": "ÇARPAYI",
-      "hint": "Ev, mebel və ya gündəlik məişət əşyası."
+      "hint": "Ev, mebel və ya gündəlik məişət əşyası.",
+      "answerLength": 7,
+      "pool": "ƏYDBPÇARCIAE"
     }
   },
   {
@@ -97,16 +109,19 @@ window.PW_MAIN_MORE=[
       "📦"
     ],
     "ru": {
-      "answer": "ШКАФ",
-      "hint": "Предмет дома, мебели или повседневного быта."
+      "hint": "Предмет дома, мебели или повседневного быта.",
+      "answerLength": 4,
+      "pool": "АЖЗГФВБЕИКШД"
     },
     "en": {
-      "answer": "WARDROBE",
-      "hint": "A household, furniture, or everyday object."
+      "hint": "A household, furniture, or everyday object.",
+      "answerLength": 8,
+      "pool": "AORGJREWHBFCD"
     },
     "az": {
-      "answer": "ŞKAF",
-      "hint": "Ev, mebel və ya gündəlik məişət əşyası."
+      "hint": "Ev, mebel və ya gündəlik məişət əşyası.",
+      "answerLength": 4,
+      "pool": "ÇƏŞKBEAĞFDGC"
     }
   },
   {
@@ -119,16 +134,19 @@ window.PW_MAIN_MORE=[
       "➡️"
     ],
     "ru": {
-      "answer": "ДВЕРЬ",
-      "hint": "Предмет дома, мебели или повседневного быта."
+      "hint": "Предмет дома, мебели или повседневного быта.",
+      "answerLength": 5,
+      "pool": "РДВАЬЖГИЗБЙЕ"
     },
     "en": {
-      "answer": "DOOR",
-      "hint": "A household, furniture, or everyday object."
+      "hint": "A household, furniture, or everyday object.",
+      "answerLength": 4,
+      "pool": "BROEAFOJGHCD"
     },
     "az": {
-      "answer": "QAPI",
-      "hint": "Ev, mebel və ya gündəlik məişət əşyası."
+      "hint": "Ev, mebel və ya gündəlik məişət əşyası.",
+      "answerLength": 4,
+      "pool": "FICBÇEDGƏPAQ"
     }
   },
   {
@@ -141,16 +159,19 @@ window.PW_MAIN_MORE=[
       "👀"
     ],
     "ru": {
-      "answer": "ОКНО",
-      "hint": "Предмет дома, мебели или повседневного быта."
+      "hint": "Предмет дома, мебели или повседневного быта.",
+      "answerLength": 4,
+      "pool": "АОНКВЗЖДБГОЕ"
     },
     "en": {
-      "answer": "WINDOW",
-      "hint": "A household, furniture, or everyday object."
+      "hint": "A household, furniture, or everyday object.",
+      "answerLength": 6,
+      "pool": "OFNEAIWGWBCD"
     },
     "az": {
-      "answer": "PƏNCƏRƏ",
-      "hint": "Ev, mebel və ya gündəlik məişət əşyası."
+      "hint": "Ev, mebel və ya gündəlik məişət əşyası.",
+      "answerLength": 7,
+      "pool": "NƏPABƏRÇƏDEC"
     }
   },
   {
@@ -163,16 +184,19 @@ window.PW_MAIN_MORE=[
       "🏠"
     ],
     "ru": {
-      "answer": "ЛАМПА",
-      "hint": "Предмет дома, мебели или повседневного быта."
+      "hint": "Предмет дома, мебели или повседневного быта.",
+      "answerLength": 5,
+      "pool": "ВЖПГАЕБЗАДМЛ"
     },
     "en": {
-      "answer": "LAMP",
-      "hint": "A household, furniture, or everyday object."
+      "hint": "A household, furniture, or everyday object.",
+      "answerLength": 4,
+      "pool": "EPLMAGCJBFDH"
     },
     "az": {
-      "answer": "LAMPA",
-      "hint": "Ev, mebel və ya gündəlik məişət əşyası."
+      "hint": "Ev, mebel və ya gündəlik məişət əşyası.",
+      "answerLength": 5,
+      "pool": "ÇDAEFMPCLABƏ"
     }
   },
   {
@@ -185,16 +209,19 @@ window.PW_MAIN_MORE=[
       "🔥"
     ],
     "ru": {
-      "answer": "ЧАЙНИК",
-      "hint": "Предмет дома, мебели или повседневного быта."
+      "hint": "Предмет дома, мебели или повседневного быта.",
+      "answerLength": 6,
+      "pool": "ЧКЕБЙАЖГНДИВ"
     },
     "en": {
-      "answer": "KETTLE",
-      "hint": "A household, furniture, or everyday object."
+      "hint": "A household, furniture, or everyday object.",
+      "answerLength": 6,
+      "pool": "KLAGTBTEFDCE"
     },
     "az": {
-      "answer": "ÇAYDAN",
-      "hint": "Ev, mebel və ya gündəlik məişət əşyası."
+      "hint": "Ev, mebel və ya gündəlik məişət əşyası.",
+      "answerLength": 6,
+      "pool": "ÇAYƏFBCAEGDN"
     }
   },
   {
@@ -207,16 +234,19 @@ window.PW_MAIN_MORE=[
       "🧼"
     ],
     "ru": {
-      "answer": "ТАРЕЛКА",
-      "hint": "Предмет дома, мебели или повседневного быта."
+      "hint": "Предмет дома, мебели или повседневного быта.",
+      "answerLength": 7,
+      "pool": "ВКГЖЕЛАДБТАР"
     },
     "en": {
-      "answer": "PLATE",
-      "hint": "A household, furniture, or everyday object."
+      "hint": "A household, furniture, or everyday object.",
+      "answerLength": 5,
+      "pool": "LCABTJFGDEHP"
     },
     "az": {
-      "answer": "BOŞQAB",
-      "hint": "Ev, mebel və ya gündəlik məişət əşyası."
+      "hint": "Ev, mebel və ya gündəlik məişət əşyası.",
+      "answerLength": 6,
+      "pool": "OŞQFƏDEAÇCBB"
     }
   },
   {
@@ -229,16 +259,19 @@ window.PW_MAIN_MORE=[
       "🍽️"
     ],
     "ru": {
-      "answer": "ЛОЖКА",
-      "hint": "Предмет дома, мебели или повседневного быта."
+      "hint": "Предмет дома, мебели или повседневного быта.",
+      "answerLength": 5,
+      "pool": "ЛЖИГЗКДОВБАЕ"
     },
     "en": {
-      "answer": "SPOON",
-      "hint": "A household, furniture, or everyday object."
+      "hint": "A household, furniture, or everyday object.",
+      "answerLength": 5,
+      "pool": "FPSENOOGBADC"
     },
     "az": {
-      "answer": "QAŞIQ",
-      "hint": "Ev, mebel və ya gündəlik məişət əşyası."
+      "hint": "Ev, mebel və ya gündəlik məişət əşyası.",
+      "answerLength": 5,
+      "pool": "QŞEBDIQƏCAFÇ"
     }
   },
   {
@@ -251,16 +284,19 @@ window.PW_MAIN_MORE=[
       "🥗"
     ],
     "ru": {
-      "answer": "ВИЛКА",
-      "hint": "Предмет дома, мебели или повседневного быта."
+      "hint": "Предмет дома, мебели или повседневного быта.",
+      "answerLength": 5,
+      "pool": "ИКЛДЕЖВЙБЗГА"
     },
     "en": {
-      "answer": "FORK",
-      "hint": "A household, furniture, or everyday object."
+      "hint": "A household, furniture, or everyday object.",
+      "answerLength": 4,
+      "pool": "KAOEGDFJBCHR"
     },
     "az": {
-      "answer": "ÇƏNGƏL",
-      "hint": "Ev, mebel və ya gündəlik məişət əşyası."
+      "hint": "Ev, mebel və ya gündəlik məişət əşyası.",
+      "answerLength": 6,
+      "pool": "ƏAGBCÇEDƏFLN"
     }
   },
   {
@@ -273,16 +309,19 @@ window.PW_MAIN_MORE=[
       "🍽️"
     ],
     "ru": {
-      "answer": "НОЖ",
-      "hint": "Предмет дома, мебели или повседневного быта."
+      "hint": "Предмет дома, мебели или повседневного быта.",
+      "answerLength": 3,
+      "pool": "ЖИНАОГВЗБДЕЙ"
     },
     "en": {
-      "answer": "KNIFE",
-      "hint": "A household, furniture, or everyday object."
+      "hint": "A household, furniture, or everyday object.",
+      "answerLength": 5,
+      "pool": "KFIDHBJAECNG"
     },
     "az": {
-      "answer": "BIÇAQ",
-      "hint": "Ev, mebel və ya gündəlik məişət əşyası."
+      "hint": "Ev, mebel və ya gündəlik məişət əşyası.",
+      "answerLength": 5,
+      "pool": "QGƏIÇDĞCBAEF"
     }
   },
   {
@@ -295,16 +334,19 @@ window.PW_MAIN_MORE=[
       "🫖"
     ],
     "ru": {
-      "answer": "ЧАШКА",
-      "hint": "Предмет дома, мебели или повседневного быта."
+      "hint": "Предмет дома, мебели или повседневного быта.",
+      "answerLength": 5,
+      "pool": "ЗЧААБГЕШКДЖВ"
     },
     "en": {
-      "answer": "CUP",
-      "hint": "A household, furniture, or everyday object."
+      "hint": "A household, furniture, or everyday object.",
+      "answerLength": 3,
+      "pool": "KEUFDPHCJGAB"
     },
     "az": {
-      "answer": "FİNCAN",
-      "hint": "Ev, mebel və ya gündəlik məişət əşyası."
+      "hint": "Ev, mebel və ya gündəlik məişət əşyası.",
+      "answerLength": 6,
+      "pool": "NƏBÇCNİFDGEA"
     }
   },
   {
@@ -317,16 +359,19 @@ window.PW_MAIN_MORE=[
       "☁️"
     ],
     "ru": {
-      "answer": "ПОДУШКА",
-      "hint": "Предмет дома, мебели или повседневного быта."
+      "hint": "Предмет дома, мебели или повседневного быта.",
+      "answerLength": 7,
+      "pool": "ПШЕАУБЖКДГВО"
     },
     "en": {
-      "answer": "PILLOW",
-      "hint": "A household, furniture, or everyday object."
+      "hint": "A household, furniture, or everyday object.",
+      "answerLength": 6,
+      "pool": "PWCOBAEDLLIF"
     },
     "az": {
-      "answer": "YASTIQ",
-      "hint": "Ev, mebel və ya gündəlik məişət əşyası."
+      "hint": "Ev, mebel və ya gündəlik məişət əşyası.",
+      "answerLength": 6,
+      "pool": "EASÇIDBTCQYƏ"
     }
   },
   {
@@ -339,16 +384,19 @@ window.PW_MAIN_MORE=[
       "🧶"
     ],
     "ru": {
-      "answer": "ОДЕЯЛО",
-      "hint": "Предмет дома, мебели или повседневного быта."
+      "hint": "Предмет дома, мебели или повседневного быта.",
+      "answerLength": 6,
+      "pool": "ЗЕЯБОГАОДЛЖВ"
     },
     "en": {
-      "answer": "BLANKET",
-      "hint": "A household, furniture, or everyday object."
+      "hint": "A household, furniture, or everyday object.",
+      "answerLength": 7,
+      "pool": "DEBAGFCHLKNT"
     },
     "az": {
-      "answer": "YORĞAN",
-      "hint": "Ev, mebel və ya gündəlik məişət əşyası."
+      "hint": "Ev, mebel və ya gündəlik məişət əşyası.",
+      "answerLength": 6,
+      "pool": "OĞNRECAÇƏYDB"
     }
   },
   {
@@ -361,16 +409,19 @@ window.PW_MAIN_MORE=[
       "🦶"
     ],
     "ru": {
-      "answer": "КОВЕР",
-      "hint": "Предмет дома, мебели или повседневного быта."
+      "hint": "Предмет дома, мебели или повседневного быта.",
+      "answerLength": 5,
+      "pool": "БВДГКЗРИЖАОЕ"
     },
     "en": {
-      "answer": "CARPET",
-      "hint": "A household, furniture, or everyday object."
+      "hint": "A household, furniture, or everyday object.",
+      "answerLength": 6,
+      "pool": "CRFDBPEJGHTA"
     },
     "az": {
-      "answer": "XALÇA",
-      "hint": "Ev, mebel və ya gündəlik məişət əşyası."
+      "hint": "Ev, mebel və ya gündəlik məişət əşyası.",
+      "answerLength": 5,
+      "pool": "FCÇAEDLƏBGXA"
     }
   },
   {
@@ -383,16 +434,19 @@ window.PW_MAIN_MORE=[
       "🧱"
     ],
     "ru": {
-      "answer": "ПОЛКА",
-      "hint": "Предмет дома, мебели или повседневного быта."
+      "hint": "Предмет дома, мебели или повседневного быта.",
+      "answerLength": 5,
+      "pool": "ДБКГОПЛЕАВЗЖ"
     },
     "en": {
-      "answer": "SHELF",
-      "hint": "A household, furniture, or everyday object."
+      "hint": "A household, furniture, or everyday object.",
+      "answerLength": 5,
+      "pool": "HJECGSAKFBLD"
     },
     "az": {
-      "answer": "RƏF",
-      "hint": "Ev, mebel və ya gündəlik məişət əşyası."
+      "hint": "Ev, mebel və ya gündəlik məişət əşyası.",
+      "answerLength": 3,
+      "pool": "ƏACÇGDRHBĞFE"
     }
   },
   {
@@ -405,16 +459,19 @@ window.PW_MAIN_MORE=[
       "😌"
     ],
     "ru": {
-      "answer": "КРЕСЛО",
-      "hint": "Предмет дома, мебели или повседневного быта."
+      "hint": "Предмет дома, мебели или повседневного быта.",
+      "answerLength": 6,
+      "pool": "ЛЖАГЕВКДСБРО"
     },
     "en": {
-      "answer": "ARMCHAIR",
-      "hint": "A household, furniture, or everyday object."
+      "hint": "A household, furniture, or everyday object.",
+      "answerLength": 8,
+      "pool": "FGARAHREDBMIC"
     },
     "az": {
-      "answer": "KRESLO",
-      "hint": "Ev, mebel və ya gündəlik məişət əşyası."
+      "hint": "Ev, mebel və ya gündəlik məişət əşyası.",
+      "answerLength": 6,
+      "pool": "LRDAECOBÇƏKS"
     }
   },
   {
@@ -427,16 +484,19 @@ window.PW_MAIN_MORE=[
       "🏠"
     ],
     "ru": {
-      "answer": "ХОЛОДИЛЬНИК",
-      "hint": "Предмет дома, мебели или повседневного быта."
+      "hint": "Предмет дома, мебели или повседневного быта.",
+      "answerLength": 11,
+      "pool": "ЛДОВЛЬОКИГИНАБЕХ"
     },
     "en": {
-      "answer": "FRIDGE",
-      "hint": "A household, furniture, or everyday object."
+      "hint": "A household, furniture, or everyday object.",
+      "answerLength": 6,
+      "pool": "DFAGEKRCHIBJ"
     },
     "az": {
-      "answer": "SOYUDUCU",
-      "hint": "Ev, mebel və ya gündəlik məişət əşyası."
+      "hint": "Ev, mebel və ya gündəlik məişət əşyası.",
+      "answerLength": 8,
+      "pool": "SYDUÇUCBUƏAOE"
     }
   },
   {
@@ -449,16 +509,19 @@ window.PW_MAIN_MORE=[
       "🏠"
     ],
     "ru": {
-      "answer": "УТЮГ",
-      "hint": "Предмет дома, мебели или повседневного быта."
+      "hint": "Предмет дома, мебели или повседневного быта.",
+      "answerLength": 4,
+      "pool": "УЕЮЖАЗВИТГБД"
     },
     "en": {
-      "answer": "IRON",
-      "hint": "A household, furniture, or everyday object."
+      "hint": "A household, furniture, or everyday object.",
+      "answerLength": 4,
+      "pool": "IAOEGDCHRNFB"
     },
     "az": {
-      "answer": "ÜTÜ",
-      "hint": "Ev, mebel və ya gündəlik məişət əşyası."
+      "hint": "Ev, mebel və ya gündəlik məişət əşyası.",
+      "answerLength": 3,
+      "pool": "ÜDÜGEAFCÇƏBT"
     }
   },
   {
@@ -471,16 +534,19 @@ window.PW_MAIN_MORE=[
       "🧼"
     ],
     "ru": {
-      "answer": "СТИРАЛКА",
-      "hint": "Предмет дома, мебели или повседневного быта."
+      "hint": "Предмет дома, мебели или повседневного быта.",
+      "answerLength": 8,
+      "pool": "СЕИАКБРДВЛГТА"
     },
     "en": {
-      "answer": "WASHER",
-      "hint": "A household, furniture, or everyday object."
+      "hint": "A household, furniture, or everyday object.",
+      "answerLength": 6,
+      "pool": "ARHGBSFJWECD"
     },
     "az": {
-      "answer": "PALTARYUYAN",
-      "hint": "Ev, mebel və ya gündəlik məişət əşyası."
+      "hint": "Ev, mebel və ya gündəlik məişət əşyası.",
+      "answerLength": 11,
+      "pool": "RTABAUYANLEYÇDPC"
     }
   },
   {
@@ -493,16 +559,19 @@ window.PW_MAIN_MORE=[
       "🏠"
     ],
     "ru": {
-      "answer": "МИКРОВОЛНОВКА",
-      "hint": "Предмет дома, мебели или повседневного быта."
+      "hint": "Предмет дома, мебели или повседневного быта.",
+      "answerLength": 13,
+      "pool": "АОНОКЛВБИВДГМОКЕРЖ"
     },
     "en": {
-      "answer": "MICROWAVE",
-      "hint": "A household, furniture, or everyday object."
+      "hint": "A household, furniture, or everyday object.",
+      "answerLength": 9,
+      "pool": "AECOFBDWVGMHRI"
     },
     "az": {
-      "answer": "MİKRODALĞA",
-      "hint": "Ev, mebel və ya gündəlik məişət əşyası."
+      "hint": "Ev, mebel və ya gündəlik məişət əşyası.",
+      "answerLength": 10,
+      "pool": "ADƏLÇĞRMBCEOİKA"
     }
   },
   {
@@ -515,16 +584,19 @@ window.PW_MAIN_MORE=[
       "🔔"
     ],
     "ru": {
-      "answer": "БУДИЛЬНИК",
-      "hint": "Предмет дома, мебели или повседневного быта."
+      "hint": "Предмет дома, мебели или повседневного быта.",
+      "answerLength": 9,
+      "pool": "ГИКЖЬВУАБДЕНИЛ"
     },
     "en": {
-      "answer": "ALARM",
-      "hint": "A household, furniture, or everyday object."
+      "hint": "A household, furniture, or everyday object.",
+      "answerLength": 5,
+      "pool": "BDEALMFCRHAG"
     },
     "az": {
-      "answer": "ZƏNGSAATI",
-      "hint": "Ev, mebel və ya gündəlik məişət əşyası."
+      "hint": "Ev, mebel və ya gündəlik məişət əşyası.",
+      "answerLength": 9,
+      "pool": "ANGBƏÇTDZAESIC"
     }
   },
   {
@@ -537,16 +609,19 @@ window.PW_MAIN_MORE=[
       "🚶"
     ],
     "ru": {
-      "answer": "ЗОНТ",
-      "hint": "Предмет дома, мебели или повседневного быта."
+      "hint": "Предмет дома, мебели или повседневного быта.",
+      "answerLength": 4,
+      "pool": "ЗДВАЕОЖТНИБГ"
     },
     "en": {
-      "answer": "UMBRELLA",
-      "hint": "A household, furniture, or everyday object."
+      "hint": "A household, furniture, or everyday object.",
+      "answerLength": 8,
+      "pool": "MLBLRAHGUFCED"
     },
     "az": {
-      "answer": "ÇƏTİR",
-      "hint": "Ev, mebel və ya gündəlik məişət əşyası."
+      "hint": "Ev, mebel və ya gündəlik məişət əşyası.",
+      "answerLength": 5,
+      "pool": "ÇFRGBCEƏTİDA"
     }
   },
   {
@@ -559,16 +634,19 @@ window.PW_MAIN_MORE=[
       "🧳"
     ],
     "ru": {
-      "answer": "РЮКЗАК",
-      "hint": "Предмет дома, мебели или повседневного быта."
+      "hint": "Предмет дома, мебели или повседневного быта.",
+      "answerLength": 6,
+      "pool": "ГКЕДАРЗБЮЖВК"
     },
     "en": {
-      "answer": "BACKPACK",
-      "hint": "A household, furniture, or everyday object."
+      "hint": "A household, furniture, or everyday object.",
+      "answerLength": 8,
+      "pool": "BHCFDAKKPECGA"
     },
     "az": {
-      "answer": "RÜKZAK",
-      "hint": "Ev, mebel və ya gündəlik məişət əşyası."
+      "hint": "Ev, mebel və ya gündəlik məişət əşyası.",
+      "answerLength": 6,
+      "pool": "EZKƏKCDAÜÇBR"
     }
   },
   {
@@ -581,16 +659,19 @@ window.PW_MAIN_MORE=[
       "🪙"
     ],
     "ru": {
-      "answer": "КОШЕЛЕК",
-      "hint": "Предмет дома, мебели или повседневного быта."
+      "hint": "Предмет дома, мебели или повседневного быта.",
+      "answerLength": 7,
+      "pool": "ШЕЛКБГАОКЕДВ"
     },
     "en": {
-      "answer": "WALLET",
-      "hint": "A household, furniture, or everyday object."
+      "hint": "A household, furniture, or everyday object.",
+      "answerLength": 6,
+      "pool": "DAGTBFEHWLLC"
     },
     "az": {
-      "answer": "PULQABI",
-      "hint": "Ev, mebel və ya gündəlik məişət əşyası."
+      "hint": "Ev, mebel və ya gündəlik məişət əşyası.",
+      "answerLength": 7,
+      "pool": "LUAEPQIƏBDÇC"
     }
   },
   {
@@ -603,16 +684,19 @@ window.PW_MAIN_MORE=[
       "☀️"
     ],
     "ru": {
-      "answer": "ОЧКИ",
-      "hint": "Предмет дома, мебели или повседневного быта."
+      "hint": "Предмет дома, мебели или повседневного быта.",
+      "answerLength": 4,
+      "pool": "ВИГБЧЖКЕДЗОА"
     },
     "en": {
-      "answer": "GLASSES",
-      "hint": "A household, furniture, or everyday object."
+      "hint": "A household, furniture, or everyday object.",
+      "answerLength": 7,
+      "pool": "LSDEGSBHCFSA"
     },
     "az": {
-      "answer": "EYNƏK",
-      "hint": "Ev, mebel və ya gündəlik məişət əşyası."
+      "hint": "Ev, mebel və ya gündəlik məişət əşyası.",
+      "answerLength": 5,
+      "pool": "ƏAÇCYBDGKEFN"
     }
   },
   {
@@ -625,16 +709,19 @@ window.PW_MAIN_MORE=[
       "🧣"
     ],
     "ru": {
-      "answer": "ПЕРЧАТКИ",
-      "hint": "Предмет дома, мебели или повседневного быта."
+      "hint": "Предмет дома, мебели или повседневного быта.",
+      "answerLength": 8,
+      "pool": "АПГВЕИБЖТДЧКР"
     },
     "en": {
-      "answer": "GLOVES",
-      "hint": "A household, furniture, or everyday object."
+      "hint": "A household, furniture, or everyday object.",
+      "answerLength": 6,
+      "pool": "AVFELCGSBHOD"
     },
     "az": {
-      "answer": "ƏLCƏK",
-      "hint": "Ev, mebel və ya gündəlik məişət əşyası."
+      "hint": "Ev, mebel və ya gündəlik məişət əşyası.",
+      "answerLength": 5,
+      "pool": "ƏDKGCBÇAƏFLE"
     }
   },
   {
@@ -647,16 +734,19 @@ window.PW_MAIN_MORE=[
       "🧈"
     ],
     "ru": {
-      "answer": "ХЛЕБ",
-      "hint": "Еда, напиток, продукт или ингредиент."
+      "hint": "Еда, напиток, продукт или ингредиент.",
+      "answerLength": 4,
+      "pool": "ЛАИЖБДВЕЗЙХГ"
     },
     "en": {
-      "answer": "BREAD",
-      "hint": "A food, drink, product, or ingredient."
+      "hint": "A food, drink, product, or ingredient.",
+      "answerLength": 5,
+      "pool": "RHAGEKCJFBLD"
     },
     "az": {
-      "answer": "ÇÖRƏK",
-      "hint": "Yemək, içki, məhsul və ya inqrediyent."
+      "hint": "Yemək, içki, məhsul və ya inqrediyent.",
+      "answerLength": 5,
+      "pool": "ÖAGCBDƏÇERFK"
     }
   },
   {
@@ -669,16 +759,19 @@ window.PW_MAIN_MORE=[
       "🐄"
     ],
     "ru": {
-      "answer": "СЫР",
-      "hint": "Еда, напиток, продукт или ингредиент."
+      "hint": "Еда, напиток, продукт или ингредиент.",
+      "answerLength": 3,
+      "pool": "СЗГЖБДАЕВИРЫ"
     },
     "en": {
-      "answer": "CHEESE",
-      "hint": "A food, drink, product, or ingredient."
+      "hint": "A food, drink, product, or ingredient.",
+      "answerLength": 6,
+      "pool": "CEDSGFBEEHAJ"
     },
     "az": {
-      "answer": "PENDİR",
-      "hint": "Yemək, içki, məhsul və ya inqrediyent."
+      "hint": "Yemək, içki, məhsul və ya inqrediyent.",
+      "answerLength": 6,
+      "pool": "PNAÇİRCDƏBEF"
     }
   },
   {
@@ -691,16 +784,19 @@ window.PW_MAIN_MORE=[
       "🧀"
     ],
     "ru": {
-      "answer": "МОЛОКО",
-      "hint": "Еда, напиток, продукт или ингредиент."
+      "hint": "Еда, напиток, продукт или ингредиент.",
+      "answerLength": 6,
+      "pool": "АОГОБКОЕДЛМВ"
     },
     "en": {
-      "answer": "MILK",
-      "hint": "A food, drink, product, or ingredient."
+      "hint": "A food, drink, product, or ingredient.",
+      "answerLength": 4,
+      "pool": "DEKFBGIHMLAC"
     },
     "az": {
-      "answer": "SÜD",
-      "hint": "Yemək, içki, məhsul və ya inqrediyent."
+      "hint": "Yemək, içki, məhsul və ya inqrediyent.",
+      "answerLength": 3,
+      "pool": "ÜCGDFBEĞSƏAÇ"
     }
   },
   {
@@ -713,16 +809,19 @@ window.PW_MAIN_MORE=[
       "🥐"
     ],
     "ru": {
-      "answer": "КОФЕ",
-      "hint": "Еда, напиток, продукт или ингредиент."
+      "hint": "Еда, напиток, продукт или ингредиент.",
+      "answerLength": 4,
+      "pool": "ЗАКГБОВЖДИФЕ"
     },
     "en": {
-      "answer": "COFFEE",
-      "hint": "A food, drink, product, or ingredient."
+      "hint": "A food, drink, product, or ingredient.",
+      "answerLength": 6,
+      "pool": "FEEBCGHJDFAO"
     },
     "az": {
-      "answer": "QƏHVƏ",
-      "hint": "Yemək, içki, məhsul və ya inqrediyent."
+      "hint": "Yemək, içki, məhsul və ya inqrediyent.",
+      "answerLength": 5,
+      "pool": "HVQBACƏEÇDFƏ"
     }
   },
   {
@@ -735,16 +834,19 @@ window.PW_MAIN_MORE=[
       "🥤"
     ],
     "ru": {
-      "answer": "СОК",
-      "hint": "Напиток, который получают из фруктов, ягод или овощей."
+      "hint": "Напиток, который получают из фруктов, ягод или овощей.",
+      "answerLength": 3,
+      "pool": "АВОЕКСЖГДИБЗ"
     },
     "en": {
-      "answer": "JUICE",
-      "hint": "A drink made from fruit, berries, or vegetables."
+      "hint": "A drink made from fruit, berries, or vegetables.",
+      "answerLength": 5,
+      "pool": "ICGAUBJEDHKF"
     },
     "az": {
-      "answer": "ŞİRƏ",
-      "hint": "Meyvə, giləmeyvə və ya tərəvəzdən hazırlanan içki."
+      "hint": "Meyvə, giləmeyvə və ya tərəvəzdən hazırlanan içki.",
+      "answerLength": 4,
+      "pool": "BFİECGRAÇŞƏD"
     }
   },
   {
@@ -757,16 +859,19 @@ window.PW_MAIN_MORE=[
       "♨️"
     ],
     "ru": {
-      "answer": "СУП",
-      "hint": "Еда, напиток, продукт или ингредиент."
+      "hint": "Еда, напиток, продукт или ингредиент.",
+      "answerLength": 3,
+      "pool": "СБЕДЖАПУЗИГВ"
     },
     "en": {
-      "answer": "SOUP",
-      "hint": "A food, drink, product, or ingredient."
+      "hint": "A food, drink, product, or ingredient.",
+      "answerLength": 4,
+      "pool": "SOAEUHBDCFGP"
     },
     "az": {
-      "answer": "ŞORBA",
-      "hint": "Yemək, içki, məhsul və ya inqrediyent."
+      "hint": "Yemək, içki, məhsul və ya inqrediyent.",
+      "answerLength": 5,
+      "pool": "ÇOEAƏBŞDRFCG"
     }
   },
   {
@@ -779,16 +884,19 @@ window.PW_MAIN_MORE=[
       "🍅"
     ],
     "ru": {
-      "answer": "САЛАТ",
-      "hint": "Еда, напиток, продукт или ингредиент."
+      "hint": "Еда, напиток, продукт или ингредиент.",
+      "answerLength": 5,
+      "pool": "АЛВДГЕАЖБЗТС"
     },
     "en": {
-      "answer": "SALAD",
-      "hint": "A food, drink, product, or ingredient."
+      "hint": "A food, drink, product, or ingredient.",
+      "answerLength": 5,
+      "pool": "ADGHJEALBSFC"
     },
     "az": {
-      "answer": "SALAT",
-      "hint": "Yemək, içki, məhsul və ya inqrediyent."
+      "hint": "Yemək, içki, məhsul və ya inqrediyent.",
+      "answerLength": 5,
+      "pool": "EABƏTSDLAFÇC"
     }
   },
   {
@@ -801,16 +909,19 @@ window.PW_MAIN_MORE=[
       "🔥"
     ],
     "ru": {
-      "answer": "ПИЦЦА",
-      "hint": "Еда, напиток, продукт или ингредиент."
+      "hint": "Еда, напиток, продукт или ингредиент.",
+      "answerLength": 5,
+      "pool": "ДЦЖЗПБЕГАИВЦ"
     },
     "en": {
-      "answer": "PIZZA",
-      "hint": "A food, drink, product, or ingredient."
+      "hint": "A food, drink, product, or ingredient.",
+      "answerLength": 5,
+      "pool": "PZZCEDFBAHGI"
     },
     "az": {
-      "answer": "PİZZA",
-      "hint": "Yemək, içki, məhsul və ya inqrediyent."
+      "hint": "Yemək, içki, məhsul və ya inqrediyent.",
+      "answerLength": 5,
+      "pool": "AZZFDECƏPÇBİ"
     }
   },
   {
@@ -823,16 +934,19 @@ window.PW_MAIN_MORE=[
       "🍟"
     ],
     "ru": {
-      "answer": "БУРГЕР",
-      "hint": "Еда, напиток, продукт или ингредиент."
+      "hint": "Еда, напиток, продукт или ингредиент.",
+      "answerLength": 6,
+      "pool": "ЕБИРУВАЖГРДЗ"
     },
     "en": {
-      "answer": "BURGER",
-      "hint": "A food, drink, product, or ingredient."
+      "hint": "A food, drink, product, or ingredient.",
+      "answerLength": 6,
+      "pool": "HJFRCEABGRUD"
     },
     "az": {
-      "answer": "BURGER",
-      "hint": "Yemək, içki, məhsul və ya inqrediyent."
+      "hint": "Yemək, içki, məhsul və ya inqrediyent.",
+      "answerLength": 6,
+      "pool": "ARGƏUREBDFCÇ"
     }
   },
   {
@@ -845,16 +959,19 @@ window.PW_MAIN_MORE=[
       "🍴"
     ],
     "ru": {
-      "answer": "ПАСТА",
-      "hint": "Еда, напиток, продукт или ингредиент."
+      "hint": "Еда, напиток, продукт или ингредиент.",
+      "answerLength": 5,
+      "pool": "ПЖЕГДААЗСТВБ"
     },
     "en": {
-      "answer": "PASTA",
-      "hint": "A food, drink, product, or ingredient."
+      "hint": "A food, drink, product, or ingredient.",
+      "answerLength": 5,
+      "pool": "SCPEBAAHFDGT"
     },
     "az": {
-      "answer": "MAKARON",
-      "hint": "Yemək, içki, məhsul və ya inqrediyent."
+      "hint": "Yemək, içki, məhsul və ya inqrediyent.",
+      "answerLength": 7,
+      "pool": "MRACNOKEBDÇA"
     }
   },
   {
@@ -867,16 +984,19 @@ window.PW_MAIN_MORE=[
       "🍛"
     ],
     "ru": {
-      "answer": "РИС",
-      "hint": "Еда, напиток, продукт или ингредиент."
+      "hint": "Еда, напиток, продукт или ингредиент.",
+      "answerLength": 3,
+      "pool": "ИВЗДАЖСЙГБЕР"
     },
     "en": {
-      "answer": "RICE",
-      "hint": "A food, drink, product, or ingredient."
+      "hint": "A food, drink, product, or ingredient.",
+      "answerLength": 4,
+      "pool": "ERKBFACHDGIJ"
     },
     "az": {
-      "answer": "DÜYÜ",
-      "hint": "Yemək, içki, məhsul və ya inqrediyent."
+      "hint": "Yemək, içki, məhsul və ya inqrediyent.",
+      "answerLength": 4,
+      "pool": "ÜGBYÜƏDECAÇF"
     }
   },
   {
@@ -889,16 +1009,19 @@ window.PW_MAIN_MORE=[
       "🥣"
     ],
     "ru": {
-      "answer": "ЯЙЦО",
-      "hint": "Еда, напиток, продукт или ингредиент."
+      "hint": "Еда, напиток, продукт или ингредиент.",
+      "answerLength": 4,
+      "pool": "ЦДВЗАЙЯОБЕЖГ"
     },
     "en": {
-      "answer": "EGG",
-      "hint": "A food, drink, product, or ingredient."
+      "hint": "A food, drink, product, or ingredient.",
+      "answerLength": 3,
+      "pool": "DBGFHKEGLJAC"
     },
     "az": {
-      "answer": "YUMURTA",
-      "hint": "Yemək, içki, məhsul və ya inqrediyent."
+      "hint": "Yemək, içki, məhsul və ya inqrediyent.",
+      "answerLength": 7,
+      "pool": "MUYARBCUDEÇT"
     }
   },
   {
@@ -911,16 +1034,19 @@ window.PW_MAIN_MORE=[
       "🥧"
     ],
     "ru": {
-      "answer": "ЯБЛОКО",
-      "hint": "Еда, напиток, продукт или ингредиент."
+      "hint": "Еда, напиток, продукт или ингредиент.",
+      "answerLength": 6,
+      "pool": "ОГЕЖВДОАКЯБЛ"
     },
     "en": {
-      "answer": "APPLE",
-      "hint": "A food, drink, product, or ingredient."
+      "hint": "A food, drink, product, or ingredient.",
+      "answerLength": 5,
+      "pool": "CPLHDGPFEJBA"
     },
     "az": {
-      "answer": "ALMA",
-      "hint": "Yemək, içki, məhsul və ya inqrediyent."
+      "hint": "Yemək, içki, məhsul və ya inqrediyent.",
+      "answerLength": 4,
+      "pool": "MƏLCFDAEBÇGA"
     }
   },
   {
@@ -933,16 +1059,19 @@ window.PW_MAIN_MORE=[
       "🍓"
     ],
     "ru": {
-      "answer": "БАНАН",
-      "hint": "Еда, напиток, продукт или ингредиент."
+      "hint": "Еда, напиток, продукт или ингредиент.",
+      "answerLength": 5,
+      "pool": "БВННДГЕИААЗЖ"
     },
     "en": {
-      "answer": "BANANA",
-      "hint": "A food, drink, product, or ingredient."
+      "hint": "A food, drink, product, or ingredient.",
+      "answerLength": 6,
+      "pool": "NNFABECHGAAD"
     },
     "az": {
-      "answer": "BANAN",
-      "hint": "Yemək, içki, məhsul və ya inqrediyent."
+      "hint": "Yemək, içki, məhsul və ya inqrediyent.",
+      "answerLength": 5,
+      "pool": "BNFCÇAAƏEGND"
     }
   },
   {
@@ -955,16 +1084,19 @@ window.PW_MAIN_MORE=[
       "🌳"
     ],
     "ru": {
-      "answer": "АПЕЛЬСИН",
-      "hint": "Еда, напиток, продукт или ингредиент."
+      "hint": "Еда, напиток, продукт или ингредиент.",
+      "answerLength": 8,
+      "pool": "АИПЬНБЕЛГВСЖД"
     },
     "en": {
-      "answer": "ORANGE",
-      "hint": "A food, drink, product, or ingredient."
+      "hint": "A food, drink, product, or ingredient.",
+      "answerLength": 6,
+      "pool": "FNOHRCGDJBEA"
     },
     "az": {
-      "answer": "PORTAĞAL",
-      "hint": "Yemək, içki, məhsul və ya inqrediyent."
+      "hint": "Yemək, içki, məhsul və ya inqrediyent.",
+      "answerLength": 8,
+      "pool": "RĞÇDATPEBLACO"
     }
   },
   {
@@ -977,16 +1109,19 @@ window.PW_MAIN_MORE=[
       "😖"
     ],
     "ru": {
-      "answer": "ЛИМОН",
-      "hint": "Еда, напиток, продукт или ингредиент."
+      "hint": "Еда, напиток, продукт или ингредиент.",
+      "answerLength": 5,
+      "pool": "ЛБГНЕАМДИВОЖ"
     },
     "en": {
-      "answer": "LEMON",
-      "hint": "A food, drink, product, or ingredient."
+      "hint": "A food, drink, product, or ingredient.",
+      "answerLength": 5,
+      "pool": "LNODBHMAEGCF"
     },
     "az": {
-      "answer": "LİMON",
-      "hint": "Yemək, içki, məhsul və ya inqrediyent."
+      "hint": "Yemək, içki, məhsul və ya inqrediyent.",
+      "answerLength": 5,
+      "pool": "ÇENİƏCLABOMD"
     }
   },
   {
@@ -999,16 +1134,19 @@ window.PW_MAIN_MORE=[
       "🧃"
     ],
     "ru": {
-      "answer": "ВИНОГРАД",
-      "hint": "Еда, напиток, продукт или ингредиент."
+      "hint": "Еда, напиток, продукт или ингредиент.",
+      "answerLength": 8,
+      "pool": "ВНЙДАРГЗЖИБЕО"
     },
     "en": {
-      "answer": "GRAPE",
-      "hint": "A food, drink, product, or ingredient."
+      "hint": "A food, drink, product, or ingredient.",
+      "answerLength": 5,
+      "pool": "RJACPKDHGFBE"
     },
     "az": {
-      "answer": "ÜZÜM",
-      "hint": "Yemək, içki, məhsul və ya inqrediyent."
+      "hint": "Yemək, içki, məhsul və ya inqrediyent.",
+      "answerLength": 4,
+      "pool": "ZMCÇEÜDÜBƏFA"
     }
   },
   {
@@ -1021,16 +1159,19 @@ window.PW_MAIN_MORE=[
       "🌱"
     ],
     "ru": {
-      "answer": "АРБУЗ",
-      "hint": "Еда, напиток, продукт или ингредиент."
+      "hint": "Еда, напиток, продукт или ингредиент.",
+      "answerLength": 5,
+      "pool": "БИЕГАЙДВЗЖУР"
     },
     "en": {
-      "answer": "WATERMELON",
-      "hint": "A food, drink, product, or ingredient."
+      "hint": "A food, drink, product, or ingredient.",
+      "answerLength": 10,
+      "pool": "NTEMAGDWLBCFERO"
     },
     "az": {
-      "answer": "QARPIZ",
-      "hint": "Yemək, içki, məhsul və ya inqrediyent."
+      "hint": "Yemək, içki, məhsul və ya inqrediyent.",
+      "answerLength": 6,
+      "pool": "EAÇBQDCPIZRƏ"
     }
   },
   {
@@ -1043,16 +1184,19 @@ window.PW_MAIN_MORE=[
       "🎟️"
     ],
     "ru": {
-      "answer": "КИНО",
-      "hint": "Искусство, музыка, кино или сцена."
+      "hint": "Искусство, музыка, кино или сцена.",
+      "answerLength": 4,
+      "pool": "НВЖГИАЗЕОКБД"
     },
     "en": {
-      "answer": "CINEMA",
-      "hint": "Art, music, cinema, or performance."
+      "hint": "Art, music, cinema, or performance.",
+      "answerLength": 6,
+      "pool": "DAINHMFJECGB"
     },
     "az": {
-      "answer": "KİNO",
-      "hint": "İncəsənət, musiqi, kino və ya səhnə."
+      "hint": "İncəsənət, musiqi, kino və ya səhnə.",
+      "answerLength": 4,
+      "pool": "DKBNÇƏİEOFAC"
     }
   },
   {
@@ -1065,16 +1209,19 @@ window.PW_MAIN_MORE=[
       "🔊"
     ],
     "ru": {
-      "answer": "МУЗЫКА",
-      "hint": "Понятие из музыки, звучания и исполнения."
+      "hint": "Понятие из музыки, звучания и исполнения.",
+      "answerLength": 6,
+      "pool": "МАКЕГБДЖЗУВЫ"
     },
     "en": {
-      "answer": "MUSIC",
-      "hint": "A concept from music, sound, and performance."
+      "hint": "A concept from music, sound, and performance.",
+      "answerLength": 5,
+      "pool": "GFECBIDHSAMU"
     },
     "az": {
-      "answer": "MUSİQİ",
-      "hint": "Musiqi, səs və ifa ilə bağlı anlayış."
+      "hint": "Musiqi, səs və ifa ilə bağlı anlayış.",
+      "answerLength": 6,
+      "pool": "MİQİCÇDESBAU"
     }
   },
   {
@@ -1087,16 +1234,19 @@ window.PW_MAIN_MORE=[
       "📝"
     ],
     "ru": {
-      "answer": "ПЕСНЯ",
-      "hint": "Искусство, музыка, кино или сцена."
+      "hint": "Искусство, музыка, кино или сцена.",
+      "answerLength": 5,
+      "pool": "ГЯЗСНПВДЕБАЖ"
     },
     "en": {
-      "answer": "SONG",
-      "hint": "Art, music, cinema, or performance."
+      "hint": "Art, music, cinema, or performance.",
+      "answerLength": 4,
+      "pool": "JDGBHSNAOCFE"
     },
     "az": {
-      "answer": "MAHNI",
-      "hint": "İncəsənət, musiqi, kino və ya səhnə."
+      "hint": "İncəsənət, musiqi, kino və ya səhnə.",
+      "answerLength": 5,
+      "pool": "AEƏBNMÇFCHDI"
     }
   },
   {
@@ -1109,16 +1259,19 @@ window.PW_MAIN_MORE=[
       "🌄"
     ],
     "ru": {
-      "answer": "ГОРА",
-      "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами."
+      "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+      "answerLength": 4,
+      "pool": "ЖРВЗДАБЙГИЕО"
     },
     "en": {
-      "answer": "MOUNTAIN",
-      "hint": "A word connected with travel, routes, holidays, or exploring new places."
+      "hint": "A word connected with travel, routes, holidays, or exploring new places.",
+      "answerLength": 8,
+      "pool": "BMANOFNDCIEUT"
     },
     "az": {
-      "answer": "DAĞ",
-      "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+      "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz.",
+      "answerLength": 3,
+      "pool": "DHAFCGĞƏÇBEX"
     }
   },
   {
@@ -1131,16 +1284,19 @@ window.PW_MAIN_MORE=[
       "➡️"
     ],
     "ru": {
-      "answer": "РЕКА",
-      "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами."
+      "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+      "answerLength": 4,
+      "pool": "ЕАВДРГКБИЙЗЖ"
     },
     "en": {
-      "answer": "RIVER",
-      "hint": "A word connected with travel, routes, holidays, or exploring new places."
+      "hint": "A word connected with travel, routes, holidays, or exploring new places.",
+      "answerLength": 5,
+      "pool": "IREHRCAGFDVB"
     },
     "az": {
-      "answer": "ÇAY",
-      "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+      "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz.",
+      "answerLength": 3,
+      "pool": "AHĞƏDÇBYGCFE"
     }
   },
   {
@@ -1153,16 +1309,19 @@ window.PW_MAIN_MORE=[
       "🌅"
     ],
     "ru": {
-      "answer": "ОЗЕРО",
-      "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами."
+      "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+      "answerLength": 5,
+      "pool": "ЕООБЗАИГЖДВР"
     },
     "en": {
-      "answer": "LAKE",
-      "hint": "A word connected with travel, routes, holidays, or exploring new places."
+      "hint": "A word connected with travel, routes, holidays, or exploring new places.",
+      "answerLength": 4,
+      "pool": "KDBMJGECFHLA"
     },
     "az": {
-      "answer": "GÖL",
-      "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+      "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz.",
+      "answerLength": 3,
+      "pool": "GLEBÇDĞƏACFÖ"
     }
   },
   {
@@ -1175,16 +1334,19 @@ window.PW_MAIN_MORE=[
       "🍄"
     ],
     "ru": {
-      "answer": "ЛЕС",
-      "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами."
+      "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+      "answerLength": 3,
+      "pool": "АЙЖБВДЕСГЛЗИ"
     },
     "en": {
-      "answer": "FOREST",
-      "hint": "A word connected with travel, routes, holidays, or exploring new places."
+      "hint": "A word connected with travel, routes, holidays, or exploring new places.",
+      "answerLength": 6,
+      "pool": "HETBADOFGSRC"
     },
     "az": {
-      "answer": "MEŞƏ",
-      "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+      "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz.",
+      "answerLength": 4,
+      "pool": "GƏAÇBĞFMŞCED"
     }
   },
   {
@@ -1197,16 +1359,19 @@ window.PW_MAIN_MORE=[
       "🌱"
     ],
     "ru": {
-      "answer": "ДЕРЕВО",
-      "hint": "Природный объект или явление."
+      "hint": "Природный объект или явление.",
+      "answerLength": 6,
+      "pool": "РВЗБЕГАЖЕИДО"
     },
     "en": {
-      "answer": "TREE",
-      "hint": "A natural place, object, or phenomenon."
+      "hint": "A natural place, object, or phenomenon.",
+      "answerLength": 4,
+      "pool": "TGHDEFCJRBAE"
     },
     "az": {
-      "answer": "AĞAC",
-      "hint": "Təbiət obyekti və ya hadisəsi."
+      "hint": "Təbiət obyekti və ya hadisəsi.",
+      "answerLength": 4,
+      "pool": "AƏADEÇBHFĞGC"
     }
   },
   {
@@ -1219,16 +1384,19 @@ window.PW_MAIN_MORE=[
       "💐"
     ],
     "ru": {
-      "answer": "ЦВЕТОК",
-      "hint": "Природный объект или явление."
+      "hint": "Природный объект или явление.",
+      "answerLength": 6,
+      "pool": "ЖТВБКДОГЗАЕЦ"
     },
     "en": {
-      "answer": "FLOWER",
-      "hint": "A natural place, object, or phenomenon."
+      "hint": "A natural place, object, or phenomenon.",
+      "answerLength": 6,
+      "pool": "LRCOWBEDFHAG"
     },
     "az": {
-      "answer": "GÜL",
-      "hint": "Təbiət obyekti və ya hadisəsi."
+      "hint": "Təbiət obyekti və ya hadisəsi.",
+      "answerLength": 3,
+      "pool": "AEĞDCBƏÇGLÜF"
     }
   },
   {
@@ -1241,16 +1409,19 @@ window.PW_MAIN_MORE=[
       "🏞️"
     ],
     "ru": {
-      "answer": "ТРАВА",
-      "hint": "Природный объект или явление."
+      "hint": "Природный объект или явление.",
+      "answerLength": 5,
+      "pool": "АБГЖЗРАВЕИТД"
     },
     "en": {
-      "answer": "GRASS",
-      "hint": "A natural place, object, or phenomenon."
+      "hint": "A natural place, object, or phenomenon.",
+      "answerLength": 5,
+      "pool": "GCJFHSAREDSB"
     },
     "az": {
-      "answer": "OT",
-      "hint": "Təbiət obyekti və ya hadisəsi."
+      "hint": "Təbiət obyekti və ya hadisəsi.",
+      "answerLength": 2,
+      "pool": "TCOÇĞEƏDFABG"
     }
   },
   {
@@ -1263,16 +1434,19 @@ window.PW_MAIN_MORE=[
       "🏞️"
     ],
     "ru": {
-      "answer": "КАМЕНЬ",
-      "hint": "Природный объект или явление."
+      "hint": "Природный объект или явление.",
+      "answerLength": 6,
+      "pool": "НЕЬЖАДКБВГЗМ"
     },
     "en": {
-      "answer": "STONE",
-      "hint": "A natural place, object, or phenomenon."
+      "hint": "A natural place, object, or phenomenon.",
+      "answerLength": 5,
+      "pool": "TNOFAGHECDBS"
     },
     "az": {
-      "answer": "DAŞ",
-      "hint": "Təbiət obyekti və ya hadisəsi."
+      "hint": "Təbiət obyekti və ya hadisəsi.",
+      "answerLength": 3,
+      "pool": "ƏŞFEĞHÇGBCAD"
     }
   },
   {
@@ -1285,16 +1459,19 @@ window.PW_MAIN_MORE=[
       "🦶"
     ],
     "ru": {
-      "answer": "ПЕСОК",
-      "hint": "Природный объект или явление."
+      "hint": "Природный объект или явление.",
+      "answerLength": 5,
+      "pool": "ПЖГВСОАЕБЗКД"
     },
     "en": {
-      "answer": "SAND",
-      "hint": "A natural place, object, or phenomenon."
+      "hint": "A natural place, object, or phenomenon.",
+      "answerLength": 4,
+      "pool": "NBSHJCAKEDGF"
     },
     "az": {
-      "answer": "QUM",
-      "hint": "Təbiət obyekti və ya hadisəsi."
+      "hint": "Təbiət obyekti və ya hadisəsi.",
+      "answerLength": 3,
+      "pool": "QBUƏEÇFGMCAD"
     }
   },
   {
@@ -1307,16 +1484,19 @@ window.PW_MAIN_MORE=[
       "🏔️"
     ],
     "ru": {
-      "answer": "СНЕГ",
-      "hint": "Природный объект или явление."
+      "hint": "Природный объект или явление.",
+      "answerLength": 4,
+      "pool": "НДЖСВИГЗБЙЕА"
     },
     "en": {
-      "answer": "SNOW",
-      "hint": "A natural place, object, or phenomenon."
+      "hint": "A natural place, object, or phenomenon.",
+      "answerLength": 4,
+      "pool": "NSWFEDCHBAGO"
     },
     "az": {
-      "answer": "QAR",
-      "hint": "Təbiət obyekti və ya hadisəsi."
+      "hint": "Təbiət obyekti və ya hadisəsi.",
+      "answerLength": 3,
+      "pool": "ƏGDEBFCĞAQÇR"
     }
   },
   {
@@ -1329,16 +1509,19 @@ window.PW_MAIN_MORE=[
       "🥶"
     ],
     "ru": {
-      "answer": "ЛЕД",
-      "hint": "Природный объект или явление."
+      "hint": "Природный объект или явление.",
+      "answerLength": 3,
+      "pool": "ДЕЛАГИЗЖЙВБК"
     },
     "en": {
-      "answer": "ICE",
-      "hint": "A natural place, object, or phenomenon."
+      "hint": "A natural place, object, or phenomenon.",
+      "answerLength": 3,
+      "pool": "EFICAGKLBDHJ"
     },
     "az": {
-      "answer": "BUZ",
-      "hint": "Təbiət obyekti və ya hadisəsi."
+      "hint": "Təbiət obyekti və ya hadisəsi.",
+      "answerLength": 3,
+      "pool": "DAƏĞCGZÇBUEF"
     }
   },
   {
@@ -1351,16 +1534,19 @@ window.PW_MAIN_MORE=[
       "🌊"
     ],
     "ru": {
-      "answer": "ВЕТЕР",
-      "hint": "Природный объект или явление."
+      "hint": "Природный объект или явление.",
+      "answerLength": 5,
+      "pool": "ЕРЕАВЖГТДЗИБ"
     },
     "en": {
-      "answer": "WIND",
-      "hint": "A natural place, object, or phenomenon."
+      "hint": "A natural place, object, or phenomenon.",
+      "answerLength": 4,
+      "pool": "GDIEBJNWFCHA"
     },
     "az": {
-      "answer": "KÜLƏK",
-      "hint": "Təbiət obyekti və ya hadisəsi."
+      "hint": "Təbiət obyekti və ya hadisəsi.",
+      "answerLength": 5,
+      "pool": "EƏÜFBDCKÇLAK"
     }
   },
   {
@@ -1373,16 +1559,19 @@ window.PW_MAIN_MORE=[
       "☁️"
     ],
     "ru": {
-      "answer": "ГРОМ",
-      "hint": "Природный объект или явление."
+      "hint": "Природный объект или явление.",
+      "answerLength": 4,
+      "pool": "ВМОАЗИГБЖДЕР"
     },
     "en": {
-      "answer": "THUNDER",
-      "hint": "A natural place, object, or phenomenon."
+      "hint": "A natural place, object, or phenomenon.",
+      "answerLength": 7,
+      "pool": "DEUBRCTNAFHG"
     },
     "az": {
-      "answer": "GÖYGURULTUSU",
-      "hint": "Təbiət obyekti və ya hadisəsi."
+      "hint": "Təbiət obyekti və ya hadisəsi.",
+      "answerLength": 12,
+      "pool": "GGÖRULUBYUAÇUCDST"
     }
   },
   {
@@ -1395,16 +1584,19 @@ window.PW_MAIN_MORE=[
       "🎨"
     ],
     "ru": {
-      "answer": "РАДУГА",
-      "hint": "Природный объект или явление."
+      "hint": "Природный объект или явление.",
+      "answerLength": 6,
+      "pool": "АЖУВДГАРЗИБЕ"
     },
     "en": {
-      "answer": "RAINBOW",
-      "hint": "A natural place, object, or phenomenon."
+      "hint": "A natural place, object, or phenomenon.",
+      "answerLength": 7,
+      "pool": "BNCEARODGIFW"
     },
     "az": {
-      "answer": "GÖYQURŞAĞI",
-      "hint": "Təbiət obyekti və ya hadisəsi."
+      "hint": "Təbiət obyekti və ya hadisəsi.",
+      "answerLength": 10,
+      "pool": "ŞĞUBGCYDÖAEQÇIR"
     }
   },
   {
@@ -1417,16 +1609,19 @@ window.PW_MAIN_MORE=[
       "⛵"
     ],
     "ru": {
-      "answer": "ОСТРОВ",
-      "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами."
+      "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+      "answerLength": 6,
+      "pool": "ОТЕОАСБДВЖГР"
     },
     "en": {
-      "answer": "ISLAND",
-      "hint": "A word connected with travel, routes, holidays, or exploring new places."
+      "hint": "A word connected with travel, routes, holidays, or exploring new places.",
+      "answerLength": 6,
+      "pool": "INECLBHGDASF"
     },
     "az": {
-      "answer": "ADA",
-      "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+      "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz.",
+      "answerLength": 3,
+      "pool": "AACÇBEĞFDHƏG"
     }
   },
   {
@@ -1439,16 +1634,19 @@ window.PW_MAIN_MORE=[
       "🏞️"
     ],
     "ru": {
-      "answer": "ПОЛЕ",
-      "hint": "Природный объект или явление."
+      "hint": "Природный объект или явление.",
+      "answerLength": 4,
+      "pool": "ГБЕЛДПОИЖАЗВ"
     },
     "en": {
-      "answer": "FIELD",
-      "hint": "A natural place, object, or phenomenon."
+      "hint": "A natural place, object, or phenomenon.",
+      "answerLength": 5,
+      "pool": "BCEAJFIGHKLD"
     },
     "az": {
-      "answer": "TARLA",
-      "hint": "Təbiət obyekti və ya hadisəsi."
+      "hint": "Təbiət obyekti və ya hadisəsi.",
+      "answerLength": 5,
+      "pool": "ALRBÇDCFƏTEA"
     }
   },
   {
@@ -1461,16 +1659,19 @@ window.PW_MAIN_MORE=[
       "⛱️"
     ],
     "ru": {
-      "answer": "БЕРЕГ",
-      "hint": "Природный объект или явление."
+      "hint": "Природный объект или явление.",
+      "answerLength": 5,
+      "pool": "РЗБДГЖВИЕАЙЕ"
     },
     "en": {
-      "answer": "SHORE",
-      "hint": "A natural place, object, or phenomenon."
+      "hint": "A natural place, object, or phenomenon.",
+      "answerLength": 5,
+      "pool": "BHSDEFOCRGAJ"
     },
     "az": {
-      "answer": "SAHİL",
-      "hint": "Təbiət obyekti və ya hadisəsi."
+      "hint": "Təbiət obyekti və ya hadisəsi.",
+      "answerLength": 5,
+      "pool": "CHEBƏİLÇDASF"
     }
   },
   {
@@ -1483,16 +1684,19 @@ window.PW_MAIN_MORE=[
       "🌌"
     ],
     "ru": {
-      "answer": "НЕБО",
-      "hint": "Природный объект или явление."
+      "hint": "Природный объект или явление.",
+      "answerLength": 4,
+      "pool": "ВОЕЗНЙДАБГИЖ"
     },
     "en": {
-      "answer": "SKY",
-      "hint": "A natural place, object, or phenomenon."
+      "hint": "A natural place, object, or phenomenon.",
+      "answerLength": 3,
+      "pool": "HBKCJEGFYSAD"
     },
     "az": {
-      "answer": "SƏMA",
-      "hint": "Təbiət obyekti və ya hadisəsi."
+      "hint": "Təbiət obyekti və ya hadisəsi.",
+      "answerLength": 4,
+      "pool": "BCAĞƏSEFDGMÇ"
     }
   },
   {
@@ -1505,16 +1709,19 @@ window.PW_MAIN_MORE=[
       "🍰"
     ],
     "ru": {
-      "answer": "КЛУБНИКА",
-      "hint": "Еда, напиток, продукт или ингредиент."
+      "hint": "Еда, напиток, продукт или ингредиент.",
+      "answerLength": 8,
+      "pool": "ЖБИГКНВЕАКЛУД"
     },
     "en": {
-      "answer": "STRAWBERRY",
-      "hint": "A food, drink, product, or ingredient."
+      "hint": "A food, drink, product, or ingredient.",
+      "answerLength": 10,
+      "pool": "FSDWBRTRYHRGAEC"
     },
     "az": {
-      "answer": "ÇİYƏLƏK",
-      "hint": "Yemək, içki, məhsul və ya inqrediyent."
+      "hint": "Yemək, içki, məhsul və ya inqrediyent.",
+      "answerLength": 7,
+      "pool": "LBDEYACƏKƏÇİ"
     }
   },
   {
@@ -1527,16 +1734,19 @@ window.PW_MAIN_MORE=[
       "🥗"
     ],
     "ru": {
-      "answer": "МОРКОВЬ",
-      "hint": "Еда, напиток, продукт или ингредиент."
+      "hint": "Еда, напиток, продукт или ингредиент.",
+      "answerLength": 7,
+      "pool": "ЬМООБАЕГВРКД"
     },
     "en": {
-      "answer": "CARROT",
-      "hint": "A food, drink, product, or ingredient."
+      "hint": "A food, drink, product, or ingredient.",
+      "answerLength": 6,
+      "pool": "AHBGFORCTRDE"
     },
     "az": {
-      "answer": "YERKÖKÜ",
-      "hint": "Yemək, içki, məhsul və ya inqrediyent."
+      "hint": "Yemək, içki, məhsul və ya inqrediyent.",
+      "answerLength": 7,
+      "pool": "CÖÜAKÇEYKDRB"
     }
   },
   {
@@ -1549,16 +1759,19 @@ window.PW_MAIN_MORE=[
       "🍲"
     ],
     "ru": {
-      "answer": "КАРТОФЕЛЬ",
-      "hint": "Еда, напиток, продукт или ингредиент."
+      "hint": "Еда, напиток, продукт или ингредиент.",
+      "answerLength": 9,
+      "pool": "КРЬОДТЕВБЖЛГФА"
     },
     "en": {
-      "answer": "POTATO",
-      "hint": "A food, drink, product, or ingredient."
+      "hint": "A food, drink, product, or ingredient.",
+      "answerLength": 6,
+      "pool": "PTFDCBOETGOA"
     },
     "az": {
-      "answer": "KARTOF",
-      "hint": "Yemək, içki, məhsul və ya inqrediyent."
+      "hint": "Yemək, içki, məhsul və ya inqrediyent.",
+      "answerLength": 6,
+      "pool": "KFRCÇABƏEDOT"
     }
   },
   {
@@ -1571,16 +1784,19 @@ window.PW_MAIN_MORE=[
       "🌱"
     ],
     "ru": {
-      "answer": "ПОМИДОР",
-      "hint": "Еда, напиток, продукт или ингредиент."
+      "hint": "Еда, напиток, продукт или ингредиент.",
+      "answerLength": 7,
+      "pool": "ОМБАОВРЕГДИП"
     },
     "en": {
-      "answer": "TOMATO",
-      "hint": "A food, drink, product, or ingredient."
+      "hint": "A food, drink, product, or ingredient.",
+      "answerLength": 6,
+      "pool": "OODMETGBATCF"
     },
     "az": {
-      "answer": "POMİDOR",
-      "hint": "Yemək, içki, məhsul və ya inqrediyent."
+      "hint": "Yemək, içki, məhsul və ya inqrediyent.",
+      "answerLength": 7,
+      "pool": "OBOECADRİPMÇ"
     }
   },
   {
@@ -1593,16 +1809,19 @@ window.PW_MAIN_MORE=[
       "🌱"
     ],
     "ru": {
-      "answer": "ОГУРЕЦ",
-      "hint": "Еда, напиток, продукт или ингредиент."
+      "hint": "Еда, напиток, продукт или ингредиент.",
+      "answerLength": 6,
+      "pool": "АВГДОЗЕРУЖЦБ"
     },
     "en": {
-      "answer": "CUCUMBER",
-      "hint": "A food, drink, product, or ingredient."
+      "hint": "A food, drink, product, or ingredient.",
+      "answerLength": 8,
+      "pool": "BAUDURCFEHMCG"
     },
     "az": {
-      "answer": "XİYAR",
-      "hint": "Yemək, içki, məhsul və ya inqrediyent."
+      "hint": "Yemək, içki, məhsul və ya inqrediyent.",
+      "answerLength": 5,
+      "pool": "XCAƏFDYEÇİRB"
     }
   },
   {
@@ -1615,16 +1834,19 @@ window.PW_MAIN_MORE=[
       "🎁"
     ],
     "ru": {
-      "answer": "ШОКОЛАД",
-      "hint": "Еда, напиток, продукт или ингредиент."
+      "hint": "Еда, напиток, продукт или ингредиент.",
+      "answerLength": 7,
+      "pool": "ЛАОЕВШЖГОДБК"
     },
     "en": {
-      "answer": "CHOCOLATE",
-      "hint": "A food, drink, product, or ingredient."
+      "hint": "A food, drink, product, or ingredient.",
+      "answerLength": 9,
+      "pool": "TCHBCDLAOGJOFE"
     },
     "az": {
-      "answer": "ŞOKOLAD",
-      "hint": "Yemək, içki, məhsul və ya inqrediyent."
+      "hint": "Yemək, içki, məhsul və ya inqrediyent.",
+      "answerLength": 7,
+      "pool": "OOBAKCƏLÇEDŞ"
     }
   },
   {
@@ -1637,16 +1859,19 @@ window.PW_MAIN_MORE=[
       "☀️"
     ],
     "ru": {
-      "answer": "МОРОЖЕНОЕ",
-      "hint": "Еда, напиток, продукт или ингредиент."
+      "hint": "Еда, напиток, продукт или ингредиент.",
+      "answerLength": 9,
+      "pool": "МАЕЕБДРОГОЖОНВ"
     },
     "en": {
-      "answer": "ICECREAM",
-      "hint": "A food, drink, product, or ingredient."
+      "hint": "A food, drink, product, or ingredient.",
+      "answerLength": 8,
+      "pool": "CHBEMARDGEIFC"
     },
     "az": {
-      "answer": "DONDURMA",
-      "hint": "Yemək, içki, məhsul və ya inqrediyent."
+      "hint": "Yemək, içki, məhsul və ya inqrediyent.",
+      "answerLength": 8,
+      "pool": "MROACDDBEÇUƏN"
     }
   },
   {
@@ -1659,16 +1884,19 @@ window.PW_MAIN_MORE=[
       "🦓"
     ],
     "ru": {
-      "answer": "ЛЕВ",
-      "hint": "Животное или птица."
+      "hint": "Животное или птица.",
+      "answerLength": 3,
+      "pool": "ДЙЕЛАИГКЗВЖБ"
     },
     "en": {
-      "answer": "LION",
-      "hint": "An animal or bird."
+      "hint": "An animal or bird.",
+      "answerLength": 4,
+      "pool": "AGCBNDIFEHLO"
     },
     "az": {
-      "answer": "ŞİR",
-      "hint": "Heyvan və ya quş."
+      "hint": "Heyvan və ya quş.",
+      "answerLength": 3,
+      "pool": "FCİDƏŞAGBEÇR"
     }
   },
   {
@@ -1681,16 +1909,19 @@ window.PW_MAIN_MORE=[
       "🐾"
     ],
     "ru": {
-      "answer": "ТИГР",
-      "hint": "Животное или птица."
+      "hint": "Животное или птица.",
+      "answerLength": 4,
+      "pool": "ТИГЕАБВДЗРЖЙ"
     },
     "en": {
-      "answer": "TIGER",
-      "hint": "An animal or bird."
+      "hint": "An animal or bird.",
+      "answerLength": 5,
+      "pool": "TDHIRCBAJEGF"
     },
     "az": {
-      "answer": "PƏLƏNG",
-      "hint": "Heyvan və ya quş."
+      "hint": "Heyvan və ya quş.",
+      "answerLength": 6,
+      "pool": "ADLƏPBNGƏECÇ"
     }
   },
   {
@@ -1703,16 +1934,19 @@ window.PW_MAIN_MORE=[
       "🌿"
     ],
     "ru": {
-      "answer": "СЛОН",
-      "hint": "Животное или птица."
+      "hint": "Животное или птица.",
+      "answerLength": 4,
+      "pool": "ЛНЗБСЖЕДОАГВ"
     },
     "en": {
-      "answer": "ELEPHANT",
-      "hint": "An animal or bird."
+      "hint": "An animal or bird.",
+      "answerLength": 8,
+      "pool": "NAEFGDEBTCLPH"
     },
     "az": {
-      "answer": "FİL",
-      "hint": "Heyvan və ya quş."
+      "hint": "Heyvan və ya quş.",
+      "answerLength": 3,
+      "pool": "ĞCADİÇEƏLFGB"
     }
   },
   {
@@ -1725,16 +1959,19 @@ window.PW_MAIN_MORE=[
       "🌍"
     ],
     "ru": {
-      "answer": "ЖИРАФ",
-      "hint": "Животное или птица."
+      "hint": "Животное или птица.",
+      "answerLength": 5,
+      "pool": "ЖВАФГДРЗЙБЕИ"
     },
     "en": {
-      "answer": "GIRAFFE",
-      "hint": "An animal or bird."
+      "hint": "An animal or bird.",
+      "answerLength": 7,
+      "pool": "GEFJFCHAIDRB"
     },
     "az": {
-      "answer": "ZÜRAFƏ",
-      "hint": "Heyvan və ya quş."
+      "hint": "Heyvan və ya quş.",
+      "answerLength": 6,
+      "pool": "BFDGREZAÜƏÇC"
     }
   },
   {
@@ -1747,16 +1984,19 @@ window.PW_MAIN_MORE=[
       "🌍"
     ],
     "ru": {
-      "answer": "ЗЕБРА",
-      "hint": "Животное или птица."
+      "hint": "Животное или птица.",
+      "answerLength": 5,
+      "pool": "ЕРВГБКДЖИЙЗА"
     },
     "en": {
-      "answer": "ZEBRA",
-      "hint": "An animal or bird."
+      "hint": "An animal or bird.",
+      "answerLength": 5,
+      "pool": "ECRJKFGDHZAB"
     },
     "az": {
-      "answer": "ZEBRA",
-      "hint": "Heyvan və ya quş."
+      "hint": "Heyvan və ya quş.",
+      "answerLength": 5,
+      "pool": "EZDĞRAƏFCÇGB"
     }
   },
   {
@@ -1769,16 +2009,19 @@ window.PW_MAIN_MORE=[
       "🙈"
     ],
     "ru": {
-      "answer": "ОБЕЗЬЯНА",
-      "hint": "Животное или птица."
+      "hint": "Животное или птица.",
+      "answerLength": 8,
+      "pool": "ИОЗЖБАВДЬНГЕЯ"
     },
     "en": {
-      "answer": "MONKEY",
-      "hint": "An animal or bird."
+      "hint": "An animal or bird.",
+      "answerLength": 6,
+      "pool": "EFMBNKYGCOAD"
     },
     "az": {
-      "answer": "MEYMUN",
-      "hint": "Heyvan və ya quş."
+      "hint": "Heyvan və ya quş.",
+      "answerLength": 6,
+      "pool": "YAMNCƏMDUBEÇ"
     }
   },
   {
@@ -1791,16 +2034,19 @@ window.PW_MAIN_MORE=[
       "❄️"
     ],
     "ru": {
-      "answer": "МЕДВЕДЬ",
-      "hint": "Животное или птица."
+      "hint": "Животное или птица.",
+      "answerLength": 7,
+      "pool": "БДЕГЕЖВЗАДМЬ"
     },
     "en": {
-      "answer": "BEAR",
-      "hint": "An animal or bird."
+      "hint": "An animal or bird.",
+      "answerLength": 4,
+      "pool": "JHEDFBRKGALC"
     },
     "az": {
-      "answer": "AYI",
-      "hint": "Heyvan və ya quş."
+      "hint": "Heyvan və ya quş.",
+      "answerLength": 3,
+      "pool": "IFDEÇAYĞGƏBC"
     }
   },
   {
@@ -1813,16 +2059,19 @@ window.PW_MAIN_MORE=[
       "🐾"
     ],
     "ru": {
-      "answer": "ВОЛК",
-      "hint": "Животное или птица."
+      "hint": "Животное или птица.",
+      "answerLength": 4,
+      "pool": "АБЗЕВЖДИГКЛО"
     },
     "en": {
-      "answer": "WOLF",
-      "hint": "An animal or bird."
+      "hint": "An animal or bird.",
+      "answerLength": 4,
+      "pool": "GDOBFJCAWLHE"
     },
     "az": {
-      "answer": "CANAVAR",
-      "hint": "Heyvan və ya quş."
+      "hint": "Heyvan və ya quş.",
+      "answerLength": 7,
+      "pool": "ÇVCAEARBNDAƏ"
     }
   },
   {
@@ -1835,16 +2084,19 @@ window.PW_MAIN_MORE=[
       "🐾"
     ],
     "ru": {
-      "answer": "ЛИСА",
-      "hint": "Животное или птица."
+      "hint": "Животное или птица.",
+      "answerLength": 4,
+      "pool": "ДЖАЛИСГЗВЙБЕ"
     },
     "en": {
-      "answer": "FOX",
-      "hint": "An animal or bird."
+      "hint": "An animal or bird.",
+      "answerLength": 3,
+      "pool": "HABCFKEXOJGD"
     },
     "az": {
-      "answer": "TÜLKÜ",
-      "hint": "Heyvan və ya quş."
+      "hint": "Heyvan və ya quş.",
+      "answerLength": 5,
+      "pool": "ETƏAÇCDLÜÜKB"
     }
   },
   {
@@ -1857,16 +2109,19 @@ window.PW_MAIN_MORE=[
       "👂"
     ],
     "ru": {
-      "answer": "ЗАЯЦ",
-      "hint": "Животное или птица."
+      "hint": "Животное или птица.",
+      "answerLength": 4,
+      "pool": "ГАБЙИВЕДЗЖЯЦ"
     },
     "en": {
-      "answer": "HARE",
-      "hint": "An animal or bird."
+      "hint": "An animal or bird.",
+      "answerLength": 4,
+      "pool": "KREBFLGCHJDA"
     },
     "az": {
-      "answer": "DOVŞAN",
-      "hint": "Heyvan və ya quş."
+      "hint": "Heyvan və ya quş.",
+      "answerLength": 6,
+      "pool": "ÇŞAFVBCEDƏNO"
     }
   },
   {
@@ -1879,16 +2134,19 @@ window.PW_MAIN_MORE=[
       "🫎"
     ],
     "ru": {
-      "answer": "ОЛЕНЬ",
-      "hint": "Животное или птица."
+      "hint": "Животное или птица.",
+      "answerLength": 5,
+      "pool": "ЛБДВНЗАЕГОЬЖ"
     },
     "en": {
-      "answer": "DEER",
-      "hint": "An animal or bird."
+      "hint": "An animal or bird.",
+      "answerLength": 4,
+      "pool": "ERCFEABHJDKG"
     },
     "az": {
-      "answer": "MARAL",
-      "hint": "Heyvan və ya quş."
+      "hint": "Heyvan və ya quş.",
+      "answerLength": 5,
+      "pool": "ABLÇERƏMFCAD"
     }
   },
   {
@@ -1901,16 +2159,19 @@ window.PW_MAIN_MORE=[
       "🧲"
     ],
     "ru": {
-      "answer": "ЛОШАДЬ",
-      "hint": "Животное или птица."
+      "hint": "Животное или птица.",
+      "answerLength": 6,
+      "pool": "ЛШЖГДЕАЗВОБЬ"
     },
     "en": {
-      "answer": "HORSE",
-      "hint": "An animal or bird."
+      "hint": "An animal or bird.",
+      "answerLength": 5,
+      "pool": "RAHEBFDJCOGS"
     },
     "az": {
-      "answer": "AT",
-      "hint": "Heyvan və ya quş."
+      "hint": "Heyvan və ya quş.",
+      "answerLength": 2,
+      "pool": "ABĞFÇETHGƏDC"
     }
   },
   {
@@ -1923,16 +2184,19 @@ window.PW_MAIN_MORE=[
       "🔔"
     ],
     "ru": {
-      "answer": "КОРОВА",
-      "hint": "Животное или птица."
+      "hint": "Животное или птица.",
+      "answerLength": 6,
+      "pool": "ЖОЕАГВОЗБРДК"
     },
     "en": {
-      "answer": "COW",
-      "hint": "An animal or bird."
+      "hint": "An animal or bird.",
+      "answerLength": 3,
+      "pool": "ADFWBCKGHEOJ"
     },
     "az": {
-      "answer": "İNƏK",
-      "hint": "Heyvan və ya quş."
+      "hint": "Heyvan və ya quş.",
+      "answerLength": 4,
+      "pool": "NBKEİAGCƏDÇF"
     }
   },
   {
@@ -1945,16 +2209,19 @@ window.PW_MAIN_MORE=[
       "☁️"
     ],
     "ru": {
-      "answer": "ОВЦА",
-      "hint": "Животное или птица."
+      "hint": "Животное или птица.",
+      "answerLength": 4,
+      "pool": "ЦБОЖВЗИАГЙДЕ"
     },
     "en": {
-      "answer": "SHEEP",
-      "hint": "An animal or bird."
+      "hint": "An animal or bird.",
+      "answerLength": 5,
+      "pool": "PDEFSEBHJCGA"
     },
     "az": {
-      "answer": "QOYUN",
-      "hint": "Heyvan və ya quş."
+      "hint": "Heyvan və ya quş.",
+      "answerLength": 5,
+      "pool": "YEQBƏCNÇOUDA"
     }
   },
   {
@@ -1967,16 +2234,19 @@ window.PW_MAIN_MORE=[
       "🥛"
     ],
     "ru": {
-      "answer": "КОЗА",
-      "hint": "Животное или птица."
+      "hint": "Животное или птица.",
+      "answerLength": 4,
+      "pool": "АВОДЙКЖГБИЕЗ"
     },
     "en": {
-      "answer": "GOAT",
-      "hint": "An animal or bird."
+      "hint": "An animal or bird.",
+      "answerLength": 4,
+      "pool": "ATDCJKEHBFOG"
     },
     "az": {
-      "answer": "KEÇİ",
-      "hint": "Heyvan və ya quş."
+      "hint": "Heyvan və ya quş.",
+      "answerLength": 4,
+      "pool": "GİEBCƏÇFĞADK"
     }
   },
   {
@@ -1989,16 +2259,19 @@ window.PW_MAIN_MORE=[
       "🏡"
     ],
     "ru": {
-      "answer": "СВИНЬЯ",
-      "hint": "Животное или птица."
+      "hint": "Животное или птица.",
+      "answerLength": 6,
+      "pool": "СЬАБЯГИВНЖЕД"
     },
     "en": {
-      "answer": "PIG",
-      "hint": "An animal or bird."
+      "hint": "An animal or bird.",
+      "answerLength": 3,
+      "pool": "PIBFGDCKJHAE"
     },
     "az": {
-      "answer": "DONUZ",
-      "hint": "Heyvan və ya quş."
+      "hint": "Heyvan və ya quş.",
+      "answerLength": 5,
+      "pool": "BONZƏUDFÇAEC"
     }
   },
   {
@@ -2011,16 +2284,19 @@ window.PW_MAIN_MORE=[
       "🏡"
     ],
     "ru": {
-      "answer": "КУРИЦА",
-      "hint": "Животное или птица."
+      "hint": "Животное или птица.",
+      "answerLength": 6,
+      "pool": "УАИБВЕДЖРКГЦ"
     },
     "en": {
-      "answer": "CHICKEN",
-      "hint": "An animal or bird."
+      "hint": "An animal or bird.",
+      "answerLength": 7,
+      "pool": "FKDENBCGACHI"
     },
     "az": {
-      "answer": "TOYUQ",
-      "hint": "Heyvan və ya quş."
+      "hint": "Heyvan və ya quş.",
+      "answerLength": 5,
+      "pool": "OUEDQÇAƏCBTY"
     }
   },
   {
@@ -2033,16 +2309,19 @@ window.PW_MAIN_MORE=[
       "🏞️"
     ],
     "ru": {
-      "answer": "УТКА",
-      "hint": "Животное или птица."
+      "hint": "Животное или птица.",
+      "answerLength": 4,
+      "pool": "БКЕАУВЖДГТЗИ"
     },
     "en": {
-      "answer": "DUCK",
-      "hint": "An animal or bird."
+      "hint": "An animal or bird.",
+      "answerLength": 4,
+      "pool": "DCJFAGULEBKH"
     },
     "az": {
-      "answer": "ÖRDƏK",
-      "hint": "Heyvan və ya quş."
+      "hint": "Heyvan və ya quş.",
+      "answerLength": 5,
+      "pool": "KDƏRÖFÇGBCEA"
     }
   },
   {
@@ -2055,16 +2334,19 @@ window.PW_MAIN_MORE=[
       "👁️"
     ],
     "ru": {
-      "answer": "ОРЕЛ",
-      "hint": "Животное или птица."
+      "hint": "Животное или птица.",
+      "answerLength": 4,
+      "pool": "ДОЛГЗАЖЕБИРВ"
     },
     "en": {
-      "answer": "EAGLE",
-      "hint": "An animal or bird."
+      "hint": "An animal or bird.",
+      "answerLength": 5,
+      "pool": "ALGFDEHKJCBE"
     },
     "az": {
-      "answer": "QARTAL",
-      "hint": "Heyvan və ya quş."
+      "hint": "Heyvan və ya quş.",
+      "answerLength": 6,
+      "pool": "BTÇCADAELRƏQ"
     }
   },
   {
@@ -2077,16 +2359,19 @@ window.PW_MAIN_MORE=[
       "👀"
     ],
     "ru": {
-      "answer": "СОВА",
-      "hint": "Животное или птица."
+      "hint": "Животное или птица.",
+      "answerLength": 4,
+      "pool": "ДИСЙВОЖГБЕАЗ"
     },
     "en": {
-      "answer": "OWL",
-      "hint": "An animal or bird."
+      "hint": "An animal or bird.",
+      "answerLength": 3,
+      "pool": "LDOGCWFABHJE"
     },
     "az": {
-      "answer": "BAYQUŞ",
-      "hint": "Heyvan və ya quş."
+      "hint": "Heyvan və ya quş.",
+      "answerLength": 6,
+      "pool": "UŞDFCAƏEBQYÇ"
     }
   },
   {
@@ -2099,16 +2384,19 @@ window.PW_MAIN_MORE=[
       "🗣️"
     ],
     "ru": {
-      "answer": "ПОПУГАЙ",
-      "hint": "Животное или птица."
+      "hint": "Животное или птица.",
+      "answerLength": 7,
+      "pool": "ЙАЕБДЖППУВОГ"
     },
     "en": {
-      "answer": "PARROT",
-      "hint": "An animal or bird."
+      "hint": "An animal or bird.",
+      "answerLength": 6,
+      "pool": "EFAOCPGBRDTR"
     },
     "az": {
-      "answer": "TUTUQUŞU",
-      "hint": "Heyvan və ya quş."
+      "hint": "Heyvan və ya quş.",
+      "answerLength": 8,
+      "pool": "TUDCTAŞÇBUUUQ"
     }
   },
   {
@@ -2121,16 +2409,19 @@ window.PW_MAIN_MORE=[
       "🏖️"
     ],
     "ru": {
-      "answer": "ДЕЛЬФИН",
-      "hint": "Животное или птица."
+      "hint": "Животное или птица.",
+      "answerLength": 7,
+      "pool": "НЕБИФАДГЛВЬЖ"
     },
     "en": {
-      "answer": "DOLPHIN",
-      "hint": "An animal or bird."
+      "hint": "An animal or bird.",
+      "answerLength": 7,
+      "pool": "NHBEIPDOLFAC"
     },
     "az": {
-      "answer": "DELFİN",
-      "hint": "Heyvan və ya quş."
+      "hint": "Heyvan və ya quş.",
+      "answerLength": 6,
+      "pool": "DAƏCİFGEBNLÇ"
     }
   },
   {
@@ -2143,16 +2434,19 @@ window.PW_MAIN_MORE=[
       "🌍"
     ],
     "ru": {
-      "answer": "КИТ",
-      "hint": "Животное или птица."
+      "hint": "Животное или птица.",
+      "answerLength": 3,
+      "pool": "ЕАБТДЖЗЙИКВГ"
     },
     "en": {
-      "answer": "WHALE",
-      "hint": "An animal or bird."
+      "hint": "An animal or bird.",
+      "answerLength": 5,
+      "pool": "FCLWDABJHKGE"
     },
     "az": {
-      "answer": "BALİNA",
-      "hint": "Heyvan və ya quş."
+      "hint": "Heyvan və ya quş.",
+      "answerLength": 6,
+      "pool": "LDAÇABİƏECFN"
     }
   },
   {
@@ -2165,16 +2459,19 @@ window.PW_MAIN_MORE=[
       "🐟"
     ],
     "ru": {
-      "answer": "АКУЛА",
-      "hint": "Животное или птица."
+      "hint": "Животное или птица.",
+      "answerLength": 5,
+      "pool": "ДУЕАГВЖЗАБЛК"
     },
     "en": {
-      "answer": "SHARK",
-      "hint": "An animal or bird."
+      "hint": "An animal or bird.",
+      "answerLength": 5,
+      "pool": "KAHCEFRGSBDJ"
     },
     "az": {
-      "answer": "KÖPƏKBALIĞI",
-      "hint": "Heyvan və ya quş."
+      "hint": "Heyvan və ya quş.",
+      "answerLength": 11,
+      "pool": "KÖKAIÇBĞPFICEDLƏ"
     }
   },
   {
@@ -2187,16 +2484,19 @@ window.PW_MAIN_MORE=[
       "🥚"
     ],
     "ru": {
-      "answer": "ЧЕРЕПАХА",
-      "hint": "Животное или птица."
+      "hint": "Животное или птица.",
+      "answerLength": 8,
+      "pool": "ПРХВЧБАЖЕАГЕД"
     },
     "en": {
-      "answer": "TURTLE",
-      "hint": "An animal or bird."
+      "hint": "An animal or bird.",
+      "answerLength": 6,
+      "pool": "FTTEUBCRLGDA"
     },
     "az": {
-      "answer": "TISBAĞA",
-      "hint": "Heyvan və ya quş."
+      "hint": "Heyvan və ya quş.",
+      "answerLength": 7,
+      "pool": "IBTÇĞCƏDESAA"
     }
   },
   {
@@ -2209,16 +2509,19 @@ window.PW_MAIN_MORE=[
       "🔋"
     ],
     "ru": {
-      "answer": "ТЕЛЕФОН",
-      "hint": "Техника, цифровое устройство или компьютерное понятие."
+      "hint": "Техника, цифровое устройство или компьютерное понятие.",
+      "answerLength": 7,
+      "pool": "ТЛЕФБОНВДГАЕ"
     },
     "en": {
-      "answer": "PHONE",
-      "hint": "Technology, a digital device, or a computer concept."
+      "hint": "Technology, a digital device, or a computer concept.",
+      "answerLength": 5,
+      "pool": "EDGFBJOANCPH"
     },
     "az": {
-      "answer": "TELEFON",
-      "hint": "Texnika, rəqəmsal cihaz və ya kompüter anlayışı."
+      "hint": "Texnika, rəqəmsal cihaz və ya kompüter anlayışı.",
+      "answerLength": 7,
+      "pool": "ÇLFDBATOCENE"
     }
   },
   {
@@ -2231,16 +2534,19 @@ window.PW_MAIN_MORE=[
       "🌐"
     ],
     "ru": {
-      "answer": "НОУТБУК",
-      "hint": "Понятие, устройство или технология из цифрового и технического мира."
+      "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+      "answerLength": 7,
+      "pool": "ОКТАУБНЕУВГД"
     },
     "en": {
-      "answer": "LAPTOP",
-      "hint": "A concept, device, or technology from the digital and technical world."
+      "hint": "A concept, device, or technology from the digital and technical world.",
+      "answerLength": 6,
+      "pool": "GPABTOCLEFPD"
     },
     "az": {
-      "answer": "NOUTBUK",
-      "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+      "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya.",
+      "answerLength": 7,
+      "pool": "OTKAÇDUNUBEC"
     }
   },
   {
@@ -2253,16 +2559,19 @@ window.PW_MAIN_MORE=[
       "🔋"
     ],
     "ru": {
-      "answer": "ПЛАНШЕТ",
-      "hint": "Понятие, устройство или технология из цифрового и технического мира."
+      "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+      "answerLength": 7,
+      "pool": "АНШТПВДЖЛГБЕ"
     },
     "en": {
-      "answer": "TABLET",
-      "hint": "A concept, device, or technology from the digital and technical world."
+      "hint": "A concept, device, or technology from the digital and technical world.",
+      "answerLength": 6,
+      "pool": "HCBDEFTGAJTL"
     },
     "az": {
-      "answer": "PLANŞET",
-      "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+      "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya.",
+      "answerLength": 7,
+      "pool": "AÇŞCPLBƏTEDN"
     }
   },
   {
@@ -2275,16 +2584,19 @@ window.PW_MAIN_MORE=[
       "💾"
     ],
     "ru": {
-      "answer": "КАМЕРА",
-      "hint": "Понятие из фотографии и работы с изображением камерой."
+      "hint": "Понятие из фотографии и работы с изображением камерой.",
+      "answerLength": 6,
+      "pool": "МБАВАЖЕГЗРДК"
     },
     "en": {
-      "answer": "CAMERA",
-      "hint": "A concept from photography and camera-based image-making."
+      "hint": "A concept from photography and camera-based image-making.",
+      "answerLength": 6,
+      "pool": "ADGJAFEBCRMH"
     },
     "az": {
-      "answer": "KAMERA",
-      "hint": "Fotoqrafiya və kamera ilə təsvir yaratma sahəsinə aid anlayış."
+      "hint": "Fotoqrafiya və kamera ilə təsvir yaratma sahəsinə aid anlayış.",
+      "answerLength": 6,
+      "pool": "EDFMCRABAKÇƏ"
     }
   },
   {
@@ -2297,16 +2609,19 @@ window.PW_MAIN_MORE=[
       "📱"
     ],
     "ru": {
-      "answer": "НАУШНИКИ",
-      "hint": "Понятие, устройство или технология из цифрового и технического мира."
+      "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+      "answerLength": 8,
+      "pool": "БНАВШЕИКДУИГН"
     },
     "en": {
-      "answer": "HEADPHONES",
-      "hint": "A concept, device, or technology from the digital and technical world."
+      "hint": "A concept, device, or technology from the digital and technical world.",
+      "answerLength": 10,
+      "pool": "FDNJEBESHGCAPOH"
     },
     "az": {
-      "answer": "QULAQLIQ",
-      "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+      "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya.",
+      "answerLength": 8,
+      "pool": "ÇLICELAQUQDBQ"
     }
   },
   {
@@ -2319,16 +2634,19 @@ window.PW_MAIN_MORE=[
       "🖱️"
     ],
     "ru": {
-      "answer": "КЛАВИАТУРА",
-      "hint": "Понятие, устройство или технология из цифрового и технического мира."
+      "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+      "answerLength": 10,
+      "pool": "КИАЕДРВГТЛЖУБАА"
     },
     "en": {
-      "answer": "KEYBOARD",
-      "hint": "A concept, device, or technology from the digital and technical world."
+      "hint": "A concept, device, or technology from the digital and technical world.",
+      "answerLength": 8,
+      "pool": "RJEAGDKCBFYHO"
     },
     "az": {
-      "answer": "KLAVİATURA",
-      "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+      "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya.",
+      "answerLength": 10,
+      "pool": "RAELİCUAKDTABVÇ"
     }
   },
   {
@@ -2341,16 +2659,19 @@ window.PW_MAIN_MORE=[
       "⌨️"
     ],
     "ru": {
-      "answer": "МЫШЬ",
-      "hint": "Понятие, устройство или технология из цифрового и технического мира."
+      "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+      "answerLength": 4,
+      "pool": "ЖШЬЗДБАЫВГМЕ"
     },
     "en": {
-      "answer": "MOUSE",
-      "hint": "A concept, device, or technology from the digital and technical world."
+      "hint": "A concept, device, or technology from the digital and technical world.",
+      "answerLength": 5,
+      "pool": "MDFBSAGHUOEC"
     },
     "az": {
-      "answer": "SİÇAN",
-      "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+      "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya.",
+      "answerLength": 5,
+      "pool": "SCİBNƏEGÇAFD"
     }
   },
   {
@@ -2363,16 +2684,19 @@ window.PW_MAIN_MORE=[
       "🔌"
     ],
     "ru": {
-      "answer": "МОНИТОР",
-      "hint": "Понятие, устройство или технология из цифрового и технического мира."
+      "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+      "answerLength": 7,
+      "pool": "ВИОАМРГДОБНТ"
     },
     "en": {
-      "answer": "MONITOR",
-      "hint": "A concept, device, or technology from the digital and technical world."
+      "hint": "A concept, device, or technology from the digital and technical world.",
+      "answerLength": 7,
+      "pool": "BMIETAOCONRD"
     },
     "az": {
-      "answer": "MONİTOR",
-      "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+      "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya.",
+      "answerLength": 7,
+      "pool": "BCİORAMNDTOÇ"
     }
   },
   {
@@ -2385,16 +2709,19 @@ window.PW_MAIN_MORE=[
       "🖋️"
     ],
     "ru": {
-      "answer": "ПРИНТЕР",
-      "hint": "Понятие, устройство или технология из цифрового и технического мира."
+      "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+      "answerLength": 7,
+      "pool": "ИГРВРЕБДПНТА"
     },
     "en": {
-      "answer": "PRINTER",
-      "hint": "A concept, device, or technology from the digital and technical world."
+      "hint": "A concept, device, or technology from the digital and technical world.",
+      "answerLength": 7,
+      "pool": "IRTADRCFPNBE"
     },
     "az": {
-      "answer": "PRİNTER",
-      "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+      "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya.",
+      "answerLength": 7,
+      "pool": "İÇBTRARDPCNE"
     }
   },
   {
@@ -2407,16 +2734,19 @@ window.PW_MAIN_MORE=[
       "☁️"
     ],
     "ru": {
-      "answer": "ДРОН",
-      "hint": "Понятие, устройство или технология из цифрового и технического мира."
+      "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+      "answerLength": 4,
+      "pool": "НДВБГЖРЗЕАИО"
     },
     "en": {
-      "answer": "DRONE",
-      "hint": "A concept, device, or technology from the digital and technical world."
+      "hint": "A concept, device, or technology from the digital and technical world.",
+      "answerLength": 5,
+      "pool": "ONACHGRJFEBD"
     },
     "az": {
-      "answer": "DRON",
-      "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+      "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya.",
+      "answerLength": 4,
+      "pool": "ENRÇFOCƏAGBD"
     }
   },
   {
@@ -2429,16 +2759,19 @@ window.PW_MAIN_MORE=[
       "⏳"
     ],
     "ru": {
-      "answer": "ЗАРЯДКА",
-      "hint": "Понятие, устройство или технология из цифрового и технического мира."
+      "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+      "answerLength": 7,
+      "pool": "ЗЕРВЯААЖБКДГ"
     },
     "en": {
-      "answer": "CHARGER",
-      "hint": "A concept, device, or technology from the digital and technical world."
+      "hint": "A concept, device, or technology from the digital and technical world.",
+      "answerLength": 7,
+      "pool": "CFGJAHRRKEDB"
     },
     "az": {
-      "answer": "ŞARJ",
-      "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+      "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya.",
+      "answerLength": 4,
+      "pool": "ŞCRÇGƏBEFAJD"
     }
   },
   {
@@ -2451,16 +2784,19 @@ window.PW_MAIN_MORE=[
       "📱"
     ],
     "ru": {
-      "answer": "ИНТЕРНЕТ",
-      "hint": "Понятие, устройство или технология из цифрового и технического мира."
+      "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+      "answerLength": 8,
+      "pool": "ВТДБННРАТГИЕЕ"
     },
     "en": {
-      "answer": "INTERNET",
-      "hint": "A concept, device, or technology from the digital and technical world."
+      "hint": "A concept, device, or technology from the digital and technical world.",
+      "answerLength": 8,
+      "pool": "ATTDIEENFBRNC"
     },
     "az": {
-      "answer": "İNTERNET",
-      "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+      "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya.",
+      "answerLength": 8,
+      "pool": "İERDATTNECÇNB"
     }
   },
   {
@@ -2473,16 +2809,19 @@ window.PW_MAIN_MORE=[
       "🔑"
     ],
     "ru": {
-      "answer": "ПАРОЛЬ",
-      "hint": "Понятие, устройство или технология из цифрового и технического мира."
+      "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+      "answerLength": 6,
+      "pool": "ЕБАГПДРОЬВЛЖ"
     },
     "en": {
-      "answer": "PASSWORD",
-      "hint": "A concept, device, or technology from the digital and technical world."
+      "hint": "A concept, device, or technology from the digital and technical world.",
+      "answerLength": 8,
+      "pool": "EFDOACGWSPSBR"
     },
     "az": {
-      "answer": "PAROL",
-      "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+      "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya.",
+      "answerLength": 5,
+      "pool": "LBRƏCFPDAOÇE"
     }
   },
   {
@@ -2495,16 +2834,19 @@ window.PW_MAIN_MORE=[
       "💻"
     ],
     "ru": {
-      "answer": "ФАЙЛ",
-      "hint": "Понятие, устройство или технология из цифрового и технического мира."
+      "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+      "answerLength": 4,
+      "pool": "ЕВЛЖАДФЗБЙИГ"
     },
     "en": {
-      "answer": "FILE",
-      "hint": "A concept, device, or technology from the digital and technical world."
+      "hint": "A concept, device, or technology from the digital and technical world.",
+      "answerLength": 4,
+      "pool": "IEBDCHFGKLJA"
     },
     "az": {
-      "answer": "FAYL",
-      "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+      "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya.",
+      "answerLength": 4,
+      "pool": "DYLÇAGCĞFEƏB"
     }
   },
   {
@@ -2517,16 +2859,19 @@ window.PW_MAIN_MORE=[
       "🗂️"
     ],
     "ru": {
-      "answer": "ПАПКА",
-      "hint": "Понятие, устройство или технология из цифрового и технического мира."
+      "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+      "answerLength": 5,
+      "pool": "АЕПГПВБЗЖКДА"
     },
     "en": {
-      "answer": "FOLDER",
-      "hint": "A concept, device, or technology from the digital and technical world."
+      "hint": "A concept, device, or technology from the digital and technical world.",
+      "answerLength": 6,
+      "pool": "LEFGHARBCDOJ"
     },
     "az": {
-      "answer": "QOVLUQ",
-      "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+      "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya.",
+      "answerLength": 6,
+      "pool": "QUOQVALDCÇBE"
     }
   },
   {
@@ -2539,16 +2884,19 @@ window.PW_MAIN_MORE=[
       "🎬"
     ],
     "ru": {
-      "answer": "ВИДЕО",
-      "hint": "Понятие, устройство или технология из цифрового и технического мира."
+      "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+      "answerLength": 5,
+      "pool": "ИКАВБДЕЗГОЙЖ"
     },
     "en": {
-      "answer": "VIDEO",
-      "hint": "A concept, device, or technology from the digital and technical world."
+      "hint": "A concept, device, or technology from the digital and technical world.",
+      "answerLength": 5,
+      "pool": "HVIGAFJDCOEB"
     },
     "az": {
-      "answer": "VİDEO",
-      "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+      "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya.",
+      "answerLength": 5,
+      "pool": "GFOAEÇİDCVƏB"
     }
   },
   {
@@ -2561,16 +2909,19 @@ window.PW_MAIN_MORE=[
       "✨"
     ],
     "ru": {
-      "answer": "ФОТО",
-      "hint": "Понятие из фотографии и работы с изображением камерой."
+      "hint": "Понятие из фотографии и работы с изображением камерой.",
+      "answerLength": 4,
+      "pool": "ТЖФЗАЕОГВБДО"
     },
     "en": {
-      "answer": "PHOTO",
-      "hint": "A concept from photography and camera-based image-making."
+      "hint": "A concept from photography and camera-based image-making.",
+      "answerLength": 5,
+      "pool": "PDOCTFOABEGH"
     },
     "az": {
-      "answer": "FOTO",
-      "hint": "Fotoqrafiya və kamera ilə təsvir yaratma sahəsinə aid anlayış."
+      "hint": "Fotoqrafiya və kamera ilə təsvir yaratma sahəsinə aid anlayış.",
+      "answerLength": 4,
+      "pool": "TOƏEAÇDBCGFO"
     }
   },
   {
@@ -2583,16 +2934,19 @@ window.PW_MAIN_MORE=[
       "🎧"
     ],
     "ru": {
-      "answer": "МИКРОФОН",
-      "hint": "Понятие, устройство или технология из цифрового и технического мира."
+      "hint": "Понятие, устройство или технология из цифрового и технического мира.",
+      "answerLength": 8,
+      "pool": "КВМФОНБГДРОИА"
     },
     "en": {
-      "answer": "MICROPHONE",
-      "hint": "A concept, device, or technology from the digital and technical world."
+      "hint": "A concept, device, or technology from the digital and technical world.",
+      "answerLength": 10,
+      "pool": "MAONBEHIODCGRFP"
     },
     "az": {
-      "answer": "MİKROFON",
-      "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya."
+      "hint": "Rəqəmsal və texniki dünyaya aid anlayış, cihaz və ya texnologiya.",
+      "answerLength": 8,
+      "pool": "OOACMFBNKİRDÇ"
     }
   },
   {
@@ -2605,16 +2959,19 @@ window.PW_MAIN_MORE=[
       "🌍"
     ],
     "ru": {
-      "answer": "САМОЛЕТ",
-      "hint": "Транспорт или предмет, связанный с поездкой."
+      "hint": "Транспорт или предмет, связанный с поездкой.",
+      "answerLength": 7,
+      "pool": "ТОМВБГСЖЛДАЕ"
     },
     "en": {
-      "answer": "PLANE",
-      "hint": "Transport or something used while travelling."
+      "hint": "Transport or something used while travelling.",
+      "answerLength": 5,
+      "pool": "FAGHCDPJELBN"
     },
     "az": {
-      "answer": "TƏYYARƏ",
-      "hint": "Nəqliyyat və ya səyahətlə bağlı əşya."
+      "hint": "Nəqliyyat və ya səyahətlə bağlı əşya.",
+      "answerLength": 7,
+      "pool": "CAYÇƏƏREDBTY"
     }
   },
   {
@@ -2627,16 +2984,19 @@ window.PW_MAIN_MORE=[
       "🧳"
     ],
     "ru": {
-      "answer": "ПОЕЗД",
-      "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами."
+      "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+      "answerLength": 5,
+      "pool": "ОДГБЖВАЙИЕЗП"
     },
     "en": {
-      "answer": "TRAIN",
-      "hint": "A word connected with travel, routes, holidays, or exploring new places."
+      "hint": "A word connected with travel, routes, holidays, or exploring new places.",
+      "answerLength": 5,
+      "pool": "NHEFRTBCIADG"
     },
     "az": {
-      "answer": "QATAR",
-      "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+      "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz.",
+      "answerLength": 5,
+      "pool": "AÇQBFRACEDTƏ"
     }
   },
   {
@@ -2649,16 +3009,19 @@ window.PW_MAIN_MORE=[
       "🛣️"
     ],
     "ru": {
-      "answer": "АВТОБУС",
-      "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами."
+      "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+      "answerLength": 7,
+      "pool": "АДЖБУСЗЕТОВГ"
     },
     "en": {
-      "answer": "BUS",
-      "hint": "A word connected with travel, routes, holidays, or exploring new places."
+      "hint": "A word connected with travel, routes, holidays, or exploring new places.",
+      "answerLength": 3,
+      "pool": "BCJFGEHUSAKD"
     },
     "az": {
-      "answer": "AVTOBUS",
-      "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+      "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz.",
+      "answerLength": 7,
+      "pool": "ATESƏOÇVCDBU"
     }
   },
   {
@@ -2671,16 +3034,19 @@ window.PW_MAIN_MORE=[
       "🛣️"
     ],
     "ru": {
-      "answer": "ТАКСИ",
-      "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами."
+      "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+      "answerLength": 5,
+      "pool": "ГБЖЗЕТДВАИСК"
     },
     "en": {
-      "answer": "TAXI",
-      "hint": "A word connected with travel, routes, holidays, or exploring new places."
+      "hint": "A word connected with travel, routes, holidays, or exploring new places.",
+      "answerLength": 4,
+      "pool": "GHCJIXABDFET"
     },
     "az": {
-      "answer": "TAKSİ",
-      "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+      "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz.",
+      "answerLength": 5,
+      "pool": "ASƏBÇEFİCTKD"
     }
   },
   {
@@ -2693,16 +3059,19 @@ window.PW_MAIN_MORE=[
       "💨"
     ],
     "ru": {
-      "answer": "САМОКАТ",
-      "hint": "Небольшое средство передвижения с платформой и рулём."
+      "hint": "Небольшое средство передвижения с платформой и рулём.",
+      "answerLength": 7,
+      "pool": "МОКБСВТАЕДАГ"
     },
     "en": {
-      "answer": "SCOOTER",
-      "hint": "A small vehicle with a deck and handlebars."
+      "hint": "A small vehicle with a deck and handlebars.",
+      "answerLength": 7,
+      "pool": "OCSGTBRAEFDO"
     },
     "az": {
-      "answer": "SAMOKAT",
-      "hint": "Platforması və sükanı olan kiçik nəqliyyat vasitəsi."
+      "hint": "Platforması və sükanı olan kiçik nəqliyyat vasitəsi.",
+      "answerLength": 7,
+      "pool": "MATCSEDBÇAKO"
     }
   },
   {
@@ -2715,16 +3084,19 @@ window.PW_MAIN_MORE=[
       "🧭"
     ],
     "ru": {
-      "answer": "КОРАБЛЬ",
-      "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами."
+      "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+      "answerLength": 7,
+      "pool": "ЛЕЬДОРВГБЖАК"
     },
     "en": {
-      "answer": "SHIP",
-      "hint": "A word connected with travel, routes, holidays, or exploring new places."
+      "hint": "A word connected with travel, routes, holidays, or exploring new places.",
+      "answerLength": 4,
+      "pool": "PEHBCJFIASDG"
     },
     "az": {
-      "answer": "GƏMİ",
-      "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+      "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz.",
+      "answerLength": 4,
+      "pool": "İGDBƏEÇMAĞCF"
     }
   },
   {
@@ -2737,16 +3109,19 @@ window.PW_MAIN_MORE=[
       "🏞️"
     ],
     "ru": {
-      "answer": "ЛОДКА",
-      "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами."
+      "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+      "answerLength": 5,
+      "pool": "ЛЖАЕВЗДИКОБГ"
     },
     "en": {
-      "answer": "BOAT",
-      "hint": "A word connected with travel, routes, holidays, or exploring new places."
+      "hint": "A word connected with travel, routes, holidays, or exploring new places.",
+      "answerLength": 4,
+      "pool": "BGACEJFKTOHD"
     },
     "az": {
-      "answer": "QAYIQ",
-      "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+      "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz.",
+      "answerLength": 5,
+      "pool": "CDƏAYEQFIÇQB"
     }
   },
   {
@@ -2759,16 +3134,19 @@ window.PW_MAIN_MORE=[
       "🏙️"
     ],
     "ru": {
-      "answer": "МЕТРО",
-      "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами."
+      "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+      "answerLength": 5,
+      "pool": "ЕАМЖБОРГДЗВТ"
     },
     "en": {
-      "answer": "METRO",
-      "hint": "A word connected with travel, routes, holidays, or exploring new places."
+      "hint": "A word connected with travel, routes, holidays, or exploring new places.",
+      "answerLength": 5,
+      "pool": "EABCDORGFTHM"
     },
     "az": {
-      "answer": "METRO",
-      "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+      "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz.",
+      "answerLength": 5,
+      "pool": "ƏTADROEFCÇBM"
     }
   },
   {
@@ -2781,16 +3159,19 @@ window.PW_MAIN_MORE=[
       "📅"
     ],
     "ru": {
-      "answer": "БИЛЕТ",
-      "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами."
+      "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+      "answerLength": 5,
+      "pool": "БЛЗГТВДАИЕЙЖ"
     },
     "en": {
-      "answer": "TICKET",
-      "hint": "A word connected with travel, routes, holidays, or exploring new places."
+      "hint": "A word connected with travel, routes, holidays, or exploring new places.",
+      "answerLength": 6,
+      "pool": "TGAETFDKIHCB"
     },
     "az": {
-      "answer": "BİLET",
-      "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+      "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz.",
+      "answerLength": 5,
+      "pool": "BLAGTİFECƏDÇ"
     }
   },
   {
@@ -2803,16 +3184,19 @@ window.PW_MAIN_MORE=[
       "🌍"
     ],
     "ru": {
-      "answer": "ЧЕМОДАН",
-      "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами."
+      "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+      "answerLength": 7,
+      "pool": "ЕОМЗАЖНГЧВБД"
     },
     "en": {
-      "answer": "SUITCASE",
-      "hint": "A word connected with travel, routes, holidays, or exploring new places."
+      "hint": "A word connected with travel, routes, holidays, or exploring new places.",
+      "answerLength": 8,
+      "pool": "HFSUEBSAGTCDI"
     },
     "az": {
-      "answer": "ÇAMADAN",
-      "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+      "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz.",
+      "answerLength": 7,
+      "pool": "ACAFÇBENADƏM"
     }
   },
   {
@@ -2825,16 +3209,19 @@ window.PW_MAIN_MORE=[
       "🌍"
     ],
     "ru": {
-      "answer": "КАРТА",
-      "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами."
+      "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+      "answerLength": 5,
+      "pool": "РВКБАГАТДЖЕЗ"
     },
     "en": {
-      "answer": "MAP",
-      "hint": "A word connected with travel, routes, holidays, or exploring new places."
+      "hint": "A word connected with travel, routes, holidays, or exploring new places.",
+      "answerLength": 3,
+      "pool": "JDEFMBCAGKPH"
     },
     "az": {
-      "answer": "XƏRİTƏ",
-      "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+      "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz.",
+      "answerLength": 6,
+      "pool": "XAEDBİRƏTƏCÇ"
     }
   },
   {
@@ -2847,16 +3234,19 @@ window.PW_MAIN_MORE=[
       "🔑"
     ],
     "ru": {
-      "answer": "ОТЕЛЬ",
-      "hint": "Транспорт или предмет, связанный с поездкой."
+      "hint": "Транспорт или предмет, связанный с поездкой.",
+      "answerLength": 5,
+      "pool": "ГАТЬВДЕЗЛЖОБ"
     },
     "en": {
-      "answer": "HOTEL",
-      "hint": "Transport or something used while travelling."
+      "hint": "Transport or something used while travelling.",
+      "answerLength": 5,
+      "pool": "ADCFOBTGEHJL"
     },
     "az": {
-      "answer": "OTEL",
-      "hint": "Nəqliyyat və ya səyahətlə bağlı əşya."
+      "hint": "Nəqliyyat və ya səyahətlə bağlı əşya.",
+      "answerLength": 4,
+      "pool": "TDÇBEƏOGLCFA"
     }
   },
   {
@@ -2869,16 +3259,19 @@ window.PW_MAIN_MORE=[
       "📘"
     ],
     "ru": {
-      "answer": "ПАСПОРТ",
-      "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами."
+      "hint": "Слово, связанное с путешествиями, дорогой, отдыхом или новыми местами.",
+      "answerLength": 7,
+      "pool": "ВОТБПРПДСЕГА"
     },
     "en": {
-      "answer": "PASSPORT",
-      "hint": "A word connected with travel, routes, holidays, or exploring new places."
+      "hint": "A word connected with travel, routes, holidays, or exploring new places.",
+      "answerLength": 8,
+      "pool": "BFOTRDPEAPCSS"
     },
     "az": {
-      "answer": "PASPORT",
-      "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz."
+      "hint": "Səyahət, yol, istirahət və yeni yerlərlə bağlı söz.",
+      "answerLength": 7,
+      "pool": "CDPOPTRÇSBAE"
     }
   },
   {
@@ -2891,16 +3284,19 @@ window.PW_MAIN_MORE=[
       "🎭"
     ],
     "ru": {
-      "answer": "ТАНЕЦ",
-      "hint": "Понятие из театра, танца и сценического искусства."
+      "hint": "Понятие из театра, танца и сценического искусства.",
+      "answerLength": 5,
+      "pool": "ВГИЗЕЖБЦАНТД"
     },
     "en": {
-      "answer": "DANCE",
-      "hint": "A concept from theater, dance, and stage art."
+      "hint": "A concept from theater, dance, and stage art.",
+      "answerLength": 5,
+      "pool": "JBDGCKHNALEF"
     },
     "az": {
-      "answer": "RƏQS",
-      "hint": "Teatr, rəqs və səhnə sənəti ilə bağlı anlayış."
+      "hint": "Teatr, rəqs və səhnə sənəti ilə bağlı anlayış.",
+      "answerLength": 4,
+      "pool": "GREBAÇSQƏDFC"
     }
   },
   {
@@ -2913,16 +3309,19 @@ window.PW_MAIN_MORE=[
       "✍️"
     ],
     "ru": {
-      "answer": "КНИГА",
-      "hint": "Искусство, музыка, кино или сцена."
+      "hint": "Искусство, музыка, кино или сцена.",
+      "answerLength": 5,
+      "pool": "ЕНЗВАБЙЖКДИГ"
     },
     "en": {
-      "answer": "BOOK",
-      "hint": "Art, music, cinema, or performance."
+      "hint": "Art, music, cinema, or performance.",
+      "answerLength": 4,
+      "pool": "FOKGAJHCBEDO"
     },
     "az": {
-      "answer": "KİTAB",
-      "hint": "İncəsənət, musiqi, kino və ya səhnə."
+      "hint": "İncəsənət, musiqi, kino və ya səhnə.",
+      "answerLength": 5,
+      "pool": "BƏTÇKDFECAGİ"
     }
   },
   {
@@ -2935,16 +3334,19 @@ window.PW_MAIN_MORE=[
       "📺"
     ],
     "ru": {
-      "answer": "ФИЛЬМ",
-      "hint": "Искусство, музыка, кино или сцена."
+      "hint": "Искусство, музыка, кино или сцена.",
+      "answerLength": 5,
+      "pool": "ИЬАВФБЖЛДГМЕ"
     },
     "en": {
-      "answer": "FILM",
-      "hint": "Art, music, cinema, or performance."
+      "hint": "Art, music, cinema, or performance.",
+      "answerLength": 4,
+      "pool": "IMLBDCAFGHJE"
     },
     "az": {
-      "answer": "FİLM",
-      "hint": "İncəsənət, musiqi, kino və ya səhnə."
+      "hint": "İncəsənət, musiqi, kino və ya səhnə.",
+      "answerLength": 4,
+      "pool": "BCƏÇİGLFEAMD"
     }
   },
   {
@@ -2957,16 +3359,19 @@ window.PW_MAIN_MORE=[
       "👏"
     ],
     "ru": {
-      "answer": "АКТЕР",
-      "hint": "Понятие из театра, танца и сценического искусства."
+      "hint": "Понятие из театра, танца и сценического искусства.",
+      "answerLength": 5,
+      "pool": "АВЕРДКЗИГЖТБ"
     },
     "en": {
-      "answer": "ACTOR",
-      "hint": "A concept from theater, dance, and stage art."
+      "hint": "A concept from theater, dance, and stage art.",
+      "answerLength": 5,
+      "pool": "HRABCFTJEGDO"
     },
     "az": {
-      "answer": "AKTYOR",
-      "hint": "Teatr, rəqs və səhnə sənəti ilə bağlı anlayış."
+      "hint": "Teatr, rəqs və səhnə sənəti ilə bağlı anlayış.",
+      "answerLength": 6,
+      "pool": "BODCTKAÇƏERY"
     }
   },
   {
@@ -2979,16 +3384,19 @@ window.PW_MAIN_MORE=[
       "🎶"
     ],
     "ru": {
-      "answer": "ГИТАРА",
-      "hint": "Понятие из музыки, звучания и исполнения."
+      "hint": "Понятие из музыки, звучания и исполнения.",
+      "answerLength": 6,
+      "pool": "ИАЖАТДВЕБЗРГ"
     },
     "en": {
-      "answer": "GUITAR",
-      "hint": "A concept from music, sound, and performance."
+      "hint": "A concept from music, sound, and performance.",
+      "answerLength": 6,
+      "pool": "URTAICEHBGDF"
     },
     "az": {
-      "answer": "GİTARA",
-      "hint": "Musiqi, səs və ifa ilə bağlı anlayış."
+      "hint": "Musiqi, səs və ifa ilə bağlı anlayış.",
+      "answerLength": 6,
+      "pool": "İGCÇƏRADTBAE"
     }
   },
   {
@@ -3001,16 +3409,19 @@ window.PW_MAIN_MORE=[
       "🎶"
     ],
     "ru": {
-      "answer": "ПИАНИНО",
-      "hint": "Искусство, музыка, кино или сцена."
+      "hint": "Искусство, музыка, кино или сцена.",
+      "answerLength": 7,
+      "pool": "АГПИДЕВННИОБ"
     },
     "en": {
-      "answer": "PIANO",
-      "hint": "Art, music, cinema, or performance."
+      "hint": "Art, music, cinema, or performance.",
+      "answerLength": 5,
+      "pool": "AOPDCNFEHBGI"
     },
     "az": {
-      "answer": "PİANİNO",
-      "hint": "İncəsənət, musiqi, kino və ya səhnə."
+      "hint": "İncəsənət, musiqi, kino və ya səhnə.",
+      "answerLength": 7,
+      "pool": "ADPÇİONCEBNİ"
     }
   },
   {
@@ -3023,16 +3434,19 @@ window.PW_MAIN_MORE=[
       "👨‍⚕️"
     ],
     "ru": {
-      "answer": "ДОКТОР",
-      "hint": "Профессия или работа человека."
+      "hint": "Профессия или работа человека.",
+      "answerLength": 6,
+      "pool": "БРОКЖВТГДАОЕ"
     },
     "en": {
-      "answer": "DOCTOR",
-      "hint": "A profession or a person’s job."
+      "hint": "A profession or a person’s job.",
+      "answerLength": 6,
+      "pool": "RFOGBCTODAHE"
     },
     "az": {
-      "answer": "HƏKİM",
-      "hint": "İnsan peşəsi və ya işi."
+      "hint": "İnsan peşəsi və ya işi.",
+      "answerLength": 5,
+      "pool": "DİBEAFƏMHKCÇ"
     }
   },
   {
@@ -3045,16 +3459,19 @@ window.PW_MAIN_MORE=[
       "✏️"
     ],
     "ru": {
-      "answer": "УЧИТЕЛЬ",
-      "hint": "Профессия, связанная с обучением и развитием людей."
+      "hint": "Профессия, связанная с обучением и развитием людей.",
+      "answerLength": 7,
+      "pool": "ЕТИГУДВЧБАЬЛ"
     },
     "en": {
-      "answer": "TEACHER",
-      "hint": "A profession connected with education and development."
+      "hint": "A profession connected with education and development.",
+      "answerLength": 7,
+      "pool": "HRAJTEEFDBGC"
     },
     "az": {
-      "answer": "MÜƏLLİM",
-      "hint": "təhsil və inkişafla bağlı peşə."
+      "hint": "təhsil və inkişafla bağlı peşə.",
+      "answerLength": 7,
+      "pool": "MLƏCÜÇMABDİL"
     }
   },
   {
@@ -3067,16 +3484,19 @@ window.PW_MAIN_MORE=[
       "🍽️"
     ],
     "ru": {
-      "answer": "ПОВАР",
-      "hint": "Профессия, связанная с приготовлением еды."
+      "hint": "Профессия, связанная с приготовлением еды.",
+      "answerLength": 5,
+      "pool": "ЖБАИОВГРДЗЕП"
     },
     "en": {
-      "answer": "CHEF",
-      "hint": "A profession connected with food preparation."
+      "hint": "A profession connected with food preparation.",
+      "answerLength": 4,
+      "pool": "BFCDMAKEGJHL"
     },
     "az": {
-      "answer": "AŞPAZ",
-      "hint": "yemək hazırlanması ilə bağlı peşə."
+      "hint": "yemək hazırlanması ilə bağlı peşə.",
+      "answerLength": 5,
+      "pool": "ŞAACBDEPFZÇƏ"
     }
   },
   {
@@ -3089,16 +3509,19 @@ window.PW_MAIN_MORE=[
       "🛫"
     ],
     "ru": {
-      "answer": "ПИЛОТ",
-      "hint": "Профессия, связанная с транспортом и перевозками."
+      "hint": "Профессия, связанная с транспортом и перевозками.",
+      "answerLength": 5,
+      "pool": "ПГАОЛИТЖБДЕВ"
     },
     "en": {
-      "answer": "PILOT",
-      "hint": "A profession connected with transport and travel."
+      "hint": "A profession connected with transport and travel.",
+      "answerLength": 5,
+      "pool": "DTFCLIPGBEOA"
     },
     "az": {
-      "answer": "PİLOT",
-      "hint": "nəqliyyat və daşınma ilə bağlı peşə."
+      "hint": "nəqliyyat və daşınma ilə bağlı peşə.",
+      "answerLength": 5,
+      "pool": "PBTİOCÇELƏDA"
     }
   },
   {
@@ -3111,16 +3534,19 @@ window.PW_MAIN_MORE=[
       "🚦"
     ],
     "ru": {
-      "answer": "ВОДИТЕЛЬ",
-      "hint": "Профессия, связанная с транспортом и перевозками."
+      "hint": "Профессия, связанная с транспортом и перевозками.",
+      "answerLength": 8,
+      "pool": "ВЕАЛЬИГОДЗТБЖ"
     },
     "en": {
-      "answer": "DRIVER",
-      "hint": "A profession connected with transport and travel."
+      "hint": "A profession connected with transport and travel.",
+      "answerLength": 6,
+      "pool": "GAIBVFCHRERD"
     },
     "az": {
-      "answer": "SÜRÜCÜ",
-      "hint": "nəqliyyat və daşınma ilə bağlı peşə."
+      "hint": "nəqliyyat və daşınma ilə bağlı peşə.",
+      "answerLength": 6,
+      "pool": "ÇDRBÜCÜEÜAƏS"
     }
   },
   {
@@ -3133,16 +3559,19 @@ window.PW_MAIN_MORE=[
       "👨‍🚒"
     ],
     "ru": {
-      "answer": "ПОЖАРНЫЙ",
-      "hint": "Профессия, связанная с безопасностью и защитой людей."
+      "hint": "Профессия, связанная с безопасностью и защитой людей.",
+      "answerLength": 8,
+      "pool": "ДАЖНОБЕГЫПВРЙ"
     },
     "en": {
-      "answer": "FIREFIGHTER",
-      "hint": "A profession connected with safety and protection."
+      "hint": "A profession connected with safety and protection.",
+      "answerLength": 11,
+      "pool": "RIFTFEEDGBRCIJAH"
     },
     "az": {
-      "answer": "YANĞINSÖNDÜRƏN",
-      "hint": "təhlükəsizlik və mühafizə ilə bağlı peşə."
+      "hint": "təhlükəsizlik və mühafizə ilə bağlı peşə.",
+      "answerLength": 14,
+      "pool": "ÜNNFRÖĞDSIAÇCNYƏNBE"
     }
   },
   {
@@ -3155,16 +3584,19 @@ window.PW_MAIN_MORE=[
       "🛡️"
     ],
     "ru": {
-      "answer": "ПОЛИЦЕЙСКИЙ",
-      "hint": "Профессия, связанная с безопасностью и защитой людей."
+      "hint": "Профессия, связанная с безопасностью и защитой людей.",
+      "answerLength": 11,
+      "pool": "ЕИОАБЙИДВЛЙГСПКЦ"
     },
     "en": {
-      "answer": "POLICE",
-      "hint": "A profession connected with safety and protection."
+      "hint": "A profession connected with safety and protection.",
+      "answerLength": 6,
+      "pool": "DCBHGPOFIAEL"
     },
     "az": {
-      "answer": "POLİS",
-      "hint": "təhlükəsizlik və mühafizə ilə bağlı peşə."
+      "hint": "təhlükəsizlik və mühafizə ilə bağlı peşə.",
+      "answerLength": 5,
+      "pool": "AEİDOSCBÇƏPL"
     }
   },
   {
@@ -3177,16 +3609,19 @@ window.PW_MAIN_MORE=[
       "🔨"
     ],
     "ru": {
-      "answer": "СТРОИТЕЛЬ",
-      "hint": "Профессия, связанная с строительством и обслуживанием зданий."
+      "hint": "Профессия, связанная с строительством и обслуживанием зданий.",
+      "answerLength": 9,
+      "pool": "СРИГОЕЛБЬАВДТТ"
     },
     "en": {
-      "answer": "BUILDER",
-      "hint": "A profession connected with construction and buildings."
+      "hint": "A profession connected with construction and buildings.",
+      "answerLength": 7,
+      "pool": "BEIDCGRUHALF"
     },
     "az": {
-      "answer": "İNŞAATÇI",
-      "hint": "tikinti və binalarla bağlı peşə."
+      "hint": "tikinti və binalarla bağlı peşə.",
+      "answerLength": 8,
+      "pool": "NTIDBƏCEAİÇAŞ"
     }
   },
   {
@@ -3199,16 +3634,19 @@ window.PW_MAIN_MORE=[
       "✏️"
     ],
     "ru": {
-      "answer": "ДИЗАЙНЕР",
-      "hint": "Профессия, связанная с творчеством, сценой или визуальным искусством."
+      "hint": "Профессия, связанная с творчеством, сценой или визуальным искусством.",
+      "answerLength": 8,
+      "pool": "ДКЗИЕГЖНЙРАВБ"
     },
     "en": {
-      "answer": "DESIGNER",
-      "hint": "A profession connected with creative arts and performance."
+      "hint": "A profession connected with creative arts and performance.",
+      "answerLength": 8,
+      "pool": "DEEASCGBNIFRH"
     },
     "az": {
-      "answer": "DİZAYNER",
-      "hint": "yaradıcılıq və səhnə sənəti ilə bağlı peşə."
+      "hint": "yaradıcılıq və səhnə sənəti ilə bağlı peşə.",
+      "answerLength": 8,
+      "pool": "ZCDEÇNBAFİYRƏ"
     }
   },
   {
@@ -3221,16 +3659,19 @@ window.PW_MAIN_MORE=[
       "🧩"
     ],
     "ru": {
-      "answer": "ПРОГРАММИСТ",
-      "hint": "Профессия, связанная с техникой и технологиями."
+      "hint": "Профессия, связанная с техникой и технологиями.",
+      "answerLength": 11,
+      "pool": "ОГВРБМИТПРАЕМСЖД"
     },
     "en": {
-      "answer": "PROGRAMMER",
-      "hint": "A profession connected with technology and machinery."
+      "hint": "A profession connected with technology and machinery.",
+      "answerLength": 10,
+      "pool": "RMAFRMGRHDBEOPC"
     },
     "az": {
-      "answer": "PROQRAMÇI",
-      "hint": "texnika və texnologiya ilə bağlı peşə."
+      "hint": "texnika və texnologiya ilə bağlı peşə.",
+      "answerLength": 9,
+      "pool": "ODPREQIRMCAƏÇB"
     }
   },
   {
@@ -3243,16 +3684,19 @@ window.PW_MAIN_MORE=[
       "💡"
     ],
     "ru": {
-      "answer": "ФОТОГРАФ",
-      "hint": "Понятие из фотографии и работы с изображением камерой."
+      "hint": "Понятие из фотографии и работы с изображением камерой.",
+      "answerLength": 8,
+      "pool": "ДОТРГБЖОФВАЕФ"
     },
     "en": {
-      "answer": "PHOTOGRAPHER",
-      "hint": "A concept from photography and camera-based image-making."
+      "hint": "A concept from photography and camera-based image-making.",
+      "answerLength": 12,
+      "pool": "POPAEBJRRFOGHTDCH"
     },
     "az": {
-      "answer": "FOTOQRAF",
-      "hint": "Fotoqrafiya və kamera ilə təsvir yaratma sahəsinə aid anlayış."
+      "hint": "Fotoqrafiya və kamera ilə təsvir yaratma sahəsinə aid anlayış.",
+      "answerLength": 8,
+      "pool": "TEQDFBROAÇFCO"
     }
   },
   {
@@ -3265,16 +3709,19 @@ window.PW_MAIN_MORE=[
       "🎼"
     ],
     "ru": {
-      "answer": "МУЗЫКАНТ",
-      "hint": "Профессия, связанная с творчеством, сценой или визуальным искусством."
+      "hint": "Профессия, связанная с творчеством, сценой или визуальным искусством.",
+      "answerLength": 8,
+      "pool": "УАЫТГЕНБДМКЗВ"
     },
     "en": {
-      "answer": "MUSICIAN",
-      "hint": "A profession connected with creative arts and performance."
+      "hint": "A profession connected with creative arts and performance.",
+      "answerLength": 8,
+      "pool": "ECINBDSFIAUGM"
     },
     "az": {
-      "answer": "MUSİQİÇİ",
-      "hint": "yaradıcılıq və səhnə sənəti ilə bağlı peşə."
+      "hint": "yaradıcılıq və səhnə sənəti ilə bağlı peşə.",
+      "answerLength": 8,
+      "pool": "ÇBİDİSUMCAİQE"
     }
   },
   {
@@ -3287,16 +3734,19 @@ window.PW_MAIN_MORE=[
       "🎭"
     ],
     "ru": {
-      "answer": "ХУДОЖНИК",
-      "hint": "Понятие или предмет из живописи и создания изображений."
+      "hint": "Понятие или предмет из живописи и создания изображений.",
+      "answerLength": 8,
+      "pool": "ЖЕАКХОВГИУДБН"
     },
     "en": {
-      "answer": "ARTIST",
-      "hint": "A concept or tool from painting and image-making."
+      "hint": "A concept or tool from painting and image-making.",
+      "answerLength": 6,
+      "pool": "GIRTCSFATBED"
     },
     "az": {
-      "answer": "RƏSSAM",
-      "hint": "Rəssamlıq və təsvir yaratma ilə bağlı anlayış və ya alət."
+      "hint": "Rəssamlıq və təsvir yaratma ilə bağlı anlayış və ya alət.",
+      "answerLength": 6,
+      "pool": "MSDFƏBERCSAÇ"
     }
   }
-];
+]];
