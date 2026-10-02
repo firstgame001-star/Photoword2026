@@ -1,5 +1,5 @@
 """Exercise the real published PhotoWord Mini App UI. Supabase calls are mocked; no real account data is changed."""
-import json, time, urllib.parse, urllib.request, re
+import json, time, urllib.parse, urllib.request, re, os
 from pathlib import Path
 from playwright.sync_api import sync_playwright, expect
 
@@ -1164,13 +1164,16 @@ with sync_playwright() as pw:
       expect(page.locator('#themesEntry')).to_be_visible();expect(page.locator('#themesEntryBadge')).to_be_visible();page.locator('#themesEntry').tap();expect(page.locator('#themesScreen')).to_be_visible();expect(page.locator('#themeCards .theme-card')).to_have_count(12);expect(page.locator('#themeCards .theme-card').first).to_be_enabled();expect(page.locator('#themeCards .theme-card').nth(2)).to_be_enabled();expect(page.locator('#themeCards .theme-card').nth(3)).to_be_enabled();expect(page.locator('#themeCards .theme-card').nth(4)).to_be_enabled();expect(page.locator('#themeCards .theme-card').nth(5)).to_be_enabled();page.locator('#themeCards .theme-card').first.tap();expect(page.locator('#themeDetailScreen')).to_be_visible();expect(page.locator('#themeLevelGrid button')).to_have_count(100);expect(page.locator('#themeLevelGrid button').nth(0)).to_be_enabled();expect(page.locator('#themeLevelGrid button').nth(20)).to_be_disabled();page.locator('#themeDetailBack').tap();page.locator('#themesBack').tap()
       # Friends use nickname and progress.
       page.locator('#friendsNav').tap();expect(page.locator('#friendsList')).to_contain_text('FriendOne');expect(page.locator('#friendsList')).to_contain_text('7 / 10');page.locator('[data-close="friendsModal"]').tap()
-      # Rating, Stars invoices, energy purchase route and rewarded-ad claim are reachable.
-      page.locator('#ratingNav').tap();expect(page.locator('#leaderboard')).to_contain_text('Player_77');expect(page.locator('#leaderboard')).to_contain_text(expected_title);expect(page.locator('#leaderboard')).to_contain_text('20');page.locator('#ratingBack').tap();page.locator('#shopNav').tap();expect(page.locator('#shopModal')).to_be_visible();expect(page.locator('#shopBalance')).to_have_text(str(account['coins']));expect(page.locator('#shopEnergyValue')).to_contain_text(str(account.get('_challenge_energy',5))+'/5');expect(page.locator('#shopAdsValue')).to_contain_text('0/10');expect(page.locator('#shopHistoryTitle')).to_be_visible();expect(page.locator('#watchAd')).to_be_disabled();expect(page.locator('#watchAd')).to_have_text({'ru':'НЕДОСТУПНО','en':'UNAVAILABLE','az':'MÖVCUD DEYİL'}[language]);expect(page.locator('[data-pack="c10"]')).to_be_enabled();expect(page.locator('[data-energy-store-pack]')).to_have_count(2);expect(page.locator('[data-energy-store-pack="e1"]')).to_be_enabled()
-      page.locator('[data-pack="c10"]').tap();expect(page.locator('[data-pack="c10"]')).to_be_enabled();assert '$test' in page.evaluate("window.__pwNative.invoices.at(-1)")
-      page.locator('[data-energy-store-pack="e1"]').tap();expect(page.locator('[data-energy-store-pack="e1"]')).to_be_enabled();assert '$energy' in page.evaluate("window.__pwNative.invoices.at(-1)")
-      page.evaluate("""() => { window.Adsgram={init:()=>({show:async()=>({done:true})})}; document.getElementById('watchAd').disabled=false }""")
-      ad_before=int(page.locator('[data-coins]').first.inner_text());page.locator('#watchAd').tap();expect(page.locator('[data-coins]').first).to_have_text(str(ad_before+5));expect(page.locator('#shopHistory')).to_contain_text('+5')
-      page.locator('[data-close="shopModal"]').tap()
+      # Rating is always checked; purchases and video can be excluded from a full audit.
+      page.locator('#ratingNav').tap();expect(page.locator('#leaderboard')).to_contain_text('Player_77');expect(page.locator('#leaderboard')).to_contain_text(expected_title);expect(page.locator('#leaderboard')).to_contain_text('20');page.locator('#ratingBack').tap();
+      if not os.getenv("PW_SKIP_COMMERCE"):
+        page.locator('#shopNav').tap();expect(page.locator('#shopModal')).to_be_visible();expect(page.locator('#shopBalance')).to_have_text(str(account['coins']));expect(page.locator('#shopEnergyValue')).to_contain_text(str(account.get('_challenge_energy',5))+'/5');expect(page.locator('#shopAdsValue')).to_contain_text('0/10');expect(page.locator('#shopHistoryTitle')).to_be_visible();expect(page.locator('#watchAd')).to_be_disabled();expect(page.locator('#watchAd')).to_have_text({'ru':'НЕДОСТУПНО','en':'UNAVAILABLE','az':'MÖVCUD DEYİL'}[language]);expect(page.locator('[data-pack="c10"]')).to_be_enabled();expect(page.locator('[data-energy-store-pack]')).to_have_count(2);expect(page.locator('[data-energy-store-pack="e1"]')).to_be_enabled()
+        page.locator('[data-pack="c10"]').tap();expect(page.locator('[data-pack="c10"]')).to_be_enabled();assert '$test' in page.evaluate("window.__pwNative.invoices.at(-1)")
+        page.locator('[data-energy-store-pack="e1"]').tap();expect(page.locator('[data-energy-store-pack="e1"]')).to_be_enabled();assert '$energy' in page.evaluate("window.__pwNative.invoices.at(-1)")
+        page.evaluate("""() => { window.Adsgram={init:()=>({show:async()=>({done:true})})}; document.getElementById('watchAd').disabled=false }""")
+        ad_before=int(page.locator('[data-coins]').first.inner_text());page.locator('#watchAd').tap();expect(page.locator('[data-coins]').first).to_have_text(str(ad_before+5));expect(page.locator('#shopHistory')).to_contain_text('+5')
+        page.locator('[data-close="shopModal"]').tap()
+
       # Reset requires double confirmation and then requires language again.
       page.locator('#settingsBtn').tap();page.locator('#resetProgressBtn').tap();page.locator('#confirmReset').tap();page.locator('#confirmReset').tap();expect(page.locator('#languageModal')).to_be_visible(timeout=3000);expect(page.locator('#languageClose')).to_be_hidden()
       assert not relevant_errors(errors),errors;ctx.close()
