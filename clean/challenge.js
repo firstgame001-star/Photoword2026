@@ -2824,7 +2824,7 @@ const I={
 const tr=()=>I[lang()]||I.ru;
 const alphabet=()=>lang()==='az'?'ABCÇDEƏFGĞHXIİJKLMNOÖPQRSŞTUÜVYZ':lang()==='en'?'ABCDEFGHJKLMNPQRSTUVWXYZ':'АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЫЭЮЯ';
 const rawInit=()=>window.Telegram?.WebApp?.initData||'';
-let mode='blitz',state=null,running=false,question=null,answer='',tiles=[],selected=[],used=new Set(),fixed=new Map(),removed=new Set(),letterOrder=[],textHintOpen=false,hintBusy=false,hearts=3,correct=0,streak=0,bestRunStreak=0,score=0,deadline=0,timer=null,energyTimer=null,serverMode=true,serverNowMs=0,serverPerfMs=0;
+let mode='blitz',state=null,running=false,question=null,currentQuestionId=null,answer='',tiles=[],selected=[],used=new Set(),fixed=new Map(),removed=new Set(),letterOrder=[],textHintOpen=false,hintBusy=false,hearts=3,correct=0,streak=0,bestRunStreak=0,score=0,deadline=0,timer=null,energyTimer=null,serverMode=true,serverNowMs=0,serverPerfMs=0;
 let runEpoch=0,pendingTimeouts=new Set();
 function cancelPending(){runEpoch++;for(const id of pendingTimeouts)clearTimeout(id);pendingTimeouts.clear()}
 function later(fn,ms){const epoch=runEpoch,id=setTimeout(()=>{pendingTimeouts.delete(id);if(epoch===runEpoch)fn()},ms);pendingTimeouts.add(id);return id}
@@ -2845,6 +2845,7 @@ async function api(action,extra={}){
   if(!r.ok){if(j.error==='progress_reset')await pw.login(true);throw Object.assign(new Error(j.error||'challenge_error'),{data:j});}
   if(!j.challenge)throw new Error('challenge_state_missing');
   syncTrustedClock(j.challenge);serverMode=true;
+  if(action==='answer')return j;
   if(action==='hint'){if(Number.isFinite(Number(j.coins)))document.querySelectorAll('[data-coins]').forEach(e=>e.textContent=String(j.coins));return j;}
   if(action==='finish'){if(Number.isFinite(Number(j.coins)))document.querySelectorAll('[data-coins]').forEach(e=>e.textContent=String(j.coins));return j;}
   return j.challenge;
@@ -2930,7 +2931,7 @@ async function nextQ(){
    if(!serverQuestions.length)await refillQuestions();
    if(epoch!==runEpoch||!running)return;
    const idx=serverQuestions.shift();if(!Number.isInteger(idx))throw new Error('questions_missing');
-   questionLoading=false;question=Q[idx];answer=question[lang()]||question.ru;buildPuzzle();
+   questionLoading=false;currentQuestionId=idx;question=Q[idx];answer=question[lang()]||question.ru;buildPuzzle();
    if(serverQuestions.length<=3)refillQuestions().catch(()=>{});
   }catch{if(epoch===runEpoch&&running){pw?.status?.(lang()==='en'?'Connection lost. Try again.':lang()==='az'?'Bağlantı kəsildi. Yenidən cəhd et.':'Связь потеряна. Попробуй ещё раз.');finish('connection')}}
   finally{if(epoch===runEpoch){questionLoading=false;renderInput()}}
@@ -2996,8 +2997,32 @@ async function blitzHint(type){
  }finally{hintBusy=false;renderInput()}
  if(selected.every(v=>v!==null))later(checkWord,70);
 }
-function checkWord(){
- if(!running)return;const word=selected.map(i=>tiles[i]).join('');
+async function checkWord(){
+ if(!running||hintBusy)return;
+ const word=selected.map(i=>tiles[i]).join('');
+ if(serverMode&&rawInit()&&state?.run_id){
+  hintBusy=true;renderInput();let result;
+  try{result=await api('answer',{mode,runId:state.run_id,questionId:currentQuestionId,answer:word,language:lang()})}
+  catch(err){flash(String(err?.message)==='answer_wait'?tr().wait:(lang()==='en'?'Answer could not be checked. Try again.':lang()==='az'?'Cavab yoxlanmadı. Yenidən cəhd et.':'Не удалось проверить ответ. Попробуй ещё раз.'));return}
+  finally{hintBusy=false;renderInput()}
+  const a=result?.answer_result;if(!a){flash(lang()==='en'?'Answer could not be checked.':lang()==='az'?'Cavab yoxlanmadı.':'Не удалось проверить ответ.');return}
+  correct=Number(a.score||0);streak=Number(a.streak||0);bestRunStreak=Number(a.best_streak||0);hearts=Math.max(0,3-Number(a.mistakes||0));
+  if(mode==='blitz'){score=correct;deadline=performance.now()+Math.max(0,Number(a.remaining_ms||0))}
+  updateHud();
+  if(a.correct){
+   pw?.sfx?.('success');pw?.haptic?.('success');
+   if(mode==='blitz'){flash(tr().correct,true);later(nextQ,220);return}
+   hintBusy=true;renderInput();$('challengeCorrectTitle').textContent=tr().correctWord;$('challengeCorrectWord').textContent=answer;$('challengeCorrectNext').textContent=tr().nextWord+' ▶';$('challengeCorrectPanel').hidden=false;return;
+  }
+  pw?.sfx?.('error');pw?.haptic?.('error');flash(tr().wrong,false);$('challengeSlots').classList.add('wrong');
+  if(mode==='blitz'){
+   later(()=>{if(running){$('challengeSlots').classList.remove('wrong');clearWord()}},330);
+   if(Number(a.remaining_ms||0)<=0)later(()=>finish('time'),340);
+  }else{
+   later(()=>{$('challengeSlots').classList.remove('wrong');if(hearts<=0)finish('lives');else clearWord()},380);
+  }
+  return;
+ }
  if(word===answer){
   pw?.sfx?.('success');pw?.haptic?.('success');correct++;streak++;bestRunStreak=Math.max(bestRunStreak,streak);
   if(mode==='blitz'){
