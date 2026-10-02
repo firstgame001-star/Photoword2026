@@ -29,7 +29,7 @@ with sync_playwright() as pw:
    ctx.route('**/rest/v1/rpc/get_avatar_frames',lambda route:route.fulfill(status=200,content_type='application/json',body=json.dumps({'FRAME-TEST':account['avatar_frame']}),headers={'Access-Control-Allow-Origin':'*'}))
    page=ctx.new_page();errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
    page.goto(BASE+'clean/#'+auth_fragment(),wait_until='domcontentloaded',timeout=45000)
-   page.locator('#profileBtn').tap();page.locator('#profileFrames').tap();expect(page.locator('.frame-card')).to_have_count(10);expect(page.locator('#framesStatus')).to_have_text('')
+   page.locator('#profileBtn').tap();page.locator('#profileFrames').tap();expect(page.locator('#framesTitle')).to_have_text({'ru':'Оформление','en':'Appearance','az':'Görünüş'}[lang]);expect(page.locator('.frame-card')).to_have_count(10);expect(page.locator('#framesStatus')).to_have_text('')
    page.locator('[data-frame-id=diamond]').tap();expect(page.locator('#framePreview')).to_have_attribute('data-frame','diamond');expect(page.locator('#framesEquip')).to_be_disabled();assert state['calls']==[]
    page.screenshot(path=str(OUT/(engine+'-'+lang+'-locked.png')))
    page.locator('[data-frame-id=bronze]').tap();expect(page.locator('#framesEquip')).to_be_enabled();page.locator('#framesEquip').tap();expect(page.locator('#avatar')).to_have_attribute('data-frame','bronze');expect(page.locator('#framesEquip')).to_be_disabled();assert account['coins']==1000

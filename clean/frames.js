@@ -1,7 +1,7 @@
 (() => {
 'use strict';
 const $=id=>document.getElementById(id),pw=window.PW;
-const lang=()=>pw.store.get('pw.language','ru');
+const lang=()=>{try{return localStorage.getItem('pw.language')||'ru'}catch{return'ru'}};
 const names={ru:['Бронза','Серебро','Золото','Алмаз','Знаток','Дуэлянт','Чемпион','Огненная серия','Космос','Коллекционер'],en:['Bronze','Silver','Gold','Diamond','Scholar','Duelist','Champion','Flame streak','Cosmos','Collector'],az:['Bürünc','Gümüş','Qızıl','Almaz','Bilici','Duelçi','Çempion','Alov seriyası','Kosmos','Kolleksiyaçı']};
 const ids=['bronze','silver','gold','diamond','scholar','duelist','champion','flame','cosmos','collector'];
 const symbols=['✦','✧','✦','◆','❖','⚔','♛','♨','✧','❋'];
