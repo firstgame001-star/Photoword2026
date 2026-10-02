@@ -98,6 +98,32 @@ Deno.serve(async(req)=>{
     hintPayload={removeIndices};
    }
   }
+  let themeAnswer:string|null=null;
+  if(["theme_hint","theme_complete"].includes(action)){
+   const result=await db.from("theme_level_answers").select("ru,en,az").eq("theme_id",themeId).eq("level_id",level).maybeSingle();
+   if(result.error||!result.data)return reply({error:"answer_unavailable"},500);
+   const language=["ru","en","az"].includes(String(body?.language))?String(body.language):"ru";
+   themeAnswer=result.data[language] as string;
+   if(action==="theme_complete"&&(typeof body.answer!=="string"||body.answer.trim().toLocaleUpperCase("az")!==themeAnswer)){
+    const attempt=await db.rpc("register_wrong_theme_answer",{p_telegram_id:user.id,p_theme_id:themeId,p_level_id:level});
+    if(attempt.error)return reply({error:"answer_attempt_failed"},500);
+    if(attempt.data!==true)return reply({error:"answer_rate_limited"},429);
+    return reply({error:"wrong_answer"},422);
+   }
+   if(action==="theme_hint"&&body.hintType==="letter"){
+    const chars=[...themeAnswer],fixed=Array.isArray(body.fixedPositions)?body.fixedPositions.filter((v:unknown)=>Number.isInteger(v)&&Number(v)>=0&&Number(v)<chars.length):[];
+    const open=chars.map((_,i)=>i).filter(i=>!fixed.includes(i));
+    if(!open.length)return reply({error:"all_letters"},409);
+    const position=open[Math.floor(Math.random()*open.length)];
+    hintPayload={position,letter:chars[position]};
+   }else if(action==="theme_hint"&&body.hintType==="remove"&&typeof body.pool==="string"){
+    const pool=[...body.pool.slice(0,64)],need:Record<string,number>={};for(const ch of themeAnswer)need[ch]=(need[ch]||0)+1;
+    const have:Record<string,number>={},removeIndices:number[]=[];
+    pool.forEach((ch,index)=>{have[ch]=(have[ch]||0)+1;if(have[ch]>(need[ch]||0)&&removeIndices.length<3)removeIndices.push(index)});
+    if(!removeIndices.length)return reply({error:"no_extra_letters"},409);
+    hintPayload={removeIndices};
+   }
+  }
   const text=(value:unknown,max:number)=>typeof value==="string"?value.slice(0,max):null;
   const fields={first_name:text(user.first_name,256),last_name:text(user.last_name,256),username:text(user.username,64),avatar_url:text(user.photo_url,2048)};
   let {data:player,error}=await db.from("players").select("*").eq("telegram_id",user.id).maybeSingle();
@@ -430,9 +456,9 @@ Deno.serve(async(req)=>{
   // PostgREST may serialize a composite result as a one-element row array.
   if(Array.isArray(player))player=player[0];
   if(!player?.id)return reply({error:"db_response"},500);
-  if((player.xp??0)<=0)return reply({player:profile(player,0),...(action==="theme_complete"?{theme_rewarded:themeRewarded}:{}),...(action==="use_hint"&&hintPayload?{hint:hintPayload}:{})});
+  if((player.xp??0)<=0)return reply({player:profile(player,0),...(action==="theme_complete"?{theme_rewarded:themeRewarded}:{}),...(["use_hint","theme_hint"].includes(action)&&hintPayload?{hint:hintPayload}:{})});
   const rank=await db.from("players").select("id",{count:"exact",head:true}).gt("xp",0).or(`xp.gt.${player.xp},and(xp.eq.${player.xp},completed_levels.gt.${player.completed_levels}),and(xp.eq.${player.xp},completed_levels.eq.${player.completed_levels},created_at.lt.${player.created_at})`);
   if(rank.error)return reply({error:"rank_failed"},500);
-  return reply({player:profile(player,(rank.count??0)+1),...(action==="theme_complete"?{theme_rewarded:themeRewarded}:{}),...(action==="use_hint"&&hintPayload?{hint:hintPayload}:{})});
+  return reply({player:profile(player,(rank.count??0)+1),...(action==="theme_complete"?{theme_rewarded:themeRewarded}:{}),...(["use_hint","theme_hint"].includes(action)&&hintPayload?{hint:hintPayload}:{})});
  }catch{return reply({error:"server_error"},500);}
 });
