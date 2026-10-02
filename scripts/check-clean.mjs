@@ -27,7 +27,7 @@ for(const file of ['core.js','home.js','game.js','achievements.js','main-levels-
 }
 
 const release=JSON.parse(readFileSync(resolve(base,'release.json'),'utf8'));
-if(release.release!=='20261002-r122')throw Error('Unexpected release: '+release.release);
+if(release.release!=='20261002-r123')throw Error('Unexpected release: '+release.release);
 if(release.duel_mode?.entry_min_coins!==25||release.duel_mode?.entry_max_coins!==500||release.duel_mode?.winner_payout_percent_of_pot!==90)throw Error('Duel configuration mismatch');
 if(release.duel_mode?.question_pool!==150||release.duel_mode?.recent_matches_excluded_per_player!==2||release.duel_mode?.rematch!==true)throw Error('Rematch and question pool manifest mismatch');
 if(release.achievements?.count!==120||release.achievements?.survives_progress_reset!==false)throw Error('Achievement catalog/reset manifest mismatch');
@@ -69,6 +69,8 @@ const technology=release.thematic_mode.categories.find(x=>x.id==='technology');
 if(!technology||technology.available_through!==100||technology.status!=='complete')throw Error('Technology theme must be playable through level 100');
 
 const index=readFileSync(resolve(base,'index.html'),'utf8');
+for(const [from,to] of [[13,14],[14,15]]){const start=index.indexOf(`data-home-chapter="${from}"`),next=index.indexOf(`data-home-chapter="${to}"`,start),play=index.indexOf(`id="homeChapter${from}Play"`,start),end=index.indexOf('</section>',play);if(!(start<play&&play<end&&end<next))throw Error('Chapter slides are nested instead of siblings: '+from+' → '+to);}
+if((index.match(/<section class="chapter home-chapter-slide/g)||[]).length!==15)throw Error('Home chapter carousel must contain 15 slides');
 const themeGame=readFileSync(resolve(base,'theme-game.html'),'utf8');
 const themeGameJs=readFileSync(resolve(base,'theme-game.js'),'utf8');
 const addedThemes=Function('window={};'+(readFileSync(resolve(base,'theme-levels-cinema-food.js'),'utf8')+readFileSync(resolve(base,'theme-levels-expansion.js'),'utf8'))+';return window.PW_THEME_EXTRA')();
