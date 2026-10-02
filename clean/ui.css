@@ -242,6 +242,8 @@ body{overflow-x:hidden}
 [data-home-chapter="10"] .chapter-cover-mark,#chapter10Select .chapter-cover-mark,
 [data-home-chapter="11"] .chapter-cover-mark,#chapter11Select .chapter-cover-mark,
 [data-home-chapter="12"] .chapter-cover-mark,#chapter12Select .chapter-cover-mark{opacity:.72}
+.chapter13-hero{background:radial-gradient(circle at 78% 24%,rgba(94,207,255,.42),transparent 34%),linear-gradient(145deg,#123b57,#081a2a 66%,#15283b)}
+[data-home-chapter="13"] .chapter-cover-mark,#chapter13Select .chapter-cover-mark{opacity:.82;color:#8bdcff}
 .future-chapter{opacity:.96}
 
 
