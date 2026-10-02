@@ -35,6 +35,7 @@ with sync_playwright() as pw:
    page.locator('[data-frame-id=bronze]').tap();expect(page.locator('#framesEquip')).to_be_enabled();page.locator('#framesEquip').tap();expect(page.locator('#avatar')).to_have_attribute('data-frame','bronze');expect(page.locator('#framesEquip')).to_be_disabled();assert account['coins']==1000
    assert page.evaluate('document.documentElement.scrollWidth<=innerWidth+1')
    page.screenshot(path=str(OUT/(engine+'-'+lang+'-collection.png')))
+   page.locator('#framesBack').tap();page.locator('#ratingShortcut').tap();expect(page.locator('[data-player-code=FRAME-TEST]')).to_have_attribute('data-frame','bronze');page.locator('#ratingBack').tap()
    page.reload(wait_until='domcontentloaded');expect(page.locator('#avatar')).to_have_attribute('data-frame','bronze');page.locator('#profileBtn').tap();expect(page.locator('#profileAvatar')).to_have_attribute('data-frame','bronze');page.screenshot(path=str(OUT/(engine+'-'+lang+'-profile.png')))
    page.locator('#profileFrames').tap();expect(page.locator('#framesStatus')).to_have_text('');page.locator('#framesNone').tap();page.locator('#framesEquip').tap();expect(page.locator('#avatar')).not_to_have_attribute('data-frame','bronze');assert account['avatar_frame'] is None
    # Server accepted choice but response was lost: retry/reopen reconciles selection.

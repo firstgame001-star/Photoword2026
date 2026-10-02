@@ -30,7 +30,7 @@ jobs:
       - name: Wait for frame release
         run: |
           for i in $(seq 1 36); do
-            if curl -fsSL 'https://firstgame001-star.github.io/Photoword2026/clean/frames.js?release=frames1' | grep -q "localStorage.getItem('pw.language')"; then exit 0; fi
+            if curl -fsSL 'https://firstgame001-star.github.io/Photoword2026/clean/frames.js?release=frames3' | grep -q "behavior:'instant'"; then exit 0; fi
             sleep 5
           done
           exit 1

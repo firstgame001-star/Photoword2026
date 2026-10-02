@@ -1,7 +1,7 @@
 begin;
 insert into public.players(telegram_id,photoword_id,first_name,coins) values(-911400001,'FRAME-TEST-A','Frame A',1000),(-911400002,'FRAME-TEST-B','Frame B',1000);
 do $$
-declare actor uuid; s jsonb; f jsonb;
+declare actor uuid; s jsonb; f jsonb; code text;
 begin
  select id into actor from public.players where telegram_id=-911400001;
  s:=public.avatar_frame_state(-911400001,'ru');if jsonb_array_length(s->'frames')<>10 then raise exception 'frame count';end if;
@@ -22,6 +22,8 @@ begin
  insert into public.player_achievements(player_id,achievement_id) select actor,achievement_id from public.avatar_frame_catalog on conflict do nothing;
  s:=public.avatar_frame_state(-911400001,'ru');if (select count(*) from jsonb_array_elements(s->'frames') x where (x->>'unlocked')::boolean)<>10 then raise exception 'legacy unlocks';end if;
  for f in select * from jsonb_array_elements(s->'frames') loop perform public.avatar_frame_equip(-911400001,'ru',f->>'id');end loop;
+ code:=public.duel_create(-911400001,25,'ru');perform public.duel_join_localized(-911400002,code,'en');
+ s:=public.duel_snapshot(-911400002,code);if s->>'their_frame'<>'collector' or s->>'my_frame' is not null then raise exception 'duel frame isolation';end if;
  if has_function_privilege('anon','public.avatar_frame_equip(bigint,text,text)','execute') or has_function_privilege('authenticated','public.avatar_frame_state(bigint,text)','execute') or has_table_privilege('anon','public.avatar_frame_catalog','select') then raise exception 'private frame permissions';end if;
 end $$;
 rollback;
