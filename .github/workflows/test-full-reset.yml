@@ -1,7 +1,7 @@
 name: Test PhotoWord full reset
 on:
   push:
-    branches: [main]
+    branches: [main, audit/photoword-comprehensive-oct-2026]
     paths: ['scripts/test-full-reset-browser.py', '.github/workflows/test-full-reset.yml', 'clean/core.js', 'clean/home.js']
   workflow_dispatch:
 permissions:

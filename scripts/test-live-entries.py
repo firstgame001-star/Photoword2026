@@ -4,7 +4,7 @@ from pathlib import Path
 from playwright.sync_api import sync_playwright, expect
 
 BASE='https://firstgame001-star.github.io/Photoword2026/'
-RELEASE='20261002-r118'
+RELEASE=json.loads(Path('clean/release.json').read_text())['release']
 OUT=Path('test-results'); OUT.mkdir(exist_ok=True)
 
 def expect_mock_value(page, account, key, value):

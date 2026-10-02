@@ -1,7 +1,7 @@
 name: Verify PhotoWord Pages
 on:
   push:
-    branches: [main]
+    branches: [main, audit/photoword-comprehensive-oct-2026]
     paths: ['clean/**', 'server/achievements_120.sql', 'server/achievement_streak_20_copy_fix.sql', 'server/achievements/catalog.json', 'scripts/build-achievements.py', 'scripts/test-achievements.sql', 'scripts/check-clean.mjs', 'scripts/full-audit.mjs', '.github/workflows/verify-photoword-pages.yml']
   workflow_run:
     workflows: ["pages build and deployment"]
