@@ -29,12 +29,12 @@ jobs:
           node scripts/test-duel-input.mjs
           node scripts/test-challenge-server-input.mjs
           node scripts/test-daily-input.mjs
-      - name: Wait for r122 and verify published files
+      - name: Wait for r123 and verify published files
         shell: bash
         run: |
           set -euo pipefail
           base='https://firstgame001-star.github.io/Photoword2026/clean'
-          release='20261002-r122'
+          release='20261002-r123'
           ok=0
           for i in $(seq 1 48); do
             if curl --fail --silent --show-error --location --max-time 20 "$base/release.json?check=$i" -o "$RUNNER_TEMP/release.json" && grep -q "$release" "$RUNNER_TEMP/release.json"; then
