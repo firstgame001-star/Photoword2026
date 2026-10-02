@@ -108,7 +108,7 @@ if(!homeJs.includes("actionRequest('notification_state')")||!homeJs.includes("ac
 if(!index.includes('id="shopBalance"')||!index.includes('id="shopEnergyValue"')||!index.includes('id="shopAdsValue"')||!index.includes('id="shopHistory"'))throw Error('Shop dashboard UI is incomplete');
 if(!homeJs.includes("actionRequest('shop_status')")||!homeJs.includes('renderShopHistory')||!homeJs.includes('waitForEnergyCredit'))throw Error('Shop client synchronization is incomplete');
 if(homeJs.includes('requestAnimationFrame(()=>showHomeChapter'))throw Error('Initial carousel must not auto-scroll after profile sync');
-for(let n=1;n<=12;n++){
+for(let n=1;n<=13;n++){
  const hasHome=uiCss.includes('#homeChapter'+n)||uiCss.includes('[data-home-chapter="'+n+'"]');
  const listNeed='#chapter'+n+'Select';
  if(!hasHome||!uiCss.includes(listNeed))throw Error('Missing chapter background '+n);
@@ -120,6 +120,7 @@ if(release.ui?.chapter_titles!==true)throw Error('Release must declare chapter t
 const gameJs=readFileSync(resolve(base,'game.js'),'utf8');
 const mainExtraJs=readFileSync(resolve(base,'main-levels-8-9.js'),'utf8');
 const mainMoreJs=readFileSync(resolve(base,'main-levels-10-12.js'),'utf8');
+const main13Js=readFileSync(resolve(base,'main-levels-13.js'),'utf8');
 if(!gameJs.includes('for(let n=1;n<=545;n++){')||!gameJs.includes('levelId===545')||!gameJs.includes('levelId===280')||!gameJs.includes('levelId===330')||!gameJs.includes('levelId===380')||!mainExtraJs.includes('"id": 281')||!mainExtraJs.includes('"id": 380'))throw Error('Main levels through Chapter 9 are incomplete');
 
 const mainBase=gameJs.slice(gameJs.indexOf('const LEVELS'),gameJs.indexOf('const TRANSLATED='));
@@ -130,7 +131,7 @@ const mainAz=mainTranslated.slice(mainAzStart,mainTranslated.indexOf('\n  };',ma
 function extractMainAnswers(section){
  return [...section.matchAll(/\b\d+:\{[^}]*["']?answer["']?\s*:\s*["']([^"']+)["']/g)].map(m=>m[1]);
 }
-const extraRows=[...Function('window={};'+mainExtraJs+';return window.PW_MAIN_EXTRA')(),...Function('window={};'+mainMoreJs+';return window.PW_MAIN_MORE')()];
+const extraRows=[...Function('window={};'+mainExtraJs+';return window.PW_MAIN_EXTRA')(),...Function('window={};'+mainMoreJs+';return window.PW_MAIN_MORE')(),...Function('window={};'+main13Js+';return window.PW_MAIN_MORE')()];
 for(const [langCode,section] of [['ru',mainBase],['en',mainEn],['az',mainAz]]){
  const answers=extractMainAnswers(section).concat(extraRows.map(row=>row[langCode].answer));
  if(answers.length!==545)throw Error('Expected 545 main answers for '+langCode+', got '+answers.length);
@@ -138,7 +139,7 @@ for(const [langCode,section] of [['ru',mainBase],['en',mainEn],['az',mainAz]]){
  for(const answer of answers){if(seen.has(answer))throw Error('Duplicate main answer in '+langCode+': '+answer);seen.add(answer);}
 }
 if(release.verification?.main_answers_unique_all_languages!==true)throw Error('Main answer uniqueness flag is missing');
-if(!index.includes('data-home-chapter="13"')||!index.includes('id="chapter13Select"')||index.match(/data-dot="/g)?.length!==13)throw Error('Chapter 12 navigation is incomplete');
+if(!index.includes('data-home-chapter="13"')||!index.includes('id="chapter13Select"')||index.match(/data-dot="/g)?.length!==13)throw Error('Chapter 13 navigation is incomplete');
 if(!index.includes('id="chapter4Progress"')||!index.includes('id="homeChapter4Progress"')||!index.includes('91–130'))throw Error('Chapter 4 UI is incomplete');
 if(!index.includes('id="chapter5Progress"')||!index.includes('id="homeChapter5Progress"')||!index.includes('131–180'))throw Error('Chapter 5 UI is incomplete');
 if(!index.includes('id="chapter6Progress"')||!index.includes('id="homeChapter6Progress"')||!index.includes('181–230'))throw Error('Chapter 6 UI is incomplete');
