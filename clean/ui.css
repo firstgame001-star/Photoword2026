@@ -244,6 +244,10 @@ body{overflow-x:hidden}
 [data-home-chapter="12"] .chapter-cover-mark,#chapter12Select .chapter-cover-mark{opacity:.72}
 .chapter13-hero{background:radial-gradient(circle at 78% 24%,rgba(94,207,255,.42),transparent 34%),linear-gradient(145deg,#123b57,#081a2a 66%,#15283b)}
 [data-home-chapter="13"] .chapter-cover-mark,#chapter13Select .chapter-cover-mark{opacity:.82;color:#8bdcff}
+.chapter14-hero{background:radial-gradient(circle at 78% 24%,rgba(119,255,213,.34),transparent 34%),linear-gradient(145deg,#114b49,#081a2a 66%,#192d3b)!important}
+[data-home-chapter="14"] .chapter-cover-mark,#chapter14Select .chapter-cover-mark{opacity:.85;color:#83f2cb}
+.chapter15-hero{background:radial-gradient(circle at 78% 24%,rgba(189,148,255,.4),transparent 34%),linear-gradient(145deg,#392650,#111b35 66%,#182940)!important}
+[data-home-chapter="15"] .chapter-cover-mark,#chapter15Select .chapter-cover-mark{opacity:.85;color:#c4a1ff}
 .future-chapter{opacity:.96}
 
 
