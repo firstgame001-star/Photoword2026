@@ -2,7 +2,7 @@ name: Test PhotoWord achievements
 on:
   push:
     branches: [main]
-    paths: ['clean/achievements.js', 'scripts/test-achievements-browser.py', '.github/workflows/test-achievements.yml']
+    paths: ['clean/achievements.js', 'server/achievements/catalog.json', 'server/achievements_120.sql', 'scripts/build-achievements.py', 'scripts/test-achievements.sql', 'scripts/test-achievements-browser.py', '.github/workflows/test-achievements.yml']
   workflow_dispatch:
 permissions:
   contents: read

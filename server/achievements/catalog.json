@@ -1798,5 +1798,365 @@
       "en": "Fully complete 9 themes.",
       "az": "9 mövzu bölməsini tam bitir."
     }
+  },
+  {
+    "id": "main_600",
+    "category": "main",
+    "metric": "main",
+    "target": 600,
+    "reward_coins": 100,
+    "icon": "🏁",
+    "title": {
+      "ru": "600 уровней пройдено",
+      "en": "600 levels completed",
+      "az": "600 səviyyə tamamlandı"
+    },
+    "description": {
+      "ru": "Впервые пройди 600 разных основных уровней.",
+      "en": "First-complete 600 different main levels.",
+      "az": "600 fərqli əsas səviyyəni ilk dəfə keç."
+    }
+  },
+  {
+    "id": "main_680",
+    "category": "main",
+    "metric": "main",
+    "target": 680,
+    "reward_coins": 150,
+    "icon": "🏆",
+    "title": {
+      "ru": "Путь до конца",
+      "en": "The whole journey",
+      "az": "Sonadək yol"
+    },
+    "description": {
+      "ru": "Пройди все 680 основных уровней.",
+      "en": "Complete all 680 main levels.",
+      "az": "680 əsas səviyyənin hamısını keç."
+    }
+  },
+  {
+    "id": "nohint_300",
+    "category": "main",
+    "metric": "nohint",
+    "target": 300,
+    "reward_coins": 100,
+    "icon": "🧠",
+    "title": {
+      "ru": "Без помощи · 300",
+      "en": "Without hints · 300",
+      "az": "İpucusuz · 300"
+    },
+    "description": {
+      "ru": "Впервые пройди 300 основных уровней без платных подсказок. Перемешивание разрешено.",
+      "en": "First-complete 300 main levels without paid hints. Shuffling is allowed.",
+      "az": "300 əsas səviyyəni ödənişli ipucusuz ilk dəfə keç. Hərfləri qarışdırmaq olar."
+    }
+  },
+  {
+    "id": "nohint_500",
+    "category": "main",
+    "metric": "nohint",
+    "target": 500,
+    "reward_coins": 150,
+    "icon": "🧠",
+    "title": {
+      "ru": "Без помощи · 500",
+      "en": "Without hints · 500",
+      "az": "İpucusuz · 500"
+    },
+    "description": {
+      "ru": "Впервые пройди 500 основных уровней без платных подсказок. Перемешивание разрешено.",
+      "en": "First-complete 500 main levels without paid hints. Shuffling is allowed.",
+      "az": "500 əsas səviyyəni ödənişli ipucusuz ilk dəfə keç. Hərfləri qarışdırmaq olar."
+    }
+  },
+  {
+    "id": "nohint_680",
+    "category": "main",
+    "metric": "nohint",
+    "target": 680,
+    "reward_coins": 200,
+    "icon": "🧠",
+    "title": {
+      "ru": "Мастер без подсказок",
+      "en": "No-hint master",
+      "az": "İpucusuz usta"
+    },
+    "description": {
+      "ru": "Пройди все 680 основных уровней без платных подсказок. Перемешивание разрешено.",
+      "en": "Complete all 680 main levels without paid hints. Shuffling is allowed.",
+      "az": "680 əsas səviyyənin hamısını ödənişli ipucusuz keç. Hərfləri qarışdırmaq olar."
+    }
+  },
+  {
+    "id": "chapter_13",
+    "category": "main",
+    "metric": "chapter_13",
+    "target": 1,
+    "reward_coins": 35,
+    "icon": "📚",
+    "title": {
+      "ru": "Глава 13 завершена",
+      "en": "Chapter 13 completed",
+      "az": "13-cü fəsil tamamlandı"
+    },
+    "description": {
+      "ru": "Пройди все уровни главы 13: 531–580.",
+      "en": "Complete every level in chapter 13: 531–580.",
+      "az": "13-cü fəslin bütün səviyyələrini keç: 531–580."
+    }
+  },
+  {
+    "id": "chapter_14",
+    "category": "main",
+    "metric": "chapter_14",
+    "target": 1,
+    "reward_coins": 40,
+    "icon": "📚",
+    "title": {
+      "ru": "Глава 14 завершена",
+      "en": "Chapter 14 completed",
+      "az": "14-cü fəsil tamamlandı"
+    },
+    "description": {
+      "ru": "Пройди все уровни главы 14: 581–630.",
+      "en": "Complete every level in chapter 14: 581–630.",
+      "az": "14-cü fəslin bütün səviyyələrini keç: 581–630."
+    }
+  },
+  {
+    "id": "chapter_15",
+    "category": "main",
+    "metric": "chapter_15",
+    "target": 1,
+    "reward_coins": 50,
+    "icon": "📚",
+    "title": {
+      "ru": "Глава 15 завершена",
+      "en": "Chapter 15 completed",
+      "az": "15-ci fəsil tamamlandı"
+    },
+    "description": {
+      "ru": "Пройди все уровни главы 15: 631–680.",
+      "en": "Complete every level in chapter 15: 631–680.",
+      "az": "15-ci fəslin bütün səviyyələrini keç: 631–680."
+    }
+  },
+  {
+    "id": "daily_streak_120",
+    "category": "daily",
+    "metric": "daily_streak",
+    "target": 120,
+    "reward_coins": 200,
+    "icon": "☀️",
+    "title": {
+      "ru": "120 дней подряд",
+      "en": "120 days in a row",
+      "az": "120 gün ardıcıl"
+    },
+    "description": {
+      "ru": "Решай загадку дня 120 дней подряд. Учитывается лучшая серия.",
+      "en": "Solve the daily puzzle 120 consecutive days. Your best streak counts.",
+      "az": "Günün tapmacasını 120 gün ardıcıl həll et. Ən yaxşı seriya sayılır."
+    }
+  },
+  {
+    "id": "daily_first_150",
+    "category": "daily",
+    "metric": "daily_first",
+    "target": 150,
+    "reward_coins": 100,
+    "icon": "✨",
+    "title": {
+      "ru": "С первой попытки · 150",
+      "en": "First try · 150",
+      "az": "İlk cəhddən · 150"
+    },
+    "description": {
+      "ru": "Реши 150 разных загадок дня с первой попытки.",
+      "en": "Solve 150 different daily puzzles on the first try.",
+      "az": "150 fərqli günün tapmacasını ilk cəhddən həll et."
+    }
+  },
+  {
+    "id": "duel_win_300",
+    "category": "duels",
+    "metric": "duel_wins",
+    "target": 300,
+    "reward_coins": 200,
+    "icon": "⚔️",
+    "title": {
+      "ru": "300 побед в дуэлях",
+      "en": "300 duel wins",
+      "az": "300 duel qələbəsi"
+    },
+    "description": {
+      "ru": "Выиграй 300 завершённых дуэлей.",
+      "en": "Win 300 settled duels.",
+      "az": "300 tamamlanmış dueldə qalib gəl."
+    }
+  },
+  {
+    "id": "duel_play_300",
+    "category": "duels",
+    "metric": "duel_played",
+    "target": 300,
+    "reward_coins": 100,
+    "icon": "🎮",
+    "title": {
+      "ru": "300 дуэлей",
+      "en": "300 duels",
+      "az": "300 duel"
+    },
+    "description": {
+      "ru": "Сыграй 300 дуэлей до завершения.",
+      "en": "Finish 300 duels.",
+      "az": "300 dueli sona çatdır."
+    }
+  },
+  {
+    "id": "duel_play_500",
+    "category": "duels",
+    "metric": "duel_played",
+    "target": 500,
+    "reward_coins": 150,
+    "icon": "🎮",
+    "title": {
+      "ru": "500 дуэлей",
+      "en": "500 duels",
+      "az": "500 duel"
+    },
+    "description": {
+      "ru": "Сыграй 500 дуэлей до завершения.",
+      "en": "Finish 500 duels.",
+      "az": "500 dueli sona çatdır."
+    }
+  },
+  {
+    "id": "duel_draw_50",
+    "category": "duels",
+    "metric": "duel_draws",
+    "target": 50,
+    "reward_coins": 80,
+    "icon": "🤝",
+    "title": {
+      "ru": "50 ничьих",
+      "en": "50 draws",
+      "az": "50 heç-heçə"
+    },
+    "description": {
+      "ru": "Заверши 50 дуэлей вничью. Отменённые комнаты не считаются.",
+      "en": "Finish 50 duels in a draw. Cancelled rooms do not count.",
+      "az": "50 dueli heç-heçə bitir. Ləğv edilən otaqlar sayılmır."
+    }
+  },
+  {
+    "id": "duel_score_25",
+    "category": "duels",
+    "metric": "duel_best",
+    "target": 25,
+    "reward_coins": 100,
+    "icon": "🎯",
+    "title": {
+      "ru": "Точный ответ · 25",
+      "en": "Sharp mind · 25",
+      "az": "Dəqiq cavab · 25"
+    },
+    "description": {
+      "ru": "Набери 25 очков в одной завершённой дуэли.",
+      "en": "Score 25 points in one settled duel.",
+      "az": "Bir tamamlanmış dueldə 25 xal topla."
+    }
+  },
+  {
+    "id": "challenge_runs_100",
+    "category": "challenges",
+    "metric": "challenge_runs",
+    "target": 100,
+    "reward_coins": 100,
+    "icon": "🎟️",
+    "title": {
+      "ru": "100 наградных испытаний",
+      "en": "100 rewarded challenges",
+      "az": "100 mükafatlı sınaq"
+    },
+    "description": {
+      "ru": "Заверши 100 испытаний, за которые сервер начислил награду.",
+      "en": "Complete 100 challenge runs that receive a server reward.",
+      "az": "Server mükafatı verilən 100 sınağı tamamla."
+    }
+  },
+  {
+    "id": "challenge_runs_200",
+    "category": "challenges",
+    "metric": "challenge_runs",
+    "target": 200,
+    "reward_coins": 150,
+    "icon": "🎟️",
+    "title": {
+      "ru": "200 наградных испытаний",
+      "en": "200 rewarded challenges",
+      "az": "200 mükafatlı sınaq"
+    },
+    "description": {
+      "ru": "Заверши 200 испытаний, за которые сервер начислил награду.",
+      "en": "Complete 200 challenge runs that receive a server reward.",
+      "az": "Server mükafatı verilən 200 sınağı tamamla."
+    }
+  },
+  {
+    "id": "challenge_streak_20",
+    "category": "challenges",
+    "metric": "challenge_streak",
+    "target": 20,
+    "reward_coins": 80,
+    "icon": "🔥",
+    "title": {
+      "ru": "Серия · 20",
+      "en": "Streak · 20",
+      "az": "Seriya · 20"
+    },
+    "description": {
+      "ru": "Собери серию из 20 правильных ответов в одном завершённом испытании.",
+      "en": "Reach a streak of 20 correct answers in a finished challenge.",
+      "az": "Tamamlanmış bir sınaqda 20 düzgün cavab seriyası qur."
+    }
+  },
+  {
+    "id": "blitz_30",
+    "category": "challenges",
+    "metric": "blitz_best",
+    "target": 30,
+    "reward_coins": 80,
+    "icon": "⚡",
+    "title": {
+      "ru": "Блиц · 30 очков",
+      "en": "Blitz · 30 points",
+      "az": "Blits · 30 xal"
+    },
+    "description": {
+      "ru": "Набери 30 очков за один раунд «Блица».",
+      "en": "Score 30 points in one Blitz run.",
+      "az": "Bir Blits oyununda 30 xal topla."
+    }
+  },
+  {
+    "id": "theme_levels_1200",
+    "category": "themes",
+    "metric": "theme_total",
+    "target": 1200,
+    "reward_coins": 150,
+    "icon": "🌍",
+    "title": {
+      "ru": "Все темы пройдены",
+      "en": "All themes explored",
+      "az": "Bütün mövzular tamamlandı"
+    },
+    "description": {
+      "ru": "Пройди все 1200 тематических уровней во всех 12 разделах.",
+      "en": "Complete all 1,200 themed levels across all 12 categories.",
+      "az": "12 bölmədəki 1 200 mövzu səviyyəsinin hamısını keç."
+    }
   }
 ]

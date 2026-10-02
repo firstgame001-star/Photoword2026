@@ -37,7 +37,7 @@ def setup(browser,language,lose=False):
  ctx.route('**/functions/v1/achievements',mock)
  page=ctx.new_page();errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
  page.goto(BASE+'clean/#'+auth_fragment(),wait_until='domcontentloaded',timeout=45000)
- page.locator('#achievementsEntry').tap();expect(page.locator('.achievement-card')).to_have_count(100)
+ page.locator('#achievementsEntry').tap();expect(page.locator('.achievement-card')).to_have_count(120)
  return ctx,page,state,account,errors
 
 with sync_playwright() as pw:
@@ -53,8 +53,8 @@ with sync_playwright() as pw:
    page.screenshot(path=str(OUT/(engine+'-'+lang+'.png')))
    page.locator('.achievement-card').first.locator('.achievement-claim').tap();expect(page.locator('[data-coins]').first).to_have_text('1015');expect(page.locator('.achievement-card').first.locator('.achievement-claim')).to_be_disabled()
    page.locator('#achievementsFilters button').nth(1).tap();expect(page.locator('.achievement-card')).to_have_count(3)
-   page.locator('#achievementsFilters button').nth(3).tap();expect(page.locator('.achievement-card')).to_have_count(21)
-   page.locator('#achievementsHome').tap();page.locator('#profileBtn').tap();expect(page.locator('#profileAchievementBadges .profile-badge')).to_have_count(3);page.locator('#profileFeaturedBtn').tap();expect(page.locator('.featured-option')).to_have_count(4);page.locator('.featured-option').nth(0).tap();page.locator('.featured-option').nth(1).tap();page.locator('#featuredSave').tap();expect(page.locator('#profileAchievementBadges .profile-badge.earned')).to_have_count(2);page.locator('#profileAchievements').tap();expect(page.locator('#profileModal')).to_be_hidden();expect(page.locator('.achievement-card')).to_have_count(100)
+   page.locator('#achievementsFilters button').nth(3).tap();expect(page.locator('.achievement-card')).to_have_count(22)
+   page.locator('#achievementsHome').tap();page.locator('#profileBtn').tap();expect(page.locator('#profileAchievementBadges .profile-badge')).to_have_count(3);page.locator('#profileFeaturedBtn').tap();expect(page.locator('.featured-option')).to_have_count(4);page.locator('.featured-option').nth(0).tap();page.locator('.featured-option').nth(1).tap();page.locator('#featuredSave').tap();expect(page.locator('#profileAchievementBadges .profile-badge.earned')).to_have_count(2);page.locator('#profileAchievements').tap();expect(page.locator('#profileModal')).to_be_hidden();expect(page.locator('.achievement-card')).to_have_count(120)
    assert not relevant_errors(errors),errors;ctx.close()
   ctx,page,state,account,errors=setup(browser,'en',True)
   page.locator('.achievement-card').first.locator('.achievement-claim').tap();expect(page.locator('#achievementsStatus')).to_contain_text('Could not confirm the reward.');assert account['coins']==1015
