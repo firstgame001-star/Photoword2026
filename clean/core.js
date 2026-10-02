@@ -90,12 +90,12 @@
   }
   async function actionRequest(action,extra={}) {
     if(!raw) throw new Error(lang()==='en'?'Telegram did not provide login data. Open the game from the bot.':lang()==='az'?'Telegram giriş məlumatlarını ötürmədi. Oyunu botdan açın.':'Telegram не передал данные входа. Запусти игру через бота.');
-    return request('/functions/v1/telegram-login',{...extra,action,initData:raw,progressGeneration:current?.progress_generation});
+    try{return await request('/functions/v1/telegram-login',{...extra,action,initData:raw,progressGeneration:current?.progress_generation})}catch(e){if(e.message==='progress_reset')await login(true);throw e;}
   }
   async function duelRequest(action,extra={}) {
     if(!raw) throw new Error(lang()==='en'?'Open the game from the Telegram bot.':lang()==='az'?'Oyunu Telegram botundan aç.':'Открой игру через Telegram-бота.');
     const timeoutMs=action==='reactions'?3000:['state','react'].includes(action)?4500:12000;
-    return request('/functions/v1/duel-game',{...extra,action,initData:raw,progressGeneration:current?.progress_generation},{},timeoutMs);
+    try{return await request('/functions/v1/duel-game',{...extra,action,initData:raw,progressGeneration:current?.progress_generation},{},timeoutMs)}catch(e){if(e.message==='progress_reset')await login(true);throw e;}
   }
   async function leaderboard() {
     const rows = await request('/rest/v1/rpc/get_leaderboard', {p_limit:100}, {apikey:KEY});
