@@ -112,9 +112,16 @@ if(!challenge.includes('ENERGY_MAX=5')||challenge.includes('reserve_energy'))thr
 if(!challenge.includes("BANK_VERSION='r54-400'")||!challenge.includes('pw.challenge.deck.'))throw Error('Challenge no-repeat deck/version missing');
 if(release.verification?.challenge_rewards_live!==true||release.challenge_modes?.rewards?.server_authoritative!==true||release.challenge_modes?.rewards?.max_per_run?.coins!==15||release.challenge_modes?.rewards?.max_per_run?.xp!==10)throw Error('Challenge reward manifest is incomplete');
 if(!challenge.includes('challengeResultReward')||!challenge.includes('rewarded_runs_today')||!challenge.includes('runId=state?.run_id'))throw Error('Challenge reward client flow is incomplete');
+const achievementSql=readFileSync('server/achievements_120.sql','utf8');
+const achievementCopyFix=readFileSync('server/achievement_streak_20_copy_fix.sql','utf8');
+if(!achievementCopyFix.includes('challenge_streak_20')||!achievementCopyFix.includes('finished challenge'))throw Error('Achievement streak description migration is incomplete');
+const achievementIds=['main_600','main_680','nohint_300','nohint_500','nohint_680','chapter_13','chapter_14','chapter_15','daily_streak_120','daily_first_150','duel_win_300','duel_play_300','duel_play_500','duel_draw_50','duel_score_25','challenge_runs_100','challenge_runs_200','challenge_streak_20','blitz_30','theme_levels_1200'];
+for(const id of achievementIds)if(!achievementSql.includes(String.fromCharCode(39)+id+String.fromCharCode(39)))throw Error('Missing server achievement '+id);
+if(release.achievements?.count!==120||release.achievements?.survives_progress_reset!==false)throw Error('Achievement catalog/reset manifest mismatch');
+if(!achievementSql.includes('(13,531,580)')||!achievementSql.includes('(14,581,630)')||!achievementSql.includes('(15,631,680)'))throw Error('Achievement chapter metric ranges are incomplete');
 const ruleBlock=home.slice(home.indexOf('const RULES='),home.indexOf('const RESET='));
 const rules=JSON.parse(ruleBlock.slice('const RULES='.length).trim().replace(/;$/, ''));
-for(const [l,need] of Object.entries({ru:['15 глав','680 уровней','Загадка дня','365','3 попытки','25 монет','Дуэли'],en:['15 chapters','680 levels','Daily puzzle','365','3 attempts','25 coins','Duels'],az:['15 fəsil','680 səviyyə','Günün tapmacası','365','3 cəhd','25 sikkə','Duellər']})){
+for(const [l,need] of Object.entries({ru:['15 глав','680 уровней','Загадка дня','365','3 попытки','25 монет','Дуэли','120 целей','забрать вручную'],en:['15 chapters','680 levels','Daily puzzle','365','3 attempts','25 coins','Duels','120 goals','claimed manually'],az:['15 fəsil','680 səviyyə','Günün tapmacası','365','3 cəhd','25 sikkə','Duellər','120 məqsəd','əl ilə götürmək']})){
  for(const value of need)if(!rules[l]?.includes(value))throw Error('Rules missing '+l+': '+value);
  if((rules[l].match(/class="rule-section"/g)||[]).length!==8)throw Error('Rules sections missing '+l);
 }
