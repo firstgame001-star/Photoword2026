@@ -27,7 +27,7 @@ for(const file of ['core.js','home.js','game.js','achievements.js','main-levels-
 }
 
 const release=JSON.parse(readFileSync(resolve(base,'release.json'),'utf8'));
-if(release.release!=='20261003-r125')throw Error('Unexpected release: '+release.release);
+if(release.release!=='20261003-r126')throw Error('Unexpected release: '+release.release);
 for(const theme of ['science','travel','technology']){
  const repeat=release.verification?.theme_repeat_reduction?.[theme];
  if(repeat?.levels!==100||repeat?.main_overlaps!==20)throw Error('Repeat limit mismatch: '+theme);
