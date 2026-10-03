@@ -213,7 +213,8 @@ export {combined, themeBanks, themeBank, challengeAll};
 
 const daily=JSON.parse(readFileSync('server/daily-bank.json','utf8'));
 if(daily.length!==365||daily.some((q,i)=>q.id!==i+1||q.photos.length!==4||['ru','en','az'].some(l=>!q[l]||[...q[l]].length>40||!/^[\p{L}]+$/u.test(q[l]))))throw Error('Daily bank must contain 365 complete multilingual puzzles');
-assertUniqueContent(daily,'Daily');
+assertUniqueWords(daily,'Daily');
+assertUniqueClues(daily,'Daily');
 assertRefs(read('daily-puzzle.js'),index,'daily-puzzle.js');
 if(release.daily_puzzle?.reward_coins!==25||release.daily_puzzle?.attempts_per_day!==3||release.daily_puzzle?.bank_size!==365)throw Error('Daily rules manifest mismatch');
 console.log('PASS: daily bank has 365 unique multilingual puzzles; 25 coin reward, three attempts and valid DOM.');

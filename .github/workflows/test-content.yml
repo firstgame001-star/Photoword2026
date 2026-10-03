@@ -1,0 +1,22 @@
+name: Check PhotoWord content and input
+on:
+  pull_request:
+    paths: ['clean/**', 'scripts/**', '.github/workflows/test-content.yml']
+  push:
+    branches: [main]
+    paths: ['clean/**', 'scripts/**', '.github/workflows/test-content.yml']
+permissions:
+  contents: read
+jobs:
+  content:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - run: node scripts/check-clean.mjs
+      - run: node scripts/full-audit.mjs
+      - run: node scripts/test-repeat-policy.mjs
+      - run: node scripts/test-challenge-server-input.mjs
+      - run: node scripts/test-duel-input.mjs
+      - run: node scripts/test-daily-input.mjs
