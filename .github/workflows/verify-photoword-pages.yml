@@ -29,7 +29,7 @@ jobs:
           node scripts/test-duel-input.mjs
           node scripts/test-challenge-server-input.mjs
           node scripts/test-daily-input.mjs
-      - name: Wait for r124 and verify published files
+      - name: Wait for r126 and verify published files
         shell: bash
         run: |
           set -euo pipefail
@@ -80,10 +80,10 @@ jobs:
           grep -q '231:{' "$RUNNER_TEMP/game.js"
           grep -q '280:{' "$RUNNER_TEMP/game.js"
           grep -q 'levelId===280' "$RUNNER_TEMP/game.js"
-          grep -q '"id": 281' "$RUNNER_TEMP/main-levels-8-9.js"
-          grep -q '"id": 330' "$RUNNER_TEMP/main-levels-8-9.js"
-          grep -q '"id": 331' "$RUNNER_TEMP/main-levels-8-9.js"
-          grep -q '"id": 380' "$RUNNER_TEMP/main-levels-8-9.js"
+          grep -q '"id":[[:space:]]*281' "$RUNNER_TEMP/main-levels-8-9.js"
+          grep -q '"id":[[:space:]]*330' "$RUNNER_TEMP/main-levels-8-9.js"
+          grep -q '"id":[[:space:]]*331' "$RUNNER_TEMP/main-levels-8-9.js"
+          grep -q '"id":[[:space:]]*380' "$RUNNER_TEMP/main-levels-8-9.js"
           grep -q 'levelId===330' "$RUNNER_TEMP/game.js"
           grep -q 'levelId===380' "$RUNNER_TEMP/game.js"
           grep -q '281–330' "$RUNNER_TEMP/index.html"
@@ -92,11 +92,11 @@ jobs:
           grep -q '431–480' "$RUNNER_TEMP/index.html"
           grep -q '481–530' "$RUNNER_TEMP/index.html"
           curl -fsSL "$base/main-levels-10-12.js" -o "$RUNNER_TEMP/main-levels-10-12.js"
-          grep -q '"id": 530' "$RUNNER_TEMP/main-levels-10-12.js"
-          grep -q '"id":531' "$RUNNER_TEMP/main-levels-13.js"
-          grep -q '"id":580' "$RUNNER_TEMP/main-levels-13.js"
-          grep -q '"id":581' "$RUNNER_TEMP/main-levels-14-15.js"
-          grep -q '"id":680' "$RUNNER_TEMP/main-levels-14-15.js"
+          grep -q '"id":[[:space:]]*530' "$RUNNER_TEMP/main-levels-10-12.js"
+          grep -q '"id":[[:space:]]*531' "$RUNNER_TEMP/main-levels-13.js"
+          grep -q '"id":[[:space:]]*580' "$RUNNER_TEMP/main-levels-13.js"
+          grep -q '"id":[[:space:]]*581' "$RUNNER_TEMP/main-levels-14-15.js"
+          grep -q '"id":[[:space:]]*680' "$RUNNER_TEMP/main-levels-14-15.js"
           grep -q '"main_answers_unique_all_languages":true' "$RUNNER_TEMP/release.json"
           grep -q 'chapter12Select' "$RUNNER_TEMP/index.html"
           grep -q 'chapter13Select' "$RUNNER_TEMP/index.html"
@@ -206,8 +206,8 @@ jobs:
           grep -q '"id":"technology","levels":100,"available_through":100,"status":"complete"' "$RUNNER_TEMP/release.json"
           grep -q '"id":"cinema","levels":100,"available_through":100,"status":"complete"' "$RUNNER_TEMP/release.json"
           grep -q '"id":"food","levels":100,"available_through":100,"status":"complete"' "$RUNNER_TEMP/release.json"
-          grep -q '"id": 100' "$RUNNER_TEMP/theme-levels-cinema-food.js"
-          grep -q '"id": 100' "$RUNNER_TEMP/theme-levels-expansion.js"
+          grep -q '"id":[[:space:]]*100' "$RUNNER_TEMP/theme-levels-cinema-food.js"
+          grep -q '"id":[[:space:]]*100' "$RUNNER_TEMP/theme-levels-expansion.js"
           grep -q '"thematic_answers_unique_across_ready_categories":true' "$RUNNER_TEMP/release.json"
           grep -q '"server_authoritative":true' "$RUNNER_TEMP/release.json"
           grep -q '"first_completion":{"coins":15,"xp":10}' "$RUNNER_TEMP/release.json"
@@ -229,4 +229,4 @@ jobs:
           node --check "$RUNNER_TEMP/theme-game.js"
           node --check "$RUNNER_TEMP/challenge.js"
           node --check "$RUNNER_TEMP/duel.js"
-          printf '### PhotoWord r124 publication check\n\nMain levels 1–680, Chapters 1–15 live through level 680, server-authoritative challenge rewards, synced thematic progress, richer profile and leaderboard, finished shop dashboard and purchase history, configurable Telegram notifications and cross-device thematic progress, full DOM/localization/theme audit, server-authoritative thematic +15 coin rewards and paid hints, unique main answers in RU/EN/AZ, Cinema and Food themes 1–100, unique backgrounds, absolute chapter ranges and earned titles, featured thematic mode, Sport 1–100, Art 1–100, Professions 1–100, Travel 1–100, Science 1–100 and Technology 1–100, three playable challenge modes with server-authoritative time and paid Blitz hints, explicit next-step feedback, 400 challenge words with no repeats until the bank is exhausted, and fixed language selection, legal/settings surfaces and JavaScript all verified.\n' >> "$GITHUB_STEP_SUMMARY"
+          printf '### PhotoWord r126 publication check\n\nMain levels 1–680, Chapters 1–15 live through level 680, server-authoritative challenge rewards, synced thematic progress, richer profile and leaderboard, finished shop dashboard and purchase history, configurable Telegram notifications and cross-device thematic progress, full DOM/localization/theme audit, server-authoritative thematic +15 coin rewards and paid hints, unique main answers in RU/EN/AZ, Cinema and Food themes 1–100, unique backgrounds, absolute chapter ranges and earned titles, featured thematic mode, Sport 1–100, Art 1–100, Professions 1–100, Travel 1–100, Science 1–100 and Technology 1–100, three playable challenge modes with server-authoritative time and paid Blitz hints, explicit next-step feedback, 400 challenge words with no repeats until the bank is exhausted, and fixed language selection, legal/settings surfaces and JavaScript all verified.\n' >> "$GITHUB_STEP_SUMMARY"
