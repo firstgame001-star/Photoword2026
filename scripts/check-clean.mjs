@@ -105,7 +105,7 @@ function themeBankCount(name){
  const end=themeGameJs.indexOf(';\nconst '+name+'_TRANSLATED=',start);
  if(start<0||end<0)return 0;
  const body=themeGameJs.slice(start+'const '+name+'_LEVELS={'.length,end);
- return (body.match(/"\\d+"\\s*:/g)||[]).length;
+ return (body.match(/"\d+"\s*:/g)||[]).length;
 }
 for(const name of ['ART','PROF','TRAVEL','SCIENCE','TECHNOLOGY'])if(themeBankCount(name)!==100)throw Error(name+' theme must contain 100 levels');
 const homeJs=readFileSync(resolve(base,'home.js'),'utf8');
