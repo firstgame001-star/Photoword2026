@@ -904,6 +904,17 @@ def auth_fragment():
     return urllib.parse.urlencode({'tgWebAppData':raw,'tgWebAppVersion':'8.0','tgWebAppPlatform':'ios'})
 
 def install_mock(ctx,account,completed,lang):
+    def hint_result(body, expected):
+        if body['hintType']=='letter':
+            position=next(i for i in range(len(expected)) if i not in body.get('fixedPositions',[]))
+            return {'position':position,'letter':expected[position]}
+        if body['hintType']=='remove':
+            have={};indices=[]
+            for i,ch in enumerate(body['pool']):
+                have[ch]=have.get(ch,0)+1
+                if have[ch]>expected.count(ch) and len(indices)<3: indices.append(i)
+            return {'removeIndices':indices}
+        return {}
     def mock(route):
         req=route.request
         if req.method=='OPTIONS':
@@ -974,7 +985,10 @@ def install_mock(ctx,account,completed,lang):
         if action=='use_hint':
             cost={'letter':50,'remove':100,'text':150}[body['hintType']]
             if account['coins']<cost: status=402;data={'error':'insufficient_coins'}
-            else: account['coins']-=cost
+            else:
+                account['coins']-=cost
+                expected=ANSWERS[body.get('language',lang)][int(body['levelId'])-1]
+                data={'player':account.copy(),'hint':hint_result(body,expected)}
         elif action=='complete_level':
             level=int(body['levelId']);assert body.get('answer')==ANSWERS[lang][level-1],(lang,level,body.get('answer'))
             if level not in completed:
@@ -994,7 +1008,13 @@ def install_mock(ctx,account,completed,lang):
         elif action=='theme_hint':
             cost={'letter':50,'remove':100,'text':150}[body['hintType']]
             if account['coins']<cost: status=402;data={'error':'insufficient_coins'}
-            else: account['coins']-=cost
+            else:
+                account['coins']-=cost
+                expected=''
+                if body['hintType']!='text':
+                    fixtures={('sport',1):{'ru':'ГОЛ','en':'GOAL','az':'QOL'}}
+                    expected=fixtures[(body['themeId'],int(body['levelId']))][body.get('language',lang)]
+                data={'player':account.copy(),'hint':hint_result(body,expected)}
         elif action=='theme_complete':
             theme=str(body['themeId']);level=int(body['levelId']);key=theme+':'+str(level)
             theme_done=account.setdefault('_theme_completed',[])
