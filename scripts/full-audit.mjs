@@ -132,7 +132,13 @@ if(!home.includes("n<=280?7:n<=330?8:n<=380?9:n<=430?10:n<=480?11:n<=530?12:n<=5
 const addedThemes=Function('window={};'+themeExtra+';return window.PW_THEME_EXTRA')();
 for(const id of ['cinema','food','animals','transport','home','nature']){
  const rows=addedThemes[id];if(!Array.isArray(rows)||rows.length!==100)throw Error('Missing 100 '+id+' levels');
- for(let i=0;i<100;i++){const row=rows[i];if(row.id!==i+1||!Array.isArray(row.photos)||row.photos.length!==4||row.photos.some(p=>!p))throw Error(id+' invalid clues at '+(i+1));for(const lang of ['ru','en','az'])if(!row[lang]?.answer||!row[lang]?.hint||row[lang].answer.includes(' '))throw Error(id+' incomplete '+lang+' level '+(i+1))}
+ for(let i=0;i<100;i++){
+  const row=rows[i];if(row.id!==i+1||!Array.isArray(row.photos)||row.photos.length!==4||row.photos.some(p=>!p))throw Error(id+' invalid clues at '+(i+1));
+  for(const lang of ['ru','en','az']){
+   const item=row[lang];if(!item?.hint||!item.pool||!Number.isInteger(item.answerLength))throw Error(id+' incomplete '+lang+' level '+(i+1));
+   if(Object.prototype.hasOwnProperty.call(item,'answer'))throw Error(id+' exposes answer for '+lang+' level '+(i+1));
+  }
+ }
 }
 const themeBank=(id,bn,tn)=>{if(bn)return [evalConst(theme,bn),evalConst(theme,tn)];const rows=addedThemes[id],base={},tr={en:{},az:{}};for(const row of rows){base[row.id]={...row.ru,photos:row.photos.map(e=>[e,e])};for(const l of ['en','az'])tr[l][row.id]=row[l]}return [base,tr]};
 const themeBanks=[
@@ -144,27 +150,15 @@ for(const [id,bn,tn] of themeBanks){
  const [bank,tr]=themeBank(id,bn,tn);
  for(const [lang,obj] of [['ru',bank],['en',tr.en],['az',tr.az]]){
   if(Object.keys(obj||{}).length!==100)throw Error(id+' '+lang+' must contain 100 levels');
-  const words=Object.values(obj).map(x=>x.answer);
-  if(words.some(x=>!x))throw Error(id+' '+lang+' has empty answer');
-  if(new Set(words).size!==100)throw Error(id+' '+lang+' contains duplicate answers');
- }
- for(let n=1;n<=100;n++){
-  if(!bank[n]?.photos||bank[n].photos.length!==4)throw Error(id+' RU level '+n+' must have 4 clues');
-  if(!tr.en?.[n]||!tr.az?.[n])throw Error(id+' translations missing level '+n);
- }
-}
-
-// Cross-theme answer uniqueness: ready thematic categories must not repeat each other's answers.
-for(const lang of ['ru','en','az']){
- const seen=new Map();
- for(const [id,bn,tn] of themeBanks){
-  const [bank,tr]=themeBank(id,bn,tn),obj=lang==='ru'?bank:tr[lang];
-  for(const [level,item] of Object.entries(obj)){
-   if(seen.has(item.answer)){const prev=seen.get(item.answer);throw Error('Cross-theme duplicate '+lang+' '+item.answer+' at '+prev.id+' '+prev.level+' and '+id+' '+level)}
-   seen.set(item.answer,{id,level});
+  for(let n=1;n<=100;n++){
+   const item=obj[n],pool=[...(item?.pool||'')];
+   if(!item?.hint||!Number.isInteger(item.answerLength)||item.answerLength<1||pool.length<item.answerLength)throw Error(id+' incomplete '+lang+' level '+n);
+   if(Object.prototype.hasOwnProperty.call(item,'answer'))throw Error(id+' exposes answer for '+lang+' level '+n);
   }
  }
+ for(let n=1;n<=100;n++)if(!bank[n]?.photos||bank[n].photos.length!==4)throw Error(id+' RU level '+n+' must have 4 clues');
 }
+// Cross-theme answer uniqueness is verified against server-held answer banks and recorded in the release manifest.
 if(release.verification?.thematic_answers_unique_across_ready_categories!==true)throw Error('Cross-theme uniqueness manifest flag missing');
 if(release.verification?.thematic_progress_server_sync!==true||release.thematic_mode?.progress_sync?.server_authoritative!==true||release.thematic_mode?.progress_sync?.cross_device!==true)throw Error('Thematic progress sync manifest is incomplete');
 if(release.verification?.chapter_start_values_absolute!==true||!home.includes("const range=(ch.num===1?0:ch.start)+'–'+ch.end"))throw Error('Absolute chapter range display missing');
