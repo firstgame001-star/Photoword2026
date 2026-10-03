@@ -29,12 +29,12 @@ jobs:
           node scripts/test-duel-input.mjs
           node scripts/test-challenge-server-input.mjs
           node scripts/test-daily-input.mjs
-      - name: Wait for r126 and verify published files
+      - name: Wait for r127 and verify published files
         shell: bash
         run: |
           set -euo pipefail
           base='https://firstgame001-star.github.io/Photoword2026/clean'
-          release='20261003-r126'
+          release='20261003-r127'
           ok=0
           for i in $(seq 1 48); do
             if curl --fail --silent --show-error --location --max-time 20 "$base/release.json?check=$i" -o "$RUNNER_TEMP/release.json" && grep -q "$release" "$RUNNER_TEMP/release.json"; then
@@ -44,7 +44,7 @@ jobs:
             sleep 5
           done
           test "$ok" = 1
-          for file in index.html game.html theme-game.html core.js home.js duel.js game.js main-levels-8-9.js main-levels-10-12.js main-levels-13.js main-levels-14-15.js theme-game.js theme-levels-cinema-food.js theme-levels-expansion.js challenge-bank-extra.js challenge-repeat-index.js challenge-repeat-policy.js challenge.js daily-puzzle.js achievements.js ui.css privacy.html terms.html release.json; do
+          for file in index.html game.html theme-game.html core.js home.js ad-session.js duel.js game.js main-levels-8-9.js main-levels-10-12.js main-levels-13.js main-levels-14-15.js theme-game.js theme-levels-cinema-food.js theme-levels-expansion.js challenge-bank-extra.js challenge-repeat-index.js challenge-repeat-policy.js challenge.js daily-puzzle.js achievements.js ui.css privacy.html terms.html release.json; do
             curl --fail --silent --show-error --location --retry 4 --retry-all-errors --retry-delay 3 --max-time 30 "$base/$file?r=$release" -o "$RUNNER_TEMP/$file"
             echo "HTTP 200: $file"
           done
@@ -170,7 +170,7 @@ jobs:
           grep -q "guestName:'Oyunçu'" "$RUNNER_TEMP/home.js"
           grep -q "telegramLogin:'Sign in with Telegram'" "$RUNNER_TEMP/home.js"
           grep -q "telegramLogin:'Telegram ilə daxil ol'" "$RUNNER_TEMP/home.js"
-          grep -q "PhotoWord · 20261003-r126" "$RUNNER_TEMP/game.html"
+          grep -q "PhotoWord · 20261003-r127" "$RUNNER_TEMP/game.html"
           grep -q '"question_bank":{"total":400' "$RUNNER_TEMP/release.json"
           grep -q 'PW_CHALLENGE_EXTRA' "$RUNNER_TEMP/challenge-bank-extra.js"
           grep -q "BANK_VERSION='r54-400'" "$RUNNER_TEMP/challenge.js"
@@ -229,4 +229,4 @@ jobs:
           node --check "$RUNNER_TEMP/theme-game.js"
           node --check "$RUNNER_TEMP/challenge.js"
           node --check "$RUNNER_TEMP/duel.js"
-          printf '### PhotoWord r126 publication check\n\nMain levels 1–680, Chapters 1–15 live through level 680, server-authoritative challenge rewards, synced thematic progress, richer profile and leaderboard, finished shop dashboard and purchase history, configurable Telegram notifications and cross-device thematic progress, full DOM/localization/theme audit, server-authoritative thematic +15 coin rewards and paid hints, unique main answers in RU/EN/AZ, Cinema and Food themes 1–100, unique backgrounds, absolute chapter ranges and earned titles, featured thematic mode, Sport 1–100, Art 1–100, Professions 1–100, Travel 1–100, Science 1–100 and Technology 1–100, three playable challenge modes with server-authoritative time and paid Blitz hints, explicit next-step feedback, 400 challenge words with no repeats until the bank is exhausted, and fixed language selection, legal/settings surfaces and JavaScript all verified.\n' >> "$GITHUB_STEP_SUMMARY"
+          printf '### PhotoWord r127 publication check\n\nMain levels 1–680, Chapters 1–15 live through level 680, server-authoritative challenge rewards, synced thematic progress, richer profile and leaderboard, finished shop dashboard and purchase history, configurable Telegram notifications and cross-device thematic progress, full DOM/localization/theme audit, server-authoritative thematic +15 coin rewards and paid hints, unique main answers in RU/EN/AZ, Cinema and Food themes 1–100, unique backgrounds, absolute chapter ranges and earned titles, featured thematic mode, Sport 1–100, Art 1–100, Professions 1–100, Travel 1–100, Science 1–100 and Technology 1–100, three playable challenge modes with server-authoritative time and paid Blitz hints, explicit next-step feedback, 400 challenge words with no repeats until the bank is exhausted, and fixed language selection, legal/settings surfaces and JavaScript all verified.\n' >> "$GITHUB_STEP_SUMMARY"
