@@ -144,15 +144,18 @@ const mainTranslated=gameJs.slice(gameJs.indexOf('const TRANSLATED='));
 const mainEnStart=mainTranslated.indexOf('en:{'),mainAzStart=mainTranslated.indexOf('az:{');
 const mainEn=mainTranslated.slice(mainEnStart,mainAzStart);
 const mainAz=mainTranslated.slice(mainAzStart,mainTranslated.indexOf('\n  };',mainAzStart));
-function extractMainAnswers(section){
- return [...section.matchAll(/\b\d+:\{[^}]*["']?answer["']?\s*:\s*["']([^"']+)["']/g)].map(m=>m[1]);
-}
+function countLevelRows(section){return (section.match(/^\s*\d+:\{/gm)||[]).length;}
+for(const [langCode,section] of [['ru',mainBase],['en',mainEn],['az',mainAz]])if(countLevelRows(section)!==280)throw Error('Expected 280 answer-hidden core levels for '+langCode);
 const extraRows=[...Function('window={};'+mainExtraJs+';return window.PW_MAIN_EXTRA')(),...Function('window={};'+mainMoreJs+';return window.PW_MAIN_MORE')(),...Function('window={};'+main13Js+';return window.PW_MAIN_MORE')(),...Function('window={};'+main14_15Js+';return window.PW_MAIN_MORE')()];
-for(const [langCode,section] of [['ru',mainBase],['en',mainEn],['az',mainAz]]){
- const answers=extractMainAnswers(section).concat(extraRows.map(row=>row[langCode].answer));
- if(answers.length!==680)throw Error('Expected 680 main answers for '+langCode+', got '+answers.length);
- const seen=new Set();
- for(const answer of answers){if(seen.has(answer))throw Error('Duplicate main answer in '+langCode+': '+answer);seen.add(answer);}
+if(extraRows.length!==400)throw Error('Expected 400 extended main levels, got '+extraRows.length);
+for(let i=0;i<extraRows.length;i++){
+ const row=extraRows[i];
+ if(row.id!==281+i||!Array.isArray(row.photos)||row.photos.length!==4)throw Error('Missing or misordered main level '+(281+i));
+ for(const langCode of ['ru','en','az']){
+  const entry=row[langCode];
+  if(!entry?.hint||!entry.pool||!Number.isInteger(entry.answerLength))throw Error('Incomplete hidden-answer level '+row.id+' '+langCode);
+  if(Object.prototype.hasOwnProperty.call(entry,'answer'))throw Error('Plaintext answer exposed for level '+row.id+' '+langCode);
+ }
 }
 if(release.verification?.main_answers_unique_all_languages!==true)throw Error('Main answer uniqueness flag is missing');
 if(!index.includes('data-home-chapter="15"')||!index.includes('id="chapter15Select"')||index.match(/data-dot="/g)?.length!==15)throw Error('Chapter 13 navigation is incomplete');
