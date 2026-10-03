@@ -190,7 +190,7 @@ console.log('PASS: full PhotoWord audit — DOM integrity, 680 main levels, 400 
 
 // Server-held answer banks are not included in public assets. Check their release flags
 // and validate public clue sets; challenge words are present in the public challenge payload.
-function normalize(word){return word.normalize('NFC').toLocaleUpperCase('az').replace(/Ё/g,'Е').replace(/[\\s\\p{P}\\p{S}]/gu,'')}
+function normalize(word){return word.normalize('NFC').toLocaleUpperCase('az').replace(/Ё/g,'Е').replace(/[\s\p{P}\p{S}]/gu,'')}
 function assertUniqueWords(rows,label){
  for(const lang of ['ru','en','az']){
   const seen=new Set();
