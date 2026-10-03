@@ -11,7 +11,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        script: [test-live-entries.py, test-daily-browser.py, test-achievements-browser.py, test-two-devices.py]
+        script: [test-live-entries.py, test-daily-browser.py, test-achievements-browser.py, test-two-devices.py, test-full-reset-browser.py, test-profile-browser.py, test-frames-browser.py]
     runs-on: ubuntu-latest
     timeout-minutes: 16
     steps:
