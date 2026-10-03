@@ -14,7 +14,7 @@ context.performance={now:()=>0};context.window.Telegram={WebApp:{initData:'signe
 let release,callsCount=0;
 context.fetch=async()=>{callsCount++;return await new Promise(resolve=>release=()=>resolve({ok:true,json:async()=>({challenge:{question_ids:[20,21,22,23,24,25,26,27,28,29]}})}))};
 let source=readFileSync('clean/challenge.js','utf8');
-source=source.replace(/\}\)\(\);\s*$/,`window.testChallenge={savePendingFinish,retryPendingFinishes,pendingFinishes,nextQ,cancelPending,choose,set(ids){running=true;serverMode=true;mode='nohint';state={run_id:'test-run'};serverQuestions=ids;questionFetch=null;questionLoading=false},answer:()=>answer,loading:()=>questionLoading,buffer:()=>[...serverQuestions]};})();`);
+source=source.replace(/\}\)\(\);\s*$/,`window.testChallenge={checkWord,configureBlitz(language){localStorage.setItem('pw.language',language);running=true;serverMode=true;mode='blitz';state={run_id:'00000000-0000-0000-0000-000000000099'};currentQuestionId=0;hintBusy=false;score=0;correct=0;streak=0;bestRunStreak=0;deadline=60000},fill(word){tiles=[...word];selected=tiles.map((_,i)=>i)},metrics:()=>({score,correct,streak,deadline}),savePendingFinish,retryPendingFinishes,pendingFinishes,nextQ,cancelPending,choose,set(ids){running=true;serverMode=true;mode='nohint';state={run_id:'test-run'};serverQuestions=ids;questionFetch=null;questionLoading=false},answer:()=>answer,loading:()=>questionLoading,buffer:()=>[...serverQuestions]};})();`);
 vm.createContext(context);vm.runInContext(source,context);
 const test=context.window.testChallenge;
 test.set([0,1,2,3,4,5,6,7,8,9]);
@@ -35,3 +35,14 @@ context.fetch=async(url,opts)=>{const body=JSON.parse(opts.body);assert.equal(bo
 await Promise.all([test.retryPendingFinishes(),test.retryPendingFinishes()]);
 assert.equal(finishes,1,'Concurrent retry sent twice');assert.equal(test.pendingFinishes().length,0,'Acknowledged reward kept retrying');
 console.log('PASS: durable pending reward, failed-request retention, account isolation, concurrent retry and duplicate acknowledgement.');
+
+// Exercise the real client handler with the production answer response shape.
+for(const language of ['ru','en','az']){
+ const client=context.window.testChallenge;client.configureBlitz(language);client.fill('TEST');
+ context.fetch=async(url,opts)=>{const body=JSON.parse(opts.body);assert.equal(body.action,'answer');assert.equal(body.language,language);assert.equal(body.questionId,0);return {ok:true,json:async()=>({challenge:{},answer_result:{correct:true,score:1,streak:1,best_streak:1,mistakes:0,remaining_ms:63000}})}};
+ await client.checkWord();assert.equal(get('hudValue2').textContent,1);assert.equal(client.metrics().score,1);assert.equal(client.metrics().deadline,63000);
+ client.fill('WRONG');context.fetch=async()=>({ok:true,json:async()=>({challenge:{},answer_result:{correct:false,score:1,streak:0,best_streak:1,mistakes:1,remaining_ms:60000}})});
+ await client.checkWord();assert.equal(client.metrics().score,1);assert.equal(client.metrics().streak,0);assert.equal(client.metrics().deadline,60000);
+ client.fill('TEST');context.fetch=async()=>({ok:true,json:async()=>({challenge:{}})});await client.checkWord();assert.equal(client.metrics().score,1,'Missing answer_result granted a point');
+}
+console.log('PASS: Blitz server-confirmed +1 point/+3 seconds, wrong-answer penalty, and missing-response rejection in RU/EN/AZ.');

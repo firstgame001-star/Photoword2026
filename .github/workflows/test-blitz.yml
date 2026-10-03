@@ -1,0 +1,22 @@
+name: Test Blitz server answer contract
+on:
+  pull_request:
+    paths: ['clean/challenge.js', 'server/challenge-game/**', 'scripts/test-blitz-browser.py', 'scripts/test-live-entries.py', 'scripts/test-challenge-server-input.mjs', '.github/workflows/test-blitz.yml']
+  push:
+    branches: [main]
+    paths: ['clean/challenge.js', 'server/challenge-game/**', 'scripts/test-blitz-browser.py', 'scripts/test-live-entries.py', 'scripts/test-challenge-server-input.mjs', '.github/workflows/test-blitz.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  blitz:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - run: node scripts/test-challenge-server-input.mjs
+      - run: python -m pip install playwright==1.63.0
+      - run: python -m playwright install --with-deps chromium
+      - run: python scripts/test-blitz-browser.py
