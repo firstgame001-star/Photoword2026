@@ -44,7 +44,7 @@ Deno.serve(async(req)=>{
   const db=createClient(Deno.env.get("SUPABASE_URL")!,Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,{auth:{persistSession:false,autoRefreshToken:false}});
   const p=(await db.from("players").select("id,progress_generation").eq("telegram_id",user.id).maybeSingle()).data;if(!p?.id)return reply({error:"player_not_found"},404);
   if(body.progressGeneration!==undefined&&body.progressGeneration!==p.progress_generation)return reply({error:"progress_reset"},409);
-  const action=String(body.action||"state"),mode=String(body.mode||"");
+  const action=String(body.action||"state"),mode=String(body.mode||""),language=["ru","en","az"].includes(String(body.language||""))?String(body.language):"ru";
   if(action==="state")return reply({challenge:await state(db,p.id)});
   if(action==="start"){
    if(!["limited","nohint","blitz"].includes(mode))return reply({error:"bad_mode"},400);
@@ -54,12 +54,19 @@ Deno.serve(async(req)=>{
     const now=Date.now(),patch:any={limited_energy:s.energy-1,updated_at:new Date(now).toISOString()};if(s.energy>=ENERGY_MAX)patch.energy_ref_at=new Date(now).toISOString();
     const up=await db.from("challenge_profiles").update(patch).eq("player_id",p.id);if(up.error)return reply({error:"start_failed"},500);s=await state(db,p.id);
    }
-   const run=await db.from("challenge_runs").insert({player_id:p.id,mode}).select("id").single();
+   const run=await db.from("challenge_runs").insert({player_id:p.id,mode,language}).select("id").single();
    if(run.error||!run.data?.id)return reply({error:"start_failed"},500);
    const initialSeen=Array.isArray(body.initialSeen)?body.initialSeen.filter((x:any)=>Number.isInteger(x)&&x>=0&&x<400).slice(0,400):[];
    const questions=await db.rpc("reserve_challenge_questions",{p_telegram_id:user.id,p_run_id:run.data.id,p_mode:mode,p_initial_seen:initialSeen});
    if(questions.error)return reply({error:"questions_failed"},500);
    return reply({challenge:{...s,run_id:run.data.id,question_ids:questions.data}});
+  }
+  if(action==="answer"){
+   const runId=String(body.runId||""),questionId=Number(body.questionId),answer=String(body.answer||"");
+   if(!["limited","nohint","blitz"].includes(mode)||!/^[0-9a-f-]{36}$/i.test(runId)||!Number.isInteger(questionId)||questionId<0||questionId>399||answer.length>40)return reply({error:"bad_answer"},400);
+   const recorded=await db.rpc("record_challenge_answer_server",{p_telegram_id:user.id,p_run_id:runId,p_question_id:questionId,p_answer:answer});
+   if(recorded.error){const m=String(recorded.error.message||"");const e=m.includes("answer_wait")?"answer_wait":m.includes("question_order")?"question_order":m.includes("challenge_time_over")?"challenge_time_over":m.includes("run_over")?"run_over":m.includes("run_finished")?"run_finished":"answer_failed";return reply({error:e},e==="answer_wait"?429:409);}
+   return reply({challenge:await state(db,p.id),answer_result:recorded.data});
   }
   if(action==="questions"){
    const runId=String(body.runId||"");

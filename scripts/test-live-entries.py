@@ -1,5 +1,5 @@
 """Exercise the real published PhotoWord Mini App UI. Supabase calls are mocked; no real account data is changed."""
-import json, time, urllib.parse, urllib.request, re, os
+import json, time, urllib.parse, urllib.request, re, os, uuid
 from pathlib import Path
 from playwright.sync_api import sync_playwright, expect
 
@@ -914,7 +914,8 @@ def install_mock(ctx,account,completed,lang):
             rewards=account.setdefault('_challenge_rewards_today',{'limited':0,'nohint':0,'blitz':0})
             if action=='start':
                 if mode=='limited' and energy>0: account['_challenge_energy']=energy-1
-                account['_challenge_run_id']='00000000-0000-0000-0000-000000000099'
+                account['_challenge_run_id']=str(uuid.uuid4())
+                account.setdefault('_challenge_test_runs',{})[account['_challenge_run_id']]={'mode':mode,'language':body.get('language',lang),'ids':[],'score':0,'streak':0,'best_streak':0,'mistakes':0,'deadline':time.monotonic()+60}
             ch={'energy':account['_challenge_energy'],'energy_max':5,'next_energy_at':None,'limited_best_score':0,'nohint_best_streak':0,'blitz_best_score':0,'blitz_best_streak':0,'server_now':time.strftime('%Y-%m-%dT%H:%M:%SZ',time.gmtime()),'rewarded_runs_today':rewards.copy(),'reward_limit':3}
             if action in ('start','questions'):
                 ch['run_id']=account['_challenge_run_id']
@@ -922,6 +923,22 @@ def install_mock(ctx,account,completed,lang):
                 fresh=[i for i in range(400) if i not in seen]
                 if not fresh: seen.clear();fresh=list(range(400))
                 ch['question_ids']=fresh[:10];seen.extend(ch['question_ids'])
+                run_id=body.get('runId') or account['_challenge_run_id']
+                account['_challenge_test_runs'][run_id]['ids'].extend(ch['question_ids'])
+            if action=='answer':
+                run=account.get('_challenge_test_runs',{}).get(body.get('runId'))
+                if not run or not run['ids'] or body.get('questionId')!=run['ids'][0]:
+                    route.fulfill(status=409,content_type='application/json',body=json.dumps({'error':'question_order'}),headers={'Access-Control-Allow-Origin':'*'});return
+                expected=CHALLENGE_BANK[run['ids'][0]][run['language']]
+                correct=body.get('answer','').strip().upper()==expected.upper()
+                if correct:
+                    run['ids'].pop(0);run['score']+=1;run['streak']+=1;run['best_streak']=max(run['best_streak'],run['streak'])
+                else:
+                    run['streak']=0;run['mistakes']+=1
+                if run['mode']=='blitz': run['deadline']+=3 if correct else -3
+                result={k:run[k] for k in ('score','streak','best_streak','mistakes')}
+                result.update(correct=correct,remaining_ms=max(0,int((run['deadline']-time.monotonic())*1000)))
+                route.fulfill(status=200,content_type='application/json',body=json.dumps({'challenge':ch,'answer_result':result}),headers={'Access-Control-Allow-Origin':'*'});return
             if action=='hint':
                 cost={'letter':75,'remove':125,'text':200}[body['hintType']]
                 if account['coins']<cost:
@@ -929,7 +946,8 @@ def install_mock(ctx,account,completed,lang):
                 account['coins']-=cost
                 route.fulfill(status=200,content_type='application/json',body=json.dumps({'challenge':ch,'coins':account['coins'],'cost':cost,'hintType':body['hintType']}),headers={'Access-Control-Allow-Origin':'*'});return
             if action=='finish':
-                score=int(body.get('score') or 0);streak=int(body.get('streak') or 0);coins=xp=0
+                run=account['_challenge_test_runs'][body['runId']]
+                score=run['score'];streak=run['best_streak'];coins=xp=0
                 if rewards.get(mode,0)<3:
                     metric=score if mode in ('limited','blitz') else streak
                     if mode=='limited':
