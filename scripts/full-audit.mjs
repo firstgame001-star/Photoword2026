@@ -74,25 +74,21 @@ const mainMoreRows=Function('window={};'+mainMore+';return window.PW_MAIN_MORE')
 const main13Rows=Function('window={};'+main13+';return window.PW_MAIN_MORE')(); const main1415Rows=Function('window={};'+main1415+';return window.PW_MAIN_MORE')(); if(!Array.isArray(main1415Rows)||main1415Rows.length!==100||main1415Rows[0].id!==581||main1415Rows.at(-1).id!==680||main1415Rows.filter(x=>x.chapter===14).length!==50||main1415Rows.filter(x=>x.chapter===15).length!==50)throw Error('Main Chapters 14-15 bank must contain 50 levels each');
 if(!Array.isArray(main13Rows)||main13Rows.length!==50||main13Rows[0].id!==531||main13Rows.at(-1).id!==580)throw Error('Main Chapter 13 bank must contain levels 531-580');
 if(!Array.isArray(mainMoreRows)||mainMoreRows.length!==150||mainMoreRows[0].id!==381||mainMoreRows.at(-1).id!==530)throw Error('Main Chapter 10-12 bank must contain levels 381-530');
-const extraAlphabet={ru:'АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЫЭЮЯ',en:'ABCDEFGHJKLMNPQRSTUVWXYZ',az:'ABCÇDEƏFGĞHXIİJKLMNOÖPQRSŞTUÜVYZ'};
-function buildExtraPool(word,lang){const chars=[...word],used=new Set(chars),extras=[],want=Math.max(12,chars.length+5);for(const ch of extraAlphabet[lang]){if(!used.has(ch)){extras.push(ch);if(chars.length+extras.length>=want)break}}return chars.concat(extras).join('')}
+// Main content audit: 680 levels, three languages, valid pools and four clues.
+// Solution words stay server-side; only level metadata is published to the client.
 const combined={ru:{...mainLevels},en:{...mainTr.en},az:{...mainTr.az}};
 for(const row of [...mainExtraRows,...mainMoreRows,...main13Rows,...main1415Rows]){
- combined.ru[row.id]={...row.ru,pool:buildExtraPool(row.ru.answer,'ru'),photos:row.photos.map(x=>[x,x])};
- combined.en[row.id]={...row.en,pool:buildExtraPool(row.en.answer,'en')};
- combined.az[row.id]={...row.az,pool:buildExtraPool(row.az.answer,'az')};
+ combined.ru[row.id]={...row.ru,photos:row.photos.map(x=>[x,x])};
+ combined.en[row.id]={...row.en};
+ combined.az[row.id]={...row.az};
 }
 for(const [lang,obj] of Object.entries(combined)){
  if(Object.keys(obj||{}).length!==680)throw Error('Main '+lang+' must contain 680 levels');
- const words=Object.values(obj).map(x=>x.answer);
- if(words.some(x=>!x))throw Error('Main '+lang+' has empty answer');
- if(new Set(words).size!==680)throw Error('Main '+lang+' contains duplicate answers');
  for(let n=1;n<=680;n++){
-  const x=obj[n];if(!x?.answer||!x?.pool||!x?.hint)throw Error('Main '+lang+' incomplete level '+n);
+  const x=obj[n],pool=[...(x?.pool||'')];
+  if(!x?.hint||!Number.isInteger(x.answerLength)||x.answerLength<1||pool.length<x.answerLength)throw Error('Main '+lang+' incomplete level '+n);
+  if(Object.prototype.hasOwnProperty.call(x,'answer'))throw Error('Main '+lang+' exposes answer for level '+n);
   if(lang==='ru'&&(!x.photos||x.photos.length!==4))throw Error('Main RU level '+n+' must have 4 clues');
-  const need={};for(const ch of [...x.answer])need[ch]=(need[ch]||0)+1;
-  const have={};for(const ch of [...x.pool])have[ch]=(have[ch]||0)+1;
-  for(const ch in need)if((have[ch]||0)<need[ch])throw Error('Main '+lang+' pool missing '+ch+' at level '+n);
  }
 }
 
