@@ -27,13 +27,13 @@ for(const file of ['core.js','home.js','game.js','achievements.js','main-levels-
 }
 
 const release=JSON.parse(readFileSync(resolve(base,'release.json'),'utf8'));
-if(release.release!=='20261003-r124')throw Error('Unexpected release: '+release.release);
+if(release.release!=='20261003-r125')throw Error('Unexpected release: '+release.release);
 for(const theme of ['science','travel','technology']){
  const repeat=release.verification?.theme_repeat_reduction?.[theme];
  if(repeat?.levels!==100||repeat?.main_overlaps!==20)throw Error('Repeat limit mismatch: '+theme);
 }
 const localizedHomeSource=readFileSync(resolve(base,'home.js'),'utf8');
-for(const text of ["guestName:'Player'","guestName:'Oyunçu'","telegramLogin:'Sign in with Telegram'","telegramLogin:'Telegram ilə daxil ol'"]){
+for(const text of ["guestName:'Player'","guestName:'Oyunçu'","telegramLogin:'Sign in with Telegram'","telegramLogin:'Telegram ilə daxil ol'","profileLoginStatus:'Not signed in'","profileLoginStatus:'Daxil olmayıb'","nicknameSet:'Set game nickname'","nicknameSet:'Oyun niki təyin et'"]){
  if(!localizedHomeSource.includes(text))throw Error('Missing guest localization: '+text);
 }
 const levelPageHtml=readFileSync(resolve(base,'game.html'),'utf8');
