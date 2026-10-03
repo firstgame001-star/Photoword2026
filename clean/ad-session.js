@@ -1,7 +1,29 @@
 /* AdsGram can leave show() pending when a banner fails to load. */
 (() => {
  'use strict';
+ let sdkPromise = null;
  window.PWAdSession = {
+  ensureSDK({timeoutMs = 15000} = {}) {
+   if (window.Adsgram?.init) return Promise.resolve(window.Adsgram);
+   if (sdkPromise) return sdkPromise;
+   sdkPromise = new Promise((resolve, reject) => {
+    const script = document.createElement('script');
+    let settled = false;
+    const finish = error => {
+     if (settled) return;
+     settled = true; clearTimeout(timer); script.onload = script.onerror = null;
+     if (error) { script.remove(); reject(error); }
+     else resolve(window.Adsgram);
+    };
+    const timer = setTimeout(() => finish(new Error('ad_sdk_timeout')), timeoutMs);
+    script.async = true;
+    script.src = 'https://sad.adsgram.ai/js/sad.min.js';
+    script.onload = () => finish(window.Adsgram?.init ? null : new Error('ad_sdk_missing'));
+    script.onerror = () => finish(new Error('ad_sdk_failed'));
+    document.head.append(script);
+   }).finally(() => { sdkPromise = null; });
+   return sdkPromise;
+  },
   show(controller, {onStart = () => {}, loadMs = 30000, totalMs = 180000} = {}) {
    return new Promise((resolve, reject) => {
     let settled = false, loadTimer, totalTimer;

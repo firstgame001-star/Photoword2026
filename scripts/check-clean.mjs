@@ -27,7 +27,7 @@ for(const file of ['ad-session.js','core.js','home.js','game.js','achievements.j
 }
 
 const release=JSON.parse(readFileSync(resolve(base,'release.json'),'utf8'));
-if(release.release!=='20261003-r127')throw Error('Unexpected release: '+release.release);
+if(release.release!=='20261003-r128')throw Error('Unexpected release: '+release.release);
 for(const theme of ['science','travel','technology']){
  const repeat=release.verification?.theme_repeat_reduction?.[theme];
  if(repeat?.levels!==100||repeat?.main_overlaps!==20)throw Error('Repeat limit mismatch: '+theme);
