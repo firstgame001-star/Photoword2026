@@ -22,12 +22,12 @@ for(const [page,module] of Object.entries(pages)){
  }
 }
 
-for(const file of ['core.js','home.js','game.js','achievements.js','main-levels-8-9.js','main-levels-10-12.js','main-levels-13.js','main-levels-14-15.js','theme-game.js','theme-levels-cinema-food.js','theme-levels-expansion.js','challenge.js','challenge-repeat-index.js','challenge-repeat-policy.js','challenge-bank-extra.js','duel.js']){
+for(const file of ['ad-session.js','core.js','home.js','game.js','achievements.js','main-levels-8-9.js','main-levels-10-12.js','main-levels-13.js','main-levels-14-15.js','theme-game.js','theme-levels-cinema-food.js','theme-levels-expansion.js','challenge.js','challenge-repeat-index.js','challenge-repeat-policy.js','challenge-bank-extra.js','duel.js']){
  execFileSync(process.execPath,['--check',resolve(base,file)]);
 }
 
 const release=JSON.parse(readFileSync(resolve(base,'release.json'),'utf8'));
-if(release.release!=='20261003-r126')throw Error('Unexpected release: '+release.release);
+if(release.release!=='20261003-r127')throw Error('Unexpected release: '+release.release);
 for(const theme of ['science','travel','technology']){
  const repeat=release.verification?.theme_repeat_reduction?.[theme];
  if(repeat?.levels!==100||repeat?.main_overlaps!==20)throw Error('Repeat limit mismatch: '+theme);
