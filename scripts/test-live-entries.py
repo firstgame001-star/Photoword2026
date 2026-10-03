@@ -990,7 +990,7 @@ def install_mock(ctx,account,completed,lang):
                 expected=ANSWERS[body.get('language',lang)][int(body['levelId'])-1]
                 data={'player':account.copy(),'hint':hint_result(body,expected)}
         elif action=='complete_level':
-            level=int(body['levelId']);assert body.get('answer')==ANSWERS[lang][level-1],(lang,level,body.get('answer'))
+            level=int(body['levelId']);expected=ANSWERS[lang][level-1] if level<=280 else account['_main_mock_submissions'][level];assert body.get('answer')==expected,(lang,level,body.get('answer'))
             if level not in completed:
                 completed.add(level);account['coins']+=20;account['xp']+=15;account['completed_levels']+=1;account['current_level']=max(account['current_level'],level+1);account['rank']=1
         elif action=='profile_stats':
@@ -1380,25 +1380,29 @@ with sync_playwright() as pw:
         completed=set(range(1,21));install_mock(ctx,account,completed,language);page=ctx.new_page();errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
         page.goto(BASE+f'clean/theme-game.html?theme={theme_id}&level=1#'+fragment,wait_until='domcontentloaded',timeout=45000)
         expect(page.locator('#themeGameTitle')).to_contain_text({'cinema':{'ru':'Кино','en':'Cinema','az':'Kino'},'food':{'ru':'Еда','en':'Food','az':'Yemək'},'animals':{'ru':'Животные','en':'Animals','az':'Heyvanlar'},'transport':{'ru':'Транспорт','en':'Transport','az':'Nəqliyyat'},'home':{'ru':'Дом','en':'Home','az':'Ev'},'nature':{'ru':'Природа','en':'Nature','az':'Təbiət'}}[theme_id][language])
-        tap_word(page,added_banks[theme_id][0][language]['answer']);expect(page.locator('#successPanel')).to_be_visible()
+        # Test the accepted-response UI contract without publishing private answer keys.
+        entry=added_banks[theme_id][0][language];assert 'answer' not in entry
+        tap_word(page,entry['pool'][:entry['answerLength']]);expect(page.locator('#successPanel')).to_be_visible()
         assert page.evaluate(f"JSON.parse(localStorage.getItem('pw.themeProgress.{theme_id}')).includes(1)")
         account['_theme_completed']=[f'{theme_id}:{i}' for i in range(1,100)]
         page.goto(BASE+f'clean/theme-game.html?theme={theme_id}&level=100#'+fragment,wait_until='domcontentloaded',timeout=45000)
-        tap_word(page,added_banks[theme_id][-1][language]['answer']);expect(page.locator('#successPanel')).to_be_visible()
+        entry=added_banks[theme_id][-1][language];assert 'answer' not in entry
+        tap_word(page,entry['pool'][:entry['answerLength']]);expect(page.locator('#successPanel')).to_be_visible()
         expect(page.locator('#nextLevel')).to_have_attribute('href','./index.html')
         assert not relevant_errors(errors),errors;ctx.close()
 
-    # Representative main-game browser checks. Loading game.js also validates every published answer/pool in RU/EN/AZ.
-    sample_levels=[1,20,21,50,51,60,61,90,91,100,101,130,131,150,180,181,200,230,231,250,280,281,300,330,331,350,380,381,400,430,431,450,480,481,500,530]
+    # Representative main-game browser checks. Loading game.js also validates every published level metadata in RU/EN/AZ; private answer checks run separately on the backend.
+    sample_levels=[1,20,21,50,51,60,61,90,91,100,101,130,131,150,180,181,200,230,231,250,280,281,300,330,331,350,380,381,400,430,431,450,480,481,500,530,531,550,580,581,600,630,631,650,680]
     for language in ['ru','en','az']:
       ctx=browser.new_context(viewport={'width':390,'height':800},has_touch=True,is_mobile=True)
       ctx.add_init_script(f"if(!sessionStorage.getItem('test.seeded')){{localStorage.setItem('pw.language','{language}'); localStorage.setItem('pw.theme','game');sessionStorage.setItem('test.seeded','1')}}")
-      account={'photoword_id':'PW-TESTONLY','first_name':'Test','last_name':'','username':None,'game_nickname':None,'nickname_changed':False,'coins':10000,'xp':0,'completed_levels':0,'current_level':530,'rank':1,'daily_streak':0,'last_daily_reward':None}
+      account={'photoword_id':'PW-TESTONLY','first_name':'Test','last_name':'','username':None,'game_nickname':None,'nickname_changed':False,'coins':10000,'xp':0,'completed_levels':0,'current_level':680,'rank':1,'daily_streak':0,'last_daily_reward':None}
       completed=set();install_mock(ctx,account,completed,language);page=ctx.new_page();errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
       for level in sample_levels:
         page.goto(BASE+f'clean/game.html?level={level}#'+fragment,wait_until='domcontentloaded',timeout=45000)
         expect(page.locator('#levelTitle')).to_contain_text(str(level));expect(page.locator('#shuffle')).to_be_visible()
-        answer=ANSWERS[language][level-1]
+        answer=ANSWERS[language][level-1] if level<=280 else ''.join(page.locator('#letters .letter').all_inner_texts())[:page.locator('#slots .slot').count()]
+        if level>280: account.setdefault('_main_mock_submissions',{})[level]=answer
         available=page.locator('#letters .letter').all_inner_texts()
         for ch in set(answer): assert available.count(ch)>=answer.count(ch),(language,level,ch,available)
         if level==21:
@@ -1428,14 +1432,14 @@ with sync_playwright() as pw:
           expect(page.locator('#successChapter')).to_be_visible();expect(page.locator('#successChapter')).to_contain_text({'ru':'Виртуоз','en':'Virtuoso','az':'Virtuoz'}[language]);expect(page.locator('#nextLevel')).to_have_attribute('href','./game.html?level=331')
         elif level==380:
           expect(page.locator('#successChapter')).to_be_visible();expect(page.locator('#successChapter')).to_contain_text({'ru':'Легенда','en':'Legend','az':'Əfsanə'}[language]);expect(page.locator('#nextLevel')).to_have_attribute('href','./game.html?level=381')
-        elif level in (430,480):
+        elif level in (430,480,530,580,630):
           expect(page.locator('#successChapter')).to_be_visible();expect(page.locator('#nextLevel')).to_have_attribute('href',f'./game.html?level={level+1}')
-        elif level==530:
+        elif level==680:
           expect(page.locator('#successChapter')).to_be_visible();expect(page.locator('#nextLevel')).to_have_attribute('href','./index.html')
       assert account['completed_levels']==len(sample_levels) and account['xp']==15*len(sample_levels)
-      page.screenshot(path=str(OUT/f'{engine}-{language}-level530.png'),full_page=True)
+      page.screenshot(path=str(OUT/f'{engine}-{language}-level680.png'),full_page=True)
       assert not relevant_errors(errors),errors
-      report={'engine':engine,'language':language,'levels':'1-530 validated / boundary samples played','checks':['runtime validation of all 530 answer pools','chapter 1 sample','chapter 2 boundaries 21 and 50','completed chapter 3 through 90','chapter 4 complete 91-130','chapter 5 complete 131-180','chapter 6 complete 181-230','chapter 7 complete 231-280','chapter 8 complete 281-330','chapter 9 complete 331-380','transitions at 20, 50, 90, 130, 180, 230, 280, 330 and completion at 530','localized text hint','letter hint','remove hint','level 100 continues to 101, 130 opens 131, 180 opens 181, 230 opens 231, 280 opens 281, 330 opens 331, and 380 opens 381, 430 opens 431, 480 opens 481, and 530 returns home'],'result':'PASS'}
+      report={'engine':engine,'language':language,'levels':'1–680 metadata audited; representative boundary samples played','checks':['chapter transitions through 680','main hints','server accepted-response UI contract','theme hints and rewards','settings and localization'],'result':'PASS'}
       reports.append(report);print(json.dumps(report,ensure_ascii=False),flush=True);ctx.close()
     # Narrow-screen long-answer smoke: no horizontal overflow at 320px.
     ctx=browser.new_context(viewport={'width':320,'height':720},has_touch=True,is_mobile=True)
