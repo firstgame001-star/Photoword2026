@@ -100,16 +100,14 @@ if(!themeGameJs.includes('const TRAVEL_LEVELS=')||!themeGameJs.includes('const T
 if(!themeGameJs.includes('const SCIENCE_LEVELS=')||!themeGameJs.includes('const SCIENCE_TRANSLATED='))throw Error('Science theme bank is missing');
 if(!themeGameJs.includes('const TECHNOLOGY_LEVELS=')||!themeGameJs.includes('const TECHNOLOGY_TRANSLATED='))throw Error('Technology theme bank is missing');
 if(!themeGameJs.includes("['sport','art','professions','travel','science','technology','cinema','food','animals','transport','home','nature'].includes(themeParam)")||!themeGameJs.includes("return 'pw.themeProgress.'+themeId")||!themeGameJs.includes("theme='+themeId+'&level="))throw Error('Thematic routing/progress is not category-specific');
-const artBank=themeGameJs.match(/const ART_LEVELS=\{([\s\S]*?)\};\s*const ART_TRANSLATED=/);
-if(!artBank||(artBank[1].match(/\"\d+\"\s*:/g)||[]).length!==100)throw Error('Art theme must contain 100 levels');
-const profBank=themeGameJs.match(/const PROF_LEVELS=\{\n([\s\S]*?)\n\};\nconst PROF_TRANSLATED=/);
-if(!profBank||(profBank[1].match(/^\s*"?(?:\d+)"?:\s*\{/gm)||[]).length!==100)throw Error('Professions theme must contain 100 levels');
-const travelBank=themeGameJs.match(/const TRAVEL_LEVELS=\{\n([\s\S]*?)\n\};\nconst TRAVEL_TRANSLATED=/);
-if(!travelBank||(travelBank[1].match(/^\s*"?(?:\d+)"?:\s*\{/gm)||[]).length!==100)throw Error('Travel theme must contain 100 levels');
-const scienceBank=themeGameJs.match(/const SCIENCE_LEVELS=\{\n([\s\S]*?)\n\};\nconst SCIENCE_TRANSLATED=/);
-if(!scienceBank||(scienceBank[1].match(/^\s*"?(?:\d+)"?:\s*\{/gm)||[]).length!==100)throw Error('Science theme must contain 100 levels');
-const technologyBank=themeGameJs.match(/const TECHNOLOGY_LEVELS=\{\n([\s\S]*?)\n\};\nconst TECHNOLOGY_TRANSLATED=/);
-if(!technologyBank||(technologyBank[1].match(/^\s*"?(?:\d+)"?:\s*\{/gm)||[]).length!==100)throw Error('Technology theme must contain 100 levels');
+function themeBankCount(name){
+ const start=themeGameJs.indexOf('const '+name+'_LEVELS={');
+ const end=themeGameJs.indexOf(';\nconst '+name+'_TRANSLATED=',start);
+ if(start<0||end<0)return 0;
+ const body=themeGameJs.slice(start+'const '+name+'_LEVELS={'.length,end);
+ return (body.match(/"\\d+"\\s*:/g)||[]).length;
+}
+for(const name of ['ART','PROF','TRAVEL','SCIENCE','TECHNOLOGY'])if(themeBankCount(name)!==100)throw Error(name+' theme must contain 100 levels');
 const homeJs=readFileSync(resolve(base,'home.js'),'utf8');
 if(!homeJs.includes("const READY_THEME_IDS=['sport','art','professions','travel','science','technology','cinema','food','animals','transport','home','nature']")||!homeJs.includes("READY_THEME_IDS.includes(id)"))throw Error('Cinema/Food themes must be enabled in the category hub');
 const uiCss=readFileSync(resolve(base,'ui.css'),'utf8');
