@@ -462,11 +462,11 @@ function renderAdButton(){const b=$('watchAd'),x=t(),configured=Boolean(shopStat
 async function configureAds(){try{const r=await pw.actionRequest('public_config');publicConfig=r.config||{};renderAdButton()}catch{renderAdButton()}}
 async function claimConfirmedAd(nonce){for(const delay of [300,700,1200,1800,2600,3600]){await new Promise(r=>setTimeout(r,delay));try{return await pw.api('ad_claim',{nonce})}catch{}}throw new Error('ad_confirmation_pending')}
 $('watchAd').onclick=async()=>{
- const b=$('watchAd'),x=t();if(b.disabled||adBusy)return;
+ const b=$('watchAd'),x=t();let stage='sdk';if(b.disabled||adBusy)return;
  adBusy=true;adPhase='adLoading';adLastError='';text('adText',x.adText);renderAdButton();
  try{
   if(!window.Adsgram||!window.PWAdSession)throw new Error('ad_sdk_missing');
-  const prep=await pw.actionRequest('ad_prepare');track('ad_open');
+  stage='prepare';const prep=await pw.actionRequest('ad_prepare');stage='show';track('ad_open');
   if(!adController)adController=window.Adsgram.init({blockId:String(prep.block_id),debug:false});
   const result=await window.PWAdSession.show(adController,{onStart(){adPhase='adPlaying';renderAdButton();track('ad_started')}});
   if(!result?.done)throw result||new Error('ad_incomplete');
@@ -475,7 +475,7 @@ $('watchAd').onclick=async()=>{
  }catch(e){
   const code=String(e?.message||e?.description||'ad_error');
   track('ad_error',{metadata:{message:code.slice(0,120),state:String(e?.state||'').slice(0,24)}});
-  const message=code==='ad_timeout'?x.adTimeout:code==='ad_confirmation_pending'?x.adPending:code.includes('ad_cooldown')?x.adCooldown:x.adError;
+  const message=stage==='prepare'&&e?.message?e.message:code==='ad_timeout'?x.adTimeout:code==='ad_confirmation_pending'?x.adPending:code.includes('ad_cooldown')?x.adCooldown:x.adError;
   adLastError=message;text('adText',message);pw.status(message);
  }finally{adBusy=false;renderAdButton();loadShopStatus().catch(()=>{})}
 };
