@@ -5,6 +5,10 @@ Function('window',readFileSync('clean/challenge-repeat-policy.js','utf8'))(windo
 Function('window',readFileSync('clean/challenge-repeat-index.js','utf8'))(window);
 const choose=window.PW_CHALLENGE_REPEAT_POLICY;
 assert.equal(window.PW_CHALLENGE_REPEAT_INDEX.length,400);
+const completedSailLevel=new Set(window.PW_CHALLENGE_REPEAT_INDEX.flatMap((row,i)=>row.main.some(n=>n<=538)?[i]:[]));
+assert(completedSailLevel.has(166),'Completing main level 538 must exclude challenge question 167 for the Azerbaijani YELKƏN answer');
+const afterSailLevel=choose({deck:[],count:400,seen:new Set(),excluded:completedSailLevel,last:null});
+assert.notEqual(afterSailLevel.index,166,'A completed translated answer reappeared in challenge mode');
 let seen=new Set(),last=null;const decks=[[],[],[]],shown=[];
 for(let n=0;n<400;n++){
  const mode=n%3,r=choose({deck:decks[mode],count:400,seen,excluded:new Set(),last,random:()=>.5});
