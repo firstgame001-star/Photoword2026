@@ -100,8 +100,8 @@ if(!themeGameJs.includes('const TRAVEL_LEVELS=')||!themeGameJs.includes('const T
 if(!themeGameJs.includes('const SCIENCE_LEVELS=')||!themeGameJs.includes('const SCIENCE_TRANSLATED='))throw Error('Science theme bank is missing');
 if(!themeGameJs.includes('const TECHNOLOGY_LEVELS=')||!themeGameJs.includes('const TECHNOLOGY_TRANSLATED='))throw Error('Technology theme bank is missing');
 if(!themeGameJs.includes("['sport','art','professions','travel','science','technology','cinema','food','animals','transport','home','nature'].includes(themeParam)")||!themeGameJs.includes("return 'pw.themeProgress.'+themeId")||!themeGameJs.includes("theme='+themeId+'&level="))throw Error('Thematic routing/progress is not category-specific');
-const artBank=themeGameJs.match(/const ART_LEVELS=\{\n([\s\S]*?)\n\};\nconst ART_TRANSLATED=/);
-if(!artBank||(artBank[1].match(/^\s*\d+:\{/gm)||[]).length!==100)throw Error('Art theme must contain 100 levels');
+const artBank=themeGameJs.match(/const ART_LEVELS=\{([\s\S]*?)\};\s*const ART_TRANSLATED=/);
+if(!artBank||(artBank[1].match(/\"\d+\"\s*:/g)||[]).length!==100)throw Error('Art theme must contain 100 levels');
 const profBank=themeGameJs.match(/const PROF_LEVELS=\{\n([\s\S]*?)\n\};\nconst PROF_TRANSLATED=/);
 if(!profBank||(profBank[1].match(/^\s*"?(?:\d+)"?:\s*\{/gm)||[]).length!==100)throw Error('Professions theme must contain 100 levels');
 const travelBank=themeGameJs.match(/const TRAVEL_LEVELS=\{\n([\s\S]*?)\n\};\nconst TRAVEL_TRANSLATED=/);
