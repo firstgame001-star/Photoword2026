@@ -144,7 +144,7 @@ const mainTranslated=gameJs.slice(gameJs.indexOf('const TRANSLATED='));
 const mainEnStart=mainTranslated.indexOf('en:{'),mainAzStart=mainTranslated.indexOf('az:{');
 const mainEn=mainTranslated.slice(mainEnStart,mainAzStart);
 const mainAz=mainTranslated.slice(mainAzStart,mainTranslated.indexOf('\n  };',mainAzStart));
-function countLevelRows(section){return (section.match(/^\\s*\\d+:\\{/gm)||[]).length;}
+function countLevelRows(section){return (section.match(/^\s*\d+:\{/gm)||[]).length;}
 for(const [langCode,section] of [['ru',mainBase],['en',mainEn],['az',mainAz]])if(countLevelRows(section)!==280)throw Error('Expected 280 answer-hidden core levels for '+langCode);
 const extraRows=[...Function('window={};'+mainExtraJs+';return window.PW_MAIN_EXTRA')(),...Function('window={};'+mainMoreJs+';return window.PW_MAIN_MORE')(),...Function('window={};'+main13Js+';return window.PW_MAIN_MORE')(),...Function('window={};'+main14_15Js+';return window.PW_MAIN_MORE')()];
 if(extraRows.length!==400)throw Error('Expected 400 extended main levels, got '+extraRows.length);
