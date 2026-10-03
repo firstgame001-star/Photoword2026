@@ -56,8 +56,8 @@
       if (!response.ok || data?.error) {try{window.dispatchEvent(new CustomEvent('pw:error',{detail:{code:data?.error||'http_error',status:response.status}}))}catch{};throw new Error(errText(data?.error,response.status));}
       return data;
     } catch (error) {
-      if (error.name === 'AbortError') {try{window.dispatchEvent(new CustomEvent('pw:error',{detail:{code:'timeout',status:0}}))}catch{};throw new Error(lang()==='en'?'Server did not respond. Check your connection.':lang()==='az'?'Server cavab vermədi. İnternet bağlantısını yoxlayın.':'Сервер не ответил. Проверь соединение.');}
-      if (error instanceof TypeError) {try{window.dispatchEvent(new CustomEvent('pw:error',{detail:{code:'network',status:0}}))}catch{};throw new Error(lang()==='en'?'Could not connect to the server.':lang()==='az'?'Serverlə əlaqə yaratmaq mümkün olmadı.':'Не удалось связаться с сервером.');}
+      if (error.name === 'AbortError') {try{window.dispatchEvent(new CustomEvent('pw:error',{detail:{code:'timeout',status:0}}))}catch{};throw Object.assign(new Error(lang()==='en'?'Server did not respond. Check your connection.':lang()==='az'?'Server cavab vermədi. İnternet bağlantısını yoxlayın.':'Сервер не ответил. Проверь соединение.'),{code:'timeout'});}
+      if (error instanceof TypeError) {try{window.dispatchEvent(new CustomEvent('pw:error',{detail:{code:'network',status:0}}))}catch{};throw Object.assign(new Error(lang()==='en'?'Could not connect to the server.':lang()==='az'?'Serverlə əlaqə yaratmaq mümkün olmadı.':'Не удалось связаться с сервером.'),{code:'network'});}
       throw error;
     } finally { clearTimeout(timer); }
   }
@@ -68,7 +68,7 @@
   let loginPending = null;
   async function api(action = 'login', extra = {}) {
     if (!raw) throw new Error(lang()==='en'?'Telegram did not provide login data. Open the game from the bot.':lang()==='az'?'Telegram giriş məlumatlarını ötürmədi. Oyunu botdan açın.':'Telegram не передал данные входа. Запусти игру через бота.');
-    let result;try{result = await request('/functions/v1/telegram-login', {...extra, action, initData:raw,progressGeneration:current?.progress_generation});}catch(e){if(e.message==='progress_reset'&&action!=='login'){loginPending=null;await api('login')}throw e;}
+    let result;try{result = await request('/functions/v1/telegram-login', {...extra, action, initData:raw,progressGeneration:current?.progress_generation},{},action==='login'?25000:12000);}catch(e){if(e.message==='progress_reset'&&action!=='login'){loginPending=null;await api('login')}throw e;}
     if (!result?.player?.photoword_id) throw new Error(lang()==='en'?'Server did not return a profile.':lang()==='az'?'Server profil qaytarmadı.':'Сервер не вернул профиль.');
     const incoming=result.player,generation=Number(incoming.progress_generation||0),key='pw.generation.'+incoming.photoword_id;
     if(current?.photoword_id===incoming.photoword_id&&Number(current.progress_generation||0)>generation)return current;
@@ -85,7 +85,14 @@
   }
   function login(force=false) {
     if(force) loginPending=null;
-    if (!loginPending) loginPending = api().catch(e => { loginPending = null; throw e; });
+    if (!loginPending) loginPending = (async()=>{
+      try{return await api()}
+      catch(e){
+        if(!['timeout','network'].includes(e.code))throw e;
+        await new Promise(resolve=>setTimeout(resolve,700));
+        return api();
+      }
+    })().catch(e => { loginPending = null; throw e; });
     return loginPending;
   }
   async function actionRequest(action,extra={}) {

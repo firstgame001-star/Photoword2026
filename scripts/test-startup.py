@@ -23,8 +23,12 @@ with sync_playwright() as pw:
     ad_requests.append(route.request.url);route.abort()
    ctx.route('https://sad.adsgram.ai/**',block_ad)
    player={'photoword_id':'PW-STARTTEST','first_name':'Test','last_name':'','game_nickname':None,'coins':250,'xp':0,'completed_levels':0,'current_level':1,'rank':1,'daily_streak':0,'last_daily_reward':None}
+   login_attempts=[]
    def api(route):
     body=route.request.post_data_json or {};action=body.get('action','')
+    if action=='login':
+     login_attempts.append(1)
+     if len(login_attempts)==1:route.abort();return
     data={'player':player,'progress':[]}
     if action=='public_config':data={'config':{'adsgram_reward_block_id':'51571'}}
     elif action=='shop_status':data={'shop':{'coins':250,'energy':5,'energy_max':5,'ads':{'configured':True,'claimed_today':0,'daily_limit':10,'reward_coins':5},'history':[]}}
@@ -37,6 +41,7 @@ with sync_playwright() as pw:
    page.goto(base+'#'+fragment,wait_until='domcontentloaded',timeout=15000)
    expect(page.locator('#homeChapter1Label')).to_contain_text({'ru':'Глава','en':'Chapter','az':'Fəsil'}[language])
    expect(page.locator('#name')).to_have_text('Test')
+   assert len(login_attempts)==2,login_attempts
    assert not ad_requests,'Startup requested AdsGram'
    page.locator('#settingsBtn').tap();expect(page.locator('#settingsModal')).to_be_visible()
    page.locator('#settingsModal [data-close]').first.tap()
@@ -48,7 +53,7 @@ with sync_playwright() as pw:
    expect(page.locator('#adText')).to_have_text({'ru':'Рекламу не удалось показать. Попробуй позже.','en':'The ad could not be shown. Try again later.','az':'Reklamı göstərmək mümkün olmadı. Sonra yenidən cəhd et.'}[language])
    assert len(ad_requests)==1,ad_requests
    assert not errors,errors
-   print(f'PASS: {engine}/{language}: home, login and settings start without AdsGram; failed ad restores button.',flush=True)
+   print(f'PASS: {engine}/{language}: home/settings start without AdsGram; login recovers from a lost first request; failed ad restores button.',flush=True)
    ctx.close()
   browser.close()
 server.shutdown()
