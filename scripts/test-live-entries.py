@@ -883,9 +883,14 @@ more_main_source=Path('clean/main-levels-10-12.js').read_text(encoding='utf-8')
 MORE_MAIN=json.JSONDecoder().raw_decode(more_main_source[more_main_source.index('['):])[0]
 assert len(MORE_MAIN)==150 and MORE_MAIN[0]['id']==381 and MORE_MAIN[-1]['id']==530
 for _lang,_answers in ANSWERS.items():
-    _answers.extend([row[_lang]['answer'] for row in EXTRA_MAIN+MORE_MAIN])
-    assert len(_answers)==530,(_lang,len(_answers))
-    assert len(set(_answers))==530,('duplicate-main-answer',_lang)
+    assert len(_answers)==280,(_lang,len(_answers))
+    assert len(set(_answers))==280,('duplicate-core-answer',_lang)
+for _row in EXTRA_MAIN+MORE_MAIN:
+    assert len(_row['photos'])==4
+    for _lang in ['ru','en','az']:
+        _entry=_row[_lang]
+        assert _entry.get('hint') and _entry.get('pool') and isinstance(_entry.get('answerLength'),int)
+        assert 'answer' not in _entry,('plaintext-answer-exposed',_row['id'],_lang)
 
 HINTS={
 'ru':{1:'Домашнее животное',11:'Она появляется рядом',21:'Соединяет два берега',31:'Её ставят на документ',41:'Направленная величина',51:'Повторяющийся рисунок'},
