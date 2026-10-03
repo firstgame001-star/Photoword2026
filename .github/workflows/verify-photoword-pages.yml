@@ -34,7 +34,7 @@ jobs:
         run: |
           set -euo pipefail
           base='https://firstgame001-star.github.io/Photoword2026/clean'
-          release='20261003-r124'
+          release='20261003-r125'
           ok=0
           for i in $(seq 1 48); do
             if curl --fail --silent --show-error --location --max-time 20 "$base/release.json?check=$i" -o "$RUNNER_TEMP/release.json" && grep -q "$release" "$RUNNER_TEMP/release.json"; then
@@ -170,7 +170,7 @@ jobs:
           grep -q "guestName:'Oyunçu'" "$RUNNER_TEMP/home.js"
           grep -q "telegramLogin:'Sign in with Telegram'" "$RUNNER_TEMP/home.js"
           grep -q "telegramLogin:'Telegram ilə daxil ol'" "$RUNNER_TEMP/home.js"
-          grep -q "PhotoWord · 20261003-r124" "$RUNNER_TEMP/game.html"
+          grep -q "PhotoWord · 20261003-r125" "$RUNNER_TEMP/game.html"
           grep -q '"question_bank":{"total":400' "$RUNNER_TEMP/release.json"
           grep -q 'PW_CHALLENGE_EXTRA' "$RUNNER_TEMP/challenge-bank-extra.js"
           grep -q "BANK_VERSION='r54-400'" "$RUNNER_TEMP/challenge.js"
