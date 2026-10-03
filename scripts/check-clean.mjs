@@ -27,7 +27,19 @@ for(const file of ['core.js','home.js','game.js','achievements.js','main-levels-
 }
 
 const release=JSON.parse(readFileSync(resolve(base,'release.json'),'utf8'));
-if(release.release!=='20261002-r123')throw Error('Unexpected release: '+release.release);
+if(release.release!=='20261003-r124')throw Error('Unexpected release: '+release.release);
+for(const theme of ['science','travel','technology']){
+ const repeat=release.verification?.theme_repeat_reduction?.[theme];
+ if(repeat?.levels!==100||repeat?.main_overlaps!==20)throw Error('Repeat limit mismatch: '+theme);
+}
+const localizedHomeSource=readFileSync(resolve(base,'home.js'),'utf8');
+for(const text of ["guestName:'Player'","guestName:'Oyunçu'","telegramLogin:'Sign in with Telegram'","telegramLogin:'Telegram ilə daxil ol'"]){
+ if(!localizedHomeSource.includes(text))throw Error('Missing guest localization: '+text);
+}
+const levelPageHtml=readFileSync(resolve(base,'game.html'),'utf8');
+if(!levelPageHtml.includes('PhotoWord · '+release.release))throw Error('Level footer does not match release '+release.release);
+if(levelPageHtml.includes('2026.09.28-r76'))throw Error('Outdated level footer remains');
+
 if(release.duel_mode?.entry_min_coins!==25||release.duel_mode?.entry_max_coins!==500||release.duel_mode?.winner_payout_percent_of_pot!==90)throw Error('Duel configuration mismatch');
 if(release.duel_mode?.question_pool!==150||release.duel_mode?.recent_matches_excluded_per_player!==2||release.duel_mode?.rematch!==true)throw Error('Rematch and question pool manifest mismatch');
 if(release.achievements?.count!==120||release.achievements?.survives_progress_reset!==false)throw Error('Achievement catalog/reset manifest mismatch');
