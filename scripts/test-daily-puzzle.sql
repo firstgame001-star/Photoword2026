@@ -20,7 +20,7 @@ begin
  s:=public.daily_puzzle_state(-911200001,'az');if not(s->>'closed')::boolean or (s->>'attempts_left')::integer<>0 then raise exception 'three failures did not close';end if;
  begin perform public.daily_puzzle_answer(-911200001,d,'ru',q.ru,gen_random_uuid());raise exception 'fourth attempt accepted';exception when others then if sqlerrm<>'daily_closed' then raise;end if;end;
  perform public.reset_game_progress_server(-911200001);
- if not(public.daily_puzzle_state(-911200001,'ru')->>'closed')::boolean then raise exception 'reset restored attempts';end if;
+ if (public.daily_puzzle_state(-911200001,'ru')->>'attempts_left')::integer<>3 then raise exception 'full reset did not clear daily progress';end if;
  -- Third attempt can win; shared attempts across all languages.
  perform public.daily_puzzle_answer(-911200002,d,'ru',repeat('X',char_length(q.ru)),gen_random_uuid());
  perform public.daily_puzzle_answer(-911200002,d,'az',repeat('X',char_length(q.az)),gen_random_uuid());
@@ -29,7 +29,7 @@ begin
  perform public.daily_puzzle_answer(-911200002,d,'en',q.en,first_request);
  s:=public.daily_puzzle_state(-911200002,'ru');
  if not(s->>'solved')::boolean or not(s->>'closed')::boolean or (s->>'attempts_left')::integer<>0 then raise exception 'win state incorrect';end if;
- if (select coins from public.players where id=b)<>1025 or (select xp from public.players where id=b)<>0 or (select coins from public.players where id=a)<>1000 then raise exception 'reward duplicate or unwanted XP';end if;
+ if (select coins from public.players where id=b)<>1025 or (select xp from public.players where id=b)<>0 or (select coins from public.players where id=a)<>250 then raise exception 'reward duplicate or unwanted XP';end if;
  if (select count(*) from public.coin_transactions where player_id=b and transaction_type='daily_puzzle_reward')<>1 then raise exception 'ledger duplicate';end if;
  if has_table_privilege('anon','public.daily_puzzle_questions','SELECT') or has_function_privilege('authenticated','public.daily_puzzle_answer(bigint,date,text,text,uuid)','EXECUTE') then raise exception 'daily permissions public';end if;
 end $$;
