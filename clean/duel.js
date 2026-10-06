@@ -193,7 +193,14 @@ $('duelJoinTitle').textContent=offer.kind==='friend'?ft().invite+(offer.from||''
 }
 async function invited(c){
 labels();show('duelJoin');code=c;
-try{await pw.login();const r=await call('preview',{code});preview=r.duel;if(!preview||preview.status!=='waiting'||Date.parse(preview.expires_at)<Date.now()+offset)throw new Error('duel_not_found');$('duelJoinInfo').textContent=t().joinInfo(preview.stake)}catch(e){error(e);home()}
+try{
+ await pw.login();
+ // A launch link remains in Telegram after joining. Restore a participant's
+ // match before treating that link as a new invitation.
+ const current=await call('state',{code});
+ if(current.duel){duel=current.duel;questionId=null;render();if(['waiting','active'].includes(duel.status))startPolling();return}
+ const r=await call('preview',{code});preview=r.duel;if(!preview||preview.status!=='waiting'||Date.parse(preview.expires_at)<Date.now()+offset)throw new Error('duel_not_found');$('duelJoinInfo').textContent=t().joinInfo(preview.stake)
+}catch(e){error(e);home()}
 }
 async function create(){
 const button=$('duelCreate');button.disabled=true;
