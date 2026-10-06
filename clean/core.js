@@ -160,6 +160,23 @@
       else tg?.HapticFeedback?.impactOccurred(kind);
     } catch { /* Haptics must never interrupt answer reset or hint application. */ }
   }
-  window.PW = {store, prefs, status, name, api, login, actionRequest, duelRequest, leaderboard, avatarFrames, clearProgressStorage, endDeletedSession, haptic, sfx, setMusic,
+  const accessibleLabels=new WeakMap();
+  const accessibleCopy={
+    'Закрыть':['Close','Bağla'],'К темам':['Back to themes','Mövzulara qayıt'],'На главную':['Home','Ana səhifə'],'Настройки':['Settings','Ayarlar'],'Обновить комнаты':['Refresh rooms','Otaqları yenilə'],
+    'Буквы':['Letters','Hərflər'],'Ответ':['Answer','Cavab'],'Четыре подсказки':['Four clues','Dörd ipucu'],
+    'Открыть букву':['Reveal a letter','Hərfi aç'],'Убрать лишние буквы':['Remove extra letters','Artıq hərfləri sil'],'Перемешать':['Shuffle','Qarışdır'],
+    'Открыть букву за 50 монет':['Reveal a letter for 50 coins','50 sikkəyə hərfi aç'],'Убрать лишние за 100 монет':['Remove extra letters for 100 coins','100 sikkəyə artıq hərfləri sil'],'Перемешать бесплатно':['Shuffle for free','Pulsuz qarışdır']
+  };
+  function localizeAccessibility(language=lang()){
+    document.querySelectorAll('[aria-label]').forEach(e=>{
+      const label=accessibleLabels.get(e)||e.getAttribute('aria-label');
+      const chapter=label?.match(/^Глава (\d+)$/),copy=accessibleCopy[label];
+      if(!chapter&&!copy)return;
+      accessibleLabels.set(e,label);
+      e.setAttribute('aria-label',language==='en'?(chapter?'Chapter '+chapter[1]:copy[0]):language==='az'?(chapter?'Fəsil '+chapter[1]:copy[1]):label);
+    });
+  }
+  localizeAccessibility();
+  window.PW = {store, prefs, status, name, api, login, actionRequest, duelRequest, leaderboard, avatarFrames, clearProgressStorage, endDeletedSession, localizeAccessibility, haptic, sfx, setMusic,
     get player() { return current; }, get hasAuth() { return Boolean(raw); }};
 })();

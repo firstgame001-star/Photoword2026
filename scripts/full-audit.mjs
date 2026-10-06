@@ -66,6 +66,21 @@ const coreErrors=evalConst(core,'ERR');
 assertLanguageKeys(coreErrors,'Core error translations');
 for(const lang of ['ru','en','az'])if(!coreErrors[lang]?.energy_full)throw Error('Missing '+lang+' energy_full localization');
 
+function assertNoRussianText(value,label){
+ if(typeof value==='function')return assertNoRussianText(value(3,'QA'),label);
+ if(typeof value==='string'&&/\p{Script=Cyrillic}/u.test(value))throw Error('Russian text in '+label+': '+value);
+ if(value&&typeof value==='object')for(const [key,item] of Object.entries(value))assertNoRussianText(item,label+'.'+key);
+}
+for(const [source,name] of [[home,'T'],[game,'GAME_UI'],[theme,'UI'],[theme,'SETTINGS_UI'],[challenge,'I'],[core,'ERR']]){
+ const copy=evalConst(source,name);for(const lang of ['en','az'])assertNoRussianText(copy[lang],name+'.'+lang);
+}
+const duelSource=read('duel.js'),titleSource=duelSource.slice(duelSource.indexOf('const chapterTitles='),duelSource.indexOf('function frameAvatar('));
+const homeChapterTitles=evalConst(home,'CHAPTER_TITLES'),chapterEnds=[20,50,90,130,180,230,280,330,380,430,480,530,580,630,680];
+for(const lang of ['ru','en','az']){
+ const getTitle=Function('language',titleSource+';return playerTitle;')(()=>lang);
+ for(let i=0;i<chapterEnds.length;i++)if(getTitle(chapterEnds[i])!==homeChapterTitles[lang][i+1])throw Error('Duel chapter title mismatch '+lang+' chapter '+(i+1));
+}
+
 // Main content audit: 680 levels, three languages, valid pools and four clues.
 const mainLevels=evalConst(game,'LEVELS'),mainTr=evalConst(game,'TRANSLATED');
 const mainExtraRows=Function('window={};'+mainExtra+';return window.PW_MAIN_EXTRA')();
