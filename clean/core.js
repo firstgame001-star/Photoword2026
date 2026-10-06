@@ -62,6 +62,13 @@
     } finally { clearTimeout(timer); }
   }
   let current = null;
+  let accountErased = false;
+  function endDeletedSession(){
+    accountErased=true;raw='';current=null;loginPending=null;
+    setMusic(false);
+    clearProgressStorage();
+    try{sessionStorage.removeItem('pw.init')}catch{}
+  }
   function clearProgressStorage(){
     try{for(let i=localStorage.length-1;i>=0;i--){const k=localStorage.key(i);if(k?.startsWith('pw.')||k?.startsWith('photoword'))localStorage.removeItem(k)}for(let i=sessionStorage.length-1;i>=0;i--){const k=sessionStorage.key(i);if(k?.startsWith('pw.')&&k!=='pw.init')sessionStorage.removeItem(k)}}catch{}
   }
@@ -69,6 +76,7 @@
   async function api(action = 'login', extra = {}) {
     if (!raw) throw new Error(lang()==='en'?'Telegram did not provide login data. Open the game from the bot.':lang()==='az'?'Telegram giriş məlumatlarını ötürmədi. Oyunu botdan açın.':'Telegram не передал данные входа. Запусти игру через бота.');
     let result;try{result = await request('/functions/v1/telegram-login', {...extra, action, initData:raw,progressGeneration:current?.progress_generation},{},action==='login'?25000:12000);}catch(e){if(e.message==='progress_reset'&&action!=='login'){loginPending=null;await api('login')}throw e;}
+    if(accountErased)throw new Error('account_deleted');
     if (!result?.player?.photoword_id) throw new Error(lang()==='en'?'Server did not return a profile.':lang()==='az'?'Server profil qaytarmadı.':'Сервер не вернул профиль.');
     const incoming=result.player,generation=Number(incoming.progress_generation||0),key='pw.generation.'+incoming.photoword_id;
     if(current?.photoword_id===incoming.photoword_id&&Number(current.progress_generation||0)>generation)return current;
@@ -96,6 +104,7 @@
     return loginPending;
   }
   async function actionRequest(action,extra={}) {
+    if(['create_invoice','create_energy_invoice'].includes(action)&&window.PWPurchaseTerms&&!await window.PWPurchaseTerms())throw new Error(lang()==='en'?'Purchase canceled.':lang()==='az'?'Alış ləğv edildi.':'Покупка отменена.');
     if(!raw) throw new Error(lang()==='en'?'Telegram did not provide login data. Open the game from the bot.':lang()==='az'?'Telegram giriş məlumatlarını ötürmədi. Oyunu botdan açın.':'Telegram не передал данные входа. Запусти игру через бота.');
     try{return await request('/functions/v1/telegram-login',{...extra,action,initData:raw,progressGeneration:current?.progress_generation})}catch(e){if(e.message==='progress_reset')await login(true);throw e;}
   }
@@ -151,6 +160,6 @@
       else tg?.HapticFeedback?.impactOccurred(kind);
     } catch { /* Haptics must never interrupt answer reset or hint application. */ }
   }
-  window.PW = {store, prefs, status, name, api, login, actionRequest, duelRequest, leaderboard, avatarFrames, clearProgressStorage, haptic, sfx, setMusic,
+  window.PW = {store, prefs, status, name, api, login, actionRequest, duelRequest, leaderboard, avatarFrames, clearProgressStorage, endDeletedSession, haptic, sfx, setMusic,
     get player() { return current; }, get hasAuth() { return Boolean(raw); }};
 })();
