@@ -123,7 +123,7 @@ const ruleBlock=home.slice(home.indexOf('const RULES='),home.indexOf('const RESE
 const rules=JSON.parse(ruleBlock.slice('const RULES='.length).trim().replace(/;$/, ''));
 for(const [l,need] of Object.entries({ru:['15 глав','680 уровней','Загадка дня','365','3 попытки','25 монет','Дуэли','120 целей','забрать вручную'],en:['15 chapters','680 levels','Daily puzzle','365','3 attempts','25 coins','Duels','120 goals','claimed manually'],az:['15 fəsil','680 səviyyə','Günün tapmacası','365','3 cəhd','25 sikkə','Duellər','120 məqsəd','əl ilə götürmək']})){
  for(const value of need)if(!rules[l]?.includes(value))throw Error('Rules missing '+l+': '+value);
- if((rules[l].match(/class="rule-section"/g)||[]).length!==8)throw Error('Rules sections missing '+l);
+ if((rules[l].match(/class="rule-section"/g)||[]).length!==11)throw Error('Rules sections missing '+l);
 }
 if(!home.includes("track('app_open',{metadata:{version:'r101'}})"))throw Error('App-open analytics version is stale');
 if(!home.includes('function chapterIdForLevel(level)'))throw Error('Chapter analytics helper is missing');
