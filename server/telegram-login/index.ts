@@ -129,11 +129,14 @@ Deno.serve(async(req)=>{
   let {data:player,error}=await db.from("players").select("*").eq("telegram_id",user.id).maybeSingle();
   if(error)return reply({error:"db"},500);
   if(!player){
+   if(action==="erase_account"&&body.confirm==="ERASE")return reply({erased:true});
+   if(action!=="login")return reply({error:"player_not_found"},409);
    const r=await db.from("players").insert({...fields,telegram_id:user.id,photoword_id:"PW-"+crypto.randomUUID().replaceAll("-","").slice(0,16).toUpperCase()}).select("*").single();
    if(r.error){const existing=await db.from("players").select("*").eq("telegram_id",user.id).maybeSingle();if(!existing.data)return reply({error:"create"},500);player=existing.data;}else player=r.data;
   }else if(action==="login"){
    const r=await db.from("players").update(fields).eq("id",player.id).select("*").single();if(r.error)return reply({error:"db"},500);player=r.data;
   }
+  if(action!=="login"&&body.accountId&&body.accountId!==player.photoword_id)return reply({error:"progress_reset"},409);
   if(action!=="login"&&action!=="reset_progress"&&body.progressGeneration!==undefined&&body.progressGeneration!==player.progress_generation)return reply({error:"progress_reset"},409);
   if(action==="profile_stats"){
    const themeRows=await db.from("theme_progress").select("theme_id,level_id").eq("player_id",player.id);
@@ -179,7 +182,7 @@ Deno.serve(async(req)=>{
   if(action==="use_hint"){
    const hintCost=costs[body.hintType];
    if(!hintCost)return reply({error:"bad_hint"},400);
-   const spent=await db.rpc("spend_hint_server",{p_telegram_id:user.id,p_level_id:level,p_hint_type:String(body.hintType),p_cost:hintCost});
+   const spent=await db.rpc("purchase_hint_once_server",{p_telegram_id:user.id,p_request_id:body.requestId||crypto.randomUUID(),p_generation:player.progress_generation,p_theme_id:null,p_level_id:level,p_hint_type:String(body.hintType),p_cost:hintCost,p_hint:hintPayload||{}});
    if(spent.error){
     const m=String(spent.error.message||"");
     if(m.includes("insufficient_coins"))return reply({error:"insufficient_coins"},402);
@@ -188,7 +191,7 @@ Deno.serve(async(req)=>{
     if(m.includes("bad_hint"))return reply({error:"bad_hint"},400);
     return reply({error:"hint_failed"},500);
    }
-   player=spent.data;
+   player=spent.data.player;hintPayload=spent.data.hint;
   }
   if(action==="complete_level"){
    const playerId=player.id,language=["ru","en","az"].includes(String(player.notification_language||body.language||""))?String(player.notification_language||body.language):"ru";
@@ -213,7 +216,7 @@ Deno.serve(async(req)=>{
   }
   if(action==="theme_hint"){
    const hintCost=costs[body.hintType];
-   const spent=await db.rpc("spend_theme_hint_server",{p_telegram_id:user.id,p_theme_id:themeId,p_level_id:level,p_hint_type:String(body.hintType),p_cost:hintCost});
+   const spent=await db.rpc("purchase_hint_once_server",{p_telegram_id:user.id,p_request_id:body.requestId||crypto.randomUUID(),p_generation:player.progress_generation,p_theme_id:themeId,p_level_id:level,p_hint_type:String(body.hintType),p_cost:hintCost,p_hint:hintPayload||{}});
    if(spent.error){
     const m=String(spent.error.message||"");
     if(m.includes("insufficient_coins"))return reply({error:"insufficient_coins"},402);
@@ -221,7 +224,7 @@ Deno.serve(async(req)=>{
     if(m.includes("bad_theme_level"))return reply({error:"bad_level"},400);
     return reply({error:"hint_failed"},500);
    }
-   player=spent.data;
+   player=spent.data.player;hintPayload=spent.data.hint;
   }
   let themeRewarded=false;
   if(action==="theme_complete"){
