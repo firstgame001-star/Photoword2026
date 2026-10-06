@@ -103,7 +103,7 @@ async function syncReactions(){
 }
 function startOfferPolling(){if(!offerPoll)offerPoll=setInterval(()=>{if(!$('duelResult').hidden)checkOffer().catch(error)},1800);checkOffer().catch(error)}
 async function checkOffer(){
-if(offerRequesting||!duel||duel.status!=='finished'||$('duelResult').hidden)return;
+if(document.hidden||offerRequesting||!duel||duel.status!=='finished'||$('duelResult').hidden)return;
 offerRequesting=true;const oldCode=duel.code;
 try{
  const r=await call('offer',{code:oldCode});
@@ -335,7 +335,7 @@ $('duelOfferOpen').onclick=async()=>{
  }catch(e){closeOfferPopup();pendingHomeOffer=null;error(e)}finally{button.disabled=false}
 };
 window.addEventListener('pw:player',()=>checkHomeOffer());
-function resumeVisible(){if($('duelScreen').classList.contains('active')&&code&&duel&&['waiting','active'].includes(duel.status))state().catch(()=>{});else checkHomeOffer()}
+function resumeVisible(){if(document.hidden)return;if($('duelScreen').classList.contains('active')&&code&&duel){if(['waiting','active'].includes(duel.status))state().catch(()=>{});else if(duel.status==='finished')checkOffer().catch(()=>{});}else checkHomeOffer()}
 window.addEventListener('focus',resumeVisible);
 document.addEventListener('visibilitychange',()=>{if(!document.hidden)resumeVisible()});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('duelOfferModal').hidden){dismissedOfferCode=pendingHomeOffer?.code||'';closeOfferPopup()}});
