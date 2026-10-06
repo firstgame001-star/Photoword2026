@@ -10,7 +10,7 @@ const storage=new Map();let timerId=0;const timers=new Map(),calls=[];let respon
 const context={document:{getElementById:get,createElement:()=>new Element(),querySelectorAll:()=>[],addEventListener(){},hidden:false},location:{search:'',href:'https://test.invalid/'},URL,URLSearchParams,Date,Math,console,localStorage:{getItem:k=>storage.get(k)??null,setItem:(k,v)=>storage.set(k,v),removeItem:k=>storage.delete(k)},sessionStorage:{getItem:()=>null,setItem(){},removeItem(){}},setTimeout:fn=>{timers.set(++timerId,fn);return timerId},clearTimeout:id=>timers.delete(id),setInterval:()=>++timerId,clearInterval(){},navigator:{},window:{addEventListener(){},scrollTo(){},PW:{status(){},haptic(){},sfx(){},player:{},login:async()=>({}),duelRequest:async(action,body)=>{calls.push(action);return respond(action,body)}}}};
 context.window.document=context.document;
 let source=readFileSync('clean/duel.js','utf8');
-source=source.replace(/\}\)\(\);\s*$/,`window.testDuel={set(d){duel=d;code=d.code;questionId=d.question_id;chosen=[];disabled=false;answering=false;drawQuestion(d.question);$('duelScreen').classList.add('active')},snapshot:()=>duel,isRequesting:()=>requesting,isAnswering:()=>answering,chosen:()=>[...chosen],drawQuestion,clearLetters,submit,state,syncReactions,playerTitle,setAnswering(v){answering=v}};})();`);
+source=source.replace(/\}\)\(\);\s*$/,`window.testDuel={set(d){duel=d;code=d.code;questionId=d.question_id;chosen=[];disabled=false;answering=false;drawQuestion(d.question);$('duelScreen').classList.add('active')},snapshot:()=>duel,isRequesting:()=>requesting,isAnswering:()=>answering,chosen:()=>[...chosen],drawQuestion,clearLetters,submit,state,syncReactions,playerTitle,invited,setAnswering(v){answering=v}};})();`);
 vm.createContext(context);vm.runInContext(source,context);
 const test=context.window.testDuel,q={length:3,letters:['A','B','C','X'],photos:['🐈','🐾','🧶','🥛']};
 const match={code:'ABCDEF0123456789',status:'active',question_id:1,question:q,my_score:0,their_score:0,skips_left:3,starts_at:new Date(Date.now()-1000).toISOString(),ends_at:new Date(Date.now()+60000).toISOString()};
@@ -37,3 +37,18 @@ test.set(match);let oldResponse;respond=()=>new Promise(resolve=>oldResponse=res
 const nextMatch={...match,code:'FFFFFFFFFFFFFFFF'};test.set(nextMatch);oldResponse({duel:{...match,their_score:9}});await oldPoll;
 assert.equal(test.snapshot().code,nextMatch.code);assert.equal(test.snapshot().their_score,0);
 console.log('PASS: disconnect/reconnect, unchanged puzzle recovery, lost accepted-answer response, and stale room response isolation.');
+
+// Telegram preserves the invitation launch parameter after joining/reloading.
+const beforeRestore=calls.length;
+respond=async action=>{assert.equal(action,'state');return {duel:{...match,my_score:2,their_score:1}}};
+await test.invited(match.code);
+assert.equal(test.snapshot().my_score,2);
+assert.equal(get('duelGame').hidden,false);
+assert.deepEqual(calls.slice(beforeRestore),['state']);
+// A player who has not joined still receives the normal invitation preview.
+const beforeInvite=calls.length;
+respond=async action=>action==='state'?{duel:null}:{duel:{code:match.code,status:'waiting',stake:25,expires_at:new Date(Date.now()+60000).toISOString()}};
+await test.invited(match.code);
+assert.deepEqual(calls.slice(beforeInvite),['state','preview']);
+assert.equal(get('duelJoin').hidden,false);
+console.log('PASS: invitation launch restores a joined match and preserves new-player preview.');
