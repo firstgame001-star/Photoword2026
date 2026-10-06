@@ -25,7 +25,7 @@ async function botCall(token:string,method:string,payload:any){try{await fetch("
 async function ensureBotUi(token:string){
  if(botUiConfigured)return;botUiConfigured=true;
  await Promise.all([
-  botCall(token,"setMyCommands",{commands:[{command:"start",description:"Запустить PhotoWord"},{command:"play",description:"Открыть игру"},{command:"support",description:"Поддержка"},{command:"help",description:"Помощь"}]}),
+  botCall(token,"setMyCommands",{commands:[{command:"start",description:"Запустить PhotoWord"},{command:"play",description:"Открыть игру"},{command:"support",description:"Поддержка"},{command:"paysupport",description:"Вопросы по покупкам"},{command:"terms",description:"Правила использования"},{command:"privacy",description:"Конфиденциальность"},{command:"cancel",description:"Отменить обращение"},{command:"myid",description:"Мой Telegram ID"},{command:"help",description:"Помощь"}]}),
   botCall(token,"setChatMenuButton",{menu_button:{type:"web_app",text:"🎮 Играть",web_app:{url:APP_URL}}}),
   botCall(token,"setMyDescription",{description:"PhotoWord — 4 изображения, 1 слово. Решай уровни, получай XP и монеты."}),
   botCall(token,"setMyShortDescription",{short_description:"4 изображения · 1 слово · RU / EN / AZ"})
