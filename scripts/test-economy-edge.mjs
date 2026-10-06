@@ -1,0 +1,20 @@
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+import {stripTypeScriptTypes} from 'node:module';
+import {createHmac,webcrypto} from 'node:crypto';
+import vm from 'node:vm';
+let handler,fail=false;const calls=[];
+const db={from(table){const q={select(){return q},eq(){return q},gte(){return q},gt(){return Promise.resolve({data:[]})},maybeSingle(){return Promise.resolve({data:{id:'player',progress_generation:0}})}};return q},async rpc(name,args){calls.push({name,args});if(name==='refresh_challenge_energy_server')return {data:{limited_energy:4,energy_ref_at:new Date().toISOString()}};if(name==='start_challenge_run_atomic_server')return fail?{error:{message:'challenge_no_energy'}}:{data:{run_id:'run',question_ids:[1,2]}};throw Error('Unexpected RPC '+name)}};
+const context={crypto:webcrypto,TextEncoder,URLSearchParams,Response,Date,console,createClient:()=>db,Deno:{env:{get:k=>k==='TELEGRAM_BOT_TOKEN'?'test-token':'test'},serve:fn=>handler=fn}};
+let s=readFileSync('server/challenge-game/index.ts','utf8').replace(/^import .*;\n/gm,'');
+vm.runInNewContext(stripTypeScriptTypes(s),context);
+const p=new URLSearchParams({auth_date:String(Math.floor(Date.now()/1000)),user:JSON.stringify({id:123})});
+const key=createHmac('sha256','WebAppData').update('test-token').digest();
+const check=[...p.entries()].sort(([a],[b])=>a.localeCompare(b)).map(([k,v])=>k+'='+v).join('\n');
+p.set('hash',createHmac('sha256',key).update(check).digest('hex'));
+async function request(body){return handler(new Request('https://example.test',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)}))}
+let r=await request({action:'start',mode:'limited',initData:'fake'});assert.equal(r.status,401);assert.equal(calls.length,0);
+r=await request({action:'start',mode:'limited',initData:p.toString(),initialSeen:[1,-1,'2']});assert.equal(r.status,200);let j=await r.json();assert.equal(j.challenge.run_id,'run');assert.equal(j.challenge.energy,4);assert.equal(calls[0].name,'start_challenge_run_atomic_server');assert.deepEqual([...calls[0].args.p_initial_seen],[1]);
+fail=true;r=await request({action:'start',mode:'limited',initData:p.toString()});assert.equal(r.status,409);assert.equal((await r.json()).error,'challenge_no_energy');
+r=await request({action:'start',mode:'limited',progressGeneration:99,initData:p.toString()});assert.equal(r.status,409);assert.equal((await r.json()).error,'progress_reset');
+console.log('PASS: authenticated atomic start, server state, no-energy recovery, invalid auth and stale-generation rejection.');
