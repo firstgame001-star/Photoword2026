@@ -18,8 +18,8 @@ test.set(match);get('duelLetters').children[0].onclick();get('duelLetters').chil
 test.set(match);get('duelLetters').children[0].onclick();get('duelLetters').children[1].onclick();get('duelLetters').children[2].onclick();let release;respond=action=>action==='answer'?new Promise(resolve=>release=resolve):Promise.resolve({duel:match});const submission=test.submit(q);test.clearLetters();assert.equal(test.chosen().length,0);release({duel:match,correct:false});await submission;
 get('duelLetters').children[0].onclick();for(const [id,fn]of [...timers]){if(id===Math.max(...timers.keys()))fn()}assert.deepEqual([...test.chosen()],[0],'Wrong-answer animation erased new input');
 test.setAnswering(true);respond=async()=>({reactions:{their_reaction:'fire',their_reaction_at:new Date().toISOString()}});await test.syncReactions();assert(calls.includes('reactions'));assert.equal(get('duelFriendReaction').textContent,'🔥');
-for(const lang of ['ru','en','az']){storage.set('pw.language',lang);assert(test.playerTitle(530));assert.notEqual(test.playerTitle(530),test.playerTitle(380))}
-console.log('PASS: clicked-slot removal, clear during pending answer, wrong-answer input race, reactions during submission, and twelve localized ranks.');
+for(const lang of ['ru','en','az']){storage.set('pw.language',lang);assert(test.playerTitle(530));assert.notEqual(test.playerTitle(530),test.playerTitle(380));assert.notEqual(test.playerTitle(580),test.playerTitle(530));assert.notEqual(test.playerTitle(630),test.playerTitle(580));assert.notEqual(test.playerTitle(680),test.playerTitle(630))}
+console.log('PASS: clicked-slot removal, clear during pending answer, wrong-answer input race, reactions during submission, and fifteen localized chapter titles.');
 
 // Disconnect during polling, then reconnect with an unchanged question.
 test.set(match);respond=async()=>{throw new Error('network disconnected')};await test.state();
