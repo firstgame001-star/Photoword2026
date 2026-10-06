@@ -983,7 +983,6 @@
     try{
       await pw.login();
       const response=await pw.actionRequest('use_hint',{hintType:type,levelId,language:gameLang,pool:level.pool,fixedPositions:[...fixed.keys()]});
-      await pw.login(true);
       if(!sessionKey)sessionKey='pw.hints.'+pw.player.photoword_id+'.'+levelId;
       if(type==='letter'){
         const {position:pos,letter}=response.hint||{};const tile=tiles.find(t=>t.letter===letter&&!fixed.has(pos)&&!removed.has(t.id));if(!Number.isInteger(pos)||!tile)throw new Error(ui.placeFail);
@@ -991,7 +990,7 @@
       }else if(type==='remove'){
         (response.hint?.removeIndices||[]).forEach(id=>{removed.add(id);selected=selected.map(value=>value===id?null:value);});pw.status(ui.remove);
       }else{textOpen=true;pw.status(ui.text);}
-      save();track('hint_use',{levelId,chapterId:chapterNum,metadata:{type}});pw.sfx('hint');pw.haptic();
+      save();void pw.login(true).catch(()=>{});track('hint_use',{levelId,chapterId:chapterNum,metadata:{type}});pw.sfx('hint');pw.haptic();
     }catch(e){pw.status(e.message);}
     finally{busy=false;paint();}
     if(selected.every(id=>id!==null))check();
