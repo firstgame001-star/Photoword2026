@@ -18,18 +18,10 @@ async function verify(raw:unknown,token:string){
 }
 const ENERGY_MAX=5,ENERGY_MS=30*60*1000;
 async function state(db:any,playerId:string){
- let row=(await db.from("challenge_profiles").select("*").eq("player_id",playerId).maybeSingle()).data;
- if(!row){const ins=await db.from("challenge_profiles").insert({player_id:playerId}).select("*").single();if(ins.error)throw ins.error;row=ins.data;}
- let energy=Number(row.limited_energy??ENERGY_MAX),ref=Date.parse(row.energy_ref_at||new Date().toISOString()),now=Date.now();
- if(!Number.isFinite(ref))ref=now;
- if(energy<ENERGY_MAX){
-  const gain=Math.floor(Math.max(0,now-ref)/ENERGY_MS);
-  if(gain>0){
-   energy=Math.min(ENERGY_MAX,energy+gain);ref=energy>=ENERGY_MAX?now:ref+gain*ENERGY_MS;
-   const upd=await db.from("challenge_profiles").update({limited_energy:energy,energy_ref_at:new Date(ref).toISOString(),updated_at:new Date(now).toISOString()}).eq("player_id",playerId).select("*").single();
-   if(upd.error)throw upd.error;row=upd.data;
-  }
- }
+ const fresh=await db.rpc("refresh_challenge_energy_server",{p_player_id:playerId});
+ if(fresh.error)throw fresh.error;
+ const row=Array.isArray(fresh.data)?fresh.data[0]:fresh.data;
+ const energy=Number(row.limited_energy),ref=Date.parse(row.energy_ref_at),now=Date.now();
  const day=new Date(now);day.setUTCHours(0,0,0,0);
  const rr=await db.from("challenge_runs").select("mode,reward_coins").eq("player_id",playerId).gte("finished_at",day.toISOString()).gt("reward_coins",0);
  const counts:any={limited:0,nohint:0,blitz:0};for(const r of rr.data||[])if(counts[r.mode]!==undefined)counts[r.mode]++;
@@ -48,19 +40,12 @@ Deno.serve(async(req)=>{
   if(action==="state")return reply({challenge:await state(db,p.id)});
   if(action==="start"){
    if(!["limited","nohint","blitz"].includes(mode))return reply({error:"bad_mode"},400);
-   let s=await state(db,p.id);
-   if(mode==="limited"){
-    if(s.energy<=0)return reply({error:"challenge_no_energy",challenge:s},409);
-    const now=Date.now(),patch:any={limited_energy:s.energy-1,updated_at:new Date(now).toISOString()};if(s.energy>=ENERGY_MAX)patch.energy_ref_at=new Date(now).toISOString();
-    const up=await db.from("challenge_profiles").update(patch).eq("player_id",p.id);if(up.error)return reply({error:"start_failed"},500);s=await state(db,p.id);
-   }
-   const run=await db.from("challenge_runs").insert({player_id:p.id,mode,language}).select("id").single();
-   if(run.error||!run.data?.id)return reply({error:"start_failed"},500);
    const initialSeen=Array.isArray(body.initialSeen)?body.initialSeen.filter((x:any)=>Number.isInteger(x)&&x>=0&&x<400).slice(0,400):[];
-   const questions=await db.rpc("reserve_challenge_questions",{p_telegram_id:user.id,p_run_id:run.data.id,p_mode:mode,p_initial_seen:initialSeen});
-   if(questions.error)return reply({error:"questions_failed"},500);
-   return reply({challenge:{...s,run_id:run.data.id,question_ids:questions.data}});
+   const run=await db.rpc("start_challenge_run_atomic_server",{p_telegram_id:user.id,p_mode:mode,p_language:language,p_generation:p.progress_generation,p_initial_seen:initialSeen});
+   if(run.error){const m=String(run.error.message||"");const error=m.includes("challenge_no_energy")?"challenge_no_energy":m.includes("progress_reset")?"progress_reset":"start_failed";return reply({error,challenge:await state(db,p.id)},error==="start_failed"?500:409);}
+   return reply({challenge:{...await state(db,p.id),...run.data}});
   }
+
   if(action==="answer"){
    const runId=String(body.runId||""),questionId=Number(body.questionId),answer=String(body.answer||"");
    if(!["limited","nohint","blitz"].includes(mode)||!/^[0-9a-f-]{36}$/i.test(runId)||!Number.isInteger(questionId)||questionId<0||questionId>399||answer.length>40)return reply({error:"bad_answer"},400);
