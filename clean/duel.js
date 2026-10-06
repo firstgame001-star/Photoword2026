@@ -28,11 +28,11 @@ let friends=[],selectedFriend='',pendingHomeOffer=null,dismissedOfferCode='',hom
 const language=()=>{try{return localStorage.getItem('pw.language')||'ru'}catch{return'ru'}};
 const t=()=>copy[language()]||copy.ru;
 const chapterTitles={
- ru:['','Новичок','Любитель','Знаток','Опытный','Эксперт','Профессионал','Мастер','Виртуоз','Легенда','Мастер слов','Исследователь','Хранитель знаний'],
- en:['','Novice','Amateur','Adept','Experienced','Expert','Professional','Master','Virtuoso','Legend','Word Master','Explorer','Keeper of Knowledge'],
- az:['','Yeni başlayan','Həvəskar','Bilici','Təcrübəli','Ekspert','Peşəkar','Usta','Virtuoz','Əfsanə','Söz ustası','Tədqiqatçı','Bilik qoruyucusu']
+ ru:['','Новичок','Любитель','Знаток','Опытный','Эксперт','Профессионал','Мастер','Виртуоз','Легенда','Мастер слов','Исследователь','Хранитель знаний','Первопроходец','Новатор','Визионер'],
+ en:['','Novice','Amateur','Adept','Experienced','Expert','Professional','Master','Virtuoso','Legend','Word Master','Explorer','Keeper of Knowledge','Pioneer','Innovator','Visionary'],
+ az:['','Yeni başlayan','Həvəskar','Bilici','Təcrübəli','Ekspert','Peşəkar','Usta','Virtuoz','Əfsanə','Söz ustası','Kəşfiyyatçı','Bilik qoruyucusu','İlk kəşf edən','Yenilikçi','Uzaqgörən']
 };
-function playerTitle(levels){const finished=[20,50,90,130,180,230,280,330,380,430,480,530].filter(end=>Number(levels||0)>=end).length;return(chapterTitles[language()]||chapterTitles.ru)[Math.max(1,finished)]}
+function playerTitle(levels){const finished=[20,50,90,130,180,230,280,330,380,430,480,530,580,630,680].filter(end=>Number(levels||0)>=end).length;return(chapterTitles[language()]||chapterTitles.ru)[Math.max(1,finished)]}
 function frameAvatar(parent,id,name,frame){let e=document.getElementById(id);if(!e){e=document.createElement('span');e.id=id;e.className='frame-avatar duel-frame-avatar';e.setAttribute('aria-hidden','true');parent.prepend(e)}e.textContent=(name||'P').charAt(0).toUpperCase();window.PWFrames?.decorate?.(e,frame)}
 function paintRoomHost(d){$('duelRoomHost').hidden=!d?.creator;if(!d?.creator)return;$('duelRoomHostName').textContent=d.my_name||t().you;$('duelRoomHostTitle').textContent=playerTitle(d.my_completed_levels);frameAvatar($('duelRoomHost'),'duelHostAvatar',d.my_name,d.my_frame)}
 let wrongTimer=null,submitTimer=null,code='',duel=null,preview=null,incomingOffer=null,requesting=false,offerRequesting=false,answering=false,poll=null,tick=null,offerPoll=null,offset=0,questionId=null,chosen=[],disabled=false,lastStatus='',answerEpoch=0,stateSeq=0,stateStarted=0,lastSyncAt=0;
