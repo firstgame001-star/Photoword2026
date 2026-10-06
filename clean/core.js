@@ -75,15 +75,15 @@
   let loginPending = null;
   async function api(action = 'login', extra = {}) {
     if (!raw) throw new Error(lang()==='en'?'Telegram did not provide login data. Open the game from the bot.':lang()==='az'?'Telegram giriş məlumatlarını ötürmədi. Oyunu botdan açın.':'Telegram не передал данные входа. Запусти игру через бота.');
-    let result;try{result = await request('/functions/v1/telegram-login', {...extra, action, initData:raw,progressGeneration:current?.progress_generation},{},action==='login'?25000:12000);}catch(e){if(e.message==='progress_reset'&&action!=='login'){loginPending=null;await api('login')}throw e;}
+    let result;try{result = await request('/functions/v1/telegram-login', {...extra, action, initData:raw,progressGeneration:current?.progress_generation,accountId:current?.photoword_id},{},action==='login'?25000:12000);}catch(e){if(e.message==='progress_reset'&&action!=='login'){loginPending=null;await api('login')}throw e;}
     if(accountErased)throw new Error('account_deleted');
     if (!result?.player?.photoword_id) throw new Error(lang()==='en'?'Server did not return a profile.':lang()==='az'?'Server profil qaytarmadı.':'Сервер не вернул профиль.');
     const incoming=result.player,generation=Number(incoming.progress_generation||0),key='pw.generation.'+incoming.photoword_id;
     if(current?.photoword_id===incoming.photoword_id&&Number(current.progress_generation||0)>generation)return current;
-    let seen=null;try{seen=localStorage.getItem(key)}catch{}
-    const changed=(current?.photoword_id===incoming.photoword_id&&generation>Number(current.progress_generation||0))||(seen!==null&&generation>Number(seen))||(seen===null&&generation>0);
+    let seen=null,previousAccount=null;try{seen=localStorage.getItem(key);previousAccount=localStorage.getItem('pw.accountId')}catch{}
+    const changed=Boolean(previousAccount&&previousAccount!==incoming.photoword_id)||(current&&current.photoword_id!==incoming.photoword_id)||(current?.photoword_id===incoming.photoword_id&&generation>Number(current.progress_generation||0))||(seen!==null&&generation>Number(seen))||(seen===null&&generation>0);
     if(changed){clearProgressStorage();window.dispatchEvent(new CustomEvent('pw:reset'))}
-    try{localStorage.setItem(key,String(generation))}catch{}
+    try{localStorage.setItem(key,String(generation));localStorage.setItem('pw.accountId',incoming.photoword_id)}catch{}
     current = incoming;
     if(changed&&action!=='reset_progress')setTimeout(()=>location.replace('./index.html?restart='+generation+location.hash),0);
     // Do not cache the complete response: it contains the private Telegram ID.
@@ -106,12 +106,14 @@
   async function actionRequest(action,extra={}) {
     if(['create_invoice','create_energy_invoice'].includes(action)&&window.PWPurchaseTerms&&!await window.PWPurchaseTerms())throw new Error(lang()==='en'?'Purchase canceled.':lang()==='az'?'Alış ləğv edildi.':'Покупка отменена.');
     if(!raw) throw new Error(lang()==='en'?'Telegram did not provide login data. Open the game from the bot.':lang()==='az'?'Telegram giriş məlumatlarını ötürmədi. Oyunu botdan açın.':'Telegram не передал данные входа. Запусти игру через бота.');
-    try{return await request('/functions/v1/telegram-login',{...extra,action,initData:raw,progressGeneration:current?.progress_generation})}catch(e){if(e.message==='progress_reset')await login(true);throw e;}
+    const hintAction=['use_hint','theme_hint'].includes(action),pendingKey=hintAction?'pw.hintRequest.'+current?.photoword_id+'.'+current?.progress_generation+'.'+action+'.'+(extra.themeId||'main')+'.'+extra.levelId+'.'+extra.hintType:null;
+    if(pendingKey){let saved=null;try{saved=JSON.parse(localStorage.getItem(pendingKey))}catch{};if(!saved){saved={...extra,requestId:crypto.randomUUID()};try{localStorage.setItem(pendingKey,JSON.stringify(saved))}catch{}}extra=saved;}
+    try{const result=await request('/functions/v1/telegram-login',{...extra,action,initData:raw,progressGeneration:current?.progress_generation,accountId:current?.photoword_id});if(pendingKey)try{localStorage.removeItem(pendingKey)}catch{};return result;}catch(e){if(e.message==='progress_reset')await login(true);throw e;}
   }
   async function duelRequest(action,extra={}) {
     if(!raw) throw new Error(lang()==='en'?'Open the game from the Telegram bot.':lang()==='az'?'Oyunu Telegram botundan aç.':'Открой игру через Telegram-бота.');
     const timeoutMs=action==='reactions'?3000:['state','react'].includes(action)?4500:12000;
-    try{return await request('/functions/v1/duel-game',{...extra,action,initData:raw,progressGeneration:current?.progress_generation},{},timeoutMs)}catch(e){if(e.message==='progress_reset')await login(true);throw e;}
+    try{return await request('/functions/v1/duel-game',{...extra,action,initData:raw,progressGeneration:current?.progress_generation,accountId:current?.photoword_id},{},timeoutMs)}catch(e){if(e.message==='progress_reset')await login(true);throw e;}
   }
   async function leaderboard() {
     const rows = await request('/rest/v1/rpc/get_leaderboard', {p_limit:100}, {apikey:KEY});
