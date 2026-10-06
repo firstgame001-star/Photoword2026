@@ -10,7 +10,7 @@ const storage=new Map();let timerId=0;const timers=new Map(),calls=[];let respon
 const context={document:{getElementById:get,createElement:()=>new Element(),querySelectorAll:()=>[],addEventListener(){},hidden:false},location:{search:'',href:'https://test.invalid/'},URL,URLSearchParams,Date,Math,console,localStorage:{getItem:k=>storage.get(k)??null,setItem:(k,v)=>storage.set(k,v),removeItem:k=>storage.delete(k)},sessionStorage:{getItem:()=>null,setItem(){},removeItem(){}},setTimeout:fn=>{timers.set(++timerId,fn);return timerId},clearTimeout:id=>timers.delete(id),setInterval:()=>++timerId,clearInterval(){},navigator:{},window:{addEventListener(){},scrollTo(){},PW:{status(){},haptic(){},sfx(){},player:{},login:async()=>({}),duelRequest:async(action,body)=>{calls.push(action);return respond(action,body)}}}};
 context.window.document=context.document;
 let source=readFileSync('clean/duel.js','utf8');
-source=source.replace(/\}\)\(\);\s*$/,`window.testDuel={set(d){duel=d;code=d.code;questionId=d.question_id;chosen=[];disabled=false;answering=false;drawQuestion(d.question);$('duelScreen').classList.add('active')},snapshot:()=>duel,isRequesting:()=>requesting,isAnswering:()=>answering,chosen:()=>[...chosen],drawQuestion,clearLetters,submit,state,syncReactions,playerTitle,invited,setAnswering(v){answering=v}};})();`);
+source=source.replace(/\}\)\(\);\s*$/,`window.testDuel={set(d){duel=d;code=d.code;questionId=d.question_id;chosen=[];disabled=false;answering=false;drawQuestion(d.question);$('duelScreen').classList.add('active')},snapshot:()=>duel,isRequesting:()=>requesting,isAnswering:()=>answering,chosen:()=>[...chosen],drawQuestion,clearLetters,submit,state,syncReactions,checkOffer,resumeVisible,playerTitle,invited,setAnswering(v){answering=v}};})();`);
 vm.createContext(context);vm.runInContext(source,context);
 const test=context.window.testDuel,q={length:3,letters:['A','B','C','X'],photos:['🐈','🐾','🧶','🥛']};
 const match={code:'ABCDEF0123456789',status:'active',question_id:1,question:q,my_score:0,their_score:0,skips_left:3,starts_at:new Date(Date.now()-1000).toISOString(),ends_at:new Date(Date.now()+60000).toISOString()};
@@ -52,3 +52,13 @@ await test.invited(match.code);
 assert.deepEqual(calls.slice(beforeInvite),['state','preview']);
 assert.equal(get('duelJoin').hidden,false);
 console.log('PASS: invitation launch restores a joined match and preserves new-player preview.');
+
+// Backgrounded results stop rematch polling and sync immediately on return.
+test.set({...match,status:'finished'});get('duelResult').hidden=false;
+context.document.hidden=true;const beforeHidden=calls.length;await test.checkOffer();test.resumeVisible();assert.equal(calls.length,beforeHidden);
+context.document.hidden=false;respond=async action=>{assert.equal(action,'offer');return {offer:null}};test.resumeVisible();await new Promise(resolve=>setImmediate(resolve));assert.equal(calls.length,beforeHidden+1);
+console.log('PASS: no rematch requests while hidden; immediate result sync after resume.');
+// Own reaction renders before a slow server acknowledgement arrives.
+test.set(match);let reactionAck;respond=action=>{assert.equal(action,'react');return new Promise(resolve=>reactionAck=resolve)};
+const pendingEmoji=get('duelReactionPicker').children[0].onclick();assert.equal(get('duelYouReaction').textContent,'😂');reactionAck({});await pendingEmoji;
+console.log('PASS: own reaction appears immediately while its network request is pending.');
