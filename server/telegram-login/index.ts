@@ -293,17 +293,10 @@ Deno.serve(async(req)=>{
   }
   if(action==="shop_status"){
    const now=Date.now(),energyMax=5,energyMs=30*60*1000;
-   const cp=await db.from("challenge_profiles").select("limited_energy,energy_ref_at").eq("player_id",player.id).maybeSingle();
+   const cp=await db.rpc("refresh_challenge_energy_server",{p_player_id:player.id});
    if(cp.error)return reply({error:"shop_failed"},500);
-   let energy=Number(cp.data?.limited_energy??energyMax),ref=Date.parse(cp.data?.energy_ref_at||new Date(now).toISOString());
-   if(!Number.isFinite(ref))ref=now;
-   if(energy<energyMax){
-    const gain=Math.floor(Math.max(0,now-ref)/energyMs);
-    if(gain>0){
-     energy=Math.min(energyMax,energy+gain);ref=energy>=energyMax?now:ref+gain*energyMs;
-     await db.from("challenge_profiles").update({limited_energy:energy,energy_ref_at:new Date(ref).toISOString(),updated_at:new Date(now).toISOString()}).eq("player_id",player.id);
-    }
-   }
+   const row=Array.isArray(cp.data)?cp.data[0]:cp.data;
+   const energy=Number(row.limited_energy),ref=Date.parse(row.energy_ref_at);
 
    const cfg=await db.from("app_config").select("key,value").in("key",["adsgram_reward_block_id"]);
    if(cfg.error)return reply({error:"shop_failed"},500);
