@@ -244,12 +244,12 @@ function resetProfileStats(){
  text('profileChaptersLabel',x.profileChapters);text('profileThemeDoneLabel',x.profileThemeLevels);text('profileThemesCompleteLabel',x.profileThemesDone);
  text('profileLimitedLabel',x.profileLimited);text('profileNoHintLabel',x.profileNoHint);text('profileBlitzLabel',x.profileBlitz);text('profileBlitzStreakLabel',x.profileBlitzStreak);
  for(const id of ['profileThemeDone','profileThemesComplete','profileLimitedBest','profileNoHintBest','profileBlitzBest','profileBlitzStreak'])text(id,'—');
- text('profileChapters',completedChapterCount(pw.player||{})+'/12');
+ text('profileChapters',completedChapterCount(pw.player||{})+'/'+MAIN_CHAPTERS.length);
  text('profileStatsStatus',x.profileStatsLoading);
 }
 function renderProfileStats(stats){
  const x=t(),challenge=stats?.challenge||{};
- text('profileChapters',completedChapterCount(pw.player||{})+'/12');
+ text('profileChapters',completedChapterCount(pw.player||{})+'/'+MAIN_CHAPTERS.length);
  text('profileThemeDone',Number(stats?.theme_levels_completed||0)+'/1200');
  text('profileThemesComplete',Number(stats?.themes_completed||0)+'/'+Number(stats?.themes_total||12));
  text('profileLimitedBest',Number(challenge.limited_best_score||0)+'/10');
@@ -277,7 +277,7 @@ $('statsEntry').onclick=openStatsScreen;$('statsBack').onclick=()=>screen('home'
 async function openProfile(){
  open('profileModal');resetProfileStats();const req=++profileStatsRequest;
  if(!pw.hasAuth){text('profileStatsStatus',t().profileStatsError);return}
- try{const data=await pw.actionRequest('profile_stats');if(req===profileStatsRequest)renderProfileStats(data?.stats||{});}
+ try{await pw.login(true);const data=await pw.actionRequest('profile_stats');if(req===profileStatsRequest)renderProfileStats(data?.stats||{});}
  catch{if(req===profileStatsRequest)text('profileStatsStatus',t().profileStatsError);}
 }
 function update(p){
@@ -293,6 +293,7 @@ function update(p){
  const claimed=String(p.last_daily_reward||'')===today();$('claimDaily').disabled=claimed;text('claimDaily',claimed?x.claimed:x.claim);text('dailyStreak',x.streak+': '+(p.daily_streak||0));text('notificationsState',p.notifications_enabled?x.notifyAllowed:x.notifyAllow);
 }
 function applyLanguage(l,persist=true){
+ if(!pw.player&&['Загрузка профиля…','Loading profile…','Profil yüklənir…'].includes($('status').textContent))$('status').textContent=l==='en'?'Loading profile…':l==='az'?'Profil yüklənir…':'Загрузка профиля…';
  if(!T[l])l='ru';if(persist){try{localStorage.setItem('pw.language',l)}catch{}}document.documentElement.lang=l;pw.localizeAccessibility?.(l);const x=T[l];setLogo(x);setThemeHubLabels();setChallengeLabels();window.PWAchievements?.labels?.();window.PWFrames?.labels?.();window.PWDaily?.labels();window.PWProfile?.labels();
  const nav=document.querySelectorAll('nav small');[x.home,x.chapters,x.rating,x.friends,x.shop].forEach((v,i)=>{if(nav[i])nav[i].textContent=v});document.querySelectorAll('#homeChapterDots button').forEach(dot=>dot.setAttribute('aria-label',x.chapter(Number(dot.dataset.dot))));
  applyStatsLabels();text('chaptersTitle',x.chapters);text('homeChaptersTitle',x.chapters);text('homeChapterHint',l==='en'?'SWIPE BETWEEN CHAPTERS':l==='az'?'FƏSİLLƏRİ SÜRÜŞDÜR':'ЛИСТАЙ ВЛЕВО И ВПРАВО');text('chaptersSubtitle',x.chaptersSubtitle);text('ratingTitle',x.rating);text('ratingSubtitle',x.ratingSubtitle);text('ratingLeague',x.overallRating);text('myPositionLabel',x.myPosition);text('refreshRating',x.refresh);
@@ -497,7 +498,7 @@ document.querySelectorAll('.modal').forEach(m=>m.onclick=e=>{if(e.target===m)clo
 document.addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelectorAll('.modal').forEach(m=>close(m.id))});
 
 $('ratingBack').onclick=()=>screen('home');let ratingReq=0;
-async function rating(){const x=t();screen('ratingScreen');const id=++ratingReq,board=$('leaderboard');board.textContent=x.loading;try{if(pw.hasAuth)await pw.login().catch(e=>pw.status(e.message));const rows=await pw.leaderboard();if(id!==ratingReq)return;board.replaceChildren();if(!rows.length){board.textContent=x.noPlayers;return}rows.forEach(p=>{const row=document.createElement('div');row.className='rankrow'+(p.photoword_id===pw.player?.photoword_id?' me':'');const rank=document.createElement('b');rank.className='rank-place';rank.textContent=p.rank===1?'🥇':p.rank===2?'🥈':p.rank===3?'🥉':'#'+p.rank;const person=document.createElement('div'),title=document.createElement('strong'),sub=document.createElement('small'),pt=earnedChapterTitle(p);title.textContent=pw.name(p);sub.textContent=(pt?pt+' · ':'')+Number(p.completed_levels||0)+' '+x.levels;person.append(title,sub);const xp=document.createElement('b');xp.className='rank-score';xp.textContent=p.xp+' XP';const avatar=document.createElement("span");avatar.className="frame-avatar rank-avatar";avatar.textContent=pw.name(p).charAt(0).toUpperCase();avatar.dataset.playerCode=p.photoword_id;row.append(rank,avatar,person,xp);board.append(row)});window.PWFrames?.hydrateRating?.(rows)}catch(e){board.textContent=e.message}}
+async function rating(){const x=t();screen('ratingScreen');const id=++ratingReq,board=$('leaderboard');board.textContent=x.loading;if(!pw.player){text('myRank','—');text('myXp',x.loading)}try{if(pw.hasAuth)await pw.login(true).catch(e=>{if(!pw.player)text('myXp',e.message);pw.status(e.message)});const rows=await pw.leaderboard();if(id!==ratingReq)return;board.replaceChildren();if(!rows.length){board.textContent=x.noPlayers;return}rows.forEach(p=>{const row=document.createElement('div');row.className='rankrow'+(p.photoword_id===pw.player?.photoword_id?' me':'');const rank=document.createElement('b');rank.className='rank-place';rank.textContent=p.rank===1?'🥇':p.rank===2?'🥈':p.rank===3?'🥉':'#'+p.rank;const person=document.createElement('div'),title=document.createElement('strong'),sub=document.createElement('small'),pt=earnedChapterTitle(p);title.textContent=pw.name(p);sub.textContent=(pt?pt+' · ':'')+Number(p.completed_levels||0)+' '+x.levels;person.append(title,sub);const xp=document.createElement('b');xp.className='rank-score';xp.textContent=p.xp+' XP';const avatar=document.createElement("span");avatar.className="frame-avatar rank-avatar";avatar.textContent=pw.name(p).charAt(0).toUpperCase();avatar.dataset.playerCode=p.photoword_id;row.append(rank,avatar,person,xp);board.append(row)});window.PWFrames?.hydrateRating?.(rows)}catch(e){board.textContent=e.message}}
 ['ratingNav','ratingShortcut','refreshRating'].forEach(id=>$(id).onclick=rating);
 
 window.addEventListener('pw:player',e=>update(e.detail));
