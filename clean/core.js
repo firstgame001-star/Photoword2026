@@ -44,7 +44,7 @@
   function name(p) {
     if(p?.game_nickname) return p.game_nickname;
     const value=[p?.first_name,p?.last_name].filter(Boolean).join(' ').trim();
-    return /[\p{L}\p{N}]/u.test(value)?value:(p?.photoword_id||'Player');
+    return /[\p{L}\p{N}]/u.test(value)?value:(lang()==='ru'?'Игрок':lang()==='az'?'Oyunçu':'Player');
   }
   async function request(path, body, headers = {}, timeoutMs = 12000) {
     const controller = new AbortController();
