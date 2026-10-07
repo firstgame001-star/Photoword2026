@@ -305,19 +305,22 @@ Deno.serve(async(req)=>{
    if(cfg.error)return reply({error:"shop_failed"},500);
    const blockId=String((cfg.data||[]).find((x:any)=>x.key==="adsgram_reward_block_id")?.value||"").trim();
    const day=new Date(now);day.setUTCHours(0,0,0,0);
-   const adCount=await db.from("ad_reward_claims").select("id",{count:"exact",head:true}).eq("player_id",player.id).eq("status","claimed").gte("claimed_at",day.toISOString());
-   if(adCount.error)return reply({error:"shop_failed"},500);
+   const adRows=await db.from("ad_reward_claims").select("reward_kind,prepared_at,claimed_at,status").eq("player_id",player.id).order("prepared_at",{ascending:false}).limit(1000);
+   if(adRows.error)return reply({error:"shop_failed"},500);
+   const claimed=(adRows.data||[]).filter((r:any)=>r.status==="claimed"&&Date.parse(r.claimed_at)>=day.getTime());
+   const coinCount=claimed.filter((r:any)=>r.reward_kind==="coins").length,energyCount=claimed.filter((r:any)=>r.reward_kind==="energy").length;
+   const nextAd=adRows.data?.[0]?.prepared_at?new Date(Date.parse(adRows.data[0].prepared_at)+600000).toISOString():null;
 
    const [coinHistory,energyHistory,adHistory]=await Promise.all([
     db.from("star_purchases").select("stars,coins,created_at").eq("player_id",player.id).order("created_at",{ascending:false}).limit(20),
     db.from("challenge_energy_purchases").select("stars,energy_added,created_at").eq("player_id",player.id).order("created_at",{ascending:false}).limit(20),
-    db.from("ad_reward_claims").select("reward_coins,claimed_at").eq("player_id",player.id).eq("status","claimed").order("claimed_at",{ascending:false}).limit(20)
+    db.from("ad_reward_claims").select("reward_coins,reward_energy,claimed_at").eq("player_id",player.id).eq("status","claimed").order("claimed_at",{ascending:false}).limit(20)
    ]);
    if(coinHistory.error||energyHistory.error||adHistory.error)return reply({error:"shop_failed"},500);
    const history:any[]=[];
    for(const row of coinHistory.data||[])history.push({type:"coins",coins:Number(row.coins||0),stars:Number(row.stars||0),at:row.created_at});
    for(const row of energyHistory.data||[])history.push({type:"energy",energy:Number(row.energy_added||0),stars:Number(row.stars||0),at:row.created_at});
-   for(const row of adHistory.data||[])history.push({type:"ad",coins:Number(row.reward_coins||0),stars:0,at:row.claimed_at});
+   for(const row of adHistory.data||[])history.push({type:"ad",coins:Number(row.reward_coins||0),energy:Number(row.reward_energy||0),stars:0,at:row.claimed_at});
    history.sort((a,b)=>Date.parse(b.at||"")-Date.parse(a.at||""));
 
    return reply({shop:{
@@ -325,7 +328,7 @@ Deno.serve(async(req)=>{
     energy,
     energy_max:energyMax,
     next_energy_at:energy<energyMax?new Date(ref+energyMs).toISOString():null,
-    ads:{configured:Boolean(blockId),reward_coins:5,claimed_today:Number(adCount.count||0),daily_limit:10},
+    ads:{configured:Boolean(blockId),reward_coins:5,claimed_today:coinCount,daily_limit:3,energy_claimed_today:energyCount,energy_daily_limit:2,next_ad_at:nextAd,cooldown_seconds:600},
     history:history.slice(0,30)
    }});
   }
@@ -348,14 +351,9 @@ Deno.serve(async(req)=>{
   if(action==="ad_prepare"){
    const cfg=await db.from("app_config").select("value").eq("key","adsgram_reward_block_id").maybeSingle();
    const blockId=String(cfg.data?.value||"").trim();if(!blockId)return reply({error:"ads_not_configured"},409);
-   const day=new Date();day.setUTCHours(0,0,0,0);
-   const cnt=await db.from("ad_reward_claims").select("id",{count:"exact",head:true}).eq("player_id",player.id).eq("status","claimed").gte("claimed_at",day.toISOString());
-   if((cnt.count??0)>=10)return reply({error:"ad_daily_limit"},429);
-   const recent=await db.from("ad_reward_claims").select("prepared_at").eq("player_id",player.id).order("prepared_at",{ascending:false}).limit(1).maybeSingle();
-   if(recent.data?.prepared_at&&Date.now()-Date.parse(recent.data.prepared_at)<120000)return reply({error:"ad_cooldown"},429);
-   const created=await db.from("ad_reward_claims").insert({player_id:player.id}).select("nonce").single();
-   if(created.error)return reply({error:"ad_prepare_failed"},500);
-   return reply({nonce:created.data.nonce,block_id:blockId,reward:5});
+   const r=await db.rpc("prepare_ad_reward_server",{p_telegram_id:user.id,p_kind:String(body.rewardKind||"coins")});
+   if(r.error){const m=String(r.error.message||"");const e=["ad_daily_limit","ad_cooldown","energy_full","bad_reward"].find(x=>m.includes(x))||"ad_prepare_failed";return reply({error:e},409);}
+   return reply({...r.data,block_id:blockId});
   }
   if(action==="ad_claim"){
    const r=await db.rpc("claim_ad_reward_server",{p_telegram_id:user.id,p_nonce:String(body.nonce||"")});
