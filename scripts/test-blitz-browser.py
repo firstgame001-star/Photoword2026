@@ -1,9 +1,13 @@
 """Published Blitz UI with the server answer contract; real accounts are untouched."""
-import ast, json, time, re, urllib.parse, uuid
+import ast, json, time, re, urllib.parse, uuid, threading
+from functools import partial
+from http.server import ThreadingHTTPServer, SimpleHTTPRequestHandler
 from pathlib import Path
 from playwright.sync_api import sync_playwright, expect
 
-BASE='https://firstgame001-star.github.io/Photoword2026/'
+server=ThreadingHTTPServer(('127.0.0.1',0),partial(SimpleHTTPRequestHandler,directory=str(Path.cwd())))
+threading.Thread(target=server.serve_forever,daemon=True).start()
+BASE=f'http://127.0.0.1:{server.server_port}/'
 tree=ast.parse(Path('scripts/test-live-entries.py').read_text())
 needed={'auth_fragment','install_mock','parse_json_array_after','current_challenge_answer','tap_challenge_word','relevant_errors'}
 exec(compile(ast.Module(body=[n for n in tree.body if isinstance(n,ast.FunctionDef) and n.name in needed],type_ignores=[]),'<smoke-helpers>','exec'))
@@ -39,3 +43,5 @@ with sync_playwright() as p:
         assert not relevant_errors(errors),errors
         ctx.close();print('PASS: published Blitz correct/wrong answer and score in '+language)
     browser.close()
+
+server.shutdown()
