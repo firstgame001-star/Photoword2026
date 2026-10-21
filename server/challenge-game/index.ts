@@ -7,6 +7,7 @@ async function sign(key:Uint8Array,data:string){const k=await crypto.subtle.impo
 async function verify(raw:unknown,token:string){
  if(typeof raw!=="string"||raw.length>16384)return null;
  const p=new URLSearchParams(raw),hash=p.get("hash");if(!hash||!/^[a-fA-F0-9]{64}$/.test(hash))return null;
+ const seen=new Set<string>();for(const [key] of p){if(seen.has(key))return null;seen.add(key)}
  const date=Number(p.get("auth_date")),now=Date.now()/1000;if(!Number.isInteger(date)||date<=0||now-date>86400||date>now+60)return null;
  p.delete("hash");
  const check=[...p.entries()].sort(([a],[b])=>a<b?-1:a>b?1:0).map(([k,v])=>k+"="+v).join("\n");
@@ -18,7 +19,7 @@ async function verify(raw:unknown,token:string){
 }
 const ENERGY_MAX=5,ENERGY_MS=30*60*1000;
 
-const RUN_ID=/^[0-9a-f-]{36}$/i;
+const RUN_ID=/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 function puzzleLetters(answer:string,runId:string,qid:number,language:string){
  const alpha=language==='az'?'ABCÇDEƏFGĞHXIİJKLMNOÖPQRSŞTUÜVYZ':language==='en'?'ABCDEFGHIJKLMNOPQRSTUVWXYZ':'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЫЭЮЯ';
  let seed=2166136261;for(const c of runId+':'+qid+':'+language)seed=Math.imul(seed^c.charCodeAt(0),16777619)>>>0;
@@ -53,9 +54,12 @@ async function state(db:any,playerId:string){
 Deno.serve(async(req)=>{
  if(req.method==="OPTIONS")return new Response(null,{status:204,headers});
  if(req.method!=="POST")return reply({error:"method"},405);
+ if(req.headers.get('origin')&&req.headers.get('origin')!=='https://firstgame001-star.github.io')return reply({error:'origin'},403);
  const token=Deno.env.get("TELEGRAM_BOT_TOKEN");if(!token)return reply({error:"not_configured"},503);
  try{
-  const body=await req.json(),user=await verify(body?.initData,token);if(!user)return reply({error:"invalid_telegram_auth"},401);
+  const raw=await req.text();if(raw.length>32768)return reply({error:'body_too_large'},413);
+  let body;try{body=JSON.parse(raw)}catch{return reply({error:'json'},400)}
+  const user=await verify(body?.initData,token);if(!user)return reply({error:"invalid_telegram_auth"},401);
   const db=createClient(Deno.env.get("SUPABASE_URL")!,Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,{auth:{persistSession:false,autoRefreshToken:false}});
   const p=(await db.from("players").select("id,progress_generation").eq("telegram_id",user.id).maybeSingle()).data;if(!p?.id)return reply({error:"player_not_found"},404);
   if(body.progressGeneration!==undefined&&body.progressGeneration!==p.progress_generation)return reply({error:"progress_reset"},409);
