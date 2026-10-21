@@ -16,7 +16,16 @@ function check(item,word,label,l){
 for(const row of banks.main)for(const l of languages)check(combined[l][row.level_id],row[l],'main '+row.level_id,l);
 const themeMap=new Map(themeBanks.map(([id,bn,tn])=>{const [ru,tr]=themeBank(id,bn,tn);return[id,{ru,en:tr.en,az:tr.az}]}));
 for(const row of banks.themes)for(const l of languages)check(themeMap.get(row.theme_id)[l][row.level_id],row[l],row.theme_id+' '+row.level_id,l);
-for(const row of banks.challenges)for(const l of languages)assert.equal(challengeAll[row.question_id][l],row['answer_'+l],'Server/client challenge mismatch '+row.question_id+' '+l);
+// The browser deliberately no longer contains answer words; verify the private server export instead.
+if(banks.challenges.length!==400)failures.push('Challenge server bank must contain 400 questions');
+for(const row of banks.challenges){
+ if(!challengeAll[row.question_id]?.p||challengeAll[row.question_id].p.length!==4)failures.push('Missing public challenge clue for '+row.question_id);
+ for(const l of languages)if(typeof row['answer_'+l]!=='string'||!row['answer_'+l])failures.push('Missing private '+l+' challenge answer '+row.question_id);
+}
+for(const l of languages){
+ const answers=banks.challenges.map(row=>norm(row['answer_'+l]||'',l));
+ if(new Set(answers).size!==answers.length)failures.push('Duplicate private '+l+' challenge answers');
+}
 const daily=JSON.parse(readFileSync('server/daily-bank.json','utf8'));
 for(const row of banks.daily)for(const l of languages)assert.equal(row[l],daily[row.id-1][l],'Daily mismatch '+row.id+' '+l);
 for(const [name,rows] of [['main',banks.main],['themes',banks.themes],['daily',banks.daily]])for(const l of languages){

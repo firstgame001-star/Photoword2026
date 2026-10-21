@@ -7,6 +7,7 @@ async function sign(key:Uint8Array,data:string){const k=await crypto.subtle.impo
 async function verify(raw:unknown,token:string){
  if(typeof raw!=="string"||raw.length>16384)return null;
  const p=new URLSearchParams(raw),hash=p.get("hash");if(!hash||!/^[a-fA-F0-9]{64}$/.test(hash))return null;
+ const seen=new Set<string>();for(const [key] of p){if(seen.has(key))return null;seen.add(key)}
  const date=Number(p.get("auth_date")),now=Date.now()/1000;if(!Number.isInteger(date)||date<=0||now-date>86400||date>now+60)return null;
  p.delete("hash");
  const check=[...p.entries()].sort(([a],[b])=>a<b?-1:a>b?1:0).map(([k,v])=>k+"="+v).join("\n");
@@ -17,6 +18,29 @@ async function verify(raw:unknown,token:string){
  try{const u=JSON.parse(p.get("user")||"null");return u&&Number.isSafeInteger(u.id)&&u.id>0?u:null;}catch{return null;}
 }
 const ENERGY_MAX=5,ENERGY_MS=30*60*1000;
+
+const RUN_ID=/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+function puzzleLetters(answer:string,runId:string,qid:number,language:string){
+ const alpha=language==='az'?'ABCÇDEƏFGĞHXIİJKLMNOÖPQRSŞTUÜVYZ':language==='en'?'ABCDEFGHIJKLMNOPQRSTUVWXYZ':'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЫЭЮЯ';
+ let seed=2166136261;for(const c of runId+':'+qid+':'+language)seed=Math.imul(seed^c.charCodeAt(0),16777619)>>>0;
+ const rnd=()=>{seed^=seed<<13;seed^=seed>>>17;seed^=seed<<5;return(seed>>>0)/4294967296};
+ const shuffle=(xs:string[])=>{for(let i=xs.length-1;i>0;i--){const j=Math.floor(rnd()*(i+1));[xs[i],xs[j]]=[xs[j],xs[i]]}return xs};
+ const word=Array.from(answer),decoys=shuffle(Array.from(alpha).filter(ch=>!word.includes(ch)));
+ return shuffle([...word,...decoys.slice(0,Math.max(0,Math.max(12,word.length+5)-word.length))]);
+}
+async function livePuzzle(db:any,playerId:string,runId:string,mode:string,qid:number){
+ if(!RUN_ID.test(runId)||!Number.isInteger(qid)||qid<0||qid>399)return null;
+ const run=await db.from('challenge_runs').select('language,mode,finished_at').eq('id',runId).eq('player_id',playerId).maybeSingle();
+ if(run.error||!run.data||run.data.finished_at!==null||run.data.mode!==mode)return null;
+ const current=await db.from('challenge_run_questions').select('question_id').eq('run_id',runId).is('answered_at',null).order('seq',{ascending:true}).limit(1).maybeSingle();
+ if(current.error||current.data?.question_id!==qid)return null;
+ const row=await db.from('challenge_question_answers').select('answer_ru,answer_en,answer_az').eq('question_id',qid).maybeSingle();
+ if(row.error||!row.data)return null;
+ const l=run.data.language,answer=row.data[l==='en'?'answer_en':l==='az'?'answer_az':'answer_ru'];
+ if(typeof answer!=='string'||!answer)return null;
+ return {answer,letters:puzzleLetters(answer,runId,qid,l),length:Array.from(answer).length};
+}
+
 async function state(db:any,playerId:string){
  const fresh=await db.rpc("refresh_challenge_energy_server",{p_player_id:playerId});
  if(fresh.error)throw fresh.error;
@@ -30,9 +54,12 @@ async function state(db:any,playerId:string){
 Deno.serve(async(req)=>{
  if(req.method==="OPTIONS")return new Response(null,{status:204,headers});
  if(req.method!=="POST")return reply({error:"method"},405);
+ if(req.headers.get('origin')&&req.headers.get('origin')!=='https://firstgame001-star.github.io')return reply({error:'origin'},403);
  const token=Deno.env.get("TELEGRAM_BOT_TOKEN");if(!token)return reply({error:"not_configured"},503);
  try{
-  const body=await req.json(),user=await verify(body?.initData,token);if(!user)return reply({error:"invalid_telegram_auth"},401);
+  const raw=await req.text();if(raw.length>32768)return reply({error:'body_too_large'},413);
+  let body;try{body=JSON.parse(raw)}catch{return reply({error:'json'},400)}
+  const user=await verify(body?.initData,token);if(!user)return reply({error:"invalid_telegram_auth"},401);
   const db=createClient(Deno.env.get("SUPABASE_URL")!,Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,{auth:{persistSession:false,autoRefreshToken:false}});
   const p=(await db.from("players").select("id,progress_generation").eq("telegram_id",user.id).maybeSingle()).data;if(!p?.id)return reply({error:"player_not_found"},404);
   if(body.progressGeneration!==undefined&&body.progressGeneration!==p.progress_generation)return reply({error:"progress_reset"},409);
@@ -46,6 +73,11 @@ Deno.serve(async(req)=>{
    return reply({challenge:{...await state(db,p.id),...run.data}});
   }
 
+  if(action==="puzzle"){
+   const puzzle=await livePuzzle(db,p.id,String(body.runId||""),mode,Number(body.questionId));
+   if(!puzzle)return reply({error:"question_order"},409);
+   return reply({challenge:await state(db,p.id),puzzle:{length:puzzle.length,letters:puzzle.letters}});
+  }
   if(action==="answer"){
    const runId=String(body.runId||""),questionId=Number(body.questionId),answer=String(body.answer||"");
    if(!["limited","nohint","blitz"].includes(mode)||!/^[0-9a-f-]{36}$/i.test(runId)||!Number.isInteger(questionId)||questionId<0||questionId>399||answer.length>40)return reply({error:"bad_answer"},400);
@@ -72,16 +104,35 @@ Deno.serve(async(req)=>{
   }
   if(action==="hint"){
    if(mode!=="blitz")return reply({error:"hints_blitz_only"},400);
-   const costs:any={letter:75,remove:125,text:200};
-   const hintType=String(body.hintType||""),cost=costs[hintType];
+   const hintType=String(body.hintType||""),cost=({letter:75,remove:125,text:200} as Record<string,number>)[hintType];
    if(!cost)return reply({error:"bad_hint"},400);
-   const spent=await db.rpc("spend_challenge_coins_server",{p_telegram_id:user.id,p_cost:cost,p_reason:"blitz_"+hintType});
-   if(spent.error){
-    const m=String(spent.error.message||"");
-    return reply({error:m.includes("insufficient_coins")?"insufficient_coins":"hint_failed"},m.includes("insufficient_coins")?402:500);
+   // Keep in-flight clients compatible until their cached JavaScript is refreshed.
+   if(!body.runId||body.questionId===undefined){
+     const legacy=await db.rpc("spend_challenge_coins_server",{p_telegram_id:user.id,p_cost:cost,p_reason:"blitz_"+hintType});
+     if(legacy.error){const m=String(legacy.error.message||"");return reply({error:m.includes("insufficient_coins")?"insufficient_coins":"hint_failed"},m.includes("insufficient_coins")?402:500)}
+     const player=Array.isArray(legacy.data)?legacy.data[0]:legacy.data;
+     return reply({challenge:await state(db,p.id),coins:Number(player?.coins||0),cost,hintType});
    }
+   const puzzle=await livePuzzle(db,p.id,String(body.runId||""),mode,Number(body.questionId));
+   if(!puzzle)return reply({error:"question_order"},409);
+   const fixed=Array.isArray(body.fixedPositions)?body.fixedPositions.filter((n:unknown)=>Number.isInteger(n)&&Number(n)>=0&&Number(n)<puzzle.length).slice(0,puzzle.length):[];
+   const removed=Array.isArray(body.removedIndices)?body.removedIndices.filter((n:unknown)=>Number.isInteger(n)&&Number(n)>=0&&Number(n)<puzzle.letters.length).slice(0,puzzle.letters.length):[];
+   let hint:Record<string,unknown>={};
+   if(hintType==="letter"){
+     const available=Array.from({length:puzzle.length},(_,n)=>n).filter(n=>!fixed.includes(n));
+     if(!available.length)return reply({error:"all_letters"},409);
+     const position=available[Math.floor(Math.random()*available.length)];
+     hint={position,letter:Array.from(puzzle.answer)[position]};
+   }
+   if(hintType==="remove"){
+     const wrong=puzzle.letters.map((ch:string,n:number)=>({ch,n})).filter((r:{ch:string,n:number})=>!Array.from(puzzle.answer).includes(r.ch)&&!removed.includes(r.n)).slice(0,3);
+     if(!wrong.length)return reply({error:"no_extra_letters"},409);
+     hint={removeIndices:wrong.map((r:{ch:string,n:number})=>r.n)};
+   }
+   const spent=await db.rpc("spend_challenge_coins_server",{p_telegram_id:user.id,p_cost:cost,p_reason:"blitz_"+hintType});
+   if(spent.error){const m=String(spent.error.message||"");return reply({error:m.includes("insufficient_coins")?"insufficient_coins":"hint_failed"},m.includes("insufficient_coins")?402:500);}
    const row=Array.isArray(spent.data)?spent.data[0]:spent.data;
-   return reply({challenge:await state(db,p.id),coins:Number(row?.coins||0),cost,hintType});
+   return reply({challenge:await state(db,p.id),coins:Number(row?.coins||0),cost,hintType,hint});
   }
   return reply({error:"unknown_action"},400);
  }catch{return reply({error:"server_error"},500);}

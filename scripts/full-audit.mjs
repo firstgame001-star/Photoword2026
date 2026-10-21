@@ -116,11 +116,9 @@ const extraArrayEnd=challengeExtra.lastIndexOf(']');
 const challengeAdded=JSON.parse(challengeExtra.slice(extraArrayStart,extraArrayEnd+1));
 const challengeAll=[...challengeBase,...challengeAdded];
 if(challengeBase.length!==200||challengeAdded.length!==200||challengeAll.length!==400)throw Error('Challenge bank must be 200+200=400');
-for(const lang of ['ru','en','az']){
- const words=challengeAll.map(x=>x[lang]);
- if(words.some(x=>!x))throw Error('Challenge '+lang+' has empty answer');
- if(new Set(words).size!==400)throw Error('Challenge '+lang+' contains duplicate answers');
-}
+if(challengeAll.some(x=>['ru','en','az'].some(lang=>Object.hasOwn(x,lang))))throw Error('Challenge client bank must not expose answers');
+const challengeServer=readFileSync(resolve(base,'../server/challenge-game/index.ts'),'utf8');
+if(!challengeServer.includes('livePuzzle(')||!challengeServer.includes('action==="puzzle"')||!challengeServer.includes('puzzleLetters('))throw Error('Server-owned challenge puzzle endpoint is incomplete');
 challengeAll.forEach((x,i)=>{if(!Array.isArray(x.p)||x.p.length!==4)throw Error('Challenge item '+(i+1)+' must have 4 clues')});
 challengeAdded.forEach((x,i)=>{for(const lang of ['ru','en','az'])if(!x.h?.[lang])throw Error('Challenge extra hint missing '+lang+' at '+(i+201))});
 if(!challenge.includes('ENERGY_MAX=5')||challenge.includes('reserve_energy'))throw Error('Challenge energy must remain strict 0-5 with no reserve');
@@ -204,7 +202,7 @@ console.log('PASS: full PhotoWord audit — DOM integrity, 680 main levels, 400 
 
 
 // Server-held answer banks are not included in public assets. Check their release flags
-// and validate public clue sets; challenge words are present in the public challenge payload.
+// and validate public clue sets; challenge words must not be present in the browser payload.
 function normalize(word){return word.normalize('NFC').toLocaleUpperCase('az').replace(/Ё/g,'Е').replace(/[\s\p{P}\p{S}]/gu,'')}
 function assertUniqueWords(rows,label){
  for(const lang of ['ru','en','az']){
@@ -218,12 +216,11 @@ function assertUniqueClues(rows,label){
 }
 const mainContentRows=Object.keys(combined.ru).map(n=>({photos:combined.ru[n].photos.map(p=>p[0])}));
 const themeContentRows=themeBanks.flatMap(([id,bn,tn])=>{const[b]=themeBank(id,bn,tn);return Object.keys(b).map(n=>({photos:b[n].photos.map(p=>p[0])}))});
-const challengeContentRows=challengeAll.map(r=>({ru:r.ru,en:r.en,az:r.az,photos:r.p}));
+const challengeContentRows=challengeAll.map(r=>({photos:r.p}));
 assertUniqueClues(mainContentRows,'Main');
 assertUniqueClues(themeContentRows,'Themes');
-assertUniqueWords(challengeContentRows,'Challenges');
 assertUniqueClues(challengeContentRows,'Challenges');
-console.log('PASS: server answer-bank flags, client clue sets, and challenge word uniqueness verified.');
+console.log('PASS: private server answer contracts and challenge image clue uniqueness verified.');
 export {combined, themeBanks, themeBank, challengeAll};
 
 const daily=JSON.parse(readFileSync('server/daily-bank.json','utf8'));
