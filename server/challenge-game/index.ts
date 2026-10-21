@@ -106,6 +106,13 @@ Deno.serve(async(req)=>{
    if(mode!=="blitz")return reply({error:"hints_blitz_only"},400);
    const hintType=String(body.hintType||""),cost=({letter:75,remove:125,text:200} as Record<string,number>)[hintType];
    if(!cost)return reply({error:"bad_hint"},400);
+   // Keep in-flight clients compatible until their cached JavaScript is refreshed.
+   if(!body.runId||body.questionId===undefined){
+     const legacy=await db.rpc("spend_challenge_coins_server",{p_telegram_id:user.id,p_cost:cost,p_reason:"blitz_"+hintType});
+     if(legacy.error){const m=String(legacy.error.message||"");return reply({error:m.includes("insufficient_coins")?"insufficient_coins":"hint_failed"},m.includes("insufficient_coins")?402:500)}
+     const player=Array.isArray(legacy.data)?legacy.data[0]:legacy.data;
+     return reply({challenge:await state(db,p.id),coins:Number(player?.coins||0),cost,hintType});
+   }
    const puzzle=await livePuzzle(db,p.id,String(body.runId||""),mode,Number(body.questionId));
    if(!puzzle)return reply({error:"question_order"},409);
    const fixed=Array.isArray(body.fixedPositions)?body.fixedPositions.filter((n:unknown)=>Number.isInteger(n)&&Number(n)>=0&&Number(n)<puzzle.length).slice(0,puzzle.length):[];
