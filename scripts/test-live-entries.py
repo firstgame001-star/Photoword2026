@@ -936,11 +936,18 @@ def install_mock(ctx,account,completed,lang):
                 ch['question_ids']=fresh[:10];seen.extend(ch['question_ids'])
                 run_id=body.get('runId') or account['_challenge_run_id']
                 account['_challenge_test_runs'][run_id]['ids'].extend(ch['question_ids'])
+            if action=='puzzle':
+                run=account.get('_challenge_test_runs',{}).get(body.get('runId'))
+                if not run or not run['ids'] or body.get('questionId')!=run['ids'][0]:
+                    route.fulfill(status=409,content_type='application/json',body=json.dumps({'error':'question_order'}),headers={'Access-Control-Allow-Origin':'*'});return
+                expected={'ru':'ТЕСТ','en':'TEST','az':'TEST'}[run['language']]
+                letters=list(expected)+(['А','Б','В','Г','Д','Е','Ж','З'] if run['language']=='ru' else list('ABCDEFGH'))
+                route.fulfill(status=200,content_type='application/json',body=json.dumps({'challenge':ch,'puzzle':{'length':len(expected),'letters':letters}}),headers={'Access-Control-Allow-Origin':'*'});return
             if action=='answer':
                 run=account.get('_challenge_test_runs',{}).get(body.get('runId'))
                 if not run or not run['ids'] or body.get('questionId')!=run['ids'][0]:
                     route.fulfill(status=409,content_type='application/json',body=json.dumps({'error':'question_order'}),headers={'Access-Control-Allow-Origin':'*'});return
-                expected=CHALLENGE_BANK[run['ids'][0]][run['language']]
+                expected={'ru':'ТЕСТ','en':'TEST','az':'TEST'}[run['language']]
                 correct=body.get('answer','').strip().upper()==expected.upper()
                 if correct:
                     run['ids'].pop(0);run['score']+=1;run['streak']+=1;run['best_streak']=max(run['best_streak'],run['streak'])
@@ -955,7 +962,9 @@ def install_mock(ctx,account,completed,lang):
                 if account['coins']<cost:
                     route.fulfill(status=402,content_type='application/json',body=json.dumps({'error':'insufficient_coins'}),headers={'Access-Control-Allow-Origin':'*'});return
                 account['coins']-=cost
-                route.fulfill(status=200,content_type='application/json',body=json.dumps({'challenge':ch,'coins':account['coins'],'cost':cost,'hintType':body['hintType']}),headers={'Access-Control-Allow-Origin':'*'});return
+                expected={'ru':'ТЕСТ','en':'TEST','az':'TEST'}[lang]
+                hint={'position':next((n for n in range(len(expected)) if n not in body.get('fixedPositions',[])),0),'letter':expected[next((n for n in range(len(expected)) if n not in body.get('fixedPositions',[])),0)]} if body['hintType']=='letter' else {'removeIndices':[len(expected),len(expected)+1,len(expected)+2]} if body['hintType']=='remove' else {}
+                route.fulfill(status=200,content_type='application/json',body=json.dumps({'challenge':ch,'coins':account['coins'],'cost':cost,'hintType':body['hintType'],'hint':hint}),headers={'Access-Control-Allow-Origin':'*'});return
             if action=='finish':
                 run=account['_challenge_test_runs'][body['runId']]
                 score=run['score'];streak=run['best_streak'];coins=xp=0
@@ -1108,7 +1117,7 @@ def current_challenge_answer(page,language):
         last_clues=clues
         item=CHALLENGE_BY_PHOTOS.get(clues)
         if item:
-            answer=item[language]
+            answer={'ru':'ТЕСТ','en':'TEST','az':'TEST'}[language]
             letters=page.locator('#challengeLetters .letter').all_inner_texts()
             if all(letters.count(ch)>=answer.count(ch) for ch in set(answer)):
                 return answer
