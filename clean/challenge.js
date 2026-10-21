@@ -3003,7 +3003,7 @@ async function checkWord(){
  if(serverMode&&rawInit()&&state?.run_id){
   hintBusy=true;renderInput();let result;
   try{result=await api('answer',{mode,runId:state.run_id,questionId:currentQuestionId,answer:word,language:lang()})}
-  catch(err){flash(String(err?.message)==='answer_wait'?tr().wait:(lang()==='en'?'Answer could not be checked. Try again.':lang()==='az'?'Cavab yoxlanmadı. Yenidən cəhd et.':'Не удалось проверить ответ. Попробуй ещё раз.'));return}
+  catch(err){if(String(err?.message)==='answer_wait'){flash(tr().wait);later(()=>{if(running&&selected.length&&!selected.includes(null))checkWord()},950);return}flash(lang()==='en'?'Answer could not be checked. Try again.':lang()==='az'?'Cavab yoxlanmadı. Yenidən cəhd et.':'Не удалось проверить ответ. Попробуй ещё раз.');return}
   finally{hintBusy=false;renderInput()}
   const a=result?.answer_result;if(!a){flash(lang()==='en'?'Answer could not be checked.':lang()==='az'?'Cavab yoxlanmadı.':'Не удалось проверить ответ.');return}
   correct=Number(a.score||0);streak=Number(a.streak||0);bestRunStreak=Number(a.best_streak||0);hearts=Math.max(0,3-Number(a.mistakes||0));
