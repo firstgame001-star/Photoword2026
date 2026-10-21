@@ -12,14 +12,14 @@ context.window.document=context.document;
 
 context.performance={now:()=>0};context.window.Telegram={WebApp:{initData:'signed-test'}};
 let release,callsCount=0;
-context.fetch=async()=>{callsCount++;return await new Promise(resolve=>release=()=>resolve({ok:true,json:async()=>({challenge:{question_ids:[20,21,22,23,24,25,26,27,28,29]}})}))};
+context.fetch=async(url,opts)=>{callsCount++;const action=JSON.parse(opts.body).action;if(action==='puzzle')return {ok:true,json:async()=>({challenge:{},puzzle:{length:4,letters:[...'МОСТАБВГДЕЁЖ']}})};assert.equal(action,'questions');return await new Promise(resolve=>release=()=>resolve({ok:true,json:async()=>({challenge:{question_ids:[20,21,22,23,24,25,26,27,28,29]}})}))};
 let source=readFileSync('clean/challenge.js','utf8');
-source=source.replace(/\}\)\(\);\s*$/,`window.testChallenge={checkWord,configureBlitz(language){localStorage.setItem('pw.language',language);running=true;serverMode=true;mode='blitz';state={run_id:'00000000-0000-0000-0000-000000000099'};currentQuestionId=0;hintBusy=false;score=0;correct=0;streak=0;bestRunStreak=0;deadline=60000},fill(word){tiles=[...word];selected=tiles.map((_,i)=>i)},metrics:()=>({score,correct,streak,deadline}),savePendingFinish,retryPendingFinishes,pendingFinishes,nextQ,cancelPending,choose,set(ids){running=true;serverMode=true;mode='nohint';state={run_id:'test-run'};serverQuestions=ids;questionFetch=null;questionLoading=false},answer:()=>answer,loading:()=>questionLoading,buffer:()=>[...serverQuestions]};})();`);
+source=source.replace(/\}\)\(\);\s*$/,`window.testChallenge={checkWord,configureBlitz(language){localStorage.setItem('pw.language',language);running=true;serverMode=true;mode='blitz';state={run_id:'00000000-0000-0000-0000-000000000099'};currentQuestionId=0;hintBusy=false;score=0;correct=0;streak=0;bestRunStreak=0;deadline=60000},fill(word){tiles=[...word];selected=tiles.map((_,i)=>i)},metrics:()=>({score,correct,streak,deadline}),savePendingFinish,retryPendingFinishes,pendingFinishes,nextQ,cancelPending,choose,set(ids){running=true;serverMode=true;mode='nohint';state={run_id:'test-run'};serverQuestions=ids;questionFetch=null;questionLoading=false},questionId:()=>currentQuestionId,loading:()=>questionLoading,buffer:()=>[...serverQuestions]};})();`);
 vm.createContext(context);vm.runInContext(source,context);
 const test=context.window.testChallenge;
 test.set([0,1,2,3,4,5,6,7,8,9]);
-await test.nextQ();assert.equal(test.answer(),'СОБАКА');await test.nextQ();assert.equal(test.answer(),'КОШКА');assert.equal(callsCount,0);
-test.set([]);const pending=test.nextQ();assert(test.loading());assert(get('challengeLetters').children.every(e=>e.disabled));release();await pending;assert.equal(test.answer(),'МОСТ');assert.equal(test.buffer().length,9);
+await test.nextQ();assert.equal(test.questionId(),0);await test.nextQ();assert.equal(test.questionId(),1);assert.equal(callsCount,2);
+test.set([]);const pending=test.nextQ();assert(test.loading());assert(get('challengeLetters').children.every(e=>e.disabled));release();await pending;assert.equal(test.questionId(),20);assert.equal(test.buffer().length,9);
 test.set([]);const stale=test.nextQ();test.cancelPending();release();await stale;assert.equal(test.buffer().length,0,'stale run populated buffer');
 console.log('PASS: server question order, input locked during network wait, buffer refill, and stale run cancellation.');
 
