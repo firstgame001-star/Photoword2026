@@ -116,11 +116,9 @@ const extraArrayEnd=challengeExtra.lastIndexOf(']');
 const challengeAdded=JSON.parse(challengeExtra.slice(extraArrayStart,extraArrayEnd+1));
 const challengeAll=[...challengeBase,...challengeAdded];
 if(challengeBase.length!==200||challengeAdded.length!==200||challengeAll.length!==400)throw Error('Challenge bank must be 200+200=400');
-for(const lang of ['ru','en','az']){
- const words=challengeAll.map(x=>x[lang]);
- if(words.some(x=>!x))throw Error('Challenge '+lang+' has empty answer');
- if(new Set(words).size!==400)throw Error('Challenge '+lang+' contains duplicate answers');
-}
+if(challengeAll.some(x=>['ru','en','az'].some(lang=>Object.hasOwn(x,lang))))throw Error('Challenge client bank must not expose answers');
+const challengeServer=readFileSync(resolve(base,'../server/challenge-game/index.ts'),'utf8');
+if(!challengeServer.includes('livePuzzle(')||!challengeServer.includes('action==="puzzle"')||!challengeServer.includes('puzzleLetters('))throw Error('Server-owned challenge puzzle endpoint is incomplete');
 challengeAll.forEach((x,i)=>{if(!Array.isArray(x.p)||x.p.length!==4)throw Error('Challenge item '+(i+1)+' must have 4 clues')});
 challengeAdded.forEach((x,i)=>{for(const lang of ['ru','en','az'])if(!x.h?.[lang])throw Error('Challenge extra hint missing '+lang+' at '+(i+201))});
 if(!challenge.includes('ENERGY_MAX=5')||challenge.includes('reserve_energy'))throw Error('Challenge energy must remain strict 0-5 with no reserve');
