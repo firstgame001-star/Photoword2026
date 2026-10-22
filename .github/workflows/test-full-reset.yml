@@ -1,5 +1,7 @@
 name: Test PhotoWord full reset
 on:
+  pull_request:
+    paths: ['clean/**', 'scripts/**', '.github/workflows/test-full-reset.yml']
   push:
     branches: [main]
     paths: ['scripts/test-full-reset-browser.py', '.github/workflows/test-full-reset.yml', 'clean/core.js', 'clean/home.js']
