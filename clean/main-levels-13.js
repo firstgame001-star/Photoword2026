@@ -506,21 +506,21 @@ window.PW_MAIN_MORE=[...(window.PW_MAIN_MORE||[]),
   "photos": [
     "🧭",
     "🗺️",
-    "🧭",
+    "📐",
     "🚶"
   ],
   "ru": {
-    "hint": "Прибор, который помогает определить стороны света.",
+    "hint": "Угол между направлением на север и направлением к выбранному объекту.",
     "answerLength": 6,
     "pool": "УДАВИБГЕЖМЗТ"
   },
   "en": {
-    "hint": "An instrument that helps you find the cardinal directions.",
+    "hint": "The clockwise angle from north to the direction of a chosen object.",
     "answerLength": 7,
     "pool": "IUAFZHCDEBTM"
   },
   "az": {
-    "hint": "Cəhətləri müəyyən etməyə kömək edən cihaz.",
+    "hint": "Şimal istiqaməti ilə seçilmiş obyektə yönələn istiqamət arasındakı bucaq.",
     "answerLength": 6,
     "pool": "UÇEBİTƏCZDAM"
   }
