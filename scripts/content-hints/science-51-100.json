@@ -99,7 +99,7 @@
     "id": 67,
     "ru": "Сползание масс грунта вниз по склону.",
     "en": "Movement of soil or rock downhill along a slope.",
-    "az": "Torpaq və ya süxurun yamac boyunca aşağı sürüşməsi."
+    "az": "Torpaq qatının yamac boyunca aşağı doğru hərəkəti."
   },
   {
     "id": 68,
@@ -201,7 +201,7 @@
     "id": 84,
     "ru": "Гибкая осевая структура, поддерживающая тело у зародышей хордовых.",
     "en": "A flexible supporting rod along the body of a chordate embryo.",
-    "az": "Xordalı rüşeymində bədən boyunca uzanan elastik dayaq."
+    "az": "Rüşeymdə bədənin oxu boyunca uzanan elastik dayaq."
   },
   {
     "id": 85,
