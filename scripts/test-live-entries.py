@@ -1118,6 +1118,9 @@ def parse_json_array_after(text,token):
 challenge_source=Path('clean/challenge.js').read_text(encoding='utf-8')
 challenge_extra_source=Path('clean/challenge-bank-extra.js').read_text(encoding='utf-8')
 CHALLENGE_BANK=parse_json_array_after(challenge_source,'const Q=')+parse_json_array_after(challenge_extra_source,'window.PW_CHALLENGE_EXTRA=')
+challenge_patches=json.loads(Path('clean/challenge-unique-patches.js').read_text(encoding='utf-8').split('window.PW_CHALLENGE_PATCHES=',1)[1].split(';})();',1)[0])
+for question_id, replacement in challenge_patches.items():
+    CHALLENGE_BANK[int(question_id)] = replacement
 assert len(CHALLENGE_BANK)==400
 CHALLENGE_BY_PHOTOS={tuple(item['p']):item for item in CHALLENGE_BANK}
 assert len(CHALLENGE_BY_PHOTOS)==400
