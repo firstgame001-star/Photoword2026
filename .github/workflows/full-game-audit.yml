@@ -1,5 +1,7 @@
 name: Full PhotoWord audit without purchases and video
 on:
+  pull_request:
+    paths: ['clean/**', 'scripts/**', '.github/workflows/full-game-audit.yml']
   push:
     branches: [main]
     paths: ['clean/**', 'scripts/**', '.github/workflows/full-game-audit.yml']

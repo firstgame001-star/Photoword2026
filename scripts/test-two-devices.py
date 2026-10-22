@@ -33,7 +33,7 @@ def phone(browser,width,language,keys):
         energy=account.setdefault('_challenge_energy',5)
         if body['mode']=='limited':energy-=1;account['_challenge_energy']=energy
         account['_challenge_run_id']=str(uuid.uuid4())
-        account.setdefault('_challenge_test_runs',{})[account['_challenge_run_id']]={'mode':body['mode'],'language':language,'ids':list(ids),'score':0,'streak':0,'best_streak':0,'mistakes':0,'deadline':time.monotonic()+60}
+        account.setdefault('_challenge_test_runs',{})[account['_challenge_run_id']]={'mode':body['mode'],'language':body.get('language',language),'ids':list(ids),'score':0,'streak':0,'best_streak':0,'mistakes':0,'deadline':time.monotonic()+60}
         state={'energy':energy,'energy_max':5,'next_energy_at':None,'limited_best_score':0,'nohint_best_streak':0,'blitz_best_score':0,'blitz_best_streak':0,'server_now':time.strftime('%Y-%m-%dT%H:%M:%SZ',time.gmtime()),'rewarded_runs_today':{'limited':0,'nohint':0,'blitz':0},'reward_limit':3,'run_id':account['_challenge_run_id'],'question_ids':ids}
         route.fulfill(status=200,content_type='application/json',body=json.dumps({'challenge':state}),headers={'Access-Control-Allow-Origin':'*'})
     ctx.route('**/functions/v1/challenge-game',challenge)
@@ -47,7 +47,7 @@ def start(page,mode,key,language):
     expect(page.locator('#challengePhotos .photo')).to_have_count(4)
     expect(page.locator('#challengePhotos .photo').first).to_have_text(CHALLENGE_BANK[batches[key][0]]['p'][0])
     answer=current_challenge_answer(page,language)
-    assert answer==CHALLENGE_BANK[batches[key][0]][language]
+    assert answer=={'ru':'ТЕСТ','en':'TEST','az':'TEST'}[language], 'Unexpected mocked server answer'
     assert page.evaluate('document.documentElement.scrollWidth<=innerWidth+1')
     return answer
 
@@ -64,7 +64,7 @@ with sync_playwright() as pw:
     tap_challenge_word(a,answer_a);expect(a.locator('#challengeCorrectPanel')).to_be_visible()
     a.locator('#challengeCorrectNext').tap()
     expect(a.locator('#challengePhotos .photo').first).to_have_text(CHALLENGE_BANK[batches['phone_a'][1]]['p'][0])
-    assert current_challenge_answer(a,'ru')==CHALLENGE_BANK[batches['phone_a'][1]]['ru']
+    assert current_challenge_answer(a,'ru')=='ТЕСТ', 'Second question must use server-provided answer'
     b.locator('#blitzLetterHint').tap();expect(b.locator('#challengeSlots .slot.fixed')).to_have_count(1)
     expect(b.locator('[data-coins]').first).to_have_text('4925')
     a.screenshot(path=str(OUT/'iphone-ru.png'));b.screenshot(path=str(OUT/'android-en.png'))

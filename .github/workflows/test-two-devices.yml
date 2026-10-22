@@ -1,5 +1,7 @@
 name: Test two PhotoWord devices
 on:
+  pull_request:
+    paths: ['clean/**', 'scripts/**', '.github/workflows/test-two-devices.yml']
   push:
     branches: [main]
     paths: ['scripts/test-two-devices.py', 'scripts/two-device-batches.json', '.github/workflows/test-two-devices.yml']
