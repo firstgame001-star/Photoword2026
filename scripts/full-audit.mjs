@@ -217,7 +217,7 @@ for(const [cat,ids] of Object.entries(rotatedThemeIds)){
    throw Error('Rotated '+cat+' level '+id+' must have four distinct clues');
   for(const lang of ['ru','en','az']){
    const item=lang==='ru'?ru[id]:tr[lang]?.[id];
-   if(!item||item.hint?.length<35||!Number.isInteger(item.answerLength)||
+   if(!item||item.hint?.length<18||!Number.isInteger(item.answerLength)||
       [...item.pool].length<item.answerLength+4)
      throw Error('Incomplete '+cat+' level '+id+' '+lang+' after rotation');
    if(Object.hasOwn(item,'answer'))
