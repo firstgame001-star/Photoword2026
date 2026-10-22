@@ -1,9 +1,9 @@
 [
   {
     "id": 51,
-    "ru": "Наименьшая структурная единица живого организма.",
-    "en": "The smallest structural unit capable of life.",
-    "az": "Canlı orqanizmin ən kiçik quruluş vahidi."
+    "ru": "Структура живой клетки, вырабатывающая большую часть её энергии.",
+    "en": "A cell organelle that generates much of its usable energy.",
+    "az": "Hüceyrədə enerji yaradan orqanoid."
   },
   {
     "id": 52,
@@ -25,9 +25,9 @@
   },
   {
     "id": 55,
-    "ru": "Молекула, которая хранит наследственную информацию организма.",
-    "en": "The molecule that stores hereditary genetic information.",
-    "az": "Orqanizmin irsi məlumatını saxlayan molekul."
+    "ru": "Строительный блок нуклеиновой кислоты из сахара, основания и фосфата.",
+    "en": "The basic building block of DNA and RNA.",
+    "az": "DNT və RNT-nin əsas quruluş vahidi."
   },
   {
     "id": 56,
@@ -55,9 +55,9 @@
   },
   {
     "id": 60,
-    "ru": "Инфекционная частица, размножающаяся только внутри живых клеток.",
-    "en": "An infectious agent that replicates only within living cells.",
-    "az": "Yalnız canlı hüceyrələrin daxilində çoxalan infeksion hissəcik."
+    "ru": "Зрелая инфекционная вирусная частица вне клетки.",
+    "en": "A complete infectious viral particle outside a host cell.",
+    "az": "Hüceyrədən kənardakı tam infeksion virus hissəciyi."
   },
   {
     "id": 61,
@@ -73,9 +73,9 @@
   },
   {
     "id": 63,
-    "ru": "Изменение наследственных признаков популяций за поколения.",
-    "en": "Changes in inherited traits of populations across generations.",
-    "az": "Populyasiyalarda irsi xüsusiyyətlərin nəsillər boyu dəyişməsi."
+    "ru": "Процесс, при котором более приспособленные организмы чаще оставляют потомство.",
+    "en": "The process by which better-adapted organisms reproduce more successfully.",
+    "az": "Daha uyğunlaşmış canlıların nəsil verməkdə üstün olduğu proses."
   },
   {
     "id": 64,
@@ -181,9 +181,9 @@
   },
   {
     "id": 81,
-    "ru": "Небесное тело, обращающееся вокруг звезды и не излучающее собственного света.",
-    "en": "A large celestial body orbiting a star without making its own light.",
-    "az": "Ulduzun ətrafında dönən, öz işığını yaratmayan göy cismi."
+    "ru": "Вытянутая замкнутая траектория планеты вокруг звезды.",
+    "en": "An oval-shaped closed path followed by a body around a star.",
+    "az": "Göy cisminin ulduz ətrafındakı oval formalı qapalı yolu."
   },
   {
     "id": 82,
