@@ -12,6 +12,9 @@ tree=ast.parse(Path('scripts/test-live-entries.py').read_text())
 needed={'auth_fragment','install_mock','parse_json_array_after','current_challenge_answer','tap_challenge_word','relevant_errors'}
 exec(compile(ast.Module(body=[n for n in tree.body if isinstance(n,ast.FunctionDef) and n.name in needed],type_ignores=[]),'<smoke-helpers>','exec'))
 CHALLENGE_BANK=parse_json_array_after(Path('clean/challenge.js').read_text(),'const Q=')+parse_json_array_after(Path('clean/challenge-bank-extra.js').read_text(),'window.PW_CHALLENGE_EXTRA=')
+challenge_patches=json.loads(Path('clean/challenge-unique-patches.js').read_text(encoding='utf-8').split('window.PW_CHALLENGE_PATCHES=',1)[1].split(';})();',1)[0])
+for question_id, replacement in challenge_patches.items():
+    CHALLENGE_BANK[int(question_id)] = replacement
 CHALLENGE_BY_PHOTOS={tuple(q['p']):q for q in CHALLENGE_BANK}
 with sync_playwright() as p:
     browser=p.chromium.launch()
