@@ -1,0 +1,302 @@
+[
+  {
+    "id": 51,
+    "ru": "Наименьшая структурная единица живого организма.",
+    "en": "The smallest structural unit capable of life.",
+    "az": "Canlı orqanizmin ən kiçik quruluş vahidi."
+  },
+  {
+    "id": 52,
+    "ru": "Группа похожих клеток, выполняющих общую задачу.",
+    "en": "A group of similar cells performing a shared function.",
+    "az": "Eyni işi görən oxşar hüceyrələr qrupu."
+  },
+  {
+    "id": 53,
+    "ru": "Часть тела, состоящая из нескольких видов тканей.",
+    "en": "A body structure made of different tissues.",
+    "az": "Müxtəlif toxumalardan təşkil olunmuş bədən hissəsi."
+  },
+  {
+    "id": 54,
+    "ru": "Мягкая форма углерода, используемая в карандашах.",
+    "en": "A soft form of carbon used in pencil leads.",
+    "az": "Karandaş özəklərində istifadə edilən yumşaq karbon forması."
+  },
+  {
+    "id": 55,
+    "ru": "Молекула, которая хранит наследственную информацию организма.",
+    "en": "The molecule that stores hereditary genetic information.",
+    "az": "Orqanizmin irsi məlumatını saxlayan molekul."
+  },
+  {
+    "id": 56,
+    "ru": "Структура из наследственного материала внутри ядра клетки.",
+    "en": "A structure that packages genetic material within a cell.",
+    "az": "Hüceyrədə irsi materialı qablaşdıran struktur."
+  },
+  {
+    "id": 57,
+    "ru": "Крупная молекула из аминокислот, необходимая живым организмам.",
+    "en": "A large amino-acid molecule essential for living organisms.",
+    "az": "Canlılar üçün vacib olan amin turşularından qurulmuş iri molekul."
+  },
+  {
+    "id": 58,
+    "ru": "Одноатомный слой углерода с шестиугольной решёткой.",
+    "en": "A single layer of carbon atoms in a hexagonal lattice.",
+    "az": "Altıbucaqlı qəfəsdə yerləşən karbon atomlarının bir qatı."
+  },
+  {
+    "id": 59,
+    "ru": "Органическое топливо из частично разложившихся болотных растений.",
+    "en": "Organic fuel formed from partly decomposed marsh plants.",
+    "az": "Bataqlıq bitkilərinin qismən çürüməsindən yaranan üzvi yanacaq."
+  },
+  {
+    "id": 60,
+    "ru": "Инфекционная частица, размножающаяся только внутри живых клеток.",
+    "en": "An infectious agent that replicates only within living cells.",
+    "az": "Yalnız canlı hüceyrələrin daxilində çoxalan infeksion hissəcik."
+  },
+  {
+    "id": 61,
+    "ru": "Микроскопический организм, иногда вызывающий болезни.",
+    "en": "A microscopic organism, sometimes capable of causing illness.",
+    "az": "Bəzən xəstəlik törədən mikroskopik orqanizm."
+  },
+  {
+    "id": 62,
+    "ru": "Атмосферный вихрь с пониженным давлением в центре.",
+    "en": "A rotating weather system with low pressure at its center.",
+    "az": "Mərkəzində aşağı təzyiq olan fırlanan hava sistemi."
+  },
+  {
+    "id": 63,
+    "ru": "Изменение наследственных признаков популяций за поколения.",
+    "en": "Changes in inherited traits of populations across generations.",
+    "az": "Populyasiyalarda irsi xüsusiyyətlərin nəsillər boyu dəyişməsi."
+  },
+  {
+    "id": 64,
+    "ru": "Изменение последовательности генетического материала.",
+    "en": "A change in the sequence of genetic material.",
+    "az": "Genetik materialın ardıcıllığında dəyişiklik."
+  },
+  {
+    "id": 65,
+    "ru": "Группа организмов, способных давать плодовитое потомство.",
+    "en": "A group of organisms typically able to produce fertile offspring.",
+    "az": "Adətən bir-biri ilə məhsuldar nəsil verən orqanizmlər qrupu."
+  },
+  {
+    "id": 66,
+    "ru": "Область высокого атмосферного давления с нисходящими потоками.",
+    "en": "A region of high atmospheric pressure with descending air.",
+    "az": "Enən hava axınları olan yüksək atmosfer təzyiqi sahəsi."
+  },
+  {
+    "id": 67,
+    "ru": "Сползание масс грунта вниз по склону.",
+    "en": "Movement of soil or rock downhill along a slope.",
+    "az": "Torpaq qatının yamac boyunca aşağı doğru hərəkəti."
+  },
+  {
+    "id": 68,
+    "ru": "Участок среды с однородными условиями для сообщества организмов.",
+    "en": "An area with uniform conditions supporting a biological community.",
+    "az": "Orqanizmlər birliyi üçün eyni şəraitli yaşayış sahəsi."
+  },
+  {
+    "id": 69,
+    "ru": "Процесс создания сахаров растениями с помощью света.",
+    "en": "The process by which plants make sugars using light.",
+    "az": "Bitkilərin işıqdan istifadə edərək şəkər yaratması prosesi."
+  },
+  {
+    "id": 70,
+    "ru": "Зелёный пигмент растений, поглощающий солнечный свет.",
+    "en": "The green plant pigment that absorbs sunlight.",
+    "az": "Bitkilərdə günəş işığını udan yaşıl piqment."
+  },
+  {
+    "id": 71,
+    "ru": "Природное твёрдое вещество с определённым химическим составом.",
+    "en": "A naturally occurring solid with a defined chemical makeup.",
+    "az": "Müəyyən kimyəvi tərkibli təbii bərk maddə."
+  },
+  {
+    "id": 72,
+    "ru": "Природное образование, состоящее из одного или нескольких минералов.",
+    "en": "Natural material made of one or more minerals.",
+    "az": "Bir və ya bir neçə mineraldan təşkil olunmuş təbii material."
+  },
+  {
+    "id": 73,
+    "ru": "Расплавленная горная масса под поверхностью Земли.",
+    "en": "Molten rock beneath Earth's surface.",
+    "az": "Yer səthinin altında ərimiş süxur kütləsi."
+  },
+  {
+    "id": 74,
+    "ru": "Движение и деформация крупных плит земной коры.",
+    "en": "The motion and deformation of Earth's large crustal plates.",
+    "az": "Yer qabığının iri plitələrinin hərəkəti və deformasiyası."
+  },
+  {
+    "id": 75,
+    "ru": "Взаимовыгодная связь корней растений и почвенных грибов.",
+    "en": "A beneficial partnership between plant roots and soil fungi.",
+    "az": "Bitki kökləri ilə torpaq göbələkləri arasında faydalı əlaqə."
+  },
+  {
+    "id": 76,
+    "ru": "Колебания поверхности Земли от внезапного смещения пород.",
+    "en": "Ground shaking caused by sudden movement of rocks.",
+    "az": "Süxurların qəfil hərəkətindən yaranan yer titrəyişi."
+  },
+  {
+    "id": 77,
+    "ru": "Постепенное разрушение почвы и горных пород водой или ветром.",
+    "en": "The wearing away of soil and rock by water or wind.",
+    "az": "Su və küləyin torpaq və süxuru tədricən aşındırması."
+  },
+  {
+    "id": 78,
+    "ru": "Прикреплённое к поверхности животное с ротовым отверстием и щупальцами.",
+    "en": "An attached animal form with a mouth and tentacles.",
+    "az": "Ağız və qısqacları olan səthə bağlanmış heyvan forması."
+  },
+  {
+    "id": 79,
+    "ru": "Длинный отросток нервной клетки, передающий импульсы от тела клетки.",
+    "en": "A long nerve-cell extension carrying signals away from the cell body.",
+    "az": "Sinir hüceyrəsindən siqnalları uzağa aparan uzun çıxıntı."
+  },
+  {
+    "id": 80,
+    "ru": "Газ из трёх атомов кислорода, поглощающий часть ультрафиолета.",
+    "en": "A three-oxygen-atom gas that absorbs some ultraviolet radiation.",
+    "az": "Üç oksigen atomlu, ultrabənövşəyi şüanı qismən udan qaz."
+  },
+  {
+    "id": 81,
+    "ru": "Небесное тело, обращающееся вокруг звезды и не излучающее собственного света.",
+    "en": "A large celestial body orbiting a star without making its own light.",
+    "az": "Ulduzun ətrafında dönən, öz işığını yaratmayan göy cismi."
+  },
+  {
+    "id": 82,
+    "ru": "Короткий ветвящийся отросток, принимающий сигналы нервной клетки.",
+    "en": "A branching nerve-cell extension that receives incoming signals.",
+    "az": "Sinir hüceyrəsinə gələn siqnalları qəbul edən budaqlı çıxıntı."
+  },
+  {
+    "id": 83,
+    "ru": "Непроизвольный быстрый ответ организма на раздражитель.",
+    "en": "An automatic, rapid response to a stimulus.",
+    "az": "Qıcıqlandırıcıya avtomatik və sürətli cavab."
+  },
+  {
+    "id": 84,
+    "ru": "Гибкая осевая структура, поддерживающая тело у зародышей хордовых.",
+    "en": "A flexible supporting rod along the body of a chordate embryo.",
+    "az": "Rüşeymdə bədənin oxu boyunca uzanan elastik dayaq."
+  },
+  {
+    "id": 85,
+    "ru": "Полный набор наследственной информации организма.",
+    "en": "The complete set of an organism's genetic information.",
+    "az": "Orqanizmin bütün irsi məlumatlarının toplusu."
+  },
+  {
+    "id": 86,
+    "ru": "Жёсткий наружный покров, поддерживающий тело членистоногих.",
+    "en": "A rigid outer covering that supports arthropods.",
+    "az": "Buğumayaqlıların bədənini saxlayan sərt xarici örtük."
+  },
+  {
+    "id": 87,
+    "ru": "Прозрачная вязкая жидкость, используемая в косметике и мыле.",
+    "en": "A clear, viscous liquid used in cosmetics and soap.",
+    "az": "Kosmetika və sabunda istifadə edilən şəffaf, qatı maye."
+  },
+  {
+    "id": 88,
+    "ru": "Разделение света на составляющие цвета из-за различия длин волн.",
+    "en": "Separation of light into colors depending on wavelength.",
+    "az": "İşığın dalğa uzunluğuna görə rənglərə ayrılması."
+  },
+  {
+    "id": 89,
+    "ru": "Усиление и ослабление волн при их наложении.",
+    "en": "Waves combining to make stronger or weaker patterns.",
+    "az": "Dalğaların üst-üstə düşüb güclənməsi və ya zəifləməsi."
+  },
+  {
+    "id": 90,
+    "ru": "Возникновение электрического тока при изменении магнитного потока.",
+    "en": "Generation of electric current from changing magnetic flux.",
+    "az": "Maqnit axını dəyişərkən elektrik cərəyanının yaranması."
+  },
+  {
+    "id": 91,
+    "ru": "Область знаний о числах, фигурах, структурах и доказательствах.",
+    "en": "The study of numbers, shapes, structures and proofs.",
+    "az": "Ədədlər, fiqurlar, strukturlar və isbatlar haqqında elm."
+  },
+  {
+    "id": 92,
+    "ru": "Абстрактная величина, которой считают или измеряют.",
+    "en": "An abstract value used for counting or measuring.",
+    "az": "Saymaq və ölçmək üçün istifadə olunan mücərrəd kəmiyyət."
+  },
+  {
+    "id": 93,
+    "ru": "Наглядное изображение зависимости величин с помощью осей.",
+    "en": "A visual plot showing how quantities relate on axes.",
+    "az": "Kəmiyyətlərin əlaqəsini oxlarla göstərən təsvir."
+  },
+  {
+    "id": 94,
+    "ru": "Передача тепла потоками движущейся жидкости или газа.",
+    "en": "Heat transfer carried by a moving fluid or gas.",
+    "az": "İstiliyin hərəkət edən maye və ya qazla ötürülməsi."
+  },
+  {
+    "id": 95,
+    "ru": "Числовая мера того, насколько возможно определённое событие.",
+    "en": "A numerical measure of how likely an event is.",
+    "az": "Hadisənin baş vermə mümkünlüyünün ədədi ölçüsü."
+  },
+  {
+    "id": 96,
+    "ru": "Наука о сборе и анализе больших наборов числовых наблюдений.",
+    "en": "The study of collecting and analyzing sets of observations.",
+    "az": "Müşahidə məlumatlarının toplanması və təhlili elmi."
+  },
+  {
+    "id": 97,
+    "ru": "Накопление молекул вещества на поверхности другого материала.",
+    "en": "Molecules accumulating on the surface of another material.",
+    "az": "Molekulların başqa maddənin səthində toplanması."
+  },
+  {
+    "id": 98,
+    "ru": "Прямой переход твёрдого вещества в газ без жидкой фазы.",
+    "en": "A solid changing directly into a gas without becoming liquid.",
+    "az": "Bərk maddənin mayeləşmədən birbaşa qaza çevrilməsi."
+  },
+  {
+    "id": 99,
+    "ru": "Собранные факты или измерения для дальнейшего анализа.",
+    "en": "Collected facts or measurements available for analysis.",
+    "az": "Təhlil üçün toplanmış faktlar və ölçmələr."
+  },
+  {
+    "id": 100,
+    "ru": "Новое знание или явление, выявленное в ходе исследования.",
+    "en": "New knowledge or a phenomenon revealed through investigation.",
+    "az": "Araşdırma nəticəsində aşkar edilmiş yeni bilik və ya hadisə."
+  }
+]

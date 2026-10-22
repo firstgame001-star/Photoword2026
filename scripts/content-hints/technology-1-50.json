@@ -1,0 +1,302 @@
+[
+  {
+    "id": 1,
+    "ru": "Способы создания устройств и полезных процессов.",
+    "en": "Methods of building useful devices and processes.",
+    "az": "Faydalı qurğu və proseslər yaratma üsulları."
+  },
+  {
+    "id": 2,
+    "ru": "Электронная машина для обработки информации.",
+    "en": "An electronic machine that processes information.",
+    "az": "Məlumatı emal edən elektron maşın."
+  },
+  {
+    "id": 3,
+    "ru": "Переносная вычислительная машина с откидным экраном.",
+    "en": "A portable computer with a folding screen.",
+    "az": "Açılan ekranı olan daşınan kompüter."
+  },
+  {
+    "id": 4,
+    "ru": "Плоский компьютер с большим сенсорным дисплеем.",
+    "en": "A flat computer with a large touchscreen.",
+    "az": "Böyük sensor ekranlı yastı kompüter."
+  },
+  {
+    "id": 5,
+    "ru": "Карманное устройство для приложений, звонков и сети.",
+    "en": "A pocket device for apps, calls and internet access.",
+    "az": "Tətbiq, zəng və internet üçün cib cihazı."
+  },
+  {
+    "id": 6,
+    "ru": "Дисплей, на который выводится изображение компьютера.",
+    "en": "A display that shows a computer's output.",
+    "az": "Kompüterin görüntüsünü göstərən ekran."
+  },
+  {
+    "id": 7,
+    "ru": "Набор клавиш для ввода текста и команд.",
+    "en": "A set of keys for entering text and commands.",
+    "az": "Mətn və əmrlər daxil etmək üçün düymələr."
+  },
+  {
+    "id": 8,
+    "ru": "Ручное устройство для перемещения указателя на экране.",
+    "en": "A handheld device for moving the on-screen pointer.",
+    "az": "Ekrandakı göstəricini hərəkət etdirən əl qurğusu."
+  },
+  {
+    "id": 9,
+    "ru": "Устройство, печатающее цифровые документы на бумаге.",
+    "en": "A device that puts digital documents onto paper.",
+    "az": "Rəqəmsal sənədləri kağıza çıxaran cihaz."
+  },
+  {
+    "id": 10,
+    "ru": "Устройство для оцифровки листов бумаги.",
+    "en": "A device that digitizes paper documents.",
+    "az": "Kağız sənədləri rəqəmsallaşdıran cihaz."
+  },
+  {
+    "id": 11,
+    "ru": "Небольшая камера для видеосвязи через компьютер.",
+    "en": "A small camera used for online video calls.",
+    "az": "Onlayn görüntülü zəng üçün kiçik kamera."
+  },
+  {
+    "id": 12,
+    "ru": "Прибор, преобразующий голос в сигнал.",
+    "en": "A device that turns voice into a signal.",
+    "az": "Səsi siqnala çevirən qurğu."
+  },
+  {
+    "id": 13,
+    "ru": "Парные динамики, надеваемые на уши.",
+    "en": "A pair of speakers worn on the ears.",
+    "az": "Qulaqlara taxılan səs çıxarıcıları."
+  },
+  {
+    "id": 14,
+    "ru": "Программируемая микросхема для управления прибором.",
+    "en": "A programmable chip that controls a device.",
+    "az": "Cihazı idarə edən proqramlaşdırılan mikrosxem."
+  },
+  {
+    "id": 15,
+    "ru": "Прибор, распределяющий сетевой трафик между устройствами.",
+    "en": "A device that directs traffic between networks.",
+    "az": "Şəbəkələr arasında trafiki istiqamətləndirən qurğu."
+  },
+  {
+    "id": 16,
+    "ru": "Прибор для преобразования сигнала линии связи.",
+    "en": "A device that converts a connection's signal.",
+    "az": "Rabitə xəttinin siqnalını çevirən qurğu."
+  },
+  {
+    "id": 17,
+    "ru": "Компьютер, предоставляющий услуги другим машинам.",
+    "en": "A computer that provides services to other machines.",
+    "az": "Başqa maşınlara xidmət verən kompüter."
+  },
+  {
+    "id": 18,
+    "ru": "Накопитель для постоянного хранения файлов.",
+    "en": "A storage device used to keep files for later use.",
+    "az": "Faylları uzunmüddətli saxlayan yaddaş qurğusu."
+  },
+  {
+    "id": 19,
+    "ru": "Маленький переносной накопитель, подключаемый через USB.",
+    "en": "A small portable storage device with a USB plug.",
+    "az": "USB ilə qoşulan kiçik daşınan yaddaş qurğusu."
+  },
+  {
+    "id": 20,
+    "ru": "Миниатюрная электронная деталь с интегральными схемами.",
+    "en": "A tiny electronic part containing integrated circuits.",
+    "az": "İnteqral sxemli kiçik elektron hissə."
+  },
+  {
+    "id": 21,
+    "ru": "Главный вычислительный узел, выполняющий инструкции.",
+    "en": "The main computing unit that executes instructions.",
+    "az": "Əmrləri yerinə yetirən əsas hesablama hissəsi."
+  },
+  {
+    "id": 22,
+    "ru": "Плата для ускорения обработки изображений и 3D.",
+    "en": "A board that accelerates image and 3D processing.",
+    "az": "Şəkil və 3D emalını sürətləndirən plata."
+  },
+  {
+    "id": 23,
+    "ru": "Место хранения информации внутри вычислителя.",
+    "en": "The part where a computing device keeps information.",
+    "az": "Hesablama cihazının məlumat saxlayan hissəsi."
+  },
+  {
+    "id": 24,
+    "ru": "Источник накопленной электрической энергии.",
+    "en": "A source of stored electrical energy.",
+    "az": "Toplanmış elektrik enerjisi mənbəyi."
+  },
+  {
+    "id": 25,
+    "ru": "Прибор, восполняющий запас энергии аккумулятора.",
+    "en": "A device that replenishes a battery's power.",
+    "az": "Batareyanın elektriklə doldurulması prosesi."
+  },
+  {
+    "id": 26,
+    "ru": "Гибкий провод для питания или передачи данных.",
+    "en": "A flexible wire carrying power or data.",
+    "az": "Enerji və ya məlumat daşıyan elastik naqil."
+  },
+  {
+    "id": 27,
+    "ru": "Полупроводниковый элемент для усиления сигнала.",
+    "en": "A semiconductor part used to amplify a signal.",
+    "az": "Siqnalı gücləndirən yarımkeçirici hissə."
+  },
+  {
+    "id": 28,
+    "ru": "Поверхность для отображения текста и картинки.",
+    "en": "A surface that displays text and pictures.",
+    "az": "Mətn və şəkilləri göstərən səth."
+  },
+  {
+    "id": 29,
+    "ru": "Датчик, который реагирует на внешнее воздействие.",
+    "en": "A detector that responds to a physical stimulus.",
+    "az": "Xarici təsirə reaksiya verən detektor."
+  },
+  {
+    "id": 30,
+    "ru": "Самая малая цветная точка цифрового изображения.",
+    "en": "The smallest colored dot in a digital image.",
+    "az": "Rəqəmsal təsvirdə ən kiçik rəngli nöqtə."
+  },
+  {
+    "id": 31,
+    "ru": "Элемент электрической цепи, ограничивающий ток.",
+    "en": "A component that limits current in a circuit.",
+    "az": "Elektrik dövrəsində cərəyanı məhdudlaşdıran element."
+  },
+  {
+    "id": 32,
+    "ru": "Несколько интернет-страниц под общим адресом.",
+    "en": "A collection of web pages at one address.",
+    "az": "Eyni ünvandakı veb səhifələr toplusu."
+  },
+  {
+    "id": 33,
+    "ru": "Программа для открытия интернет-страниц.",
+    "en": "Software for opening web pages.",
+    "az": "Veb səhifələri açan proqram."
+  },
+  {
+    "id": 34,
+    "ru": "Получение нужных сведений по запросу.",
+    "en": "Finding information using a query.",
+    "az": "Sorğu ilə lazımi məlumatı tapmaq."
+  },
+  {
+    "id": 35,
+    "ru": "Полупроводниковый элемент, проводящий ток в одну сторону.",
+    "en": "A semiconductor that conducts mainly in one direction.",
+    "az": "Cərəyanı əsasən bir tərəfə keçirən yarımkeçirici."
+  },
+  {
+    "id": 36,
+    "ru": "Элемент, накапливающий заряд между двумя обкладками.",
+    "en": "An element that stores charge between two plates.",
+    "az": "İki lövhə arasında yük saxlayan element."
+  },
+  {
+    "id": 37,
+    "ru": "Беспроводная локальная сеть с радиосигналом.",
+    "en": "A local wireless network using radio waves.",
+    "az": "Radio dalğaları ilə işləyən yerli simsiz şəbəkə."
+  },
+  {
+    "id": 38,
+    "ru": "Связь между близкими устройствами без проводов.",
+    "en": "Short-range wireless communication between devices.",
+    "az": "Yaxın cihazlar arasında qısa məsafəli simsiz rabitə."
+  },
+  {
+    "id": 39,
+    "ru": "Прибор для чтения переносных карт памяти.",
+    "en": "A device for reading removable memory cards.",
+    "az": "Yaddaş kartlarını oxuyan cihaz."
+  },
+  {
+    "id": 40,
+    "ru": "Понятное имя интернет-адреса вместо цифрового.",
+    "en": "A readable internet address name instead of digits.",
+    "az": "Rəqəm əvəzinə işlənən oxunaqlı internet ünvanı."
+  },
+  {
+    "id": 41,
+    "ru": "Готовая основа из библиотек и правил для приложения.",
+    "en": "A reusable set of tools for building applications.",
+    "az": "Tətbiq qurmaq üçün hazır alətlər və qaydalar dəsti."
+  },
+  {
+    "id": 42,
+    "ru": "Программа, превращающая исходный код в машинные инструкции.",
+    "en": "A tool translating source code into machine instructions.",
+    "az": "Mənbə kodunu maşın əmrlərinə çevirən alət."
+  },
+  {
+    "id": 43,
+    "ru": "Имя, используемое для входа в личный кабинет.",
+    "en": "A name used to sign in to an account.",
+    "az": "Şəxsi hesaba daxil olmaq üçün istifadəçi adı."
+  },
+  {
+    "id": 44,
+    "ru": "Страница с данными и настройками пользователя.",
+    "en": "A page showing a user's details and settings.",
+    "az": "İstifadəçi məlumatları və ayarları olan səhifə."
+  },
+  {
+    "id": 45,
+    "ru": "Личная запись для доступа к сетевому сервису.",
+    "en": "A personal registration used to access a service.",
+    "az": "Xidmətə giriş üçün şəxsi qeydiyyat."
+  },
+  {
+    "id": 46,
+    "ru": "Программа, исполняющая код по шагам без предварительной сборки.",
+    "en": "A program running source instructions step by step.",
+    "az": "Kodu əvvəlcədən yığmadan addım-addım icra edən proqram."
+  },
+  {
+    "id": 47,
+    "ru": "Хранилище программного кода и истории изменений.",
+    "en": "A store for source code and its revision history.",
+    "az": "Kodun və dəyişiklik tarixçəsinin saxlandığı yer."
+  },
+  {
+    "id": 48,
+    "ru": "Зафиксированное изменение в истории программного проекта.",
+    "en": "A saved change in a project's revision history.",
+    "az": "Layihənin tarixçəsində qeyd edilmiş dəyişiklik."
+  },
+  {
+    "id": 49,
+    "ru": "Организованное хранилище данных с запросами и таблицами.",
+    "en": "An organized data store supporting queries and tables.",
+    "az": "Cədvəllər və sorğularla işləyən mütəşəkkil məlumat anbarı."
+  },
+  {
+    "id": 50,
+    "ru": "Резервная копия файлов для восстановления после сбоя.",
+    "en": "A spare copy of data kept for recovery after failure.",
+    "az": "Nasazlıqdan sonra bərpa üçün saxlanılan ehtiyat surət."
+  }
+]

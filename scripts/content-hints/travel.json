@@ -1,0 +1,602 @@
+[
+  {
+    "id": 1,
+    "ru": "Документ с фотографией для пересечения границ государств.",
+    "en": "An identity document used when crossing international borders.",
+    "az": "Dövlət sərhədini keçərkən istifadə edilən şəxsiyyət sənədi."
+  },
+  {
+    "id": 2,
+    "ru": "Документ, подтверждающий право на поездку или вход.",
+    "en": "A document granting entry to a journey or event.",
+    "az": "Səfərə və ya tədbirə giriş hüququ verən sənəd."
+  },
+  {
+    "id": 3,
+    "ru": "Переносной багаж на колёсах с ручкой.",
+    "en": "A wheeled case used to carry belongings on trips.",
+    "az": "Səyahətdə əşyaları daşımaq üçün təkərli çanta."
+  },
+  {
+    "id": 4,
+    "ru": "Часть суши, окружённая водой с трёх сторон.",
+    "en": "Land surrounded by water on three sides.",
+    "az": "Üç tərəfdən su ilə əhatə olunmuş quru hissəsi."
+  },
+  {
+    "id": 5,
+    "ru": "Плоское изображение местности с дорогами и обозначениями.",
+    "en": "A flat representation of an area showing roads and landmarks.",
+    "az": "Yolları və obyektləri göstərən ərazi təsviri."
+  },
+  {
+    "id": 6,
+    "ru": "Административная часть страны за пределами столицы.",
+    "en": "An administrative region within a country.",
+    "az": "Ölkə daxilində inzibati ərazi vahidi."
+  },
+  {
+    "id": 7,
+    "ru": "Место, где самолёты взлетают, садятся и принимают пассажиров.",
+    "en": "A place where aircraft depart, land and handle passengers.",
+    "az": "Təyyarələrin qalxıb endiyi və sərnişin qəbul etdiyi yer."
+  },
+  {
+    "id": 8,
+    "ru": "Охраняемая природная территория с ограниченным посещением.",
+    "en": "A protected natural area where human activity is restricted.",
+    "az": "İnsan fəaliyyətinin məhdudlaşdırıldığı qorunan təbiət ərazisi."
+  },
+  {
+    "id": 9,
+    "ru": "Несколько вагонов, которые движутся по рельсам.",
+    "en": "Connected carriages that travel along railway tracks.",
+    "az": "Relslər üzərində hərəkət edən sərnişin vaqonları dəstəsi."
+  },
+  {
+    "id": 10,
+    "ru": "Высокое мостовое сооружение над долиной или дорогой.",
+    "en": "A long elevated bridge carrying a road or railway over a valley.",
+    "az": "Vadi və ya yol üzərindən keçən hündür körpü qurğusu."
+  },
+  {
+    "id": 11,
+    "ru": "Крупное судно для плавания по морям и океанам.",
+    "en": "A large vessel built to travel by sea.",
+    "az": "Dənizdə sərnişin və ya yük daşıyan iri su nəqliyyatı."
+  },
+  {
+    "id": 12,
+    "ru": "Общественный транспорт с колёсами и множеством сидений.",
+    "en": "A road vehicle carrying many passengers along a route.",
+    "az": "Müəyyən marşrut üzrə çoxlu sərnişin daşıyan yol nəqliyyatı."
+  },
+  {
+    "id": 13,
+    "ru": "Машина с водителем, которую вызывают для личной поездки.",
+    "en": "A hired car with a driver for individual journeys.",
+    "az": "Fərdi gediş üçün sürücüsü ilə kirayələnən avtomobil."
+  },
+  {
+    "id": 14,
+    "ru": "Городские пассажирские составы, часто идущие под землёй.",
+    "en": "An urban rail service that often runs underground.",
+    "az": "Çox vaxt yeraltı işləyən şəhər dəmir yolu nəqliyyatı."
+  },
+  {
+    "id": 15,
+    "ru": "Подземные коридоры и помещения древних захоронений.",
+    "en": "Underground passages associated with old burial places.",
+    "az": "Qədim dəfn yerləri ilə bağlı yeraltı keçidlər."
+  },
+  {
+    "id": 16,
+    "ru": "Учебное заведение исламской религиозной традиции.",
+    "en": "An educational institution associated with Islamic learning.",
+    "az": "İslam elmlərinin tədris olunduğu təhsil müəssisəsi."
+  },
+  {
+    "id": 17,
+    "ru": "Сооружение, соединяющее берега через реку или ущелье.",
+    "en": "A structure connecting two sides across water or a ravine.",
+    "az": "Çay və ya dərə üzərindən iki sahili birləşdirən qurğu."
+  },
+  {
+    "id": 18,
+    "ru": "Монументальное сооружение над местом захоронения.",
+    "en": "A monumental building built over a tomb.",
+    "az": "Məzarın üzərində inşa edilən monumental tikili."
+  },
+  {
+    "id": 19,
+    "ru": "Укреплённая часть города для защиты при осаде.",
+    "en": "A fortified stronghold designed to defend a town.",
+    "az": "Şəhəri qorumaq üçün inşa olunan möhkəmləndirilmiş qala hissəsi."
+  },
+  {
+    "id": 20,
+    "ru": "Разрешение государства на въезд иностранца.",
+    "en": "Official permission to enter a foreign country.",
+    "az": "Xarici ölkəyə daxil olmaq üçün verilən rəsmi icazə."
+  },
+  {
+    "id": 21,
+    "ru": "Человек, путешествующий ради отдыха и впечатлений.",
+    "en": "A person travelling for leisure and sightseeing.",
+    "az": "İstirahət və görməli yerləri gəzmək üçün səfər edən şəxs."
+  },
+  {
+    "id": 22,
+    "ru": "Человек, который сопровождает группу и рассказывает о местах.",
+    "en": "A person who shows visitors around and explains local sights.",
+    "az": "Qonaqlara yerləri göstərib onlar haqqında danışan şəxs."
+  },
+  {
+    "id": 23,
+    "ru": "Организованное посещение достопримечательностей с рассказом.",
+    "en": "An organised visit to sights, usually with an explanation.",
+    "az": "Görməli yerlərə izahatla təşkil edilən gəzinti."
+  },
+  {
+    "id": 24,
+    "ru": "Заранее выбранный путь между пунктами поездки.",
+    "en": "A planned path connecting stops on a journey.",
+    "az": "Səyahətdə dayanacaqları birləşdirən əvvəlcədən seçilmiş yol."
+  },
+  {
+    "id": 25,
+    "ru": "Высокий каменный памятник в форме сужающегося столба.",
+    "en": "A tall stone monument tapering toward the top.",
+    "az": "Yuxarıya doğru daralan hündür daş abidə."
+  },
+  {
+    "id": 26,
+    "ru": "Прибор с магнитной стрелкой для определения направления.",
+    "en": "A device with a magnetic needle that helps find directions.",
+    "az": "İstiqaməti təyin edən maqnit əqrəbli cihaz."
+  },
+  {
+    "id": 27,
+    "ru": "Отдых на природе с ночёвкой в оборудованном лагере.",
+    "en": "Staying outdoors at a site equipped for temporary accommodation.",
+    "az": "Müvəqqəti qalmaq üçün təchiz edilmiş açıq hava düşərgəsində istirahət."
+  },
+  {
+    "id": 28,
+    "ru": "Переносное укрытие из ткани, натянутое на каркас.",
+    "en": "A portable fabric shelter supported by poles.",
+    "az": "Dirəklərlə qurulan daşınan parça sığınacaq."
+  },
+  {
+    "id": 29,
+    "ru": "Огонь из дров, разведённый на открытом воздухе.",
+    "en": "An outdoor fire made from burning wood.",
+    "az": "Açıq havada yandırılan odun ocağı."
+  },
+  {
+    "id": 30,
+    "ru": "Ряд колонн, поддерживающих общую кровлю или арку.",
+    "en": "A sequence of columns supporting a roof or arch.",
+    "az": "Damı və ya tağı daşıyan sütunlar sırası."
+  },
+  {
+    "id": 31,
+    "ru": "Еда на открытом воздухе во время прогулки.",
+    "en": "A meal eaten outdoors during a leisure outing.",
+    "az": "Gəzinti zamanı açıq havada edilən yemək."
+  },
+  {
+    "id": 32,
+    "ru": "Песчаный или галечный берег, где купаются и загорают.",
+    "en": "A sandy or pebbly shore used for swimming and sunbathing.",
+    "az": "Üzmək və günəşlənmək üçün istifadə edilən qumlu və ya çınqıllı sahil."
+  },
+  {
+    "id": 33,
+    "ru": "Место отдыха с гостиницами и оздоровительными услугами.",
+    "en": "A destination offering accommodation and holiday activities.",
+    "az": "Mehmanxana və istirahət imkanları olan turizm məkanı."
+  },
+  {
+    "id": 34,
+    "ru": "Участок суши, окружённый водой со всех сторон.",
+    "en": "Land completely surrounded by water.",
+    "az": "Hər tərəfdən su ilə əhatə olunmuş quru hissəsi."
+  },
+  {
+    "id": 35,
+    "ru": "Большая церковь определённого архитектурного типа.",
+    "en": "A large church of a traditional architectural design.",
+    "az": "Müəyyən memarlıq quruluşu olan böyük kilsə."
+  },
+  {
+    "id": 36,
+    "ru": "Большое природное возвышение с крутыми склонами.",
+    "en": "A major natural elevation rising above surrounding land.",
+    "az": "Ətraf ərazidən yüksələn iri təbii relyef forması."
+  },
+  {
+    "id": 37,
+    "ru": "Самая высокая точка горы или холма.",
+    "en": "The highest point of a mountain or hill.",
+    "az": "Dağın və ya təpənin ən hündür nöqtəsi."
+  },
+  {
+    "id": 38,
+    "ru": "Пониженная местность между горами или холмами.",
+    "en": "Low ground lying between hills or mountains.",
+    "az": "Dağlar və təpələr arasında alçaq ərazi."
+  },
+  {
+    "id": 39,
+    "ru": "Большая территория, густо покрытая деревьями.",
+    "en": "A large area covered mainly with trees.",
+    "az": "Əsasən ağaclarla örtülmüş böyük ərazi."
+  },
+  {
+    "id": 40,
+    "ru": "Засушливая местность с очень редкими осадками.",
+    "en": "A very dry landscape with little rainfall.",
+    "az": "Yağıntısı çox az olan quraq ərazi."
+  },
+  {
+    "id": 41,
+    "ru": "Место, где поток воды падает с высокого уступа.",
+    "en": "Water dropping over a steep ledge in a river.",
+    "az": "Çay suyunun hündür çıxıntıdan aşağı töküldüyü yer."
+  },
+  {
+    "id": 42,
+    "ru": "Водоём, окружённый сушей и не являющийся морем.",
+    "en": "An inland body of water surrounded by land.",
+    "az": "Quru ilə əhatə olunmuş daxili su hövzəsi."
+  },
+  {
+    "id": 43,
+    "ru": "Природный поток воды, движущийся по руслу.",
+    "en": "A natural flow of water moving in a channel.",
+    "az": "Məcrası boyunca axan təbii su axını."
+  },
+  {
+    "id": 44,
+    "ru": "Огромная часть солёной воды между континентами.",
+    "en": "A vast body of salt water between continents.",
+    "az": "Qitələr arasında yerləşən nəhəng duzlu su hövzəsi."
+  },
+  {
+    "id": 45,
+    "ru": "Защищённая часть моря, вдающаяся в сушу.",
+    "en": "A sheltered inlet where the sea extends into land.",
+    "az": "Dənizin quruya doğru daxil olduğu sığınacaqlı hissə."
+  },
+  {
+    "id": 46,
+    "ru": "Многоярусное культовое здание с характерными крышами в Азии.",
+    "en": "A tiered Asian religious tower with distinctive roofs.",
+    "az": "Asiyada çoxmərtəbəli, özünəməxsus damları olan dini tikili."
+  },
+  {
+    "id": 47,
+    "ru": "Высокая башня рядом с мусульманским местом богослужения.",
+    "en": "A slender tower beside a Muslim place of worship.",
+    "az": "Müsəlman ibadət yerinin yanındakı uca, nazik qüllə."
+  },
+  {
+    "id": 48,
+    "ru": "Комплекс зданий, где живёт религиозная община.",
+    "en": "A group of buildings inhabited by a religious community.",
+    "az": "Dini icmanın yaşadığı binalar kompleksi."
+  },
+  {
+    "id": 49,
+    "ru": "Учреждение, которое помогает гражданам за рубежом.",
+    "en": "An office providing assistance to citizens in a foreign country.",
+    "az": "Xarici ölkədə vətəndaşlara yardım göstərən idarə."
+  },
+  {
+    "id": 50,
+    "ru": "Место, где пассажиры ждут и садятся в транспорт.",
+    "en": "A place where passengers wait to board public transport.",
+    "az": "Sərnişinlərin nəqliyyat gözləyib mindiyi yer."
+  },
+  {
+    "id": 51,
+    "ru": "Фотография, сделанная для сохранения момента поездки.",
+    "en": "A photograph taken to capture a moment of a trip.",
+    "az": "Səfərdən bir anı yadda saxlamaq üçün çəkilən foto."
+  },
+  {
+    "id": 52,
+    "ru": "Небольшой предмет, который привозят на память из поездки.",
+    "en": "A keepsake brought home from a journey.",
+    "az": "Səfərdən xatirə kimi gətirilən kiçik əşya."
+  },
+  {
+    "id": 53,
+    "ru": "Карточка с фотографией места и коротким приветствием.",
+    "en": "A card with a picture of a place and a short greeting.",
+    "az": "Məkan şəkli və qısa təbrik yazısı olan kart."
+  },
+  {
+    "id": 54,
+    "ru": "Остатки разрушенных старинных зданий.",
+    "en": "Remains of old buildings that have fallen into decay.",
+    "az": "Dağılmış qədim tikililərin qalıqları."
+  },
+  {
+    "id": 55,
+    "ru": "Место для временного размещения машин или палаток.",
+    "en": "An area used to park vehicles or set up camp.",
+    "az": "Avtomobil saxlamaq və ya çadır qurmaq üçün yer."
+  },
+  {
+    "id": 56,
+    "ru": "Роскошное большое здание, где живут правители.",
+    "en": "A grand residence associated with rulers or royalty.",
+    "az": "Hökmdarların yaşaması ilə bağlı möhtəşəm iqamətgah."
+  },
+  {
+    "id": 57,
+    "ru": "Здание, предназначенное для религиозных обрядов.",
+    "en": "A building used for religious ceremonies and worship.",
+    "az": "Dini mərasimlərin keçirildiyi ibadət binası."
+  },
+  {
+    "id": 58,
+    "ru": "Место молитвы мусульман, обычно с куполом и минаретом.",
+    "en": "A Muslim place of worship, often with a dome and tower.",
+    "az": "Müsəlmanların ibadət etdiyi, çox vaxt günbəzli bina."
+  },
+  {
+    "id": 59,
+    "ru": "Главная большая христианская церковь города.",
+    "en": "A principal large Christian church in a city.",
+    "az": "Şəhərin əsas böyük xristian kilsəsi."
+  },
+  {
+    "id": 60,
+    "ru": "Исторический постоялый двор для торговых караванов.",
+    "en": "A historical roadside inn serving travelling trade caravans.",
+    "az": "Ticarət karvanlarının gecələdiyi tarixi yolüstü mehmanxana."
+  },
+  {
+    "id": 61,
+    "ru": "Временная стоянка под открытым небом во время похода.",
+    "en": "A temporary outdoor overnight stop while travelling.",
+    "az": "Yürüş zamanı açıq havada müvəqqəti gecələmə yeri."
+  },
+  {
+    "id": 62,
+    "ru": "Группа военных или торговых судов, действующих вместе.",
+    "en": "A group of ships operating together.",
+    "az": "Birgə fəaliyyət göstərən gəmilər qrupu."
+  },
+  {
+    "id": 63,
+    "ru": "Небольшое заведение, где подают напитки и лёгкую еду.",
+    "en": "A small place serving drinks and light meals.",
+    "az": "İçkilər və yüngül yeməklər verilən kiçik məkan."
+  },
+  {
+    "id": 64,
+    "ru": "Заведение с меню и обслуживанием за столиками.",
+    "en": "A dining establishment with menus and table service.",
+    "az": "Menyu və masa xidməti olan yemək məkanı."
+  },
+  {
+    "id": 65,
+    "ru": "Перечень блюд и напитков с ценами.",
+    "en": "A list of dishes and drinks offered with prices.",
+    "az": "Qiymətləri göstərilən yemək və içki siyahısı."
+  },
+  {
+    "id": 66,
+    "ru": "Первый приём пищи после ночного сна.",
+    "en": "The first meal eaten in the morning.",
+    "az": "Səhər oyanandan sonra yeyilən ilk yemək."
+  },
+  {
+    "id": 67,
+    "ru": "Неспешное передвижение пешком ради отдыха.",
+    "en": "A leisurely journey on foot for enjoyment.",
+    "az": "İstirahət məqsədilə sakit tempdə piyada hərəkət."
+  },
+  {
+    "id": 68,
+    "ru": "Платформа, выступающая от берега для причала судов.",
+    "en": "A platform extending from shore where boats dock.",
+    "az": "Qayıqların yanaşması üçün sahildən suya uzanan platforma."
+  },
+  {
+    "id": 69,
+    "ru": "Живописная прибрежная зона с мягким климатом.",
+    "en": "A scenic coastal region known for its mild climate.",
+    "az": "Mülayim iqlimi ilə seçilən mənzərəli sahil bölgəsi."
+  },
+  {
+    "id": 70,
+    "ru": "Оздоровительное учреждение с проживанием и процедурами.",
+    "en": "A residential health resort offering treatments.",
+    "az": "Qalmaq və müalicə prosedurları üçün sağlamlıq müəssisəsi."
+  },
+  {
+    "id": 71,
+    "ru": "Поездка на пассажирском судне ради отдыха.",
+    "en": "A leisure holiday spent travelling on a passenger ship.",
+    "az": "Sərnişin gəmisində istirahət məqsədli səyahət."
+  },
+  {
+    "id": 72,
+    "ru": "Поездка самолёта между аэропортами по расписанию.",
+    "en": "A scheduled aircraft journey between airports.",
+    "az": "Aeroportlar arasında cədvəl üzrə təyyarə səfəri."
+  },
+  {
+    "id": 73,
+    "ru": "Момент, когда самолёт отрывается от взлётной полосы.",
+    "en": "The moment an aircraft leaves the runway and rises.",
+    "az": "Təyyarənin səmada yerinə yetirdiyi hava səfəri."
+  },
+  {
+    "id": 74,
+    "ru": "Момент прибытия пассажиров или самолёта в пункт назначения.",
+    "en": "The moment a flight reaches its destination.",
+    "az": "Uçuşun təyinat nöqtəsinə çatdığı an."
+  },
+  {
+    "id": 75,
+    "ru": "Вещи путешественника, сдаваемые или берущиеся в салон.",
+    "en": "Personal belongings carried or checked during a journey.",
+    "az": "Səfərdə əl yükü və ya təhvil verilən şəxsi əşyalar."
+  },
+  {
+    "id": 76,
+    "ru": "Процедура перед посадкой с проверкой документов и багажа.",
+    "en": "A pre-departure process confirming a passenger and baggage.",
+    "az": "Yola düşməzdən əvvəl sərnişin və yük məlumatlarının təsdiqi."
+  },
+  {
+    "id": 77,
+    "ru": "Заранее оформленное закрепление места или услуги.",
+    "en": "An advance reservation securing a place or service.",
+    "az": "Yer və ya xidmətin əvvəlcədən sifariş edilməsi."
+  },
+  {
+    "id": 78,
+    "ru": "Отдельное помещение для проживания в гостинице.",
+    "en": "An individual accommodation unit in a hotel.",
+    "az": "Mehmanxanada qalmaq üçün ayrıca yaşayış otağı."
+  },
+  {
+    "id": 79,
+    "ru": "Узкая лодка венецианского типа или подвесная кабина подъёмника.",
+    "en": "A narrow Venetian boat or a hanging cable-car cabin.",
+    "az": "Venesiya qayığı və ya kanat yolunun asma kabinəsi."
+  },
+  {
+    "id": 80,
+    "ru": "Недорогое жильё для путешественников с общими комнатами.",
+    "en": "Budget accommodation where travellers often share rooms.",
+    "az": "Səyahətçilər üçün çox vaxt ümumi otaqlı ucuz qalacaq yer."
+  },
+  {
+    "id": 81,
+    "ru": "Организованная перевозка гостей между аэропортом и отелем.",
+    "en": "A prearranged ride between an airport and accommodation.",
+    "az": "Aeroportla qalacaq yer arasında təşkil edilmiş nəqliyyat."
+  },
+  {
+    "id": 82,
+    "ru": "Договор, покрывающий расходы при непредвиденных происшествиях.",
+    "en": "Protection against certain unexpected losses during travel.",
+    "az": "Səfərdə gözlənilməz itkilərə qarşı maliyyə təminatı."
+  },
+  {
+    "id": 83,
+    "ru": "Денежная единица, принятая в отдельной стране.",
+    "en": "The money used officially in a particular country.",
+    "az": "Müəyyən ölkədə istifadə olunan pul vahidi."
+  },
+  {
+    "id": 84,
+    "ru": "Замена денег одной страны на деньги другой.",
+    "en": "Converting money of one country into another country's money.",
+    "az": "Bir ölkənin pulunu başqa ölkənin puluna çevirmə."
+  },
+  {
+    "id": 85,
+    "ru": "Географическая зона с единым местным временем.",
+    "en": "A region observing the same standard local time.",
+    "az": "Eyni yerli vaxtı istifadə edən coğrafi bölgə."
+  },
+  {
+    "id": 86,
+    "ru": "Неожиданное интересное событие во время путешествия.",
+    "en": "An exciting or unexpected experience on a journey.",
+    "az": "Səyahətdə baş verən maraqlı və gözlənilməz hadisə."
+  },
+  {
+    "id": 87,
+    "ru": "Древнее каменное сооружение из нескольких вертикальных плит.",
+    "en": "A prehistoric monument built from upright stones and a capstone.",
+    "az": "Şaquli daşlar və üst daşından düzələn qədim abidə."
+  },
+  {
+    "id": 88,
+    "ru": "Путешествие для наблюдения за дикими животными в природе.",
+    "en": "A trip to observe wild animals in their natural habitat.",
+    "az": "Vəhşi heyvanları təbiətdə izləmək üçün səfər."
+  },
+  {
+    "id": 89,
+    "ru": "Погружение под воду с маской и дыхательным снаряжением.",
+    "en": "Underwater exploration using breathing equipment.",
+    "az": "Nəfəs alma avadanlığı ilə sualtı kəşfiyyat."
+  },
+  {
+    "id": 90,
+    "ru": "Спуск по бурной реке на надувном плоту.",
+    "en": "Travelling down a fast river in an inflatable raft.",
+    "az": "Sürətli çayda şişmə sal ilə hərəkət."
+  },
+  {
+    "id": 91,
+    "ru": "Моторная машина, передвигающаяся по снежному покрову.",
+    "en": "A powered vehicle designed to travel over snow.",
+    "az": "Qar üzərində hərəkət üçün nəzərdə tutulmuş motorlu maşın."
+  },
+  {
+    "id": 92,
+    "ru": "Доска для спуска по снежным склонам боком.",
+    "en": "A single board used to slide down snowy slopes.",
+    "az": "Qarlı yamacdan sürüşmək üçün tək lövhə."
+  },
+  {
+    "id": 93,
+    "ru": "Горный подъёмник с кабинами, движущимися по крутому склону.",
+    "en": "A cable-driven railway carrying passengers up steep slopes.",
+    "az": "Sərt dağ yamacı ilə hərəkət edən kanatlı dəmir yolu."
+  },
+  {
+    "id": 94,
+    "ru": "Узкая дорожка через лес или горную местность.",
+    "en": "A narrow path through countryside, woods or hills.",
+    "az": "Meşə və ya dağlıq ərazidən keçən ensiz yol."
+  },
+  {
+    "id": 95,
+    "ru": "Понижение в горном хребте, по которому можно перейти на другую сторону.",
+    "en": "A low crossing point through a mountain ridge.",
+    "az": "Dağ silsiləsini keçməyə imkan verən alçaq keçid."
+  },
+  {
+    "id": 96,
+    "ru": "Мелководный залив, отделённый от моря рифом или косой.",
+    "en": "Shallow water separated from the sea by a reef or sandbar.",
+    "az": "Dənizdən rif və ya qum səddi ilə ayrılan dayaz su hövzəsi."
+  },
+  {
+    "id": 97,
+    "ru": "Древний круг из поставленных вертикально камней.",
+    "en": "A prehistoric circle made of standing stones.",
+    "az": "Şaquli daşlardan qurulmuş qədim dairəvi abidə."
+  },
+  {
+    "id": 98,
+    "ru": "Место, где можно укрыться от непогоды в пути.",
+    "en": "A place that provides safety from bad weather on a journey.",
+    "az": "Pis hava zamanı yolçunun özünü qoruya bildiyi yer."
+  },
+  {
+    "id": 99,
+    "ru": "Открытая площадка у здания или на склоне холма.",
+    "en": "An open platform beside a building or on a hillside.",
+    "az": "Binanın yanında və ya yamacda yerləşən açıq meydança."
+  },
+  {
+    "id": 100,
+    "ru": "Поездка в другие места ради отдыха, работы или новых впечатлений.",
+    "en": "A journey to other places for leisure, work or discovery.",
+    "az": "İstirahət, iş və ya yeni təəssürat üçün başqa yerlərə səfər."
+  }
+]
