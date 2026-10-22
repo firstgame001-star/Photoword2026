@@ -47,7 +47,7 @@ def start(page,mode,key,language):
     expect(page.locator('#challengePhotos .photo')).to_have_count(4)
     expect(page.locator('#challengePhotos .photo').first).to_have_text(CHALLENGE_BANK[batches[key][0]]['p'][0])
     answer=current_challenge_answer(page,language)
-    assert answer==CHALLENGE_BANK[batches[key][0]][language]
+    assert answer=={'ru':'ТЕСТ','en':'TEST','az':'TEST'}[language], 'Unexpected mocked server answer'
     assert page.evaluate('document.documentElement.scrollWidth<=innerWidth+1')
     return answer
 
@@ -64,7 +64,7 @@ with sync_playwright() as pw:
     tap_challenge_word(a,answer_a);expect(a.locator('#challengeCorrectPanel')).to_be_visible()
     a.locator('#challengeCorrectNext').tap()
     expect(a.locator('#challengePhotos .photo').first).to_have_text(CHALLENGE_BANK[batches['phone_a'][1]]['p'][0])
-    assert current_challenge_answer(a,'ru')==CHALLENGE_BANK[batches['phone_a'][1]]['ru']
+    assert current_challenge_answer(a,'ru')=='ТЕСТ', 'Second question must use server-provided answer'
     b.locator('#blitzLetterHint').tap();expect(b.locator('#challengeSlots .slot.fixed')).to_have_count(1)
     expect(b.locator('[data-coins]').first).to_have_text('4925')
     a.screenshot(path=str(OUT/'iphone-ru.png'));b.screenshot(path=str(OUT/'android-en.png'))
