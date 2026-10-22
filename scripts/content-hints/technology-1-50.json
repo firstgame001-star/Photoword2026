@@ -104,7 +104,7 @@
   {
     "id": 18,
     "ru": "Накопитель для постоянного хранения файлов.",
-    "en": "A drive used for long-term file storage.",
+    "en": "A storage device used to keep files for later use.",
     "az": "Faylları uzunmüddətli saxlayan yaddaş qurğusu."
   },
   {
@@ -147,7 +147,7 @@
     "id": 25,
     "ru": "Прибор, восполняющий запас энергии аккумулятора.",
     "en": "A device that replenishes a battery's power.",
-    "az": "Batareyanın enerjisini bərpa edən cihaz."
+    "az": "Batareyanın elektriklə doldurulması prosesi."
   },
   {
     "id": 26,
