@@ -34,7 +34,7 @@ console.log('PASS: 40 distinct challenge puzzles, all three hints localized, no 
 const patchSource=readFileSync('clean/challenge-unique-patches.js','utf8');
 const baseSource=readFileSync('clean/challenge.js','utf8');
 const overrides=JSON.parse(patchSource.split('window.PW_CHALLENGE_PATCHES=',2)[1].split(';})();',1)[0]);
-const core=JSON.parse(baseSource.match(/const Q=(\\[[\\s\\S]*?\\]);\\s*\\n/)[1]);
+const core=JSON.parse(baseSource.split('const Q=',2)[1].split('];',1)[0]+']');
 const resolved=[...core,...bank];
 for(const [id,puzzle] of Object.entries(overrides)) resolved[Number(id)]=puzzle;
 assert.equal(resolved.length,400);
