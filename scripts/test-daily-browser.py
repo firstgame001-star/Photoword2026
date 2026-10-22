@@ -16,7 +16,7 @@ def setup(browser,lang,scenario,width):
  state={'day':'2026-10-02','question_id':1,'attempts':0,'solved':False,'receipts':{},'lose':scenario=='lost','ids':[]}
  def snapshot(language):
   q=bank[state['question_id']-1];word=q[language]
-  return {'day':state['day'],'question_id':q['id'],'language':language,'photos':q['photos'],'letters':list(word)+list('XYZ'),'length':len(word),'attempts':state['attempts'],'attempts_left':3-state['attempts'],'solved':state['solved'],'closed':state['solved'] or state['attempts']>=3,'reward_coins':25,'server_now':time.strftime('%Y-%m-%dT%H:%M:%SZ',time.gmtime()),'reset_at':'2026-10-03T20:00:00Z'}
+  return {'day':state['day'],'question_id':q['id'],'language':language,'photos':q['photos'],'letters':list(word)+list('XYZ'),'length':len(word),'attempts':state['attempts'],'attempts_left':3-state['attempts'],'solved':state['solved'],'closed':state['solved'] or state['attempts']>=3,'reward_coins':25,'server_now':time.strftime('%Y-%m-%dT%H:%M:%SZ',time.gmtime()),'reset_at':time.strftime('%Y-%m-%dT%H:%M:%SZ',time.gmtime(time.time()+86400))}
  def daily(route):
   body=json.loads(route.request.post_data or '{}');language=body.get('language','ru')
   if route.request.method=='OPTIONS':route.fulfill(status=204,headers={'Access-Control-Allow-Origin':'*','Access-Control-Allow-Headers':'content-type'});return
