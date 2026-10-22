@@ -30,3 +30,24 @@ for(const id of ids){
  signatures.add(s);
 }
 console.log('PASS: 40 distinct challenge puzzles, all three hints localized, no solutions published, no stale main/theme links.');
+
+const patchSource=readFileSync('clean/challenge-unique-patches.js','utf8');
+const baseSource=readFileSync('clean/challenge.js','utf8');
+const overrides=JSON.parse(patchSource.split('window.PW_CHALLENGE_PATCHES=',2)[1].split(';})();',1)[0]);
+const core=JSON.parse(baseSource.match(/const Q=(\\[[\\s\\S]*?\\]);\\s*\\n/)[1]);
+const resolved=[...core,...bank];
+for(const [id,puzzle] of Object.entries(overrides)) resolved[Number(id)]=puzzle;
+assert.equal(resolved.length,400);
+assert.equal(Object.keys(overrides).length,349);
+const usedClues=new Set();
+for(const [id,puzzle] of resolved.entries()){
+ assert(Array.isArray(puzzle.p)&&puzzle.p.length===4,'Missing four photos: '+id);
+ assert.equal(new Set(puzzle.p).size,4,'Duplicate clues inside puzzle '+id);
+ const sig=puzzle.p.join('|');
+ assert(!usedClues.has(sig),'Two puzzles have identical images: '+id);
+ usedClues.add(sig);
+ for(const lang of ['ru','en','az']) assert(typeof puzzle.h?.[lang]==='string'||id<200,'Missing localized patch hint: '+id+' '+lang);
+}
+const legacy=index.filter(r=>r.main.length>0||Object.keys(r.themes).length>0);
+assert.equal(legacy.length,10,'Only ten legacy overlapping puzzles should be excluded from new runs');
+console.log('PASS: all 400 visible photo groups unique, 349 replacements and 10 excluded legacy puzzles.');
