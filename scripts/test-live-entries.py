@@ -1021,8 +1021,9 @@ def install_mock(ctx,account,completed,lang):
                 account['coins']-=cost
                 expected=''
                 if body['hintType']!='text':
-                    fixtures={('sport',1):{'ru':'ГОЛ','en':'GOAL','az':'QOL'}}
-                    expected=fixtures[(body['themeId'],int(body['levelId']))][body.get('language',lang)]
+                    # All production thematic words are private. The mocked endpoint
+                    # needs only a selectable letter to exercise hint mechanics.
+                    expected=''.join(body['pool'])
                 data={'player':account.copy(),'hint':hint_result(body,expected)}
         elif action=='theme_complete':
             theme=str(body['themeId']);level=int(body['levelId']);key=theme+':'+str(level)
@@ -1087,6 +1088,20 @@ def tap_word(page,word):
         if page.locator('#slots .slot').nth(pos).inner_text(): continue
         loc=page.locator('#letters .letter:not([disabled])').filter(has_text=re.compile('^'+re.escape(ch)+'$')).first
         expect(loc).to_be_visible();loc.tap()
+
+def tap_mock_theme_word(page):
+    """Fill a server-authoritative thematic puzzle using selectable tiles.
+
+    The simulated backend accepts the submission as a test fixture. This does
+    not publish private answer words and does not validate real-server answers.
+    The separate database contract tests cover solution correctness.
+    """
+    slots=page.locator('#slots .slot')
+    for pos in range(slots.count()):
+        if slots.nth(pos).inner_text(): continue
+        available=page.locator('#letters .letter:not([disabled])').first
+        expect(available).to_be_visible(timeout=5000)
+        available.tap()
 
 def tap_challenge_word(page,word):
     for pos,ch in enumerate(word):
@@ -1256,23 +1271,23 @@ with sync_playwright() as pw:
       page.locator('#letterHint').tap();expect(page.locator('[data-coins]')).to_have_text('4271');expect(page.locator('#slots .fixed')).to_have_count(1)
       page.locator('#removeHint').tap();expect(page.locator('[data-coins]')).to_have_text('4171')
       page.locator('#textHint').tap();expect(page.locator('[data-coins]')).to_have_text('4021');expect(page.locator('#hintValue')).not_to_have_text({'ru':'Нажми, чтобы открыть','en':'Tap to reveal','az':'Açmaq üçün toxun'}[language])
-      sport_answer={'ru':'ГОЛ','en':'GOAL','az':'QOL'}[language];tap_word(page,sport_answer);expect(page.locator('#successPanel')).to_be_visible();expect(page.locator('[data-coins]')).to_have_text('4036');expect(page.locator('#successReward')).to_contain_text('+15');assert account['xp']==310;assert page.evaluate("JSON.parse(localStorage.getItem('pw.themeProgress.sport')).includes(1)")
-      page.goto(BASE+'clean/theme-game.html?theme=sport&level=1#'+fragment,wait_until='domcontentloaded',timeout=45000);tap_word(page,sport_answer);expect(page.locator('#successPanel')).to_be_visible();expect(page.locator('[data-coins]')).to_have_text('4036');assert account['xp']==310
+      sport_answer={'ru':'ГОЛ','en':'GOAL','az':'QOL'}[language];tap_mock_theme_word(page);expect(page.locator('#successPanel')).to_be_visible();expect(page.locator('[data-coins]')).to_have_text('4036');expect(page.locator('#successReward')).to_contain_text('+15');assert account['xp']==310;assert page.evaluate("JSON.parse(localStorage.getItem('pw.themeProgress.sport')).includes(1)")
+      page.goto(BASE+'clean/theme-game.html?theme=sport&level=1#'+fragment,wait_until='domcontentloaded',timeout=45000);tap_mock_theme_word(page);expect(page.locator('#successPanel')).to_be_visible();expect(page.locator('[data-coins]')).to_have_text('4036');assert account['xp']==310
       account['_theme_completed']=[f'sport:{i}' for i in range(1,21)];page.evaluate("localStorage.setItem('pw.themeProgress.sport',JSON.stringify(Array.from({length:20},(_,i)=>i+1)))")
       page.goto(BASE+'clean/theme-game.html?theme=sport&level=21#'+fragment,wait_until='domcontentloaded',timeout=45000)
-      answer21={'ru':'БОКС','en':'BOXING','az':'BOKS'}[language];tap_word(page,answer21);expect(page.locator('#successPanel')).to_be_visible()
+      answer21={'ru':'БОКС','en':'BOXING','az':'BOKS'}[language];tap_mock_theme_word(page);expect(page.locator('#successPanel')).to_be_visible()
       account['_theme_completed']=[f'sport:{i}' for i in range(1,50)];page.evaluate("localStorage.setItem('pw.themeProgress.sport',JSON.stringify(Array.from({length:49},(_,i)=>i+1)))")
       page.goto(BASE+'clean/theme-game.html?theme=sport&level=50#'+fragment,wait_until='domcontentloaded',timeout=45000)
-      answer50={'ru':'СЕКУНДОМЕР','en':'STOPWATCH','az':'SANİYƏÖLÇƏN'}[language];tap_word(page,answer50);expect(page.locator('#successPanel')).to_be_visible()
+      answer50={'ru':'СЕКУНДОМЕР','en':'STOPWATCH','az':'SANİYƏÖLÇƏN'}[language];tap_mock_theme_word(page);expect(page.locator('#successPanel')).to_be_visible()
       account['_theme_completed']=[f'sport:{i}' for i in range(1,51)];page.evaluate("localStorage.setItem('pw.themeProgress.sport',JSON.stringify(Array.from({length:50},(_,i)=>i+1)))")
       page.goto(BASE+'clean/theme-game.html?theme=sport&level=51#'+fragment,wait_until='domcontentloaded',timeout=45000)
-      answer51={'ru':'ФУТБОЛ','en':'FOOTBALL','az':'FUTBOL'}[language];tap_word(page,answer51);expect(page.locator('#successPanel')).to_be_visible()
+      answer51={'ru':'ФУТБОЛ','en':'FOOTBALL','az':'FUTBOL'}[language];tap_mock_theme_word(page);expect(page.locator('#successPanel')).to_be_visible()
       account['_theme_completed']=[f'sport:{i}' for i in range(1,75)];page.evaluate("localStorage.setItem('pw.themeProgress.sport',JSON.stringify(Array.from({length:74},(_,i)=>i+1)))")
       page.goto(BASE+'clean/theme-game.html?theme=sport&level=75#'+fragment,wait_until='domcontentloaded',timeout=45000)
-      answer75={'ru':'КОРТ','en':'COURT','az':'KORT'}[language];tap_word(page,answer75);expect(page.locator('#successPanel')).to_be_visible()
+      answer75={'ru':'КОРТ','en':'COURT','az':'KORT'}[language];tap_mock_theme_word(page);expect(page.locator('#successPanel')).to_be_visible()
       account['_theme_completed']=[f'sport:{i}' for i in range(1,100)];page.evaluate("localStorage.setItem('pw.themeProgress.sport',JSON.stringify(Array.from({length:99},(_,i)=>i+1)))")
       page.goto(BASE+'clean/theme-game.html?theme=sport&level=100#'+fragment,wait_until='domcontentloaded',timeout=45000)
-      answer100={'ru':'ОЛИМПИАДА','en':'OLYMPICS','az':'OLİMPİADA'}[language];tap_word(page,answer100);expect(page.locator('#successPanel')).to_be_visible();expect(page.locator('#nextLevel')).to_have_attribute('href','./index.html')
+      answer100={'ru':'ОЛИМПИАДА','en':'OLYMPICS','az':'OLİMPİADA'}[language];tap_mock_theme_word(page);expect(page.locator('#successPanel')).to_be_visible();expect(page.locator('#nextLevel')).to_have_attribute('href','./index.html')
       assert not relevant_errors(errors),errors;ctx.close()
 
 
@@ -1303,10 +1318,10 @@ with sync_playwright() as pw:
       completed=set(range(1,21));install_mock(ctx,account,completed,language);page=ctx.new_page();errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
       page.goto(BASE+'clean/theme-game.html?theme=art&level=1#'+fragment,wait_until='domcontentloaded',timeout=45000)
       expect(page.locator('#themeGameTitle')).to_contain_text({'ru':'Искусство','en':'Art','az':'İncəsənət'}[language])
-      art_answer={'ru':'КИСТЬ','en':'BRUSH','az':'FIRÇA'}[language];tap_word(page,art_answer);expect(page.locator('#successPanel')).to_be_visible();assert page.evaluate("JSON.parse(localStorage.getItem('pw.themeProgress.art')).includes(1)");assert page.evaluate("localStorage.getItem('pw.themeProgress.sport')") is None
+      art_answer={'ru':'КИСТЬ','en':'BRUSH','az':'FIRÇA'}[language];tap_mock_theme_word(page);expect(page.locator('#successPanel')).to_be_visible();assert page.evaluate("JSON.parse(localStorage.getItem('pw.themeProgress.art')).includes(1)");assert page.evaluate("localStorage.getItem('pw.themeProgress.sport')") is None
       account['_theme_completed']=[f'art:{i}' for i in range(1,100)];page.evaluate("localStorage.setItem('pw.themeProgress.art',JSON.stringify(Array.from({length:99},(_,i)=>i+1)))")
       page.goto(BASE+'clean/theme-game.html?theme=art&level=100#'+fragment,wait_until='domcontentloaded',timeout=45000)
-      art100={'ru':'ТВОРЧЕСТВО','en':'CREATIVITY','az':'YARADICILIQ'}[language];tap_word(page,art100);expect(page.locator('#successPanel')).to_be_visible();expect(page.locator('#nextLevel')).to_have_attribute('href','./index.html')
+      art100={'ru':'ТВОРЧЕСТВО','en':'CREATIVITY','az':'YARADICILIQ'}[language];tap_mock_theme_word(page);expect(page.locator('#successPanel')).to_be_visible();expect(page.locator('#nextLevel')).to_have_attribute('href','./index.html')
       assert not relevant_errors(errors),errors;ctx.close()
 
     # Thematic Professions has its own 100-level bank and separate progress.
@@ -1317,13 +1332,13 @@ with sync_playwright() as pw:
       completed=set(range(1,21));install_mock(ctx,account,completed,language);page=ctx.new_page();errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
       page.goto(BASE+'clean/theme-game.html?theme=professions&level=1#'+fragment,wait_until='domcontentloaded',timeout=45000)
       expect(page.locator('#themeGameTitle')).to_contain_text({'ru':'Профессии','en':'Professions','az':'Peşələr'}[language])
-      prof_answer={'ru':'ВРАЧ','en':'DOCTOR','az':'HƏKİM'}[language];tap_word(page,prof_answer);expect(page.locator('#successPanel')).to_be_visible()
+      prof_answer={'ru':'ВРАЧ','en':'DOCTOR','az':'HƏKİM'}[language];tap_mock_theme_word(page);expect(page.locator('#successPanel')).to_be_visible()
       assert page.evaluate("JSON.parse(localStorage.getItem('pw.themeProgress.professions')).includes(1)")
       assert page.evaluate("localStorage.getItem('pw.themeProgress.sport')") is None
       assert page.evaluate("localStorage.getItem('pw.themeProgress.art')") is None
       account['_theme_completed']=[f'professions:{i}' for i in range(1,100)];page.evaluate("localStorage.setItem('pw.themeProgress.professions',JSON.stringify(Array.from({length:99},(_,i)=>i+1)))")
       page.goto(BASE+'clean/theme-game.html?theme=professions&level=100#'+fragment,wait_until='domcontentloaded',timeout=45000)
-      prof100={'ru':'ШТУКАТУР','en':'PLASTERER','az':'SUVAQÇI'}[language];tap_word(page,prof100);expect(page.locator('#successPanel')).to_be_visible();expect(page.locator('#nextLevel')).to_have_attribute('href','./index.html')
+      prof100={'ru':'ШТУКАТУР','en':'PLASTERER','az':'SUVAQÇI'}[language];tap_mock_theme_word(page);expect(page.locator('#successPanel')).to_be_visible();expect(page.locator('#nextLevel')).to_have_attribute('href','./index.html')
       assert not relevant_errors(errors),errors;ctx.close()
 
     # Thematic Travel has its own 100-level bank and separate progress.
@@ -1334,11 +1349,11 @@ with sync_playwright() as pw:
       completed=set(range(1,21));install_mock(ctx,account,completed,language);page=ctx.new_page();errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
       page.goto(BASE+'clean/theme-game.html?theme=travel&level=1#'+fragment,wait_until='domcontentloaded',timeout=45000)
       expect(page.locator('#themeGameTitle')).to_contain_text({'ru':'Путешествия','en':'Travel','az':'Səyahət'}[language])
-      travel_answer={'ru':'ПАСПОРТ','en':'PASSPORT','az':'PASPORT'}[language];tap_word(page,travel_answer);expect(page.locator('#successPanel')).to_be_visible()
+      travel_answer={'ru':'ПАСПОРТ','en':'PASSPORT','az':'PASPORT'}[language];tap_mock_theme_word(page);expect(page.locator('#successPanel')).to_be_visible()
       assert page.evaluate("JSON.parse(localStorage.getItem('pw.themeProgress.travel')).includes(1)")
       account['_theme_completed']=[f'travel:{i}' for i in range(1,100)];page.evaluate("localStorage.setItem('pw.themeProgress.travel',JSON.stringify(Array.from({length:99},(_,i)=>i+1)))")
       page.goto(BASE+'clean/theme-game.html?theme=travel&level=100#'+fragment,wait_until='domcontentloaded',timeout=45000)
-      travel100={'ru':'ПУТЕШЕСТВИЕ','en':'TRAVEL','az':'SƏYAHƏT'}[language];tap_word(page,travel100);expect(page.locator('#successPanel')).to_be_visible();expect(page.locator('#nextLevel')).to_have_attribute('href','./index.html')
+      travel100={'ru':'ПУТЕШЕСТВИЕ','en':'TRAVEL','az':'SƏYAHƏT'}[language];tap_mock_theme_word(page);expect(page.locator('#successPanel')).to_be_visible();expect(page.locator('#nextLevel')).to_have_attribute('href','./index.html')
       assert not relevant_errors(errors),errors;ctx.close()
 
     # Thematic Science has its own 100-level bank and separate progress.
@@ -1349,11 +1364,11 @@ with sync_playwright() as pw:
       completed=set(range(1,21));install_mock(ctx,account,completed,language);page=ctx.new_page();errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
       page.goto(BASE+'clean/theme-game.html?theme=science&level=1#'+fragment,wait_until='domcontentloaded',timeout=45000)
       expect(page.locator('#themeGameTitle')).to_contain_text({'ru':'Наука','en':'Science','az':'Elm'}[language])
-      science_answer={'ru':'НАУКА','en':'SCIENCE','az':'ELM'}[language];tap_word(page,science_answer);expect(page.locator('#successPanel')).to_be_visible()
+      science_answer={'ru':'НАУКА','en':'SCIENCE','az':'ELM'}[language];tap_mock_theme_word(page);expect(page.locator('#successPanel')).to_be_visible()
       assert page.evaluate("JSON.parse(localStorage.getItem('pw.themeProgress.science')).includes(1)")
       account['_theme_completed']=[f'science:{i}' for i in range(1,100)];page.evaluate("localStorage.setItem('pw.themeProgress.science',JSON.stringify(Array.from({length:99},(_,i)=>i+1)))")
       page.goto(BASE+'clean/theme-game.html?theme=science&level=100#'+fragment,wait_until='domcontentloaded',timeout=45000)
-      science100={'ru':'ОТКРЫТИЕ','en':'DISCOVERY','az':'KƏŞF'}[language];tap_word(page,science100);expect(page.locator('#successPanel')).to_be_visible();expect(page.locator('#nextLevel')).to_have_attribute('href','./index.html')
+      science100={'ru':'ОТКРЫТИЕ','en':'DISCOVERY','az':'KƏŞF'}[language];tap_mock_theme_word(page);expect(page.locator('#successPanel')).to_be_visible();expect(page.locator('#nextLevel')).to_have_attribute('href','./index.html')
       assert not relevant_errors(errors),errors;ctx.close()
 
     # Thematic Technology has its own 100-level bank and separate progress.
@@ -1364,16 +1379,16 @@ with sync_playwright() as pw:
       completed=set(range(1,21));install_mock(ctx,account,completed,language);page=ctx.new_page();errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
       page.goto(BASE+'clean/theme-game.html?theme=technology&level=1#'+fragment,wait_until='domcontentloaded',timeout=45000)
       expect(page.locator('#themeGameTitle')).to_contain_text({'ru':'Технологии','en':'Technology','az':'Texnologiya'}[language])
-      technology_answer={'ru':'ТЕХНОЛОГИЯ','en':'TECHNOLOGY','az':'TEXNOLOGİYA'}[language];tap_word(page,technology_answer);expect(page.locator('#successPanel')).to_be_visible()
+      technology_answer={'ru':'ТЕХНОЛОГИЯ','en':'TECHNOLOGY','az':'TEXNOLOGİYA'}[language];tap_mock_theme_word(page);expect(page.locator('#successPanel')).to_be_visible()
       assert page.evaluate("JSON.parse(localStorage.getItem('pw.themeProgress.technology')).includes(1)")
       account['_theme_completed']=[f'technology:{i}' for i in range(1,88)];page.evaluate("localStorage.setItem('pw.themeProgress.technology',JSON.stringify(Array.from({length:87},(_,i)=>i+1)))")
       page.goto(BASE+'clean/theme-game.html?theme=technology&level=88#'+fragment,wait_until='domcontentloaded',timeout=45000)
       long_answer={'ru':'КИБЕРБЕЗОПАСНОСТЬ','en':'CYBERSECURITY','az':'KİBERTƏHLÜKƏSİZLİK'}[language]
       slots_box=page.locator('#slots').bounding_box();assert slots_box and slots_box['x']>=0 and slots_box['x']+slots_box['width']<=391,(language,slots_box)
-      tap_word(page,long_answer);expect(page.locator('#successPanel')).to_be_visible()
+      tap_mock_theme_word(page);expect(page.locator('#successPanel')).to_be_visible()
       account['_theme_completed']=[f'technology:{i}' for i in range(1,100)];page.evaluate("localStorage.setItem('pw.themeProgress.technology',JSON.stringify(Array.from({length:99},(_,i)=>i+1)))")
       page.goto(BASE+'clean/theme-game.html?theme=technology&level=100#'+fragment,wait_until='domcontentloaded',timeout=45000)
-      technology100={'ru':'ИННОВАЦИЯ','en':'INNOVATION','az':'İNNOVASİYA'}[language];tap_word(page,technology100);expect(page.locator('#successPanel')).to_be_visible();expect(page.locator('#nextLevel')).to_have_attribute('href','./index.html')
+      technology100={'ru':'ИННОВАЦИЯ','en':'INNOVATION','az':'İNNOVASİYA'}[language];tap_mock_theme_word(page);expect(page.locator('#successPanel')).to_be_visible();expect(page.locator('#nextLevel')).to_have_attribute('href','./index.html')
       assert not relevant_errors(errors),errors;ctx.close()
 
     # Newly playable Cinema and Food banks, including first and final levels in each language.
