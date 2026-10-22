@@ -112,7 +112,7 @@ function makeClient(id){
   let n=0;const timers=new Map();
   const win={addEventListener(){},scrollTo(){},PW:{login:async()=>({}),status(){},haptic(){},sfx(){},
     player:{},duelRequest:(action,body)=>rpc(id,action,body)}};
-  const context={window:win,document:{getElementById:get,createElement:()=>new Element(),querySelectorAll:()=>[],addEventListener(){},hidden:false},
+  const context={window:win,document:{getElementById:get,createElement:()=>new Element(),querySelectorAll:selector=>selector==='.screen'?[get('home'),get('duelScreen')]:[],addEventListener(){},hidden:false},
     location:{search:'',hash:'',href:'https://test.invalid/'},URL,URLSearchParams,Date,Math,console,navigator:{},
     setTimeout:(fn)=>{timers.set(++n,fn);return n},clearTimeout:x=>timers.delete(x),
     setInterval:()=>++n,clearInterval:()=>{},
