@@ -1,21 +1,21 @@
 [
   {
     "id": 1,
-    "ru": "Документ с фотографией для пересечения границ государств.",
-    "en": "An identity document used when crossing international borders.",
-    "az": "Dövlət sərhədini keçərkən istifadə edilən şəxsiyyət sənədi."
+    "ru": "Отметка пограничной службы в документе о пересечении границы.",
+    "en": "A border-control mark placed in a passport when entering a country.",
+    "az": "Ölkəyə giriş zamanı pasporta vurulan sərhəd xidməti möhürü."
   },
   {
     "id": 2,
-    "ru": "Документ, подтверждающий право на поездку или вход.",
-    "en": "A document granting entry to a journey or event.",
-    "az": "Səfərə və ya tədbirə giriş hüququ verən sənəd."
+    "ru": "Документ, предъявляемый пассажиром перед посадкой на самолёт.",
+    "en": "A passenger's pass required to board an aircraft.",
+    "az": "Təyyarəyə minərkən təqdim edilən sərnişin sənədi."
   },
   {
     "id": 3,
-    "ru": "Переносной багаж на колёсах с ручкой.",
-    "en": "A wheeled case used to carry belongings on trips.",
-    "az": "Səyahətdə əşyaları daşımaq üçün təkərli çanta."
+    "ru": "Большая заплечная сумка со снаряжением для долгого похода.",
+    "en": "A pack carried with gear on extended hikes.",
+    "az": "Uzun yürüşlərdə ləvazimat daşımaq üçün bel çantası."
   },
   {
     "id": 4,
@@ -25,9 +25,9 @@
   },
   {
     "id": 5,
-    "ru": "Плоское изображение местности с дорогами и обозначениями.",
-    "en": "A flat representation of an area showing roads and landmarks.",
-    "az": "Yolları və obyektləri göstərən ərazi təsviri."
+    "ru": "Книга с описанием достопримечательностей и советами туристам.",
+    "en": "A book of places to visit and practical travel advice.",
+    "az": "Görməli yerlər və səfər məsləhətləri olan kitab."
   },
   {
     "id": 6,
@@ -37,9 +37,9 @@
   },
   {
     "id": 7,
-    "ru": "Место, где самолёты взлетают, садятся и принимают пассажиров.",
-    "en": "A place where aircraft depart, land and handle passengers.",
-    "az": "Təyyarələrin qalxıb endiyi və sərnişin qəbul etdiyi yer."
+    "ru": "Часть аэропорта для пассажиров, пересаживающихся на следующий рейс.",
+    "en": "An airport area for travelers changing flights.",
+    "az": "Növbəti reysə keçən sərnişinlər üçün aeroport sahəsi."
   },
   {
     "id": 8,
@@ -49,9 +49,9 @@
   },
   {
     "id": 9,
-    "ru": "Несколько вагонов, которые движутся по рельсам.",
-    "en": "Connected carriages that travel along railway tracks.",
-    "az": "Relslər üzərində hərəkət edən sərnişin vaqonları dəstəsi."
+    "ru": "Железнодорожный состав для движения с очень высокой скоростью.",
+    "en": "A railway train designed for very high speeds.",
+    "az": "Çox yüksək sürətlə hərəkət edən dəmir yolu qatarı."
   },
   {
     "id": 10,
@@ -61,27 +61,27 @@
   },
   {
     "id": 11,
-    "ru": "Крупное судно для плавания по морям и океанам.",
-    "en": "A large vessel built to travel by sea.",
-    "az": "Dənizdə sərnişin və ya yük daşıyan iri su nəqliyyatı."
+    "ru": "Судно, которое движется благодаря ветру в парусах.",
+    "en": "A small vessel propelled by wind in its sails.",
+    "az": "Yelkənlərinə dolan küləklə hərəkət edən qayıq."
   },
   {
     "id": 12,
-    "ru": "Общественный транспорт с колёсами и множеством сидений.",
-    "en": "A road vehicle carrying many passengers along a route.",
-    "az": "Müəyyən marşrut üzrə çoxlu sərnişin daşıyan yol nəqliyyatı."
+    "ru": "Транспорт, регулярно курсирующий между двумя пунктами.",
+    "en": "A vehicle running regularly between two locations.",
+    "az": "İki məntəqə arasında müntəzəm hərəkət edən nəqliyyat."
   },
   {
     "id": 13,
-    "ru": "Машина с водителем, которую вызывают для личной поездки.",
-    "en": "A hired car with a driver for individual journeys.",
-    "az": "Fərdi gediş üçün sürücüsü ilə kirayələnən avtomobil."
+    "ru": "Счётчик, рассчитывающий стоимость поездки по расстоянию и времени.",
+    "en": "A device calculating a cab fare from time and distance.",
+    "az": "Məsafə və vaxta görə gediş haqqını hesablayan sayğac."
   },
   {
     "id": 14,
-    "ru": "Городские пассажирские составы, часто идущие под землёй.",
-    "en": "An urban rail service that often runs underground.",
-    "az": "Çox vaxt yeraltı işləyən şəhər dəmir yolu nəqliyyatı."
+    "ru": "Горизонтальная движущаяся дорожка в аэропорту.",
+    "en": "A horizontal moving belt carrying pedestrians.",
+    "az": "Aeroportda piyadaları daşıyan hərəkətli üfüqi yol."
   },
   {
     "id": 15,
@@ -97,9 +97,9 @@
   },
   {
     "id": 17,
-    "ru": "Сооружение, соединяющее берега через реку или ущелье.",
-    "en": "A structure connecting two sides across water or a ravine.",
-    "az": "Çay və ya dərə üzərindən iki sahili birləşdirən qurğu."
+    "ru": "Узкое сооружение для прохода людей над дорогой или рекой.",
+    "en": "A bridge intended for people on foot.",
+    "az": "Yalnız piyadaların keçməsi üçün körpü."
   },
   {
     "id": 18,
@@ -139,9 +139,9 @@
   },
   {
     "id": 24,
-    "ru": "Заранее выбранный путь между пунктами поездки.",
-    "en": "A planned path connecting stops on a journey.",
-    "az": "Səyahətdə dayanacaqları birləşdirən əvvəlcədən seçilmiş yol."
+    "ru": "Личные записи о впечатлениях и маршрутах поездки.",
+    "en": "A personal journal of places and experiences during a journey.",
+    "az": "Səfər təəssüratları və marşrutları haqqında şəxsi qeyd dəftəri."
   },
   {
     "id": 25,
@@ -151,9 +151,9 @@
   },
   {
     "id": 26,
-    "ru": "Прибор с магнитной стрелкой для определения направления.",
-    "en": "A device with a magnetic needle that helps find directions.",
-    "az": "İstiqaməti təyin edən maqnit əqrəbli cihaz."
+    "ru": "Схематическое изображение сторон света на карте.",
+    "en": "A symbol on a map showing compass directions.",
+    "az": "Xəritədə əsas cəhətləri göstərən işarə."
   },
   {
     "id": 27,
@@ -199,9 +199,9 @@
   },
   {
     "id": 34,
-    "ru": "Участок суши, окружённый водой со всех сторон.",
-    "en": "Land completely surrounded by water.",
-    "az": "Hər tərəfdən su ilə əhatə olunmuş quru hissəsi."
+    "ru": "Суша, окружённая тёплым морем вблизи экватора.",
+    "en": "An island in warm equatorial waters.",
+    "az": "Ekvatora yaxın isti sulardakı ada."
   },
   {
     "id": 35,
@@ -211,9 +211,9 @@
   },
   {
     "id": 36,
-    "ru": "Большое природное возвышение с крутыми склонами.",
-    "en": "A major natural elevation rising above surrounding land.",
-    "az": "Ətraf ərazidən yüksələn iri təbii relyef forması."
+    "ru": "Последовательность соединённых горных вершин.",
+    "en": "A connected series of mountains and peaks.",
+    "az": "Bir-birinə bağlı dağ və zirvələr sırası."
   },
   {
     "id": 37,
@@ -229,33 +229,33 @@
   },
   {
     "id": 39,
-    "ru": "Большая территория, густо покрытая деревьями.",
-    "en": "A large area covered mainly with trees.",
-    "az": "Əsasən ağaclarla örtülmüş böyük ərazi."
+    "ru": "Низкие кустарники и растения под пологом леса.",
+    "en": "Low vegetation growing beneath larger forest trees.",
+    "az": "Meşədə böyük ağacların altında bitən alçaq bitkilər."
   },
   {
     "id": 40,
-    "ru": "Засушливая местность с очень редкими осадками.",
-    "en": "A very dry landscape with little rainfall.",
-    "az": "Yağıntısı çox az olan quraq ərazi."
+    "ru": "Группа путников с грузами, пересекающая пустыню.",
+    "en": "A group of travelers or pack animals crossing a desert.",
+    "az": "Səhranı birlikdə keçən yük heyvanları və səyyahlar dəstəsi."
   },
   {
     "id": 41,
-    "ru": "Место, где поток воды падает с высокого уступа.",
-    "en": "Water dropping over a steep ledge in a river.",
-    "az": "Çay suyunun hündür çıxıntıdan aşağı töküldüyü yer."
+    "ru": "Быстро текущая вода в русле среди гор.",
+    "en": "Fast-flowing water in a rocky mountain channel.",
+    "az": "Daşlı dağ məcrasında sürətlə axan su."
   },
   {
     "id": 42,
-    "ru": "Водоём, окружённый сушей и не являющийся морем.",
-    "en": "An inland body of water surrounded by land.",
-    "az": "Quru ilə əhatə olunmuş daxili su hövzəsi."
+    "ru": "Искусственный большой водоём для запаса воды.",
+    "en": "A large artificial lake used to store water.",
+    "az": "Su ehtiyatı saxlamaq üçün süni böyük su hövzəsi."
   },
   {
     "id": 43,
-    "ru": "Природный поток воды, движущийся по руслу.",
-    "en": "A natural flow of water moving in a channel.",
-    "az": "Məcrası boyunca axan təbii su axını."
+    "ru": "Место, где река впадает в море, озеро или другую реку.",
+    "en": "The place where a river flows into another body of water.",
+    "az": "Çayın başqa su hövzəsinə töküldüyü yer."
   },
   {
     "id": 44,

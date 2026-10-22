@@ -226,6 +226,32 @@ for(const [cat,ids] of Object.entries(rotatedThemeIds)){
  }
 }
 
+// The publicly shipped bank exposes only puzzle metadata: ids, clues and letter pools.
+// This manifest names all 139 newly rotated thematic levels WITHOUT storing answers.
+const rotationManifest=JSON.parse(readFileSync('scripts/theme-rotation-manifest.json','utf8'));
+const rotatedCategories=rotationManifest.rotated_levels;
+if(rotationManifest.count!==139||
+ Object.values(rotatedCategories).reduce((sum,ids)=>sum+ids.length,0)!==139)
+ throw Error('Thematic 139-level answer rotation manifest is incomplete');
+for(const [category,ids] of Object.entries(rotatedCategories)){
+ const found=themeBanks.find(row=>row[0]===category);
+ if(!found)throw Error('Unexpected thematic category '+category);
+ const [bank,tr]=themeBank(...found);
+ for(const levelId of ids){
+  const pictures=bank[levelId]?.photos?.map(p=>p[0]);
+  if(!pictures||pictures.length!==4||new Set(pictures).size!==4)
+   throw Error('Invalid rotated clues in '+category+':'+levelId);
+  for(const [lang,meta] of [['ru',bank[levelId]],['en',tr.en?.[levelId]],['az',tr.az?.[levelId]]]){
+   if(!meta||typeof meta.hint!=='string'||meta.hint.length<18||
+       !Number.isInteger(meta.answerLength)||meta.answerLength<2||
+       typeof meta.pool!=='string'||[...meta.pool].length<meta.answerLength+5)
+    throw Error('Unplayable rotated question '+category+':'+levelId+':'+lang);
+   if(Object.prototype.hasOwnProperty.call(meta,'answer'))
+    throw Error('Secret answer exposed in '+category+':'+levelId);
+  }
+ }
+}
+
 // Cross-theme answer uniqueness is verified against server-held answer banks and recorded in the release manifest.
 if(release.verification?.thematic_answers_unique_across_ready_categories!==true)throw Error('Cross-theme uniqueness manifest flag missing');
 if(release.verification?.thematic_progress_server_sync!==true||release.thematic_mode?.progress_sync?.server_authoritative!==true||release.thematic_mode?.progress_sync?.cross_device!==true)throw Error('Thematic progress sync manifest is incomplete');

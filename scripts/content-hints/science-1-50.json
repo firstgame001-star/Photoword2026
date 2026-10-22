@@ -13,9 +13,9 @@
   },
   {
     "id": 3,
-    "ru": "Помещение со специальным оборудованием для опытов.",
-    "en": "A room equipped for scientific experiments.",
-    "az": "Elmi təcrübələr üçün avadanlıqla təchiz edilmiş otaq."
+    "ru": "Устройство с контролируемой температурой для выращивания организмов или эмбрионов.",
+    "en": "A temperature-controlled device used for embryos or cultures.",
+    "az": "Embrion və ya kulturlar üçün temperaturu sabit saxlayan cihaz."
   },
   {
     "id": 4,
@@ -25,51 +25,51 @@
   },
   {
     "id": 5,
-    "ru": "Оптический прибор для рассматривания очень мелких объектов.",
-    "en": "An optical instrument for viewing tiny objects.",
-    "az": "Çox kiçik obyektləri görmək üçün optik cihaz."
+    "ru": "Получение фотографий объектов, видимых под микроскопом.",
+    "en": "Photographing objects through a microscope.",
+    "az": "Mikroskopda görünən obyektlərin fotoşəkillərinin çəkilməsi."
   },
   {
     "id": 6,
-    "ru": "Прибор для наблюдения удалённых небесных тел.",
-    "en": "An instrument for observing distant celestial bodies.",
-    "az": "Uzaq göy cisimlərini müşahidə edən cihaz."
+    "ru": "Астрономический прибор, принимающий радиоволны из космоса.",
+    "en": "An astronomical instrument that detects radio waves from space.",
+    "az": "Kosmosdan gələn radio dalğalarını qəbul edən astronomiya cihazı."
   },
   {
     "id": 7,
-    "ru": "Узкий стеклянный сосуд для небольших химических опытов.",
-    "en": "A narrow glass vessel for small chemistry experiments.",
-    "az": "Kiçik kimyəvi təcrübələr üçün dar şüşə qab."
+    "ru": "Тонкий лабораторный инструмент для переноса небольших объёмов жидкости.",
+    "en": "A slim lab tool for transferring tiny volumes of liquid.",
+    "az": "Az miqdarda mayeni köçürmək üçün incə laboratoriya aləti."
   },
   {
     "id": 8,
-    "ru": "Лабораторный сосуд с широким основанием и узким горлом.",
-    "en": "A laboratory vessel with a wide base and narrow neck.",
-    "az": "Geniş altlığı və dar boğazı olan laboratoriya qabı."
+    "ru": "Высокий мерный сосуд с делениями для определения объёма жидкости.",
+    "en": "A tall marked vessel used to measure liquid volumes.",
+    "az": "Mayenin həcmini ölçən bölgülü hündür qab."
   },
   {
     "id": 9,
-    "ru": "Вещество, применяемое для выявления или проведения реакции.",
-    "en": "A substance added to detect or cause a chemical reaction.",
-    "az": "Kimyəvi reaksiyanı aparmaq və ya aşkar etmək üçün maddə."
+    "ru": "Вещество, ускоряющее химическую реакцию и не расходуемое в ней.",
+    "en": "A substance that speeds a reaction without being consumed.",
+    "az": "Kimyəvi reaksiyanı sərf olunmadan sürətləndirən maddə."
   },
   {
     "id": 10,
-    "ru": "Запись математической зависимости с буквами и знаками.",
-    "en": "A symbolic expression describing a mathematical relationship.",
-    "az": "Riyazi əlaqəni hərf və işarələrlə ifadə edən yazı."
+    "ru": "Математическое сравнение двух выражений знаками больше или меньше.",
+    "en": "A comparison of mathematical expressions using greater-than or less-than signs.",
+    "az": "İfadələrin böyük və ya kiçik işarələri ilə müqayisəsi."
   },
   {
     "id": 11,
-    "ru": "Мельчайшая частица химического элемента, сохраняющая его свойства.",
-    "en": "The smallest unit of a chemical element retaining its identity.",
-    "az": "Kimyəvi elementin xüsusiyyətini saxlayan ən kiçik vahid."
+    "ru": "Нестабильная разновидность атома, испускающая излучение.",
+    "en": "An unstable atomic form that emits radiation.",
+    "az": "Şüalanma yayan qeyri-sabit atom növü."
   },
   {
     "id": 12,
-    "ru": "Группа атомов, химически связанных друг с другом.",
-    "en": "Two or more atoms bound together chemically.",
-    "az": "Bir-biri ilə kimyəvi bağlanmış atomlar qrupu."
+    "ru": "Вещество из атомов разных элементов в фиксированном соотношении.",
+    "en": "A substance formed by atoms of different elements bonded together.",
+    "az": "Müxtəlif element atomlarının bağlanmasından yaranan maddə."
   },
   {
     "id": 13,
@@ -91,9 +91,9 @@
   },
   {
     "id": 16,
-    "ru": "Отрицательно заряженная частица вокруг атомного ядра.",
-    "en": "A negatively charged particle associated with an atomic nucleus.",
-    "az": "Atom nüvəsi ətrafında olan mənfi yüklü zərrəcik."
+    "ru": "Античастица электрона с положительным зарядом.",
+    "en": "The positively charged antimatter counterpart of an electron.",
+    "az": "Elektronun müsbət yüklü antimaddə qarşılığı."
   },
   {
     "id": 17,
@@ -205,9 +205,9 @@
   },
   {
     "id": 35,
-    "ru": "Свойство тела сохранять покой или прямолинейное движение.",
-    "en": "The tendency of a body to resist changes in its motion.",
-    "az": "Cismin hərəkət vəziyyətini dəyişməyə müqaviməti."
+    "ru": "Энергия тела, обусловленная его движением.",
+    "en": "Energy an object has because it is moving.",
+    "az": "Cismin hərəkəti nəticəsində malik olduğu enerji."
   },
   {
     "id": 36,
@@ -217,9 +217,9 @@
   },
   {
     "id": 37,
-    "ru": "Возмущение, которое переносит энергию через среду или пространство.",
-    "en": "A disturbance that carries energy through space or a medium.",
-    "az": "Mühit və ya fəza boyunca enerji daşıyan titrəyiş."
+    "ru": "Колебание с неподвижными узлами, образующееся при наложении противоположных волн.",
+    "en": "A wave pattern with fixed nodes created by two opposite-traveling waves.",
+    "az": "Əks istiqamətdə yayılan dalğaların yaratdığı sabit düyünlü rəqs."
   },
   {
     "id": 38,
@@ -229,9 +229,9 @@
   },
   {
     "id": 39,
-    "ru": "Электромагнитное излучение, видимое человеческому глазу.",
-    "en": "Electromagnetic radiation visible to the human eye.",
-    "az": "İnsan gözünün görə bildiyi elektromaqnit şüalanma."
+    "ru": "Огибание волной препятствий и проникновение за их края.",
+    "en": "The bending and spreading of waves around obstacles.",
+    "az": "Dalğaların maneələrin kənarından əyilərək yayılması."
   },
   {
     "id": 40,
@@ -253,15 +253,15 @@
   },
   {
     "id": 43,
-    "ru": "Устройство, испускающее узкий когерентный световой пучок.",
-    "en": "A device producing a narrow, coherent beam of light.",
-    "az": "Dar və koherent işıq şüası yaradan qurğu."
+    "ru": "Представление непрерывной величины отдельными дискретными значениями.",
+    "en": "Representing continuous values using discrete steps.",
+    "az": "Davamlı kəmiyyətin ayrı-ayrı diskret pillələrə çevrilməsi."
   },
   {
     "id": 44,
-    "ru": "Тело, притягивающее некоторые металлы и имеющее два полюса.",
-    "en": "An object that attracts certain metals and has two poles.",
-    "az": "Bəzi metalları cəzb edən və iki qütbü olan cisim."
+    "ru": "Магнит, поле которого создаётся электрическим током.",
+    "en": "A magnet whose field is produced by electric current.",
+    "az": "Sahəsi elektrik cərəyanı ilə yaranan maqnit."
   },
   {
     "id": 45,
