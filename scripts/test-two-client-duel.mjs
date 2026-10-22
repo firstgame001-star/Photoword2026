@@ -22,7 +22,7 @@ const words=[
 ];
 const room={code:'ABCDEF1234567890',stake:25,status:'waiting',index:{A:0,B:0},score:{A:0,B:0},
   coins:{A:200,B:200},reaction:{A:null,B:null},reactionAt:{A:null,B:null},
-  started:false,settled:false,payouts:0,answerCalls:{A:0,B:0},skipCalls:0};
+  started:false,settled:false,payouts:0,answerCalls:{A:0,B:0},skipCalls:0,skips:{A:0,B:0}};
 const clients={};
 const lang={A:'ru',B:'en'};
 const iso=()=>new Date().toISOString();
@@ -39,7 +39,7 @@ function snapshot(id){
     their_name:id==='A'?'Player B':'Игрок A',
     my_completed_levels:50,their_completed_levels:50,
     question_id:question?i+1:null,question,starts_at:startsAt,ends_at:endsAt,
-    my_score:room.score[id],their_score:room.score[other],skips_left:3,
+    my_score:room.score[id],their_score:room.score[other],skips_left:3-room.skips[id],
     my_reaction:room.reaction[id],my_reaction_at:room.reactionAt[id],
     their_reaction:room.reaction[other],their_reaction_at:room.reactionAt[other],
     won:room.status==='finished'&&room.score[id]>room.score[other],
@@ -73,7 +73,7 @@ async function rpc(id,action,data={}){
     return {correct:Boolean(correct),duel:snapshot(id),server_now:iso()};
   }
   if(action==='skip'){
-    room.skipCalls++;room.index[id]++;
+    room.skipCalls++;room.skips[id]++;room.index[id]++;
     return {duel:snapshot(id),server_now:iso()};
   }
   if(action==='offer')return {offer:null};
@@ -140,6 +140,8 @@ assert.equal(A.get('duelClear').textContent,'СБРОСИТЬ БУКВЫ');
 assert.equal(B.get('duelClear').textContent,'CLEAR LETTERS');
 assert.equal(A.get('duelSlots').children.length,3);
 assert.equal(B.get('duelSlots').children.length,3);
+const seconds=Number(A.get('duelTimer').textContent);
+assert(Number.isInteger(seconds)&&seconds>0&&seconds<=60,'Duel countdown must be within 60 seconds');
 // A clears a partial answer. B retains independent input and a separate language.
 A.test.type([0,1]);B.test.type([0,1]);
 assert.equal(A.test.chosen().length,2);
@@ -171,6 +173,11 @@ assert.equal(room.score.A,2);
 assert.equal(room.score.B,1);
 assert.equal(room.answerCalls.A,2);
 assert.equal(room.answerCalls.B,1);
+await B.get('duelSkip').onclick();
+assert.equal(room.skipCalls,1);
+assert.equal(room.skips.B,1);
+assert.equal(room.score.B,1);
+assert.equal(B.get('duelSkip').textContent,'SKIP · 2');
 // Game settles only once even if multiple devices poll for final state.
 settle();settle();
 assert.equal(room.coins.A,220);
