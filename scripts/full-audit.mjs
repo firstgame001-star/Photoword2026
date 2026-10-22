@@ -171,6 +171,36 @@ for(const [id,bn,tn] of themeBanks){
  }
  for(let n=1;n<=100;n++)if(!bank[n]?.photos||bank[n].photos.length!==4)throw Error(id+' RU level '+n+' must have 4 clues');
 }
+
+const specificHintGroups={
+ travel:['travel.json'],
+ technology:['technology-1-50.json','technology-51-100.json'],
+ science:['science-1-50.json','science-51-100.json']
+};
+let specificHintCount=0;
+for(const [category,parts] of Object.entries(specificHintGroups)){
+ const rows=parts.flatMap(part=>JSON.parse(readFileSync('scripts/content-hints/'+part,'utf8')));
+ if(rows.length!==100)throw Error('Specific '+category+' hint catalogue must have 100 rows');
+ const [ru,tr]=themeBank(category,category==='travel'?'TRAVEL_LEVELS':category==='science'?'SCIENCE_LEVELS':'TECHNOLOGY_LEVELS',
+  category==='travel'?'TRAVEL_TRANSLATED':category==='science'?'SCIENCE_TRANSLATED':'TECHNOLOGY_TRANSLATED');
+ for(let i=0;i<rows.length;i++){
+  const row=rows[i];
+  if(row.id!==i+1)throw Error('Out-of-order '+category+' hint '+i);
+  for(const lang of ['ru','en','az']){
+   const item=lang==='ru'?ru[i+1]:tr[lang]?.[i+1];
+   if(!row[lang]||row[lang].length<20||item?.hint!==row[lang])
+    throw Error('Incorrect '+category+' '+lang+' specific hint at level '+(i+1));
+   specificHintCount++;
+  }
+  for(const lang of ['ru','en','az']){
+   if(!row[lang]||row[lang].length<20)throw Error('Incomplete specific hint');
+  }
+ }
+ for(const lang of ['ru','en','az'])if(new Set(rows.map(row=>row[lang])).size!==100)
+  throw Error('Duplicate descriptions '+category+' '+lang);
+}
+if(specificHintCount!==900)throw Error('Missing specific hint coverage');
+
 // Cross-theme answer uniqueness is verified against server-held answer banks and recorded in the release manifest.
 if(release.verification?.thematic_answers_unique_across_ready_categories!==true)throw Error('Cross-theme uniqueness manifest flag missing');
 if(release.verification?.thematic_progress_server_sync!==true||release.thematic_mode?.progress_sync?.server_authoritative!==true||release.thematic_mode?.progress_sync?.cross_device!==true)throw Error('Thematic progress sync manifest is incomplete');
