@@ -51,7 +51,7 @@
     "id": 9,
     "ru": "Несколько вагонов, которые движутся по рельсам.",
     "en": "Connected carriages that travel along railway tracks.",
-    "az": "Relslər üzərində hərəkət edən vaqonlar qatarı."
+    "az": "Relslər üzərində hərəkət edən sərnişin vaqonları dəstəsi."
   },
   {
     "id": 10,
@@ -63,7 +63,7 @@
     "id": 11,
     "ru": "Крупное судно для плавания по морям и океанам.",
     "en": "A large vessel built to travel by sea.",
-    "az": "Dənizdə üzmək üçün nəzərdə tutulmuş böyük gəmi."
+    "az": "Dənizdə sərnişin və ya yük daşıyan iri su nəqliyyatı."
   },
   {
     "id": 12,
@@ -435,7 +435,7 @@
     "id": 73,
     "ru": "Момент, когда самолёт отрывается от взлётной полосы.",
     "en": "The moment an aircraft leaves the runway and rises.",
-    "az": "Təyyarənin uçuş-enmə zolağından havaya qalxdığı an."
+    "az": "Təyyarənin səmada yerinə yetirdiyi hava səfəri."
   },
   {
     "id": 74,
@@ -585,7 +585,7 @@
     "id": 98,
     "ru": "Место, где можно укрыться от непогоды в пути.",
     "en": "A place that provides safety from bad weather on a journey.",
-    "az": "Yolda pis havadan qorunmaq üçün sığınacaq."
+    "az": "Pis hava zamanı yolçunun özünü qoruya bildiyi yer."
   },
   {
     "id": 99,
