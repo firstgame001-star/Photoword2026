@@ -1,0 +1,302 @@
+[
+  {
+    "id": 51,
+    "ru": "Небольшое исправление программы без полной переустановки.",
+    "en": "A small software fix applied without reinstalling everything.",
+    "az": "Proqramı yenidən qurmadan tətbiq edilən kiçik düzəliş."
+  },
+  {
+    "id": 52,
+    "ru": "Набор инструкций, управляющих работой устройства.",
+    "en": "A set of instructions that tells a device what to do.",
+    "az": "Qurğuya nə etməli olduğunu bildirən əmrlər toplusu."
+  },
+  {
+    "id": 53,
+    "ru": "Стандартный тест скорости оборудования или программы.",
+    "en": "A standard test of hardware or software performance.",
+    "az": "Avadanlıq və ya proqramın sürətini ölçən standart sınaq."
+  },
+  {
+    "id": 54,
+    "ru": "Быстрое временное хранилище часто нужных данных.",
+    "en": "Fast temporary storage of frequently used data.",
+    "az": "Tez-tez işlənən məlumatın sürətli müvəqqəti saxlanması."
+  },
+  {
+    "id": 55,
+    "ru": "Цифровая строка, подтверждающая право доступа.",
+    "en": "A digital string that confirms access rights.",
+    "az": "Giriş hüququnu təsdiqləyən rəqəmsal sətir."
+  },
+  {
+    "id": 56,
+    "ru": "Именованный блок кода для отдельной задачи.",
+    "en": "A named block of code that performs a task.",
+    "az": "Müəyyən işi görən adlı kod bloku."
+  },
+  {
+    "id": 57,
+    "ru": "Именованное значение, изменяющееся во время работы программы.",
+    "en": "A named value that can change while code runs.",
+    "az": "Proqram işləyərkən dəyişə bilən adlı dəyər."
+  },
+  {
+    "id": 58,
+    "ru": "Упорядоченная коллекция элементов под одним именем.",
+    "en": "An ordered collection of items under one name.",
+    "az": "Bir ad altında sıralanmış elementlər toplusu."
+  },
+  {
+    "id": 59,
+    "ru": "Сенсорная площадка ноутбука для управления указателем.",
+    "en": "A touch-sensitive laptop pad used to move a pointer.",
+    "az": "Noutbukda göstəricini idarə edən sensorlu səth."
+  },
+  {
+    "id": 60,
+    "ru": "Неправильное поведение приложения из-за дефекта в коде.",
+    "en": "Unexpected behavior caused by a defect in code.",
+    "az": "Koddakı qüsurun yaratdığı gözlənilməz davranış."
+  },
+  {
+    "id": 61,
+    "ru": "Поиск и исправление дефектов программного кода.",
+    "en": "Finding and fixing faults in software code.",
+    "az": "Proqram kodunun qüsurlarını tapıb düzəltmə."
+  },
+  {
+    "id": 62,
+    "ru": "Выпуск программы, отмеченный собственным номером.",
+    "en": "A specific software release identified by a number.",
+    "az": "Nömrə ilə fərqlənən proqram buraxılışı."
+  },
+  {
+    "id": 63,
+    "ru": "Переход программы на более новую редакцию.",
+    "en": "Replacing software with a more recent release.",
+    "az": "Proqramın daha yeni buraxılışa keçirilməsi."
+  },
+  {
+    "id": 64,
+    "ru": "Размещение приложения на устройстве для использования.",
+    "en": "Putting an application onto a device for use.",
+    "az": "Tətbiqin istifadə üçün cihaza yerləşdirilməsi."
+  },
+  {
+    "id": 65,
+    "ru": "Внешнее оборудование, подключённое к главному компьютеру.",
+    "en": "External equipment connected to a main computer.",
+    "az": "Əsas kompüterə qoşulmuş xarici avadanlıq."
+  },
+  {
+    "id": 66,
+    "ru": "Нажимаемый элемент для отдачи команды.",
+    "en": "A pressable control used to issue a command.",
+    "az": "Əmr vermək üçün basılan idarə elementi."
+  },
+  {
+    "id": 67,
+    "ru": "Область интерфейса с инструментами или настройками.",
+    "en": "An interface area containing tools or settings.",
+    "az": "Alətlər və ya ayarlar olan interfeys sahəsi."
+  },
+  {
+    "id": 68,
+    "ru": "Системный сигнал о важном событии.",
+    "en": "A system alert about an important event.",
+    "az": "Vacib hadisə haqqında sistem xəbərdarlığı."
+  },
+  {
+    "id": 69,
+    "ru": "Онлайн-беседа нескольких участников.",
+    "en": "An online conversation between participants.",
+    "az": "İştirakçılar arasında onlayn söhbət."
+  },
+  {
+    "id": 70,
+    "ru": "Отправленный текст или файл в переписке.",
+    "en": "Text or a file sent in a conversation.",
+    "az": "Yazışmada göndərilmiş mətn və ya fayl."
+  },
+  {
+    "id": 71,
+    "ru": "Сетевое имя собственного компьютера при тестировании.",
+    "en": "The network name referring back to the same computer.",
+    "az": "Şəbəkədə həmin kompüterin özünə işarə edən ad."
+  },
+  {
+    "id": 72,
+    "ru": "Передача видео или звука через интернет при воспроизведении.",
+    "en": "Delivery of audio or video as it plays online.",
+    "az": "Audio və videonun internetdə eyni vaxtda ötürülməsi."
+  },
+  {
+    "id": 73,
+    "ru": "Серия разговорных аудиовыпусков в интернете.",
+    "en": "A series of spoken audio episodes online.",
+    "az": "İnternetdə yayımlanan silsilə danışıq audio yazıları."
+  },
+  {
+    "id": 74,
+    "ru": "Сервис для публикаций, подписок и общения.",
+    "en": "A service for posts, followers and social interaction.",
+    "az": "Paylaşımlar, izləmələr və ünsiyyət üçün xidmət."
+  },
+  {
+    "id": 75,
+    "ru": "Приложение для личной переписки и файлов.",
+    "en": "An app for private messages and file sharing.",
+    "az": "Şəxsi mesaj və fayl mübadiləsi tətbiqi."
+  },
+  {
+    "id": 76,
+    "ru": "Квадратный узор, который считывает камера телефона.",
+    "en": "A square pattern that a phone camera can scan.",
+    "az": "Telefon kamerasının oxuduğu kvadrat naxış."
+  },
+  {
+    "id": 77,
+    "ru": "Определение местонахождения устройства на Земле.",
+    "en": "Determining a device's location on Earth.",
+    "az": "Cihazın Yer üzərindəki mövqeyini müəyyən etmə."
+  },
+  {
+    "id": 78,
+    "ru": "Спутниковая система для вычисления координат.",
+    "en": "A satellite system for calculating coordinates.",
+    "az": "Koordinatları hesablamaq üçün peyk sistemi."
+  },
+  {
+    "id": 79,
+    "ru": "Антенная площадка, подключающая телефоны к мобильной сети.",
+    "en": "An antenna site linking phones to a mobile network.",
+    "az": "Telefonları mobil şəbəkəyə bağlayan anten məntəqəsi."
+  },
+  {
+    "id": 80,
+    "ru": "Платформа для изолированного запуска приложений в контейнерах.",
+    "en": "A platform for running applications in isolated containers.",
+    "az": "Tətbiqləri təcrid olunmuş konteynerlərdə işlədən platforma."
+  },
+  {
+    "id": 81,
+    "ru": "Число передаваемых бит информации за секунду.",
+    "en": "The number of data bits transferred each second.",
+    "az": "Saniyədə ötürülən məlumat bitlərinin sayı."
+  },
+  {
+    "id": 82,
+    "ru": "Код, запускающий устройство до основной операционной системы.",
+    "en": "Code that starts a device before its operating system.",
+    "az": "Əməliyyat sistemindən əvvəl cihazı işə salan kod."
+  },
+  {
+    "id": 83,
+    "ru": "Управление процессами с минимальным участием человека.",
+    "en": "Managing processes with little direct human involvement.",
+    "az": "İnsanın az iştirakı ilə prosesləri idarə etmə."
+  },
+  {
+    "id": 84,
+    "ru": "Текст со ссылками для перехода к другим документам.",
+    "en": "Text containing links to other documents.",
+    "az": "Başqa sənədlərə keçid verən əlaqələri olan mətn."
+  },
+  {
+    "id": 85,
+    "ru": "Получение готового изображения из цифровой сцены или модели.",
+    "en": "Producing a finished image from a digital scene or model.",
+    "az": "Rəqəmsal səhnə və ya modeldən yekun təsvir alma."
+  },
+  {
+    "id": 86,
+    "ru": "Сведения о файле: формат, автор или время создания.",
+    "en": "Details describing a file's format, author or creation date.",
+    "az": "Faylın formatı, müəllifi və yaradılma tarixi kimi məlumatlar."
+  },
+  {
+    "id": 87,
+    "ru": "Изучение собранных показателей для поиска закономерностей.",
+    "en": "Examining collected metrics to find patterns.",
+    "az": "Toplanan göstəricilərdə qanunauyğunluqların axtarışı."
+  },
+  {
+    "id": 88,
+    "ru": "Защита сетей и информации от цифровых угроз.",
+    "en": "Protection of networks and information from online threats.",
+    "az": "Şəbəkə və məlumatın rəqəmsal təhlükələrdən qorunması."
+  },
+  {
+    "id": 89,
+    "ru": "Преобразование данных в вид, читаемый только с ключом.",
+    "en": "Transforming data so that a key is needed to read it.",
+    "az": "Məlumatı yalnız açarla oxunan formaya çevirmə."
+  },
+  {
+    "id": 90,
+    "ru": "Сетевой фильтр, разрешающий или блокирующий соединения.",
+    "en": "A network filter that permits or blocks connections.",
+    "az": "Bağlantıları icazə verən və ya bloklayan şəbəkə filtri."
+  },
+  {
+    "id": 91,
+    "ru": "Вредоносная программа, скрывающаяся под видом полезной.",
+    "en": "Harmful software disguised as a useful application.",
+    "az": "Faydalı tətbiq kimi görünən zərərli proqram."
+  },
+  {
+    "id": 92,
+    "ru": "Программа, которая обнаруживает и удаляет угрозы на устройстве.",
+    "en": "Software that detects and removes threats from a device.",
+    "az": "Cihazdakı təhlükələri aşkar edib silən proqram."
+  },
+  {
+    "id": 93,
+    "ru": "Последовательность записей с криптографическими связями.",
+    "en": "A sequence of records linked cryptographically.",
+    "az": "Kriptoqrafik şəkildə bağlanan qeydlər silsiləsi."
+  },
+  {
+    "id": 94,
+    "ru": "Математические методы защиты и проверки сообщений.",
+    "en": "Mathematical methods for protecting and verifying messages.",
+    "az": "Mesajları qorumaq və yoxlamaq üçün riyazi üsullar."
+  },
+  {
+    "id": 95,
+    "ru": "Цифровая среда, существующая в модели, а не в физическом мире.",
+    "en": "An environment existing digitally rather than physically.",
+    "az": "Fiziki yox, rəqəmsal modeldə mövcud olan mühit."
+  },
+  {
+    "id": 96,
+    "ru": "Погружение в искусственный мир через специальный шлем.",
+    "en": "Immersion in a computer-generated world through a headset.",
+    "az": "Xüsusi eynək vasitəsilə süni dünyaya daxil olma."
+  },
+  {
+    "id": 97,
+    "ru": "Послойное изготовление объёмного предмета из цифровой модели.",
+    "en": "Building a physical object layer by layer from a digital model.",
+    "az": "Rəqəmsal model üzrə əşyanı qat-qat hazırlama."
+  },
+  {
+    "id": 98,
+    "ru": "Жилище с автоматическим управлением светом и приборами.",
+    "en": "A house with automated lights and appliances.",
+    "az": "İşıq və cihazları avtomatik idarə olunan ev."
+  },
+  {
+    "id": 99,
+    "ru": "Определение личности по лицу или отпечаткам пальцев.",
+    "en": "Identifying people by faces or fingerprints.",
+    "az": "İnsanı üz və ya barmaq izinə görə tanıma."
+  },
+  {
+    "id": 100,
+    "ru": "Введение полезного нового решения в продукт или процесс.",
+    "en": "Introducing a useful new idea into a product or process.",
+    "az": "Məhsul və ya prosesə faydalı yeni həllin tətbiqi."
+  }
+]
