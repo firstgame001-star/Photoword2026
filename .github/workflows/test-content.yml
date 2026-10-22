@@ -17,6 +17,7 @@ jobs:
       - run: node scripts/check-clean.mjs
       - run: node scripts/full-audit.mjs
       - run: node scripts/audit-content-clues.mjs
+      - run: node scripts/audit-ambiguous-clues.mjs
       - run: node scripts/test-repeat-policy.mjs
       - run: node scripts/test-challenge-server-input.mjs
       - run: node scripts/test-challenge-auth-preview.mjs
