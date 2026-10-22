@@ -78,6 +78,18 @@ BEGIN
    RAISE EXCEPTION 'challenge reward source uniqueness missing';
  EXCEPTION WHEN unique_violation THEN NULL; END;
 
+ -- Explicit cancelled-match refunds also have an immutable match receipt.
+ duel_code:=public.duel_create(t,25,'ru');
+ SELECT id INTO mid FROM public.duel_matches WHERE code=duel_code;
+ PERFORM public.duel_cancel(t,duel_code);
+ IF (SELECT count(*) FROM public.coin_transactions WHERE player_id=a AND transaction_type='duel_refund' AND reward_source_id=mid)<>1
+ THEN RAISE EXCEPTION 'cancellation refund missing source receipt'; END IF;
+ BEGIN
+   INSERT INTO public.coin_transactions(player_id,amount,transaction_type,description,reward_source_id)
+   VALUES(a,25,'duel_refund','duplicate cancellation',mid);
+   RAISE EXCEPTION 'duplicate cancellation receipt accepted';
+ EXCEPTION WHEN unique_violation THEN NULL; END;
+
  -- Duel: 950ms cooldown for creator AND opponent; audit extremely fast sequences.
  duel_code:=public.duel_create(t,25,'ru');
  PERFORM public.duel_join_localized(t-1,duel_code,'en');
