@@ -19,6 +19,8 @@ jobs:
       - run: node scripts/test-repeat-policy.mjs
       - run: node scripts/test-challenge-server-input.mjs
       - run: node scripts/test-challenge-auth-preview.mjs
+      - run: node scripts/test-anticheat-contract.mjs
+      - run: node scripts/test-anticheat-endpoints.mjs
       - run: node scripts/test-duel-input.mjs
       - run: node scripts/test-daily-input.mjs
       - run: node scripts/test-ad-session.mjs

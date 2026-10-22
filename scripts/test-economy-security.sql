@@ -67,13 +67,17 @@ begin
  insert into public.ad_reward_claims(player_id) values(a) returning nonce into n;
  begin perform public.claim_ad_reward_server(t,n);raise exception 'unconfirmed ad';exception when others then if sqlerrm<>'ad_claim_unconfirmed' then raise;end if;end;
  perform public.confirm_adsgram_reward_server(t);perform public.claim_ad_reward_server(t,n);
- begin perform public.claim_ad_reward_server(t,n);raise exception 'ad duplicate';exception when others then if sqlerrm<>'ad_claim_unconfirmed' then raise;end if;end;
- begin perform public.claim_ad_reward_server(t-1,n);raise exception 'foreign nonce';exception when others then if sqlerrm<>'ad_claim_unconfirmed' then raise;end if;end;
+ -- Claimed receipts are idempotent, not an error: retry returns existing player unchanged.
+ before_coins:=(select coins from public.players where id=a);
+ perform public.claim_ad_reward_server(t,n);
+ if (select coins from public.players where id=a)<>before_coins then raise exception 'ad duplicate credited again';end if;
+ begin perform public.claim_ad_reward_server(t-1,n);raise exception 'foreign nonce accepted';exception when others then if sqlerrm<>'ad_claim_invalid' then raise;end if;end;
  insert into public.ad_reward_claims(player_id,status,prepared_at) values(a,'confirmed',now()-interval '9 minutes') returning nonce into n;
- begin perform public.claim_ad_reward_server(t,n);raise exception 'expired nonce';exception when others then if sqlerrm<>'ad_claim_expired' then raise;end if;end;
- for k in 1..9 loop insert into public.ad_reward_claims(player_id,status) values(a,'confirmed') returning nonce into n;perform public.claim_ad_reward_server(t,n);end loop;
+ begin perform public.claim_ad_reward_server(t,n);raise exception 'expired nonce accepted';exception when others then if sqlerrm<>'ad_claim_expired' then raise;end if;end;
+ -- Coin ads allow three rewards per UTC day; after first successful claim, only two remain.
+ for k in 1..2 loop insert into public.ad_reward_claims(player_id,status) values(a,'confirmed') returning nonce into n;perform public.claim_ad_reward_server(t,n);end loop;
  insert into public.ad_reward_claims(player_id,status) values(a,'confirmed') returning nonce into n;
- begin perform public.claim_ad_reward_server(t,n);raise exception 'ad cap';exception when others then if sqlerrm<>'ad_daily_limit' then raise;end if;end;
+ begin perform public.claim_ad_reward_server(t,n);raise exception 'ad cap not enforced';exception when others then if sqlerrm<>'ad_daily_limit' then raise;end if;end;
  if exists(select 1 from pg_proc p join pg_namespace ns on ns.oid=p.pronamespace where ns.nspname='public' and p.proname in ('start_challenge_run_atomic_server','refresh_challenge_energy_server','credit_star_purchase_server','spend_hint_server','claim_ad_reward_server') and (has_function_privilege('anon',p.oid,'EXECUTE') or has_function_privilege('authenticated',p.oid,'EXECUTE'))) then raise exception 'public economy RPC';end if;
 end $$;
 rollback;
