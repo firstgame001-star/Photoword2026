@@ -78,6 +78,14 @@ BEGIN
    RAISE EXCEPTION 'challenge reward source uniqueness missing';
  EXCEPTION WHEN unique_violation THEN NULL; END;
 
+ IF NOT EXISTS(SELECT 1 FROM public.anti_cheat_audit_events
+       WHERE player_id=a AND source_type='challenge' AND source_id=rid AND event_type='fast_correct_sequence')
+ THEN RAISE EXCEPTION 'challenge flag not archived'; END IF;
+ DELETE FROM public.challenge_runs WHERE id=rid;
+ IF EXISTS(SELECT 1 FROM public.anti_cheat_flags WHERE run_id=rid) THEN RAISE EXCEPTION 'live challenge flag not cascaded'; END IF;
+ IF NOT EXISTS(SELECT 1 FROM public.anti_cheat_audit_events WHERE player_id=a AND source_type='challenge' AND source_id=rid)
+ THEN RAISE EXCEPTION 'reset cleared challenge anti-cheat audit'; END IF;
+
  -- Explicit cancelled-match refunds also have an immutable match receipt.
  duel_code:=public.duel_create(t,25,'ru');
  SELECT id INTO mid FROM public.duel_matches WHERE code=duel_code;
@@ -127,10 +135,19 @@ BEGIN
  THEN RAISE EXCEPTION 'duel winning payout repeated'; END IF;
  IF (SELECT status FROM public.duel_matches WHERE id=mid)<>'finished'
  THEN RAISE EXCEPTION 'duel not settled'; END IF;
+ IF NOT EXISTS(SELECT 1 FROM public.anti_cheat_audit_events
+       WHERE player_id=a AND source_type='duel' AND source_id=mid AND event_type='fast_correct_sequence')
+ THEN RAISE EXCEPTION 'duel flag not archived'; END IF;
+ DELETE FROM public.duel_matches WHERE id=mid;
+ IF NOT EXISTS(SELECT 1 FROM public.anti_cheat_audit_events WHERE player_id=a AND source_type='duel' AND source_id=mid)
+ THEN RAISE EXCEPTION 'duel deletion cleared anti-cheat audit'; END IF;
  IF has_table_privilege('anon','public.duel_answer_attempts','SELECT') OR
     has_table_privilege('anon','public.duel_anti_cheat_flags','INSERT') OR
     has_function_privilege('anon','public.duel_submit(bigint,text,text)','EXECUTE')
  THEN RAISE EXCEPTION 'anti-cheat data or payout RPC publicly accessible'; END IF;
+ DELETE FROM public.players WHERE id=a;
+ IF EXISTS(SELECT 1 FROM public.anti_cheat_audit_events WHERE player_id=a)
+ THEN RAISE EXCEPTION 'account erasure retained personal anti-cheat audit'; END IF;
 END
 $test$;
 ROLLBACK;
