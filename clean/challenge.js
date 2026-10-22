@@ -113,7 +113,7 @@ async function syncRepeatProgress(){
 function excludedQuestions(){
  const excluded=new Set(),progress=repeatProgress;
  (window.PW_CHALLENGE_REPEAT_INDEX||[]).forEach((row,i)=>{
-  if(row.main.some(n=>n<=progress.main)||Object.entries(row.themes).some(([id,levels])=>levels.some(n=>(progress.themes[id]||[]).includes(n))))excluded.add(i);
+  if(row.main.length||Object.keys(row.themes).length)excluded.add(i);
  });
  return excluded;
 }
