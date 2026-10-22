@@ -1479,14 +1479,19 @@ with sync_playwright() as pw:
     slots_box=page.locator('#slots').bounding_box();assert slots_box and slots_box['x']>=0 and slots_box['x']+slots_box['width']<=321,slots_box
     assert not relevant_errors(errors),errors;ctx.close()
 
-    # Exact regression for the reported Telegram overflow: AZ Professions level 5 (firefighter)
+    # Exact regression for a short Telegram viewport: AZ Professions level 5, current server-owned answer length.
     # on a short iPhone-like Mini App viewport. The text hint must remain fully on screen.
     ctx=browser.new_context(viewport={'width':390,'height':650},has_touch=True,is_mobile=True)
     ctx.add_init_script("localStorage.setItem('pw.language','az'); localStorage.setItem('pw.theme','game');")
     short_account={'photoword_id':'PW-SHORT-FIREFIGHTER','first_name':'Short','last_name':'','username':None,'game_nickname':None,'nickname_changed':False,'coins':5000,'xp':300,'completed_levels':20,'current_level':21,'rank':1,'daily_streak':0,'last_daily_reward':None}
     install_mock(ctx,short_account,set(range(1,21)),'az');page=ctx.new_page();errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
     page.goto(BASE+'clean/theme-game.html?theme=professions&level=5#'+fragment,wait_until='domcontentloaded',timeout=45000)
-    expect(page.locator('#slots .slot')).to_have_count(len('YANĞINSÖNDÜRƏN'))
+    theme_js=Path('clean/theme-game.js').read_text()
+    theme_marker='const PROF_TRANSLATED='
+    assert theme_marker in theme_js
+    theme_localized,_=json.JSONDecoder().raw_decode(theme_js.split(theme_marker,1)[1].lstrip())
+    expected_slots=theme_localized['az']['5']['answerLength']
+    expect(page.locator('#slots .slot')).to_have_count(expected_slots)
     viewport=page.evaluate("({w:innerWidth,h:innerHeight,sw:document.documentElement.scrollWidth})")
     hint_box=page.locator('#textHint').bounding_box();tools_box=page.locator('.tools').bounding_box()
     assert viewport['sw']<=viewport['w']+1,viewport
