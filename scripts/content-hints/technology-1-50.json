@@ -7,21 +7,21 @@
   },
   {
     "id": 2,
-    "ru": "Электронная машина для обработки информации.",
-    "en": "An electronic machine that processes information.",
-    "az": "Məlumatı emal edən elektron maşın."
+    "ru": "Небольшая вычислительная машина в компактном корпусе.",
+    "en": "A compact computer housed in a small enclosure.",
+    "az": "Kiçik gövdəli yığcam hesablama qurğusu."
   },
   {
     "id": 3,
-    "ru": "Переносная вычислительная машина с откидным экраном.",
-    "en": "A portable computer with a folding screen.",
-    "az": "Açılan ekranı olan daşınan kompüter."
+    "ru": "Очень тонкий и лёгкий переносной компьютер.",
+    "en": "An especially thin and lightweight portable computer.",
+    "az": "Çox nazik və yüngül daşınan kompüter."
   },
   {
     "id": 4,
-    "ru": "Плоский компьютер с большим сенсорным дисплеем.",
-    "en": "A flat computer with a large touchscreen.",
-    "az": "Böyük sensor ekranlı yastı kompüter."
+    "ru": "Электронное перо для рисования и ввода на сенсорном экране.",
+    "en": "A pen-shaped tool for drawing on a touchscreen.",
+    "az": "Sensor ekranda yazmaq və çəkmək üçün elektron qələm."
   },
   {
     "id": 5,
@@ -31,33 +31,33 @@
   },
   {
     "id": 6,
-    "ru": "Дисплей, на который выводится изображение компьютера.",
-    "en": "A display that shows a computer's output.",
-    "az": "Kompüterin görüntüsünü göstərən ekran."
+    "ru": "Большой экран, составленный из нескольких дисплеев.",
+    "en": "A large display formed from multiple screens.",
+    "az": "Bir neçə ekrandan qurulmuş iri görüntü səthi."
   },
   {
     "id": 7,
-    "ru": "Набор клавиш для ввода текста и команд.",
-    "en": "A set of keys for entering text and commands.",
-    "az": "Mətn və əmrlər daxil etmək üçün düymələr."
+    "ru": "Панель ввода, где у каждой клавиши отдельный механический переключатель.",
+    "en": "A typing device with an individual mechanical switch for each key.",
+    "az": "Hər düyməsinin ayrıca mexaniki açarı olan yazı qurğusu."
   },
   {
     "id": 8,
-    "ru": "Ручное устройство для перемещения указателя на экране.",
-    "en": "A handheld device for moving the on-screen pointer.",
-    "az": "Ekrandakı göstəricini hərəkət etdirən əl qurğusu."
+    "ru": "Указательное устройство с вращаемым пальцами шариком.",
+    "en": "A pointing device controlled by rolling a ball.",
+    "az": "Topu fırladaraq idarə olunan göstərici qurğusu."
   },
   {
     "id": 9,
-    "ru": "Устройство, печатающее цифровые документы на бумаге.",
-    "en": "A device that puts digital documents onto paper.",
-    "az": "Rəqəmsal sənədləri kağıza çıxaran cihaz."
+    "ru": "Прибор для печати больших чертежей и технических схем.",
+    "en": "A machine used to print large technical drawings.",
+    "az": "Böyük ölçülü texniki çertyojları çap edən qurğu."
   },
   {
     "id": 10,
-    "ru": "Устройство для оцифровки листов бумаги.",
-    "en": "A device that digitizes paper documents.",
-    "az": "Kağız sənədləri rəqəmsallaşdıran cihaz."
+    "ru": "Процесс перевода бумажного документа в электронный вид.",
+    "en": "Converting paper documents into electronic images.",
+    "az": "Kağız sənədlərin elektron təsvirə çevrilməsi prosesi."
   },
   {
     "id": 11,
@@ -67,15 +67,15 @@
   },
   {
     "id": 12,
-    "ru": "Прибор, преобразующий голос в сигнал.",
-    "en": "A device that turns voice into a signal.",
-    "az": "Səsi siqnala çevirən qurğu."
+    "ru": "Миниатюрный микрофон, который крепят к одежде.",
+    "en": "A tiny microphone clipped to clothing.",
+    "az": "Paltara bərkidilən kiçik mikrofon."
   },
   {
     "id": 13,
-    "ru": "Парные динамики, надеваемые на уши.",
-    "en": "A pair of speakers worn on the ears.",
-    "az": "Qulaqlara taxılan səs çıxarıcıları."
+    "ru": "Технология уменьшения нежелательных окружающих звуков.",
+    "en": "Technology used to reduce unwanted background sounds.",
+    "az": "Ətrafdakı arzuolunmaz səsləri azaltmaq texnologiyası."
   },
   {
     "id": 14,
@@ -85,21 +85,21 @@
   },
   {
     "id": 15,
-    "ru": "Прибор, распределяющий сетевой трафик между устройствами.",
-    "en": "A device that directs traffic between networks.",
-    "az": "Şəbəkələr arasında trafiki istiqamətləndirən qurğu."
+    "ru": "Устройство, обеспечивающее беспроводное подключение к локальной сети.",
+    "en": "A device providing wireless access to a local network.",
+    "az": "Yerli şəbəkəyə simsiz qoşulmanı təmin edən qurğu."
   },
   {
     "id": 16,
-    "ru": "Прибор для преобразования сигнала линии связи.",
-    "en": "A device that converts a connection's signal.",
-    "az": "Rabitə xəttinin siqnalını çevirən qurğu."
+    "ru": "Прибор, преобразующий световой сигнал оптоволокна для домашней сети.",
+    "en": "A device that terminates an optical fiber connection.",
+    "az": "Fiber optik rabitə xəttini sonlandıran qurğu."
   },
   {
     "id": 17,
-    "ru": "Компьютер, предоставляющий услуги другим машинам.",
-    "en": "A computer that provides services to other machines.",
-    "az": "Başqa maşınlara xidmət verən kompüter."
+    "ru": "Здание с множеством серверов для обработки и хранения данных.",
+    "en": "A facility housing servers and networking infrastructure.",
+    "az": "Server və şəbəkə avadanlıqlarını yerləşdirən mərkəz."
   },
   {
     "id": 18,
@@ -121,9 +121,9 @@
   },
   {
     "id": 21,
-    "ru": "Главный вычислительный узел, выполняющий инструкции.",
-    "en": "The main computing unit that executes instructions.",
-    "az": "Əmrləri yerinə yetirən əsas hesablama hissəsi."
+    "ru": "Наличие нескольких вычислительных ядер у процессора.",
+    "en": "The design of a processor with several computing cores.",
+    "az": "Prosessorda bir neçə hesablama nüvəsinin olması."
   },
   {
     "id": 22,
@@ -133,27 +133,27 @@
   },
   {
     "id": 23,
-    "ru": "Место хранения информации внутри вычислителя.",
-    "en": "The part where a computing device keeps information.",
-    "az": "Hesablama cihazının məlumat saxlayan hissəsi."
+    "ru": "Временная память компьютера, которая очищается при отключении питания.",
+    "en": "Short-term computer memory cleared when power is off.",
+    "az": "Enerji kəsiləndə silinən müvəqqəti kompüter yaddaşı."
   },
   {
     "id": 24,
-    "ru": "Источник накопленной электрической энергии.",
-    "en": "A source of stored electrical energy.",
-    "az": "Toplanmış elektrik enerjisi mənbəyi."
+    "ru": "Переносной аккумулятор для зарядки устройств вне розетки.",
+    "en": "A portable battery used to recharge devices on the go.",
+    "az": "Yolda cihazları enerji ilə dolduran daşınan batareya."
   },
   {
     "id": 25,
-    "ru": "Прибор, восполняющий запас энергии аккумулятора.",
-    "en": "A device that replenishes a battery's power.",
-    "az": "Batareyanın elektriklə doldurulması prosesi."
+    "ru": "Пополнение энергии телефона без соединительного кабеля.",
+    "en": "Recharging a device without a physical charging cable.",
+    "az": "Kabel qoşmadan cihazın batareyasının doldurulması."
   },
   {
     "id": 26,
-    "ru": "Гибкий провод для питания или передачи данных.",
-    "en": "A flexible wire carrying power or data.",
-    "az": "Enerji və ya məlumat daşıyan elastik naqil."
+    "ru": "Тонкое стеклянное волокно для передачи света и информации.",
+    "en": "A thin glass strand that transmits light signals.",
+    "az": "İşıq siqnallarını daşıyan nazik şüşə lif."
   },
   {
     "id": 27,
@@ -169,15 +169,15 @@
   },
   {
     "id": 29,
-    "ru": "Датчик, который реагирует на внешнее воздействие.",
-    "en": "A detector that responds to a physical stimulus.",
-    "az": "Xarici təsirə reaksiya verən detektor."
+    "ru": "Датчик, измеряющий ускорение и наклон устройства.",
+    "en": "A sensor that measures acceleration and device movement.",
+    "az": "Cihazın sürətlənməsini və hərəkətini ölçən sensor."
   },
   {
     "id": 30,
-    "ru": "Самая малая цветная точка цифрового изображения.",
-    "en": "The smallest colored dot in a digital image.",
-    "az": "Rəqəmsal təsvirdə ən kiçik rəngli nöqtə."
+    "ru": "Отдельный цветовой компонент точки дисплея.",
+    "en": "An individual color component of a display pixel.",
+    "az": "Ekran pikselinin ayrıca rəng hissəsi."
   },
   {
     "id": 31,
