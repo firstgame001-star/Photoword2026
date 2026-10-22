@@ -107,7 +107,7 @@ class Element {
   querySelector(){return new Element()}
 }
 function makeClient(id){
-  const nodes=new Map();const get=n=>{if(!nodes.has(n))nodes.set(n,new Element());return nodes.get(n)};
+  const nodes=new Map();const get=n=>{if(!nodes.has(n)){const el=new Element();el.id=n;nodes.set(n,el)}return nodes.get(n)};
   const storage=new Map([['pw.language',lang[id]]]);
   let n=0;const timers=new Map();
   const win={addEventListener(){},scrollTo(){},PW:{login:async()=>({}),status(){},haptic(){},sfx(){},
