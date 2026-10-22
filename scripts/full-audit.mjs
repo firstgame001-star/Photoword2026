@@ -201,6 +201,31 @@ for(const [category,parts] of Object.entries(specificHintGroups)){
 }
 if(specificHintCount!==900)throw Error('Missing specific hint coverage');
 
+// The 51 Art/Food overlap replacements must remain playable in all locales.
+// Server answer words are deliberately not embedded in this public audit.
+const rotatedThemeIds={
+ art:[10,13,26,28,29,32,33,39,40,41,43,45,51,52,53,56,58,59,61,62,63,66,67,68,69],
+ food:[1,2,3,4,9,10,12,16,17,18,19,29,33,36,37,38,41,46,51,54,62,63,78,79,92,93]
+};
+if(rotatedThemeIds.art.length!==25||rotatedThemeIds.food.length!==26)
+ throw Error('Expected 51 rotated Art/Food levels');
+for(const [cat,ids] of Object.entries(rotatedThemeIds)){
+ const [ru,tr]=themeBank(cat,cat==='art'?'ART_LEVELS':null,cat==='art'?'ART_TRANSLATED':null);
+ for(const id of ids){
+  const photos=ru[id]?.photos?.map(p=>p[0]);
+  if(!photos||photos.length!==4||new Set(photos).size!==4)
+   throw Error('Rotated '+cat+' level '+id+' must have four distinct clues');
+  for(const lang of ['ru','en','az']){
+   const item=lang==='ru'?ru[id]:tr[lang]?.[id];
+   if(!item||item.hint?.length<18||!Number.isInteger(item.answerLength)||
+      [...item.pool].length<item.answerLength+4)
+     throw Error('Incomplete '+cat+' level '+id+' '+lang+' after rotation');
+   if(Object.hasOwn(item,'answer'))
+     throw Error('Answer leak in rotated '+cat+' level '+id);
+  }
+ }
+}
+
 // Cross-theme answer uniqueness is verified against server-held answer banks and recorded in the release manifest.
 if(release.verification?.thematic_answers_unique_across_ready_categories!==true)throw Error('Cross-theme uniqueness manifest flag missing');
 if(release.verification?.thematic_progress_server_sync!==true||release.thematic_mode?.progress_sync?.server_authoritative!==true||release.thematic_mode?.progress_sync?.cross_device!==true)throw Error('Thematic progress sync manifest is incomplete');
