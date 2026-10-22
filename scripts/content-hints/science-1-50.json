@@ -1,0 +1,302 @@
+[
+  {
+    "id": 1,
+    "ru": "Систематическое изучение мира через наблюдения и эксперименты.",
+    "en": "Systematic study of the world through observation and experiments.",
+    "az": "Dünyanın müşahidə və təcrübələrlə sistemli öyrənilməsi."
+  },
+  {
+    "id": 2,
+    "ru": "Человек, который проводит исследования и ищет новые знания.",
+    "en": "A person who conducts studies to discover new knowledge.",
+    "az": "Yeni bilik əldə etmək üçün araşdırmalar aparan şəxs."
+  },
+  {
+    "id": 3,
+    "ru": "Помещение со специальным оборудованием для опытов.",
+    "en": "A room equipped for scientific experiments.",
+    "az": "Elmi təcrübələr üçün avadanlıqla təchiz edilmiş otaq."
+  },
+  {
+    "id": 4,
+    "ru": "Твёрдая метаморфическая порода, образованная из кварцевого песчаника.",
+    "en": "A hard metamorphic rock formed from quartz-rich sandstone.",
+    "az": "Kvars qumdaşından əmələ gələn sərt metamorfik süxur."
+  },
+  {
+    "id": 5,
+    "ru": "Оптический прибор для рассматривания очень мелких объектов.",
+    "en": "An optical instrument for viewing tiny objects.",
+    "az": "Çox kiçik obyektləri görmək üçün optik cihaz."
+  },
+  {
+    "id": 6,
+    "ru": "Прибор для наблюдения удалённых небесных тел.",
+    "en": "An instrument for observing distant celestial bodies.",
+    "az": "Uzaq göy cisimlərini müşahidə edən cihaz."
+  },
+  {
+    "id": 7,
+    "ru": "Узкий стеклянный сосуд для небольших химических опытов.",
+    "en": "A narrow glass vessel for small chemistry experiments.",
+    "az": "Kiçik kimyəvi təcrübələr üçün dar şüşə qab."
+  },
+  {
+    "id": 8,
+    "ru": "Лабораторный сосуд с широким основанием и узким горлом.",
+    "en": "A laboratory vessel with a wide base and narrow neck.",
+    "az": "Geniş altlığı və dar boğazı olan laboratoriya qabı."
+  },
+  {
+    "id": 9,
+    "ru": "Вещество, применяемое для выявления или проведения реакции.",
+    "en": "A substance added to detect or cause a chemical reaction.",
+    "az": "Kimyəvi reaksiyanı aparmaq və ya aşkar etmək üçün maddə."
+  },
+  {
+    "id": 10,
+    "ru": "Запись математической зависимости с буквами и знаками.",
+    "en": "A symbolic expression describing a mathematical relationship.",
+    "az": "Riyazi əlaqəni hərf və işarələrlə ifadə edən yazı."
+  },
+  {
+    "id": 11,
+    "ru": "Мельчайшая частица химического элемента, сохраняющая его свойства.",
+    "en": "The smallest unit of a chemical element retaining its identity.",
+    "az": "Kimyəvi elementin xüsusiyyətini saxlayan ən kiçik vahid."
+  },
+  {
+    "id": 12,
+    "ru": "Группа атомов, химически связанных друг с другом.",
+    "en": "Two or more atoms bound together chemically.",
+    "az": "Bir-biri ilə kimyəvi bağlanmış atomlar qrupu."
+  },
+  {
+    "id": 13,
+    "ru": "Частица с полуцелым спином, подчиняющаяся принципу Паули.",
+    "en": "A particle with half-integer spin obeying the Pauli exclusion principle.",
+    "az": "Yarım-tam spinə malik, Pauli prinsipinə tabe olan zərrəcik."
+  },
+  {
+    "id": 14,
+    "ru": "Очень лёгкая нейтральная частица, слабо взаимодействующая с веществом.",
+    "en": "An electrically neutral particle that rarely interacts with matter.",
+    "az": "Maddə ilə çox zəif qarşılıqlı təsir edən yüksüz zərrəcik."
+  },
+  {
+    "id": 15,
+    "ru": "Нейтральная частица в ядре большинства атомов.",
+    "en": "An uncharged particle found in most atomic nuclei.",
+    "az": "Əksər atom nüvələrində olan yüksüz zərrəcik."
+  },
+  {
+    "id": 16,
+    "ru": "Отрицательно заряженная частица вокруг атомного ядра.",
+    "en": "A negatively charged particle associated with an atomic nucleus.",
+    "az": "Atom nüvəsi ətrafında olan mənfi yüklü zərrəcik."
+  },
+  {
+    "id": 17,
+    "ru": "Атом или молекула, получившие электрический заряд.",
+    "en": "An atom or molecule carrying a net electrical charge.",
+    "az": "Elektrik yükü almış atom və ya molekul."
+  },
+  {
+    "id": 18,
+    "ru": "Частица, передающая сильное взаимодействие между кварками.",
+    "en": "A particle that carries the strong force between quarks.",
+    "az": "Kvarklar arasında güclü qarşılıqlı təsiri daşıyan zərrəcik."
+  },
+  {
+    "id": 19,
+    "ru": "Частица с целочисленным спином, способная делить квантовое состояние.",
+    "en": "A particle with integer spin that may share quantum states.",
+    "az": "Tam spinli, eyni kvant halını paylaşa bilən zərrəcik."
+  },
+  {
+    "id": 20,
+    "ru": "Однородная смесь растворённого вещества и растворителя.",
+    "en": "A uniform mixture of dissolved material and solvent.",
+    "az": "Həll olmuş maddə ilə həlledicinin bircins qarışığı."
+  },
+  {
+    "id": 21,
+    "ru": "Вещество, которое в воде может отдавать ионы водорода.",
+    "en": "A substance that can donate hydrogen ions in water.",
+    "az": "Suda hidrogen ionları verə bilən maddə."
+  },
+  {
+    "id": 22,
+    "ru": "Растворимое основание с избытком гидроксидных ионов.",
+    "en": "A water-soluble base producing hydroxide ions.",
+    "az": "Hidroksid ionları yaradan suda həll olan əsas."
+  },
+  {
+    "id": 23,
+    "ru": "Состояние вещества, которое заполняет весь доступный объём.",
+    "en": "A state of matter that fills its container.",
+    "az": "Olduğu qabın bütün həcmini tutan maddə halı."
+  },
+  {
+    "id": 24,
+    "ru": "Состояние вещества с постоянным объёмом, но без собственной формы.",
+    "en": "A state with fixed volume but no fixed shape.",
+    "az": "Həcmi sabit, forması isə qabdan asılı olan maddə halı."
+  },
+  {
+    "id": 25,
+    "ru": "То, что имеет массу и занимает пространство.",
+    "en": "Anything that has mass and occupies space.",
+    "az": "Kütləsi olan və məkan tutan hər şey."
+  },
+  {
+    "id": 26,
+    "ru": "Величина, показывающая степень нагретости тела.",
+    "en": "A measure of how hot or cold something is.",
+    "az": "Cismin nə qədər isti və ya soyuq olduğunu göstərən ölçü."
+  },
+  {
+    "id": 27,
+    "ru": "Сила, приходящаяся на единицу площади поверхности.",
+    "en": "Force applied per unit area.",
+    "az": "Səthin vahid sahəsinə düşən qüvvə."
+  },
+  {
+    "id": 28,
+    "ru": "Скорость изменения скорости тела со временем.",
+    "en": "The rate at which an object's velocity changes.",
+    "az": "Cismin sürətinin zamanla dəyişmə sürəti."
+  },
+  {
+    "id": 29,
+    "ru": "Воздействие, меняющее движение или форму тела.",
+    "en": "An influence that changes an object's motion or shape.",
+    "az": "Cismin hərəkətini və ya formasını dəyişən təsir."
+  },
+  {
+    "id": 30,
+    "ru": "Передача энергии при перемещении под действием силы.",
+    "en": "Energy transferred when a force moves an object.",
+    "az": "Qüvvə cismin yerini dəyişəndə ötürülən enerji."
+  },
+  {
+    "id": 31,
+    "ru": "Количество выполненной работы за единицу времени.",
+    "en": "The rate at which work is done or energy is transferred.",
+    "az": "Vahid zamanda görülən işin və ya ötürülən enerjinin miqdarı."
+  },
+  {
+    "id": 32,
+    "ru": "Самая удалённая от Солнца точка эллиптической орбиты.",
+    "en": "The point in an orbit farthest from the Sun.",
+    "az": "Orbitdə Günəşdən ən uzaqda yerləşən nöqtə."
+  },
+  {
+    "id": 33,
+    "ru": "Ближайшая к Солнцу точка орбиты небесного тела.",
+    "en": "The point in an orbit nearest to the Sun.",
+    "az": "Orbitdə Günəşə ən yaxın yerləşən nöqtə."
+  },
+  {
+    "id": 34,
+    "ru": "Сопротивление, возникающее при соприкосновении движущихся поверхностей.",
+    "en": "Resistance arising between surfaces moving against each other.",
+    "az": "Bir-birinə toxunub hərəkət edən səthlər arasında müqavimət."
+  },
+  {
+    "id": 35,
+    "ru": "Свойство тела сохранять покой или прямолинейное движение.",
+    "en": "The tendency of a body to resist changes in its motion.",
+    "az": "Cismin hərəkət vəziyyətini dəyişməyə müqaviməti."
+  },
+  {
+    "id": 36,
+    "ru": "Планета, обращающаяся вокруг звезды за пределами Солнечной системы.",
+    "en": "A planet orbiting a star outside our solar system.",
+    "az": "Günəş sistemindən kənarda ulduzun ətrafında dövr edən planet."
+  },
+  {
+    "id": 37,
+    "ru": "Возмущение, которое переносит энергию через среду или пространство.",
+    "en": "A disturbance that carries energy through space or a medium.",
+    "az": "Mühit və ya fəza boyunca enerji daşıyan titrəyiş."
+  },
+  {
+    "id": 38,
+    "ru": "Кажущееся смещение близкого объекта при изменении точки наблюдения.",
+    "en": "Apparent displacement of an object when the viewpoint changes.",
+    "az": "Baxış nöqtəsi dəyişdikdə cismin görünən yer dəyişməsi."
+  },
+  {
+    "id": 39,
+    "ru": "Электромагнитное излучение, видимое человеческому глазу.",
+    "en": "Electromagnetic radiation visible to the human eye.",
+    "az": "İnsan gözünün görə bildiyi elektromaqnit şüalanma."
+  },
+  {
+    "id": 40,
+    "ru": "Точка небесной сферы прямо над головой наблюдателя.",
+    "en": "The point on the sky directly above an observer.",
+    "az": "Müşahidəçinin başı üzərindəki səma nöqtəsi."
+  },
+  {
+    "id": 41,
+    "ru": "Изменение направления луча при переходе между средами.",
+    "en": "The bending of a ray as it passes between materials.",
+    "az": "Şüa bir mühitdən digərinə keçərkən istiqamətini dəyişir."
+  },
+  {
+    "id": 42,
+    "ru": "Точка небесной сферы прямо под наблюдателем.",
+    "en": "The point on the celestial sphere directly beneath an observer.",
+    "az": "Müşahidəçinin ayaqları altındakı səma nöqtəsi."
+  },
+  {
+    "id": 43,
+    "ru": "Устройство, испускающее узкий когерентный световой пучок.",
+    "en": "A device producing a narrow, coherent beam of light.",
+    "az": "Dar və koherent işıq şüası yaradan qurğu."
+  },
+  {
+    "id": 44,
+    "ru": "Тело, притягивающее некоторые металлы и имеющее два полюса.",
+    "en": "An object that attracts certain metals and has two poles.",
+    "az": "Bəzi metalları cəzb edən və iki qütbü olan cisim."
+  },
+  {
+    "id": 45,
+    "ru": "Твёрдая внешняя оболочка Земли из коры и верхней мантии.",
+    "en": "Earth's rigid outer layer of crust and uppermost mantle.",
+    "az": "Yer qabığı və üst mantiyanın sərt xarici təbəqəsi."
+  },
+  {
+    "id": 46,
+    "ru": "Разность электрических потенциалов между двумя точками.",
+    "en": "The difference in electric potential between two points.",
+    "az": "İki nöqtə arasındakı elektrik potensial fərqi."
+  },
+  {
+    "id": 47,
+    "ru": "Свойство частиц, определяющее их электрическое взаимодействие.",
+    "en": "A property of particles that determines electrical interactions.",
+    "az": "Zərrəciklərin elektrik qarşılıqlı təsirini müəyyən edən xassə."
+  },
+  {
+    "id": 48,
+    "ru": "Совокупность замёрзшей воды на Земле, включая ледники и снег.",
+    "en": "All frozen water on Earth, including glaciers and snow.",
+    "az": "Yer üzündə buzlaqlar və qar daxil olmaqla bütün donmuş su."
+  },
+  {
+    "id": 49,
+    "ru": "Слой недр Земли между корой и ядром.",
+    "en": "The layer of Earth between its crust and core.",
+    "az": "Yer qabığı ilə nüvəsi arasında yerləşən təbəqə."
+  },
+  {
+    "id": 50,
+    "ru": "Тёмная вулканическая порода, образующаяся при остывании лавы.",
+    "en": "A dark volcanic rock formed when lava cools.",
+    "az": "Lava soyuduqda əmələ gələn tünd vulkanik süxur."
+  }
+]
