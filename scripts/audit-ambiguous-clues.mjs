@@ -49,3 +49,18 @@ function clues(ref){
 }
 for(const [from,to] of cases)if(clues(from)===clues(to))throw Error('Old ambiguous clue quartet repeated: '+from+' / '+to);
 console.log('PASS: 26 historically ambiguous cross-mode clue pairs are now distinct in the public game data.');
+
+const allRefs=[];
+for(let i=1;i<=680;i++)allRefs.push('main:'+i);
+for(const [category] of themeBanks)for(let i=1;i<=100;i++)allRefs.push('theme:'+category+':'+i);
+for(let i=0;i<400;i++)allRefs.push('challenge:'+i);
+for(let i=1;i<=365;i++)allRefs.push('daily:'+i);
+if(allRefs.length!==2645)throw Error('Unexpected complete puzzle count');
+const byQuartet=new Map();
+for(const ref of allRefs){const sig=clues(ref);const seen=byQuartet.get(sig)||[];seen.push(ref);byQuartet.set(sig,seen)}
+for(const target of new Set(cases.map(([,b])=>b))){
+ const other=byQuartet.get(clues(target)).filter(ref=>ref!==target);
+ if(other.length)throw Error('Reworked '+target+' duplicates '+other.join(','));
+}
+console.log('PASS: all 26 reworked questions have unique quartets across the full 2,645-puzzle catalogue.');
+
