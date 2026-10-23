@@ -1,0 +1,25 @@
+-- Exclude suspicious game results from achievement metrics that can award coins.
+-- Existing players, balances, completed levels and claimed achievements are unchanged.
+CREATE OR REPLACE FUNCTION public.achievement_metrics(p_player uuid)
+ RETURNS jsonb
+ LANGUAGE plpgsql
+ SET search_path TO ''
+AS $function$
+declare m jsonb;themes jsonb;chapters jsonb;daily_best_streak integer;ds jsonb;duels jsonb;challenges jsonb;
+begin
+ select jsonb_build_object('main',count(*) filter(where mode='main'),'nohint',count(*) filter(where mode='main' and no_hint),'theme_total',count(*) filter(where mode='theme')) into m from public.achievement_levels where player_id=p_player;
+ select coalesce(jsonb_object_agg('theme_'||theme_id,n),'{}'::jsonb)||jsonb_build_object('themes_complete',count(*) filter(where n>=100)) into themes from (select theme_id,count(*) n from public.achievement_levels where player_id=p_player and mode='theme' group by theme_id) t;
+ select jsonb_object_agg('chapter_'||i,case when n=last_level-first_level+1 then 1 else 0 end) into chapters
+ from (select b.i,b.first_level,b.last_level,count(l.level_id) n
+       from (values(1,1,20),(2,21,50),(3,51,90),(4,91,130),(5,131,180),(6,181,230),(7,231,280),(8,281,330),(9,331,380),(10,381,430),(11,431,480),(12,481,530),(13,531,580),(14,581,630),(15,631,680)) b(i,first_level,last_level)
+       left join public.achievement_levels l on l.player_id=p_player and l.mode='main' and l.level_id between b.first_level and b.last_level
+       group by b.i,b.first_level,b.last_level) c;
+ select coalesce(max(n),0) into daily_best_streak from (select count(*) n from (select puzzle_day-(row_number() over(order by puzzle_day))::integer grp from public.daily_puzzle_progress where player_id=p_player and solved) d group by grp) series;
+ select jsonb_build_object('daily_total',count(*),'daily_first',count(*) filter(where attempts=1),'daily_streak',daily_best_streak) into ds from public.daily_puzzle_progress where player_id=p_player and solved;
+ select jsonb_build_object('duel_played',count(*),'duel_wins',count(*) filter(where winner=p_player),'duel_draws',count(*) filter(where winner is null),'duel_best',coalesce(max(case when creator=p_player then creator_score else opponent_score end),0)) into duels from public.duel_matches m where m.status='finished' and (m.creator=p_player or m.opponent=p_player) and m.created_at>=(select progress_reset_at from public.players where id=p_player)
+ and not exists(select 1 from public.duel_anti_cheat_flags f where f.match_id=m.id and f.player_id=p_player);
+ select jsonb_build_object('challenge_runs',count(*) filter(where reward_coins>0),'challenge_streak',coalesce(max(streak),0),'blitz_best',coalesce(max(score) filter(where mode='blitz'),0)) into challenges from public.challenge_runs r where r.player_id=p_player and r.finished_at is not null
+ and not exists(select 1 from public.anti_cheat_flags f where f.run_id=r.id and f.event_type in ('implausibly_fast_run','fast_correct_sequence'));
+ return m||themes||chapters||ds||duels||challenges;
+end
+$function$;
