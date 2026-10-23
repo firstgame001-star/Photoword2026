@@ -52,4 +52,12 @@ assertHas(readFileSync('clean/challenge.js','utf8'),"reward.review_pending?fraud
 const achievementGuard=readFileSync('supabase/migrations/20261023063647_exclude_flagged_runs_from_achievement_coin_rewards.sql','utf8');
 assertHas(achievementGuard,'not exists(select 1 from public.anti_cheat_flags', 'Flagged challenge attempts must not unlock coin-based achievements');
 assertHas(achievementGuard,'not exists(select 1 from public.duel_anti_cheat_flags', 'Flagged duels must not unlock coin-based achievements');
+const duelEconomyGuard=readFileSync('supabase/migrations/20261023083001_refund_both_stakes_when_duel_winner_flagged.sql','utf8');
+const duelEconomyRegression=readFileSync('scripts/test-duel-economy.sql','utf8');
+assertHas(duelEconomyGuard,"'Anti-cheat void '",'Flagged prospective winners must trigger a match void');
+assertHas(duelEconomyGuard,"when v_flagged then 'cancelled'",'Flagged winning match cannot appear as legitimate victory');
+assertHas(duelEconomyGuard,'f.player_id=v_winner','Only a flagged proposed winner must void the duel');
+assertHas(duelEconomyRegression,'ROLLBACK;','Duel finance tests must not change real balances');
+assertHas(duelEconomyRegression,'ARRAY[25,50,75,100,500]','Check representative stake bands');
+assertHas(duelEconomyRegression,"'duel_refund'",'Draws, cancellations and flagged-duel refunds must be tested');
 console.log('PASS: protection of payouts, duel symmetry, rate limits, anomaly flags, forbidden cross-user actions, and rollback-only tests');
