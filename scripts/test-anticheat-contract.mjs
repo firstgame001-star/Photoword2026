@@ -43,4 +43,10 @@ assertHas(transactional,"'challenge anomaly not detected'",'Challenge anomaly no
 assertHas(transactional,'ROLLBACK;','Synthetic tests must roll back');
 assertHas(edgeDuel,'invalid_telegram_auth','Duel API signature rejection missing');
 assertHas(edgeChallenge,'invalid_telegram_auth','Challenge API signature rejection missing');
+
+const farmingGuard=readFileSync('supabase/migrations/20261023063125_block_suspicious_challenge_reward_farming.sql','utf8');
+assertHas(farmingGuard,"if v_flagged then v_coins:=0;v_xp:=0; end if;",'Suspicious challenge payouts must be withheld');
+assertHas(farmingGuard,"where player_id=v_player.id and not v_flagged;",'Suspicious challenge records must not promote best score');
+assertHas(farmingGuard,"'review_pending',v_flagged",'Flagged run status must be returned to the client');
+assertHas(readFileSync('clean/challenge.js','utf8'),"reward.review_pending?fraudInfo", 'Client must explain withheld suspicious-run rewards');
 console.log('PASS: protection of payouts, duel symmetry, rate limits, anomaly flags, forbidden cross-user actions, and rollback-only tests');
