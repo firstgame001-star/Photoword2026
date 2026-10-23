@@ -439,7 +439,7 @@ async function loadShopStatus(){
  try{const data=await pw.actionRequest('shop_status');renderShopStatus(data?.shop||{});return data?.shop||{}}
  finally{card?.classList.remove('shop-status-loading')}
 }
-function openShop(){track('shop_open');open('shopModal');text('shopHistoryEmpty',t().shopLoading);loadShopStatus().catch(e=>pw.status(e.message))}
+function openShop(){track('shop_open');open('shopModal');text('shopHistoryEmpty',t().shopLoading);loadShopStatus().then(()=>recoverAdReceipt()).catch(e=>pw.status(e.message))}
 $('refreshShopHistory').onclick=()=>loadShopStatus().catch(e=>pw.status(e.message));
 async function waitForEnergyCredit(before){
  const x=t();pw.status(x.paymentProcessing);
@@ -475,6 +475,40 @@ document.querySelectorAll('[data-energy-store-pack]').forEach(b=>b.onclick=async
 
 function renderAdButton(){const b=$('watchAd'),x=t(),a=adChoice(),configured=Boolean(shopStatus?.ads?.configured??publicConfig.adsgram_reward_block_id),limited=a.claimed>=a.limit,full=a.energy&&Number(shopStatus?.energy)>=5;b.disabled=adBusy||!configured||limited||full||a.left>0;b.textContent=adBusy?x[adPhase]:limited?x.adLimitReached:full?'5/5 ⚡':a.left>0?shopCountdown(a.left):configured?x.adWatch:x.adSetup;for(const [id,kind] of [['adCoinsChoice','coins'],['adEnergyChoice','energy']]){const q=$(id);q.disabled=adBusy;q.setAttribute('aria-pressed',String(adRewardKind===kind));q.style.borderColor=adRewardKind===kind?'#ffd45a':'';q.textContent=(kind==='coins'?'+5 🪙':'+1 ⚡')+' · '+Number(kind==='coins'?shopStatus?.ads?.claimed_today||0:shopStatus?.ads?.energy_claimed_today||0)+'/'+(kind==='coins'?3:2);}}
 async function configureAds(){try{const r=await pw.actionRequest('public_config');publicConfig=r.config||{};renderAdButton()}catch{renderAdButton()}}
+// Preserve only a server-issued claim receipt after AdsGram reports a finished ad.
+// Never grant coins or energy from local storage: the server must confirm the nonce.
+const adReceiptKey=()=> 'pw.adsgram.pending.v1.'+String(pw.player?.photoword_id||'not-signed-in');
+function saveAdReceipt(nonce,kind){
+ try{if(/^[0-9a-f-]{36}$/i.test(String(nonce||'')))
+   localStorage.setItem(adReceiptKey(),JSON.stringify({nonce,kind,at:Date.now()}));}catch{}
+}
+function pendingAdReceipt(){
+ try{const data=JSON.parse(localStorage.getItem(adReceiptKey())||'null');
+  if(!data)return null;
+  if(typeof data.nonce!=='string'||!/^[0-9a-f-]{36}$/i.test(data.nonce)
+      ||!Number.isFinite(data.at)||Date.now()-data.at>8*60*1000||Date.now()<data.at-60000){
+   localStorage.removeItem(adReceiptKey());return null;
+  }
+  return data;
+ }catch{return null}
+}
+function clearAdReceipt(nonce){
+ try{const data=pendingAdReceipt();if(data?.nonce===nonce)localStorage.removeItem(adReceiptKey())}catch{}
+}
+let adRecoveryBusy=false;
+async function recoverAdReceipt(){
+ if(adBusy||adRecoveryBusy)return;
+ const saved=pendingAdReceipt();if(!saved)return;
+ adRecoveryBusy=true;
+ try{
+  const player=await pw.api('ad_claim',{nonce:saved.nonce});
+  clearAdReceipt(saved.nonce);update(player);pw.sfx('coin');
+  flashStatus(saved.kind==='energy'?'+1 ⚡':t().adRewarded);
+  track('ad_complete',{metadata:{recovered:true,kind:saved.kind}});
+  await loadShopStatus().catch(()=>{});
+ }catch{/* A delayed provider confirmation can still arrive before receipt expiry. */}
+ finally{adRecoveryBusy=false}
+}
 async function claimConfirmedAd(nonce){for(const delay of [300,700,1200,1800,2600,3600]){await new Promise(r=>setTimeout(r,delay));try{return await pw.api('ad_claim',{nonce})}catch{}}throw new Error('ad_confirmation_pending')}
 $('watchAd').onclick=async()=>{
  const b=$('watchAd'),x=t();let stage='sdk';if(b.disabled||adBusy)return;
@@ -486,8 +520,8 @@ $('watchAd').onclick=async()=>{
   if(!adController)adController=window.Adsgram.init({blockId:String(prep.block_id),debug:false});
   const result=await window.PWAdSession.show(adController,{onStart(){adPhase='adPlaying';renderAdButton();track('ad_started')}});
   if(!result?.done)throw result||new Error('ad_incomplete');
-  adPhase='adChecking';renderAdButton();track('ad_watched');
-  const p=await claimConfirmedAd(prep.nonce);track('ad_complete');update(p);pw.sfx('coin');flashStatus(adRewardKind==='energy'?'+1 ⚡':x.adRewarded);
+  adPhase='adChecking';renderAdButton();track('ad_watched');saveAdReceipt(prep.nonce,adRewardKind);
+  const p=await claimConfirmedAd(prep.nonce);clearAdReceipt(prep.nonce);track('ad_complete');update(p);pw.sfx('coin');flashStatus(adRewardKind==='energy'?'+1 ⚡':x.adRewarded);
  }catch(e){
   const code=String(e?.message||e?.description||'ad_error');
   track('ad_error',{metadata:{message:code.slice(0,120),state:String(e?.state||'').slice(0,24)}});
@@ -506,11 +540,12 @@ async function rating(){const x=t();screen('ratingScreen');const id=++ratingReq,
 ['ratingNav','ratingShortcut','refreshRating'].forEach(id=>$(id).onclick=rating);
 
 window.addEventListener('pw:player',e=>update(e.detail));
+window.addEventListener('focus',()=>recoverAdReceipt().catch(()=>{}));
 function showProfileSyncedOnce(){
  let shown=false;try{shown=sessionStorage.getItem('pw.profileSyncedShown')==='1';if(!shown)sessionStorage.setItem('pw.profileSyncedShown','1')}catch{}
  if(shown)return;
  const msg=t().profileSynced;pw.status(msg);
  setTimeout(()=>{const e=$('status');if(e&&!e.hidden&&e.textContent===msg){e.hidden=true;e.textContent=''}},1800);
 }
-pw.login().then(async()=>{showProfileSyncedOnce();track('app_open',{metadata:{version:'r101'}});configureAds();try{await syncThemeProgress()}catch(e){track('server_error',{metadata:{code:'theme_progress_sync',status:0}})}try{const start=window.Telegram?.WebApp?.initDataUnsafe?.start_param||'';if(start.startsWith('ref_PW-'))await pw.api('register_referral',{referrer:start.slice(4)})}catch{}}).catch(e=>pw.status(e.message));
+pw.login().then(async()=>{showProfileSyncedOnce();track('app_open',{metadata:{version:'r101'}});configureAds();recoverAdReceipt().catch(()=>{});try{await syncThemeProgress()}catch(e){track('server_error',{metadata:{code:'theme_progress_sync',status:0}})}try{const start=window.Telegram?.WebApp?.initDataUnsafe?.start_param||'';if(start.startsWith('ref_PW-'))await pw.api('register_referral',{referrer:start.slice(4)})}catch{}}).catch(e=>pw.status(e.message));
 })();
