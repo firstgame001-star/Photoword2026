@@ -113,7 +113,7 @@ def attach(browser,fixture,person,errors,login_fragment=False):
     ctx=browser.new_context(viewport={'width':width,'height':800},has_touch=True,is_mobile=True)
     ctx.add_init_script('localStorage.setItem("pw.language",'+json.dumps(lang)+');')
     # Intercept the PW initializer before duel.js processes Telegram startapp links.
-    ctx.add_init_script("""() => {
+    ctx.add_init_script("""(() => {
       let pwCore;
       Object.defineProperty(window,'PW',{
         configurable:true,
@@ -123,7 +123,7 @@ def attach(browser,fixture,person,errors,login_fragment=False):
           if(core)core.duelRequest=(action,body={})=>window.duelSyntheticApi(action,body);
         }
       });
-    }""")
+    })()""")
     install_mock(ctx,fixture.account[person],set(range(1,11)),lang)
     # No unscripted duel request should ever reach the production API.
     ctx.route('**/functions/v1/duel-game',lambda route:route.fulfill(
