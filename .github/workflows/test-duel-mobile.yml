@@ -1,0 +1,31 @@
+name: Test published duel mobile lifecycle
+on:
+  push:
+    branches: [main]
+    paths: ['scripts/test-duel-mobile-browser.py', 'clean/duel.js', '.github/workflows/test-duel-mobile.yml']
+  pull_request:
+    paths: ['scripts/test-duel-mobile-browser.py', 'clean/duel.js', '.github/workflows/test-duel-mobile.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  duet-mobile:
+    runs-on: ubuntu-latest
+    timeout-minutes: 16
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - name: Install mobile browser engines
+        run: |
+          python -m pip install playwright==1.63.0
+          python -m playwright install --with-deps chromium webkit
+      - name: Exercise published duel screens using isolated synthetic accounts
+        run: python scripts/test-duel-mobile-browser.py
+      - name: Save mobile screen evidence
+        if: always()
+        uses: actions/upload-artifact@v5
+        with:
+          name: duel-mobile-screen-evidence
+          path: test-results/duel-mobile/
+          retention-days: 7
