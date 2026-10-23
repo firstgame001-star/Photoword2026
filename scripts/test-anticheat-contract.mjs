@@ -37,7 +37,7 @@ assertHas(sql,"coalesce(v_run.score,0)",'Challenge reward must use stored score'
 assertHas(transactional,"'cross-user challenge accepted'",'Foreign-user challenge rejection not tested');
 assertHas(transactional,"'outsider submitted duel answer'",'Foreign-user duel rejection not tested');
 assertHas(transactional,"'client-forged score credited'",'Forged client score not tested');
-assertHas(transactional,"'flagged duel winner wrongly paid'",'Flagged duel winner no-reward check missing');
+assertHas(transactional,"'legitimate fast duel winner wrongly withheld'",'Fast legitimate duel must remain eligible for victory');
 assertHas(transactional,"'fast duel streak not flagged'",'Duel anomaly not tested');
 assertHas(transactional,"'challenge anomaly not detected'",'Challenge anomaly not tested');
 assertHas(transactional,'ROLLBACK;','Synthetic tests must roll back');
@@ -60,4 +60,8 @@ assertHas(duelEconomyGuard,'f.player_id=v_winner','Only a flagged proposed winne
 assertHas(duelEconomyRegression,'ROLLBACK;','Duel finance tests must not change real balances');
 assertHas(duelEconomyRegression,'ARRAY[25,50,75,100,500]','Check representative stake bands');
 assertHas(duelEconomyRegression,"'duel_refund'",'Draws, cancellations and flagged-duel refunds must be tested');
+const fairDuelGuard=readFileSync('supabase/migrations/20261023093207_reduce_duel_anticheat_false_positives.sql','utf8');
+assertHas(fairDuelGuard,"v_count=10 and v_window<interval '12 seconds'",'Extreme ten-answer anomaly detection missing');
+assertHas(fairDuelGuard,"in ('superhuman_correct_sequence','confirmed_automation')",'Only high-confidence duel alerts should prevent winner payouts');
+assertHas(fairDuelGuard,"f.player_id=p_player and f.event_type in ('superhuman_correct_sequence','confirmed_automation')",'Legitimate fast winners must retain achievement credit');
 console.log('PASS: protection of payouts, duel symmetry, rate limits, anomaly flags, forbidden cross-user actions, and rollback-only tests');
