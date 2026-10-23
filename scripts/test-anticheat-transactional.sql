@@ -66,15 +66,13 @@ BEGIN
  IF NOT EXISTS(SELECT 1 FROM public.anti_cheat_flags WHERE run_id=rid AND event_type='fast_correct_sequence')
  THEN RAISE EXCEPTION 'challenge anomaly not detected'; END IF;
  v:=public.finish_challenge_run_server(t,rid,'limited',10000,10000);
- IF (v->>'reward_coins')::integer<>0 OR (v->>'reward_xp')::integer<>0
+ IF (v->>'reward_coins')::integer<>5 OR (v->>'reward_xp')::integer<>3 OR (v->>'review_pending')::boolean IS TRUE
  THEN RAISE EXCEPTION 'client-forged score credited'; END IF;
  v:=public.finish_challenge_run_server(t,rid,'limited',0,0);
  IF NOT (v->>'duplicate')::boolean THEN RAISE EXCEPTION 'challenge finish duplicate not recognized'; END IF;
- IF (SELECT count(*) FROM public.coin_transactions WHERE player_id=a AND transaction_type='challenge_reward' AND reward_source_id=rid)<>0
- THEN RAISE EXCEPTION 'flagged challenge issued coins'; END IF;
- -- Probe uniqueness separately using a synthetic sentinel inside the rollback.
- INSERT INTO public.coin_transactions(player_id,amount,transaction_type,description,reward_source_id)
- VALUES(a,5,'challenge_reward','uniqueness sentinel',rid);
+ IF (SELECT count(*) FROM public.coin_transactions WHERE player_id=a AND transaction_type='challenge_reward' AND reward_source_id=rid)<>1
+ THEN RAISE EXCEPTION 'fair challenge reward missing or repeated'; END IF;
+ -- The real payout now acts as a unique source receipt for replay protection.
  BEGIN
    INSERT INTO public.coin_transactions(player_id,amount,transaction_type,description,reward_source_id)
    VALUES(a,5,'challenge_reward','duplicate attempted',rid);
