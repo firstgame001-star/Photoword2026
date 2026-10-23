@@ -277,7 +277,7 @@ async function finish(reason){
  if(mode==='limited'){$('challengeResultMain').textContent=x.passed+': '+correct+' / 10';$('challengeResultSub').textContent=x.record+': '+Math.max(state?.limited_best_score||0,correct)+' / 10'}
  else if(mode==='nohint'){$('challengeResultMain').textContent=x.passed+': '+correct+' · '+x.series+': '+bestRunStreak;$('challengeResultSub').textContent=x.record+': '+Math.max(state?.nohint_best_streak||0,bestRunStreak)}
  else{$('challengeResultMain').textContent=x.points+': '+score+' · '+x.series+': '+bestRunStreak;$('challengeResultSub').textContent=x.record+': '+Math.max(state?.blitz_best_score||0,score)}
- const rewardBox=$('challengeResultReward');if(rewardBox){const coins=Number(reward.reward_coins||0),xp=Number(reward.reward_xp||0),used=Number(reward.rewarded_runs_today||0),limit=Number(reward.reward_limit||3);rewardBox.textContent=rewardPending?pendingRewardText():coins||xp?x.rewardEarned(coins,xp):(used>=limit?x.rewardLimit:x.rewardNone);rewardBox.classList.toggle('earned',Boolean(coins||xp));}
+ const rewardBox=$('challengeResultReward');if(rewardBox){const coins=Number(reward.reward_coins||0),xp=Number(reward.reward_xp||0),used=Number(reward.rewarded_runs_today||0),limit=Number(reward.reward_limit||3);const fraudInfo=lang()==='en'?'Anti-cheat: reward withheld.':lang()==='az'?'Antifırıldaq: mükafat verilmədi.':'Античит: награда не начислена.';rewardBox.textContent=rewardPending?pendingRewardText():reward.review_pending?fraudInfo:coins||xp?x.rewardEarned(coins,xp):(used>=limit?x.rewardLimit:x.rewardNone);rewardBox.classList.toggle('earned',Boolean(coins||xp));}
  $('challengeAgain').textContent=(mode==='nohint'?x.restart:x.again)+' ▶';
 }
 function openMode(m){
