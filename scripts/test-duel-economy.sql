@@ -66,7 +66,7 @@ BEGIN
  duel_code:=public.duel_create(-911164301,25,'ru');PERFORM public.duel_join(-911164302,duel_code);
  SELECT m.id INTO duel_id FROM public.duel_matches m WHERE m.code=duel_code;
  UPDATE public.duel_matches SET creator_score=9,opponent_score=2,starts_at=clock_timestamp()-interval '65 seconds',ends_at=clock_timestamp()-interval '1 second' WHERE id=duel_id;
- INSERT INTO public.duel_anti_cheat_flags(match_id,player_id,event_type,details) VALUES(duel_id,a.id,'fast_correct_sequence','{}'::jsonb);
+ INSERT INTO public.duel_anti_cheat_flags(match_id,player_id,event_type,details) VALUES(duel_id,a.id,'superhuman_correct_sequence','{}'::jsonb);
  PERFORM public.duel_settle_one(duel_id);PERFORM public.duel_settle_one(duel_id);
  IF (SELECT status FROM public.duel_matches WHERE id=duel_id)<>'cancelled'
  OR (SELECT payout FROM public.duel_matches WHERE id=duel_id)<>0
