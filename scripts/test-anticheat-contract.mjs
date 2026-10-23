@@ -37,7 +37,7 @@ assertHas(sql,"coalesce(v_run.score,0)",'Challenge reward must use stored score'
 assertHas(transactional,"'cross-user challenge accepted'",'Foreign-user challenge rejection not tested');
 assertHas(transactional,"'outsider submitted duel answer'",'Foreign-user duel rejection not tested');
 assertHas(transactional,"'client-forged score credited'",'Forged client score not tested');
-assertHas(transactional,"'duel winning payout repeated'",'Duplicate payout not tested');
+assertHas(transactional,"'flagged duel winner wrongly paid'",'Flagged duel winner no-reward check missing');
 assertHas(transactional,"'fast duel streak not flagged'",'Duel anomaly not tested');
 assertHas(transactional,"'challenge anomaly not detected'",'Challenge anomaly not tested');
 assertHas(transactional,'ROLLBACK;','Synthetic tests must roll back');
