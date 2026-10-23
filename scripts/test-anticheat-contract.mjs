@@ -64,4 +64,9 @@ const fairDuelGuard=readFileSync('supabase/migrations/20261023093207_reduce_duel
 assertHas(fairDuelGuard,"v_count=10 and v_window<interval '12 seconds'",'Extreme ten-answer anomaly detection missing');
 assertHas(fairDuelGuard,"in ('superhuman_correct_sequence','confirmed_automation')",'Only high-confidence duel alerts should prevent winner payouts');
 assertHas(fairDuelGuard,"f.player_id=p_player and f.event_type in ('superhuman_correct_sequence','confirmed_automation')",'Legitimate fast winners must retain achievement credit');
+const duelFairnessRegression=readFileSync('scripts/test-duel-fairness.sql','utf8');
+assertHas(duelFairnessRegression,"'fast_correct_sequence'",'Five-answer monitoring scenario missing');
+assertHas(duelFairnessRegression,"'superhuman_correct_sequence'",'Extreme ten-answer scenario missing');
+assertHas(duelFairnessRegression,"'duel_wins'",'Legitimate achievement fairness missing');
+assertHas(duelFairnessRegression,'ROLLBACK;','False-positive regression must roll back fake players');
 console.log('PASS: protection of payouts, duel symmetry, rate limits, anomaly flags, forbidden cross-user actions, and rollback-only tests');
