@@ -69,4 +69,15 @@ assertHas(duelFairnessRegression,"'fast_correct_sequence'",'Five-answer monitori
 assertHas(duelFairnessRegression,"'superhuman_correct_sequence'",'Extreme ten-answer scenario missing');
 assertHas(duelFairnessRegression,"'duel_wins'",'Legitimate achievement fairness missing');
 assertHas(duelFairnessRegression,'ROLLBACK;','False-positive regression must roll back fake players');
+const challengeFairness=readFileSync('supabase/migrations/20261023104700_reduce_challenge_anticheat_false_positives_three_modes.sql','utf8');
+const challengeFairnessRegression=readFileSync('scripts/test-challenge-fairness.sql','utf8');
+assertHas(challengeFairness,"v_count=10 and coalesce(v_all_correct,false) and v_window<interval '12 seconds'",'Ten consecutive correct answers must be required to withhold rewards');
+assertHas(challengeFairness,"f.event_type in ('superhuman_correct_sequence','confirmed_automation')",'Ordinary quick answers must not prevent achievements');
+assertHas(challengeFairness,"('superhuman_correct_sequence','confirmed_automation')",'Only high-confidence flags may withhold coins and XP');
+for(const mode of ['limited','nohint','blitz'])assertHas(challengeFairnessRegression,"'"+mode+"'",'Missing challenge fairness test for '+mode);
+assertHas(challengeFairnessRegression,"'fast_correct_sequence'",'Legitimate quick correct sequence should remain auditable');
+assertHas(challengeFairnessRegression,"'superhuman_correct_sequence'",'Strong abnormal answer-sequence test missing');
+assertHas(challengeFairnessRegression,"'challenge_runs'",'Achievements must ignore only severe anomalies');
+assertHas(challengeFairnessRegression,"'duplicate'",'Repeated finish idempotency must be tested');
+assertHas(challengeFairnessRegression,'ROLLBACK;','Production regression must not mutate existing players');
 console.log('PASS: protection of payouts, duel symmetry, rate limits, anomaly flags, forbidden cross-user actions, and rollback-only tests');
