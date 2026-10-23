@@ -131,10 +131,12 @@ BEGIN
  UPDATE public.duel_matches SET ends_at=clock_timestamp()-interval '1 second' WHERE id=mid;
  PERFORM public.duel_settle_one(mid);
  PERFORM public.duel_settle_one(mid);
- IF (SELECT count(*) FROM public.coin_transactions WHERE player_id=a AND transaction_type='duel_win' AND reward_source_id=mid)<>1
- THEN RAISE EXCEPTION 'duel winning payout repeated'; END IF;
- IF (SELECT status FROM public.duel_matches WHERE id=mid)<>'finished'
- THEN RAISE EXCEPTION 'duel not settled'; END IF;
+ IF (SELECT count(*) FROM public.coin_transactions WHERE player_id=a AND transaction_type='duel_win' AND reward_source_id=mid)<>0
+ THEN RAISE EXCEPTION 'flagged duel winner wrongly paid'; END IF;
+ IF (SELECT count(*) FROM public.coin_transactions WHERE transaction_type='duel_refund' AND reward_source_id=mid)<>2
+ THEN RAISE EXCEPTION 'flagged duel refund repeated or missing'; END IF;
+ IF (SELECT status FROM public.duel_matches WHERE id=mid)<>'cancelled'
+ THEN RAISE EXCEPTION 'flagged duel was not voided'; END IF;
  IF NOT EXISTS(SELECT 1 FROM public.anti_cheat_audit_events
        WHERE player_id=a AND source_type='duel' AND source_id=mid AND event_type='fast_correct_sequence')
  THEN RAISE EXCEPTION 'duel flag not archived'; END IF;
