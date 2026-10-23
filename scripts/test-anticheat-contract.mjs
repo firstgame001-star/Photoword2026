@@ -49,4 +49,7 @@ assertHas(farmingGuard,"if v_flagged then v_coins:=0;v_xp:=0; end if;",'Suspicio
 assertHas(farmingGuard,"where player_id=v_player.id and not v_flagged;",'Suspicious challenge records must not promote best score');
 assertHas(farmingGuard,"'review_pending',v_flagged",'Flagged run status must be returned to the client');
 assertHas(readFileSync('clean/challenge.js','utf8'),"reward.review_pending?fraudInfo", 'Client must explain withheld suspicious-run rewards');
+const achievementGuard=readFileSync('supabase/migrations/20261023063647_exclude_flagged_runs_from_achievement_coin_rewards.sql','utf8');
+assertHas(achievementGuard,'not exists(select 1 from public.anti_cheat_flags', 'Flagged challenge attempts must not unlock coin-based achievements');
+assertHas(achievementGuard,'not exists(select 1 from public.duel_anti_cheat_flags', 'Flagged duels must not unlock coin-based achievements');
 console.log('PASS: protection of payouts, duel symmetry, rate limits, anomaly flags, forbidden cross-user actions, and rollback-only tests');
