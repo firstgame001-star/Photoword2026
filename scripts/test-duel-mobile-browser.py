@@ -135,7 +135,7 @@ def attach(browser,fixture,person,errors,login_fragment=False):
     target=BASE+'clean/'
     if login_fragment:target+='?startapp=duel_'+CODE
     page.goto(target+'#'+auth_fragment(),wait_until='domcontentloaded',timeout=45000)
-    expect(page.locator('#duelEntry')).to_be_visible(timeout=15000)
+    expect(page.locator('#duelJoin' if login_fragment else '#duelEntry')).to_be_visible(timeout=15000)
     page.evaluate("""() => {if(!window.PW)throw Error('Missing public game core');
        window.PW.duelRequest=(action,body={})=>window.duelSyntheticApi(action,body);}""")
     return ctx,page
