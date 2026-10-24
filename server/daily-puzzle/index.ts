@@ -31,7 +31,9 @@ Deno.serve(async(req)=>{
  if(req.method!=="POST")return reply({error:"method"},405);
  const token=Deno.env.get("TELEGRAM_BOT_TOKEN");if(!token)return reply({error:"not_configured"},503);
  try{
-  const body=await req.json(),user=await verify(body?.initData,token);if(!user)return reply({error:"invalid_telegram_auth"},401);
+  const raw=await req.text();if(raw.length>32768)return reply({error:"body_too_large"},413);
+  let body;try{body=JSON.parse(raw)}catch{return reply({error:"json"},400)}
+  const user=await verify(body?.initData,token);if(!user)return reply({error:"invalid_telegram_auth"},401);
   const language=String(body.language||"ru"),action=String(body.action||"state");
   if(!["ru","en","az"].includes(language))return reply({error:"bad_language"},400);
   const db=createClient(Deno.env.get("SUPABASE_URL")!,Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,{auth:{persistSession:false,autoRefreshToken:false}});
