@@ -4,7 +4,7 @@ on:
     paths: ['clean/**', 'server/telegram-webhook/**', 'scripts/test-support-webhook.mjs', 'scripts/test-stars-precheckout.mjs', '.github/workflows/test-support.yml']
   push:
     branches: [main]
-    paths: ['clean/**', 'server/telegram-webhook/**', 'scripts/test-support-webhook.mjs', '.github/workflows/test-support.yml']
+    paths: ['clean/**', 'server/telegram-webhook/**', 'scripts/test-support-webhook.mjs', 'scripts/test-stars-precheckout.mjs', '.github/workflows/test-support.yml']
 permissions:
   contents: read
 jobs:
