@@ -378,7 +378,7 @@ $('nicknameBtn').onclick=()=>{if(pw.player?.nickname_changed)return;close('profi
 $('saveNickname').onclick=async()=>{const b=$('saveNickname'),value=$('nicknameInput').value.trim();b.disabled=true;try{const p=await pw.api('set_nickname',{nickname:value});update(p);close('nicknameModal');pw.sfx('success')}catch(e){pw.status(e.message)}finally{b.disabled=false}};
 $('shareGameBtn').onclick=async()=>{const x=t(),link='https://t.me/PhotoWordBot?startapp=share',url='https://t.me/share/url?url='+encodeURIComponent(link)+'&text='+encodeURIComponent(x.shareText);if(window.Telegram?.WebApp?.openTelegramLink)Telegram.WebApp.openTelegramLink(url);else location.href=url};
 
-let notificationState=null;
+let notificationState=null,notificationFormRevision=0,notificationFetchSequence=0;
 function paintNotificationState(s){
  notificationState=s||{enabled:false,daily_reward:true,energy_full:true,chapter_unlocked:true};
  $('notificationsMaster').checked=Boolean(notificationState.enabled);
@@ -387,25 +387,47 @@ function paintNotificationState(s){
  $('notificationChapter').checked=notificationState.chapter_unlocked!==false;
  $('testNotification').disabled=!notificationState.enabled;
 }
-async function loadNotificationState(){
- try{const r=await pw.actionRequest('notification_state');notificationState=r.notifications||{};paintNotificationState(notificationState);return notificationState}
- catch(e){pw.status(e.message);paintNotificationState({enabled:Boolean(pw.player?.notifications_enabled),daily_reward:true,energy_full:true,chapter_unlocked:true});return notificationState}
+// Never overwrite an in-progress choice with a late server response.
+for(const id of ['notificationsMaster','notificationDaily','notificationEnergy','notificationChapter']){
+ $(id).addEventListener('change',()=>{notificationFormRevision++});
 }
-async function openNotifications(){close('settingsModal');open('notificationsModal');paintNotificationState({enabled:Boolean(pw.player?.notifications_enabled),daily_reward:true,energy_full:true,chapter_unlocked:true});await loadNotificationState()}
+async function loadNotificationState(){
+ const sequence=++notificationFetchSequence,revision=notificationFormRevision;
+ try{
+  const r=await pw.actionRequest('notification_state');
+  if(sequence!==notificationFetchSequence||revision!==notificationFormRevision)return notificationState;
+  paintNotificationState(r.notifications||{});return notificationState;
+ }catch(e){
+  if(sequence!==notificationFetchSequence||revision!==notificationFormRevision)return notificationState;
+  pw.status(e.message);
+  paintNotificationState({enabled:Boolean(pw.player?.notifications_enabled),daily_reward:true,energy_full:true,chapter_unlocked:true});
+  return notificationState;
+ }
+}
+async function openNotifications(){
+ close('settingsModal');open('notificationsModal');
+ notificationFetchSequence++;notificationFormRevision=0;
+ paintNotificationState({enabled:Boolean(pw.player?.notifications_enabled),daily_reward:true,energy_full:true,chapter_unlocked:true});
+ await loadNotificationState();
+}
 $('notificationsBtn').onclick=openNotifications;
 $('saveNotifications').onclick=async()=>{
- const x=t(),b=$('saveNotifications'),enabled=$('notificationsMaster').checked,tg=window.Telegram?.WebApp;
+ const x=t(),b=$('saveNotifications'),tg=window.Telegram?.WebApp;
+ const choice={enabled:$('notificationsMaster').checked,
+  dailyReward:$('notificationDaily').checked,energyFull:$('notificationEnergy').checked,
+  chapterUnlocked:$('notificationChapter').checked};
  const save=async()=>{
+  notificationFetchSequence++; // Invalidates any older notification_state response.
   b.disabled=true;
   try{
    const tz=-new Date().getTimezoneOffset();
-   const r=await pw.actionRequest('update_notifications',{enabled,dailyReward:$('notificationDaily').checked,energyFull:$('notificationEnergy').checked,chapterUnlocked:$('notificationChapter').checked,timezoneOffsetMinutes:tz,language:lang()});
+   const r=await pw.actionRequest('update_notifications',{...choice,timezoneOffsetMinutes:tz,language:lang()});
    notificationState=r.notifications||{};paintNotificationState(notificationState);
-   if(enabled){try{localStorage.setItem('pw.writeAccess','1')}catch{}}else{try{localStorage.removeItem('pw.writeAccess')}catch{}}
+   if(choice.enabled){try{localStorage.setItem('pw.writeAccess','1')}catch{}}else{try{localStorage.removeItem('pw.writeAccess')}catch{}}
    const p=await pw.login(true);update(p);pw.status(x.notificationSaved);
   }catch(e){pw.status(e.message)}finally{b.disabled=false}
  };
- if(enabled&&!pw.player?.notifications_enabled){
+ if(choice.enabled&&!pw.player?.notifications_enabled){
   if(!tg?.requestWriteAccess){pw.status(x.notifyNeedTelegram);return}
   tg.requestWriteAccess(ok=>{if(!ok){pw.status(x.notifyDenied);return}save()});
  }else save();
