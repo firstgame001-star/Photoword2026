@@ -30,4 +30,5 @@ jobs:
       - run: node scripts/test-ad-session.mjs
       - run: node scripts/test-temporary-one-star-pack.mjs
       - run: node scripts/test-stars-language.mjs
+      - run: node scripts/test-embedded-terms.mjs
       - run: node scripts/test-adsgram-callback.mjs
