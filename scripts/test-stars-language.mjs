@@ -35,5 +35,5 @@ for(const p of ['pwcoins:ctest:123456789:01234567-89ab-cdef','pwenergy:e1:123456
 }
 assert(css.includes('place-items:center'),'Purchase terms must be centered');
 assert(css.includes('height:100dvh'),'Purchase terms must use dynamic mobile viewport');
-assert(html.includes('20261024-centered-purchase-terms'),'Centered purchase terms style not cache-busted');
+assert(html.includes('20261024-embedded-terms'),'Centered purchase terms style not cache-busted');
 console.log('PASS: signed login, game language changes, Stars invoice locale and RU/EN/AZ bot payment notifications; centered iPhone modal.');
