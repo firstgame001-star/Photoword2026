@@ -25,6 +25,7 @@ jobs:
       - run: node scripts/test-anticheat-contract.mjs
       - run: node scripts/test-bot-behavior-contract.mjs
       - run: node scripts/test-bot-alert-dispatch.mjs
+      - run: node scripts/test-bot-review-webhook.mjs
       - run: node scripts/test-api-rate-guard.mjs
       - run: node scripts/test-anticheat-endpoints.mjs
       - run: node scripts/test-duel-input.mjs
