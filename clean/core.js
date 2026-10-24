@@ -187,7 +187,8 @@
     musicTimer=null;
     if(!prefs.music||document.hidden||accountErased){stopMusic();return;}
     const ctx=ensureAudio();
-    if(!ctx||ctx.state!=='running'){
+    if(!ctx){stopMusic();return;}
+    if(ctx.state!=='running'){
       // Audio may be suspended by iOS until a user interacts with the game.
       musicTimer=setTimeout(musicStep,800);return;
     }
@@ -222,6 +223,7 @@
     // Resume when the user returns; AudioContext may need another tap.
     else if(prefs.music)startMusic();
   });
+  window.addEventListener('pagehide',stopMusic);
   function haptic(kind = 'light') {
     if (!prefs.haptic) return;
     try {
