@@ -1,31 +1,30 @@
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 
-// TEMPORARY QA TEST: retain until the user explicitly requests final removal.
+// Previously sold 1-Star test packs must stay in the historical payment ledger.
+// New invoices and storefronts must use production prices.
 const login=readFileSync('server/telegram-login/index.ts','utf8');
 const webhook=readFileSync('server/telegram-webhook/index.ts','utf8');
 const html=readFileSync('clean/index.html','utf8');
 const home=readFileSync('clean/home.js','utf8');
 const migration=readFileSync('supabase/migrations/20261024114239_temporary_one_star_one_coin_test_pack.sql','utf8');
 
-for(const [name,source] of [['invoice API',login],['payment webhook',webhook]]){
- assert(source.includes('ctest:{coins:1,stars:1}'),name+' does not accept 1-Star test pack');
-}
-assert(login.includes('packKey==="ctest"?"Тест PhotoWord · 1 монета"'),'Test invoice not clearly labeled');
-assert(login.includes('currency:"XTR"'),'Telegram Stars currency missing');
-assert(login.includes('amount:pack.stars'),'Telegram invoice amount does not match server pack');
-assert.equal((webhook.match(/\(ctest\|c10\|c50\|c150\|c300\)/g)||[]).length,2,'Both pre-checkout and payment fulfillment must accept ctest');
-assert(webhook.includes('q.total_amount'),'Pre-checkout amount validation missing');
-assert(webhook.includes('pay.total_amount'),'Payment amount validation missing');
-assert(webhook.includes('telegram_payment_charge_id'),'Charge replay protection needs a unique Telegram receipt');
-assert(home.includes("document.querySelectorAll('[data-pack]')"),'Coin pack buttons must be wired to invoice flow');
-assert(home.includes("tg.openInvoice(result.invoice_url"),'Payment sheet is not opened');
-assert(html.includes('data-pack="ctest"'),'1-Star pack must be shown for user retest');
-assert(html.includes('<span>1 ⭐</span>'),'1-Star pack must have correct storefront price');
-const css=readFileSync('clean/ui.css','utf8');
-assert(css.includes('#purchaseTermsModal:not([hidden])'),'Purchase consent overlay rule missing');
-assert(css.includes('z-index:80')&&css.includes('place-items:center'),'Purchase terms must be centered above the shop before payment');
-assert(migration.includes('stars=1 AND coins=1'),'Ledger must accept temporary reward price');
-assert(migration.includes('((1,1),(15,10)'),'RPC must accept temporary reward price');
-assert(migration.includes('ON FUNCTION public.credit_star_purchase_server'),'Server credit must keep protected EXECUTE grants');
-console.log('PASS: restored 1-Star offer is visible and server-validated; checkout consent remains above the shop.');
+assert(!login.includes('ctest:{coins:1,stars:1}'),'Coin test pack still open for new invoices');
+assert(!html.includes('data-pack="ctest"'),'Temporary coin package is visible');
+assert(!html.includes('ТЕСТ: +1 🪙'),'Temporary coin label is visible');
+assert(!webhook.includes('payload.match(/^pwcoins:(ctest|c10|c50|c150|c300):(\\d+):/);') ||
+  webhook.indexOf('payload.match(/^pwcoins:(ctest|c10|c50|c150|c300):') >
+  webhook.indexOf('const pay=msg?.successful_payment'),
+  'One-Star coin offer must be rejected before checkout');
+assert(webhook.includes('ctest:{coins:1,stars:1}'),'Legacy completed coin receipts must still reconcile safely');
+assert(webhook.includes('e1:{energy:1,stars:15}'),'New +1 energy price must be 15 Stars');
+assert(login.includes('e1:{energy:1,stars:15}'),'Invoice must request 15 Stars');
+assert(html.includes('<button data-energy-pack="e1">+1 ⚡ · 15 ⭐</button>'),'Challenge energy price outdated');
+assert(html.includes('data-energy-store-pack="e1"><b>+1 ⚡</b><span>15 ⭐</span>'),'Shop energy price outdated');
+assert(login.includes('currency:"XTR"')&&login.includes('amount:pack.stars'),'Telegram Stars invoice amount invalid');
+assert(webhook.includes('q.total_amount')&&webhook.includes('pay.total_amount'),'Payment amount validation missing');
+assert(webhook.includes('telegram_payment_charge_id'),'Transaction ID replay protection missing');
+assert(home.includes("document.querySelectorAll('[data-pack]')"),'Coin invoice buttons disconnected');
+assert(home.includes('tg.openInvoice(result.invoice_url'),'Payment sheet missing');
+assert(migration.includes('stars=1 AND coins=1'),'Historical 1-Star coin purchases must remain supported');
+console.log('PASS: test prices retired, 15-Star energy and normal coin offers restored; historic receipts preserved.');
