@@ -28,6 +28,7 @@ jobs:
       - run: node scripts/test-two-client-duel.mjs
       - run: node scripts/test-daily-input.mjs
       - run: node scripts/test-ad-session.mjs
+      - run: node scripts/test-background-music.mjs
       - run: node scripts/test-temporary-one-star-pack.mjs
       - run: node scripts/test-stars-language.mjs
       - run: node scripts/test-embedded-terms.mjs
