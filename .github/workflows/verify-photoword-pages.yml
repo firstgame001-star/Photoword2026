@@ -34,7 +34,7 @@ jobs:
         run: |
           set -euo pipefail
           base='https://firstgame001-star.github.io/Photoword2026/clean'
-          release="$(node -p \"require('./clean/release.json').release\")"
+          release="$(node -p 'require("./clean/release.json").release')"
           echo "Expected PhotoWord release: $release"
           ok=0
           for i in $(seq 1 48); do
