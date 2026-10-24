@@ -108,7 +108,7 @@ Deno.serve(async(req)=>{
    // New invoices carry the language selected at checkout. Older invoices
    // fall back to the player's server-synced game/notification language.
    const payload=String(pay.invoice_payload||"");
-   const paidLocale=payload.match(/^pw(?:coins|energy):[^:]+:\\d+:(ru|en|az):/)?.[1];
+   const paidLocale=payload.match(/^pw(?:coins|energy):[^:]+:\d+:(ru|en|az):/)?.[1];
    const l=paidLocale||(["ru","en","az"].includes(pref?.notification_language)?pref.notification_language:"ru");
    const coinText=(coins:number)=>l==="en"?"✅ Payment confirmed. "+coins+" 🪙 credited.":l==="az"?"✅ Ödəniş təsdiqləndi. "+coins+" 🪙 əlavə olundu.":"✅ Оплата подтверждена. Начислено "+coins+" 🪙.";
    const energyText=l==="en"?"✅ Payment confirmed. Energy restored (maximum 5/5 ⚡).":l==="az"?"✅ Ödəniş təsdiqləndi. Enerji bərpa olundu (maksimum 5/5 ⚡).":"✅ Оплата подтверждена. Энергия восстановлена (максимум 5/5 ⚡).";
