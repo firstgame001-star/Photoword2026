@@ -62,7 +62,7 @@ with sync_playwright() as pw:
   assert page.locator('#purchaseTermsCancel').is_hidden(),'Read-only Terms should have one Close button'
   page.locator('#purchaseTermsAgree').tap()
   expect(terms).to_be_hidden()
-    page.locator('#shopNav').tap()
+  page.locator('#shopNav').tap()
   expect(page.locator('#shopModal')).to_be_visible()
   # Capture the language sent to the invoice endpoint, never to real Telegram.
   page.locator('[data-pack="c10"]').tap()
