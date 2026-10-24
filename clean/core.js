@@ -123,21 +123,36 @@
   }
   async function avatarFrames(codes){return request('/rest/v1/rpc/get_avatar_frames',{p_codes:codes},{apikey:KEY});}
   document.addEventListener('visibilitychange',()=>{if(!document.hidden&&current)login(true).catch(()=>{});});
-  let audioCtx=null,musicTimer=null,musicIndex=0;
+  let audioCtx=null,musicTimer=null,trackIndex=0,trackBeat=0;
   const musicVoices=new Set();
-  // Original gentle PhotoWord soundtrack: four soft chord changes, a bass
-  // pulse and a short melody. All audio is synthesized locally, no downloads.
-  const musicChords=[
-    [50,54,57,61], // Dmaj7
-    [47,50,54,57], // Bm7
-    [43,47,50,54], // Gmaj7
-    [45,49,52,55]  // A7
-  ];
-  const musicLead=[
-    74,76,78,76,73,76,78,73,
-    71,74,76,74,73,71,69,73,
-    74,78,81,78,76,74,71,74,
-    73,76,78,76,74,73,71,69
+  // Four original, locally synthesized ambient melodies, played in rotation.
+  // Each tune gets two full phrases before the next tune starts (~1 minute).
+  // No external audio assets, licensing dependencies or network requests.
+  const musicTracks=[
+    {name:'Dawn',tempo:735,leadType:'sine',leadVolume:.011,chords:[
+      [50,54,57,61],[47,50,54,57],[43,47,50,54],[45,49,52,55]
+    ],lead:[
+      74,76,78,76,73,76,78,73, 71,74,76,74,73,71,69,73,
+      74,78,81,78,76,74,71,74, 73,76,78,76,74,73,71,69
+    ]},
+    {name:'Evening',tempo:850,leadType:'triangle',leadVolume:.008,chords:[
+      [45,48,52,55],[41,45,48,52],[48,52,55,59],[43,47,50,52]
+    ],lead:[
+      72,76,79,76,72,69,72,74, 76,72,69,72,74,72,69,67,
+      69,72,76,79,76,72,71,69, 67,69,72,74,72,71,69,67
+    ]},
+    {name:'Starlight',tempo:900,leadType:'sine',leadVolume:.009,chords:[
+      [48,52,55,59],[43,47,50,54],[45,48,52,55],[41,45,48,52]
+    ],lead:[
+      76,79,83,79,76,74,72,74, 79,76,74,71,74,76,79,76,
+      81,79,76,72,74,76,79,83, 79,76,72,74,76,74,72,71
+    ]},
+    {name:'Breeze',tempo:790,leadType:'triangle',leadVolume:.0085,chords:[
+      [43,47,50,54],[50,54,57,59],[40,43,47,50],[48,52,55,59]
+    ],lead:[
+      74,79,81,79,76,74,71,74, 78,81,79,76,74,72,71,69,
+      71,74,79,83,81,79,76,74, 72,76,79,76,74,72,71,74
+    ]}
   ];
   function ensureAudio(){
     if(!audioCtx){
@@ -192,18 +207,25 @@
       // Audio may be suspended by iOS until a user interacts with the game.
       musicTimer=setTimeout(musicStep,800);return;
     }
-    const beat=musicIndex++%musicLead.length;
-    const chord=musicChords[Math.floor(beat/4)%musicChords.length];
+    const track=musicTracks[trackIndex];
+    const beat=trackBeat%track.lead.length;
+    const chord=track.chords[Math.floor(beat/4)%track.chords.length];
     if(beat%4===0){
-      for(const note of chord.slice(1))musicVoice(note,3.25,.0038,'sine',.55);
-      musicVoice(chord[0]-12,3.3,.008,'triangle',.35);
+      for(const note of chord.slice(1))musicVoice(note,3.15,.0038,'sine',.55);
+      musicVoice(chord[0]-12,3.2,.0075,'triangle',.35);
     }
-    // The melody is intentionally sparse so word puzzles remain the focus.
+    // Quiet, sparse melody; other sounds remain independent.
     if(beat%2===0||beat%4===3){
-      musicVoice(musicLead[beat],1.45,.011,'sine',.055);
-      musicVoice(musicLead[beat]-12,1.65,.0035,'triangle',.10,.09);
+      const note=track.lead[beat];
+      musicVoice(note,1.42,track.leadVolume,track.leadType,.055);
+      musicVoice(note-12,1.55,.003,'triangle',.10,.09);
     }
-    musicTimer=setTimeout(musicStep,735);
+    trackBeat++;
+    if(trackBeat>=track.lead.length*2){
+      trackBeat=0;
+      trackIndex=(trackIndex+1)%musicTracks.length;
+    }
+    musicTimer=setTimeout(musicStep,track.tempo);
   }
   function startMusic(){
     if(!prefs.music||document.hidden||accountErased||musicTimer!==null)return;
