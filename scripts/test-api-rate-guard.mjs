@@ -10,7 +10,7 @@ const edgeRoutes=[
 ];
 for(const [route,firstProtectedWork] of edgeRoutes){
   const src=readFileSync('server/'+route+'/index.ts','utf8');
-  const signature=src.indexOf('const user=await verify(');
+  const signature=src.indexOf('user=await verify(');
   const gate=src.indexOf('await db.rpc("consume_player_request_budget_server"')>=0?
     src.indexOf('await db.rpc("consume_player_request_budget_server"'):
     src.indexOf("await db.rpc('consume_player_request_budget_server'");
