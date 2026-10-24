@@ -59,7 +59,7 @@ assert.equal(get('watchAd').disabled,false);
 await get('watchAd').onclick();
 assert.equal(flashes.at(-1),'Full energy converted to coins','Full-energy reward message must show coins');
 ui.saveAdReceipt('10000000-0000-4000-8000-000000000002','energy');
-const delayedKey=ui.adReceiptKey();
+const delayedKey=key;
 const delayed=JSON.parse(receipts.get(delayedKey));
 delayed.at=Date.now()-12*60*1000; // Survive a Telegram disconnect longer than 8 minutes.
 receipts.set(delayedKey,JSON.stringify(delayed));
