@@ -412,7 +412,7 @@ Deno.serve(async(req)=>{
    return reply({invoice_url:tgData.result,pack:packKey,energy:pack.energy,stars:pack.stars});
   }
   if(action==="create_invoice"){
-   const packs:Record<string,{coins:number,stars:number}>={c10:{coins:10,stars:15},c50:{coins:50,stars:65},c150:{coins:150,stars:175},c300:{coins:300,stars:300}};
+   const packs:Record<string,{coins:number,stars:number}>={ctest:{coins:1,stars:1},c10:{coins:10,stars:15},c50:{coins:50,stars:65},c150:{coins:150,stars:175},c300:{coins:300,stars:300}};
    const packKey=String(body.pack||""),pack=packs[packKey];if(!pack)return reply({error:"bad_pack"},400);
    const payload="pwcoins:"+packKey+":"+user.id+":"+crypto.randomUUID();
    const webhookUrl=Deno.env.get("SUPABASE_URL")+"/functions/v1/telegram-webhook";
@@ -429,7 +429,7 @@ Deno.serve(async(req)=>{
      return reply({error:"webhook_failed"},502);
    }
    const tgRes=await fetch("https://api.telegram.org/bot"+token+"/createInvoiceLink",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({
-     title:pack.coins+" монет PhotoWord",description:"Игровые монеты PhotoWord",payload,currency:"XTR",prices:[{label:pack.coins+" монет",amount:pack.stars}]
+     title:(packKey==="ctest"?"Тест PhotoWord · 1 монета":pack.coins+" монет PhotoWord"),description:(packKey==="ctest"?"Временная проверка Telegram Stars: 1 игровая монета за 1 звезду.":"Игровые монеты PhotoWord"),payload,currency:"XTR",prices:[{label:(packKey==="ctest"?"Тест: 1 монета":pack.coins+" монет"),amount:pack.stars}]
    })});
    const tgData=await tgRes.json();
    if(!tgData.ok||typeof tgData.result!=="string"){
