@@ -55,23 +55,27 @@ async function checkout(invoice_payload,total_amount=15,currency='XTR',buyer=42)
   return answers[0].ok;
 }
 const energy='pwenergy:e1:42:az:6d5b1c7c-abcd-4321-a234-123456789abc';
-assert.equal(await checkout(energy),true,'Energy with remaining capacity must be purchasable');
+assert(readFileSync('server/telegram-login/index.ts','utf8').includes('e1:{energy:1,stars:1}'),'Invoice generation must price one energy at one Star');
+assert(source.includes('e1:{energy:1,stars:1}'),'Webhook checkout must price one energy at one Star');
+assert(readFileSync('clean/index.html','utf8').includes('data-energy-store-pack="e1" title="Временная тестовая цена"><b>ТЕСТ: +1 ⚡</b><span>1 ⭐</span>'),'Shop must display 1 Star');
+assert.equal(await checkout(energy,1),true,'Energy with remaining capacity must be purchasable');
+assert.equal(await checkout(energy,15),false,'Previously issued 15-Star e1 invoice must not be charged at the test price');
 state.reused=true;
-assert.equal(await checkout(energy),false,'Already paid energy invoice must be rejected');
+assert.equal(await checkout(energy,1),false,'Already paid energy invoice must be rejected');
 assert(lastDenial.includes('artıq ödənilib'),'Already-used invoice error must use chosen Azerbaijani locale');
 state.reused=false;
 state.energy=5;
-assert.equal(await checkout(energy),false,'Cannot charge for already full energy');
+assert.equal(await checkout(energy,1),false,'Cannot charge for already full energy');
 assert(lastDenial.includes('Enerji artıq doludur'),'Full energy error must use chosen Azerbaijani locale');
 state.energy=3;state.refAt=new Date(Date.now()-65*60_000).toISOString();
-assert.equal(await checkout(energy),false,'Regenerated full energy must reject checkout');
+assert.equal(await checkout(energy,1),false,'Regenerated full energy must reject checkout');
 state.refAt=new Date().toISOString();
 state.dbError=true;
-assert.equal(await checkout(energy),false,'Database outage must fail closed');
+assert.equal(await checkout(energy,1),false,'Database outage must fail closed');
 state.dbError=false;
 assert.equal(await checkout(energy,14),false,'Wrong price must fail');
-assert.equal(await checkout(energy,15,'USD'),false,'Wrong currency must fail');
-assert.equal(await checkout(energy,15,'XTR',43),false,'Different Telegram buyer must fail');
+assert.equal(await checkout(energy,1,'USD'),false,'Wrong currency must fail');
+assert.equal(await checkout(energy,1,'XTR',43),false,'Different Telegram buyer must fail');
 const coins='pwcoins:c10:42:ru:6d5b1c7c-abcd-4321-a234-123456789abc';
 assert.equal(await checkout(coins),true,'Valid coin checkout must remain available');
 assert.equal(await checkout(coins,1),false,'Forged cheaper coin pack must fail');
@@ -83,7 +87,7 @@ async function paid(kind){
   const isCoin=kind==='coins';
   const invoice_payload=isCoin?coins:energy;
   const successful_payment={
-    currency:'XTR',total_amount:isCoin?15:15,invoice_payload,telegram_payment_charge_id:'OFFLINE-'+kind
+    currency:'XTR',total_amount:isCoin?15:1,invoice_payload,telegram_payment_charge_id:'OFFLINE-'+kind
   };
   const response=await handler(new Request('https://invalid.local',{method:'POST',headers:{'x-telegram-bot-api-secret-token':secret},body:JSON.stringify({
     message:{message_id:1,chat:{id:42,type:'private'},from:{id:42},successful_payment}
@@ -114,7 +118,7 @@ assert.equal(await refunded(),200,'Valid refund update must be accepted');
 assert.equal(state.lastRefundArgs.p_charge_id,'OFFLINE-refund');
 assert.equal(state.lastRefundArgs.p_stars,15);
 assert(sent.some(x=>x.method==='sendMessage'&&x.text.includes('возвращены')),'Localized refund confirmation must be sent');
-assert.equal(await refunded(energy,'OFFLINE-energy-refund',15),200,'Energy refund update must be accepted');
+assert.equal(await refunded(energy,'OFFLINE-energy-refund',1),200,'Energy refund update must be accepted');
 assert(sent.some(x=>x.method==='sendMessage'&&x.text.includes('geri qaytarıldı')),'Energy refund notice must inherit Azerbaijani checkout locale');
 state.refundStatus='duplicate';
 assert.equal(await refunded(),200,'Duplicate refund should acknowledge');
