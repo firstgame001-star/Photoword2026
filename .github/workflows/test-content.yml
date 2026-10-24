@@ -23,6 +23,7 @@ jobs:
       - run: node scripts/test-independent-challenge-puzzles.mjs
       - run: node scripts/test-challenge-auth-preview.mjs
       - run: node scripts/test-anticheat-contract.mjs
+      - run: node scripts/test-api-rate-guard.mjs
       - run: node scripts/test-anticheat-endpoints.mjs
       - run: node scripts/test-duel-input.mjs
       - run: node scripts/test-two-client-duel.mjs
