@@ -1,5 +1,6 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import {handleReviewCommand,handleReviewCallback} from "./review.ts";
 async function webhookSecret(token:string){const data=new TextEncoder().encode(token);const hash=await crypto.subtle.digest("SHA-256",data);return "pw_"+Array.from(new Uint8Array(hash)).map(b=>b.toString(16).padStart(2,"0")).join("").slice(0,48);}
 const packs:Record<string,{coins:number,stars:number}>={ctest:{coins:1,stars:1},c10:{coins:10,stars:15},c50:{coins:50,stars:65},c150:{coins:150,stars:175},c300:{coins:300,stars:300}};
 const energyPacks:Record<string,{energy:number,stars:number}>={e1:{energy:1,stars:15},e5:{energy:5,stars:50}};
@@ -59,7 +60,13 @@ Deno.serve(async(req)=>{
    await fetch("https://api.telegram.org/bot"+token+"/answerPreCheckoutQuery",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({pre_checkout_query_id:q.id,ok,error_message:ok?undefined:denial[locale as "ru"|"en"|"az"][reason as "invalid"|"used"|"full"]})});
    return new Response("ok");
  }
- const msg=u.message||u.edited_message;
+ // Telegram authenticates this callback using the bot webhook secret above.
+  // Only configured staff may view or change a behavior-review decision.
+  if(u.callback_query){
+    const ok=await handleReviewCallback(db,token,tg,u.callback_query);
+    return new Response(ok?"ok":"retry",{status:ok?200:503});
+  }
+  const msg=u.message||u.edited_message;
  if(msg?.from?.id&&msg.chat?.type==='private'&&!msg.successful_payment&&!msg.refunded_payment){
    const text=String(msg.text||msg.caption||'').trim(),chatId=msg.chat.id;
    const player=(await db.from("players").select("id,photoword_id,notification_language").eq("telegram_id",msg.from.id).maybeSingle()).data;
@@ -73,7 +80,11 @@ Deno.serve(async(req)=>{
    const send=(text:string)=>tg(token,'sendMessage',{chat_id:chatId,text});
    const command=text.split(/\s+/)[0].replace(/@PhotoWordBot$/i,'').toLowerCase();
    const payload=text.split(/\s+/)[1]||'';
-   if(command==='/myid'){await send('Telegram ID: '+msg.from.id);return new Response('ok');}
+   if(["/anticheat","/case","/case_decide"].includes(command)){
+      const ok=await handleReviewCommand(db,token,tg,Number(msg.from.id),Number(chatId),command,text);
+      return new Response(ok?"ok":"retry",{status:ok?200:503});
+    }
+    if(command==='/myid'){await send('Telegram ID: '+msg.from.id);return new Response('ok');}
    // Staff commands require an explicit private allowlist; no user can grant themselves access.
    if(['/support_queue','/ticket','/reply'].includes(command)){
      const conf=await db.from('app_config').select('value').eq('key','support_admin_telegram_ids').maybeSingle();
