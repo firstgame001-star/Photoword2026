@@ -21,7 +21,7 @@
   try{const theme=localStorage.getItem('pw.theme')||'game';document.documentElement.dataset.theme=['game','night','light','neon','gold'].includes(theme)?theme:'game';}catch{document.documentElement.dataset.theme='game';}
   let prefs;
   try { prefs = JSON.parse(localStorage.getItem('photoword-prefs')) || {}; } catch { prefs = {}; }
-  prefs = {sound: true, haptic: true, music: false, ...prefs};
+  prefs = {sound: true, haptic: true, music: true, ...prefs};
   const ERR={
     ru:{reset_duel_active:'Заверши текущую дуэль перед полным сбросом.',energy_full:'Энергия уже 5/5.',player_not_found:'Профиль игрока не найден. Перезапусти игру через бота.',rank_failed:'Не удалось обновить позицию в рейтинге.',server_error:'Временная ошибка сервера. Попробуй ещё раз.',db:'Временная ошибка базы данных. Попробуй ещё раз.',db_response:'Сервер вернул некорректный ответ. Попробуй ещё раз.',create:'Не удалось создать профиль. Перезапусти игру через бота.',invalid_telegram_auth:'Не удалось подтвердить вход. Закрой мини-приложение и открой его через бота.',not_configured:'Сервер входа ещё не настроен.',insufficient_coins:'Недостаточно монет.',complete_failed:'Сервер не сохранил прохождение.',level_completed:'Уровень уже пройден.',wrong_answer:'Неверное слово.',all_letters:'Все буквы уже открыты.',no_extra_letters:'Лишних букв не осталось.',answer_rate_limited:'Подожди 5 минут перед следующими попытками на этом уровне.',answer_attempt_failed:'Не удалось проверить попытку. Попробуй ещё раз.',answer_unavailable:'Ответ уровня временно недоступен.',hint_failed:'Сервер не применил подсказку.',level_locked:'Сначала пройди предыдущий уровень.',invoice_failed:'Не удалось создать счёт Telegram Stars.',webhook_failed:'Не удалось подготовить подтверждение платежа Telegram.',notification_failed:'Telegram не разрешил отправить тестовое уведомление. Проверь разрешение на сообщения от бота.',bad_pack:'Такого пакета монет нет.',daily_claimed:'Сегодня награда уже получена.',daily_failed:'Не удалось получить ежедневную награду.',task_claimed:'Эта награда сегодня уже получена.',task_not_ready:'Сначала выполни условие задания.',task_failed:'Не удалось получить награду за задание.',bad_task:'Такого задания нет.',bad_level:'Такого уровня пока нет.',reset_failed:'Не удалось сбросить прогресс.',nickname_locked:'Игровой ник уже был установлен и больше не меняется.',nickname_taken:'Этот ник уже занят.',bad_nickname:'Ник: 3–16 символов, только английские буквы, цифры и _.',nickname_failed:'Не удалось сохранить ник.',referral_failed:'Не удалось зарегистрировать приглашение.',friends_failed:'Не удалось загрузить друзей.',ads_not_configured:'Реклама ещё не подключена.',ad_daily_limit:'Лимит рекламных наград на сегодня достигнут.',ad_cooldown:'Между просмотрами нужно подождать 10 минут.',ad_prepare_failed:'Не удалось подготовить рекламу.',ad_too_fast:'Просмотр ещё не подтверждён.',ad_claim_expired:'Подтверждение рекламы истекло. Посмотри новую рекламу.',ad_claim_invalid:'Не удалось подтвердить рекламную награду.',config_failed:'Не удалось загрузить настройки приложения.',erase_confirm:'Подтверди удаление аккаунта.',erase_failed:'Не удалось удалить аккаунт.'},
     en:{reset_duel_active:'Finish the current duel before resetting the game.',energy_full:'Energy is already 5/5.',player_not_found:'Player profile was not found. Reopen the game from the bot.',rank_failed:'Could not update leaderboard position.',server_error:'Temporary server error. Try again.',db:'Temporary database error. Try again.',db_response:'The server returned an invalid response. Try again.',create:'Could not create the profile. Reopen the game from the bot.',invalid_telegram_auth:'Could not verify Telegram login. Close the Mini App and open it again from the bot.',not_configured:'Login server is not configured.',insufficient_coins:'Not enough coins.',complete_failed:'The server did not save level completion.',level_completed:'This level is already completed.',wrong_answer:'Wrong word.',all_letters:'All letters are already revealed.',no_extra_letters:'No extra letters remain.',answer_rate_limited:'Wait 5 minutes before trying this level again.',answer_attempt_failed:'Could not check this attempt. Try again.',answer_unavailable:'This level answer is temporarily unavailable.',hint_failed:'The server did not apply the hint.',level_locked:'Complete the previous level first.',invoice_failed:'Could not create a Telegram Stars invoice.',webhook_failed:'Could not prepare Telegram payment confirmation.',notification_failed:'Telegram could not send the test notification. Check the bot message permission.',bad_pack:'This coin pack does not exist.',daily_claimed:'Today’s daily reward has already been claimed.',daily_failed:'Could not claim the daily reward.',task_claimed:'This task reward has already been claimed today.',task_not_ready:'Complete the task first.',task_failed:'Could not claim the task reward.',bad_task:'This task does not exist.',bad_level:'This level is not available yet.',reset_failed:'Could not reset progress.',nickname_locked:'Your game nickname has already been set and cannot be changed again.',nickname_taken:'This nickname is already taken.',bad_nickname:'Nickname: 3–16 characters, English letters, numbers and _ only.',nickname_failed:'Could not save the nickname.',referral_failed:'Could not register the referral.',friends_failed:'Could not load friends.',ads_not_configured:'Ads are not connected yet.',ad_daily_limit:'Today’s rewarded-ad limit has been reached.',ad_cooldown:'Wait 10 minutes between ad views.',ad_prepare_failed:'Could not prepare the ad.',ad_too_fast:'The ad view is not confirmed yet.',ad_claim_expired:'The ad confirmation expired. Watch a new ad.',ad_claim_invalid:'Could not confirm the ad reward.',config_failed:'Could not load app configuration.',erase_confirm:'Confirm account deletion.',erase_failed:'Could not delete the account.'},
@@ -124,15 +124,36 @@
   async function avatarFrames(codes){return request('/rest/v1/rpc/get_avatar_frames',{p_codes:codes},{apikey:KEY});}
   document.addEventListener('visibilitychange',()=>{if(!document.hidden&&current)login(true).catch(()=>{});});
   let audioCtx=null,musicTimer=null,musicIndex=0;
+  const musicVoices=new Set();
+  // Original gentle PhotoWord soundtrack: four soft chord changes, a bass
+  // pulse and a short melody. All audio is synthesized locally, no downloads.
+  const musicChords=[
+    [50,54,57,61], // Dmaj7
+    [47,50,54,57], // Bm7
+    [43,47,50,54], // Gmaj7
+    [45,49,52,55]  // A7
+  ];
+  const musicLead=[
+    74,76,78,76,73,76,78,73,
+    71,74,76,74,73,71,69,73,
+    74,78,81,78,76,74,71,74,
+    73,76,78,76,74,73,71,69
+  ];
   function ensureAudio(){
-    if(!audioCtx){const C=window.AudioContext||window.webkitAudioContext;if(C)audioCtx=new C();}
+    if(!audioCtx){
+      const C=window.AudioContext||window.webkitAudioContext;
+      if(C)try{audioCtx=new C()}catch{return null}
+    }
     if(audioCtx?.state==='suspended')audioCtx.resume().catch(()=>{});
     return audioCtx;
   }
   function tone(freq,duration=.08,volume=.04,type='sine',delay=0){
     const ctx=ensureAudio();if(!ctx)return;
     const o=ctx.createOscillator(),g=ctx.createGain(),t=ctx.currentTime+delay;
-    o.type=type;o.frequency.setValueAtTime(freq,t);g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(Math.max(.0002,volume),t+.01);g.gain.exponentialRampToValueAtTime(.0001,t+duration);
+    o.type=type;o.frequency.setValueAtTime(freq,t);
+    g.gain.setValueAtTime(.0001,t);
+    g.gain.exponentialRampToValueAtTime(Math.max(.0002,volume),t+.01);
+    g.gain.exponentialRampToValueAtTime(.0001,t+duration);
     o.connect(g);g.connect(ctx.destination);o.start(t);o.stop(t+duration+.03);
   }
   function sfx(kind='tap'){
@@ -143,19 +164,64 @@
     else if(kind==='hint'){tone(660,.1,.035,'sine');tone(880,.12,.03,'sine',.07);}
     else tone(440,.045,.025,'sine');
   }
-  function stopMusic(){if(musicTimer){clearTimeout(musicTimer);musicTimer=null;}}
+  function musicVoice(midi,duration,volume,type='sine',attack=.09,delay=0){
+    const ctx=audioCtx;if(!ctx||ctx.state!=='running')return;
+    const start=ctx.currentTime+.015+delay,end=start+duration;
+    const o=ctx.createOscillator(),g=ctx.createGain();
+    o.type=type;
+    o.frequency.setValueAtTime(440*Math.pow(2,(midi-69)/12),start);
+    g.gain.setValueAtTime(.0001,start);
+    g.gain.linearRampToValueAtTime(volume,start+attack);
+    g.gain.exponentialRampToValueAtTime(.0001,end);
+    o.connect(g);g.connect(ctx.destination);
+    musicVoices.add(o);
+    o.onended=()=>{musicVoices.delete(o);o.disconnect();g.disconnect()};
+    o.start(start);o.stop(end+.05);
+  }
+  function stopMusic(){
+    if(musicTimer!==null){clearTimeout(musicTimer);musicTimer=null;}
+    for(const voice of musicVoices){try{voice.stop()}catch{}}
+    musicVoices.clear();
+  }
   function musicStep(){
-    if(!prefs.music){stopMusic();return;}
-    const seq=[261.63,329.63,392,493.88,392,329.63,293.66,349.23];
-    tone(seq[musicIndex++%seq.length],1.45,.012,'sine');
-    musicTimer=setTimeout(musicStep,900);
+    musicTimer=null;
+    if(!prefs.music||document.hidden||accountErased){stopMusic();return;}
+    const ctx=ensureAudio();
+    if(!ctx||ctx.state!=='running'){
+      // Audio may be suspended by iOS until a user interacts with the game.
+      musicTimer=setTimeout(musicStep,800);return;
+    }
+    const beat=musicIndex++%musicLead.length;
+    const chord=musicChords[Math.floor(beat/4)%musicChords.length];
+    if(beat%4===0){
+      for(const note of chord.slice(1))musicVoice(note,3.25,.0038,'sine',.55);
+      musicVoice(chord[0]-12,3.3,.008,'triangle',.35);
+    }
+    // The melody is intentionally sparse so word puzzles remain the focus.
+    if(beat%2===0||beat%4===3){
+      musicVoice(musicLead[beat],1.45,.011,'sine',.055);
+      musicVoice(musicLead[beat]-12,1.65,.0035,'triangle',.10,.09);
+    }
+    musicTimer=setTimeout(musicStep,735);
+  }
+  function startMusic(){
+    if(!prefs.music||document.hidden||accountErased||musicTimer!==null)return;
+    musicStep();
   }
   function setMusic(enabled){
     prefs.music=Boolean(enabled);
     try{localStorage.setItem('photoword-prefs',JSON.stringify(prefs));}catch{}
-    if(prefs.music){ensureAudio();if(!musicTimer)musicStep();}else stopMusic();
+    if(prefs.music)startMusic();else stopMusic();
   }
-  document.addEventListener('pointerdown',()=>{if(prefs.music&&!musicTimer)setMusic(true);},{once:false,passive:true});
+  // Telegram/iOS browsers block autoplay: start only after a user gesture.
+  // A saved off-setting is respected; music never overrides muted devices.
+  document.addEventListener('pointerdown',()=>{if(prefs.music&&musicTimer===null)startMusic();},{passive:true});
+  document.addEventListener('keydown',()=>{if(prefs.music&&musicTimer===null)startMusic();});
+  document.addEventListener('visibilitychange',()=>{
+    if(document.hidden)stopMusic();
+    // Resume when the user returns; AudioContext may need another tap.
+    else if(prefs.music)startMusic();
+  });
   function haptic(kind = 'light') {
     if (!prefs.haptic) return;
     try {
