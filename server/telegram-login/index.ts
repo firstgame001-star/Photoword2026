@@ -59,7 +59,7 @@ Deno.serve(async(req)=>{
   let body;try{body=JSON.parse(raw);}catch{return reply({error:"json"},400);}
   const user=await verify(body?.initData,token);if(!user)return reply({error:"invalid_telegram_auth"},401);
   const action=body?.action||"login";
-  if(!["login","use_hint","complete_level","theme_hint","theme_complete","claim_daily","claim_task","create_invoice","create_energy_invoice","register_referral","friends","reset_progress","set_nickname","enable_notifications","public_config","ad_prepare","ad_claim","track_event","erase_account","theme_progress","profile_stats","shop_status","notification_state","update_notifications","test_notification"].includes(action))return reply({error:"unknown_action"},400);
+  if(!["login","use_hint","complete_level","theme_hint","theme_complete","claim_daily","claim_task","create_invoice","create_energy_invoice","register_referral","friends","reset_progress","set_nickname","enable_notifications","public_config","ad_prepare","ad_claim","track_event","erase_account","theme_progress","profile_stats","shop_status","notification_state","update_notifications","set_language","test_notification"].includes(action))return reply({error:"unknown_action"},400);
   const level=Number(body?.levelId);
   const themeId=typeof body?.themeId==="string"?body.themeId:"";
   const themeIds=new Set(["sport","art","professions","travel","science","technology","cinema","food","animals","transport","home","nature"]);
@@ -125,7 +125,8 @@ Deno.serve(async(req)=>{
    }
   }
   const text=(value:unknown,max:number)=>typeof value==="string"?value.slice(0,max):null;
-  const fields={first_name:text(user.first_name,256),last_name:text(user.last_name,256),username:text(user.username,64),avatar_url:text(user.photo_url,2048)};
+  const gameLanguage=["ru","en","az"].includes(String(body.language||""))?String(body.language):null;
+  const fields={first_name:text(user.first_name,256),last_name:text(user.last_name,256),username:text(user.username,64),avatar_url:text(user.photo_url,2048),...(action==="login"&&gameLanguage?{notification_language:gameLanguage}:{})};
   let {data:player,error}=await db.from("players").select("*").eq("telegram_id",user.id).maybeSingle();
   if(error)return reply({error:"db"},500);
   if(!player){
@@ -138,6 +139,17 @@ Deno.serve(async(req)=>{
   }
   if(action!=="login"&&body.accountId&&body.accountId!==player.photoword_id)return reply({error:"progress_reset"},409);
   if(action!=="login"&&action!=="reset_progress"&&body.progressGeneration!==undefined&&body.progressGeneration!==player.progress_generation)return reply({error:"progress_reset"},409);
+  if(action==="set_language"){
+   if(!gameLanguage)return reply({error:"bad_language"},400);
+   const langUpdate=await db.from("players").update({notification_language:gameLanguage}).eq("id",player.id).select("notification_language").single();
+   if(langUpdate.error)return reply({error:"db"},500);
+   return reply({language:langUpdate.data.notification_language});
+  }
+  if(["create_invoice","create_energy_invoice"].includes(action)&&gameLanguage){
+   const langUpdate=await db.from("players").update({notification_language:gameLanguage}).eq("id",player.id).select("notification_language").single();
+   if(langUpdate.error)return reply({error:"db"},500);
+   player.notification_language=langUpdate.data.notification_language;
+  }
   if(action==="profile_stats"){
    const themeRows=await db.from("theme_progress").select("theme_id,level_id").eq("player_id",player.id);
    if(themeRows.error)return reply({error:"db"},500);
@@ -401,7 +413,7 @@ Deno.serve(async(req)=>{
    let currentEnergy=Number(cp?.limited_energy??5),ref=Date.parse(cp?.energy_ref_at||new Date().toISOString());
    if(currentEnergy<5&&Number.isFinite(ref)){currentEnergy=Math.min(5,currentEnergy+Math.floor(Math.max(0,Date.now()-ref)/(30*60*1000)));}
    if(currentEnergy>=5)return reply({error:"energy_full"},409);
-   const payload="pwenergy:"+packKey+":"+user.id+":"+crypto.randomUUID();
+   const payload="pwenergy:"+packKey+":"+user.id+":"+(gameLanguage||player.notification_language||"ru")+":"+crypto.randomUUID();
    const webhookUrl=Deno.env.get("SUPABASE_URL")+"/functions/v1/telegram-webhook";
    const whRes=await fetch("https://api.telegram.org/bot"+token+"/setWebhook",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({url:webhookUrl,secret_token:await webhookSecret(token),allowed_updates:["message","pre_checkout_query"],drop_pending_updates:false})});
    const whData=await whRes.json();if(!whData?.ok)return reply({error:"webhook_failed"},502);
@@ -414,7 +426,7 @@ Deno.serve(async(req)=>{
   if(action==="create_invoice"){
    const packs:Record<string,{coins:number,stars:number}>={ctest:{coins:1,stars:1},c10:{coins:10,stars:15},c50:{coins:50,stars:65},c150:{coins:150,stars:175},c300:{coins:300,stars:300}};
    const packKey=String(body.pack||""),pack=packs[packKey];if(!pack)return reply({error:"bad_pack"},400);
-   const payload="pwcoins:"+packKey+":"+user.id+":"+crypto.randomUUID();
+   const payload="pwcoins:"+packKey+":"+user.id+":"+(gameLanguage||player.notification_language||"ru")+":"+crypto.randomUUID();
    const webhookUrl=Deno.env.get("SUPABASE_URL")+"/functions/v1/telegram-webhook";
    const whRes=await fetch("https://api.telegram.org/bot"+token+"/setWebhook",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({url:webhookUrl,secret_token:await webhookSecret(token),allowed_updates:["message","pre_checkout_query"],drop_pending_updates:false})});
    const whData=await whRes.json();
