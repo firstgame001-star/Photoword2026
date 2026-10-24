@@ -72,7 +72,7 @@ begin
  perform public.claim_ad_reward_server(t,n);
  if (select coins from public.players where id=a)<>before_coins then raise exception 'ad duplicate credited again';end if;
  begin perform public.claim_ad_reward_server(t-1,n);raise exception 'foreign nonce accepted';exception when others then if sqlerrm<>'ad_claim_invalid' then raise;end if;end;
- insert into public.ad_reward_claims(player_id,status,prepared_at) values(a,'confirmed',now()-interval '9 minutes') returning nonce into n;
+ insert into public.ad_reward_claims(player_id,status,prepared_at) values(a,'confirmed',now()-interval '25 hours') returning nonce into n;
  begin perform public.claim_ad_reward_server(t,n);raise exception 'expired nonce accepted';exception when others then if sqlerrm<>'ad_claim_expired' then raise;end if;end;
  -- Coin ads allow three rewards per UTC day; after first successful claim, only two remain.
  for k in 1..2 loop insert into public.ad_reward_claims(player_id,status) values(a,'confirmed') returning nonce into n;perform public.claim_ad_reward_server(t,n);end loop;
