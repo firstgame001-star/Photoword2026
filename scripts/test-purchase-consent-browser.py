@@ -43,12 +43,33 @@ with sync_playwright() as pw:
       window.__paymentCallback=callback;
     };
   }""")
-  page.locator('#shopNav').tap()
+  # Reading Terms through Settings stays in the Mini App and never counts as consent.
+  page.locator('#settingsBtn').tap()
+  expect(page.locator('#settingsModal')).to_be_visible()
+  page.locator('#termsLink').tap()
+  terms=page.locator('#purchaseTermsModal')
+  expect(terms).to_be_visible(timeout=7000)
+  expect(page.locator('#purchaseTermsTitle')).to_have_text({'ru':'Пользовательское соглашение','en':'Terms of Use','az':'İstifadəçi razılaşması'}[language])
+  expect(page.locator('#purchaseTermsContent section')).to_have_count(6)
+  assert not page.locator('#purchaseTermsLink').count(),'External GitHub terms link survived'
+  assert page.evaluate("""() => {
+    const box=document.getElementById('purchaseTermsContent');
+    return box.scrollHeight>box.clientHeight+120 && box.querySelectorAll('section').length===6;
+  }"""),'Full agreement must scroll inside the app'
+  page.locator('#purchaseTermsContent').evaluate('(el) => el.scrollTop=el.scrollHeight')
+  assert page.evaluate('document.getElementById("purchaseTermsContent").scrollTop>40')
+  assert page.evaluate('window.__openedInvoices.length')==0,'Reading Terms unexpectedly launched payment'
+  assert page.locator('#purchaseTermsCancel').is_hidden(),'Read-only Terms should have one Close button'
+  page.locator('#purchaseTermsAgree').tap()
+  expect(terms).to_be_hidden()
+    page.locator('#shopNav').tap()
   expect(page.locator('#shopModal')).to_be_visible()
   # Capture the language sent to the invoice endpoint, never to real Telegram.
   page.locator('[data-pack="c10"]').tap()
   terms=page.locator('#purchaseTermsModal')
   expect(terms).to_be_visible(timeout=7000)
+  expect(page.locator('#purchaseTermsContent section')).to_have_count(6)
+  assert page.locator('#purchaseTermsCancel').is_visible(),'Purchase consent must show Cancel'
   assert page.evaluate("""() => {
     const t=document.getElementById('purchaseTermsModal'),
           s=document.getElementById('shopModal'),
@@ -90,6 +111,6 @@ with sync_playwright() as pw:
   page.evaluate("window.__paymentCallback('cancelled')")
   expect(page.locator('[data-energy-store-pack="e1"]')).to_be_enabled()
   assert not relevant_errors(errors),errors
-  print(f'PASS: {engine} {language}: consent above shop, cancel blocks payment, agree opens invoice, energy checkout unaffected')
+  print(f'PASS: {engine} {language}: six in-app Terms sections, readable Settings modal, no external link, consent and Stars payments')
   ctx.close();browser.close()
 server.shutdown()
