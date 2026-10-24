@@ -1182,6 +1182,19 @@ with sync_playwright() as pw:
     for language in ['ru','en','az']:
       ctx=browser.new_context(viewport={'width':390,'height':800},has_touch=True,is_mobile=True)
       ctx.add_init_script(f"if(!sessionStorage.getItem('test.seeded')){{localStorage.setItem('pw.language','{language}'); localStorage.setItem('pw.theme','game');sessionStorage.setItem('test.seeded','1')}}")
+      # Simulate a delayed notification_state reply arriving after edits/saving.
+      # This must never revert a user-selected checkbox.
+      ctx.add_init_script("""(() => {
+        const normalFetch=window.fetch.bind(window);
+        window.fetch=(url,options)=> {
+          let action='';
+          try{action=JSON.parse(options?.body||'{}').action||''}catch{}
+          const response=normalFetch(url,options);
+          return action==='notification_state'
+            ? response.then(r=>new Promise(resolve=>setTimeout(()=>resolve(r),1600)))
+            : response;
+        };
+      })()""")
       account={'photoword_id':'PW-TESTONLY','first_name':'Test','last_name':'','username':None,'game_nickname':None,'nickname_changed':False,'coins':5000,'xp':300,'completed_levels':20,'current_level':21,'rank':1,'daily_streak':0,'last_daily_reward':None}
       completed=set(range(1,21));install_mock(ctx,account,completed,language);page=ctx.new_page();errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
       page.goto(BASE+'clean/#'+fragment,wait_until='domcontentloaded',timeout=45000)
@@ -1205,7 +1218,7 @@ with sync_playwright() as pw:
       # Language can be changed from Settings and changed back without losing the game.
       other={'ru':'en','en':'az','az':'ru'}[language];page.locator('#settingsBtn').tap();page.locator('#languageBtn').tap();page.locator(f'[data-language="{other}"]').tap();assert page.evaluate("localStorage.getItem('pw.language')")==other;expect(page.locator('#status')).to_be_hidden(timeout=3500);page.locator('#settingsBtn').tap();page.locator('#languageBtn').tap();page.locator(f'[data-language="{language}"]').tap();assert page.evaluate("localStorage.getItem('pw.language')")==language;expect(page.locator('#status')).to_be_hidden(timeout=3500)
       # Notification preferences: master permission, individual switches and test delivery.
-      page.locator('#settingsBtn').tap();expect(page.locator('#notificationsBtn')).to_be_visible();page.locator('#notificationsBtn').tap();expect(page.locator('#notificationsModal')).to_be_visible();expect(page.locator('#notificationDaily')).to_be_checked();expect(page.locator('#notificationEnergy')).to_be_checked();expect(page.locator('#notificationChapter')).to_be_checked();page.locator('#notificationsMaster').check();page.locator('#notificationEnergy').uncheck();page.locator('#saveNotifications').tap();expect(page.locator('#notificationsMaster')).to_be_checked();expect(page.locator('#notificationEnergy')).not_to_be_checked();expect(page.locator('#testNotification')).to_be_enabled();assert page.evaluate("localStorage.getItem('pw.writeAccess')")=='1';page.locator('#testNotification').tap();expect_mock_value(page,account,'_notification_tests',1);page.locator('[data-close="notificationsModal"]').tap();page.locator('#settingsBtn').tap();expect(page.locator('#notificationsState')).to_have_text({'ru':'Включены','en':'On','az':'Aktivdir'}[language]);page.locator('[data-close="settingsModal"]').tap()
+      page.locator('#settingsBtn').tap();expect(page.locator('#notificationsBtn')).to_be_visible();page.locator('#notificationsBtn').tap();expect(page.locator('#notificationsModal')).to_be_visible();expect(page.locator('#notificationDaily')).to_be_checked();expect(page.locator('#notificationEnergy')).to_be_checked();expect(page.locator('#notificationChapter')).to_be_checked();page.locator('#notificationsMaster').check();page.locator('#notificationEnergy').uncheck();page.locator('#saveNotifications').tap();expect(page.locator('#saveNotifications')).to_be_enabled();page.wait_for_timeout(1800);expect(page.locator('#notificationsMaster')).to_be_checked();expect(page.locator('#notificationEnergy')).not_to_be_checked();expect(page.locator('#testNotification')).to_be_enabled();assert page.evaluate("localStorage.getItem('pw.writeAccess')")=='1';page.locator('#testNotification').tap();expect_mock_value(page,account,'_notification_tests',1);page.locator('[data-close="notificationsModal"]').tap();page.locator('#settingsBtn').tap();expect(page.locator('#notificationsState')).to_have_text({'ru':'Включены','en':'On','az':'Aktivdir'}[language]);page.locator('[data-close="settingsModal"]').tap()
       # Rules and support are localized.
       page.locator('#settingsBtn').tap();page.locator('#rulesBtn').tap();expect(page.locator('#rulesModal')).to_be_visible();assert len(page.locator('#rulesBody').inner_text())>100;rules_text=page.locator('#rulesBody').inner_text();
       if language=='az': assert 'Günün tapmacası' in rules_text and str(len(json.loads(Path('clean/release.json').read_text())['chapters']))+' fəsil' in rules_text and '5–12-ci fəsillər artıq' not in rules_text
