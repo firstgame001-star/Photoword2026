@@ -71,6 +71,9 @@ Deno.serve(async req=>{
     if(code&&!/^[A-F0-9]{16}$/.test(code))return reply({error:'duel_not_found'},404);
     const db=createClient(Deno.env.get('SUPABASE_URL')!,Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!,
       {auth:{persistSession:false,autoRefreshToken:false}});
+    const budget=await db.rpc('consume_player_request_budget_server',{p_telegram_id:user.id,p_route:'duel-game',p_action:action});
+    if(budget.error)return reply({error:'request_guard_unavailable'},503);
+    if(budget.data?.allowed!==true)return reply({error:'request_rate_limited',retry_after_seconds:Math.max(1,Number(budget.data?.retry_after_seconds)||1)},429);
     if(body.progressGeneration!==undefined){const p=await db.from('players').select('progress_generation').eq('telegram_id',user.id).single();if(p.error)return reply({error:'player_not_found'},404);if(p.data.progress_generation!==body.progressGeneration)return reply({error:'progress_reset'},409);}
     let result:any=null,correct:boolean|undefined;
     if(action==='reactions'){
