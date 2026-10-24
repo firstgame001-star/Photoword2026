@@ -35,6 +35,9 @@ Deno.serve(async(req)=>{
   const language=String(body.language||"ru"),action=String(body.action||"state");
   if(!["ru","en","az"].includes(language))return reply({error:"bad_language"},400);
   const db=createClient(Deno.env.get("SUPABASE_URL")!,Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,{auth:{persistSession:false,autoRefreshToken:false}});
+  const budget=await db.rpc("consume_player_request_budget_server",{p_telegram_id:user.id,p_route:"daily-puzzle",p_action:action});
+  if(budget.error)return reply({error:"request_guard_unavailable"},503);
+  if(budget.data?.allowed!==true)return reply({error:"request_rate_limited",retry_after_seconds:Math.max(1,Number(budget.data?.retry_after_seconds)||1)},429);
   if(action==="state")return reply({daily:await snapshot(db,user.id,language)});
   if(action!=="answer")return reply({error:"unknown_action"},400);
   if(typeof body.answer!=="string"||[...body.answer].length>40||!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(String(body.requestId||""))||!/^\d{4}-\d{2}-\d{2}$/.test(String(body.day||"")))return reply({error:"bad_request"},400);
