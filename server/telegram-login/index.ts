@@ -323,16 +323,18 @@ Deno.serve(async(req)=>{
    const coinCount=claimed.filter((r:any)=>r.reward_kind==="coins").length,energyCount=claimed.filter((r:any)=>r.reward_kind==="energy").length;
    const nextAd=adRows.data?.[0]?.prepared_at?new Date(Date.parse(adRows.data[0].prepared_at)+600000).toISOString():null;
 
-   const [coinHistory,energyHistory,adHistory]=await Promise.all([
+   const [coinHistory,energyHistory,adHistory,refundHistory]=await Promise.all([
     db.from("star_purchases").select("stars,coins,created_at").eq("player_id",player.id).order("created_at",{ascending:false}).limit(20),
     db.from("challenge_energy_purchases").select("stars,energy_added,created_at").eq("player_id",player.id).order("created_at",{ascending:false}).limit(20),
-    db.from("ad_reward_claims").select("reward_coins,reward_energy,claimed_at").eq("player_id",player.id).eq("status","claimed").order("claimed_at",{ascending:false}).limit(20)
+    db.from("ad_reward_claims").select("reward_coins,reward_energy,claimed_at").eq("player_id",player.id).eq("status","claimed").order("claimed_at",{ascending:false}).limit(20),
+    db.from("star_refunds").select("kind,stars,status,revoked_coins,revoked_energy,coin_debt_created,created_at").eq("player_id",player.id).order("created_at",{ascending:false}).limit(20)
    ]);
-   if(coinHistory.error||energyHistory.error||adHistory.error)return reply({error:"shop_failed"},500);
+   if(coinHistory.error||energyHistory.error||adHistory.error||refundHistory.error)return reply({error:"shop_failed"},500);
    const history:any[]=[];
    for(const row of coinHistory.data||[])history.push({type:"coins",coins:Number(row.coins||0),stars:Number(row.stars||0),at:row.created_at});
    for(const row of energyHistory.data||[])history.push({type:"energy",energy:Number(row.energy_added||0),stars:Number(row.stars||0),at:row.created_at});
    for(const row of adHistory.data||[])history.push({type:"ad",coins:Number(row.reward_coins||0),energy:Number(row.reward_energy||0),stars:0,at:row.claimed_at});
+   for(const row of refundHistory.data||[])history.push({type:"refund",kind:row.kind,coins:Number(row.revoked_coins||0),energy:Number(row.revoked_energy||0),debt:Number(row.coin_debt_created||0),stars:Number(row.stars||0),at:row.created_at});
    history.sort((a,b)=>Date.parse(b.at||"")-Date.parse(a.at||""));
 
    return reply({shop:{
