@@ -306,7 +306,7 @@ function applyLanguage(l,persist=true){
  $('dailyModal').querySelector('h2').textContent=x.daily;text('dailyCopy',x.dailyCopy);
  const shortcuts=document.querySelectorAll('.shortcuts button b');if(shortcuts[0])shortcuts[0].textContent=x.daily;if(shortcuts[1])shortcuts[1].textContent=x.rating;
  text('rulesTitle',x.rulesTitle);$('rulesBody').innerHTML=RULES[l]||RULES.ru;const guide=GUIDE[l]||GUIDE.ru;text('rulesIntro',guide.intro);text('rulesDone',guide.done);text('rulesWelcomeTitle',guide.title);text('rulesWelcomeText',guide.text);text('rulesWelcomeRead',guide.read);text('rulesWelcomeSkip',guide.skip);text('homeRulesOpen',guide.link);text('resetTitle',x.resetTitle);text('resetBody',RESET[l]||RESET.ru);text('cancelReset',x.cancel);text('confirmReset',x.resetButton);text('eraseAccountTitle',x.eraseTitle);text('eraseAccountText',x.eraseText);text('confirmEraseAccount',x.eraseButton);text('cancelEraseAccount',x.cancel);
- setThemeLabels(x);text('themeCurrent',x.themeNames[getTheme()]);text('languageCurrent',l==='ru'?'Русский':l==='en'?'English':'Azərbaycan dili');document.querySelectorAll('[data-language]').forEach(b=>b.classList.toggle('selected',b.dataset.language===l));
+ setThemeLabels(x);text('themeCurrent',x.themeNames[getTheme()]);text('languageCurrent',l==='ru'?'Русский':l==='en'?'English':'Azərbaycan dili');text('termsLinkTitle',x.terms);document.querySelectorAll('[data-language]').forEach(b=>b.classList.toggle('selected',b.dataset.language===l));
  if(pw.player)update(pw.player);
  else{text('name',x.guestName);text('profileName',x.guestName);text('rankLabel',x.telegramLogin);const initial=x.guestName.charAt(0).toUpperCase();text('avatar',initial);text('profileAvatar',initial);const guest={current_level:1,completed_levels:0};updateHomeCarousel(guest);updateChapterCards(guest)}
 }
@@ -332,14 +332,41 @@ function chapterIdForLevel(level){
 }
 $('chaptersNav').onclick=()=>{track('chapter_open',{chapterId:chapterIdForLevel(pw.player?.current_level)});screen('chaptersScreen')};$('chaptersBack').onclick=()=>screen('home');$('homeNav').onclick=()=>screen('home');
 let purchaseTermsAccepted=false,purchaseTermsPending=null,purchaseTermsResolve=null;
-function finishPurchaseTerms(accepted){if(!purchaseTermsResolve)return;purchaseTermsAccepted=accepted;$('purchaseTermsModal').hidden=true;const resolve=purchaseTermsResolve;purchaseTermsResolve=null;purchaseTermsPending=null;resolve(accepted)}
+function finishPurchaseTerms(accepted){
+ const resolve=purchaseTermsResolve;
+ $('purchaseTermsModal').hidden=true;
+ if(!resolve)return; // Reading from Settings never counts as accepting a purchase.
+ purchaseTermsResolve=null;purchaseTermsPending=null;
+ if(accepted)purchaseTermsAccepted=true;
+ resolve(Boolean(accepted));
+}
+function showEmbeddedTerms(forPurchase){
+ const l=lang(),legal=window.PWLegalTerms?.[l]||window.PWLegalTerms?.ru;
+ if(!legal?.c||!legal?.t){pw.status(l==='az'?'Razılaşmanı açmaq mümkün olmadı.':l==='en'?'Could not open the agreement.':'Не удалось открыть соглашение.');return false;}
+ const labels={ru:{accept:'ПРИНИМАЮ УСЛОВИЯ',cancel:'ОТМЕНА',close:'ЗАКРЫТЬ'},
+ en:{accept:'I ACCEPT THE TERMS',cancel:'CANCEL',close:'CLOSE'},
+ az:{accept:'ŞƏRTLƏRİ QƏBUL EDİRƏM',cancel:'LƏĞV ET',close:'BAĞLA'}}[l]||{accept:'ПРИНИМАЮ УСЛОВИЯ',cancel:'ОТМЕНА',close:'ЗАКРЫТЬ'};
+ text('purchaseTermsTitle',legal.t);
+ text('purchaseTermsText',legal.d);
+ const content=$('purchaseTermsContent');
+ content.innerHTML=legal.c;
+ content.scrollTop=0;
+ $('purchaseTermsAgree').textContent=forPurchase?labels.accept:labels.close;
+ $('purchaseTermsCancel').textContent=labels.cancel;
+ $('purchaseTermsCancel').hidden=!forPurchase;
+ open('purchaseTermsModal');
+ return true;
+}
 window.PWPurchaseTerms=()=>{
- if(purchaseTermsAccepted)return Promise.resolve(true);if(purchaseTermsPending)return purchaseTermsPending;
- const l=lang(),c={ru:['Перед покупкой','Монеты и энергия используются только в игре. Начисление — после подтверждения Telegram. Вопросы о покупке: /paysupport. Ознакомься с соглашением перед оплатой.','Пользовательское соглашение','ПРИНИМАЮ УСЛОВИЯ','ОТМЕНА'],en:['Before purchasing','Coins and energy are for game use. Credits follow Telegram confirmation. Purchase questions: /paysupport. Read the terms before paying.','Terms of Use','I ACCEPT THE TERMS','CANCEL'],az:['Alışdan əvvəl','Sikkə və enerji yalnız oyunda istifadə olunur. Əlavə etmə Telegram təsdiqindən sonra olur. Alış sualları: /paysupport. Ödənişdən əvvəl razılaşmanı oxu.','İstifadəçi razılaşması','ŞƏRTLƏRİ QƏBUL EDİRƏM','LƏĞV ET']}[l];
- ['purchaseTermsTitle','purchaseTermsText','purchaseTermsLink','purchaseTermsAgree','purchaseTermsCancel'].forEach((id,i)=>text(id,c[i]));$('purchaseTermsLink').href='./terms.html?lang='+l;
- purchaseTermsPending=new Promise(resolve=>purchaseTermsResolve=resolve);open('purchaseTermsModal');return purchaseTermsPending;
+ if(purchaseTermsAccepted)return Promise.resolve(true);
+ if(purchaseTermsPending)return purchaseTermsPending;
+ if(!showEmbeddedTerms(true))return Promise.resolve(false);
+ purchaseTermsPending=new Promise(resolve=>{purchaseTermsResolve=resolve});
+ return purchaseTermsPending;
 };
-$('purchaseTermsAgree').onclick=()=>finishPurchaseTerms(true);$('purchaseTermsCancel').onclick=()=>finishPurchaseTerms(false);
+$('purchaseTermsAgree').onclick=()=>finishPurchaseTerms(true);
+$('purchaseTermsCancel').onclick=()=>finishPurchaseTerms(false);
+$('termsLink').onclick=()=>{close('settingsModal');showEmbeddedTerms(false)};
 $('rulesDone').onclick=()=>close('rulesModal');$('rulesWelcomeSkip').onclick=()=>close('rulesWelcomeModal');$('rulesWelcomeRead').onclick=()=>{close('rulesWelcomeModal');open('rulesModal')};$('homeRulesOpen').onclick=()=>{applyLanguage(lang());open('rulesModal')};
 $('rulesBtn').onclick=()=>{close('settingsModal');applyLanguage(lang());setTimeout(()=>open('rulesModal'),0)};
 $('supportBtn').onclick=()=>{track('support_open');close('settingsModal');setTimeout(()=>open('supportModal'),0)};
