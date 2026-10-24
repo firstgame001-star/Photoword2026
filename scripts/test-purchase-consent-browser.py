@@ -1,7 +1,7 @@
 """iPhone WebKit / Android Chromium: purchase terms must visibly precede invoice.
 All network calls to PhotoWord servers are mocked; no payments or live users.
 """
-import ast,json,time,threading
+import ast,json,time,threading,urllib.parse
 from functools import partial
 from http.server import SimpleHTTPRequestHandler,ThreadingHTTPServer
 from pathlib import Path
