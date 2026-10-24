@@ -60,7 +60,7 @@ Deno.serve(async(req)=>{
    return new Response("ok");
  }
  const msg=u.message||u.edited_message;
- if(msg?.from?.id&&msg.chat?.type==='private'&&!msg.successful_payment){
+ if(msg?.from?.id&&msg.chat?.type==='private'&&!msg.successful_payment&&!msg.refunded_payment){
    const text=String(msg.text||msg.caption||'').trim(),chatId=msg.chat.id;
    const player=(await db.from("players").select("id,photoword_id,notification_language").eq("telegram_id",msg.from.id).maybeSingle()).data;
    const launch=text.match(/^\/start(?:@PhotoWordBot)?\s+(?:support|paysupport)_(ru|en|az)$/i)?.[1]?.toLowerCase();
@@ -125,6 +125,35 @@ Deno.serve(async(req)=>{
    }
  }
 
+
+ // This service message is emitted only after Telegram has refunded Stars.
+ // Never issue refundStarPayment automatically from an inbound update.
+ const refund=msg?.refunded_payment;
+ if(refund&&refund.currency==="XTR"){
+   const charge=String(refund.telegram_payment_charge_id||"");
+   const result=await db.rpc("register_star_refund_server",{
+     p_telegram_id:msg.from?.id,p_charge_id:charge,
+     p_payload:String(refund.invoice_payload||""),p_stars:refund.total_amount
+   });
+   if(result.error){
+     console.error("PhotoWord Stars refund reconciliation failed");
+     return new Response("retry",{status:503});
+   }
+   const data=Array.isArray(result.data)?result.data[0]:result.data;
+   if(data?.status!=="duplicate"){
+     const player=(await db.from("players").select("notification_language").eq("telegram_id",msg.from?.id).maybeSingle()).data;
+     const paidLocale=String(refund.invoice_payload||"").match(/^pw(?:coins|energy):[^:]+:\d+:(ru|en|az):/)?.[1];
+     const language=paidLocale||(["ru","en","az"].includes(player?.notification_language)?player.notification_language:"ru");
+     const message=language==="az"
+       ?"↩️ Telegram Stars geri qaytarıldı. Alışın oyun mükafatları düzəliş edildi."
+       :language==="en"
+       ?"↩️ Telegram Stars refunded. The game's purchase rewards were adjusted."
+       :"↩️ Telegram Stars возвращены. Игровые награды по покупке скорректированы.";
+     await tg(token,"sendMessage",{chat_id:msg.chat?.id||msg.from.id,text:message});
+   }
+   return new Response("ok");
+ }
+
  const pay=msg?.successful_payment;
  if(pay&&pay.currency==="XTR"){
    const pref=(await db.from("players").select("notification_language").eq("telegram_id",msg.from?.id).maybeSingle()).data;
@@ -140,6 +169,10 @@ Deno.serve(async(req)=>{
    if(m&&Number(m[2])===msg.from?.id){
      const pack=packs[m[1]];
      if(pack&&pack.stars===pay.total_amount){
+       // An out-of-order refund may be received before successful_payment.
+       const refunded=await db.from("star_refunds").select("status").eq("telegram_payment_charge_id",pay.telegram_payment_charge_id).maybeSingle();
+       if(refunded.error)return new Response("retry",{status:503});
+       if(refunded.data)return new Response("ok");
        const credit=await db.rpc("credit_star_purchase_server",{p_telegram_id:msg.from.id,p_charge_id:pay.telegram_payment_charge_id,p_payload:pay.invoice_payload,p_stars:pack.stars,p_coins:pack.coins});
        if(credit.error){console.error("PhotoWord Stars coin credit failed");return new Response("retry",{status:503});}
        await tg(token,"sendMessage",{chat_id:msg.chat?.id||msg.from.id,text:coinText(pack.coins)});
@@ -147,6 +180,10 @@ Deno.serve(async(req)=>{
    } else if(e&&Number(e[2])===msg.from?.id){
      const pack=energyPacks[e[1]];
      if(pack&&pack.stars===pay.total_amount){
+       // An out-of-order refund may be received before successful_payment.
+       const refunded=await db.from("star_refunds").select("status").eq("telegram_payment_charge_id",pay.telegram_payment_charge_id).maybeSingle();
+       if(refunded.error)return new Response("retry",{status:503});
+       if(refunded.data)return new Response("ok");
        const credit=await db.rpc("credit_challenge_energy_purchase_server",{p_telegram_id:msg.from.id,p_charge_id:pay.telegram_payment_charge_id,p_payload:pay.invoice_payload,p_stars:pack.stars,p_energy:pack.energy});
        if(credit.error){console.error("PhotoWord Stars energy credit failed");return new Response("retry",{status:503});}
        await tg(token,"sendMessage",{chat_id:msg.chat?.id||msg.from.id,text:energyText});
