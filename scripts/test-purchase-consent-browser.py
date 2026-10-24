@@ -24,6 +24,13 @@ with sync_playwright() as pw:
     'completed_levels':0,'current_level':1,'rank':0,'daily_streak':0,'last_daily_reward':None,
     '_challenge_energy':4}
   install_mock(ctx,account,set(),language)
+  language_requests=[]
+  def capture_game_language(route):
+   payload=json.loads(route.request.post_data or '{}')
+   if payload.get('action') in ('login','create_invoice','create_energy_invoice','set_language'):
+    language_requests.append((payload['action'],payload.get('language')))
+   route.fallback()
+  ctx.route('**/functions/v1/telegram-login',capture_game_language)
   page=ctx.new_page()
   errors=[];page.on('pageerror',lambda err:errors.append(str(err)))
   page.goto(base+'clean/#'+auth_fragment(),wait_until='domcontentloaded',timeout=50000)
@@ -58,6 +65,7 @@ with sync_playwright() as pw:
             viewHeight:viewport.height,boxHeight:box.height};
   }""")
   assert geometry['offset']<max(22,geometry['viewHeight']*0.035),f'Consent not vertically centered: {geometry}'
+  assert ('login',language) in language_requests,'Signed-in login did not sync selected game language'
   assert page.evaluate('window.__openedInvoices.length')==0,'Invoice opened before consent'
   page.screenshot(path=str(out/f'{engine}-{language}-consent.png'))
   page.locator('#purchaseTermsCancel').tap()
@@ -69,12 +77,14 @@ with sync_playwright() as pw:
   page.locator('#purchaseTermsAgree').tap()
   expect(terms).to_be_hidden()
   page.wait_for_function('window.__openedInvoices.length===1',timeout=10000)
+  assert ('create_invoice',language) in language_requests,'Coin invoice did not carry selected game language'
   assert page.evaluate('window.__openedInvoices[0]')=='https://t.me/$test'
   page.evaluate("window.__paymentCallback('cancelled')")
   expect(page.locator('[data-pack="c10"]')).to_be_enabled()
   # Once accepted, a subsequent purchase opens the invoice without a second gate.
   page.locator('[data-energy-store-pack="e1"]').tap()
   page.wait_for_function('window.__openedInvoices.length===2',timeout=10000)
+  assert ('create_energy_invoice',language) in language_requests,'Energy invoice did not carry selected game language'
   assert page.evaluate('window.__openedInvoices[1]')=='https://t.me/$energy'
   assert terms.is_hidden(),'Consent unexpectedly reopened after acceptance'
   page.evaluate("window.__paymentCallback('cancelled')")
