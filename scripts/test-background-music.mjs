@@ -7,9 +7,9 @@ const core=readFileSync('clean/core.js','utf8');
 assert(core.includes('music: true, ...prefs'),'Background music should be enabled by default for new players');
 for(const page of ['index.html','game.html','theme-game.html']){
  const html=readFileSync('clean/'+page,'utf8');
- assert(html.includes('core.js?v=20261024-background-soundtrack'),'Fresh music script missing in '+page);
+ assert(html.includes('core.js?v=20261024-four-rotating-melodies'),'Fresh music script missing in '+page);
 }
-const start=core.indexOf('  let audioCtx=null,musicTimer=null,musicIndex=0;');
+const start=core.indexOf('  let audioCtx=null,musicTimer=null,trackIndex=0,trackBeat=0;');
 const finish=core.indexOf('  function haptic(',start);
 assert(start>0&&finish>start,'Shared audio section missing');
 const audio=core.slice(start,finish);
@@ -42,13 +42,13 @@ const ctx={
  Math
 };
 vm.createContext(ctx);
-vm.runInContext(audio+'\nwindow.musicTest={setMusic,sfx,stopMusic,musicStep};',ctx);
+vm.runInContext(audio+'\nwindow.musicTest={setMusic,sfx,stopMusic,musicStep,trackState:()=>({index:trackIndex,beat:trackBeat}),tracks:musicTracks.map(t=>({name:t.name,tempo:t.tempo,lead:t.lead.join(\",\"),chords:t.chords.length}))};',ctx);
 assert.equal(notes.length,0,'Music must not autoplay before first interaction');
 assert.equal(timers.size,0,'Music timers must not run before a gesture');
 listeners.get('pointerdown')();
 assert.equal(notes.length,6,'Opening chord, bass and melody must start as layered music');
 assert.equal(timers.size,1);
-assert.equal([...timers.values()][0].delay,735,'Beat scheduler must remain gentle');
+assert.equal([...timers.values()][0].delay,735,'First melody tempo must be calm');
 const firstPitches=new Set(notes.map(n=>n.pitch));
 assert(firstPitches.size>=5,'Music must use chords rather than repeat one beep');
 function tick(){
@@ -58,6 +58,19 @@ function tick(){
 }
 for(let i=0;i<5;i++)tick();
 assert(notes.length>8,'Soundtrack must continue to generate a melody');
+const tracks=ctx.window.musicTest.tracks;
+assert.equal(tracks.length,4,'Four distinct background melodies must be installed');
+assert.equal(new Set(tracks.map(t=>t.name)).size,4,'Track names must be unique');
+assert.equal(new Set(tracks.map(t=>t.lead)).size,4,'Each track must have a different lead melody');
+assert(tracks.every(t=>t.chords===4),'Every track must have its own harmonic progression');
+const heard=new Set([ctx.window.musicTest.trackState().index]);
+for(let i=0;i<4*64;i++){
+ tick();
+ heard.add(ctx.window.musicTest.trackState().index);
+}
+assert.deepEqual([...heard],[0,1,2,3],'The soundtrack must cycle through all four tracks automatically');
+assert.equal(ctx.window.musicTest.trackState().index,0,'The soundtrack must loop to the first melody');
+
 const preFx=notes.length;ctx.prefs.sound=false;ctx.window.musicTest.sfx('success');
 assert.equal(notes.length,preFx,'Sound effects toggle must silence SFX separately');
 tick();assert.equal(timers.size,1,'Music must continue with sound effects muted');
@@ -80,4 +93,4 @@ assert.equal(timers.size,0,'Page navigation must stop music');
 listeners.get('pointerdown')();
 assert.equal(timers.size,1,'A new interaction can restart music after page return');
 ctx.accountErased=true;tick();assert.equal(timers.size,0,'Erased accounts must not continue playing');
-console.log('PASS: layered instrumental background music, no premature autoplay, persistence, independent SFX, pause/resume and account cleanup.');
+console.log('PASS: four distinct melodies rotate automatically, with gentle chords, saved mute, independent SFX and lifecycle pause/resume.');
