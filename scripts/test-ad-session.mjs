@@ -25,11 +25,11 @@ c=controller();c.show=()=>{throw new Error('SDK failure')};await assert.rejects(
 // no duplicate attempt while pending, and the button always recovers.
 const source=readFileSync('clean/home.js','utf8');
 const section=source.slice(source.indexOf('function renderAdButton()'),source.indexOf("$('claimDaily').onclick"));
-let showResolve,claimCalls=0,updates=0,mode='success';const events=[],elements=new Map();
+let showResolve,claimCalls=0,updates=0,mode='success';const events=[],flashes=[],elements=new Map();
 const get=id=>{if(!elements.has(id))elements.set(id,{disabled:false,textContent:'',style:{},setAttribute(){}});return elements.get(id)};
 const receipts=new Map();
 const localStorage={getItem:key=>receipts.get(key)||null,setItem:(key,value)=>receipts.set(key,value),removeItem:key=>receipts.delete(key)};
-const ui={localStorage,window:{Adsgram:{init:()=>({})},PWAdSession:{ensureSDK:async()=>{},show:()=>new Promise(resolve=>showResolve=resolve)}},$:get,t:()=>({adWatch:'Watch',adLoading:'Loading',adPlaying:'Playing',adChecking:'Checking',adError:'Unavailable',adTimeout:'Timeout',adPending:'Pending',adCooldown:'Wait',adRewarded:'Credited'}),text:(id,value)=>get(id).textContent=value,pw:{player:{photoword_id:'AD-ACCOUNT'},actionRequest:async()=>({nonce:'00000000-0000-4000-8000-000000000001',block_id:'51571'}),api:async()=>{claimCalls++;if(mode==='unconfirmed')throw new Error('ad_claim_invalid');return {coins:5}},status:()=>{},sfx:()=>{}},track:event=>events.push(event),update:()=>updates++,flashStatus:()=>{},loadShopStatus:async()=>{},setTimeout:fn=>{fn();return 1},publicConfig:{},shopStatus:{ads:{configured:true,claimed_today:0,daily_limit:10}},adController:null,adBusy:false,adPhase:'',adLastError:''};
+const ui={localStorage,window:{Adsgram:{init:()=>({})},PWAdSession:{ensureSDK:async()=>{},show:()=>new Promise(resolve=>showResolve=resolve)}},$:get,t:()=>({adWatch:'Watch',adLoading:'Loading',adPlaying:'Playing',adChecking:'Checking',adError:'Unavailable',adTimeout:'Timeout',adPending:'Pending',adCooldown:'Wait',adRewarded:'Credited',adFallbackCoins:'Full energy converted to coins'}),text:(id,value)=>get(id).textContent=value,pw:{player:{photoword_id:'AD-ACCOUNT'},actionRequest:async()=>({nonce:'00000000-0000-4000-8000-000000000001',block_id:'51571'}),api:async()=>{claimCalls++;if(mode==='unconfirmed')throw new Error('ad_claim_invalid');return {coins:5}},status:()=>{},sfx:()=>{}},track:event=>events.push(event),update:()=>updates++,flashStatus:msg=>flashes.push(msg),loadShopStatus:async()=>{},setTimeout:fn=>{fn();return 1},publicConfig:{},shopStatus:{ads:{configured:true,claimed_today:0,daily_limit:10}},adController:null,adBusy:false,adPhase:'',adLastError:''};
 ui.adRewardKind="coins";ui.lang=()=>"ru";ui.shopCountdown=()=>"10:00";vm.createContext(ui);vm.runInContext(source.slice(source.indexOf("function adChoice()"),source.indexOf("for(const [id,kind] of",source.indexOf("function adChoice()"))),ui);vm.runInContext(section,ui);ui.renderAdButton();
 let click=get('watchAd').onclick();await new Promise(resolve=>setImmediate(resolve));assert.equal(get('watchAd').disabled,true);ui.renderAdButton();assert.equal(get('watchAd').disabled,true);assert.equal(get('watchAd').textContent,'Loading');await get('watchAd').onclick();assert.equal(events.filter(e=>e==='ad_open').length,1);assert.equal(claimCalls,0);showResolve({done:true});await click;assert.equal(updates,1);assert.equal(get('watchAd').disabled,false);assert.equal(get('watchAd').textContent,'Watch');
 mode='unconfirmed';click=get('watchAd').onclick();await new Promise(resolve=>setImmediate(resolve));showResolve({done:true});await click;assert.equal(updates,1,'Unconfirmed ad granted coins');assert.equal(get('adText').textContent,'Pending');assert.equal(get('watchAd').disabled,false);assert.equal(events.filter(e=>e==='ad_complete').length,1);
@@ -45,4 +45,21 @@ await ui.recoverAdReceipt();assert.equal(updates,2,'Receipt recovery duplicated 
 ui.window.PWAdSession.show=async()=>{throw {description:'provider error',state:'load'}};await get('watchAd').onclick();assert.equal(get('watchAd').disabled,false);assert.equal(get('adText').textContent,'Unavailable');assert.equal(updates,2);
 ui.shopStatus.ads.claimed_today=3;ui.shopStatus.ads.daily_limit=3;ui.renderAdButton();assert.equal(get('watchAd').disabled,true);
 ui.adRewardKind='energy';ui.shopStatus.ads.energy_daily_limit=2;ui.shopStatus.ads.energy_claimed_today=0;ui.shopStatus.energy=5;ui.renderAdButton();assert.equal(get('watchAd').disabled,true);ui.shopStatus.energy=4;ui.renderAdButton();assert.equal(get('watchAd').disabled,false);ui.shopStatus.ads.next_ad_at=new Date(Date.now()+600000).toISOString();ui.renderAdButton();assert.equal(get('watchAd').disabled,true);
+
+// A full-energy ad is not lost: the server returns its actual +5 coin fallback
+// while the UI must not display an incorrect +1 energy success message.
+ui.shopStatus.ads.next_ad_at=null;
+ui.adRewardKind='energy';
+ui.shopStatus.energy=4;
+ui.shopStatus.ads.energy_claimed_today=0;
+ui.pw.api=async()=>{claimCalls++;return {coins:10,ad_reward:{coins:5,energy:0}}};
+ui.window.PWAdSession.show=async()=>({done:true});
+ui.renderAdButton();
+assert.equal(get('watchAd').disabled,false);
+await get('watchAd').onclick();
+assert.equal(flashes.at(-1),'Full energy converted to coins','Full-energy reward message must show coins');
+ui.saveAdReceipt('10000000-0000-4000-8000-000000000002','energy');
+await ui.recoverAdReceipt();
+assert.equal(flashes.at(-1),'Full energy converted to coins','Recovered ad must also show actual reward');
+
 console.log('PASS: AdsGram timeouts, provider errors, server-only rewards, cross-account receipt isolation, pending recovery, and repeat-claim protection.');
