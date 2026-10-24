@@ -6,7 +6,7 @@ import assert from 'node:assert/strict';
 import {webcrypto} from 'node:crypto';
 
 const sent=[];
-const state={energy:3,refAt:new Date().toISOString(),reused:false,dbError:false,creditError:false,creditCalls:0};
+const state={energy:3,refAt:new Date().toISOString(),reused:false,dbError:false,creditError:false,creditCalls:0,refundStatus:'applied',refundRpcError:false,refunded:false,lastRefundArgs:null};
 function result(data){return {data,error:state.dbError?{message:'db_unavailable'}:null};}
 function query(table){
   const q={
@@ -16,6 +16,7 @@ function query(table){
     maybeSingle(){
       if(table==='players')return Promise.resolve(result({id:'test-player'}));
       if(table==='challenge_profiles')return Promise.resolve(result({limited_energy:state.energy,energy_ref_at:state.refAt}));
+      if(table==='star_refunds')return Promise.resolve(result(state.refunded?{status:'pending'}:null));
       return Promise.resolve(result(null));
     }
   };
@@ -24,7 +25,14 @@ function query(table){
 let handler;
 const ctx={
   Deno:{env:{get:key=>({TELEGRAM_BOT_TOKEN:'offline-only',SUPABASE_URL:'https://invalid.local',SUPABASE_SERVICE_ROLE_KEY:'fake'})[key]},serve:fn=>handler=fn},
-  createClient:()=>({from:query,rpc:async()=>{state.creditCalls++;return {data:{},error:state.creditError?{message:"offline"}:null}}}),
+  createClient:()=>({from:query,rpc:async(name,args)=>{
+    state.creditCalls++;
+    if(name==='register_star_refund_server'){
+      state.lastRefundArgs=args;
+      return {data:{status:state.refundStatus,kind:'coins'},error:state.refundRpcError?{message:'refund unavailable'}:null};
+    }
+    return {data:{},error:state.creditError?{message:"offline"}:null};
+  }}),
   fetch:async(url,options)=>{const method=url.split('/').at(-1);sent.push({method,...JSON.parse(options.body)});return {json:async()=>({ok:true})}},
   crypto:webcrypto,TextEncoder,Date,Math,Number,Response,Request,console
 };
@@ -92,4 +100,30 @@ assert(sent.some(x=>x.method==='sendMessage'&&x.text.includes('Начислен�
 assert.equal(await paid('energy'),200,'Successful energy fulfillment must acknowledge receipt');
 assert(sent.some(x=>x.method==='sendMessage'&&x.text.includes('Enerji')),'Energy confirmation must be localized in AZ');
 
-console.log('PASS: energy invoice reuse, full/regenerated energy, database outage, amount/currency/buyer validation and coin checkout, failed-payment retries (fully mocked).');
+
+// Telegram's refunded_payment is a service message, not a bot command.
+async function refunded(invoice_payload=coins,charge='OFFLINE-refund',stars=15){
+  sent.length=0;
+  const response=await handler(new Request('https://invalid.local',{method:'POST',
+    headers:{'x-telegram-bot-api-secret-token':secret},
+    body:JSON.stringify({message:{message_id:9,chat:{id:42,type:'private'},from:{id:42},
+      refunded_payment:{currency:'XTR',invoice_payload,telegram_payment_charge_id:charge,total_amount:stars}}})}));
+  return response.status;
+}
+assert.equal(await refunded(),200,'Valid refund update must be accepted');
+assert.equal(state.lastRefundArgs.p_charge_id,'OFFLINE-refund');
+assert.equal(state.lastRefundArgs.p_stars,15);
+assert(sent.some(x=>x.method==='sendMessage'&&x.text.includes('возвращены')),'Localized refund confirmation must be sent');
+state.refundStatus='duplicate';
+assert.equal(await refunded(),200,'Duplicate refund should acknowledge');
+assert(!sent.some(x=>x.method==='sendMessage'),'Duplicate refund must not notify twice');
+state.refundStatus='applied';state.refundRpcError=true;
+assert.equal(await refunded(),503,'Failed refund reconciliation must request webhook retry');
+state.refundRpcError=false;
+state.refunded=true;
+const before=state.creditCalls;
+assert.equal(await paid('coins'),200,'Out-of-order refunded receipt should be safely acknowledged');
+assert.equal(state.creditCalls,before,'Already refunded charge must not be credited again');
+assert(!sent.some(x=>x.method==='sendMessage'),'Refunded receipt must not trigger payment success notification');
+state.refunded=false;
+console.log('PASS: energy checkout limits, duplicate refunds, failed refund retries, out-of-order updates and coin/energy payment handling (mocked).');
