@@ -409,7 +409,7 @@ Deno.serve(async(req)=>{
    player=referralResult.data;
   }
   if(action==="create_energy_invoice"){
-   const packs:Record<string,{energy:number,stars:number,full?:boolean}>={e1:{energy:1,stars:15},e5:{energy:5,stars:50,full:true}};
+   const packs:Record<string,{energy:number,stars:number,full?:boolean}>={e1:{energy:1,stars:1},e5:{energy:5,stars:50,full:true}};
    const packKey=String(body.pack||""),pack=packs[packKey];if(!pack)return reply({error:"bad_pack"},400);
    const cp=(await db.from("challenge_profiles").select("limited_energy,energy_ref_at").eq("player_id",player.id).maybeSingle()).data;
    let currentEnergy=Number(cp?.limited_energy??5),ref=Date.parse(cp?.energy_ref_at||new Date().toISOString());
@@ -420,7 +420,7 @@ Deno.serve(async(req)=>{
    const whRes=await fetch("https://api.telegram.org/bot"+token+"/setWebhook",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({url:webhookUrl,secret_token:await webhookSecret(token),allowed_updates:["message","pre_checkout_query"],drop_pending_updates:false})});
    const whData=await whRes.json();if(!whData?.ok)return reply({error:"webhook_failed"},502);
    const tgRes=await fetch("https://api.telegram.org/bot"+token+"/createInvoiceLink",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({
-     title:(pack.full?"Энергия 5/5 PhotoWord":"+1 энергия PhotoWord"),description:"Энергия для режима «Ограниченные попытки»",payload,currency:"XTR",prices:[{label:(pack.full?"Восстановить до 5/5":"+1 энергия"),amount:pack.stars}]
+     title:(pack.full?"Энергия 5/5 PhotoWord":"ТЕСТ PhotoWord · +1 энергия"),description:(pack.full?"Энергия для режима «Ограниченные попытки»":"Временный тест: +1 энергия за 1 Telegram Star."),payload,currency:"XTR",prices:[{label:(pack.full?"Восстановить до 5/5":"ТЕСТ: +1 энергия"),amount:pack.stars}]
    })});
    const tgData=await tgRes.json();if(!tgData.ok||typeof tgData.result!=="string")return reply({error:"invoice_failed"},502);
    return reply({invoice_url:tgData.result,pack:packKey,energy:pack.energy,stars:pack.stars});
