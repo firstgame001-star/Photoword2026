@@ -324,7 +324,7 @@ $('settingsBtn').onclick=()=>open('settingsModal');
 $('languageBtn').onclick=()=>{close('settingsModal');const c=$('languageClose');if(c)c.hidden=false;setTimeout(()=>open('languageModal'),0)};
 $('themeBtn').onclick=()=>{close('settingsModal');setTimeout(()=>open('themeModal'),0)};
 document.querySelectorAll('[data-theme]').forEach(b=>b.onclick=()=>{applyTheme(b.dataset.theme);track('theme_change',{metadata:{theme:b.dataset.theme}});close('themeModal')});
-document.querySelectorAll('[data-language]').forEach(b=>b.onclick=()=>{const firstChoice=!getLang();applyLanguage(b.dataset.language);track('language_change',{metadata:{language:b.dataset.language}});close('languageModal');if(firstChoice)setTimeout(()=>open('rulesWelcomeModal'),0);pw.status(b.dataset.language==='ru'?'Язык игры: Русский':b.dataset.language==='en'?'Game language: English':'Oyun dili: Azərbaycan dili')});
+document.querySelectorAll('[data-language]').forEach(b=>b.onclick=()=>{const firstChoice=!getLang();applyLanguage(b.dataset.language);pw.actionRequest('set_language',{language:b.dataset.language}).catch(()=>{});track('language_change',{metadata:{language:b.dataset.language}});close('languageModal');if(firstChoice)setTimeout(()=>open('rulesWelcomeModal'),0);pw.status(b.dataset.language==='ru'?'Язык игры: Русский':b.dataset.language==='en'?'Game language: English':'Oyun dili: Azərbaycan dili')});
 $('profileBtn').onclick=openProfile;$('dailyRewardBtn').onclick=()=>open('dailyModal');$('shopOffer').onclick=openShop;$('shopNav').onclick=openShop;$('themesEntry').onclick=()=>{renderThemeHub(pw.player);screen('themesScreen');track('themes_open')};$('themesBack').onclick=()=>screen('home');$('themeDetailBack').onclick=()=>screen('themesScreen');document.querySelectorAll('[data-challenge]').forEach(b=>b.onclick=()=>openChallengeMode(b.dataset.challenge));
 function chapterIdForLevel(level){
  const n=Number(level||1);
@@ -450,14 +450,14 @@ async function waitForEnergyCredit(before){
  pw.status(x.paymentPending);return false;
 }
 async function waitForStarCredit(before,coins){const x=t(),target=before+coins,delays=[700,1200,1800,2600,3600,5000];pw.status(x.paymentProcessing);for(const ms of delays){await new Promise(r=>setTimeout(r,ms));try{const p=await pw.login(true);if((p.coins||0)>=target){pw.sfx('coin');pw.status(x.paymentCredited);await loadShopStatus().catch(()=>{});return true}}catch{}}pw.status(x.paymentPending);return false}
-document.querySelectorAll('[data-pack]').forEach(b=>b.onclick=async()=>{if(b.disabled)return;b.disabled=true;try{const base=(pw.player||await pw.login()).coins||0;track('invoice_open',{metadata:{pack:b.dataset.pack}});const result=await pw.actionRequest('create_invoice',{pack:b.dataset.pack}),tg=window.Telegram?.WebApp;if(!tg?.openInvoice)throw new Error(t().notifyNeedTelegram);tg.openInvoice(result.invoice_url,status=>{b.disabled=false;track('payment_status',{metadata:{status,pack:b.dataset.pack}});if(status==='paid')waitForStarCredit(base,result.coins);else if(status==='pending'){pw.status(t().paymentPending);setTimeout(()=>pw.login(true).catch(()=>{}),2500)}else if(status==='failed')pw.status(t().paymentFailed);else if(status==='cancelled')pw.status(t().paymentCancelled)})}catch(e){pw.status(e.message);b.disabled=false}});
+document.querySelectorAll('[data-pack]').forEach(b=>b.onclick=async()=>{if(b.disabled)return;b.disabled=true;try{const base=(pw.player||await pw.login()).coins||0;track('invoice_open',{metadata:{pack:b.dataset.pack}});const result=await pw.actionRequest('create_invoice',{pack:b.dataset.pack,language:lang()}),tg=window.Telegram?.WebApp;if(!tg?.openInvoice)throw new Error(t().notifyNeedTelegram);tg.openInvoice(result.invoice_url,status=>{b.disabled=false;track('payment_status',{metadata:{status,pack:b.dataset.pack}});if(status==='paid')waitForStarCredit(base,result.coins);else if(status==='pending'){pw.status(t().paymentPending);setTimeout(()=>pw.login(true).catch(()=>{}),2500)}else if(status==='failed')pw.status(t().paymentFailed);else if(status==='cancelled')pw.status(t().paymentCancelled)})}catch(e){pw.status(e.message);b.disabled=false}});
 
 document.querySelectorAll('[data-energy-store-pack]').forEach(b=>b.onclick=async()=>{
  if(b.disabled)return;
  const before=Number(shopStatus?.energy||0);b.disabled=true;
  try{
   track('invoice_open',{metadata:{pack:b.dataset.energyStorePack,type:'energy'}});
-  const result=await pw.actionRequest('create_energy_invoice',{pack:b.dataset.energyStorePack}),tg=window.Telegram?.WebApp;
+  const result=await pw.actionRequest('create_energy_invoice',{pack:b.dataset.energyStorePack,language:lang()}),tg=window.Telegram?.WebApp;
   if(!tg?.openInvoice)throw new Error(t().shopNeedTelegram);
   tg.openInvoice(result.invoice_url,status=>{
     b.disabled=false;track('payment_status',{metadata:{status,pack:b.dataset.energyStorePack,type:'energy'}});
