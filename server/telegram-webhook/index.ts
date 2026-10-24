@@ -1,7 +1,7 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 async function webhookSecret(token:string){const data=new TextEncoder().encode(token);const hash=await crypto.subtle.digest("SHA-256",data);return "pw_"+Array.from(new Uint8Array(hash)).map(b=>b.toString(16).padStart(2,"0")).join("").slice(0,48);}
-const packs:Record<string,{coins:number,stars:number}>={c10:{coins:10,stars:15},c50:{coins:50,stars:65},c150:{coins:150,stars:175},c300:{coins:300,stars:300}};
+const packs:Record<string,{coins:number,stars:number}>={ctest:{coins:1,stars:1},c10:{coins:10,stars:15},c50:{coins:50,stars:65},c150:{coins:150,stars:175},c300:{coins:300,stars:300}};
 const energyPacks:Record<string,{energy:number,stars:number}>={e1:{energy:1,stars:15},e5:{energy:5,stars:50}};
 const APP_URL="https://firstgame001-star.github.io/Photoword2026/clean/";
 let botUiConfigured=false;
@@ -28,7 +28,7 @@ Deno.serve(async(req)=>{
    const q=u.pre_checkout_query;let ok=false;
    if(q.currency==="XTR"){
      const payload=String(q.invoice_payload||"");
-     const m=payload.match(/^pwcoins:(c10|c50|c150|c300):(\d+):/);
+     const m=payload.match(/^pwcoins:(ctest|c10|c50|c150|c300):(\d+):/);
      const e=payload.match(/^pwenergy:(e1|e5):(\d+):/);
      if(m&&Number(m[2])===q.from?.id&&packs[m[1]]?.stars===q.total_amount)ok=true;
      if(e&&Number(e[2])===q.from?.id&&energyPacks[e[1]]?.stars===q.total_amount)ok=true;
@@ -109,7 +109,7 @@ Deno.serve(async(req)=>{
    const coinText=(coins:number)=>l==="en"?"✅ Payment confirmed. "+coins+" 🪙 credited.":l==="az"?"✅ Ödəniş təsdiqləndi. "+coins+" 🪙 əlavə olundu.":"✅ Оплата подтверждена. Начислено "+coins+" 🪙.";
    const energyText=l==="en"?"✅ Payment confirmed. Energy restored (maximum 5/5 ⚡).":l==="az"?"✅ Ödəniş təsdiqləndi. Enerji bərpa olundu (maksimum 5/5 ⚡).":"✅ Оплата подтверждена. Энергия восстановлена (максимум 5/5 ⚡).";
    const payload=String(pay.invoice_payload||"");
-   const m=payload.match(/^pwcoins:(c10|c50|c150|c300):(\d+):/);
+   const m=payload.match(/^pwcoins:(ctest|c10|c50|c150|c300):(\d+):/);
    const e=payload.match(/^pwenergy:(e1|e5):(\d+):/);
    if(m&&Number(m[2])===msg.from?.id){
      const pack=packs[m[1]];
