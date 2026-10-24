@@ -33,6 +33,9 @@ Deno.serve(async(req)=>{
   if(action==="equip"&&body.frame!==null&&(typeof body.frame!=="string"||!/^[a-z]{1,20}$/.test(body.frame)))return reply({error:"bad_frame"},400);
   if(action==="showcase"&&(!Array.isArray(body.achievements)||body.achievements.length>3||body.achievements.some((x:unknown)=>typeof x!=="string"||!/^[a-z0-9_]{1,60}$/.test(x as string))||new Set(body.achievements).size!==body.achievements.length||!Number.isInteger(body.progressGeneration)))return reply({error:"bad_showcase"},400);
   const db=createClient(Deno.env.get("SUPABASE_URL")!,Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,{auth:{persistSession:false,autoRefreshToken:false}});
+  const budget=await db.rpc("consume_player_request_budget_server",{p_telegram_id:user.id,p_route:"achievements",p_action:String(action)});
+  if(budget.error)return reply({error:"request_guard_unavailable"},503);
+  if(budget.data?.allowed!==true)return reply({error:"request_rate_limited",retry_after_seconds:Math.max(1,Number(budget.data?.retry_after_seconds)||1)},429);
   if(body.progressGeneration!==undefined){const p=await db.from("players").select("progress_generation").eq("telegram_id",user.id).single();if(p.error)return reply({error:"player_not_found"},404);if(p.data.progress_generation!==body.progressGeneration)return reply({error:"progress_reset"},409);}
   const settled=await db.rpc("duel_statistics",{p_telegram_id:user.id});if(settled.error)return reply({error:"server_error"},500);
   const args:any={p_telegram_id:user.id,p_language:language};if(action==="claim")args.p_achievement=body.achievement;
