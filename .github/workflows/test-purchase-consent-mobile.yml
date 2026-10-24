@@ -1,0 +1,40 @@
+name: Test mobile Telegram Stars purchase consent
+on:
+  push:
+    branches: [main]
+    paths: ['clean/**', 'scripts/test-purchase-consent-browser.py', '.github/workflows/test-purchase-consent-mobile.yml']
+  pull_request:
+    paths: ['clean/**', 'scripts/test-purchase-consent-browser.py', '.github/workflows/test-purchase-consent-mobile.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  payment-modal:
+    runs-on: ubuntu-latest
+    timeout-minutes: 16
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - name: Install browsers
+        run: |
+          sudo python - <<'PYAPT'
+          from pathlib import Path
+          for name, uri in [('apt-mirrors.txt','https://archive.ubuntu.com/ubuntu'),('apt-security-mirrors.txt','https://security.ubuntu.com/ubuntu')]:
+              path=Path('/etc/apt')/name
+              if path.exists(): path.write_text(uri+'\n')
+          paths=list(Path('/etc/apt/sources.list.d').glob('*.sources'))+list(Path('/etc/apt/sources.list.d').glob('*.list'))+[Path('/etc/apt/sources.list')]
+          for path in paths:
+              if path.exists(): path.write_text(path.read_text().replace('http://azure.archive.ubuntu.com/ubuntu','https://archive.ubuntu.com/ubuntu').replace('https://azure.archive.ubuntu.com/ubuntu','https://archive.ubuntu.com/ubuntu'))
+          PYAPT
+          python -m pip install playwright==1.63.0
+          python -m playwright install --with-deps chromium webkit
+      - name: Verify purchase modal visibility and invoice sequence
+        run: python scripts/test-purchase-consent-browser.py
+      - name: Upload mobile evidence
+        if: always()
+        uses: actions/upload-artifact@v5
+        with:
+          name: mobile-purchase-consent
+          path: test-results/purchase-consent/
+          retention-days: 7
