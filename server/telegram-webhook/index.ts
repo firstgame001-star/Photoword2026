@@ -26,7 +26,8 @@ Deno.serve(async(req)=>{
  const db=createClient(Deno.env.get("SUPABASE_URL")!,Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,{auth:{persistSession:false}});
  let u:any;try{u=await req.json()}catch{return new Response("ok")}
  if(u.pre_checkout_query){
-   const q=u.pre_checkout_query;let ok=false;
+   const q=u.pre_checkout_query;let ok=false,reason="invalid";
+   const locale=String(q.invoice_payload||"").match(/^pw(?:coins|energy):[^:]+:\d+:(ru|en|az):/)?.[1]||"ru";
    if(q.currency==="XTR"){
      const payload=String(q.invoice_payload||"");
      const m=payload.match(/^pwcoins:(ctest|c10|c50|c150|c300):(\d+):/);
@@ -37,18 +38,25 @@ Deno.serve(async(req)=>{
        // regenerated to full. Old links must never charge without a reward.
        const prior=await db.from("challenge_energy_purchases").select("id").eq("invoice_payload",payload).limit(1);
        const buyer=await db.from("players").select("id").eq("telegram_id",q.from.id).maybeSingle();
-       if(!prior.error&&!prior.data?.length&&!buyer.error&&buyer.data?.id){
+       if(!prior.error&&prior.data?.length)reason="used";
+       else if(!prior.error&&!buyer.error&&buyer.data?.id){
          const prof=await db.from("challenge_profiles").select("limited_energy,energy_ref_at").eq("player_id",buyer.data.id).maybeSingle();
          if(!prof.error){
            const now=Date.now(),current=Number(prof.data?.limited_energy??5);
            const ref=Date.parse(prof.data?.energy_ref_at||new Date(now).toISOString());
            const regenerated=current<5&&Number.isFinite(ref)?Math.min(5,current+Math.floor(Math.max(0,now-ref)/(30*60*1000))):current;
            ok=regenerated<5;
+           if(!ok)reason="full";
          }
        }
      }
    }
-   await fetch("https://api.telegram.org/bot"+token+"/answerPreCheckoutQuery",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({pre_checkout_query_id:q.id,ok,error_message:ok?undefined:"Не удалось проверить пакет покупки."})});
+   const denial={
+     ru:{invalid:"Не удалось проверить пакет покупки.",used:"Этот счёт на энергию уже оплачен. Откройте новый счёт в игре.",full:"Энергия уже восстановлена. Покупка не требуется."},
+     en:{invalid:"Could not verify the purchase.",used:"This energy invoice was already paid. Open a new one in the game.",full:"Energy is already full. No purchase is needed."},
+     az:{invalid:"Alışı yoxlamaq mümkün olmadı.",used:"Bu enerji hesabı artıq ödənilib. Oyunda yenisini açın.",full:"Enerji artıq doludur. Alış tələb olunmur."}
+   };
+   await fetch("https://api.telegram.org/bot"+token+"/answerPreCheckoutQuery",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({pre_checkout_query_id:q.id,ok,error_message:ok?undefined:denial[locale as "ru"|"en"|"az"][reason as "invalid"|"used"|"full"]})});
    return new Response("ok");
  }
  const msg=u.message||u.edited_message;
