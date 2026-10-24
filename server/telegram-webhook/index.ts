@@ -23,6 +23,7 @@ Deno.serve(async(req)=>{
  const token=Deno.env.get("TELEGRAM_BOT_TOKEN");if(!token)return new Response("config",{status:500});
  if(req.headers.get("x-telegram-bot-api-secret-token")!==await webhookSecret(token))return new Response("forbidden",{status:403});
  await ensureBotUi(token);
+ const db=createClient(Deno.env.get("SUPABASE_URL")!,Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,{auth:{persistSession:false}});
  let u:any;try{u=await req.json()}catch{return new Response("ok")}
  if(u.pre_checkout_query){
    const q=u.pre_checkout_query;let ok=false;
@@ -31,12 +32,26 @@ Deno.serve(async(req)=>{
      const m=payload.match(/^pwcoins:(ctest|c10|c50|c150|c300):(\d+):/);
      const e=payload.match(/^pwenergy:(e1|e5):(\d+):/);
      if(m&&Number(m[2])===q.from?.id&&packs[m[1]]?.stars===q.total_amount)ok=true;
-     if(e&&Number(e[2])===q.from?.id&&energyPacks[e[1]]?.stars===q.total_amount)ok=true;
+     if(e&&Number(e[2])===q.from?.id&&energyPacks[e[1]]?.stars===q.total_amount){
+       // Reject already-used energy invoices and purchases where energy has
+       // regenerated to full. Old links must never charge without a reward.
+       const prior=await db.from("challenge_energy_purchases").select("id").eq("invoice_payload",payload).limit(1);
+       const buyer=await db.from("players").select("id").eq("telegram_id",q.from.id).maybeSingle();
+       if(!prior.error&&!prior.data?.length&&!buyer.error&&buyer.data?.id){
+         const prof=await db.from("challenge_profiles").select("limited_energy,energy_ref_at").eq("player_id",buyer.data.id).maybeSingle();
+         if(!prof.error){
+           const now=Date.now(),current=Number(prof.data?.limited_energy??5);
+           const ref=Date.parse(prof.data?.energy_ref_at||new Date(now).toISOString());
+           const regenerated=current<5&&Number.isFinite(ref)?Math.min(5,current+Math.floor(Math.max(0,now-ref)/(30*60*1000))):current;
+           ok=regenerated<5;
+         }
+       }
+     }
    }
    await fetch("https://api.telegram.org/bot"+token+"/answerPreCheckoutQuery",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({pre_checkout_query_id:q.id,ok,error_message:ok?undefined:"Не удалось проверить пакет покупки."})});
+   return new Response("ok");
  }
  const msg=u.message||u.edited_message;
- const db=createClient(Deno.env.get("SUPABASE_URL")!,Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,{auth:{persistSession:false}});
  if(msg?.from?.id&&msg.chat?.type==='private'&&!msg.successful_payment){
    const text=String(msg.text||msg.caption||'').trim(),chatId=msg.chat.id;
    const player=(await db.from("players").select("id,photoword_id,notification_language").eq("telegram_id",msg.from.id).maybeSingle()).data;
