@@ -540,7 +540,7 @@ function pendingAdReceipt(){
  try{const data=JSON.parse(localStorage.getItem(adReceiptKey())||'null');
   if(!data)return null;
   if(typeof data.nonce!=='string'||!/^[0-9a-f-]{36}$/i.test(data.nonce)
-      ||!Number.isFinite(data.at)||Date.now()-data.at>8*60*1000||Date.now()<data.at-60000){
+      ||!Number.isFinite(data.at)||Date.now()-data.at>24*60*60*1000||Date.now()<data.at-60000){
    localStorage.removeItem(adReceiptKey());return null;
   }
   return data;
