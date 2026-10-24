@@ -68,6 +68,9 @@ Deno.serve(async(req)=>{
   const costs:Record<string,number>={letter:50,remove:100,text:150};
   if(["use_hint","theme_hint"].includes(action)&&!Object.hasOwn(costs,body.hintType))return reply({error:"bad_hint"},400);
   const db=createClient(Deno.env.get("SUPABASE_URL")!,Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,{auth:{persistSession:false,autoRefreshToken:false}});
+  const budget=await db.rpc("consume_player_request_budget_server",{p_telegram_id:user.id,p_route:"telegram-login",p_action:String(action)});
+  if(budget.error)return reply({error:"request_guard_unavailable"},503);
+  if(budget.data?.allowed!==true)return reply({error:"request_rate_limited",retry_after_seconds:Math.max(1,Number(budget.data?.retry_after_seconds)||1)},429);
   let mainAnswers:string[]|null=null;
   let mainAnswer:string|null=null;
   let hintPayload:Record<string,unknown>|null=null;
