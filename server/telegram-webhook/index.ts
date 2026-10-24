@@ -141,13 +141,15 @@ Deno.serve(async(req)=>{
      const pack=packs[m[1]];
      if(pack&&pack.stars===pay.total_amount){
        const credit=await db.rpc("credit_star_purchase_server",{p_telegram_id:msg.from.id,p_charge_id:pay.telegram_payment_charge_id,p_payload:pay.invoice_payload,p_stars:pack.stars,p_coins:pack.coins});
-       if(!credit.error)await tg(token,"sendMessage",{chat_id:msg.chat?.id||msg.from.id,text:coinText(pack.coins)});
+       if(credit.error){console.error("PhotoWord Stars coin credit failed");return new Response("retry",{status:503});}
+       await tg(token,"sendMessage",{chat_id:msg.chat?.id||msg.from.id,text:coinText(pack.coins)});
      }
    } else if(e&&Number(e[2])===msg.from?.id){
      const pack=energyPacks[e[1]];
      if(pack&&pack.stars===pay.total_amount){
        const credit=await db.rpc("credit_challenge_energy_purchase_server",{p_telegram_id:msg.from.id,p_charge_id:pay.telegram_payment_charge_id,p_payload:pay.invoice_payload,p_stars:pack.stars,p_energy:pack.energy});
-       if(!credit.error)await tg(token,"sendMessage",{chat_id:msg.chat?.id||msg.from.id,text:energyText});
+       if(credit.error){console.error("PhotoWord Stars energy credit failed");return new Response("retry",{status:503});}
+       await tg(token,"sendMessage",{chat_id:msg.chat?.id||msg.from.id,text:energyText});
      }
    }
  }
