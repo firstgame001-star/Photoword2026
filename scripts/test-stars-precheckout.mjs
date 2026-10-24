@@ -114,6 +114,8 @@ assert.equal(await refunded(),200,'Valid refund update must be accepted');
 assert.equal(state.lastRefundArgs.p_charge_id,'OFFLINE-refund');
 assert.equal(state.lastRefundArgs.p_stars,15);
 assert(sent.some(x=>x.method==='sendMessage'&&x.text.includes('возвращены')),'Localized refund confirmation must be sent');
+assert.equal(await refunded(energy,'OFFLINE-energy-refund',15),200,'Energy refund update must be accepted');
+assert(sent.some(x=>x.method==='sendMessage'&&x.text.includes('geri qaytarıldı')),'Energy refund notice must inherit Azerbaijani checkout locale');
 state.refundStatus='duplicate';
 assert.equal(await refunded(),200,'Duplicate refund should acknowledge');
 assert(!sent.some(x=>x.method==='sendMessage'),'Duplicate refund must not notify twice');
