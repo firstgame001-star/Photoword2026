@@ -102,7 +102,7 @@ state.creditError=false;
 assert.equal(await paid('coins'),200,'Successful coin fulfillment must acknowledge receipt');
 assert(sent.some(x=>x.method==='sendMessage'&&x.text.includes('Начислено')),'Coin confirmation must be localized');
 assert.equal(await paid('energy'),200,'Successful energy fulfillment must acknowledge receipt');
-assert(sent.some(x=>x.method==='sendMessage'&&x.text.includes('Enerji')),'Energy confirmation must be localized in AZ');
+assert(sent.some(x=>x.method==='sendMessage'&&x.text.includes('enerji')),'Energy confirmation must be localized in AZ');
 
 
 // Telegram's refunded_payment is a service message, not a bot command.
