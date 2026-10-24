@@ -73,9 +73,10 @@
     try{for(let i=localStorage.length-1;i>=0;i--){const k=localStorage.key(i);if(k?.startsWith('pw.')||k?.startsWith('photoword'))localStorage.removeItem(k)}for(let i=sessionStorage.length-1;i>=0;i--){const k=sessionStorage.key(i);if(k?.startsWith('pw.')&&k!=='pw.init')sessionStorage.removeItem(k)}}catch{}
   }
   let loginPending = null;
+  function storedLanguage(){try{return localStorage.getItem('pw.language')}catch{return null}}
   async function api(action = 'login', extra = {}) {
     if (!raw) throw new Error(lang()==='en'?'Telegram did not provide login data. Open the game from the bot.':lang()==='az'?'Telegram giriş məlumatlarını ötürmədi. Oyunu botdan açın.':'Telegram не передал данные входа. Запусти игру через бота.');
-    let result;try{result = await request('/functions/v1/telegram-login', {...extra, action, initData:raw,progressGeneration:current?.progress_generation,accountId:current?.photoword_id},{},action==='login'?25000:12000);}catch(e){if(e.message==='progress_reset'&&action!=='login'){loginPending=null;await api('login')}throw e;}
+    let result;try{result = await request('/functions/v1/telegram-login', {...(action==='login'&&['ru','en','az'].includes(storedLanguage())?{language:storedLanguage()}:{}),...extra, action, initData:raw,progressGeneration:current?.progress_generation,accountId:current?.photoword_id},{},action==='login'?25000:12000);}catch(e){if(e.message==='progress_reset'&&action!=='login'){loginPending=null;await api('login')}throw e;}
     if(accountErased)throw new Error('account_deleted');
     if (!result?.player?.photoword_id) throw new Error(lang()==='en'?'Server did not return a profile.':lang()==='az'?'Server profil qaytarmadı.':'Сервер не вернул профиль.');
     const incoming=result.player,generation=Number(incoming.progress_generation||0),key='pw.generation.'+incoming.photoword_id;
