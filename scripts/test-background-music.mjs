@@ -13,7 +13,7 @@ const start=core.indexOf('  let audioCtx=null,musicTimer=null,trackIndex=0,track
 const finish=core.indexOf('  function haptic(',start);
 assert(start>0&&finish>start,'Shared audio section missing');
 const audio=core.slice(start,finish);
-const listeners=new Map(),notes=[],timers=new Map(),saved=new Map();
+const listeners=new Map(),notes=[],timers=new Map(),saved=new Map(),sessionSaved=new Map();
 let next=0;
 const document={
  hidden:false,
@@ -37,6 +37,7 @@ const ctx={
  window:{AudioContext:FakeAudioContext,addEventListener(type,callback){listeners.set(type,callback)}},
  document,prefs:{sound:true,music:true},accountErased:false,
  localStorage:{setItem(k,v){saved.set(k,v)}},
+ sessionStorage:{getItem(k){return sessionSaved.get(k)||null},setItem(k,v){sessionSaved.set(k,v)}},
  setTimeout(fn,delay){const id=++next;timers.set(id,{fn,delay});return id},
  clearTimeout(id){timers.delete(id)},
  Math
@@ -70,6 +71,21 @@ for(let i=0;i<4*64;i++){
 }
 assert.deepEqual([...heard],[0,1,2,3],'The soundtrack must cycle through all four tracks automatically');
 assert.equal(ctx.window.musicTest.trackState().index,0,'The soundtrack must loop to the first melody');
+const savedPosition=JSON.parse(sessionSaved.get('pw.music.rotation.v1'));
+assert.equal(savedPosition.track,0,'Session must remember the current tune');
+assert.equal(savedPosition.beat,ctx.window.musicTest.trackState().beat,'Session must remember the exact phrase position');
+sessionSaved.set('pw.music.rotation.v1',JSON.stringify({track:2,beat:13}));
+const nextPage={
+ ...ctx,
+ window:{AudioContext:FakeAudioContext,addEventListener(){}},
+ document:{hidden:false,addEventListener(){}},
+ prefs:{music:true,sound:true}
+};
+vm.createContext(nextPage);
+vm.runInContext(audio+'\nwindow.getMusicPosition=()=>({track:trackIndex,beat:trackBeat});',nextPage);
+assert.equal(nextPage.window.getMusicPosition().track,2,'Navigating to another game page should retain melody selection');
+assert.equal(nextPage.window.getMusicPosition().beat,13,'Navigating to another game page should retain playback progress');
+sessionSaved.set('pw.music.rotation.v1',JSON.stringify(savedPosition));
 
 const preFx=notes.length;ctx.prefs.sound=false;ctx.window.musicTest.sfx('success');
 assert.equal(notes.length,preFx,'Sound effects toggle must silence SFX separately');
@@ -93,4 +109,4 @@ assert.equal(timers.size,0,'Page navigation must stop music');
 listeners.get('pointerdown')();
 assert.equal(timers.size,1,'A new interaction can restart music after page return');
 ctx.accountErased=true;tick();assert.equal(timers.size,0,'Erased accounts must not continue playing');
-console.log('PASS: four distinct melodies rotate automatically, with gentle chords, saved mute, independent SFX and lifecycle pause/resume.');
+console.log('PASS: four automatic melody rotations, per-page position continuity, layered chords, saved mute and background pause/resume.');
