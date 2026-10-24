@@ -38,6 +38,7 @@ with sync_playwright() as pw:
   }""")
   page.locator('#shopNav').tap()
   expect(page.locator('#shopModal')).to_be_visible()
+  # Capture the language sent to the invoice endpoint, never to real Telegram.
   page.locator('[data-pack="c10"]').tap()
   terms=page.locator('#purchaseTermsModal')
   expect(terms).to_be_visible(timeout=7000)
@@ -50,6 +51,13 @@ with sync_playwright() as pw:
     return !t.hidden && !s.hidden && top && t.contains(top) &&
        parseInt(getComputedStyle(t).zIndex)>parseInt(getComputedStyle(s).zIndex);
   }"""),'Consent is behind shop or cannot be tapped'
+  geometry=page.evaluate("""() => {
+    const box=document.querySelector('#purchaseTermsModal .modalcard').getBoundingClientRect(),
+          viewport=window.visualViewport;
+    return {offset:Math.abs(box.top+box.height/2-(viewport.offsetTop+viewport.height/2)),
+            viewHeight:viewport.height,boxHeight:box.height};
+  }""")
+  assert geometry['offset']<max(22,geometry['viewHeight']*0.035),f'Consent not vertically centered: {geometry}'
   assert page.evaluate('window.__openedInvoices.length')==0,'Invoice opened before consent'
   page.screenshot(path=str(out/f'{engine}-{language}-consent.png'))
   page.locator('#purchaseTermsCancel').tap()
