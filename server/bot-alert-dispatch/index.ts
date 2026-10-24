@@ -43,12 +43,12 @@ function validAdmins(raw:unknown):number[]{
   return [...new Set(parsed.filter((n:unknown)=>Number.isSafeInteger(n)&&Number(n)>0).map(Number))].slice(0,5);
  }catch{return []}
 }
-async function sendMessage(token:string,chatId:number,message:string){
+async function sendMessage(token:string,chatId:number,message:string,caseId:number){
  try{
   const reply=await fetch("https://api.telegram.org/bot"+token+"/sendMessage",{
    method:"POST",headers:{"Content-Type":"application/json"},
    signal:AbortSignal.timeout(10000),
-   body:JSON.stringify({chat_id:chatId,text:message,disable_web_page_preview:true})
+   body:JSON.stringify({chat_id:chatId,text:message,disable_web_page_preview:true,reply_markup:{inline_keyboard:[[{text:"🔎 Открыть дело",callback_data:"ac:o:"+caseId+":p"}]]}})
   });
   const body=await reply.json().catch(()=>null);
   return {ok:Boolean(reply.ok&&body?.ok),error:reply.ok?"telegram_not_ok":"telegram_http_"+reply.status};
@@ -92,7 +92,7 @@ Deno.serve(async(req)=>{
    if(typeof lease.data!=="string")continue;
    claimed++;
    const delivered=await sendMessage(token,admin,notification(signal,
-    names.get(signal.player_id)||"неизвестный PhotoWord ID"));
+    names.get(signal.player_id)||"неизвестный PhotoWord ID"),signal.id);
    const finish=await db.rpc("finish_bot_alert_delivery_server",{
     p_signal_id:signal.id,p_admin_id:admin,p_claim_token:lease.data,
     p_sent:delivered.ok,p_error:delivered.ok?null:delivered.error
