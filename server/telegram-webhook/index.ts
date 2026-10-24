@@ -2,7 +2,7 @@ import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 async function webhookSecret(token:string){const data=new TextEncoder().encode(token);const hash=await crypto.subtle.digest("SHA-256",data);return "pw_"+Array.from(new Uint8Array(hash)).map(b=>b.toString(16).padStart(2,"0")).join("").slice(0,48);}
 const packs:Record<string,{coins:number,stars:number}>={ctest:{coins:1,stars:1},c10:{coins:10,stars:15},c50:{coins:50,stars:65},c150:{coins:150,stars:175},c300:{coins:300,stars:300}};
-const energyPacks:Record<string,{energy:number,stars:number}>={e1:{energy:1,stars:15},e5:{energy:5,stars:50}};
+const energyPacks:Record<string,{energy:number,stars:number}>={e1:{energy:1,stars:1},e5:{energy:5,stars:50}};
 const APP_URL="https://firstgame001-star.github.io/Photoword2026/clean/";
 let botUiConfigured=false;
 async function tg(token:string,method:string,payload:any={}){const r=await fetch("https://api.telegram.org/bot"+token+"/"+method,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});return await r.json();}
@@ -179,12 +179,12 @@ Deno.serve(async(req)=>{
      }
    } else if(e&&Number(e[2])===msg.from?.id){
      const pack=energyPacks[e[1]];
-     if(pack&&pack.stars===pay.total_amount){
+     if(pack&&(pack.stars===pay.total_amount||(e[1]==="e1"&&pay.total_amount===15))){
        // An out-of-order refund may be received before successful_payment.
        const refunded=await db.from("star_refunds").select("status").eq("telegram_payment_charge_id",pay.telegram_payment_charge_id).maybeSingle();
        if(refunded.error)return new Response("retry",{status:503});
        if(refunded.data)return new Response("ok");
-       const credit=await db.rpc("credit_challenge_energy_purchase_server",{p_telegram_id:msg.from.id,p_charge_id:pay.telegram_payment_charge_id,p_payload:pay.invoice_payload,p_stars:pack.stars,p_energy:pack.energy});
+       const credit=await db.rpc("credit_challenge_energy_purchase_server",{p_telegram_id:msg.from.id,p_charge_id:pay.telegram_payment_charge_id,p_payload:pay.invoice_payload,p_stars:pay.total_amount,p_energy:pack.energy});
        if(credit.error){console.error("PhotoWord Stars energy credit failed");return new Response("retry",{status:503});}
        await tg(token,"sendMessage",{chat_id:msg.chat?.id||msg.from.id,text:energyText});
      }
