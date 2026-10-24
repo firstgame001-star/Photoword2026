@@ -23,7 +23,8 @@ assert(home.includes("tg.openInvoice(result.invoice_url"),'Payment sheet is not 
 assert(html.includes('data-pack="ctest"'),'1-Star pack must be shown for user retest');
 assert(html.includes('<span>1 ⭐</span>'),'1-Star pack must have correct storefront price');
 const css=readFileSync('clean/ui.css','utf8');
-assert(css.includes('#purchaseTermsModal:not([hidden]){z-index:80}'),'Purchase terms must overlay the shop before payment');
+assert(css.includes('#purchaseTermsModal:not([hidden])'),'Purchase consent overlay rule missing');
+assert(css.includes('z-index:80')&&css.includes('place-items:center'),'Purchase terms must be centered above the shop before payment');
 assert(migration.includes('stars=1 AND coins=1'),'Ledger must accept temporary reward price');
 assert(migration.includes('((1,1),(15,10)'),'RPC must accept temporary reward price');
 assert(migration.includes('ON FUNCTION public.credit_star_purchase_server'),'Server credit must keep protected EXECUTE grants');
