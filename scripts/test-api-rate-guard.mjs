@@ -36,7 +36,7 @@ for(const fragment of [
   assert(migration.includes(fragment),'Token bucket migration lost: '+fragment);
 }
 const webhook=readFileSync('server/telegram-webhook/index.ts','utf8');
-assert(!webhook.includes('consume_player_request_budget_server'),'Paid Telegram webhooks must not be rate-limited by a player's game-API budget');
+assert(!webhook.includes('consume_player_request_budget_server'),"Paid Telegram webhooks must not be rate-limited by the game API budget");
 const core=readFileSync('clean/core.js','utf8');
 for(const lang of ['ru','en','az']){
   assert(core.includes(lang+':{')&&core.includes('request_rate_limited:'),'Rate limit notices must be translatable');
