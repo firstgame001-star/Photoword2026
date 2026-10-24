@@ -154,6 +154,16 @@
       71,74,79,83,81,79,76,74, 72,76,79,76,74,72,71,74
     ]}
   ];
+  const musicSessionKey='pw.music.rotation.v1';
+  // Re-entering a chapter must not restart the first tune each time.
+  // This stores only melody position within this Telegram browser session.
+  try{
+    const saved=JSON.parse(sessionStorage.getItem(musicSessionKey)||'null');
+    if(Number.isInteger(saved?.track)&&saved.track>=0&&saved.track<musicTracks.length)
+      trackIndex=saved.track;
+    if(Number.isInteger(saved?.beat)&&saved.beat>=0&&saved.beat<musicTracks[0].lead.length*2)
+      trackBeat=saved.beat;
+  }catch{}
   function ensureAudio(){
     if(!audioCtx){
       const C=window.AudioContext||window.webkitAudioContext;
@@ -225,6 +235,7 @@
       trackBeat=0;
       trackIndex=(trackIndex+1)%musicTracks.length;
     }
+    try{sessionStorage.setItem(musicSessionKey,JSON.stringify({track:trackIndex,beat:trackBeat}))}catch{}
     musicTimer=setTimeout(musicStep,track.tempo);
   }
   function startMusic(){
