@@ -61,6 +61,9 @@ Deno.serve(async(req)=>{
   let body;try{body=JSON.parse(raw)}catch{return reply({error:'json'},400)}
   const user=await verify(body?.initData,token);if(!user)return reply({error:"invalid_telegram_auth"},401);
   const db=createClient(Deno.env.get("SUPABASE_URL")!,Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,{auth:{persistSession:false,autoRefreshToken:false}});
+  const budget=await db.rpc("consume_player_request_budget_server",{p_telegram_id:user.id,p_route:"challenge-game",p_action:String(body.action||"state")});
+  if(budget.error)return reply({error:"request_guard_unavailable"},503);
+  if(budget.data?.allowed!==true)return reply({error:"request_rate_limited",retry_after_seconds:Math.max(1,Number(budget.data?.retry_after_seconds)||1)},429);
   const p=(await db.from("players").select("id,progress_generation").eq("telegram_id",user.id).maybeSingle()).data;if(!p?.id)return reply({error:"player_not_found"},404);
   if(body.progressGeneration!==undefined&&body.progressGeneration!==p.progress_generation)return reply({error:"progress_reset"},409);
   const action=String(body.action||"state"),mode=String(body.mode||""),language=["ru","en","az"].includes(String(body.language||""))?String(body.language):"ru";
