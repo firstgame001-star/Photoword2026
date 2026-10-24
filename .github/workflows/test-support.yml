@@ -1,7 +1,7 @@
 name: Test PhotoWord support
 on:
   pull_request:
-    paths: ['clean/**', 'server/telegram-webhook/**', 'scripts/test-support-webhook.mjs', '.github/workflows/test-support.yml']
+    paths: ['clean/**', 'server/telegram-webhook/**', 'scripts/test-support-webhook.mjs', 'scripts/test-stars-precheckout.mjs', '.github/workflows/test-support.yml']
   push:
     branches: [main]
     paths: ['clean/**', 'server/telegram-webhook/**', 'scripts/test-support-webhook.mjs', '.github/workflows/test-support.yml']
@@ -19,5 +19,6 @@ jobs:
         with:
           node-version: '24'
       - run: node scripts/test-support-webhook.mjs
+      - run: node scripts/test-stars-precheckout.mjs
       - run: node scripts/check-clean.mjs
       - run: node scripts/full-audit.mjs
