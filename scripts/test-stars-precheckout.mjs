@@ -33,7 +33,7 @@ source=source.replace(/^import .*;\n/gm,'');
 vm.runInNewContext(stripTypeScriptTypes(source),ctx);
 const digest=await webcrypto.subtle.digest('SHA-256',new TextEncoder().encode('offline-only'));
 const secret='pw_'+Buffer.from(digest).toString('hex').slice(0,48);
-let serial=0;
+let serial=0,lastDenial='';
 async function checkout(invoice_payload,total_amount=15,currency='XTR',buyer=42){
   sent.length=0;
   const request=new Request('https://invalid.local',{method:'POST',headers:{'x-telegram-bot-api-secret-token':secret},body:JSON.stringify({
@@ -43,15 +43,18 @@ async function checkout(invoice_payload,total_amount=15,currency='XTR',buyer=42)
   assert.equal(response.status,200);
   const answers=sent.filter(x=>x.method==='answerPreCheckoutQuery');
   assert.equal(answers.length,1,'Every pre-checkout must receive one answer');
+  lastDenial=answers[0].error_message||'';
   return answers[0].ok;
 }
 const energy='pwenergy:e1:42:az:6d5b1c7c-abcd-4321-a234-123456789abc';
 assert.equal(await checkout(energy),true,'Energy with remaining capacity must be purchasable');
 state.reused=true;
 assert.equal(await checkout(energy),false,'Already paid energy invoice must be rejected');
+assert(lastDenial.includes('artıq ödənilib'),'Already-used invoice error must use chosen Azerbaijani locale');
 state.reused=false;
 state.energy=5;
 assert.equal(await checkout(energy),false,'Cannot charge for already full energy');
+assert(lastDenial.includes('Enerji artıq doludur'),'Full energy error must use chosen Azerbaijani locale');
 state.energy=3;state.refAt=new Date(Date.now()-65*60_000).toISOString();
 assert.equal(await checkout(energy),false,'Regenerated full energy must reject checkout');
 state.refAt=new Date().toISOString();
