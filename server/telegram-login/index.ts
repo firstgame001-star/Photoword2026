@@ -71,6 +71,7 @@ Deno.serve(async(req)=>{
   let mainAnswers:string[]|null=null;
   let mainAnswer:string|null=null;
   let hintPayload:Record<string,unknown>|null=null;
+   let adReward:{coins:number,energy:number}|null=null;
   if(["use_hint","complete_level"].includes(action)){
    const result=await db.from("main_level_answers").select("ru,en,az").eq("level_id",level).maybeSingle();
    if(result.error||!result.data)return reply({error:"answer_unavailable"},500);
@@ -372,6 +373,9 @@ Deno.serve(async(req)=>{
   if(action==="ad_claim"){
    const r=await db.rpc("claim_ad_reward_server",{p_telegram_id:user.id,p_nonce:String(body.nonce||"")});
    if(r.error){const m=r.error.message||"";const e=m.includes("ad_daily_limit")?"ad_daily_limit":m.includes("ad_too_fast")?"ad_too_fast":m.includes("expired")?"ad_claim_expired":"ad_claim_invalid";return reply({error:e},409);}
+   const receipt=await db.from("ad_reward_claims").select("reward_coins,reward_energy,status").eq("player_id",player.id).eq("nonce",String(body.nonce||"")).maybeSingle();
+   if(receipt.error||receipt.data?.status!=="claimed")return reply({error:"ad_reward_receipt_unavailable"},503);
+   adReward={coins:Number(receipt.data.reward_coins||0),energy:Number(receipt.data.reward_energy||0)};
    player=r.data;
   }
   if(action==="erase_account"){
@@ -464,9 +468,9 @@ Deno.serve(async(req)=>{
   // PostgREST may serialize a composite result as a one-element row array.
   if(Array.isArray(player))player=player[0];
   if(!player?.id)return reply({error:"db_response"},500);
-  if((player.xp??0)<=0)return reply({player:profile(player,0),...(action==="theme_complete"?{theme_rewarded:themeRewarded}:{}),...(["use_hint","theme_hint"].includes(action)&&hintPayload?{hint:hintPayload}:{})});
+  if((player.xp??0)<=0)return reply({player:{...profile(player,0),...(adReward?{ad_reward:adReward}:{})},...(action==="theme_complete"?{theme_rewarded:themeRewarded}:{}),...(["use_hint","theme_hint"].includes(action)&&hintPayload?{hint:hintPayload}:{})});
   const rank=await db.from("players").select("id",{count:"exact",head:true}).gt("xp",0).or(`xp.gt.${player.xp},and(xp.eq.${player.xp},completed_levels.gt.${player.completed_levels}),and(xp.eq.${player.xp},completed_levels.eq.${player.completed_levels},created_at.lt.${player.created_at})`);
   if(rank.error)return reply({error:"rank_failed"},500);
-  return reply({player:profile(player,(rank.count??0)+1),...(action==="theme_complete"?{theme_rewarded:themeRewarded}:{}),...(["use_hint","theme_hint"].includes(action)&&hintPayload?{hint:hintPayload}:{})});
+  return reply({player:{...profile(player,(rank.count??0)+1),...(adReward?{ad_reward:adReward}:{})},...(action==="theme_complete"?{theme_rewarded:themeRewarded}:{}),...(["use_hint","theme_hint"].includes(action)&&hintPayload?{hint:hintPayload}:{})});
  }catch{return reply({error:"server_error"},500);}
 });
