@@ -1,5 +1,5 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
-import {createClient} from "https://esm.sh/@supabase/supabase-js@2";
+import {createClient} from "https://esm.sh/@supabase/supabase-js@2.117.1";
 
 type AlertSignal={
  id:number;player_id:string;event_kind:string;first_seen:string;
