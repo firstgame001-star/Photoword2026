@@ -138,7 +138,7 @@ for(const [l,need] of Object.entries({ru:['15 глав','680 уровней','З
  for(const value of need)if(!rules[l]?.includes(value))throw Error('Rules missing '+l+': '+value);
  if((rules[l].match(/class="rule-section"/g)||[]).length!==11)throw Error('Rules sections missing '+l);
 }
-if(!home.includes("track('app_open',{metadata:{version:'r101'}})"))throw Error('App-open analytics version is stale');
+if(!home.includes("track('app_open',{metadata:{version:'r101',campaign:")||!home.includes("/^ads_[a-z0-9_]{1,28}$/.test(raw)"))throw Error('App-open campaign attribution is missing');
 if(!home.includes('function chapterIdForLevel(level)'))throw Error('Chapter analytics helper is missing');
 if(!home.includes("n<=280?7:n<=330?8:n<=380?9:n<=430?10:n<=480?11:n<=530?12:n<=580?13:n<=630?14:15"))throw Error('Chapter analytics mapping is incomplete');
 
