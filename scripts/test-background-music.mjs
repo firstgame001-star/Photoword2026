@@ -34,7 +34,7 @@ class FakeAudioContext{
  resume(){this.state='running';return Promise.resolve()}
 }
 const ctx={
- window:{AudioContext:FakeAudioContext},
+ window:{AudioContext:FakeAudioContext,addEventListener(type,callback){listeners.set(type,callback)}},
  document,prefs:{sound:true,music:true},accountErased:false,
  localStorage:{setItem(k,v){saved.set(k,v)}},
  setTimeout(fn,delay){const id=++next;timers.set(id,{fn,delay});return id},
@@ -75,5 +75,9 @@ assert.equal(timers.size,0,'Music must pause in the background');
 assert.equal(ctx.prefs.music,true,'Background pause must not overwrite the saved preference');
 document.hidden=false;listeners.get('visibilitychange')();
 assert.equal(timers.size,1,'Music should resume when the Telegram app is visible');
+listeners.get('pagehide')();
+assert.equal(timers.size,0,'Page navigation must stop music');
+listeners.get('pointerdown')();
+assert.equal(timers.size,1,'A new interaction can restart music after page return');
 ctx.accountErased=true;tick();assert.equal(timers.size,0,'Erased accounts must not continue playing');
 console.log('PASS: layered instrumental background music, no premature autoplay, persistence, independent SFX, pause/resume and account cleanup.');
