@@ -409,7 +409,7 @@ Deno.serve(async(req)=>{
    player=referralResult.data;
   }
   if(action==="create_energy_invoice"){
-   const packs:Record<string,{energy:number,stars:number,full?:boolean}>={e1:{energy:1,stars:1},e5:{energy:5,stars:50,full:true}};
+   const packs:Record<string,{energy:number,stars:number,full?:boolean}>={e1:{energy:1,stars:15},e5:{energy:5,stars:50,full:true}};
    const packKey=String(body.pack||""),pack=packs[packKey];if(!pack)return reply({error:"bad_pack"},400);
    const cp=(await db.from("challenge_profiles").select("limited_energy,energy_ref_at").eq("player_id",player.id).maybeSingle()).data;
    let currentEnergy=Number(cp?.limited_energy??5),ref=Date.parse(cp?.energy_ref_at||new Date().toISOString());
