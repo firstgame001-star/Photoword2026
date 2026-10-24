@@ -2,7 +2,7 @@ import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 async function webhookSecret(token:string){const data=new TextEncoder().encode(token);const hash=await crypto.subtle.digest("SHA-256",data);return "pw_"+Array.from(new Uint8Array(hash)).map(b=>b.toString(16).padStart(2,"0")).join("").slice(0,48);}
 const packs:Record<string,{coins:number,stars:number}>={ctest:{coins:1,stars:1},c10:{coins:10,stars:15},c50:{coins:50,stars:65},c150:{coins:150,stars:175},c300:{coins:300,stars:300}};
-const energyPacks:Record<string,{energy:number,stars:number}>={e1:{energy:1,stars:1},e5:{energy:5,stars:50}};
+const energyPacks:Record<string,{energy:number,stars:number}>={e1:{energy:1,stars:15},e5:{energy:5,stars:50}};
 const APP_URL="https://firstgame001-star.github.io/Photoword2026/clean/";
 let botUiConfigured=false;
 async function tg(token:string,method:string,payload:any={}){const r=await fetch("https://api.telegram.org/bot"+token+"/"+method,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});return await r.json();}
@@ -30,7 +30,7 @@ Deno.serve(async(req)=>{
    const locale=String(q.invoice_payload||"").match(/^pw(?:coins|energy):[^:]+:\d+:(ru|en|az):/)?.[1]||"ru";
    if(q.currency==="XTR"){
      const payload=String(q.invoice_payload||"");
-     const m=payload.match(/^pwcoins:(ctest|c10|c50|c150|c300):(\d+):/);
+     const m=payload.match(/^pwcoins:(c10|c50|c150|c300):(\d+):/);
      const e=payload.match(/^pwenergy:(e1|e5):(\d+):/);
      if(m&&Number(m[2])===q.from?.id&&packs[m[1]]?.stars===q.total_amount)ok=true;
      if(e&&Number(e[2])===q.from?.id&&energyPacks[e[1]]?.stars===q.total_amount){
@@ -163,7 +163,7 @@ Deno.serve(async(req)=>{
    const paidLocale=payload.match(/^pw(?:coins|energy):[^:]+:\d+:(ru|en|az):/)?.[1];
    const l=paidLocale||(["ru","en","az"].includes(pref?.notification_language)?pref.notification_language:"ru");
    const coinText=(coins:number)=>l==="en"?"✅ Payment confirmed. "+coins+" 🪙 credited.":l==="az"?"✅ Ödəniş təsdiqləndi. "+coins+" 🪙 əlavə olundu.":"✅ Оплата подтверждена. Начислено "+coins+" 🪙.";
-   const energyText=l==="en"?"✅ Payment confirmed. Energy restored (maximum 5/5 ⚡).":l==="az"?"✅ Ödəniş təsdiqləndi. Enerji bərpa olundu (maksimum 5/5 ⚡).":"✅ Оплата подтверждена. Энергия восстановлена (максимум 5/5 ⚡).";
+   const energyText=(isFull:boolean)=>isFull?(l==="en"?"✅ Payment confirmed. Energy restored to 5/5 ⚡.":l==="az"?"✅ Ödəniş təsdiqləndi. Enerji 5/5 ⚡ səviyyəsinə bərpa olundu.":"✅ Оплата подтверждена. Энергия восстановлена до 5/5 ⚡."):(l==="en"?"✅ Payment confirmed. +1 energy credited ⚡.":l==="az"?"✅ Ödəniş təsdiqləndi. +1 enerji əlavə olundu ⚡.":"✅ Оплата подтверждена. Начислена +1 энергия ⚡.");
    const m=payload.match(/^pwcoins:(ctest|c10|c50|c150|c300):(\d+):/);
    const e=payload.match(/^pwenergy:(e1|e5):(\d+):/);
    if(m&&Number(m[2])===msg.from?.id){
@@ -179,14 +179,14 @@ Deno.serve(async(req)=>{
      }
    } else if(e&&Number(e[2])===msg.from?.id){
      const pack=energyPacks[e[1]];
-     if(pack&&(pack.stars===pay.total_amount||(e[1]==="e1"&&pay.total_amount===15))){
+     if(pack&&(pack.stars===pay.total_amount||(e[1]==="e1"&&pay.total_amount===1))){
        // An out-of-order refund may be received before successful_payment.
        const refunded=await db.from("star_refunds").select("status").eq("telegram_payment_charge_id",pay.telegram_payment_charge_id).maybeSingle();
        if(refunded.error)return new Response("retry",{status:503});
        if(refunded.data)return new Response("ok");
        const credit=await db.rpc("credit_challenge_energy_purchase_server",{p_telegram_id:msg.from.id,p_charge_id:pay.telegram_payment_charge_id,p_payload:pay.invoice_payload,p_stars:pay.total_amount,p_energy:pack.energy});
        if(credit.error){console.error("PhotoWord Stars energy credit failed");return new Response("retry",{status:503});}
-       await tg(token,"sendMessage",{chat_id:msg.chat?.id||msg.from.id,text:energyText});
+       await tg(token,"sendMessage",{chat_id:msg.chat?.id||msg.from.id,text:energyText(e[1]==="e5")});
      }
    }
  }
