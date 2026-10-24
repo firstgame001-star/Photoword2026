@@ -19,6 +19,7 @@ jobs:
         with:
           node-version: '24'
       - run: node scripts/test-support-webhook.mjs
-      - run: node scripts/test-stars-precheckout.mjs
+      - name: Test Stars pre-checkout, retry and localization
+        run: node scripts/test-stars-precheckout.mjs
       - run: node scripts/check-clean.mjs
       - run: node scripts/full-audit.mjs
