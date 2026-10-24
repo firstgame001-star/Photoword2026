@@ -6,7 +6,7 @@ import assert from 'node:assert/strict';
 import {webcrypto} from 'node:crypto';
 
 const sent=[];
-const state={energy:3,refAt:new Date().toISOString(),reused:false,dbError:false};
+const state={energy:3,refAt:new Date().toISOString(),reused:false,dbError:false,creditError:false,creditCalls:0};
 function result(data){return {data,error:state.dbError?{message:'db_unavailable'}:null};}
 function query(table){
   const q={
@@ -24,7 +24,7 @@ function query(table){
 let handler;
 const ctx={
   Deno:{env:{get:key=>({TELEGRAM_BOT_TOKEN:'offline-only',SUPABASE_URL:'https://invalid.local',SUPABASE_SERVICE_ROLE_KEY:'fake'})[key]},serve:fn=>handler=fn},
-  createClient:()=>({from:query}),
+  createClient:()=>({from:query,rpc:async()=>{state.creditCalls++;return {data:{},error:state.creditError?{message:"offline"}:null}}}),
   fetch:async(url,options)=>{const method=url.split('/').at(-1);sent.push({method,...JSON.parse(options.body)});return {json:async()=>({ok:true})}},
   crypto:webcrypto,TextEncoder,Date,Math,Number,Response,Request,console
 };
@@ -67,4 +67,29 @@ assert.equal(await checkout(energy,15,'XTR',43),false,'Different Telegram buyer 
 const coins='pwcoins:c10:42:ru:6d5b1c7c-abcd-4321-a234-123456789abc';
 assert.equal(await checkout(coins),true,'Valid coin checkout must remain available');
 assert.equal(await checkout(coins,1),false,'Forged cheaper coin pack must fail');
-console.log('PASS: energy invoice reuse, full/regenerated energy, database outage, amount/currency/buyer validation and coin checkout (fully mocked).');
+
+// A paid Telegram receipt must NOT be acknowledged when credit RPC fails.
+// A non-2xx response allows Telegram to retry the same idempotent receipt.
+async function paid(kind){
+  sent.length=0;
+  const isCoin=kind==='coins';
+  const invoice_payload=isCoin?coins:energy;
+  const successful_payment={
+    currency:'XTR',total_amount:isCoin?15:15,invoice_payload,telegram_payment_charge_id:'OFFLINE-'+kind
+  };
+  const response=await handler(new Request('https://invalid.local',{method:'POST',headers:{'x-telegram-bot-api-secret-token':secret},body:JSON.stringify({
+    message:{message_id:1,chat:{id:42,type:'private'},from:{id:42},successful_payment}
+  })}));
+  return response.status;
+}
+state.creditError=true;
+assert.equal(await paid('coins'),503,'Failed coin fulfillment must request retry');
+assert(!sent.some(x=>x.method==='sendMessage'),'Failed credit must not announce success');
+assert.equal(await paid('energy'),503,'Failed energy fulfillment must request retry');
+state.creditError=false;
+assert.equal(await paid('coins'),200,'Successful coin fulfillment must acknowledge receipt');
+assert(sent.some(x=>x.method==='sendMessage'&&x.text.includes('Начислено')),'Coin confirmation must be localized');
+assert.equal(await paid('energy'),200,'Successful energy fulfillment must acknowledge receipt');
+assert(sent.some(x=>x.method==='sendMessage'&&x.text.includes('Enerji')),'Energy confirmation must be localized in AZ');
+
+console.log('PASS: energy invoice reuse, full/regenerated energy, database outage, amount/currency/buyer validation and coin checkout, failed-payment retries (fully mocked).');
